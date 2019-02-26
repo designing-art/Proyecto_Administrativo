@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
 
-public class registro_empleados extends JFrame {
+public class registro_clientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtcodigo;
@@ -37,7 +37,7 @@ public class registro_empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_empleados frame = new registro_empleados();
+					registro_clientes frame = new registro_clientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class registro_empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_empleados() {
+	public registro_clientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 486, 538);
 		contentPane = new JPanel();

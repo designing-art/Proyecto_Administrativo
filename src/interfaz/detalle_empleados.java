@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
 
-public class registro_empleados extends JFrame {
+public class detalle_empleados extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtcodigo;
@@ -29,6 +29,10 @@ public class registro_empleados extends JFrame {
 	private JTextField txtfechanacimiento;
 	private JTextField txtfecharegistro;
 	private JTextField txtfechalabores;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -37,7 +41,7 @@ public class registro_empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_empleados frame = new registro_empleados();
+					detalle_empleados frame = new detalle_empleados();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,18 +53,18 @@ public class registro_empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_empleados() {
+	public detalle_empleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 494, 538);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistroDeEmpleados = new JLabel("REGISTRAR EMPLEADO");
+		JLabel lblRegistroDeEmpleados = new JLabel("DETALLES DEL EMPLEADO");
 		lblRegistroDeEmpleados.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistroDeEmpleados.setBounds(170, 11, 147, 28);
+		lblRegistroDeEmpleados.setBounds(163, 11, 147, 28);
 		contentPane.add(lblRegistroDeEmpleados);
 		
 		JLabel lblNombres = new JLabel("Nombres :");
@@ -119,14 +123,6 @@ public class registro_empleados extends JFrame {
 		lblFotografia.setBounds(271, 69, 93, 14);
 		contentPane.add(lblFotografia);
 		
-		JButton btnTomar = new JButton("Subir");
-		btnTomar.setBounds(271, 116, 63, 23);
-		contentPane.add(btnTomar);
-		
-		JButton button = new JButton("Tomar");
-		button.setBounds(271, 91, 63, 23);
-		contentPane.add(button);
-		
 		JLabel lblTelefonoDeLa = new JLabel("Telefono de Referencia :");
 		lblTelefonoDeLa.setBounds(271, 371, 126, 14);
 		contentPane.add(lblTelefonoDeLa);
@@ -154,38 +150,40 @@ public class registro_empleados extends JFrame {
 		txtcodigo.setColumns(10);
 		
 		txtnombres = new JTextField();
+		txtnombres.setEditable(false);
 		txtnombres.setBounds(75, 92, 186, 20);
 		contentPane.add(txtnombres);
 		txtnombres.setColumns(10);
 		
 		txtapellidos = new JTextField();
+		txtapellidos.setEditable(false);
 		txtapellidos.setColumns(10);
 		txtapellidos.setBounds(75, 117, 186, 20);
 		contentPane.add(txtapellidos);
 		
 		txtdireccion = new JTextField();
+		txtdireccion.setEditable(false);
 		txtdireccion.setColumns(10);
 		txtdireccion.setBounds(75, 142, 186, 44);
 		contentPane.add(txtdireccion);
 		
 		txtcorreo = new JTextField();
+		txtcorreo.setEditable(false);
 		txtcorreo.setColumns(10);
 		txtcorreo.setBounds(75, 192, 186, 20);
 		contentPane.add(txtcorreo);
 		
 		txtidentidad = new JTextField();
+		txtidentidad.setEditable(false);
 		txtidentidad.setColumns(10);
 		txtidentidad.setBounds(75, 242, 186, 20);
 		contentPane.add(txtidentidad);
 		
 		txttelefono = new JTextField();
+		txttelefono.setEditable(false);
 		txttelefono.setColumns(10);
 		txttelefono.setBounds(75, 267, 186, 20);
 		contentPane.add(txttelefono);
-		
-		JComboBox comboBoxcargo = new JComboBox();
-		comboBoxcargo.setBounds(345, 242, 118, 20);
-		contentPane.add(comboBoxcargo);
 		
 		txthorario = new JTextField();
 		txthorario.setEditable(false);
@@ -193,16 +191,14 @@ public class registro_empleados extends JFrame {
 		txthorario.setBounds(345, 267, 118, 20);
 		contentPane.add(txthorario);
 		
-		JComboBox comboBoxcontrato = new JComboBox();
-		comboBoxcontrato.setBounds(374, 295, 89, 20);
-		contentPane.add(comboBoxcontrato);
-		
 		txtnombrereferencia = new JTextField();
+		txtnombrereferencia.setEditable(false);
 		txtnombrereferencia.setColumns(10);
 		txtnombrereferencia.setBounds(271, 340, 184, 20);
 		contentPane.add(txtnombrereferencia);
 		
 		txttelefonoreferencia = new JTextField();
+		txttelefonoreferencia.setEditable(false);
 		txttelefonoreferencia.setColumns(10);
 		txttelefonoreferencia.setBounds(271, 387, 184, 20);
 		contentPane.add(txttelefonoreferencia);
@@ -211,52 +207,56 @@ public class registro_empleados extends JFrame {
 		lblDatosGenerales.setBounds(10, 44, 118, 14);
 		contentPane.add(lblDatosGenerales);
 		
-		JButton btnRegistrar = new JButton("REGISTRAR");
+		JButton btnRegistrar = new JButton("ACTUALIZAR");
 		btnRegistrar.setBackground(new Color(0, 128, 0));
-		btnRegistrar.setBounds(318, 420, 99, 23);
+		btnRegistrar.setBounds(337, 418, 118, 23);
 		contentPane.add(btnRegistrar);
 		
 		JButton btnSalir = new JButton("SALIR");
 		btnSalir.setBackground(new Color(255, 0, 0));
-		btnSalir.setBounds(329, 454, 75, 23);
+		btnSalir.setBounds(380, 446, 75, 23);
 		contentPane.add(btnSalir);
 		
 		txtfechanacimiento = new JTextField();
 		txtfechanacimiento.setEditable(false);
 		txtfechanacimiento.setColumns(10);
-		txtfechanacimiento.setBounds(113, 317, 148, 20);
+		txtfechanacimiento.setBounds(75, 317, 186, 20);
 		contentPane.add(txtfechanacimiento);
 		
 		txtfecharegistro = new JTextField();
 		txtfecharegistro.setEditable(false);
 		txtfecharegistro.setColumns(10);
-		txtfecharegistro.setBounds(113, 368, 148, 20);
+		txtfecharegistro.setBounds(75, 368, 186, 20);
 		contentPane.add(txtfecharegistro);
-		
-		JButton btnFecha = new JButton("Seleccionar");
-		btnFecha.setBounds(10, 316, 93, 23);
-		contentPane.add(btnFecha);
-		
-		JButton button_1 = new JButton("Seleccionar");
-		button_1.setBounds(10, 367, 93, 23);
-		contentPane.add(button_1);
-		
-		JButton button_2 = new JButton("Seleccionar");
-		button_2.setBounds(10, 416, 93, 23);
-		contentPane.add(button_2);
 		
 		txtfechalabores = new JTextField();
 		txtfechalabores.setEditable(false);
 		txtfechalabores.setColumns(10);
-		txtfechalabores.setBounds(113, 417, 148, 20);
+		txtfechalabores.setBounds(75, 417, 186, 20);
 		contentPane.add(txtfechalabores);
 		
-		JComboBox comboBoxgenero = new JComboBox();
-		comboBoxgenero.setBounds(75, 217, 28, 20);
-		contentPane.add(comboBoxgenero);
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(75, 217, 28, 20);
+		contentPane.add(textField);
 		
-		JComboBox comboBoxestado = new JComboBox();
-		comboBoxestado.setBounds(75, 447, 28, 20);
-		contentPane.add(comboBoxestado);
+		textField_1 = new JTextField();
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		textField_1.setBounds(75, 447, 28, 20);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBounds(345, 242, 118, 20);
+		contentPane.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setEditable(false);
+		textField_3.setColumns(10);
+		textField_3.setBounds(370, 292, 93, 20);
+		contentPane.add(textField_3);
 	}
 }
