@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class egresos extends JFrame {
 
@@ -65,7 +66,8 @@ public class egresos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblEgresos = new JLabel("EGRESOS");
-		lblEgresos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEgresos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEgresos.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblEgresos.setBounds(170, 11, 147,40);
 		contentPane.add(lblEgresos);
 		

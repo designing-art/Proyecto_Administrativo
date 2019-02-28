@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class ingresos extends JFrame {
 	
@@ -54,7 +55,8 @@ public class ingresos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblIngresos = new JLabel("INGRESOS");
-		lblIngresos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblIngresos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngresos.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblIngresos.setBounds(170, 11, 147,40);
 		contentPane.add(lblIngresos);
 		
