@@ -41,14 +41,14 @@ public class ventana_principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 448);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(102, 205, 170));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
 		lblCanalCoffee.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
-		lblCanalCoffee.setBounds(251, 24, 180, 36);
+		lblCanalCoffee.setBounds(254, 24, 180, 36);
 		contentPane.add(lblCanalCoffee);
 		
 		JButton btnEmpleados = new JButton("Empleados");
@@ -57,7 +57,7 @@ public class ventana_principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnEmpleados.setBounds(39, 94, 109, 23);
+		btnEmpleados.setBounds(41, 158, 109, 23);
 		contentPane.add(btnEmpleados);
 		
 		JButton btnNewButton = new JButton("Logo de la empresa");
@@ -66,48 +66,51 @@ public class ventana_principal extends JFrame {
 			}
 		});
 		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\hp\\Documents\\Proyecto_Canal40\\Proyecto_Administrativo\\src\\archivos\\button.png"));
-		btnNewButton.setBounds(192, 62, 311, 305);
+		btnNewButton.setBounds(192, 62, 311, 323);
 		contentPane.add(btnNewButton);
 		
 		JButton btnPlanillas = new JButton("Planillas");
 		btnPlanillas.setBackground(Color.WHITE);
-		btnPlanillas.setBounds(39, 128, 109, 23);
+		btnPlanillas.setBounds(41, 362, 109, 23);
 		contentPane.add(btnPlanillas);
 		
 		JButton btnCargos = new JButton("Clientes");
 		btnCargos.setBackground(Color.WHITE);
-		btnCargos.setBounds(39, 162, 109, 23);
+		btnCargos.setBounds(41, 192, 109, 23);
 		contentPane.add(btnCargos);
 		
 		JLabel lblMenu = new JLabel("Menu de opciones:");
 		lblMenu.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
-		lblMenu.setBounds(39, 62, 121, 29);
+		lblMenu.setBounds(41, 126, 121, 29);
 		contentPane.add(lblMenu);
-		
-		JButton btnProductos = new JButton("Productos");
-		btnProductos.setBackground(Color.WHITE);
-		btnProductos.setBounds(39, 196, 109, 23);
-		contentPane.add(btnProductos);
 		
 		JButton btnServicios = new JButton("Servicios");
 		btnServicios.setBackground(Color.WHITE);
-		btnServicios.setBounds(39, 230, 109, 23);
+		btnServicios.setBounds(41, 226, 109, 23);
 		contentPane.add(btnServicios);
 		
 		JButton btnIngresos = new JButton("Ingresos");
 		btnIngresos.setBackground(Color.WHITE);
-		btnIngresos.setBounds(39, 264, 109, 23);
+		btnIngresos.setBounds(41, 260, 109, 23);
 		contentPane.add(btnIngresos);
 		
 		JButton btnEgresos = new JButton("Egresos");
 		btnEgresos.setBackground(Color.WHITE);
-		btnEgresos.setBounds(39, 298, 109, 23);
+		btnEgresos.setBounds(41, 294, 109, 23);
 		contentPane.add(btnEgresos);
 		
 		JButton btnFacturas = new JButton("Facturas");
 		btnFacturas.setBackground(Color.WHITE);
-		btnFacturas.setBounds(39, 332, 109, 23);
+		btnFacturas.setBounds(41, 328, 109, 23);
 		contentPane.add(btnFacturas);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(41, 11, 107, 92);
+		contentPane.add(panel);
+		
+		JLabel lblUsuario = new JLabel("Usuario");
+		lblUsuario.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 11));
+		lblUsuario.setBounds(80, 101, 36, 14);
+		contentPane.add(lblUsuario);
 	}
-
 }

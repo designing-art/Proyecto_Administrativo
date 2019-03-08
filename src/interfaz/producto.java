@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 
 public class producto extends JFrame {
 	private JTextField txtcodigoproducto;
@@ -43,7 +44,7 @@ public class producto extends JFrame {
 	 */
 	public producto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 486, 460);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,6 +113,21 @@ public class producto extends JFrame {
 		txtprecioproducto.setBounds(190,320, 100, 20);
 		contentPane.add(txtprecioproducto);
 		txtprecioproducto.setColumns(10);
+		
+		JButton button = new JButton("Guardar");
+		button.setBackground(new Color(0, 128, 0));
+		button.setBounds(51, 366, 89, 23);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("Editar");
+		button_1.setBackground(new Color(0, 128, 0));
+		button_1.setBounds(188, 366, 89, 23);
+		contentPane.add(button_1);
+		
+		JButton button_2 = new JButton("Salir");
+		button_2.setBackground(Color.RED);
+		button_2.setBounds(319, 366, 89, 23);
+		contentPane.add(button_2);
 		
 		
 		

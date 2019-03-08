@@ -58,7 +58,7 @@ public class egresos extends JFrame {
 	 */
 	public egresos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 486, 529);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,15 +73,15 @@ public class egresos extends JFrame {
 		
 		
 		JLabel lblCodigoEgresos = new JLabel("Codigo Egresos : ");
-		lblCodigoEgresos.setBounds(10, 95, 150, 14);
+		lblCodigoEgresos.setBounds(10, 95, 118, 14);
 		contentPane.add(lblCodigoEgresos);
 		
 		JLabel lblegresosalquiler = new JLabel("Alquiler : L.");
-		lblegresosalquiler.setBounds(10, 150, 180, 14);
+		lblegresosalquiler.setBounds(10, 150, 124, 14);
 		contentPane.add(lblegresosalquiler);
 		
 		JLabel lblegresosenergia = new JLabel("Energia Electrica :  L.");
-		lblegresosenergia.setBounds(10, 200, 180, 14);
+		lblegresosenergia.setBounds(10, 200, 86, 14);
 		contentPane.add(lblegresosenergia);
 		
 		JLabel lblegresosaguapotable = new JLabel("Agua potable :  L.");
@@ -118,15 +118,6 @@ public class egresos extends JFrame {
 		JLabel lblfechaegresos = new JLabel("Fecha Egresos : ");
 		lblfechaegresos.setBounds(10, 585, 105, 14);
 		contentPane.add(lblfechaegresos);
-		
-		
-		JPanel panelfotoegresos = new JPanel();
-		panelfotoegresos.setBounds(345, 69, 118, 132);
-		contentPane.add(panelfotoegresos);
-		
-		JLabel lblFotografiaEgresos = new JLabel("Fotografia :");
-		lblFotografiaEgresos.setBounds(271, 69, 93, 14);
-		contentPane.add(lblFotografiaEgresos);
 		
 		
 		JLabel lbldescripcionegresos = new JLabel("Descripcion Egresos : ");

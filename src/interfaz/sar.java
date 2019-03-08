@@ -43,7 +43,7 @@ public class sar extends JFrame {
 	 */
 	public sar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 432, 538);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +53,7 @@ public class sar extends JFrame {
 		JLabel lblsar = new JLabel("SAR");
 		lblsar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblsar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblsar.setBounds(205, 23, 46, 14);
+		lblsar.setBounds(188, 23, 46, 14);
 		contentPane.add(lblsar);
 		
 		JLabel lblIdSar = new JLabel("ID SAR:");
@@ -62,7 +62,7 @@ public class sar extends JFrame {
 		
 		txtidsar = new JTextField();
 		txtidsar.setEditable(false);
-		txtidsar.setBounds(226, 63, 86, 20);
+		txtidsar.setBounds(156, 63, 65, 20);
 		contentPane.add(txtidsar);
 		txtidsar.setColumns(10);
 		
@@ -71,7 +71,7 @@ public class sar extends JFrame {
 		contentPane.add(lblCai);
 		
 		txtcai = new JTextField();
-		txtcai.setBounds(226, 126, 156, 20);
+		txtcai.setBounds(156, 126, 156, 20);
 		contentPane.add(txtcai);
 		txtcai.setColumns(10);
 		
@@ -80,7 +80,7 @@ public class sar extends JFrame {
 		contentPane.add(lblRangoInicial);
 		
 		txtrangoinicial = new JTextField();
-		txtrangoinicial.setBounds(226, 198, 156, 20);
+		txtrangoinicial.setBounds(156, 198, 156, 20);
 		contentPane.add(txtrangoinicial);
 		txtrangoinicial.setColumns(10);
 		
@@ -89,7 +89,7 @@ public class sar extends JFrame {
 		contentPane.add(lblRangoFinal);
 		
 		txtrangofinal = new JTextField();
-		txtrangofinal.setBounds(226, 274, 156, 20);
+		txtrangofinal.setBounds(156, 274, 156, 20);
 		contentPane.add(txtrangofinal);
 		txtrangofinal.setColumns(10);
 		
@@ -98,14 +98,24 @@ public class sar extends JFrame {
 		contentPane.add(lblFechaLimite);
 		
 		txtfechalimite = new JTextField();
-		txtfechalimite.setBounds(226, 349, 156, 20);
+		txtfechalimite.setBounds(156, 346, 156, 20);
 		contentPane.add(txtfechalimite);
 		txtfechalimite.setColumns(10);
 		
-		JButton btnNewButton = new JButton("GUARDAR");
-		btnNewButton.setBackground(new Color(0, 128, 0));
-		btnNewButton.setBounds(25, 465, 89, 23);
-		contentPane.add(btnNewButton);
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBackground(new Color(0, 128, 0));
+		btnGuardar.setBounds(25, 425, 89, 23);
+		contentPane.add(btnGuardar);
+		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBackground(new Color(0, 128, 0));
+		btnEditar.setBounds(162, 425, 89, 23);
+		contentPane.add(btnEditar);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setBackground(Color.RED);
+		btnSalir.setBounds(293, 425, 89, 23);
+		contentPane.add(btnSalir);
 		
 		
 	}

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 
 public class servicios extends JFrame {
 	private JTextField txtidservicio;
@@ -48,7 +49,7 @@ public class servicios extends JFrame {
 	 */
 	public servicios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 486, 671);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -156,6 +157,21 @@ public class servicios extends JFrame {
 		txtgrabacioneventoservicio.setBounds(190,520, 100, 20);
 		contentPane.add(txtgrabacioneventoservicio);
 		txtgrabacioneventoservicio.setColumns(10);
+		
+		JButton button = new JButton("Guardar");
+		button.setBackground(new Color(0, 128, 0));
+		button.setBounds(10, 581, 89, 23);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("Editar");
+		button_1.setBackground(new Color(0, 128, 0));
+		button_1.setBounds(190, 581, 89, 23);
+		contentPane.add(button_1);
+		
+		JButton button_2 = new JButton("Salir");
+		button_2.setBackground(Color.RED);
+		button_2.setBounds(371, 581, 89, 23);
+		contentPane.add(button_2);
 		
 		
 		
