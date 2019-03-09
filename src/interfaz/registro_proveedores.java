@@ -56,42 +56,42 @@ public class registro_proveedores extends JFrame {
 		
 		JLabel lblRegistroProveedores = new JLabel("REGISTRAR PROVEEDORES");
 		lblRegistroProveedores.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistroProveedores.setBounds(223, 42, 147, 28);
+		lblRegistroProveedores.setBounds(289, 43, 147, 28);
 		contentPane.add(lblRegistroProveedores);
 		
 		JLabel lblNombresproveedor = new JLabel("Nombres Del Proveedor :");
-		lblNombresproveedor.setBounds(67, 149, 174, 14);
+		lblNombresproveedor.setBounds(46, 149, 174, 14);
 		contentPane.add(lblNombresproveedor);
 		
 		JLabel lblcuentaproveedor = new JLabel("Cuenta Bancaria:");
-		lblcuentaproveedor.setBounds(67, 174, 136, 14);
+		lblcuentaproveedor.setBounds(46, 174, 136, 14);
 		contentPane.add(lblcuentaproveedor);
 		
 		JLabel lbldireccionproveedor = new JLabel("Direccion Del Proveedor :");
-		lbldireccionproveedor.setBounds(67, 202, 174, 14);
+		lbldireccionproveedor.setBounds(46, 199, 174, 14);
 		contentPane.add(lbldireccionproveedor);
 		
 		JLabel lblcodigoproveedor = new JLabel("Codigo Del Proveedor :");
-		lblcodigoproveedor.setBounds(67, 124, 136, 14);
+		lblcodigoproveedor.setBounds(46, 124, 136, 14);
 		contentPane.add(lblcodigoproveedor);
 		
 		JLabel lbltelefonoproveedor = new JLabel("Telefono Del Proveedor :");
-		lbltelefonoproveedor.setBounds(67, 302, 156, 14);
+		lbltelefonoproveedor.setBounds(47, 302, 156, 14);
 		contentPane.add(lbltelefonoproveedor);
 		
 		JLabel lblCorreoproveedor = new JLabel("Correo Del Proveedor :");
-		lblCorreoproveedor.setBounds(67, 252, 136, 14);
+		lblCorreoproveedor.setBounds(46, 252, 136, 14);
 		contentPane.add(lblCorreoproveedor);
 		
 		JLabel lblGeneroproveedor = new JLabel("Rtn Del Proveedor:");
-		lblGeneroproveedor.setBounds(67, 277, 136, 14);
+		lblGeneroproveedor.setBounds(46, 277, 136, 14);
 		contentPane.add(lblGeneroproveedor);
 		
 		
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(539, 159, 118, 132);
+		panel.setBounds(522, 115, 118, 132);
 		contentPane.add(panel);
 		
 		JLabel lblFotografiaproveedor = new JLabel("Fotografia :");
@@ -103,57 +103,61 @@ public class registro_proveedores extends JFrame {
 		contentPane.add(btnsubirproveedor);
 		
 		JButton btntomarproveedor = new JButton("Tomar");
-		btntomarproveedor.setBounds(423, 193, 89, 23);
+		btntomarproveedor.setBounds(423, 183, 89, 23);
 		contentPane.add(btntomarproveedor);
 		
 		
 		txtnombresproveedor = new JTextField();
 		txtnombresproveedor.setEditable(false);
-		txtnombresproveedor.setBounds(213, 121, 28, 20);
+		txtnombresproveedor.setBounds(192, 118, 28, 20);
 		contentPane.add(txtnombresproveedor);
 		txtnombresproveedor.setColumns(10);
 		
 		txtcuentaproveedor = new JTextField();
-		txtcuentaproveedor.setBounds(213, 146, 186, 20);
+		txtcuentaproveedor.setBounds(192, 146, 186, 20);
 		contentPane.add(txtcuentaproveedor);
 		txtcuentaproveedor.setColumns(10);
 		
 		txtdireccionproveedor = new JTextField();
 		txtdireccionproveedor.setColumns(10);
-		txtdireccionproveedor.setBounds(213, 171, 186, 20);
+		txtdireccionproveedor.setBounds(192, 171, 186, 20);
 		contentPane.add(txtdireccionproveedor);
 		
 		txtcodigoproveedor = new JTextField();
 		txtcodigoproveedor.setColumns(10);
-		txtcodigoproveedor.setBounds(213, 202, 186, 44);
+		txtcodigoproveedor.setBounds(192, 199, 186, 44);
 		contentPane.add(txtcodigoproveedor);
 		
 		txttelefonoproveedor = new JTextField();
 		txttelefonoproveedor.setColumns(10);
-		txttelefonoproveedor.setBounds(213, 249, 186, 20);
+		txttelefonoproveedor.setBounds(192, 249, 186, 20);
 		contentPane.add(txttelefonoproveedor);
 		
 		txtcorreoproveedor= new JTextField();
 		txtcorreoproveedor.setColumns(10);
-		txtcorreoproveedor.setBounds(213, 277, 186, 20);
+		txtcorreoproveedor.setBounds(192, 274, 186, 20);
 		contentPane.add(txtcorreoproveedor);
 		
 		txtrtnproveedor = new JTextField();
 		txtrtnproveedor.setColumns(10);
-		txtrtnproveedor.setBounds(213, 302, 186, 20);
+		txtrtnproveedor.setBounds(192, 299, 186, 20);
 		contentPane.add(txtrtnproveedor);
 		
 		JButton btnnuevoproveedor = new JButton("Nuevo");
-		btnnuevoproveedor.setBounds(422, 231, 89, 23);
+		btnnuevoproveedor.setBounds(536, 273, 104, 23);
 		contentPane.add(btnnuevoproveedor);
 		
 		JButton btnactualizarproveedor = new JButton("Actualizar");
-		btnactualizarproveedor.setBounds(422, 268, 89, 23);
+		btnactualizarproveedor.setBounds(423, 307, 102, 23);
 		contentPane.add(btnactualizarproveedor);
 		
 		JButton btnguardarproveedor = new JButton("Guardar");
-		btnguardarproveedor.setBounds(422, 298, 89, 23);
+		btnguardarproveedor.setBounds(423, 273, 102, 23);
 		contentPane.add(btnguardarproveedor);
+		
+		JButton btnsalirproveedor = new JButton("Salir");
+		btnsalirproveedor.setBounds(536, 307, 104, 23);
+		contentPane.add(btnsalirproveedor);
 	
 		
 		
