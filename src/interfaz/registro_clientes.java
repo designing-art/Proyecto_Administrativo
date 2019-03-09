@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class registro_clientes extends JFrame {
 
@@ -23,12 +24,12 @@ public class registro_clientes extends JFrame {
 	private JTextField txtcorreo;
 	private JTextField txtidentidad;
 	private JTextField txttelefono;
-	private JTextField txthorario;
-	private JTextField txtnombrereferencia;
-	private JTextField txttelefonoreferencia;
-	private JTextField txtfechanacimiento;
-	private JTextField txtfecharegistro;
-	private JTextField txtfechalabores;
+	private JTextField txtnombreempresa;
+	private JTextField textFielddescripcionempresa;
+	private JTextField textFielddireccion;
+	private JTextField textFieldrtnempresa;
+	private JTextField textFieldtelefonoempresa;
+	private JTextField textFieldcorreoempresa;
 
 	/**
 	 * Launch the application.
@@ -51,212 +52,189 @@ public class registro_clientes extends JFrame {
 	 */
 	public registro_clientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistroDeEmpleados = new JLabel("REGISTRAR EMPLEADO");
+		JLabel lblRegistroDeEmpleados = new JLabel("REGISTRAR CLIENTES");
+		lblRegistroDeEmpleados.setBounds(250, 11, 147, 28);
+		lblRegistroDeEmpleados.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroDeEmpleados.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistroDeEmpleados.setBounds(170, 11, 147, 28);
 		contentPane.add(lblRegistroDeEmpleados);
 		
+		JLabel lblDatosGenerales = new JLabel("Datos Generales:");
+		lblDatosGenerales.setBounds(50, 45, 118, 14);
+		contentPane.add(lblDatosGenerales);
+		
 		JLabel lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(10, 95, 63, 14);
+		lblNombres.setBounds(50, 96, 63, 14);
 		contentPane.add(lblNombres);
 		
 		JLabel lblApellidos = new JLabel("Apellidos :");
-		lblApellidos.setBounds(10, 120, 63, 14);
+		lblApellidos.setBounds(50, 121, 63, 14);
 		contentPane.add(lblApellidos);
 		
 		JLabel lblTelefono = new JLabel("Direccion :");
-		lblTelefono.setBounds(10, 145, 63, 14);
+		lblTelefono.setBounds(50, 146, 63, 14);
 		contentPane.add(lblTelefono);
 		
-		JLabel lblDireccion = new JLabel("Codigo :");
-		lblDireccion.setBounds(10, 69, 63, 14);
-		contentPane.add(lblDireccion);
+		JLabel lblCodigo = new JLabel("Codigo :");
+		lblCodigo.setBounds(50, 70, 63, 14);
+		contentPane.add(lblCodigo);
 		
 		JLabel label = new JLabel("Telefono :");
-		label.setBounds(10, 270, 63, 14);
+		label.setBounds(50, 271, 63, 14);
 		contentPane.add(label);
 		
 		JLabel lblCorreo = new JLabel("Correo :");
-		lblCorreo.setBounds(10, 195, 63, 14);
+		lblCorreo.setBounds(50, 196, 63, 14);
 		contentPane.add(lblCorreo);
 		
 		JLabel lblGenero = new JLabel("Genero :");
-		lblGenero.setBounds(10, 220, 63, 14);
+		lblGenero.setBounds(50, 221, 63, 14);
 		contentPane.add(lblGenero);
 		
 		JLabel lblIdentidad = new JLabel("Identidad :");
-		lblIdentidad.setBounds(10, 245, 63, 14);
+		lblIdentidad.setBounds(50, 246, 63, 14);
 		contentPane.add(lblIdentidad);
 		
-		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setBounds(271, 245, 48, 14);
-		contentPane.add(lblCargo);
-		
-		JLabel lblHorario = new JLabel("Horario :");
-		lblHorario.setBounds(271, 270, 48, 14);
-		contentPane.add(lblHorario);
-		
-		JLabel lblTipoDeContrato = new JLabel("Tipo de Contrato :");
-		lblTipoDeContrato.setBounds(271, 295, 93, 14);
-		contentPane.add(lblTipoDeContrato);
-		
-		JLabel lblReferencia = new JLabel("Nombre completo de referencia :");
-		lblReferencia.setBounds(271, 320, 184, 14);
-		contentPane.add(lblReferencia);
+		JLabel lblNombreEmpresa = new JLabel("Nombre empresa:");
+		lblNombreEmpresa.setBounds(50, 296, 184, 14);
+		contentPane.add(lblNombreEmpresa);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(345, 69, 118, 132);
+		panel.setBounds(508, 64, 120, 132);
 		contentPane.add(panel);
 		
 		JLabel lblFotografia = new JLabel("Fotografia :");
-		lblFotografia.setBounds(271, 69, 93, 14);
+		lblFotografia.setBounds(422, 64, 206, 14);
 		contentPane.add(lblFotografia);
 		
-		JButton btnTomar = new JButton("Subir");
-		btnTomar.setBounds(271, 116, 63, 23);
+		JButton btnSubir = new JButton("Subir");
+		btnSubir.setBounds(408, 111, 90, 23);
+		contentPane.add(btnSubir);
+		
+		JButton btnTomar = new JButton("Tomar");
+		btnTomar.setBounds(408, 86, 90, 23);
 		contentPane.add(btnTomar);
 		
-		JButton button = new JButton("Tomar");
-		button.setBounds(271, 91, 63, 23);
-		contentPane.add(button);
+		JLabel lblTelefonoEmpresa = new JLabel("Telefono empresa:");
+		lblTelefonoEmpresa.setBounds(50, 405, 151, 14);
+		contentPane.add(lblTelefonoEmpresa);
 		
-		JLabel lblTelefonoDeLa = new JLabel("Telefono de Referencia :");
-		lblTelefonoDeLa.setBounds(271, 371, 126, 14);
-		contentPane.add(lblTelefonoDeLa);
+		JLabel lblDireccionEmpresa = new JLabel("Direccion empresa:");
+		lblDireccionEmpresa.setBounds(50, 346, 118, 14);
+		contentPane.add(lblDireccionEmpresa);
 		
-		JLabel lblFechaDeNacimiento = new JLabel("Fecha de nacimiento :");
-		lblFechaDeNacimiento.setBounds(10, 295, 105, 14);
-		contentPane.add(lblFechaDeNacimiento);
+		JLabel lblDescripcionEmpresa = new JLabel("Descripcion empresa:");
+		lblDescripcionEmpresa.setBounds(50, 321, 128, 14);
+		contentPane.add(lblDescripcionEmpresa);
 		
-		JLabel lblFechaDeRegistro = new JLabel("Fecha de Registro :");
-		lblFechaDeRegistro.setBounds(10, 343, 105, 14);
-		contentPane.add(lblFechaDeRegistro);
-		
-		JLabel lblFechaDeComienso = new JLabel("Fecha de comienzo de labores :");
-		lblFechaDeComienso.setBounds(10, 393, 151, 14);
-		contentPane.add(lblFechaDeComienso);
-		
-		JLabel lblEstado = new JLabel("Estado :");
-		lblEstado.setBounds(10, 450, 63, 14);
-		contentPane.add(lblEstado);
+		JLabel lblCorreoEmpresa = new JLabel("Correo empresa :");
+		lblCorreoEmpresa.setBounds(50, 426, 118, 14);
+		contentPane.add(lblCorreoEmpresa);
 		
 		txtcodigo = new JTextField();
+		txtcodigo.setBounds(188, 67, 28, 20);
 		txtcodigo.setEditable(false);
-		txtcodigo.setBounds(75, 66, 28, 20);
 		contentPane.add(txtcodigo);
 		txtcodigo.setColumns(10);
 		
 		txtnombres = new JTextField();
-		txtnombres.setBounds(75, 92, 186, 20);
+		txtnombres.setBounds(188, 93, 186, 20);
 		contentPane.add(txtnombres);
 		txtnombres.setColumns(10);
 		
 		txtapellidos = new JTextField();
+		txtapellidos.setBounds(188, 118, 186, 20);
 		txtapellidos.setColumns(10);
-		txtapellidos.setBounds(75, 117, 186, 20);
 		contentPane.add(txtapellidos);
 		
 		txtdireccion = new JTextField();
+		txtdireccion.setBounds(188, 146, 186, 44);
 		txtdireccion.setColumns(10);
-		txtdireccion.setBounds(75, 142, 186, 44);
 		contentPane.add(txtdireccion);
 		
 		txtcorreo = new JTextField();
+		txtcorreo.setBounds(188, 193, 186, 20);
 		txtcorreo.setColumns(10);
-		txtcorreo.setBounds(75, 192, 186, 20);
 		contentPane.add(txtcorreo);
 		
 		txtidentidad = new JTextField();
+		txtidentidad.setBounds(188, 243, 186, 20);
 		txtidentidad.setColumns(10);
-		txtidentidad.setBounds(75, 242, 186, 20);
 		contentPane.add(txtidentidad);
 		
 		txttelefono = new JTextField();
+		txttelefono.setBounds(188, 268, 186, 20);
 		txttelefono.setColumns(10);
-		txttelefono.setBounds(75, 267, 186, 20);
 		contentPane.add(txttelefono);
 		
-		JComboBox comboBoxcargo = new JComboBox();
-		comboBoxcargo.setBounds(345, 242, 118, 20);
-		contentPane.add(comboBoxcargo);
-		
-		txthorario = new JTextField();
-		txthorario.setEditable(false);
-		txthorario.setColumns(10);
-		txthorario.setBounds(345, 267, 118, 20);
-		contentPane.add(txthorario);
-		
-		JComboBox comboBoxcontrato = new JComboBox();
-		comboBoxcontrato.setBounds(374, 295, 89, 20);
-		contentPane.add(comboBoxcontrato);
-		
-		txtnombrereferencia = new JTextField();
-		txtnombrereferencia.setColumns(10);
-		txtnombrereferencia.setBounds(271, 340, 184, 20);
-		contentPane.add(txtnombrereferencia);
-		
-		txttelefonoreferencia = new JTextField();
-		txttelefonoreferencia.setColumns(10);
-		txttelefonoreferencia.setBounds(271, 387, 184, 20);
-		contentPane.add(txttelefonoreferencia);
-		
-		JLabel lblDatosGenerales = new JLabel("Datos Generales:");
-		lblDatosGenerales.setBounds(10, 44, 118, 14);
-		contentPane.add(lblDatosGenerales);
-		
-		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBackground(new Color(0, 128, 0));
-		btnRegistrar.setBounds(318, 420, 99, 23);
-		contentPane.add(btnRegistrar);
-		
-		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setBackground(new Color(255, 0, 0));
-		btnSalir.setBounds(329, 454, 75, 23);
-		contentPane.add(btnSalir);
-		
-		txtfechanacimiento = new JTextField();
-		txtfechanacimiento.setEditable(false);
-		txtfechanacimiento.setColumns(10);
-		txtfechanacimiento.setBounds(113, 317, 148, 20);
-		contentPane.add(txtfechanacimiento);
-		
-		txtfecharegistro = new JTextField();
-		txtfecharegistro.setEditable(false);
-		txtfecharegistro.setColumns(10);
-		txtfecharegistro.setBounds(113, 368, 148, 20);
-		contentPane.add(txtfecharegistro);
-		
-		JButton btnFecha = new JButton("Seleccionar");
-		btnFecha.setBounds(10, 316, 93, 23);
-		contentPane.add(btnFecha);
-		
-		JButton button_1 = new JButton("Seleccionar");
-		button_1.setBounds(10, 367, 93, 23);
-		contentPane.add(button_1);
-		
-		JButton button_2 = new JButton("Seleccionar");
-		button_2.setBounds(10, 416, 93, 23);
-		contentPane.add(button_2);
-		
-		txtfechalabores = new JTextField();
-		txtfechalabores.setEditable(false);
-		txtfechalabores.setColumns(10);
-		txtfechalabores.setBounds(113, 417, 148, 20);
-		contentPane.add(txtfechalabores);
+		txtnombreempresa = new JTextField();
+		txtnombreempresa.setBounds(188, 293, 186, 20);
+		txtnombreempresa.setColumns(10);
+		contentPane.add(txtnombreempresa);
 		
 		JComboBox comboBoxgenero = new JComboBox();
-		comboBoxgenero.setBounds(75, 217, 28, 20);
+		comboBoxgenero.setBounds(188, 218, 46, 20);
 		contentPane.add(comboBoxgenero);
 		
-		JComboBox comboBoxestado = new JComboBox();
-		comboBoxestado.setBounds(75, 447, 28, 20);
-		contentPane.add(comboBoxestado);
+		
+		
+		textFielddescripcionempresa = new JTextField();
+		textFielddescripcionempresa.setBounds(188, 321, 186, 20);
+		textFielddescripcionempresa.setColumns(10);
+		contentPane.add(textFielddescripcionempresa);
+		
+		
+		
+		textFielddireccion = new JTextField();
+		textFielddireccion.setBounds(188, 345, 186, 20);
+		textFielddireccion.setColumns(10);
+		contentPane.add(textFielddireccion);
+		
+		JLabel lblRtnEmpresa = new JLabel("RTN empresa:");
+		lblRtnEmpresa.setBounds(50, 371, 184, 14);
+		contentPane.add(lblRtnEmpresa);
+		
+		textFieldrtnempresa = new JTextField();
+		textFieldrtnempresa.setBounds(188, 374, 186, 20);
+		textFieldrtnempresa.setColumns(10);
+		contentPane.add(textFieldrtnempresa);
+		
+		textFieldtelefonoempresa = new JTextField();
+		textFieldtelefonoempresa.setBounds(188, 402, 186, 20);
+		textFieldtelefonoempresa.setColumns(10);
+		contentPane.add(textFieldtelefonoempresa);
+		
+		
+		
+		textFieldcorreoempresa = new JTextField();
+		textFieldcorreoempresa.setBounds(188, 430, 186, 20);
+		textFieldcorreoempresa.setColumns(10);
+		contentPane.add(textFieldcorreoempresa);
+		
+		JButton btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar.setBounds(508, 236, 120, 23);
+		btnRegistrar.setBackground(new Color(0, 128, 0));
+		contentPane.add(btnRegistrar);
+		
+		JButton btnGuardar = new JButton("ACTUALIZAR");
+		btnGuardar.setBounds(508, 265, 120, 23);
+		btnGuardar.setBackground(new Color(0, 128, 0));
+		contentPane.add(btnGuardar);
+		
+		JButton btnBorrar = new JButton("BORRAR");
+		btnBorrar.setBounds(508, 306, 120, 23);
+		btnBorrar.setBackground(new Color(255, 0, 0));
+		contentPane.add(btnBorrar);
+		
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(508, 337, 120, 23);
+		btnSalir.setBackground(new Color(255, 0, 0));
+		contentPane.add(btnSalir);
 	}
 }
