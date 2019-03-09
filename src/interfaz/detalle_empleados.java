@@ -55,7 +55,7 @@ public class detalle_empleados extends JFrame {
 	 */
 	public detalle_empleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 494, 538);
+		setBounds(100, 100, 700, 538);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,8 +63,8 @@ public class detalle_empleados extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblRegistroDeEmpleados = new JLabel("DETALLES DEL EMPLEADO");
-		lblRegistroDeEmpleados.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRegistroDeEmpleados.setBounds(163, 11, 147, 28);
+		lblRegistroDeEmpleados.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblRegistroDeEmpleados);
 		
 		JLabel lblNombres = new JLabel("Nombres :");
@@ -144,63 +144,63 @@ public class detalle_empleados extends JFrame {
 		contentPane.add(lblEstado);
 		
 		txtcodigo = new JTextField();
-		txtcodigo.setEditable(false);
 		txtcodigo.setBounds(75, 66, 28, 20);
+		txtcodigo.setEditable(false);
 		contentPane.add(txtcodigo);
 		txtcodigo.setColumns(10);
 		
 		txtnombres = new JTextField();
-		txtnombres.setEditable(false);
 		txtnombres.setBounds(75, 92, 186, 20);
+		txtnombres.setEditable(false);
 		contentPane.add(txtnombres);
 		txtnombres.setColumns(10);
 		
 		txtapellidos = new JTextField();
+		txtapellidos.setBounds(75, 117, 186, 20);
 		txtapellidos.setEditable(false);
 		txtapellidos.setColumns(10);
-		txtapellidos.setBounds(75, 117, 186, 20);
 		contentPane.add(txtapellidos);
 		
 		txtdireccion = new JTextField();
+		txtdireccion.setBounds(75, 142, 186, 44);
 		txtdireccion.setEditable(false);
 		txtdireccion.setColumns(10);
-		txtdireccion.setBounds(75, 142, 186, 44);
 		contentPane.add(txtdireccion);
 		
 		txtcorreo = new JTextField();
+		txtcorreo.setBounds(75, 192, 186, 20);
 		txtcorreo.setEditable(false);
 		txtcorreo.setColumns(10);
-		txtcorreo.setBounds(75, 192, 186, 20);
 		contentPane.add(txtcorreo);
 		
 		txtidentidad = new JTextField();
+		txtidentidad.setBounds(75, 242, 186, 20);
 		txtidentidad.setEditable(false);
 		txtidentidad.setColumns(10);
-		txtidentidad.setBounds(75, 242, 186, 20);
 		contentPane.add(txtidentidad);
 		
 		txttelefono = new JTextField();
+		txttelefono.setBounds(75, 267, 186, 20);
 		txttelefono.setEditable(false);
 		txttelefono.setColumns(10);
-		txttelefono.setBounds(75, 267, 186, 20);
 		contentPane.add(txttelefono);
 		
 		txthorario = new JTextField();
+		txthorario.setBounds(345, 267, 118, 20);
 		txthorario.setEditable(false);
 		txthorario.setColumns(10);
-		txthorario.setBounds(345, 267, 118, 20);
 		contentPane.add(txthorario);
 		
 		txtnombrereferencia = new JTextField();
+		txtnombrereferencia.setBounds(271, 340, 184, 20);
 		txtnombrereferencia.setEditable(false);
 		txtnombrereferencia.setColumns(10);
-		txtnombrereferencia.setBounds(271, 340, 184, 20);
 		contentPane.add(txtnombrereferencia);
 		
 		txttelefonoreferencia = new JTextField();
+		txttelefonoreferencia.setBounds(271, 387, 184, 20);
 		txttelefonoreferencia.setEditable(false);
 		txttelefonoreferencia.setColumns(10);
-		txttelefonoreferencia.setBounds(271, 387, 184, 20);
 		contentPane.add(txttelefonoreferencia);
 		
 		JLabel lblDatosGenerales = new JLabel("Datos Generales:");
@@ -208,55 +208,55 @@ public class detalle_empleados extends JFrame {
 		contentPane.add(lblDatosGenerales);
 		
 		JButton btnRegistrar = new JButton("ACTUALIZAR");
-		btnRegistrar.setBackground(new Color(0, 128, 0));
 		btnRegistrar.setBounds(337, 418, 118, 23);
+		btnRegistrar.setBackground(new Color(0, 128, 0));
 		contentPane.add(btnRegistrar);
 		
 		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setBackground(new Color(255, 0, 0));
 		btnSalir.setBounds(380, 446, 75, 23);
+		btnSalir.setBackground(new Color(255, 0, 0));
 		contentPane.add(btnSalir);
 		
 		txtfechanacimiento = new JTextField();
+		txtfechanacimiento.setBounds(75, 317, 186, 20);
 		txtfechanacimiento.setEditable(false);
 		txtfechanacimiento.setColumns(10);
-		txtfechanacimiento.setBounds(75, 317, 186, 20);
 		contentPane.add(txtfechanacimiento);
 		
 		txtfecharegistro = new JTextField();
+		txtfecharegistro.setBounds(75, 368, 186, 20);
 		txtfecharegistro.setEditable(false);
 		txtfecharegistro.setColumns(10);
-		txtfecharegistro.setBounds(75, 368, 186, 20);
 		contentPane.add(txtfecharegistro);
 		
 		txtfechalabores = new JTextField();
+		txtfechalabores.setBounds(75, 417, 186, 20);
 		txtfechalabores.setEditable(false);
 		txtfechalabores.setColumns(10);
-		txtfechalabores.setBounds(75, 417, 186, 20);
 		contentPane.add(txtfechalabores);
 		
 		textField = new JTextField();
+		textField.setBounds(75, 217, 28, 20);
 		textField.setEditable(false);
 		textField.setColumns(10);
-		textField.setBounds(75, 217, 28, 20);
 		contentPane.add(textField);
 		
 		textField_1 = new JTextField();
+		textField_1.setBounds(75, 447, 28, 20);
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
-		textField_1.setBounds(75, 447, 28, 20);
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setBounds(345, 242, 118, 20);
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
-		textField_2.setBounds(345, 242, 118, 20);
 		contentPane.add(textField_2);
 		
 		textField_3 = new JTextField();
+		textField_3.setBounds(370, 292, 93, 20);
 		textField_3.setEditable(false);
 		textField_3.setColumns(10);
-		textField_3.setBounds(370, 292, 93, 20);
 		contentPane.add(textField_3);
 	}
 }
