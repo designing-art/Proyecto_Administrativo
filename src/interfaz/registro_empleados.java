@@ -224,31 +224,31 @@ public class registro_empleados extends JFrame {
 		contentPane.add(btnSalir);
 		
 		txtfechanacimiento = new JTextField();
-		txtfechanacimiento.setBounds(199, 317, 158, 20);
+		txtfechanacimiento.setBounds(219, 317, 138, 20);
 		txtfechanacimiento.setEditable(false);
 		txtfechanacimiento.setColumns(10);
 		contentPane.add(txtfechanacimiento);
 		
 		txtfecharegistro = new JTextField();
-		txtfecharegistro.setBounds(199, 362, 158, 20);
+		txtfecharegistro.setBounds(219, 362, 138, 20);
 		txtfecharegistro.setEditable(false);
 		txtfecharegistro.setColumns(10);
 		contentPane.add(txtfecharegistro);
 		
 		JButton btnFecha = new JButton("Seleccionar");
-		btnFecha.setBounds(96, 314, 93, 23);
+		btnFecha.setBounds(96, 314, 105, 23);
 		contentPane.add(btnFecha);
 		
 		JButton button_1 = new JButton("Seleccionar");
-		button_1.setBounds(96, 361, 93, 23);
+		button_1.setBounds(96, 361, 105, 23);
 		contentPane.add(button_1);
 		
 		JButton button_2 = new JButton("Seleccionar");
-		button_2.setBounds(96, 410, 93, 23);
+		button_2.setBounds(96, 410, 105, 23);
 		contentPane.add(button_2);
 		
 		txtfechalabores = new JTextField();
-		txtfechalabores.setBounds(199, 411, 158, 20);
+		txtfechalabores.setBounds(219, 411, 138, 20);
 		txtfechalabores.setEditable(false);
 		txtfechalabores.setColumns(10);
 		contentPane.add(txtfechalabores);
