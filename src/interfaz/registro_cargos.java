@@ -13,8 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class cargos extends JFrame {
+public class registro_cargos extends JFrame {
 	private JTextField txtcodigoCargo ;
 	private JTextField txttipoCargo ;
 	private JTextField txtfuncionesCargo ;
@@ -26,6 +28,7 @@ public class cargos extends JFrame {
 	
 
 	private JPanel contentPane;
+	private JTextField textField;
 	
 
 	/**
@@ -35,7 +38,7 @@ public class cargos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					cargos frame = new cargos();
+					registro_cargos frame = new registro_cargos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,96 +50,102 @@ public class cargos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public cargos() {
+	public registro_cargos() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 538);
+		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistroCargos = new JLabel(" REGISTRO Y MANTENIMIENTO DE CARGOS");
+		JLabel lblRegistroCargos = new JLabel(" REGISTRO DE CARGOS");
 		lblRegistroCargos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistroCargos.setBounds(170, 11, 147, 28);
+		lblRegistroCargos.setBounds(275, 45, 136, 28);
 		contentPane.add(lblRegistroCargos);
 		
 		JLabel lblCodigoCargo = new JLabel("Codigo :");
-		lblCodigoCargo.setBounds(10, 69, 63, 14);
+		lblCodigoCargo.setBounds(201, 84, 63, 14);
 		contentPane.add(lblCodigoCargo);
 		
 		JLabel lblTipoDeCargo = new JLabel("Tipo de Cargo :");
-		lblTipoDeCargo.setBounds(10, 120, 100, 14);
+		lblTipoDeCargo.setBounds(201, 109, 105, 14);
 		contentPane.add(lblTipoDeCargo);
 		
 		JLabel lblFuncionesCargo = new JLabel("Funciones :");
-		lblFuncionesCargo.setBounds(10, 173, 100, 14);
+		lblFuncionesCargo.setBounds(201, 164, 76, 14);
 		contentPane.add(lblFuncionesCargo);
 		
 		JLabel lblSueldoCargo = new JLabel("Sueldo :");
-		lblSueldoCargo.setBounds(10, 220, 100, 14);
+		lblSueldoCargo.setBounds(201, 231, 100, 14);
 		contentPane.add(lblSueldoCargo);
 		
 		JLabel lblHoraExtraCargo = new JLabel("Valor Hora Extra :");
-		lblHoraExtraCargo.setBounds(10,270, 120, 14);
+		lblHoraExtraCargo.setBounds(201,256, 120, 14);
 		contentPane.add(lblHoraExtraCargo);
 		
 		 txtcodigoCargo = new JTextField();
 		txtcodigoCargo.setEditable(false);
-		txtcodigoCargo.setBounds(75, 66, 28, 20);
+		txtcodigoCargo.setBounds(304, 81, 28, 20);
 		contentPane.add(txtcodigoCargo);
 		txtcodigoCargo.setColumns(10);
 		
 		txttipoCargo = new JTextField();
-		txttipoCargo.setBounds(120,170 , 186, 20);
+		txttipoCargo.setBounds(304,164 , 186, 56);
 		contentPane.add(txttipoCargo);
 		txttipoCargo.setColumns(10);
 		
 		txtfuncionesCargo = new JTextField();
-		txtfuncionesCargo.setBounds(120,215 , 186, 20);
+		txtfuncionesCargo.setBounds(304,228 , 186, 20);
 		contentPane.add(txtfuncionesCargo);
 		txtfuncionesCargo.setColumns(10);
 		
 		txthoraExtraCargo = new JTextField();
-		txthoraExtraCargo.setBounds(120,265 , 186, 20);
+		txthoraExtraCargo.setBounds(304,253 , 186, 20);
 		contentPane.add(txthoraExtraCargo);
 		txthoraExtraCargo.setColumns(10);
 		
 		
-		JButton btnCancelarCargo = new JButton("CANCELAR");
+		JButton btnCancelarCargo = new JButton("ACTUALIZAR");
 		btnCancelarCargo.setBackground(new Color(0, 128, 0));
-		btnCancelarCargo.setBounds(90, 310, 99, 23);
+		btnCancelarCargo.setBounds(201, 333, 99, 23);
 		contentPane.add(btnCancelarCargo);
 		
 		JButton btnGuardarCargo = new JButton("GUARDAR");
 		btnGuardarCargo.setBackground(new Color(0, 128, 0));
-		btnGuardarCargo.setBounds(210, 310, 99, 23);
+		btnGuardarCargo.setBounds(201, 299, 99, 23);
 		contentPane.add(btnGuardarCargo);
 		
 		
 		JButton btnNuevoCargo = new JButton("NUEVO");
 		btnNuevoCargo.setBackground(new Color(0, 128, 0));
-		btnNuevoCargo.setBounds(90, 340, 99, 23);
+		btnNuevoCargo.setBounds(304, 299, 99, 23);
 		contentPane.add(btnNuevoCargo);
 		
-		JButton btnActualizarCargo = new JButton("ACTUALIZAR");
-		btnActualizarCargo.setBackground(new Color(0, 128, 0));
-		btnActualizarCargo.setBounds(210, 340, 99, 23);
+		JButton btnActualizarCargo = new JButton("SALIR");
+		btnActualizarCargo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnActualizarCargo.setBackground(Color.RED);
+		btnActualizarCargo.setBounds(304, 333, 99, 23);
 		contentPane.add(btnActualizarCargo);
 		
 		
 	
 		JComboBox comboBoxtipoCargo = new JComboBox();
-		comboBoxtipoCargo.setBounds(120, 120, 50, 20);
+		comboBoxtipoCargo.setBounds(304, 106, 186, 20);
 		contentPane.add(comboBoxtipoCargo);
 		
-		JLabel lblBuscarCargo = new JLabel("Buscar Por :");
-		lblBuscarCargo.setBounds(10,380, 120, 14);
-		contentPane.add(lblBuscarCargo);
+		JLabel lblNombreCargo = new JLabel("Nombre Cargo:");
+		lblNombreCargo.setBounds(201, 139, 76, 14);
+		contentPane.add(lblNombreCargo);
 		
-		JComboBox comboBoxbuscarCargo = new JComboBox();
-		comboBoxbuscarCargo.setBounds(120, 380, 50, 20);
-		contentPane.add(comboBoxbuscarCargo);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(304, 133, 186, 20);
+		contentPane.add(textField);
 		
 		
 
