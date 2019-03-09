@@ -11,22 +11,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class servicios extends JFrame {
 	private JTextField txtidservicio;
 	private JTextField txtduracionservicio;
 	private JTextField txtprecioservicio;
 	private JTextField txttomasservicio;
-	private JTextField txttransmisionesservicio;
-	private JTextField txtgrabacionesservicio;
-	private JTextField txtpublicidadservicio;
-	private JTextField txtdescripcionservicio;
-	private JTextField txtgrabacioneventoservicio;
 	private JTextField txtedicionservicio;
-	private JTextField txtrecuperacionvhsservicio;
 
 
  JPanel contentPane;
+ private JTextField textField;
+ private JButton btnGuardar;
+ private JButton btnNuevo;
+ private JButton btnActualizar;
+ private JButton btnSalir;
 
 	/**
 	 * Launch the application.
@@ -49,7 +50,7 @@ public class servicios extends JFrame {
 	 */
 	public servicios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 486, 671);
+		setBounds(100, 100, 700, 671);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,119 +60,78 @@ public class servicios extends JFrame {
 		
 		JLabel lblRegistroservicios = new JLabel("REGISTRO DE SERVICIOS");
 		lblRegistroservicios.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistroservicios.setBounds(170, 11, 147, 28);
+		lblRegistroservicios.setBounds(272, 85, 147, 28);
 		contentPane.add(lblRegistroservicios);
 		
 		
 		
 		JLabel lblidservicio = new JLabel("Codigo:");
-		lblidservicio.setBounds(10, 69, 63, 14);
+		lblidservicio.setBounds(214, 144, 63, 14);
 		contentPane.add(lblidservicio);
 		
 		JLabel lblduracionservicio = new JLabel("Duracion :");
-		lblduracionservicio.setBounds(10, 120, 100, 14);
+		lblduracionservicio.setBounds(214, 182, 100, 14);
 		contentPane.add(lblduracionservicio);
 		
-		JLabel lblprecioservicio = new JLabel("Precio :");
-		lblprecioservicio.setBounds(10, 173, 100, 14);
+		JLabel lblprecioservicio = new JLabel("Precio : L.");
+		lblprecioservicio.setBounds(214, 215, 100, 14);
 		contentPane.add(lblprecioservicio);
 		
 		JLabel lbltomaservicio = new JLabel("Tomas :");
-		lbltomaservicio.setBounds(10, 220, 100, 14);
+		lbltomaservicio.setBounds(214, 248, 100, 14);
 		contentPane.add(lbltomaservicio);
 		
-		JLabel lbltransmisionservicio = new JLabel("Transmisiones :");
-		lbltransmisionservicio.setBounds(10,270, 120, 14);
-		contentPane.add(lbltransmisionservicio);
-		
-		JLabel lblgrabacionservicio = new JLabel("Grabaciones :");
-		lblgrabacionservicio.setBounds(10,320, 120, 14);
-		contentPane.add(lblgrabacionservicio);
-		
-		JLabel lblpublicidadservicio = new JLabel("Publicidad :");
-		lblpublicidadservicio.setBounds(10,370, 120, 14);
-		contentPane.add(lblpublicidadservicio);
 		
 		JLabel lbldescripcionservicio = new JLabel("Descripcion :");
-		lbldescripcionservicio.setBounds(10,420, 120, 14);
+		lbldescripcionservicio.setBounds(216,278, 120, 14);
 		contentPane.add(lbldescripcionservicio);
 		
 		
-		JLabel lblgrabacioneventoservicio = new JLabel("Grabacion de Eventos :");
-		lblgrabacioneventoservicio.setBounds(10,470, 150, 14);
-		contentPane.add(lblgrabacioneventoservicio);
-		
-		JLabel lbledicionservicio= new JLabel("Ediciones :");
-		lbledicionservicio.setBounds(10,520, 120, 14);
-		contentPane.add(lbledicionservicio);
+
 		
 		txtidservicio = new JTextField();
 		txtidservicio.setEditable(false);
-		txtidservicio.setBounds(190, 69, 28, 20);
+		txtidservicio.setBounds(376, 141, 28, 20);
 		contentPane.add(txtidservicio);
 		txtidservicio.setColumns(10);
 		
 		txtduracionservicio = new JTextField();
-		txtduracionservicio.setBounds(190,120 , 100, 20);
+		txtduracionservicio.setBounds(376,212 , 100, 20);
 		contentPane.add(txtduracionservicio);
 		txtduracionservicio.setColumns(10);
 		
 		
 		txtprecioservicio = new JTextField();
-		txtprecioservicio.setBounds(190,173 , 100, 20);
+		txtprecioservicio.setBounds(376,245 , 100, 20);
 		contentPane.add(txtprecioservicio);
 		txtprecioservicio.setColumns(10);
 		
 		
 		txttomasservicio = new JTextField();
-		txttomasservicio.setBounds(190,220 , 100, 20);
+		txttomasservicio.setBounds(376,275 , 100, 20);
 		contentPane.add(txttomasservicio);
 		txttomasservicio.setColumns(10);
 		
-		txttransmisionesservicio = new JTextField();
-		txttransmisionesservicio.setBounds(190,270, 100, 20);
-		contentPane.add(txttransmisionesservicio);
-		txttransmisionesservicio.setColumns(10);
+		textField = new JTextField();
+		textField.setBounds(376, 179, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
-		txtgrabacionesservicio = new JTextField();
-		txtgrabacionesservicio.setBounds(190,320, 100, 20);
-		contentPane.add(txtgrabacionesservicio);
-		txtgrabacionesservicio.setColumns(10);
+		btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setBounds(214, 335, 111, 23);
+		contentPane.add(btnGuardar);
 		
-		txtpublicidadservicio = new JTextField();
-		txtpublicidadservicio.setBounds(190,370, 100, 20);
-		contentPane.add(txtpublicidadservicio);
-		txtpublicidadservicio.setColumns(10);
+		btnNuevo = new JButton("NUEVO");
+		btnNuevo.setBounds(349, 335, 127, 23);
+		contentPane.add(btnNuevo);
 		
-		txtrecuperacionvhsservicio = new JTextField();
-		txtrecuperacionvhsservicio.setBounds(190,420, 100, 20);
-		contentPane.add(txtrecuperacionvhsservicio);
-		txtrecuperacionvhsservicio.setColumns(10);
+		btnActualizar = new JButton("ACTUALIZAR");
+		btnActualizar.setBounds(214, 369, 111, 23);
+		contentPane.add(btnActualizar);
 		
-		txtdescripcionservicio = new JTextField();
-		txtdescripcionservicio.setBounds(190,470, 100, 20);
-		contentPane.add(txtdescripcionservicio);
-		txtdescripcionservicio.setColumns(10);
-		
-		txtgrabacioneventoservicio= new JTextField();
-		txtgrabacioneventoservicio.setBounds(190,520, 100, 20);
-		contentPane.add(txtgrabacioneventoservicio);
-		txtgrabacioneventoservicio.setColumns(10);
-		
-		JButton button = new JButton("Guardar");
-		button.setBackground(new Color(0, 128, 0));
-		button.setBounds(10, 581, 89, 23);
-		contentPane.add(button);
-		
-		JButton button_1 = new JButton("Editar");
-		button_1.setBackground(new Color(0, 128, 0));
-		button_1.setBounds(190, 581, 89, 23);
-		contentPane.add(button_1);
-		
-		JButton button_2 = new JButton("Salir");
-		button_2.setBackground(Color.RED);
-		button_2.setBounds(371, 581, 89, 23);
-		contentPane.add(button_2);
+		btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(349, 369, 127, 23);
+		contentPane.add(btnSalir);
 		
 		
 		

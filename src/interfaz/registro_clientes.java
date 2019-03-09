@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class registro_clientes extends JFrame {
 
@@ -217,23 +219,35 @@ public class registro_clientes extends JFrame {
 		textFieldcorreoempresa.setColumns(10);
 		contentPane.add(textFieldcorreoempresa);
 		
-		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(508, 236, 120, 23);
+		JButton btnRegistrar = new JButton("GUARDAR");
+		btnRegistrar.setBounds(408, 242, 109, 23);
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnRegistrar.setBackground(new Color(0, 128, 0));
 		contentPane.add(btnRegistrar);
 		
-		JButton btnGuardar = new JButton("ACTUALIZAR");
-		btnGuardar.setBounds(508, 265, 120, 23);
+		JButton btnGuardar = new JButton("NUEVO");
+		btnGuardar.setBounds(527, 242, 101, 23);
 		btnGuardar.setBackground(new Color(0, 128, 0));
 		contentPane.add(btnGuardar);
 		
-		JButton btnBorrar = new JButton("BORRAR");
-		btnBorrar.setBounds(508, 306, 120, 23);
+		JButton btnBorrar = new JButton("ACTUALIZAR");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBorrar.setBounds(408, 271, 109, 23);
 		btnBorrar.setBackground(new Color(255, 0, 0));
 		contentPane.add(btnBorrar);
 		
 		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setBounds(508, 337, 120, 23);
+		btnSalir.setBounds(527, 271, 101, 23);
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalir.setBackground(new Color(255, 0, 0));
 		contentPane.add(btnSalir);
 	}
