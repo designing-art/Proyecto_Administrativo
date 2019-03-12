@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class sar extends JFrame {
+public class registro_mantenimiento_sar extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtidsar;
@@ -29,7 +29,7 @@ public class sar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					sar frame = new sar();
+					registro_mantenimiento_sar frame = new registro_mantenimiento_sar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class sar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public sar() {
+	public registro_mantenimiento_sar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 432, 538);
 		contentPane = new JPanel();

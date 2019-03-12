@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JButton;
 
-public class registro_deducciones extends JFrame {
+public class registro_mantenimiento_bonificaciones extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -54,7 +54,7 @@ public class registro_deducciones extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_deducciones frame = new registro_deducciones();
+					registro_mantenimiento_bonificaciones frame = new registro_mantenimiento_bonificaciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +66,7 @@ public class registro_deducciones extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_deducciones() {
+	public registro_mantenimiento_bonificaciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -75,8 +75,8 @@ public class registro_deducciones extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistrarDeducciones = new JLabel("REGISTRAR DEDUCCIONES");
-		lblRegistrarDeducciones.setBounds(10, 11, 147, 28);
+		JLabel lblRegistrarDeducciones = new JLabel("REGISTRAR BONIFICACIONES");
+		lblRegistrarDeducciones.setBounds(0, 11, 176, 28);
 		lblRegistrarDeducciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrarDeducciones.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblRegistrarDeducciones);
@@ -155,9 +155,9 @@ public class registro_deducciones extends JFrame {
 		table_1.setBounds(423, 71, 251, 302);
 		contentPane.add(table_1);
 		
-		lblListaDeDeducciones = new JLabel("Lista de deducciones : ");
+		lblListaDeDeducciones = new JLabel("Lista de bonificaciones : ");
 		lblListaDeDeducciones.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblListaDeDeducciones.setBounds(422, 36, 128, 27);
+		lblListaDeDeducciones.setBounds(422, 36, 146, 27);
 		contentPane.add(lblListaDeDeducciones);
 		
 		lblTipo = new JLabel("Tipo :");
@@ -182,9 +182,9 @@ public class registro_deducciones extends JFrame {
 		textField_7.setBounds(88, 353, 206, 39);
 		contentPane.add(textField_7);
 		
-		lblAgregarDeduccion = new JLabel("Agregar deduccion :");
+		lblAgregarDeduccion = new JLabel("Agregar bonificacion :");
 		lblAgregarDeduccion.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAgregarDeduccion.setBounds(14, 281, 118, 14);
+		lblAgregarDeduccion.setBounds(14, 281, 124, 14);
 		contentPane.add(lblAgregarDeduccion);
 		
 		textField_8 = new JTextField();
@@ -193,7 +193,7 @@ public class registro_deducciones extends JFrame {
 		textField_8.setBounds(423, 404, 251, 20);
 		contentPane.add(textField_8);
 		
-		lblTotalDeduciones = new JLabel("Total deduciones :");
+		lblTotalDeduciones = new JLabel("Total bonificaciones :");
 		lblTotalDeduciones.setBounds(423, 384, 127, 14);
 		contentPane.add(lblTotalDeduciones);
 		

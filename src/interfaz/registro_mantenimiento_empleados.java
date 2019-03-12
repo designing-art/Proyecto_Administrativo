@@ -17,7 +17,7 @@ import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class registro_empleados extends JFrame {
+public class registro_mantenimiento_empleados extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtcodigo;
@@ -42,7 +42,7 @@ public class registro_empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_empleados frame = new registro_empleados();
+					registro_mantenimiento_empleados frame = new registro_mantenimiento_empleados();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +54,7 @@ public class registro_empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_empleados() {
+	public registro_mantenimiento_empleados() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

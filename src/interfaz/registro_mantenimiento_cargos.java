@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class registro_cargos extends JFrame {
+public class registro_mantenimiento_cargos extends JFrame {
 	private JTextField txtcodigoCargo ;
 	private JTextField txttipoCargo ;
 	private JTextField txtfuncionesCargo ;
@@ -38,7 +38,7 @@ public class registro_cargos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_cargos frame = new registro_cargos();
+					registro_mantenimiento_cargos frame = new registro_mantenimiento_cargos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class registro_cargos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_cargos() {
+	public registro_mantenimiento_cargos() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);

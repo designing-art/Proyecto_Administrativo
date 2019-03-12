@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class registro_facturas_clientes extends JFrame {
+public class registro_mantenimiento_facturas_clientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtcodigofacturaclientes;
@@ -30,7 +30,7 @@ public class registro_facturas_clientes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_facturas_clientes frame = new registro_facturas_clientes();
+					registro_mantenimiento_facturas_clientes frame = new registro_mantenimiento_facturas_clientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class registro_facturas_clientes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_facturas_clientes() {
+	public registro_mantenimiento_facturas_clientes() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

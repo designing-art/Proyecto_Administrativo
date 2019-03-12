@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class productos extends JFrame {
+public class registro_mantenimiento_productos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtcodigoproducto;
@@ -40,7 +40,7 @@ public class productos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					productos frame = new productos();
+					registro_mantenimiento_productos frame = new registro_mantenimiento_productos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class productos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public productos() {
+	public registro_mantenimiento_productos() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

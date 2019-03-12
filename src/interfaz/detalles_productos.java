@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
-public class registro_productos extends JFrame {
+public class detalles_productos extends JFrame {
 	private JTextField txtcodigoproducto;
 	private JTextField txtdispositivoproducto;
 	private JTextField txtmarcaproducto;
@@ -30,7 +30,7 @@ public class registro_productos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_productos frame = new registro_productos();
+					detalles_productos frame = new detalles_productos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class registro_productos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_productos() {
+	public detalles_productos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 486, 460);
 		contentPane = new JPanel();
@@ -58,59 +58,59 @@ public class registro_productos extends JFrame {
 		contentPane.add(lblRegistroproducto);
 		
 		JLabel lblidproducto = new JLabel("Codigo:");
-		lblidproducto.setBounds(10, 69, 63, 14);
+		lblidproducto.setBounds(92, 60, 63, 14);
 		contentPane.add(lblidproducto);
 		
 		JLabel lbldispositivoproducto = new JLabel("Dispositivo de entrega :");
-		lbldispositivoproducto.setBounds(10, 120, 150, 14);
+		lbldispositivoproducto.setBounds(92, 111, 150, 14);
 		contentPane.add(lbldispositivoproducto);
 		
 		JLabel lblmarcaproducto = new JLabel("Marca :");
-		lblmarcaproducto.setBounds(10, 173, 100, 14);
+		lblmarcaproducto.setBounds(92, 164, 100, 14);
 		contentPane.add(lblmarcaproducto);
 		
 		JLabel lblcapacidadproducto = new JLabel("Capacidad :");
-		lblcapacidadproducto.setBounds(10, 220, 100, 14);
+		lblcapacidadproducto.setBounds(92, 211, 100, 14);
 		contentPane.add(lblcapacidadproducto);
 		
 		JLabel lblcolorproducto = new JLabel("Color :");
-		lblcolorproducto.setBounds(10,270, 120, 14);
+		lblcolorproducto.setBounds(92,261, 120, 14);
 		contentPane.add(lblcolorproducto);
 		
 		JLabel lblprecioproducto = new JLabel("Precio:");
-		lblprecioproducto.setBounds(10,320, 120, 14);
+		lblprecioproducto.setBounds(92,311, 120, 14);
 		contentPane.add(lblprecioproducto);
 		
 		txtcodigoproducto = new JTextField();
 		txtcodigoproducto.setEditable(false);
-		txtcodigoproducto.setBounds(190, 69, 28, 20);
+		txtcodigoproducto.setBounds(272, 60, 28, 20);
 		contentPane.add(txtcodigoproducto);
 		txtcodigoproducto.setColumns(10);
 		
 		txtdispositivoproducto = new JTextField();
-		txtdispositivoproducto.setBounds(190,120 , 100, 20);
+		txtdispositivoproducto.setBounds(272,111 , 100, 20);
 		contentPane.add(txtdispositivoproducto);
 		txtdispositivoproducto.setColumns(10);
 		
 		
 		txtmarcaproducto = new JTextField();
-		txtmarcaproducto.setBounds(190,173 , 100, 20);
+		txtmarcaproducto.setBounds(272,164 , 100, 20);
 		contentPane.add(txtmarcaproducto);
 		txtmarcaproducto.setColumns(10);
 		
 		
 		txtcapacidadproducto= new JTextField();
-		txtcapacidadproducto.setBounds(190,220 , 100, 20);
+		txtcapacidadproducto.setBounds(272,211 , 100, 20);
 		contentPane.add(txtcapacidadproducto);
 		txtcapacidadproducto.setColumns(10);
 		
 		txtcolorproducto = new JTextField();
-		txtcolorproducto.setBounds(190,270, 100, 20);
+		txtcolorproducto.setBounds(272,261, 100, 20);
 		contentPane.add(txtcolorproducto);
 		txtcolorproducto.setColumns(10);
 		
 		txtprecioproducto= new JTextField();
-		txtprecioproducto.setBounds(190,320, 100, 20);
+		txtprecioproducto.setBounds(272,311, 100, 20);
 		contentPane.add(txtprecioproducto);
 		txtprecioproducto.setColumns(10);
 		

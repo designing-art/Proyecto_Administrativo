@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JProgressBar;
 import javax.swing.JButton;
 
-public class registro_inventario extends JFrame {
+public class registro_mantenimiento_inventario extends JFrame {
 
 	private JPanel contentPane;
 	
@@ -40,7 +40,7 @@ public class registro_inventario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_inventario frame = new registro_inventario();
+					registro_mantenimiento_inventario frame = new registro_mantenimiento_inventario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class registro_inventario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_inventario() {
+	public registro_mantenimiento_inventario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();

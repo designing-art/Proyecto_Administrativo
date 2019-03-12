@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class registro_detalle_compras extends JFrame {
+public class registro_mantenimiento_detalle_compras extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textcodigocompra;
@@ -29,7 +29,7 @@ public class registro_detalle_compras extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_detalle_compras frame = new registro_detalle_compras();
+					registro_mantenimiento_detalle_compras frame = new registro_mantenimiento_detalle_compras();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class registro_detalle_compras extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_detalle_compras() {
+	public registro_mantenimiento_detalle_compras() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -57,50 +57,50 @@ public class registro_detalle_compras extends JFrame {
 		contentPane.add(lblcompras);
 		
 
-		JLabel lblcodigodetallecompra = new JLabel("Codigo De  compras:");
+		JLabel lblcodigodetallecompra = new JLabel("Codigo de  compra:");
 		lblcodigodetallecompra.setBounds(67, 159,127, 14);
 		contentPane.add(lblcodigodetallecompra);
 		
-		JLabel lblnombredetallecompra= new JLabel("Nombre De Compra :");
-		lblnombredetallecompra.setBounds(67, 180, 180, 24);
+		JLabel lblnombredetallecompra= new JLabel("Nombre de compra :");
+		lblnombredetallecompra.setBounds(67, 184, 180, 24);
 		contentPane.add(lblnombredetallecompra);
 		
-		JLabel lblcantidaddetallecompra = new JLabel("Cantidad De Compra :");
-		lblcantidaddetallecompra.setBounds(67, 240, 180, 14);
+		JLabel lblcantidaddetallecompra = new JLabel("Cantidad de compra :");
+		lblcantidaddetallecompra.setBounds(67, 248, 180, 14);
 		contentPane.add(lblcantidaddetallecompra);
 		
-		JLabel lblpreciodetallecompra = new JLabel("Precio  De Comprar:");
-		lblpreciodetallecompra.setBounds(67, 215, 180, 14);
+		JLabel lblpreciodetallecompra = new JLabel("Precio  de la compra:");
+		lblpreciodetallecompra.setBounds(67, 219, 180, 14);
 		contentPane.add(lblpreciodetallecompra);
 		
-		JLabel lblimpuestodetallecompra = new JLabel("Impuesto  Sobre la Compra:");
-		lblimpuestodetallecompra.setBounds(67, 266, 180, 15);
+		JLabel lblimpuestodetallecompra = new JLabel("Impuesto  sobre la compra:");
+		lblimpuestodetallecompra.setBounds(67, 277, 180, 15);
 		contentPane.add(lblimpuestodetallecompra);
 		
 		textcodigocompra= new JTextField();
 		textcodigocompra.setEditable(false);
-		textcodigocompra.setBounds(257, 150, 39, 24);
+		textcodigocompra.setBounds(204, 154, 39, 24);
 		contentPane.add(textcodigocompra);
 		textcodigocompra.setColumns(10);
 		
 		textnombrecompra = new JTextField();
 		textnombrecompra.setColumns(10);
-		textnombrecompra.setBounds(257, 180, 127, 24);
+		textnombrecompra.setBounds(204, 180, 180, 24);
 		contentPane.add(textnombrecompra);
 		
 		textcantidadcompra = new JTextField();
 		textcantidadcompra.setColumns(10);
-		textcantidadcompra.setBounds(257, 210, 127, 24);
+		textcantidadcompra.setBounds(204, 210, 180, 24);
 		contentPane.add(textcantidadcompra);
 		
 		textpreciocompra = new JTextField();
 		textpreciocompra.setColumns(10);
-		textpreciocompra.setBounds(257, 238, 127, 24);
+		textpreciocompra.setBounds(204, 238, 180, 24);
 		contentPane.add(textpreciocompra);
 		
 		textimpuestocompra = new JTextField();
 		textimpuestocompra.setColumns(10);
-		textimpuestocompra.setBounds(257, 268, 127, 24);
+		textimpuestocompra.setBounds(204, 268, 180, 24);
 		contentPane.add(textimpuestocompra);
 		
 		JButton btnguardarcompra = new JButton("Guardar");

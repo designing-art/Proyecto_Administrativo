@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 
-public class registro_facturas extends JFrame {
+public class registro_mantenimiento_facturas_empresa extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textcodigofactura;
@@ -30,7 +30,7 @@ public class registro_facturas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_facturas frame = new registro_facturas();
+					registro_mantenimiento_facturas_empresa frame = new registro_mantenimiento_facturas_empresa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class registro_facturas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_facturas() {
+	public registro_mantenimiento_facturas_empresa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -95,7 +95,7 @@ public class registro_facturas extends JFrame {
 		
 		textcodigofactura = new JTextField();
 		textcodigofactura.setEditable(false);
-		textcodigofactura.setBounds(218, 126, 43, 26);
+		textcodigofactura.setBounds(215, 126, 43, 26);
 		contentPane.add(textcodigofactura);
 		textcodigofactura.setColumns(10);
 		
@@ -122,19 +122,19 @@ public class registro_facturas extends JFrame {
 		textfechafactura.setColumns(10);
 		
 		JButton btnguardarfactura = new JButton("Guardar");
-		btnguardarfactura.setBounds(222, 300, 118, 23);
+		btnguardarfactura.setBounds(218, 309, 118, 23);
 		contentPane.add(btnguardarfactura);
 		
 		JButton btnnuevafactura = new JButton("Nuevo");
-		btnnuevafactura.setBounds(388, 300, 103, 23);
+		btnnuevafactura.setBounds(346, 309, 103, 23);
 		contentPane.add(btnnuevafactura);
 		
 		JButton btnactualizarfactura = new JButton("Actualizar");
-		btnactualizarfactura.setBounds(222, 343, 118, 23);
+		btnactualizarfactura.setBounds(218, 343, 118, 23);
 		contentPane.add(btnactualizarfactura);
 		
 		JButton btnsalirfactura = new JButton("Salir");
-		btnsalirfactura.setBounds(388, 343, 103, 23);
+		btnsalirfactura.setBounds(346, 343, 103, 23);
 		contentPane.add(btnsalirfactura);
 		
 	}
