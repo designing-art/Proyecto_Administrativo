@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class registro_mantenimiento_contratos extends JFrame {
+public class registro_mantenimiento_contratos_empleados extends JFrame {
 
 	private JPanel contentPane;
 
@@ -24,7 +24,7 @@ public class registro_mantenimiento_contratos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_contratos frame = new registro_mantenimiento_contratos();
+					registro_mantenimiento_contratos_empleados frame = new registro_mantenimiento_contratos_empleados();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class registro_mantenimiento_contratos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_contratos() {
+	public registro_mantenimiento_contratos_empleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -45,9 +45,9 @@ public class registro_mantenimiento_contratos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistrarContratos = new JLabel("REGISTRAR CONTRATOS");
+		JLabel lblRegistrarContratos = new JLabel("REGISTRAR CONTRATOS EMPLEADOS");
 		lblRegistrarContratos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistrarContratos.setBounds(263, 34, 147, 28);
+		lblRegistrarContratos.setBounds(170, 34, 213, 28);
 		contentPane.add(lblRegistrarContratos);
 		
 		JLabel lblTipoDeContrato = new JLabel("Tipo de contrato :");

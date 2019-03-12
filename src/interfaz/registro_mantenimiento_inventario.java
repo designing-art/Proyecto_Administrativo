@@ -64,7 +64,7 @@ public class registro_mantenimiento_inventario extends JFrame {
 		JLabel lblInventario = new JLabel(" Registro Del Inventario");
 		lblInventario.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblInventario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInventario.setBounds(262, 74, 180, 14);
+		lblInventario.setBounds(248, 75, 180, 40);
 		contentPane.add(lblInventario);
 		
 

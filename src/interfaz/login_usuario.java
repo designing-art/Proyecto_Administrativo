@@ -54,7 +54,7 @@ public class login_usuario extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(140, 157, 435, 180);
+		panel.setBounds(140, 157, 435, 223);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -87,17 +87,17 @@ public class login_usuario extends JFrame {
 		lblLogin.setBounds(10, 11, 162, 32);
 		panel.add(lblLogin);
 		
+		JButton btnEntrar = new JButton("ENTRAR");
+		btnEntrar.setBounds(77, 151, 141, 34);
+		panel.add(btnEntrar);
+		
+		JButton btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar.setBounds(228, 151, 156, 34);
+		panel.add(btnRegistrar);
+		
 		JButton btnNewButton = new JButton("Logo");
 		btnNewButton.setBounds(267, 11, 169, 137);
 		contentPane.add(btnNewButton);
-		
-		JButton btnEntrar = new JButton("ENTRAR");
-		btnEntrar.setBounds(140, 348, 141, 34);
-		contentPane.add(btnEntrar);
-		
-		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(419, 348, 156, 34);
-		contentPane.add(btnRegistrar);
 	}
 
 }
