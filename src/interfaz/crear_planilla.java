@@ -78,7 +78,7 @@ public class crear_planilla extends JFrame {
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(223, 97, 97, 20);
+		textField_2.setBounds(247, 97, 97, 20);
 		contentPane.add(textField_2);
 		
 		JLabel lblRegistrarPlanilla = new JLabel("CREAR NUEVA PLANILLA");
@@ -87,11 +87,11 @@ public class crear_planilla extends JFrame {
 		contentPane.add(lblRegistrarPlanilla);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(124, 72, 196, 20);
+		comboBox.setBounds(148, 72, 196, 20);
 		contentPane.add(comboBox);
 		
 		JButton btnNewButton = new JButton("Seleccionar");
-		btnNewButton.setBounds(124, 96, 89, 23);
+		btnNewButton.setBounds(148, 96, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		table = new JTable();
