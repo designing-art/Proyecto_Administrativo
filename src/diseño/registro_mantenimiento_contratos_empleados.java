@@ -1,4 +1,4 @@
-package interfaz;
+package diseño;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

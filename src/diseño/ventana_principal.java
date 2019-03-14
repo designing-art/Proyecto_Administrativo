@@ -1,4 +1,4 @@
-package interfaz;
+package diseño;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -56,11 +56,11 @@ public class ventana_principal extends JFrame {
 		
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
 		lblCanalCoffee.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
-		lblCanalCoffee.setBounds(415, 58, 180, 36);
+		lblCanalCoffee.setBounds(419, 58, 180, 36);
 		contentPane.add(lblCanalCoffee);
 		
 		JLabel btnEmpresa = new JLabel();
-		btnEmpresa.setBounds(344, 89, 311, 323);
+		btnEmpresa.setBounds(344, 89, 328, 323);
 		contentPane.add(btnEmpresa);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo.png"));
 		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(btnEmpresa.getWidth(), btnEmpresa.getHeight(), Image.SCALE_DEFAULT));
