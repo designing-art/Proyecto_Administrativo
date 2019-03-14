@@ -9,10 +9,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Window.Type;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
 
 public class ventana_principal extends JFrame {
 
@@ -38,43 +44,36 @@ public class ventana_principal extends JFrame {
 	 * Create the frame.
 	 */
 	public ventana_principal() {
+		setResizable(false);
+		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
 		lblCanalCoffee.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
-		lblCanalCoffee.setBounds(415, 76, 180, 36);
+		lblCanalCoffee.setBounds(415, 58, 180, 36);
 		contentPane.add(lblCanalCoffee);
 		
-		JButton btnNewButton = new JButton("Logo de la empresa");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\hp\\Documents\\Proyecto_Canal40\\Proyecto_Administrativo\\src\\archivos\\button.png"));
-		btnNewButton.setBounds(349, 114, 311, 323);
-		contentPane.add(btnNewButton);
+		JLabel btnEmpresa = new JLabel();
+		btnEmpresa.setBounds(344, 89, 311, 323);
+		contentPane.add(btnEmpresa);
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo.png"));
+		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(btnEmpresa.getWidth(), btnEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		btnEmpresa.setIcon(icono);
+		
 		
 		JLabel lblMenu = new JLabel("Menu de opciones:");
 		lblMenu.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
-		lblMenu.setBounds(105, 155, 121, 29);
+		lblMenu.setBounds(118, 117, 121, 29);
 		contentPane.add(lblMenu);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(104, 36, 107, 108);
-		contentPane.add(panel);
-		
-		JLabel lblUsuario = new JLabel("Usuario :");
-		panel.add(lblUsuario);
-		lblUsuario.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 11));
-		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(170, 182, 150, 255);
+		panel_1.setBounds(182, 157, 150, 255);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -114,7 +113,7 @@ public class ventana_principal extends JFrame {
 		panel_1.add(btnSar);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 182, 150, 255);
+		panel_2.setBounds(21, 157, 150, 255);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -154,8 +153,8 @@ public class ventana_principal extends JFrame {
 		panel_2.add(btnHorarios);
 		
 		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al sistema administrativo.");
-		lblBienvenidoAlSistema.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
-		lblBienvenidoAlSistema.setBounds(240, 0, 232, 36);
+		lblBienvenidoAlSistema.setFont(new Font("Berlin Sans FB", Font.BOLD, 20));
+		lblBienvenidoAlSistema.setBounds(174, 11, 498, 36);
 		contentPane.add(lblBienvenidoAlSistema);
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
