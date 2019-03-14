@@ -182,7 +182,7 @@ public class registro_mantenimiento_empleados extends JFrame {
 		contentPane.add(txtidentidad);
 		
 		txttelefono = new JTextField();
-		txttelefono.setBounds(205, 208, 93, 20);
+		txttelefono.setBounds(205, 207, 93, 20);
 		txttelefono.setColumns(10);
 		contentPane.add(txttelefono);
 		
@@ -275,11 +275,11 @@ public class registro_mantenimiento_empleados extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblTelefonos = new JLabel("Telefonos :");
-		lblTelefonos.setBounds(37, 211, 63, 14);
+		lblTelefonos.setBounds(37, 205, 63, 14);
 		contentPane.add(lblTelefonos);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(102, 208, 93, 20);
+		textField_1.setBounds(102, 207, 93, 20);
 		textField_1.setColumns(10);
 		contentPane.add(textField_1);
 		

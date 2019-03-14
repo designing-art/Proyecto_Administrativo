@@ -9,17 +9,28 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Window.Type;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
+
+import clases.usuarios;
+import mantenimiento.sesion_usuario;
+
 import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class login_usuario extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUsuario;
+	private JPasswordField txtContraseña;
 
 	/**
 	 * Launch the application.
@@ -54,7 +65,7 @@ public class login_usuario extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(140, 157, 435, 223);
+		panel.setBounds(129, 159, 435, 223);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -72,32 +83,81 @@ public class login_usuario extends JFrame {
 		lblNewLabel.setBounds(164, 126, 162, 14);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(164, 64, 220, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(164, 95, 220, 20);
-		panel.add(textField_1);
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(164, 64, 220, 20);
+		panel.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
 		JLabel lblLogin = new JLabel("Ingresar");
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblLogin.setBounds(10, 11, 162, 32);
 		panel.add(lblLogin);
 		
-		JButton btnEntrar = new JButton("ENTRAR");
-		btnEntrar.setBounds(77, 151, 141, 34);
-		panel.add(btnEntrar);
+		JButton btnLogo = new JButton("Logo");
+		btnLogo.setBounds(263, 11, 169, 137);
+		contentPane.add(btnLogo);
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo.png"));
+		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(btnLogo.getWidth(), btnLogo.getHeight(), Image.SCALE_DEFAULT));
+		btnLogo.setIcon(icono);
 		
-		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(228, 151, 156, 34);
-		panel.add(btnRegistrar);
 		
-		JButton btnNewButton = new JButton("Logo");
-		btnNewButton.setBounds(267, 11, 169, 137);
-		contentPane.add(btnNewButton);
+		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.setBounds(164, 151, 127, 32);
+		panel.add(btnIngresar);
+		
+		txtContraseña = new JPasswordField();
+		txtContraseña.setBounds(164, 95, 220, 20);
+		panel.add(txtContraseña);
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ingresar();
+			}
+		});
+		
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setBounds(586, 426, 98, 34);
+		contentPane.add(btnSalir);
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				salir();
+			}
+		});
+		
 	}
 
+	protected void ingresar() {
+		String usuario = txtUsuario.getText();
+		String contraseña = String.valueOf(txtContraseña.getPassword());
+
+		sesion_usuario gestionUsuario = new sesion_usuario();
+
+		usuarios usuario2 = new usuarios();
+		usuario2.setUsuario(usuario);
+		usuario2.setContraseña(contraseña);
+
+		usuarios usu = gestionUsuario.obtenerUsuario(usuario2);
+
+		if (usu != null) {
+			JOptionPane.showMessageDialog(contentPane, "Bienvenido");
+
+			this.dispose();
+			ventana_principal menu = new ventana_principal();
+			menu.setVisible(true);
+
+		} else {
+			JOptionPane.showMessageDialog(contentPane, "Su Usuario y Contraseña son INVALIDOS", "Atencion!", JOptionPane.ERROR_MESSAGE);
+		}
+
+		
+	}
+
+	private void setUsuario(String usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void salir() {
+		System.exit(0);
+	}
 }
