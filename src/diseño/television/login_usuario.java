@@ -96,7 +96,7 @@ public class login_usuario extends JFrame {
 		JButton btnLogo = new JButton("Logo");
 		btnLogo.setBounds(263, 11, 169, 137);
 		contentPane.add(btnLogo);
-		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo.png"));
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/television/logo.png"));
 		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(btnLogo.getWidth(), btnLogo.getHeight(), Image.SCALE_DEFAULT));
 		btnLogo.setIcon(icono);
 		
@@ -127,6 +127,7 @@ public class login_usuario extends JFrame {
 	}
 
 	protected void ingresar() {
+
 		String usuario = txtUsuario.getText();
 		String contraseña = String.valueOf(txtContraseña.getPassword());
 
@@ -142,20 +143,16 @@ public class login_usuario extends JFrame {
 			JOptionPane.showMessageDialog(contentPane, "Bienvenido");
 
 			this.dispose();
-			ventana_principal menu = new ventana_principal();
-			menu.setVisible(true);
+			
+			ventana_principal bienvenida = new ventana_principal();
+			bienvenida.setVisible(true);
 
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Su Usuario y Contraseña son INVALIDOS", "Atencion!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(contentPane, "Datos invalidos", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
-		
 	}
 
-	private void setUsuario(String usuario) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	protected void salir() {
 		System.exit(0);
