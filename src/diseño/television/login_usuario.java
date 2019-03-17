@@ -1,6 +1,7 @@
 package diseño.television;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,8 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 
-import clases.television.usuarios;
-import mantenimiento.television.sesion_usuario;
+import clases.television.usuario;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -127,29 +127,6 @@ public class login_usuario extends JFrame {
 	}
 
 	protected void ingresar() {
-
-		String usuario = txtUsuario.getText();
-		String contraseña = String.valueOf(txtContraseña.getPassword());
-
-		sesion_usuario gestionUsuario = new sesion_usuario();
-
-		usuarios usuario2 = new usuarios();
-		usuario2.setUsuario(usuario);
-		usuario2.setContraseña(contraseña);
-
-		usuarios usu = gestionUsuario.obtenerUsuario(usuario2);
-
-		if (usu != null) {
-			JOptionPane.showMessageDialog(contentPane, "Bienvenido");
-
-			this.dispose();
-			
-			ventana_principal bienvenida = new ventana_principal();
-			bienvenida.setVisible(true);
-
-		} else {
-			JOptionPane.showMessageDialog(contentPane, "Datos invalidos", "Error", JOptionPane.ERROR_MESSAGE);
-		}
 
 	}
 

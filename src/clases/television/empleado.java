@@ -1,10 +1,10 @@
 package clases.television;
 
-public class empleados {
+public class empleado {
 
-	private int id_empleados;
-	private String nombres_empleados;
-	private String apellidos_empleados;
+	private int id_empleado;
+	private String nombres_empleado;
+	private String apellidos_empleado;
 	private String identidad_empleado;
 	private String genero_empleado;
 	private int edad_empleado;
@@ -20,14 +20,10 @@ public class empleados {
 	private String fecha_inicio_labores_empleado;
 	private String estado_empleado;
 
-	public empleados(int id_empleados, String nombres_empleados, String apellidos_empleados, String identidad_empleado,
-			String genero_empleado, int edad_empleado, String telefono1_empleado, String telefono2_empleado,
-			String correo_empleado, String direccion_empleado, int foto_empleado, String referencia_empleado,
-			String telefono_referencia, String fecha_nacimiento_empleado, String fecha_registro_empleado,
-			String fecha_inicio_labores_empleado, String estado_empleado) {
-		this.id_empleados = id_empleados;
-		this.nombres_empleados = nombres_empleados;
-		this.apellidos_empleados = apellidos_empleados;
+	public empleado() {
+		this.id_empleado = id_empleado;
+		this.nombres_empleado = nombres_empleado;
+		this.apellidos_empleado = apellidos_empleado;
 		this.identidad_empleado = identidad_empleado;
 		this.genero_empleado = genero_empleado;
 		this.edad_empleado = edad_empleado;
@@ -45,28 +41,28 @@ public class empleados {
 
 	}
 
-	public int getId_empleados() {
-		return id_empleados;
+	public int getId_empleado() {
+		return id_empleado;
 	}
 
-	public void setId_empleados(int id_empleados) {
-		this.id_empleados = id_empleados;
+	public void setId_empleado(int id_empleado) {
+		this.id_empleado = id_empleado;
 	}
 
-	public String getNombres_empleados() {
-		return nombres_empleados;
+	public String getNombres_empleado() {
+		return nombres_empleado;
 	}
 
-	public void setNombres_empleados(String nombres_empleados) {
-		this.nombres_empleados = nombres_empleados;
+	public void setNombres_empleado(String nombres_empleado) {
+		this.nombres_empleado = nombres_empleado;
 	}
 
-	public String getApellidos_empleados() {
-		return apellidos_empleados;
+	public String getApellidos_empleado() {
+		return apellidos_empleado;
 	}
 
-	public void setApellidos_empleados(String apellidos_empleados) {
-		this.apellidos_empleados = apellidos_empleados;
+	public void setApellidos_empleado(String apellidos_empleado) {
+		this.apellidos_empleado = apellidos_empleado;
 	}
 
 	public String getIdentidad_empleado() {

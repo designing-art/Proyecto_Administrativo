@@ -19,21 +19,34 @@ import java.awt.event.ActionEvent;
 
 public class registro_mantenimiento_empleados extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField txtcodigo;
-	private JTextField txtnombres;
-	private JTextField txtapellidos;
-	private JTextField txtdireccion;
-	private JTextField txtcorreo;
-	private JTextField txtidentidad;
-	private JTextField txttelefono;
-	private JTextField txtnombrereferencia;
-	private JTextField txttelefonoreferencia;
-	private JTextField txtfechanacimiento;
-	private JTextField txtfecharegistro;
-	private JTextField txtfechalabores;
-	private JTextField textField;
-	private JTextField textField_1;
+
+	 JPanel contentPane;
+	 public JTextField txtcodigo;
+	 public JTextField txtnombres;
+	 public JTextField txtapellidos;
+	 public JTextField txtdireccion;
+	 public JTextField txtcorreo;
+	 public JTextField txtidentidad;
+	 public JTextField txttelefono2;
+	 public JTextField txtnombrereferencia;
+	 public JTextField txttelefonoreferencia;
+	 public JTextField txtfechanacimiento;
+	 public JTextField txtfecharegistro;
+	 public JTextField txtfechalabores;
+	 public JTextField txtedad;
+	 public JTextField txttelefono1;
+	 public JTextField txtgenero;
+	 public JTextField txtestado;
+	 public JButton btnGuardar;
+	 public JButton btnActualizar;
+	 public JButton btnBorrar;
+	 public JButton btnNuevo;
+	 public JButton btnSalir;
+	 
+	 public JButton btnBuscar;
+	 public JTextField txtbuscar;
+	 
+	 
 
 	/**
 	 * Launch the application.
@@ -152,7 +165,6 @@ public class registro_mantenimiento_empleados extends JFrame {
 		
 		txtcodigo = new JTextField();
 		txtcodigo.setBounds(102, 58, 28, 20);
-		txtcodigo.setEditable(false);
 		contentPane.add(txtcodigo);
 		txtcodigo.setColumns(10);
 		
@@ -181,10 +193,10 @@ public class registro_mantenimiento_empleados extends JFrame {
 		txtidentidad.setColumns(10);
 		contentPane.add(txtidentidad);
 		
-		txttelefono = new JTextField();
-		txttelefono.setBounds(205, 207, 93, 20);
-		txttelefono.setColumns(10);
-		contentPane.add(txttelefono);
+		txttelefono2 = new JTextField();
+		txttelefono2.setBounds(205, 207, 93, 20);
+		txttelefono2.setColumns(10);
+		contentPane.add(txttelefono2);
 		
 		JComboBox comboBoxcargo = new JComboBox();
 		comboBoxcargo.setBounds(443, 196, 199, 20);
@@ -209,29 +221,23 @@ public class registro_mantenimiento_empleados extends JFrame {
 		lblDatosGenerales.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblDatosGenerales);
 		
-		JButton btnRegistrar = new JButton("GUARDAR");
-		btnRegistrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnRegistrar.setBounds(392, 404, 99, 23);
-		btnRegistrar.setBackground(new Color(0, 128, 0));
-		contentPane.add(btnRegistrar);
+		btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setBounds(343, 401, 99, 23);
+		btnGuardar.setBackground(new Color(0, 128, 0));
+		contentPane.add(btnGuardar);
 		
-		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setBounds(543, 438, 99, 23);
+		btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(525, 443, 99, 23);
 		btnSalir.setBackground(new Color(255, 0, 0));
 		contentPane.add(btnSalir);
 		
 		txtfechanacimiento = new JTextField();
 		txtfechanacimiento.setBounds(160, 320, 138, 20);
-		txtfechanacimiento.setEditable(false);
 		txtfechanacimiento.setColumns(10);
 		contentPane.add(txtfechanacimiento);
 		
 		txtfecharegistro = new JTextField();
 		txtfecharegistro.setBounds(160, 365, 138, 20);
-		txtfecharegistro.setEditable(false);
 		txtfecharegistro.setColumns(10);
 		contentPane.add(txtfecharegistro);
 		
@@ -244,22 +250,13 @@ public class registro_mantenimiento_empleados extends JFrame {
 		contentPane.add(button_1);
 		
 		JButton button_2 = new JButton("Seleccionar");
-		button_2.setBounds(294, 80, 105, 23);
+		button_2.setBounds(37, 413, 105, 23);
 		contentPane.add(button_2);
 		
 		txtfechalabores = new JTextField();
 		txtfechalabores.setBounds(160, 414, 138, 20);
-		txtfechalabores.setEditable(false);
 		txtfechalabores.setColumns(10);
 		contentPane.add(txtfechalabores);
-		
-		JComboBox comboBoxgenero = new JComboBox();
-		comboBoxgenero.setBounds(260, 154, 38, 20);
-		contentPane.add(comboBoxgenero);
-		
-		JComboBox comboBoxestado = new JComboBox();
-		comboBoxestado.setBounds(104, 444, 38, 20);
-		contentPane.add(comboBoxestado);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(443, 224, 199, 20);
@@ -269,32 +266,43 @@ public class registro_mantenimiento_empleados extends JFrame {
 		lblEdad.setBounds(37, 157, 53, 14);
 		contentPane.add(lblEdad);
 		
-		textField = new JTextField();
-		textField.setBounds(102, 154, 38, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtedad = new JTextField();
+		txtedad.setBounds(102, 154, 38, 20);
+		contentPane.add(txtedad);
+		txtedad.setColumns(10);
 		
 		JLabel lblTelefonos = new JLabel("Telefonos :");
 		lblTelefonos.setBounds(37, 205, 63, 14);
 		contentPane.add(lblTelefonos);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(102, 207, 93, 20);
-		textField_1.setColumns(10);
-		contentPane.add(textField_1);
+		txttelefono1 = new JTextField();
+		txttelefono1.setBounds(102, 207, 93, 20);
+		txttelefono1.setColumns(10);
+		contentPane.add(txttelefono1);
 		
-		JButton btnNuevo = new JButton("NUEVO");
-		btnNuevo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBackground(new Color(0, 128, 0));
-		btnNuevo.setBounds(543, 404, 99, 23);
+		btnNuevo.setBounds(449, 401, 99, 23);
 		contentPane.add(btnNuevo);
 		
-		JButton btnActualizar = new JButton("ACTUALIZAR");
+		btnActualizar = new JButton("ACTUALIZAR");
 		btnActualizar.setBackground(new Color(0, 128, 0));
-		btnActualizar.setBounds(392, 438, 99, 23);
+		btnActualizar.setBounds(553, 401, 99, 23);
 		contentPane.add(btnActualizar);
+		
+		txtgenero = new JTextField();
+		txtgenero.setColumns(10);
+		txtgenero.setBounds(260, 153, 38, 20);
+		contentPane.add(txtgenero);
+		
+		txtestado = new JTextField();
+		txtestado.setColumns(10);
+		txtestado.setBounds(102, 444, 38, 20);
+		contentPane.add(txtestado);
+		
+		btnBorrar = new JButton("BORRAR");
+		btnBorrar.setBackground(Color.RED);
+		btnBorrar.setBounds(416, 443, 99, 23);
+		contentPane.add(btnBorrar);
 	}
 }

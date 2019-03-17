@@ -1,16 +1,16 @@
 package clases.television;
 
-public class usuarios {
+public class usuario {
 
 	private String usuario;
 	private String contraseña;
 
-	public usuarios(String usuario, String contraseña) {
+	public usuario(String usuario, String contraseña) {
 		this.usuario = usuario;
 		this.contraseña = contraseña;
 	}
 
-	public usuarios() {
+	public usuario() {
 		
 	}
 
