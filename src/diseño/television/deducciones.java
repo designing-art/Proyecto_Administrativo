@@ -1,21 +1,21 @@
 package diseño.television;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
+
 import javax.swing.JButton;
-import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-public class empleados extends JFrame {
+public class deducciones extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -28,7 +28,7 @@ public class empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					empleados frame = new empleados();
+					deducciones frame = new deducciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public empleados() {
+	public deducciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -48,15 +48,14 @@ public class empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		JLabel lbldeduccion = new JLabel("DEDUCCIONES");
+		lbldeduccion.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbldeduccion.setBounds(297, 11, 100, 28);
+		contentPane.add(lbldeduccion);
 		
-		JLabel lblEmpleadosRegistrados = new JLabel("EMPLEADOS");
-		lblEmpleadosRegistrados.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmpleadosRegistrados.setBounds(297, 11, 72, 28);
-		contentPane.add(lblEmpleadosRegistrados);
-		
-		JLabel lblBuscarEmpleado = new JLabel("Busqueda de empleados :");
-		lblBuscarEmpleado.setBounds(77, 53, 125, 14);
-		contentPane.add(lblBuscarEmpleado);
+		JLabel lblBuscardeduccion= new JLabel("Busqueda de deducciones :");
+		lblBuscardeduccion.setBounds(77, 53, 150, 14);
+		contentPane.add(lblBuscardeduccion);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(213, 50, 156, 20);
@@ -72,17 +71,15 @@ public class empleados extends JFrame {
 		table.setBounds(30, 78, 617, 322);
 		contentPane.add(table);
 		
-		JButton btnRegistrarEmpleado = new JButton("Registrar Empleado");
-		btnRegistrarEmpleado.setBackground(Color.GREEN);
-		btnRegistrarEmpleado.setBounds(30, 411, 154, 23);
-		contentPane.add(btnRegistrarEmpleado);
+		JButton btnRegistrardeducciones= new JButton("Registrar deducciones");
+		btnRegistrardeducciones.setBackground(Color.GREEN);
+		btnRegistrardeducciones.setBounds(30, 411, 154, 23);
+		contentPane.add(btnRegistrardeducciones);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBackground(Color.RED);
 		btnSalir.setBounds(564, 411, 83, 23);
 		contentPane.add(btnSalir);
 	}
-	
+
 }
-
-

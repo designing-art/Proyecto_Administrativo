@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.border.MatteBorder;
 
-public class empleados extends JFrame {
+public class facturas_empresa extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -28,7 +28,7 @@ public class empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					empleados frame = new empleados();
+					facturas_empresa frame = new facturas_empresa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public empleados() {
+	public facturas_empresa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -49,12 +49,12 @@ public class empleados extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblEmpleadosRegistrados = new JLabel("EMPLEADOS");
-		lblEmpleadosRegistrados.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmpleadosRegistrados.setBounds(297, 11, 72, 28);
-		contentPane.add(lblEmpleadosRegistrados);
+		JLabel lblFacturasEmpleadosRegistrados = new JLabel("FACTURAS EMPLEADOS");
+		lblFacturasEmpleadosRegistrados.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFacturasEmpleadosRegistrados.setBounds(297, 11, 72, 28);
+		contentPane.add(lblFacturasEmpleadosRegistrados);
 		
-		JLabel lblBuscarEmpleado = new JLabel("Busqueda de empleados :");
+		JLabel lblBuscarFacturaEmpleadoRegistrado = new JLabel("Busqueda de facturas de empleados :");
 		lblBuscarEmpleado.setBounds(77, 53, 125, 14);
 		contentPane.add(lblBuscarEmpleado);
 		

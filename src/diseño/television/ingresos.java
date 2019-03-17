@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.border.MatteBorder;
 
-public class empleados extends JFrame {
+public class ingresos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -28,7 +28,7 @@ public class empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					empleados frame = new empleados();
+					ingresos frame = new ingresos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public empleados() {
+	public ingresos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -49,14 +49,14 @@ public class empleados extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblEmpleadosRegistrados = new JLabel("EMPLEADOS");
-		lblEmpleadosRegistrados.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmpleadosRegistrados.setBounds(297, 11, 72, 28);
-		contentPane.add(lblEmpleadosRegistrados);
+		JLabel lblIngresosRegistrados = new JLabel("INGRESOS REGISTRADOS");
+		lblIngresosRegistrados.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblIngresosRegistrados.setBounds(297, 11, 72, 28);
+		contentPane.add(lblIngresosRegistrados);
 		
-		JLabel lblBuscarEmpleado = new JLabel("Busqueda de empleados :");
-		lblBuscarEmpleado.setBounds(77, 53, 125, 14);
-		contentPane.add(lblBuscarEmpleado);
+		JLabel lblBuscarIngresosRegistrados = new JLabel("Busqueda de ingresos registrados :");
+		lblBuscarIngresosRegistrados.setBounds(77, 53, 125, 14);
+		contentPane.add(lblBuscarIngresosRegistrados);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(213, 50, 156, 20);
@@ -72,10 +72,10 @@ public class empleados extends JFrame {
 		table.setBounds(30, 78, 617, 322);
 		contentPane.add(table);
 		
-		JButton btnRegistrarEmpleado = new JButton("Registrar Empleado");
-		btnRegistrarEmpleado.setBackground(Color.GREEN);
-		btnRegistrarEmpleado.setBounds(30, 411, 154, 23);
-		contentPane.add(btnRegistrarEmpleado);
+		JButton btnRegistrarIngreso = new JButton("Registrar Ingreso");
+		btnRegistrarIngreso.setBackground(Color.GREEN);
+		btnRegistrarIngreso.setBounds(30, 411, 154, 23);
+		contentPane.add(btnRegistrarIngreso);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBackground(Color.RED);
