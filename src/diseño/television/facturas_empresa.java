@@ -55,8 +55,8 @@ public class facturas_empresa extends JFrame {
 		contentPane.add(lblFacturasEmpleadosRegistrados);
 		
 		JLabel lblBuscarFacturaEmpleadoRegistrado = new JLabel("Busqueda de facturas de empleados :");
-		lblBuscarEmpleado.setBounds(77, 53, 125, 14);
-		contentPane.add(lblBuscarEmpleado);
+		lblBuscarFacturaEmpleadoRegistrado.setBounds(77, 53, 125, 14);
+		contentPane.add(lblBuscarFacturaEmpleadoRegistrado);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(213, 50, 156, 20);
