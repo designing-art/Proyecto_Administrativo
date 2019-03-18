@@ -10,12 +10,13 @@ public class television {
 
     public static void main(String[] args) {
       
-        empleado mod = new empleado();
-        consultas_empleado modC = new consultas_empleado();
-        registro_mantenimiento_empleados frm = new registro_mantenimiento_empleados();
+        cargo modCargo = new cargo();
+        consultas_cargo modCCargo = new consultas_cargo();
+        registro_mantenimiento_cargos frmCargo = new registro_mantenimiento_cargos();
         
-        control_empleado ctrl = new control_empleado(mod, modC, frm);
-        frm.setVisible(true);
+        control_cargo ctrl = new control_cargo(modCargo, modCCargo, frmCargo);
+        ctrl.iniciar();
+        frmCargo.setVisible(true);
         
     }
     
