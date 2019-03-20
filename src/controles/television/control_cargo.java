@@ -26,7 +26,7 @@ public class control_cargo implements ActionListener {
 
 	public void iniciar() {
         frmCargo.setTitle("Registro de cargos");
-        frmCargo.txtBusquedaCargo.setVisible(true);
+        frmCargo.setVisible(true);
         frmCargo.setLocationRelativeTo(null);
     }
 
@@ -81,26 +81,6 @@ public class control_cargo implements ActionListener {
                 limpiar();
             }
         } 
-        
-        if (e.getSource() == frmCargo.btnBuscarCargo) {
-            modCargo.setId_cargo(Integer.parseInt(frmCargo.txtBusquedaCargo.getText()));
-            
-            if(modCCargo.buscar(modCargo))
-            {
-            	
-            	frmCargo.txtCodigoCargo.setText(String.valueOf(modCargo.getId_cargo()));
-                frmCargo.txtNombreCargo.setText(modCargo.getNombre_cargo());
-                frmCargo.txtTipoDeCargo.setText(modCargo.getArea_cargo());
-                frmCargo.txtHoraExtraCargo.setText(String.valueOf(modCargo.getValor_hora_extra_cargo()));
-                frmCargo.txtSueldoCargo.setText(String.valueOf(modCargo.getSueldo_cargo()));
-                frmCargo.txtFunsionesCargo.setText(modCargo.getFunciones_cargo());
-                
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro registro");
-                limpiar();
-            }
-        }
         
         if (e.getSource() == frmCargo.btnNuevoCargo) {
             limpiar();
