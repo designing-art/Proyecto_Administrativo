@@ -35,7 +35,7 @@ public class registro_mantenimiento_cargos extends JFrame {
 	 public JButton btnBorrarCargo;
 	
 	 public JPanel contentPane;
-	 private JLabel lblNewLabel;
+	 
 	
 	
 
