@@ -35,8 +35,8 @@ public class control_cargo implements ActionListener {
 
         if (e.getSource() == frmCargo.btnGuardarCargo) {
             modCargo.setId_cargo(Integer.parseInt(frmCargo.txtCodigoCargo.getText()));
-            modCargo.setArea_cargo(frmCargo.txtTipoDeCargo.getText());
-            modCargo.setNombre_cargo(frmCargo.txtNombreCargo.getText());
+            modCargo.setArea_cargo(frmCargo.cbTipoDeCargo.getText());
+            modCargo.setNombre_cargo(frmCargo.cbNombreCargo.getText());
             modCargo.setValor_hora_extra_cargo(Double.parseDouble(frmCargo.txtHoraExtraCargo.getText()));
             modCargo.setSueldo_cargo(Double.parseDouble(frmCargo.txtSueldoCargo.getText()));
             modCargo.setFunciones_cargo(frmCargo.txtFunsionesCargo.getText());
@@ -91,7 +91,7 @@ public class control_cargo implements ActionListener {
     public void limpiar()
     {
     	frmCargo.txtCodigoCargo.setText(null);
-        frmCargo.txtNombreCargo.setText(null);
+        frmCargo.cbNombreCargo.setText(null);
         frmCargo.txtTipoDeCargo.setText(null);
         frmCargo.txtHoraExtraCargo.setText(null);
         frmCargo.txtSueldoCargo.setText(null);
