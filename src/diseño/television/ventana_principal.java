@@ -62,209 +62,279 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel label_8 = new JLabel();
-		label_8.setBounds(289, 99, 31, 29);
-		contentPane.add(label_8);
 		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/television/logo.png"));
-		final ImageIcon iconopeq = new ImageIcon(logopeq.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-		label_8.setIcon(iconopeq);
 		
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
-		lblCanalCoffee.setBounds(392, 58, 255, 36);
-		lblCanalCoffee.setFont(new Font("Showcard Gothic", Font.BOLD, 15));
+		lblCanalCoffee.setBounds(410, 202, 274, 36);
+		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		contentPane.add(lblCanalCoffee);
 		
 		JLabel lblEmpresa = new JLabel();
-		lblEmpresa.setBounds(366, 90, 299, 318);
+		lblEmpresa.setBounds(448, 236, 201, 186);
 		contentPane.add(lblEmpresa);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/television/logo.png"));
 		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lblEmpresa.getWidth(), lblEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpresa.setIcon(icono);
 		
-		
-		JLabel lblMenu = new JLabel("Menu de opciones:");
-		lblMenu.setBounds(119, 90, 176, 29);
-		lblMenu.setFont(new Font("Britannic Bold", Font.BOLD, 15));
-		contentPane.add(lblMenu);
-		
-		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al sistema administrativo.");
-		lblBienvenidoAlSistema.setBounds(167, 11, 498, 36);
-		lblBienvenidoAlSistema.setForeground(SystemColor.textHighlight);
-		lblBienvenidoAlSistema.setFont(new Font("Showcard Gothic", Font.BOLD, 18));
+		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
+		lblBienvenidoAlSistema.setBounds(21, 11, 379, 21);
+		lblBienvenidoAlSistema.setForeground(Color.DARK_GRAY);
+		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		contentPane.add(lblBienvenidoAlSistema);
 		
 		JLabel lblInformacionEmpresa = new JLabel("\u00BFmas informacion sobre la empresa?");
-		lblInformacionEmpresa.setBounds(392, 419, 255, 14);
+		lblInformacionEmpresa.setBounds(427, 433, 267, 14);
 		lblInformacionEmpresa.setForeground(new Color(0, 128, 0));
-		lblInformacionEmpresa.setFont(new Font("Showcard Gothic", Font.BOLD, 11));
+		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(lblInformacionEmpresa);
+		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/television/libreta.png"));
 		
-		JLabel lblEmpleados = new JLabel("Empleados.");
-		lblEmpleados.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblEmpleados.setBounds(94, 114, 75, 22);
-		contentPane.add(lblEmpleados);
+		JLabel labelfotousuario = new JLabel();
+		labelfotousuario.setForeground(Color.LIGHT_GRAY);
+		labelfotousuario.setBounds(495, 43, 109, 123);
+		contentPane.add(labelfotousuario);
+		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/television/usuario.png"));
+		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage().getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+		labelfotousuario.setIcon(iconousuario);
 		
-		JLabel lblClientes = new JLabel("Clientes.");
-		lblClientes.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblClientes.setBounds(94, 157, 75, 22);
-		contentPane.add(lblClientes);
+		JLabel lblUsuario = new JLabel("Usuario :");
+		lblUsuario.setForeground(new Color(0, 128, 0));
+		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblUsuario.setBounds(467, 177, 75, 14);
+		contentPane.add(lblUsuario);
 		
-		JLabel lblProductosYServicios = new JLabel("Productos y Servicios.");
-		lblProductosYServicios.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblProductosYServicios.setBounds(94, 201, 150, 22);
-		contentPane.add(lblProductosYServicios);
+		JLabel lblCargo = new JLabel("Cargo :");
+		lblCargo.setForeground(new Color(0, 128, 0));
+		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblCargo.setBounds(479, 191, 75, 14);
+		contentPane.add(lblCargo);
 		
-		JLabel lblIngresosYEgresos = new JLabel("Ingresos y Egresos.");
-		lblIngresosYEgresos.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblIngresosYEgresos.setBounds(94, 245, 137, 22);
-		contentPane.add(lblIngresosYEgresos);
+		JLabel lblCristianDiaz = new JLabel("Cristian Diaz");
+		lblCristianDiaz.setForeground(new Color(0, 128, 0));
+		lblCristianDiaz.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblCristianDiaz.setBounds(540, 177, 97, 14);
+		contentPane.add(lblCristianDiaz);
 		
-		JLabel lblFacturas = new JLabel("Facturas.");
-		lblFacturas.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblFacturas.setBounds(94, 290, 75, 22);
-		contentPane.add(lblFacturas);
+		JLabel lblDeveloper = new JLabel("Developer");
+		lblDeveloper.setForeground(new Color(0, 128, 0));
+		lblDeveloper.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblDeveloper.setBounds(552, 191, 83, 14);
+		contentPane.add(lblDeveloper);
 		
-		JLabel lblFacturas_1 = new JLabel("Planillas.");
-		lblFacturas_1.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblFacturas_1.setBounds(94, 386, 75, 22);
-		contentPane.add(lblFacturas_1);
-		
-		JLabel lblCargos = new JLabel("Cargos.");
-		lblCargos.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		lblCargos.setBounds(94, 331, 75, 29);
-		contentPane.add(lblCargos);
-		
-		JButton button_4 = new JButton("Registrar");
-		button_4.setForeground(new Color(0, 128, 0));
-		button_4.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_4.setBackground(Color.WHITE);
-		button_4.setBounds(94, 135, 106, 22);
-		contentPane.add(button_4);
-		
-		JButton button_5 = new JButton("Listar");
-		button_5.setForeground(new Color(0, 128, 128));
-		button_5.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_5.setBackground(Color.WHITE);
-		button_5.setBounds(199, 135, 106, 22);
-		contentPane.add(button_5);
-		
-		JButton button = new JButton("Registrar");
-		button.setForeground(new Color(0, 128, 0));
-		button.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button.setBackground(Color.WHITE);
-		button.setBounds(94, 179, 106, 22);
-		contentPane.add(button);
-		
-		JButton button_1 = new JButton("Listar");
-		button_1.setForeground(new Color(0, 128, 128));
-		button_1.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_1.setBackground(Color.WHITE);
-		button_1.setBounds(199, 179, 106, 22);
-		contentPane.add(button_1);
-		
-		JButton button_2 = new JButton("Registrar");
-		button_2.setForeground(new Color(0, 128, 0));
-		button_2.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_2.setBackground(Color.WHITE);
-		button_2.setBounds(94, 223, 106, 22);
-		contentPane.add(button_2);
-		
-		JButton button_3 = new JButton("Listar");
-		button_3.setForeground(new Color(0, 128, 128));
-		button_3.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_3.setBackground(Color.WHITE);
-		button_3.setBounds(199, 223, 106, 22);
-		contentPane.add(button_3);
-		
-		JButton button_6 = new JButton("Registrar");
-		button_6.setForeground(new Color(0, 128, 0));
-		button_6.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_6.setBackground(Color.WHITE);
-		button_6.setBounds(94, 269, 106, 22);
-		contentPane.add(button_6);
-		
-		JButton button_7 = new JButton("Listar");
-		button_7.setForeground(new Color(0, 128, 128));
-		button_7.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_7.setBackground(Color.WHITE);
-		button_7.setBounds(199, 269, 106, 22);
-		contentPane.add(button_7);
-		
-		JButton button_8 = new JButton("Registrar");
-		button_8.setForeground(new Color(0, 128, 0));
-		button_8.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_8.setBackground(Color.WHITE);
-		button_8.setBounds(94, 313, 106, 22);
-		contentPane.add(button_8);
-		
-		JButton button_9 = new JButton("Listar");
-		button_9.setForeground(new Color(0, 128, 128));
-		button_9.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_9.setBackground(Color.WHITE);
-		button_9.setBounds(199, 313, 106, 22);
-		contentPane.add(button_9);
-		
-		JButton btnRegistrarCargos = new JButton("Registrar");
-		btnRegistrarCargos.setForeground(new Color(0, 128, 0));
-		btnRegistrarCargos.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		btnRegistrarCargos.setBackground(Color.WHITE);
-		btnRegistrarCargos.setBounds(94, 359, 106, 22);
-		contentPane.add(btnRegistrarCargos);
-		btnRegistrarCargos.addActionListener(new ActionListener() {
+		JButton btnEmpleados = new JButton("Empleados");
+		btnEmpleados.setBackground(Color.LIGHT_GRAY);
+		btnEmpleados.setForeground(new Color(0, 0, 0));
+		btnEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnEmpleados.setBounds(51, 123, 97, 21);
+		contentPane.add(btnEmpleados);
+		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				registro_mantenimiento_cargos registroCargos = new registro_mantenimiento_cargos();
-				registroCargos.show();
+				registro_mantenimiento_empleados empleados = new registro_mantenimiento_empleados();
+				empleados.setVisible(true);
+				empleados.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
 		
-		JButton button_11 = new JButton("Listar");
-		button_11.setForeground(new Color(0, 128, 128));
-		button_11.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		button_11.setBackground(Color.WHITE);
-		button_11.setBounds(199, 359, 106, 22);
-		contentPane.add(button_11);
+		JLabel lblHora = new JLabel("Hora  :");
+		lblHora.setForeground(new Color(0, 0, 0));
+		lblHora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblHora.setBounds(427, 18, 50, 14);
+		contentPane.add(lblHora);
 		
-		JLabel label = new JLabel("1.");
-		label.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label.setBounds(78, 114, 20, 22);
+		JLabel lblFecha = new JLabel("Fecha :");
+		lblFecha.setForeground(new Color(0, 0, 0));
+		lblFecha.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblFecha.setBounds(529, 18, 63, 14);
+		contentPane.add(lblFecha);
+		
+		JLabel label = new JLabel("00:00");
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label.setBounds(475, 18, 55, 14);
 		contentPane.add(label);
 		
-		JLabel label_1 = new JLabel("2.");
-		label_1.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label_1.setBounds(78, 157, 20, 22);
+		JLabel label_1 = new JLabel("00/00/0000");
+		label_1.setForeground(Color.BLACK);
+		label_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_1.setBounds(585, 18, 87, 14);
 		contentPane.add(label_1);
 		
-		JLabel label_2 = new JLabel("3.");
-		label_2.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label_2.setBounds(78, 201, 20, 22);
-		contentPane.add(label_2);
+		JLabel lblMenuDeOpciones = new JLabel("Menu de Opciones :");
+		lblMenuDeOpciones.setForeground(Color.DARK_GRAY);
+		lblMenuDeOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblMenuDeOpciones.setBounds(146, 83, 145, 14);
+		contentPane.add(lblMenuDeOpciones);
 		
-		JLabel label_3 = new JLabel("4.");
-		label_3.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label_3.setBounds(78, 245, 20, 22);
-		contentPane.add(label_3);
+		JLabel lblEmpleados = new JLabel("Empleados :");
+		lblEmpleados.setForeground(new Color(0, 128, 0));
+		lblEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblEmpleados.setBounds(51, 104, 97, 21);
+		contentPane.add(lblEmpleados);
 		
-		JLabel label_4 = new JLabel("5.");
-		label_4.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label_4.setBounds(78, 290, 20, 22);
-		contentPane.add(label_4);
+		JButton btnCargos = new JButton("Cargos");
+		btnCargos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCargos.setForeground(Color.BLACK);
+		btnCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnCargos.setBackground(Color.LIGHT_GRAY);
+		btnCargos.setBounds(158, 123, 97, 21);
+		contentPane.add(btnCargos);
 		
-		JLabel label_5 = new JLabel("6.");
-		label_5.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label_5.setBounds(78, 334, 20, 22);
-		contentPane.add(label_5);
+		JButton btnPlanillas = new JButton("Planillas");
+		btnPlanillas.setForeground(Color.BLACK);
+		btnPlanillas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnPlanillas.setBackground(Color.LIGHT_GRAY);
+		btnPlanillas.setBounds(158, 170, 97, 21);
+		contentPane.add(btnPlanillas);
 		
-		JLabel label_6 = new JLabel("7.");
-		label_6.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		label_6.setBounds(78, 386, 20, 22);
-		contentPane.add(label_6);
+		JButton btnContratos = new JButton("Contratos");
+		btnContratos.setForeground(Color.BLACK);
+		btnContratos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnContratos.setBackground(Color.LIGHT_GRAY);
+		btnContratos.setBounds(51, 145, 97, 21);
+		contentPane.add(btnContratos);
+		
+		JButton btnHorarios = new JButton("Horarios");
+		btnHorarios.setForeground(Color.BLACK);
+		btnHorarios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnHorarios.setBackground(Color.LIGHT_GRAY);
+		btnHorarios.setBounds(265, 123, 97, 21);
+		contentPane.add(btnHorarios);
+		
+		JButton btnDeducciones = new JButton("Deducciones");
+		btnDeducciones.setForeground(Color.BLACK);
+		btnDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnDeducciones.setBackground(Color.LIGHT_GRAY);
+		btnDeducciones.setBounds(265, 145, 97, 21);
+		contentPane.add(btnDeducciones);
+		
+		JButton btnBonificaciones = new JButton("Bonificaciones");
+		btnBonificaciones.setForeground(Color.BLACK);
+		btnBonificaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnBonificaciones.setBackground(Color.LIGHT_GRAY);
+		btnBonificaciones.setBounds(158, 145, 97, 21);
+		contentPane.add(btnBonificaciones);
+		
+		JLabel lblClientes = new JLabel("Clientes :");
+		lblClientes.setForeground(new Color(0, 128, 0));
+		lblClientes.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblClientes.setBounds(51, 190, 97, 21);
+		contentPane.add(lblClientes);
+		
+		JButton btnClientes = new JButton("Clientes");
+		btnClientes.setForeground(Color.BLACK);
+		btnClientes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnClientes.setBackground(Color.LIGHT_GRAY);
+		btnClientes.setBounds(51, 209, 97, 21);
+		contentPane.add(btnClientes);
+		
+		JButton btnServicios = new JButton("Servicios");
+		btnServicios.setForeground(Color.BLACK);
+		btnServicios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnServicios.setBackground(Color.LIGHT_GRAY);
+		btnServicios.setBounds(51, 231, 97, 21);
+		contentPane.add(btnServicios);
+		
+		JButton btnContratos_1 = new JButton("Contratos");
+		btnContratos_1.setForeground(Color.BLACK);
+		btnContratos_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnContratos_1.setBackground(Color.LIGHT_GRAY);
+		btnContratos_1.setBounds(158, 209, 97, 21);
+		contentPane.add(btnContratos_1);
+		
+		JButton btnProductos = new JButton("Productos");
+		btnProductos.setForeground(Color.BLACK);
+		btnProductos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnProductos.setBackground(Color.LIGHT_GRAY);
+		btnProductos.setBounds(265, 209, 97, 21);
+		contentPane.add(btnProductos);
+		
+		JLabel lblProductosYServicios = new JLabel("Finanzas :");
+		lblProductosYServicios.setForeground(new Color(0, 128, 0));
+		lblProductosYServicios.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblProductosYServicios.setBounds(51, 251, 174, 21);
+		contentPane.add(lblProductosYServicios);
+		
+		JButton btnIngresos_1 = new JButton("Ingresos");
+		btnIngresos_1.setForeground(Color.BLACK);
+		btnIngresos_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnIngresos_1.setBackground(Color.LIGHT_GRAY);
+		btnIngresos_1.setBounds(51, 270, 97, 21);
+		contentPane.add(btnIngresos_1);
+		
+		JButton btnEgresos = new JButton("Egresos");
+		btnEgresos.setForeground(Color.BLACK);
+		btnEgresos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnEgresos.setBackground(Color.LIGHT_GRAY);
+		btnEgresos.setBounds(158, 270, 97, 21);
+		contentPane.add(btnEgresos);
+		
+		JLabel lblFacturas = new JLabel("Facturas :");
+		lblFacturas.setForeground(new Color(0, 128, 0));
+		lblFacturas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblFacturas.setBounds(51, 291, 97, 21);
+		contentPane.add(lblFacturas);
+		
+		JButton btnIngresos = new JButton("Facturas Clientes");
+		btnIngresos.setForeground(Color.BLACK);
+		btnIngresos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnIngresos.setBackground(Color.LIGHT_GRAY);
+		btnIngresos.setBounds(51, 310, 145, 21);
+		contentPane.add(btnIngresos);
+		
+		JButton btnFacturasEmpresa = new JButton("Facturas Empresa");
+		btnFacturasEmpresa.setForeground(Color.BLACK);
+		btnFacturasEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnFacturasEmpresa.setBackground(Color.LIGHT_GRAY);
+		btnFacturasEmpresa.setBounds(217, 310, 145, 21);
+		contentPane.add(btnFacturasEmpresa);
+		
+		JLabel lblInventario = new JLabel("Inventario :");
+		lblInventario.setForeground(new Color(0, 128, 0));
+		lblInventario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblInventario.setBounds(51, 332, 174, 21);
+		contentPane.add(lblInventario);
+		
+		JButton btnInventario = new JButton("Inventario");
+		btnInventario.setForeground(Color.BLACK);
+		btnInventario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnInventario.setBackground(Color.LIGHT_GRAY);
+		btnInventario.setBounds(51, 351, 97, 21);
+		contentPane.add(btnInventario);
+		
+		JButton btnProveedores = new JButton("Proveedores");
+		btnProveedores.setForeground(Color.BLACK);
+		btnProveedores.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnProveedores.setBackground(Color.LIGHT_GRAY);
+		btnProveedores.setBounds(158, 351, 97, 21);
+		contentPane.add(btnProveedores);
+		
+		JButton btnCompras = new JButton("Compras");
+		btnCompras.setForeground(Color.BLACK);
+		btnCompras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnCompras.setBackground(Color.LIGHT_GRAY);
+		btnCompras.setBounds(265, 351, 97, 21);
+		contentPane.add(btnCompras);
+		
+		JLabel lblReportes = new JLabel("Reportes :");
+		lblReportes.setForeground(new Color(0, 128, 0));
+		lblReportes.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblReportes.setBounds(168, 383, 87, 21);
+		contentPane.add(lblReportes);
+		
+		JButton btnGenerarReportes = new JButton("Generar Reportes");
+		btnGenerarReportes.setForeground(Color.BLACK);
+		btnGenerarReportes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnGenerarReportes.setBackground(Color.LIGHT_GRAY);
+		btnGenerarReportes.setBounds(132, 401, 143, 21);
+		contentPane.add(btnGenerarReportes);
 		
 		JLabel lblMenuOpciones = new JLabel();
-		lblMenuOpciones.setBounds(28, 58, 319, 389);
+		lblMenuOpciones.setBounds(21, 43, 371, 417);
 		contentPane.add(lblMenuOpciones);
-		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/television/libreta.png"));
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(), lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
 		lblMenuOpciones.setIcon(icono2);
 

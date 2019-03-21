@@ -17,13 +17,20 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
+
+import conexion.television.conexion;
+
 import java.awt.Window.Type;
 import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
+import javax.swing.border.BevelBorder;
 
 public class registro_mantenimiento_cargos extends JFrame {
 	
@@ -43,11 +50,45 @@ public class registro_mantenimiento_cargos extends JFrame {
 	 private JPanel panel_1;
 	 private JLabel lblListaDeCargos;
 	 private JLabel label_7;
-
+	 public JTable tablaCargos;
+	 private static JTable table;
+	 private JTextField textField;
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					DefaultTableModel modelo = new DefaultTableModel();
+					table.setModel(modelo);
+		            PreparedStatement ps = null;
+		            ResultSet rs = null;
+		            conexion conn = new conexion();
+		            java.sql.Connection con = conn.getConexion();
+
+		            String sql = "SELECT id_cargo, tipo_cargo, nombre_cargo, sueldo_cargo, funsiones_cargo FROM cargos";
+		            ps = con.prepareStatement(sql);
+		            rs = ps.executeQuery();
+
+		            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+		            int cantidadColumnas = rsMd.getColumnCount();
+
+		            modelo.addColumn("Código");
+		            modelo.addColumn("Producto");
+		            modelo.addColumn("Precio");
+		            modelo.addColumn("Cantidad");
+
+		            int[] anchos = {50, 200, 50, 50};
+		            for (int i = 0; i < table.getColumnCount(); i++) {
+		                table.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+		            }
+
+		            while (rs.next()) {
+		                Object[] filas = new Object[cantidadColumnas];
+		                for (int i = 0; i < cantidadColumnas; i++) {
+		                    filas[i] = rs.getObject(i + 1);
+		                }
+		                modelo.addRow(filas);
+		            }
 					registro_mantenimiento_cargos frame = new registro_mantenimiento_cargos();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -187,9 +228,66 @@ public class registro_mantenimiento_cargos extends JFrame {
 		 
 		 lblListaDeCargos = new JLabel("Lista de Cargos Registrados");
 		 lblListaDeCargos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		 lblListaDeCargos.setBounds(38, 66, 190, 23);
+		 lblListaDeCargos.setBounds(27, 46, 190, 23);
 		 panel_1.add(lblListaDeCargos);
 		 final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/television/libreta.png"));
+		 
+		 table = new JTable();
+		 table.setModel(new DefaultTableModel(
+		 	new Object[][] {
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 		{null, null, null, null, null, null},
+		 	},
+		 	new String[] {
+		 		"Codigo", "Tipo", "Nombre", "Hora Extra", "Sueldo", "Funsiones"
+		 	}
+		 ) {
+		 	Class[] columnTypes = new Class[] {
+		 		Integer.class, String.class, String.class, Double.class, Double.class, String.class
+		 	};
+		 	public Class getColumnClass(int columnIndex) {
+		 		return columnTypes[columnIndex];
+		 	}
+		 	boolean[] columnEditables = new boolean[] {
+		 		false, false, false, false, false, false
+		 	};
+		 	public boolean isCellEditable(int row, int column) {
+		 		return columnEditables[column];
+		 	}
+		 });
+		 table.getColumnModel().getColumn(0).setResizable(false);
+		 table.getColumnModel().getColumn(1).setResizable(false);
+		 table.getColumnModel().getColumn(2).setResizable(false);
+		 table.getColumnModel().getColumn(3).setResizable(false);
+		 table.getColumnModel().getColumn(4).setResizable(false);
+		 table.getColumnModel().getColumn(5).setResizable(false);
+		 table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		 table.setBackground(Color.LIGHT_GRAY);
+		 table.setBounds(27, 100, 344, 264);
+		 panel_1.add(table);
+		 
+		 JLabel lblBuscar = new JLabel("Buscar");
+		 lblBuscar.setBounds(27, 68, 60, 31);
+		 panel_1.add(lblBuscar);
+		 
+		 textField = new JTextField();
+		 textField.setColumns(10);
+		 textField.setBounds(88, 73, 283, 20);
+		 panel_1.add(textField);
 		 
 		 JLabel lblTaa = new JLabel();
 		 lblTaa.setBounds(0, 0, 400, 434);
