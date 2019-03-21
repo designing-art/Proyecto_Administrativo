@@ -22,6 +22,19 @@ public class television {
         principal.setVisible(true);
         
         
+        bonificacion modBonificacion = new bonificacion();
+        consultas_bonificacion modCBonificacion = new consultas_bonificacion();
+        registro_mantenimiento_bonificaciones frmBonificaciones = new registro_mantenimiento_bonificaciones();
+        control_bonificacion ctrlbonificacion= new control_bonificacion(modBonificacion, modCBonificacion, frmBonificaciones);
+        ctrlbonificacion.iniciar();
+        frmBonificaciones.setVisible(false);
+        
+        principal.setVisible(true);
+        
+        
+    
+        
+        
     }
     
 }

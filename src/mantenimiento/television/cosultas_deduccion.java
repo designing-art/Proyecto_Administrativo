@@ -7,8 +7,9 @@ import java.sql.SQLException;
 
 
 import clases.television.deduccion;
+import conexion.television.conexion;
 
-public class cosultas_deduccion {
+public class cosultas_deduccion extends conexion {
 	
 	public boolean registrar(deduccion deduccion) {
         PreparedStatement ps = null;
@@ -47,7 +48,7 @@ public class cosultas_deduccion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "UPDATE deduccio SET id_deduccion=?,prestamo _deduccion=?,adelanto_deduccion=?,  embargo_deduccion=?, plan_telefonico_deduccion=?, deduccion_bancaria=?, cooperativa_deduccion=? ,ihss_deduccion=?, rap_deduccion=?, otras_deduccion=?WHERE id_cargo=? ";
+        String sql = "UPDATE deduccion SET id_deduccion=?,prestamo _deduccion=?,adelanto_deduccion=?,  embargo_deduccion=?, plan_telefonico_deduccion=?, deduccion_bancaria=?, cooperativa_deduccion=? ,ihss_deduccion=?, rap_deduccion=?, otras_deduccion=?WHERE id_cargo=? ";
 
         try {
         	 ps = con.prepareStatement(sql);
