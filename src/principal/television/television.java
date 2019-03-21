@@ -19,6 +19,13 @@ public class television {
         ctrlcargo.iniciar();
         frmCargo.setVisible(false);
         
+        horario modHorario = new horario(0, null, null, null, null, null, null);
+        consultas_horario modCHorario = new consultas_horario();
+        registro_mantenimiento_horarios frmHorario = new registro_mantenimiento_horarios();
+        control_horario ctrlhorario = new control_horario(modHorario, modCHorario, frmHorario);
+        ctrlhorario.iniciar();
+        frmHorario.setVisible(false);
+        
         principal.setVisible(true);
         
         
