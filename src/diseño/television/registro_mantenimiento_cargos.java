@@ -43,12 +43,7 @@ public class registro_mantenimiento_cargos extends JFrame {
 	 private JPanel panel_1;
 	 private JLabel lblListaDeCargos;
 	 private JLabel label_7;
-	
-	
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
