@@ -42,10 +42,10 @@ public class registro_mantenimiento_deducciones extends JFrame {
 	private JLabel lblAgregarDeduccion;
 	private JTextField textField_8;
 	private JLabel lblTotalDeduciones;
-	private JButton button;
-	private JButton button_1;
-	private JButton button_2;
-	private JButton button_3;
+	private JButton btnGuardarDeduccion;
+	private JButton btnNuevoDeduccion;
+	private JButton btnActualizarDeduccion;
+	private JButton btnSalirDeduccion;
 
 	/**
 	 * Launch the application.
@@ -201,24 +201,24 @@ public class registro_mantenimiento_deducciones extends JFrame {
 		comboBox_1.setBounds(87, 303, 205, 20);
 		contentPane.add(comboBox_1);
 		
-		button = new JButton("GUARDAR");
-		button.setBackground(new Color(0, 128, 0));
-		button.setBounds(87, 403, 99, 23);
-		contentPane.add(button);
+		btnGuardarDeduccion = new JButton("GUARDAR");
+		btnGuardarDeduccion.setBackground(new Color(0, 128, 0));
+		btnGuardarDeduccion.setBounds(87, 403, 99, 23);
+		contentPane.add(btnGuardarDeduccion);
 		
-		button_1 = new JButton("NUEVO");
-		button_1.setBackground(new Color(0, 128, 0));
-		button_1.setBounds(423, 427, 99, 23);
-		contentPane.add(button_1);
+		btnNuevoDeduccion= new JButton("NUEVO");
+		btnNuevoDeduccion.setBackground(new Color(0, 128, 0));
+		btnNuevoDeduccion.setBounds(423, 427, 99, 23);
+		contentPane.add(btnNuevoDeduccion);
 		
-		button_2 = new JButton("ACTUALIZAR");
-		button_2.setBackground(new Color(0, 128, 0));
-		button_2.setBounds(195, 403, 99, 23);
-		contentPane.add(button_2);
+		btnActualizarDeduccion= new JButton("ACTUALIZAR");
+		btnActualizarDeduccion.setBackground(new Color(0, 128, 0));
+		btnActualizarDeduccion.setBounds(195, 403, 99, 23);
+		contentPane.add(btnActualizarDeduccion);
 		
-		button_3 = new JButton("SALIR");
-		button_3.setBackground(Color.RED);
-		button_3.setBounds(575, 427, 99, 23);
-		contentPane.add(button_3);
+		btnSalirDeduccion = new JButton("SALIR");
+		btnSalirDeduccion.setBackground(Color.RED);
+		btnSalirDeduccion.setBounds(575, 427, 99, 23);
+		contentPane.add(btnSalirDeduccion);
 	}
 }
