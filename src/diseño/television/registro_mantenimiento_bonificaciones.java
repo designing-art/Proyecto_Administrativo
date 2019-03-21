@@ -18,17 +18,17 @@ import javax.swing.JButton;
 public class registro_mantenimiento_bonificaciones extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	public JTextField txtCodigoBonificacion;
+	public JTextField txtnombresBonificacion;
+	public JTextField txtapellidosbonificacion;
 	private JLabel label_2;
 	private JLabel label_3;
 	private JLabel label_4;
 	private JLabel label_5;
-	private JTextField textField_3;
+    public JTextField txtidentidadbonificacion;
 	private JLabel label_1;
 	private JComboBox comboBox;
-	private JTextField textField_4;
+	public JTextField txttipobonificacion;
 	private JTable table;
 	private JPanel panel;
 	private JLabel label_6;
@@ -36,16 +36,16 @@ public class registro_mantenimiento_bonificaciones extends JFrame {
 	private JLabel lblListaDeDeducciones;
 	private JLabel lblTipo;
 	private JLabel lblCantidad;
-	private JTextField textField_6;
+	public JTextField txtcantidadbonificacion;
 	private JLabel lblObservacion;
-	private JTextField textField_7;
+	public JTextField txtobservacionbonificacion;
 	private JLabel lblAgregarDeduccion;
-	private JTextField textField_8;
+	public JTextField txtTotalBonificacion;
 	private JLabel lblTotalDeduciones;
-	private JButton button;
-	private JButton button_1;
-	private JButton button_2;
-	private JButton button_3;
+	public JButton btnGuardarBonificacion;
+	public JButton btnActualizarBonificacion;
+	public JButton btnNuevaBonificacion;
+	public JButton btnSalirBonificacion;
 
 	/**
 	 * Launch the application.
@@ -81,21 +81,21 @@ public class registro_mantenimiento_bonificaciones extends JFrame {
 		lblRegistrarDeducciones.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblRegistrarDeducciones);
 		
-		textField = new JTextField();
-		textField.setBounds(75, 223, 186, 20);
-		textField.setColumns(10);
-		contentPane.add(textField);
+		txtCodigoBonificacion= new JTextField();
+		txtCodigoBonificacion.setBounds(75, 223, 186, 20);
+		txtCodigoBonificacion.setColumns(10);
+		contentPane.add(txtCodigoBonificacion);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(75, 198, 186, 20);
-		textField_1.setColumns(10);
-		contentPane.add(textField_1);
+		txtnombresBonificacion = new JTextField();
+		txtnombresBonificacion.setBounds(75, 198, 186, 20);
+		txtnombresBonificacion.setColumns(10);
+		contentPane.add(txtnombresBonificacion);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(75, 172, 28, 20);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		contentPane.add(textField_2);
+		txtapellidosbonificacion = new JTextField();
+		txtapellidosbonificacion.setBounds(75, 172, 28, 20);
+		txtapellidosbonificacion.setEditable(false);
+		txtapellidosbonificacion.setColumns(10);
+		contentPane.add(txtapellidosbonificacion);
 		
 		JLabel lblDatosDelEmpleado = new JLabel("Datos del empleado :");
 		lblDatosDelEmpleado.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -118,10 +118,10 @@ public class registro_mantenimiento_bonificaciones extends JFrame {
 		label_5.setBounds(14, 254, 63, 14);
 		contentPane.add(label_5);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(75, 248, 186, 20);
-		textField_3.setColumns(10);
-		contentPane.add(textField_3);
+		txtcantidadbonificacion = new JTextField();
+		txtcantidadbonificacion.setBounds(75, 248, 186, 20);
+		txtcantidadbonificacion.setColumns(10);
+		contentPane.add(txtcantidadbonificacion);
 		
 		label_1 = new JLabel("Buscar empleado por : ");
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -132,10 +132,10 @@ public class registro_mantenimiento_bonificaciones extends JFrame {
 		comboBox.setBounds(136, 39, 125, 20);
 		contentPane.add(comboBox);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(271, 39, 141, 20);
-		contentPane.add(textField_4);
+		txtobservacionbonificacion = new JTextField();
+		txtobservacionbonificacion.setColumns(10);
+		txtobservacionbonificacion.setBounds(271, 39, 141, 20);
+		contentPane.add(txtobservacionbonificacion);
 		
 		table = new JTable();
 		table.setBackground(Color.LIGHT_GRAY);
@@ -168,30 +168,30 @@ public class registro_mantenimiento_bonificaciones extends JFrame {
 		lblCantidad.setBounds(14, 331, 63, 14);
 		contentPane.add(lblCantidad);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(87, 328, 207, 20);
-		contentPane.add(textField_6);
+		txtidentidadbonificacion = new JTextField();
+		txtidentidadbonificacion.setColumns(10);
+		txtidentidadbonificacion.setBounds(87, 328, 207, 20);
+		contentPane.add(txtidentidadbonificacion);
 		
 		lblObservacion = new JLabel("Observacion :");
 		lblObservacion.setBounds(14, 359, 80, 14);
 		contentPane.add(lblObservacion);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(88, 353, 206, 39);
-		contentPane.add(textField_7);
+		txttipobonificacion = new JTextField();
+		txttipobonificacion.setColumns(10);
+		txttipobonificacion.setBounds(88, 353, 206, 39);
+		contentPane.add(txttipobonificacion);
 		
 		lblAgregarDeduccion = new JLabel("Agregar bonificacion :");
 		lblAgregarDeduccion.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAgregarDeduccion.setBounds(14, 281, 124, 14);
 		contentPane.add(lblAgregarDeduccion);
 		
-		textField_8 = new JTextField();
-		textField_8.setEditable(false);
-		textField_8.setColumns(10);
-		textField_8.setBounds(423, 404, 251, 20);
-		contentPane.add(textField_8);
+		txtTotalBonificacion = new JTextField();
+		txtTotalBonificacion.setEditable(false);
+		txtTotalBonificacion.setColumns(10);
+		txtTotalBonificacion.setBounds(423, 404, 251, 20);
+		contentPane.add(txtTotalBonificacion);
 		
 		lblTotalDeduciones = new JLabel("Total bonificaciones :");
 		lblTotalDeduciones.setBounds(423, 384, 127, 14);
@@ -201,24 +201,24 @@ public class registro_mantenimiento_bonificaciones extends JFrame {
 		comboBox_1.setBounds(87, 303, 205, 20);
 		contentPane.add(comboBox_1);
 		
-		button = new JButton("GUARDAR");
-		button.setBackground(new Color(0, 128, 0));
-		button.setBounds(87, 403, 99, 23);
-		contentPane.add(button);
+		btnGuardarBonificacion = new JButton("GUARDAR");
+		btnGuardarBonificacion.setBackground(new Color(0, 128, 0));
+		btnGuardarBonificacion.setBounds(87, 403, 99, 23);
+		contentPane.add(btnGuardarBonificacion);
 		
-		button_1 = new JButton("NUEVO");
-		button_1.setBackground(new Color(0, 128, 0));
-		button_1.setBounds(423, 427, 99, 23);
-		contentPane.add(button_1);
+		btnNuevaBonificacion = new JButton("NUEVO");
+		btnNuevaBonificacion.setBackground(new Color(0, 128, 0));
+		btnNuevaBonificacion.setBounds(423, 427, 99, 23);
+		contentPane.add(btnNuevaBonificacion);
 		
-		button_2 = new JButton("ACTUALIZAR");
-		button_2.setBackground(new Color(0, 128, 0));
-		button_2.setBounds(195, 403, 99, 23);
-		contentPane.add(button_2);
+		btnActualizarBonificacion = new JButton("ACTUALIZAR");
+		btnActualizarBonificacion.setBackground(new Color(0, 128, 0));
+		btnActualizarBonificacion.setBounds(195, 403, 99, 23);
+		contentPane.add(btnActualizarBonificacion);
 		
-		button_3 = new JButton("SALIR");
-		button_3.setBackground(Color.RED);
-		button_3.setBounds(575, 427, 99, 23);
-		contentPane.add(button_3);
+		btnSalirBonificacion = new JButton("SALIR");
+		btnSalirBonificacion.setBackground(Color.RED);
+		btnSalirBonificacion.setBounds(575, 427, 99, 23);
+		contentPane.add(btnSalirBonificacion);
 	}
 }
