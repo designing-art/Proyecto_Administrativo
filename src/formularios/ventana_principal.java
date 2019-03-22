@@ -63,7 +63,7 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/television/logo.png"));
+		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 		
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
 		lblCanalCoffee.setBounds(410, 202, 274, 36);
@@ -73,7 +73,7 @@ public class ventana_principal extends JFrame {
 		JLabel lblEmpresa = new JLabel();
 		lblEmpresa.setBounds(448, 236, 201, 186);
 		contentPane.add(lblEmpresa);
-		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/television/logo.png"));
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lblEmpresa.getWidth(), lblEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpresa.setIcon(icono);
 		
@@ -88,13 +88,13 @@ public class ventana_principal extends JFrame {
 		lblInformacionEmpresa.setForeground(new Color(0, 128, 0));
 		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(lblInformacionEmpresa);
-		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/television/libreta.png"));
+		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		
 		JLabel labelfotousuario = new JLabel();
 		labelfotousuario.setForeground(Color.LIGHT_GRAY);
 		labelfotousuario.setBounds(495, 43, 109, 123);
 		contentPane.add(labelfotousuario);
-		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/television/usuario.png"));
+		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage().getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
 		labelfotousuario.setIcon(iconousuario);
 		

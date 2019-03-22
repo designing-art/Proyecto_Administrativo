@@ -1,12 +1,8 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,7 +20,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
+import clases.cargo;
 import conexion.conexion;
+import consultas.consultas_cargo;
+import controles.control_cargo;
 
 import java.awt.Window.Type;
 import javax.swing.JTextArea;
@@ -70,6 +69,7 @@ public class registro_mantenimiento_cargos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.setBounds(21, 38, 341, 434);
@@ -79,7 +79,7 @@ public class registro_mantenimiento_cargos extends JFrame {
 		JLabel label = new JLabel();
 		label.setBounds(267, 48, 49, 44);
 		panel.add(label);
-		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/television/logo.png"));
+		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon iconopeq = new ImageIcon(logopeq.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 		label.setIcon(iconopeq);
 		
@@ -146,7 +146,7 @@ public class registro_mantenimiento_cargos extends JFrame {
 		 lblFuncionesCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		 lblFuncionesCargo.setBounds(26, 249, 99, 14);
 		 panel.add(lblFuncionesCargo);
-		 final ImageIcon icono = new ImageIcon(getClass().getResource("/material/television/libreta.png"));
+		 final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		 
 		 cbxTipoCargo = new JComboBox();
 		 cbxTipoCargo.setModel(new DefaultComboBoxModel(new String[] {"Administrativo", "Gerencial", "Operario", "Servicio"}));
@@ -201,7 +201,7 @@ public class registro_mantenimiento_cargos extends JFrame {
 		 lblListaDeCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		 lblListaDeCargos.setBounds(27, 46, 212, 23);
 		 panel_1.add(lblListaDeCargos);
-		 final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/television/libreta.png"));
+		 final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		 
 		 table = new JTable();
 		 table.setModel(new DefaultTableModel(
@@ -288,4 +288,15 @@ public class registro_mantenimiento_cargos extends JFrame {
 		 contentPane.add(btnRegresar);
 		
 	}
+public static void main(String[] args) {
+	cargo modCargo = new cargo();
+    consultas_cargo modCCargo = new consultas_cargo();
+    registro_mantenimiento_cargos frmCargo = new registro_mantenimiento_cargos();
+    control_cargo ctrlcargo = new control_cargo(modCargo, modCCargo, frmCargo);
+    ctrlcargo.iniciar();
+    ventana_principal principal = new ventana_principal();
+    principal.setVisible(true);
+        
+        
+    }
 }
