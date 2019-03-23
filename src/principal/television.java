@@ -1,9 +1,6 @@
 
 package principal;
 
-import clases.*;
-import consultas.*;
-import controles.*;
 import formularios.*;
 
 public class television {
