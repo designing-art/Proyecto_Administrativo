@@ -23,8 +23,8 @@ import javax.swing.DefaultComboBoxModel;
 public class registro_cargos extends JFrame {
 
 	public JTextField txtCodigoCargo;
-	public JComboBox cbxNombreCargo;
-	public JComboBox cbxTipoCargo;
+	public JComboBox<?> cbxNombreCargo;
+	public JComboBox<?> cbxTipoCargo;
 	public JTextField txtSueldoCargo;
 	public JTextField txtHoraExtraCargo;
 
@@ -33,11 +33,7 @@ public class registro_cargos extends JFrame {
 	public JButton btnActualizarCargo;
 
 	public JPanel contentPane;
-	private JLabel lblNewLabel;
-	private JLabel label_7;
 	public JTable tablaCargos;
-	private static JTable table;
-
 	public JTextArea txtFunsionesCargo;
 
 	public registro_cargos() {
@@ -187,7 +183,7 @@ public class registro_cargos extends JFrame {
 			}
 		});
 		btnRegresar.setForeground(new Color(0, 0, 0));
-		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
 		btnRegresar.setBackground(new Color(184, 134, 11));
 		btnRegresar.setBounds(10, 11, 118, 23);
 		contentPane.add(btnRegresar);
@@ -202,9 +198,9 @@ public class registro_cargos extends JFrame {
 			}
 		});
 		btnListaDeCargos.setForeground(Color.BLACK);
-		btnListaDeCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		btnListaDeCargos.setBackground(new Color(184, 134, 11));
-		btnListaDeCargos.setBounds(597, 11, 187, 23);
+		btnListaDeCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		btnListaDeCargos.setBackground(new Color(34, 139, 34));
+		btnListaDeCargos.setBounds(624, 11, 160, 23);
 		contentPane.add(btnListaDeCargos);
 
 	}
