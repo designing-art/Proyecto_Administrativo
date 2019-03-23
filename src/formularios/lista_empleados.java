@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Lista_empleados extends JFrame {
+public class lista_empleados extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,7 +19,7 @@ public class Lista_empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Lista_empleados frame = new Lista_empleados();
+					lista_empleados frame = new lista_empleados();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,7 +31,7 @@ public class Lista_empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Lista_empleados() {
+	public lista_empleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

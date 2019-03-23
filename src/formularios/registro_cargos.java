@@ -134,6 +134,12 @@ public class registro_cargos extends JFrame {
 
 		cbxTipoCargo.setBounds(158, 110, 159, 22);
 		panel.add(cbxTipoCargo);
+		
+		cbxTipoCargo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 
 		cbxNombreCargo = new JComboBox();
 		cbxNombreCargo.setModel(new DefaultComboBoxModel(new String[] { "Gerente de Operaciones", "Administrador",
