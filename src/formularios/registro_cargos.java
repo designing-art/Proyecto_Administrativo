@@ -1,10 +1,9 @@
 package formularios;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,20 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableModel;
-
-import clases.cargo;
-import conexion.conexion;
-import consultas.consultas_cargo;
-import controles.control_cargo;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 
