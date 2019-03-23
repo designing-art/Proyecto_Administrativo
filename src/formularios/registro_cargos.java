@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.JTextArea;
@@ -83,11 +87,60 @@ public class registro_cargos extends JFrame {
 		txtHoraExtraCargo.setBounds(198, 169, 119, 20);
 		panel.add(txtHoraExtraCargo);
 		txtHoraExtraCargo.setColumns(10);
+		txtHoraExtraCargo.addKeyListener(new KeyListener() {
+	           @Override
+	            public void keyTyped(KeyEvent ke) {
+	              char c  = ke.getKeyChar();
+	              if(Character.isLetter(c))
+	              {               
+	                Toolkit.getDefaultToolkit().beep();
+	                ke.consume();
+	              }                
+	            }
+	            public void keyPressed(KeyEvent ke) {
+	            }
+	            public void keyReleased(KeyEvent ke) {
+	            }            
+	      });
+		
+		
+		
+		
+		/*txtHoraExtraCargo.addKeyListener(new KeyListener() {
+	           @Override
+	            public void keyTyped(KeyEvent ke) {
+	              char c  = ke.getKeyChar();
+	              if(Character.isDigit(c))
+	              {               
+	                Toolkit.getDefaultToolkit().beep();
+	                ke.consume();
+	              }                
+	            }
+	            public void keyPressed(KeyEvent ke) {
+	            }
+	            public void keyReleased(KeyEvent ke) {
+	            }            
+	      }); */
 
 		txtSueldoCargo = new JTextField();
 		txtSueldoCargo.setBounds(198, 200, 119, 20);
 		panel.add(txtSueldoCargo);
 		txtSueldoCargo.setColumns(10);
+		txtSueldoCargo.addKeyListener(new KeyListener() {
+	           @Override
+	            public void keyTyped(KeyEvent ke) {
+	              char c  = ke.getKeyChar();
+	              if(Character.isLetter(c))
+	              {               
+	                Toolkit.getDefaultToolkit().beep();
+	                ke.consume();
+	              }                
+	            }
+	            public void keyPressed(KeyEvent ke) {
+	            }
+	            public void keyReleased(KeyEvent ke) {
+	            }            
+	      });
 		
 
 		JLabel lblSueldoCargo = new JLabel("5. Sueldo :");
@@ -131,15 +184,9 @@ public class registro_cargos extends JFrame {
 		cbxTipoCargo = new JComboBox();
 		cbxTipoCargo.setModel(new DefaultComboBoxModel(
 				new String[] { "Administrativo", "Gerencial", "Operario", "Servicio", "Seguridad" }));
-
 		cbxTipoCargo.setBounds(158, 110, 159, 22);
 		panel.add(cbxTipoCargo);
 		
-		cbxTipoCargo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 
 		cbxNombreCargo = new JComboBox();
 		cbxNombreCargo.setModel(new DefaultComboBoxModel(new String[] { "Gerente de Operaciones", "Administrador",
