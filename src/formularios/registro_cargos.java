@@ -34,7 +34,6 @@ public class registro_cargos extends JFrame {
 
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
-	public JButton btnActualizarCargo;
 
 	public JPanel contentPane;
 	public JTable tablaCargos;
@@ -206,55 +205,45 @@ public class registro_cargos extends JFrame {
 		txtFunsionesCargo.setBackground(Color.LIGHT_GRAY);
 		txtFunsionesCargo.setBounds(136, 231, 181, 109);
 		panel.add(txtFunsionesCargo);
-				
-				btnActualizarCargo = new JButton("Actualizar");
-				btnActualizarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-				btnActualizarCargo.setBackground(new Color(0, 128, 0));
-				btnActualizarCargo.setBounds(217, 351, 99, 23);
-				panel.add(btnActualizarCargo);
-				
-						JLabel lblImagenLibreta = new JLabel();
-						lblImagenLibreta.setBounds(0, 0, 341, 434);
-						panel.add(lblImagenLibreta);
-						final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-								lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-						lblImagenLibreta.setIcon(logo);
+						
+						JButton button = new JButton("Actualizar");
+						button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+						button.setBackground(new Color(240, 230, 140));
+						button.setBounds(27, 352, 99, 23);
+						panel.add(button);
+						
+								JLabel lblImagenLibreta = new JLabel();
+								lblImagenLibreta.setBounds(0, 0, 341, 434);
+								panel.add(lblImagenLibreta);
+								final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+										lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+								lblImagenLibreta.setIcon(logo);
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-
-		JLabel lblCargos = new JLabel("REGISTRO DE CARGOS");
-		lblCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lblCargos.setBounds(295, 1, 249, 41);
-		contentPane.add(lblCargos);
-
-		JButton btnRegresar = new JButton("Regresar");
-		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ventana_principal principal = new ventana_principal();
-				principal.setVisible(true);
-				principal.setLocationRelativeTo(null);
-				dispose();
-			}
-		});
-		btnRegresar.setForeground(new Color(0, 0, 0));
-		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
-		btnRegresar.setBackground(new Color(184, 134, 11));
-		btnRegresar.setBounds(10, 11, 118, 23);
-		contentPane.add(btnRegresar);
 		
-		JButton btnListaDeCargos = new JButton("Lista de Cargos");
-		btnListaDeCargos.addActionListener(new ActionListener() {
+		JButton btnListaDeCargos = new JButton("Lista de Cargos.");
+		btnListaDeCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnListaDeCargos.setBackground(new Color(240, 230, 140));
+		btnListaDeCargos.setBounds(618, 11, 166, 23);
+		contentPane.add(btnListaDeCargos);
+		
+		JButton btnAtras = new JButton("Regresar");
+		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAtras.setBackground(new Color(255, 127, 80));
+		btnAtras.setBounds(10, 11, 99, 23);
+		contentPane.add(btnAtras);
+		
+		JLabel lblRegistrarCargo = new JLabel("REGISTRAR CARGO");
+		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		lblRegistrarCargo.setBounds(309, 3, 197, 36);
+		contentPane.add(lblRegistrarCargo);
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
-				principal.setVisible(true);
-				principal.setLocationRelativeTo(null);
+		 		principal.setVisible(true);
+		 		principal.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
-		btnListaDeCargos.setForeground(Color.BLACK);
-		btnListaDeCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
-		btnListaDeCargos.setBackground(new Color(34, 139, 34));
-		btnListaDeCargos.setBounds(624, 11, 160, 23);
-		contentPane.add(btnListaDeCargos);
 
 	}
 }
