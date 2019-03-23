@@ -22,6 +22,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Window.Type;
 import javax.swing.border.SoftBevelBorder;
+
+import clases.cargo;
+import consultas.consultas_cargo;
+import controles.control_cargo;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
@@ -130,7 +135,7 @@ public class ventana_principal extends JFrame {
 		contentPane.add(btnEmpleados);
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				registro_mantenimiento_empleados empleados = new registro_mantenimiento_empleados();
+				registro_empleados empleados = new registro_empleados();
 				empleados.setVisible(true);
 				empleados.setLocationRelativeTo(null);
 				dispose();
@@ -176,10 +181,16 @@ public class ventana_principal extends JFrame {
 		JButton btnCargos = new JButton("Cargos");
 		btnCargos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				registro_mantenimiento_cargos cargos = new registro_mantenimiento_cargos();
+				registro_cargos cargos = new registro_cargos();
 				cargos.setVisible(true);
 				cargos.setLocationRelativeTo(null);
 				dispose();
+					cargo modCargo = new cargo();
+					consultas_cargo modCCargo = new consultas_cargo();
+					registro_cargos frmCargo = new registro_cargos();
+					control_cargo ctrlcargo = new control_cargo(modCargo, modCCargo, frmCargo);
+			        frmCargo.setVisible(true);
+			        frmCargo.setLocationRelativeTo(null);
 			}
 		});
 		btnCargos.setForeground(Color.BLACK);
@@ -205,7 +216,7 @@ public class ventana_principal extends JFrame {
 		JButton btnHorarios = new JButton("Horarios");
 		btnHorarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				registro_mantenimiento_horarios horarios = new registro_mantenimiento_horarios();
+				registro_horarios horarios = new registro_horarios();
 				horarios.setVisible(true);
 				horarios.setLocationRelativeTo(null);
 				dispose();

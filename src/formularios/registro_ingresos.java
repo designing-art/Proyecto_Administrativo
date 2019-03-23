@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class registro_mantenimiento_ingresos extends JFrame {
+public class registro_ingresos extends JFrame {
 	
 	private JTextField txtcodigoingresos;
 	private JTextField txtingresosedicion;
@@ -32,7 +32,7 @@ public class registro_mantenimiento_ingresos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_ingresos frame = new registro_mantenimiento_ingresos();
+					registro_ingresos frame = new registro_ingresos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class registro_mantenimiento_ingresos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_ingresos() {
+	public registro_ingresos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 545);
 		contentPane = new JPanel();

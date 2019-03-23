@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JButton;
 
-public class registro_mantenimiento_deducciones extends JFrame {
+public class registro_deducciones extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -54,7 +54,7 @@ public class registro_mantenimiento_deducciones extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_deducciones frame = new registro_mantenimiento_deducciones();
+					registro_deducciones frame = new registro_deducciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +66,7 @@ public class registro_mantenimiento_deducciones extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_deducciones() {
+	public registro_deducciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();

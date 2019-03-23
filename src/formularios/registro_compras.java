@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class registro_mantenimiento_detalle_compras extends JFrame {
+public class registro_compras extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textcodigocompra;
@@ -29,7 +29,7 @@ public class registro_mantenimiento_detalle_compras extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_detalle_compras frame = new registro_mantenimiento_detalle_compras();
+					registro_compras frame = new registro_compras();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class registro_mantenimiento_detalle_compras extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_detalle_compras() {
+	public registro_compras() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();

@@ -6,15 +6,15 @@ import javax.swing.JOptionPane;
 
 import clases.horario;
 import consultas.consultas_horario;
-import formularios.registro_mantenimiento_horarios;
+import formularios.registro_horarios;
 
 public class control_horario implements ActionListener {
 
     public horario modHorario;
     public consultas_horario modCHorario;
-    public registro_mantenimiento_horarios frmHorario;
+    public registro_horarios frmHorario;
 
-    public control_horario(horario modHorario, consultas_horario modCHorario, registro_mantenimiento_horarios frmHorario) {
+    public control_horario(horario modHorario, consultas_horario modCHorario, registro_horarios frmHorario) {
         this.modHorario = modHorario;
         this.modCHorario = modCHorario;
         this.frmHorario = frmHorario;

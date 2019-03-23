@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-public class registro_mantenimiento_horarios extends JFrame {
+public class registro_horarios extends JFrame {
 	public JTextField txtidhorario;
 	public JTextField txttipohorario;
 	public JTextField txtdescripciohorario;
@@ -38,7 +38,7 @@ public class registro_mantenimiento_horarios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_horarios frame = new registro_mantenimiento_horarios();
+					registro_horarios frame = new registro_horarios();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class registro_mantenimiento_horarios extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_horarios() {
+	public registro_horarios() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);

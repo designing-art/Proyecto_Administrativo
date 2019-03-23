@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class registro_mantenimiento_servicios extends JFrame {
+public class registro_servicios extends JFrame {
 	private JTextField txtidservicio;
 	private JTextField txtduracionservicio;
 	private JTextField txtprecioservicio;
@@ -36,7 +36,7 @@ public class registro_mantenimiento_servicios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_servicios frame = new registro_mantenimiento_servicios();
+					registro_servicios frame = new registro_servicios();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class registro_mantenimiento_servicios extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_servicios() {
+	public registro_servicios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();

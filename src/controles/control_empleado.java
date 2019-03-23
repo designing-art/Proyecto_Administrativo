@@ -6,15 +6,15 @@ import javax.swing.JOptionPane;
 
 import clases.empleado;
 import consultas.consultas_empleado;
-import formularios.registro_mantenimiento_empleados;
+import formularios.registro_empleados;
 
 public class control_empleado implements ActionListener {
 
     private empleado modEmpleado;
     private consultas_empleado modCEmpleado;
-    private registro_mantenimiento_empleados frmEmpleado;
+    private registro_empleados frmEmpleado;
 
-    public control_empleado(empleado modEmpleado, consultas_empleado modCempleado, registro_mantenimiento_empleados frmEmpleado) {
+    public control_empleado(empleado modEmpleado, consultas_empleado modCempleado, registro_empleados frmEmpleado) {
         this.modEmpleado = modEmpleado;
         this.modCEmpleado = modCempleado;
         this.frmEmpleado = frmEmpleado;

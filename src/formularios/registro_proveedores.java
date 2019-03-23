@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class registro_mantenimiento_proveedores extends JFrame {
+public class registro_proveedores extends JFrame {
 	private JTextField txtcodigoproveedor;
 	private JTextField txtnombresproveedor;
 	private JTextField txtcuentaproveedor;
@@ -33,7 +33,7 @@ public class registro_mantenimiento_proveedores extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_proveedores frame = new registro_mantenimiento_proveedores();
+					registro_proveedores frame = new registro_proveedores();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class registro_mantenimiento_proveedores extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_proveedores() {
+	public registro_proveedores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();

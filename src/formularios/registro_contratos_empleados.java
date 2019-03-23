@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class registro_mantenimiento_contratos_empleados extends JFrame {
+public class registro_contratos_empleados extends JFrame {
 
 	private JPanel contentPane;
 
@@ -24,7 +24,7 @@ public class registro_mantenimiento_contratos_empleados extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registro_mantenimiento_contratos_empleados frame = new registro_mantenimiento_contratos_empleados();
+					registro_contratos_empleados frame = new registro_contratos_empleados();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class registro_mantenimiento_contratos_empleados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registro_mantenimiento_contratos_empleados() {
+	public registro_contratos_empleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();

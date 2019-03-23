@@ -14,18 +14,16 @@ public class consultas_cargo extends conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO cargos (id_cargo, area_cargo, nombre_cargo, valor_hora_extra_cargo, sueldo_cargo, funciones_cargo) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO cargos (area_cargo, nombre_cargo, valor_hora_extra_cargo, sueldo_cargo, funciones_cargo) VALUES(?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, cargo.getId_cargo());
-            ps.setString(2, cargo.getArea_cargo());
-            ps.setString(3, cargo.getNombre_cargo());
-            ps.setDouble(4, cargo.getValor_hora_extra_cargo());
-            ps.setDouble(5, cargo.getSueldo_cargo());
-            ps.setString(6, cargo.getFunciones_cargo());
+            ps.setString(1, cargo.getArea_cargo());
+            ps.setString(2, cargo.getNombre_cargo());
+            ps.setDouble(3, cargo.getValor_hora_extra_cargo());
+            ps.setDouble(4, cargo.getSueldo_cargo());
+            ps.setString(5, cargo.getFunciones_cargo());
             ps.execute();
-            
             return true;
         } catch (SQLException e) {
             System.err.println(e);

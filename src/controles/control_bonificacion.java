@@ -6,16 +6,16 @@ import javax.swing.JOptionPane;
 
 import clases.bonificacion;
 import consultas.consultas_bonificacion;
-import formularios.registro_mantenimiento_bonificaciones;
+import formularios.registro_bonificaciones;
 
 
 public class control_bonificacion implements ActionListener {
 	
 	public bonificacion modBonificacion;
     public consultas_bonificacion modCBonificacion;
-    public registro_mantenimiento_bonificaciones frmBonificaciones;
+    public registro_bonificaciones frmBonificaciones;
 
-    public control_bonificacion(bonificacion modBonificacion, consultas_bonificacion modCBonificacion, registro_mantenimiento_bonificaciones frmBonificaciones) {
+    public control_bonificacion(bonificacion modBonificacion, consultas_bonificacion modCBonificacion, registro_bonificaciones frmBonificaciones) {
         this.modBonificacion = modBonificacion;
         this.modCBonificacion = modCBonificacion;
         this.frmBonificaciones = frmBonificaciones;

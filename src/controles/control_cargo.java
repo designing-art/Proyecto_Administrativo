@@ -6,61 +6,55 @@ import javax.swing.JOptionPane;
 
 import clases.cargo;
 import consultas.consultas_cargo;
-import formularios.registro_mantenimiento_cargos;
+import formularios.registro_cargos;
 
 public class control_cargo implements ActionListener {
 
-    public cargo modCargo;
-    public consultas_cargo modCCargo;
-    public registro_mantenimiento_cargos frmCargo;
+    public cargo claseCargo;
+    public consultas_cargo consultasCargo;
+    public registro_cargos formularioCargo;
 
-    public control_cargo(cargo modCargo, consultas_cargo modCCargo, registro_mantenimiento_cargos frmCargo) {
-        this.modCargo = modCargo;
-        this.modCCargo = modCCargo;
-        this.frmCargo = frmCargo;
-        this.frmCargo.btnGuardarCargo.addActionListener(this);
-        this.frmCargo.btnActualizarCargo.addActionListener(this);
-        this.frmCargo.btnBorrarCargo.addActionListener(this);
-        this.frmCargo.btnNuevoCargo.addActionListener(this);
+    public control_cargo(cargo claseCargo, consultas_cargo consultasCargo, registro_cargos formularioCargo) {
+        this.claseCargo = claseCargo;
+        this.consultasCargo = consultasCargo;
+        this.formularioCargo = formularioCargo;
+        this.formularioCargo.btnGuardarCargo.addActionListener(this);
+        this.formularioCargo.btnNuevoCargo.addActionListener(this);
+        this.formularioCargo.btnActualizarCargo.addActionListener(this);
+        
     }
-
-
-	public void iniciar() {
-        frmCargo.setTitle("Registro de cargos");
-        frmCargo.setVisible(true);
-        frmCargo.setLocationRelativeTo(null);
-    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------//
+    //---------------------------EVENTOS PARA INSERTAR Y ACTUALIZAR CARGOS-------------------------------------------------------//
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == frmCargo.btnGuardarCargo) {
-            modCargo.setId_cargo(Integer.parseInt(frmCargo.txtCodigoCargo.getText()));
-            modCargo.setArea_cargo(frmCargo.cbxTipoCargo.getSelectedItem().toString());
-            modCargo.setNombre_cargo(frmCargo.cbxNombreCargo.getSelectedItem().toString());
-            modCargo.setValor_hora_extra_cargo(Double.parseDouble(frmCargo.txtHoraExtraCargo.getText()));
-            modCargo.setSueldo_cargo(Double.parseDouble(frmCargo.txtSueldoCargo.getText()));
-            modCargo.setFunciones_cargo(frmCargo.txtFunsionesCargo.getText());
+        if (e.getSource() == formularioCargo.btnGuardarCargo) {
+            claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
+            claseCargo.setNombre_cargo(formularioCargo.cbxNombreCargo.getSelectedItem().toString());
+            claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
+            claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
+            claseCargo.setFunciones_cargo(formularioCargo.txtFunsionesCargo.getText());
             
-            if(modCCargo.registrar(modCargo))
+            if(consultasCargo.registrar(claseCargo))
             {
                 JOptionPane.showMessageDialog(null, "Exito! Cargo Registrado.");
                 limpiar();
             } else {
-                JOptionPane.showMessageDialog(null, "Lo sentimos, Cargo no registrado, Verifique los datos del cargo, he intentelo de nuevo.");
+                JOptionPane.showMessageDialog(null, "Error!, Verifique los datos del cargo, he intentelo de nuevo.");
                 limpiar();
             }
         }
         
-        if (e.getSource() == frmCargo.btnActualizarCargo) {
-        	modCargo.setId_cargo(Integer.parseInt(frmCargo.txtCodigoCargo.getText()));
-            modCargo.setArea_cargo(frmCargo.cbxTipoCargo.getSelectedItem().toString());
-            modCargo.setNombre_cargo(frmCargo.cbxNombreCargo.getSelectedItem().toString());
-            modCargo.setValor_hora_extra_cargo(Double.parseDouble(frmCargo.txtHoraExtraCargo.getText()));
-            modCargo.setSueldo_cargo(Double.parseDouble(frmCargo.txtSueldoCargo.getText()));
-            modCargo.setFunciones_cargo(frmCargo.txtFunsionesCargo.getText());
+        if (e.getSource() == formularioCargo.btnActualizarCargo) {
+            claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
+            claseCargo.setNombre_cargo(formularioCargo.cbxNombreCargo.getSelectedItem().toString());
+            claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
+            claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
+            claseCargo.setFunciones_cargo(formularioCargo.txtFunsionesCargo.getText());
             
-            if(modCCargo.modificar(modCargo))
+            if(consultasCargo.modificar(claseCargo))
             {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
                 limpiar();
@@ -70,20 +64,7 @@ public class control_cargo implements ActionListener {
             }
         }
         
-        if (e.getSource() == frmCargo.btnBorrarCargo) {
-            modCargo.setId_cargo(Integer.parseInt(frmCargo.txtCodigoCargo.getText()));
-            
-            if(modCCargo.eliminar(modCargo))
-            {
-                JOptionPane.showMessageDialog(null, "Registro Eliminado");
-                limpiar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar");
-                limpiar();
-            }
-        } 
-        
-        if (e.getSource() == frmCargo.btnNuevoCargo) {
+        if (e.getSource() == formularioCargo.btnNuevoCargo) {
             limpiar();
         }
 
@@ -91,15 +72,14 @@ public class control_cargo implements ActionListener {
     
     public void limpiar()
     {
-    	frmCargo.txtCodigoCargo.setText(null);
-        frmCargo.cbxNombreCargo.setToolTipText(null);
-        frmCargo.cbxTipoCargo.setToolTipText(null);
-        frmCargo.txtHoraExtraCargo.setText(null);
-        frmCargo.txtSueldoCargo.setText(null);
-        frmCargo.txtFunsionesCargo.setText(null);
+        formularioCargo.cbxNombreCargo.setToolTipText(null);
+        formularioCargo.cbxTipoCargo.setToolTipText(null);
+        formularioCargo.txtHoraExtraCargo.setText(null);
+        formularioCargo.txtSueldoCargo.setText(null);
+        formularioCargo.txtFunsionesCargo.setText(null);
 
     }
-
-	
-
+    
+    //------------------------------------FIN DE LOS METODOS DE REGISTRO Y ACTUALIZAR CARGO-----------------------------------//
+    
 }
