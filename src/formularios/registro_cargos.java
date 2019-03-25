@@ -20,8 +20,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
+
+import clases.cargo;
+import consultas.consultas_cargo;
+import controles.control_cargo;
+
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DropMode;
 
 
 public class registro_cargos extends JFrame {
@@ -34,10 +40,11 @@ public class registro_cargos extends JFrame {
 
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
+	public JButton btnActualizarCargo;
 
 	public JPanel contentPane;
 	public JTable tablaCargos;
-	public JTextArea txtFunsionesCargo;
+	private JTextField txtFuncionesCargo;
 
 	public registro_cargos() {
 		setType(Type.UTILITY);
@@ -67,13 +74,13 @@ public class registro_cargos extends JFrame {
 
 		btnNuevoCargo = new JButton("Nuevo");
 		btnNuevoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnNuevoCargo.setBounds(27, 378, 99, 23);
+		btnNuevoCargo.setBounds(27, 360, 99, 23);
 		panel.add(btnNuevoCargo);
 		btnNuevoCargo.setBackground(new Color(0, 128, 128));
 
 		btnGuardarCargo = new JButton("Guardar");
 		btnGuardarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarCargo.setBounds(217, 378, 99, 23);
+		btnGuardarCargo.setBounds(217, 325, 99, 23);
 		panel.add(btnGuardarCargo);
 		btnGuardarCargo.setBackground(new Color(60, 179, 113));
 
@@ -83,6 +90,7 @@ public class registro_cargos extends JFrame {
 		panel.add(lblHoraExtraCargo);
 
 		txtHoraExtraCargo = new JTextField();
+		txtHoraExtraCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtHoraExtraCargo.setBounds(198, 169, 119, 20);
 		panel.add(txtHoraExtraCargo);
 		txtHoraExtraCargo.setColumns(10);
@@ -122,6 +130,7 @@ public class registro_cargos extends JFrame {
 	      }); */
 
 		txtSueldoCargo = new JTextField();
+		txtSueldoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtSueldoCargo.setBounds(198, 200, 119, 20);
 		panel.add(txtSueldoCargo);
 		txtSueldoCargo.setColumns(10);
@@ -181,6 +190,7 @@ public class registro_cargos extends JFrame {
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 
 		cbxTipoCargo = new JComboBox();
+		cbxTipoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxTipoCargo.setModel(new DefaultComboBoxModel(
 				new String[] { "Administrativo", "Gerencial", "Operario", "Servicio", "Seguridad" }));
 		cbxTipoCargo.setBounds(158, 110, 159, 22);
@@ -188,6 +198,7 @@ public class registro_cargos extends JFrame {
 		
 
 		cbxNombreCargo = new JComboBox();
+		cbxNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxNombreCargo.setModel(new DefaultComboBoxModel(new String[] { "Gerente de Operaciones", "Administrador",
 				"Operador", "Editor", "Camarografo", "Conserge", "Vigilante" }));
 		cbxNombreCargo.setBounds(158, 140, 159, 22);
@@ -200,31 +211,25 @@ public class registro_cargos extends JFrame {
 		JLabel label_1 = new JLabel("L.");
 		label_1.setBounds(182, 206, 17, 14);
 		panel.add(label_1);
-
-		txtFunsionesCargo = new JTextArea();
-		txtFunsionesCargo.setBackground(Color.LIGHT_GRAY);
-		txtFunsionesCargo.setBounds(136, 231, 181, 109);
-		panel.add(txtFunsionesCargo);
 						
-						JButton button = new JButton("Actualizar");
-						button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-						button.setBackground(new Color(240, 230, 140));
-						button.setBounds(27, 352, 99, 23);
-						panel.add(button);
-						
-								JLabel lblImagenLibreta = new JLabel();
-								lblImagenLibreta.setBounds(0, 0, 341, 434);
-								panel.add(lblImagenLibreta);
-								final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-										lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-								lblImagenLibreta.setIcon(logo);
+						btnActualizarCargo = new JButton("Actualizar");
+						btnActualizarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+						btnActualizarCargo.setBackground(new Color(240, 230, 140));
+						btnActualizarCargo.setBounds(27, 325, 99, 23);
+						panel.add(btnActualizarCargo);
+										
+										txtFuncionesCargo = new JTextField();
+										txtFuncionesCargo.setBounds(158, 229, 159, 85);
+										panel.add(txtFuncionesCargo);
+										txtFuncionesCargo.setColumns(10);
+										
+												JLabel lblImagenLibreta = new JLabel();
+												lblImagenLibreta.setBounds(0, 0, 341, 434);
+												panel.add(lblImagenLibreta);
+												final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+														lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+												lblImagenLibreta.setIcon(logo);
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		
-		JButton btnListaDeCargos = new JButton("Lista de Cargos.");
-		btnListaDeCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnListaDeCargos.setBackground(new Color(240, 230, 140));
-		btnListaDeCargos.setBounds(618, 11, 166, 23);
-		contentPane.add(btnListaDeCargos);
 		
 		JButton btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -232,15 +237,29 @@ public class registro_cargos extends JFrame {
 		btnAtras.setBounds(10, 11, 99, 23);
 		contentPane.add(btnAtras);
 		
-		JLabel lblRegistrarCargo = new JLabel("REGISTRAR CARGO");
-		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		lblRegistrarCargo.setBounds(309, 3, 197, 36);
+		JLabel lblRegistrarCargo = new JLabel("Asignar cargo.");
+		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lblRegistrarCargo.setBounds(323, 3, 132, 36);
 		contentPane.add(lblRegistrarCargo);
+		
+		JButton button = new JButton("Siguiente");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        registro_horarios horario = new registro_horarios();
+		        horario.setVisible(true);
+		        horario.setLocationRelativeTo(null);
+				dispose();	
+			}
+		});
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(0, 255, 127));
+		button.setBounds(685, 12, 99, 23);
+		contentPane.add(button);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ventana_principal principal = new ventana_principal();
-		 		principal.setVisible(true);
-		 		principal.setLocationRelativeTo(null);
+				registro_empleados empleado = new registro_empleados();
+				empleado.setVisible(true);
+				empleado.setLocationRelativeTo(null);
 				dispose();
 			}
 		});

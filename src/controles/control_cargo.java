@@ -35,7 +35,7 @@ public class control_cargo implements ActionListener {
             claseCargo.setNombre_cargo(formularioCargo.cbxNombreCargo.getSelectedItem().toString());
             claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
             claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
-            claseCargo.setFunciones_cargo(formularioCargo.txtFunsionesCargo.getText());
+            claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
             
             if(consultasCargo.registrar(claseCargo))
             {
@@ -52,7 +52,7 @@ public class control_cargo implements ActionListener {
             claseCargo.setNombre_cargo(formularioCargo.cbxNombreCargo.getSelectedItem().toString());
             claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
             claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
-            claseCargo.setFunciones_cargo(formularioCargo.txtFunsionesCargo.getText());
+            claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
             
             if(consultasCargo.modificar(claseCargo))
             {
@@ -76,7 +76,7 @@ public class control_cargo implements ActionListener {
         formularioCargo.cbxTipoCargo.setToolTipText(null);
         formularioCargo.txtHoraExtraCargo.setText(null);
         formularioCargo.txtSueldoCargo.setText(null);
-        formularioCargo.txtFunsionesCargo.setText(null);
+        formularioCargo.txtFuncionesCargo.setText(null);
 
     }
     
