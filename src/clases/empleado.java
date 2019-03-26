@@ -20,27 +20,6 @@ public class empleado {
 	private String fecha_inicio_labores_empleado;
 	private String estado_empleado;
 
-	public empleado() {
-		this.id_empleado = id_empleado;
-		this.nombres_empleado = nombres_empleado;
-		this.apellidos_empleado = apellidos_empleado;
-		this.identidad_empleado = identidad_empleado;
-		this.genero_empleado = genero_empleado;
-		this.edad_empleado = edad_empleado;
-		this.telefono1_empleado = telefono1_empleado;
-		this.telefono2_empleado = telefono2_empleado;
-		this.correo_empleado = correo_empleado;
-		this.direccion_empleado = direccion_empleado;
-		this.foto_empleado = foto_empleado;
-		this.referencia_empleado = referencia_empleado;
-		this.telefono_referencia = telefono_referencia;
-		this.fecha_nacimiento_empleado = fecha_nacimiento_empleado;
-		this.fecha_registro_empleado = fecha_registro_empleado;
-		this.fecha_inicio_labores_empleado = fecha_inicio_labores_empleado;
-		this.estado_empleado = estado_empleado;
-
-	}
-
 	public int getId_empleado() {
 		return id_empleado;
 	}

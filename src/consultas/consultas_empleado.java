@@ -18,22 +18,21 @@ public class consultas_empleado extends conexion {
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, empleado.getId_empleado());
-            ps.setString(2, empleado.getNombres_empleado());
-            ps.setString(3, empleado.getApellidos_empleado());
-            ps.setString(4, empleado.getIdentidad_empleado());
-            ps.setString(5, empleado.getGenero_empleado());
-            ps.setInt(6, empleado.getEdad_empleado());
-            ps.setString(7, empleado.getTelefono1_empleado());
-            ps.setString(8, empleado.getTelefono2_empleado());
-            ps.setString(9, empleado.getCorreo_empleado());
-            ps.setString(10, empleado.getDireccion_empleado());
-            ps.setString(11, empleado.getReferencia_empleado());
-            ps.setString(12, empleado.getTelefono_referencia());
-            ps.setString(13, empleado.getFecha_nacimiento_empleado());
-            ps.setString(14, empleado.getFecha_registro_empleado());
-            ps.setString(15, empleado.getFecha_inicio_labores_empleado());
-            ps.setString(16, empleado.getEstado_empleado());
+            ps.setString(1, empleado.getNombres_empleado());
+            ps.setString(2, empleado.getApellidos_empleado());
+            ps.setString(3, empleado.getIdentidad_empleado());
+            ps.setString(4, empleado.getGenero_empleado());
+            ps.setInt(5, empleado.getEdad_empleado());
+            ps.setString(6, empleado.getTelefono1_empleado());
+            ps.setString(7, empleado.getTelefono2_empleado());
+            ps.setString(8, empleado.getCorreo_empleado());
+            ps.setString(9, empleado.getDireccion_empleado());
+            ps.setString(10, empleado.getReferencia_empleado());
+            ps.setString(11, empleado.getTelefono_referencia());
+            ps.setString(12, empleado.getFecha_nacimiento_empleado());
+            ps.setString(13, empleado.getFecha_registro_empleado());
+            ps.setString(14, empleado.getFecha_inicio_labores_empleado());
+            ps.setString(15, empleado.getEstado_empleado());
             ps.execute();
             
             return true;
@@ -57,23 +56,21 @@ public class consultas_empleado extends conexion {
 
         try {
         	ps = con.prepareStatement(sql);
-            ps.setInt(1, empleado.getId_empleado());
-            ps.setString(2, empleado.getNombres_empleado());
-            ps.setString(3, empleado.getApellidos_empleado());
-            ps.setString(4, empleado.getIdentidad_empleado());
-            ps.setString(5, empleado.getGenero_empleado());
-            ps.setInt(6, empleado.getEdad_empleado());
-            ps.setString(7, empleado.getTelefono1_empleado());
-            ps.setString(8, empleado.getTelefono2_empleado());
-            ps.setString(9, empleado.getCorreo_empleado());
-            ps.setString(10, empleado.getDireccion_empleado());
-            ps.setInt(11, empleado.getFoto_empleado());
-            ps.setString(12, empleado.getReferencia_empleado());
-            ps.setString(13, empleado.getTelefono_referencia());
-            ps.setString(14, empleado.getFecha_nacimiento_empleado());
-            ps.setString(15, empleado.getFecha_registro_empleado());
-            ps.setString(16, empleado.getFecha_inicio_labores_empleado());
-            ps.setString(17, empleado.getEstado_empleado());
+        	ps.setString(1, empleado.getNombres_empleado());
+            ps.setString(2, empleado.getApellidos_empleado());
+            ps.setString(3, empleado.getIdentidad_empleado());
+            ps.setString(4, empleado.getGenero_empleado());
+            ps.setInt(5, empleado.getEdad_empleado());
+            ps.setString(6, empleado.getTelefono1_empleado());
+            ps.setString(7, empleado.getTelefono2_empleado());
+            ps.setString(8, empleado.getCorreo_empleado());
+            ps.setString(9, empleado.getDireccion_empleado());
+            ps.setString(10, empleado.getReferencia_empleado());
+            ps.setString(11, empleado.getTelefono_referencia());
+            ps.setString(12, empleado.getFecha_nacimiento_empleado());
+            ps.setString(13, empleado.getFecha_registro_empleado());
+            ps.setString(14, empleado.getFecha_inicio_labores_empleado());
+            ps.setString(15, empleado.getEstado_empleado());
             ps.execute();
             return true;
         } catch (SQLException e) {

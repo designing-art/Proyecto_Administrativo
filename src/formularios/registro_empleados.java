@@ -49,6 +49,8 @@ public class registro_empleados extends JFrame {
 	 
 	 public JButton btnBuscar;
 	 public JTextField txtbuscar;
+	 public JComboBox<?> cbxgenero;
+	 public JComboBox<?> cbxestado;
 	 
 	 
 
@@ -129,9 +131,9 @@ public class registro_empleados extends JFrame {
 		lblReferencia.setBounds(379, 214, 248, 23);
 		contentPane.add(lblReferencia);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(465, 83, 126, 132);
-		contentPane.add(panel);
+		JPanel pnlfotoempleado = new JPanel();
+		pnlfotoempleado.setBounds(465, 83, 126, 132);
+		contentPane.add(pnlfotoempleado);
 		
 		JLabel lblFotografia = new JLabel("Fotografia :");
 		lblFotografia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -235,7 +237,7 @@ public class registro_empleados extends JFrame {
 		
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardar.setBounds(540, 334, 99, 23);
+		btnGuardar.setBounds(540, 433, 99, 23);
 		btnGuardar.setBackground(new Color(0, 255, 127));
 		contentPane.add(btnGuardar);
 		
@@ -278,26 +280,26 @@ public class registro_empleados extends JFrame {
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevo.setBackground(new Color(0, 139, 139));
-		btnNuevo.setBounds(379, 366, 99, 23);
+		btnNuevo.setBounds(379, 433, 99, 23);
 		contentPane.add(btnNuevo);
 		
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(240, 230, 140));
-		btnActualizar.setBounds(379, 335, 99, 23);
+		btnActualizar.setBounds(379, 400, 99, 23);
 		contentPane.add(btnActualizar);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
-		comboBox_1.setBounds(120, 231, 50, 20);
-		contentPane.add(comboBox_1);
+		cbxgenero = new JComboBox();
+		cbxgenero.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxgenero.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
+		cbxgenero.setBounds(120, 231, 50, 20);
+		contentPane.add(cbxgenero);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-		comboBox_2.setBounds(439, 303, 76, 20);
-		contentPane.add(comboBox_2);
+		cbxestado = new JComboBox();
+		cbxestado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxestado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
+		cbxestado.setBounds(439, 303, 76, 20);
+		contentPane.add(cbxestado);
 		
 		JButton btnListaDeEmpleados = new JButton("Siguiente");
 		btnListaDeEmpleados.addActionListener(new ActionListener() {
@@ -317,20 +319,23 @@ public class registro_empleados extends JFrame {
 		contentPane.add(btnListaDeEmpleados);
 		
 		JDateChooser dateFechaNacimiento = new JDateChooser();
-		dateFechaNacimiento.setBounds(172, 368, 163, 20);
+		dateFechaNacimiento.setDateFormatString("dd-MMM-yyyy HH:mm:ss");
+		dateFechaNacimiento.setBounds(184, 368, 151, 20);
 		contentPane.add(dateFechaNacimiento);
 		
 		JDateChooser dateFechaRegistro = new JDateChooser();
-		dateFechaRegistro.setBounds(172, 399, 163, 20);
+		dateFechaRegistro.setDateFormatString("dd-MMM-yyyy HH:mm:ss");
+		dateFechaRegistro.setBounds(184, 399, 151, 20);
 		contentPane.add(dateFechaRegistro);
 		
 		JDateChooser dateFechaLabores = new JDateChooser();
-		dateFechaLabores.setBounds(172, 431, 163, 20);
+		dateFechaLabores.setDateFormatString("dd-MMM-yyyy HH:mm:ss");
+		dateFechaLabores.setBounds(184, 431, 151, 20);
 		contentPane.add(dateFechaLabores);
 		
 		JLabel lblMensajeConfirmacionRegistroEmpleado = new JLabel("");
 		lblMensajeConfirmacionRegistroEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblMensajeConfirmacionRegistroEmpleado.setBounds(379, 392, 260, 66);
+		lblMensajeConfirmacionRegistroEmpleado.setBounds(379, 400, 260, 58);
 		contentPane.add(lblMensajeConfirmacionRegistroEmpleado);
 		
 		JLabel label_1 = new JLabel("");

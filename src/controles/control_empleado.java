@@ -2,6 +2,8 @@ package controles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+
 import javax.swing.JOptionPane;
 
 import clases.empleado;
@@ -20,16 +22,9 @@ public class control_empleado implements ActionListener {
         this.frmEmpleado = frmEmpleado;
         this.frmEmpleado.btnGuardar.addActionListener(this);
         this.frmEmpleado.btnActualizar.addActionListener(this);
-        this.frmEmpleado.btnBorrar.addActionListener(this);
         this.frmEmpleado.btnNuevo.addActionListener(this);
-        this.frmEmpleado.btnSalir.addActionListener(this);
     }
     
-    public void iniciar() {
-        frmEmpleado.setTitle("Registro de empleados");
-        frmEmpleado.setLocationRelativeTo(null);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -38,7 +33,7 @@ public class control_empleado implements ActionListener {
             modEmpleado.setNombres_empleado(frmEmpleado.txtnombres.getText());
             modEmpleado.setApellidos_empleado(frmEmpleado.txtapellidos.getText());
             modEmpleado.setIdentidad_empleado(frmEmpleado.txtidentidad.getText());
-            modEmpleado.setGenero_empleado(frmEmpleado.txtgenero.getText());
+            modEmpleado.setGenero_empleado(frmEmpleado.cbxgenero.getSelectedItem().toString());
             modEmpleado.setEdad_empleado(Integer.parseInt(frmEmpleado.txtedad.getText()));
             modEmpleado.setTelefono1_empleado(frmEmpleado.txttelefono1.getText());
             modEmpleado.setTelefono2_empleado(frmEmpleado.txttelefono2.getText());
@@ -46,10 +41,10 @@ public class control_empleado implements ActionListener {
             modEmpleado.setDireccion_empleado(frmEmpleado.txtdireccion.getText());
             modEmpleado.setReferencia_empleado(frmEmpleado.txtnombrereferencia.getText());
             modEmpleado.setTelefono_referencia(frmEmpleado.txttelefonoreferencia.getText());
-            modEmpleado.setFecha_nacimiento_empleado(frmEmpleado.txtfechanacimiento.getText());
-            modEmpleado.setFecha_registro_empleado(frmEmpleado.txtfecharegistro.getText());
+            modEmpleado.setFecha_nacimiento_empleado(frmEmpleado.date);
+            modEmpleado.setFecha_registro_empleado(Date.valueOf(frmEmpleado.txtfechanacimiento.ge()));
             modEmpleado.setFecha_inicio_labores_empleado(frmEmpleado.txtfechalabores.getText());
-            modEmpleado.setEstado_empleado(frmEmpleado.txtestado.getText());
+            modEmpleado.setEstado_empleado(frmEmpleado.cbxestado.getSelectedItem().toString());
             
             if(modCEmpleado.registrar(modEmpleado))
             {
