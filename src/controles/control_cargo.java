@@ -2,7 +2,12 @@ package controles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
+import com.placeholder.PlaceHolder;
 
 import clases.cargo;
 import consultas.consultas_cargo;
@@ -89,4 +94,38 @@ public class control_cargo implements ActionListener {
     
     //------------------------------------FIN DE LOS METODOS DE REGISTRO Y ACTUALIZAR CARGO-----------------------------------//
     
+    private void construirTabla() {
+		  String titulos[]={ "Codigo", "Area", "Nombre", "Sueldo","Hora Extra", "Funciones"};
+		  String informacion[][]=obtenerMatriz();
+		   
+		  formularioCargo.tablaCargosRegistrados=new JTable(informacion,titulos);
+		  formularioCargo.barra.setViewportView(formularioCargo.tablaCargosRegistrados);
+		   
+		 }
+		 
+		 private String[][] obtenerMatriz() {
+		   
+		  consultas_cargo cargo = new consultas_cargo();
+		  ArrayList<cargo>miLista = cargo.cargarTablaCargos();
+		   
+		  String matrizInfo[][]=new String[miLista.size()][5];
+		   
+		  for (int i = 0; i < miLista.size(); i++) {
+		   matrizInfo[i][0]=miLista.get(i).getId_cargo()+"";
+		   matrizInfo[i][1]=miLista.get(i).getArea_cargo()+"";
+		   matrizInfo[i][2]=miLista.get(i).getNombre_cargo()+"";
+		   matrizInfo[i][3]=miLista.get(i).getSueldo_cargo()+"";
+		   matrizInfo[i][4]=miLista.get(i).getValor_hora_extra_cargo()+"";
+		   matrizInfo[i][5]=miLista.get(i).getFunciones_cargo()+"";
+		  }
+		    
+		  return matrizInfo;
+		 }
+		 
+		 public void pistas() {
+				PlaceHolder pistas;
+				pistas = new PlaceHolder(formularioCargo.txtSueldoCargo, "Ingrese el sueldo");
+				pistas = new PlaceHolder(formularioCargo.txtHoraExtraCargo, "Ingrese precio hora extra.");
+				pistas = new PlaceHolder(formularioCargo.txtFuncionesCargo, "Escriba funciones del empleado.");
+			}
 }
