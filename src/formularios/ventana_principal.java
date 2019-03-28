@@ -198,8 +198,9 @@ public class ventana_principal extends JFrame {
 		        control_cargo control = new control_cargo(clase, consulta, formulario);
 		        formulario.setVisible(true);
 		        formulario.setLocationRelativeTo(null);
-		        formulario.txtSueldoCargo.requestFocusInWindow();
+		        formulario.txtNombreCargo.requestFocusInWindow();
 		        control.pistas();
+		        formulario.construirTabla();
 				dispose();	
 			}
 		});

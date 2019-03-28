@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import clases.cargo;
 import consultas.consultas_cargo;
 import controles.control_cargo;
@@ -42,7 +44,8 @@ public class registro_cargos extends JFrame {
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
 	public JButton btnActualizarCargo;
-
+	public JButton btnBorrarCargo;
+	
 	public JPanel contentPane;
 	public JTextField txtBusquedaCargos;
 	public JScrollPane barraCargos;
@@ -66,12 +69,12 @@ public class registro_cargos extends JFrame {
 		JButton btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
-		btnAtras.setBounds(732, 10, 102, 23);
+		btnAtras.setBounds(28, 11, 102, 23);
 		contentPane.add(btnAtras);
 
 		JLabel lblRegistrarCargo = new JLabel("Registro y Mantenimiento de Cargos.");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lblRegistrarCargo.setBounds(38, 10, 331, 39);
+		lblRegistrarCargo.setBounds(216, 10, 331, 39);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
@@ -194,12 +197,6 @@ public class registro_cargos extends JFrame {
 		label_1.setBounds(168, 208, 17, 14);
 		panelRegistro.add(label_1);
 
-		btnActualizarCargo = new JButton("Actualizar");
-		btnActualizarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarCargo.setBackground(new Color(240, 230, 140));
-		btnActualizarCargo.setBounds(218, 355, 99, 23);
-		panelRegistro.add(btnActualizarCargo);
-
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(122, 233, 193, 111);
 		panelRegistro.add(scrollPane);
@@ -267,18 +264,12 @@ public class registro_cargos extends JFrame {
 		txtBusquedaCargos.setBounds(137, 72, 199, 20);
 		panelTablaCargos.add(txtBusquedaCargos);
 
-		JButton button = new JButton("Editar");
-		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button.setBackground(new Color(0, 128, 128));
-		button.setBounds(305, 395, 99, 23);
-		panelTablaCargos.add(button);
+		btnBorrarCargo = new JButton("Borrar");
 
-		JButton button_1 = new JButton("Borrar");
-
-		button_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button_1.setBackground(new Color(220, 20, 60));
-		button_1.setBounds(30, 395, 99, 23);
-		panelTablaCargos.add(button_1);
+		btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBorrarCargo.setBackground(new Color(220, 20, 60));
+		btnBorrarCargo.setBounds(30, 395, 99, 23);
+		panelTablaCargos.add(btnBorrarCargo);
 
 		barraCargos = new JScrollPane();
 		panelTablaCargos.add(barraCargos);
@@ -287,11 +278,7 @@ public class registro_cargos extends JFrame {
 		tablaCargos = new JTable();
 		barraCargos.setViewportView(tablaCargos);
 		barraCargos.setViewportView(tablaCargos);
-
-		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funsiones" };
-		String informacion[][] = control_cargo.obtenerMatriz();
-		tablaCargos = new JTable(informacion, titulos);
-		barraCargos.setViewportView(tablaCargos);
+		
 		
 		JLabel label_2 = new JLabel();
 		label_2.setBounds(355, 41, 49, 44);
@@ -300,12 +287,18 @@ public class registro_cargos extends JFrame {
 				label_2.getHeight(), Image.SCALE_DEFAULT));
 		label_2.setIcon(logo2);
 		
-		JLabel label_5 = new JLabel();
-		label_5.setBounds(0, 0, 431, 449);
-		panelTablaCargos.add(label_5);
-		final ImageIcon logo1 = new ImageIcon(icono2.getImage().getScaledInstance(label_5.getWidth(),
-				label_5.getHeight(), Image.SCALE_DEFAULT));
-		label_5.setIcon(logo1);
+				btnActualizarCargo = new JButton("Actualizar");
+				btnActualizarCargo.setBounds(305, 395, 99, 23);
+				panelTablaCargos.add(btnActualizarCargo);
+				btnActualizarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+				btnActualizarCargo.setBackground(new Color(240, 230, 140));
+				
+				JLabel label_5 = new JLabel();
+				label_5.setBounds(0, 0, 431, 449);
+				panelTablaCargos.add(label_5);
+				final ImageIcon logo1 = new ImageIcon(icono2.getImage().getScaledInstance(label_5.getWidth(),
+						label_5.getHeight(), Image.SCALE_DEFAULT));
+				label_5.setIcon(logo1);
 		
 		
 		btnAtras.addActionListener(new ActionListener() {
@@ -317,6 +310,13 @@ public class registro_cargos extends JFrame {
 			}
 		});
 
+	}
+	
+	public void construirTabla() {
+		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funsiones" };
+		String informacion[][] = control_cargo.obtenerMatriz();
+		tablaCargos = new JTable(informacion, titulos);
+		barraCargos.setViewportView(tablaCargos);  
 	}
 
 }
