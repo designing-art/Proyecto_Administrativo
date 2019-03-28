@@ -130,35 +130,34 @@ public class consultas_cargo extends conexion {
     }
         
         
-        public ArrayList<cargo> cargarTablaCargos() {
-        	 
-        	  conexion conexion = new conexion();
-        	  ArrayList<cargo> miLista = new ArrayList<cargo>();
-        	  cargo cargo;
-        	  try {
-        	   Statement estatuto = conexion.getConexion().createStatement();
-        	   ResultSet rs = estatuto.executeQuery("SELECT * FROM cargos ");
-        	 
-        	   while (rs.next()) {
-        		cargo = new cargo();
-        		cargo.setId_cargo(Integer.parseInt(rs.getString("id_cargo")));
-               	cargo.setArea_cargo(rs.getString("area_cargo"));
-               	cargo.setNombre_cargo(rs.getString("nombre_cargo"));
-               	cargo.setSueldo_cargo(Double.parseDouble(rs.getString("sueldo_cargo")));
-               	cargo.setValor_hora_extra_cargo(Double.parseDouble(rs.getString("valor_hora_extra_cargo")));
-               	cargo.setFunciones_cargo(rs.getString("funciones_cargo"));
-        	    miLista.add(cargo);
-        	   }
-        	   rs.close();
-        	   estatuto.close();
-        	   conexion.desconectar();
-        	 
-        	  } catch (SQLException e) {
-        	   System.out.println(e.getMessage());
-        	   JOptionPane.showMessageDialog(null, "Error al consultar", "Error",
-        	     JOptionPane.ERROR_MESSAGE);
-        	 
-        	  }
-        	  return miLista;
-        	 }
+    public ArrayList<cargo> buscarUsuariosConMatriz() {
+
+		conexion conex = new conexion();
+		ArrayList<cargo> miLista = new ArrayList<cargo>();
+		cargo cargo;
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM cargos ");
+
+			while (rs.next()) {
+				cargo = new cargo();
+				cargo.setId_cargo(Integer.parseInt(rs.getString("id_cargo")));
+				cargo.setArea_cargo(rs.getString("area_cargo"));
+				cargo.setNombre_cargo(rs.getString("nombre_cargo"));
+				cargo.setSueldo_cargo(Double.parseDouble(rs.getString("sueldo_cargo")));
+				cargo.setValor_hora_extra_cargo(Double.parseDouble(rs.getString("valor_hora_extra_cargo")));
+				cargo.setFunciones_cargo(rs.getString("funciones_cargo"));
+				miLista.add(cargo);
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+		return miLista;
+	}
 }

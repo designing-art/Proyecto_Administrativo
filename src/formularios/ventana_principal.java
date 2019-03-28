@@ -199,6 +199,7 @@ public class ventana_principal extends JFrame {
 		        formulario.setVisible(true);
 		        formulario.setLocationRelativeTo(null);
 		        formulario.txtSueldoCargo.requestFocusInWindow();
+		        control.pistas();
 				dispose();	
 			}
 		});

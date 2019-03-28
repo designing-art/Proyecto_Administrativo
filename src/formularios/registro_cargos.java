@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -23,21 +23,19 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 
-import com.placeholder.PlaceHolder;
-
 import clases.cargo;
 import consultas.consultas_cargo;
+import controles.control_cargo;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
-import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 
 public class registro_cargos extends JFrame {
 
 	public JTextField txtCodigoCargo;
-	public JComboBox<?> cbxNombreCargo;
 	public JComboBox<?> cbxTipoCargo;
+	public JTextField txtNombreCargo;
 	public JTextField txtHoraExtraCargo;
 	public JTextField txtSueldoCargo;
 	public JTextArea txtFuncionesCargo;
@@ -48,10 +46,9 @@ public class registro_cargos extends JFrame {
 	public JButton btnActualizarCargo;
 
 	public JPanel contentPane;
+	public JTextField txtBusquedaCargos;
+	public JScrollPane barraCargos;
 	public JTable tablaCargos;
-	public JTextField textField;
-	public JTable tablaCargosRegistrados;
-	public JScrollPane barra;
 
 	public registro_cargos() {
 		setType(Type.UTILITY);
@@ -63,8 +60,7 @@ public class registro_cargos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
+
 		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
@@ -193,16 +189,9 @@ public class registro_cargos extends JFrame {
 		cbxTipoCargo = new JComboBox();
 		cbxTipoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxTipoCargo.setModel(new DefaultComboBoxModel(
-				new String[] { "Operario", "Administrativo", "Gerencial", "Servicio", "Seguridad" }));
+				new String[] { "Operativo", "Administrativo", "Gerencial", "Servicios", "Seguridad" }));
 		cbxTipoCargo.setBounds(158, 110, 159, 22);
 		panelRegistro.add(cbxTipoCargo);
-
-		cbxNombreCargo = new JComboBox();
-		cbxNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxNombreCargo.setModel(new DefaultComboBoxModel(new String[] { "Operador", "Gerente de Operaciones",
-				"Administrador", "Editor", "Camarografo", "Conserge", "Vigilante" }));
-		cbxNombreCargo.setBounds(158, 140, 159, 22);
-		panelRegistro.add(cbxNombreCargo);
 
 		JLabel lblL = new JLabel("L.");
 		lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -226,59 +215,87 @@ public class registro_cargos extends JFrame {
 		txtFuncionesCargo = new JTextArea();
 		scrollPane.setViewportView(txtFuncionesCargo);
 
+		txtNombreCargo = new JTextField();
+		txtNombreCargo.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtNombreCargo.setColumns(10);
+		txtNombreCargo.setBounds(158, 141, 158, 20);
+		panelRegistro.add(txtNombreCargo);
+
+		txtNombreCargo.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
+
 		JLabel lblImagenLibreta = new JLabel();
 		lblImagenLibreta.setBounds(0, 0, 341, 425);
 		panelRegistro.add(lblImagenLibreta);
 		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
 				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblImagenLibreta.setIcon(logo);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(390, 61, 393, 425);
-		contentPane.add(panel);
-		
+
+		JPanel panelTablaCargos = new JPanel();
+		panelTablaCargos.setLayout(null);
+		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelTablaCargos.setBackground(Color.WHITE);
+		panelTablaCargos.setBounds(397, 61, 393, 425);
+		contentPane.add(panelTablaCargos);
+
 		JLabel label_2 = new JLabel("Cargos Registrados.");
 		label_2.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_2.setBounds(10, 11, 166, 23);
-		panel.add(label_2);
-		
+		panelTablaCargos.add(label_2);
+
 		JLabel label_3 = new JLabel("Buscar Cargo :");
 		label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		label_3.setBounds(10, 39, 136, 22);
-		panel.add(label_3);
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		textField.setColumns(10);
-		textField.setBounds(105, 40, 278, 20);
-		panel.add(textField);
-		
+		panelTablaCargos.add(label_3);
+
+		txtBusquedaCargos = new JTextField();
+		txtBusquedaCargos.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtBusquedaCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtBusquedaCargos.setColumns(10);
+		txtBusquedaCargos.setBounds(105, 40, 278, 20);
+		panelTablaCargos.add(txtBusquedaCargos);
+
 		JButton button = new JButton("Editar");
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(0, 128, 128));
 		button.setBounds(284, 385, 99, 23);
-		panel.add(button);
-		
+		panelTablaCargos.add(button);
+
 		JButton button_1 = new JButton("Borrar");
-		
+
 		button_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button_1.setBackground(new Color(220, 20, 60));
 		button_1.setBounds(10, 385, 99, 23);
-		panel.add(button_1);
-		
-		barra = new JScrollPane();
-		barra.setBounds(10, 72, 373, 301);
-		panel.add(barra);
-		
-		tablaCargosRegistrados = new JTable();
-		barra.setViewportView(tablaCargosRegistrados);
-		
-		
-		
+		panelTablaCargos.add(button_1);
+
+		barraCargos = new JScrollPane();
+		panelTablaCargos.add(barraCargos);
+		barraCargos.setBounds(10, 83, 373, 291);
+
+		tablaCargos = new JTable();
+		barraCargos.setViewportView(tablaCargos);
+		barraCargos.setViewportView(tablaCargos);
+
+		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funsiones" };
+		String informacion[][] = control_cargo.obtenerMatriz();
+		tablaCargos = new JTable(informacion, titulos);
+		barraCargos.setViewportView(tablaCargos);
+
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				registro_empleados empleado = new registro_empleados();
@@ -289,5 +306,5 @@ public class registro_cargos extends JFrame {
 		});
 
 	}
-	
+
 }
