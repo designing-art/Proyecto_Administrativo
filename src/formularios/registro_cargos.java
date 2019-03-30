@@ -50,6 +50,7 @@ public class registro_cargos extends JFrame {
 	public JTextField txtBusquedaCargos;
 	public JScrollPane barraCargos;
 	public JTable tablaCargos;
+	private JTextField txtCodigoCargo;
 
 	public registro_cargos() {
 		setType(Type.UTILITY);
@@ -226,18 +227,19 @@ public class registro_cargos extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
-		
-		JLabel txtCodigoCargo = new JLabel("");
-		txtCodigoCargo.setBackground(new Color(255, 255, 255));
-		txtCodigoCargo.setBounds(142, 71, 37, 29);
-		panelRegistro.add(txtCodigoCargo);
-		
-				JLabel lblImagenLibreta = new JLabel();
-				lblImagenLibreta.setBounds(0, 0, 341, 450);
-				panelRegistro.add(lblImagenLibreta);
-				final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-						lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-				lblImagenLibreta.setIcon(logo);
+				
+				txtCodigoCargo = new JTextField();
+				txtCodigoCargo.setEditable(false);
+				txtCodigoCargo.setBounds(142, 81, 63, 23);
+				panelRegistro.add(txtCodigoCargo);
+				txtCodigoCargo.setColumns(10);
+				
+						JLabel lblImagenLibreta = new JLabel();
+						lblImagenLibreta.setBounds(0, 0, 341, 450);
+						panelRegistro.add(lblImagenLibreta);
+						final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+								lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+						lblImagenLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -318,5 +320,4 @@ public class registro_cargos extends JFrame {
 		tablaCargos = new JTable(informacion, titulos);
 		barraCargos.setViewportView(tablaCargos);  
 	}
-
 }

@@ -44,7 +44,7 @@ public class consultas_cargo extends conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "UPDATE cargos SET id_cargo=?, area_cargo=?, nombre_cargo=?,  valor_hora_extra_cargo=?, sueldo_cargo=?, funciones_cargo=? WHERE id_cargo=? ";
+        String sql = "UPDATE cargos SET id_cargo=?, area_cargo=?, nombre_cargo=?, sueldo_cargo=?, valor_hora_extra_cargo=?, funciones_cargo=? WHERE id_cargo=? ";
 
         try {
         	 ps = con.prepareStatement(sql);
