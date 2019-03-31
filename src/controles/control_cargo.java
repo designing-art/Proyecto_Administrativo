@@ -12,9 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import com.placeholder.PlaceHolder;
 
 import clases.cargo;
@@ -35,11 +32,10 @@ public class control_cargo implements ActionListener {
 		this.formularioCargo.btnGuardarCargo.addActionListener(this);
 		this.formularioCargo.btnNuevoCargo.addActionListener(this);
 		this.formularioCargo.btnActualizarCargo.addActionListener(this);
+		this.formularioCargo.btnActualizarDatosCargo.addActionListener(this);
 		this.formularioCargo.btnBorrarCargo.addActionListener(this);
 
 	}
-
-	/* Eventos */
 	public void actionPerformed(ActionEvent e) {
 		/* Insertar */
 		if (e.getSource() == formularioCargo.btnGuardarCargo) {
@@ -50,7 +46,7 @@ public class control_cargo implements ActionListener {
 			claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
 
 			if (consultasCargo.insertar(claseCargo)) {
-				JOptionPane.showMessageDialog(null, "Exito! Cargo Registrado");
+				JOptionPane.showMessageDialog(null, "Cargo registrado!");
 				limpiar();
 				formularioCargo.construirTabla();
 			} else {
@@ -58,7 +54,7 @@ public class control_cargo implements ActionListener {
 				limpiar();
 			}
 		}
-
+		
 		/* Pasar datos de la tabla al formulario para actualizar */
 		if (e.getSource() == formularioCargo.btnActualizarDatosCargo) {
 			int filaseleccionada;
@@ -83,15 +79,30 @@ public class control_cargo implements ActionListener {
 				}
 
 			} catch (HeadlessException ex) {
-
 				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
+		
 		/* Actualizar */
 		if (e.getSource() == formularioCargo.btnActualizarCargo) {
-		}
+			
+			claseCargo.setId_cargo(Integer.parseInt(formularioCargo.txtCodigoCargo.getText()));
+			claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
+			claseCargo.setNombre_cargo(formularioCargo.txtNombreCargo.getText());
+			claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
+			claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
+			claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
+            
+            if(consultasCargo.actualizar(claseCargo))
+            {
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al Modificar");
+                limpiar();
+            }
+        }
 
 		/* Borrar */
 		if (e.getSource() == formularioCargo.btnBorrarCargo) {

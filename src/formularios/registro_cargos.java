@@ -239,7 +239,7 @@ public class registro_cargos extends JFrame {
 		btnActualizarCargo = new JButton("Actualizar");
 		btnActualizarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarCargo.setBackground(new Color(60, 179, 113));
-		btnActualizarCargo.setBounds(218, 359, 99, 23);
+		btnActualizarCargo.setBounds(218, 355, 99, 23);
 		panelRegistro.add(btnActualizarCargo);
 
 		JLabel lblImagenLibreta = new JLabel();
@@ -274,7 +274,6 @@ public class registro_cargos extends JFrame {
 		panelTablaCargos.add(txtBusquedaCargos);
 
 		btnBorrarCargo = new JButton("Borrar");
-
 		btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarCargo.setBackground(new Color(220, 20, 60));
 		btnBorrarCargo.setBounds(30, 395, 99, 23);
@@ -295,15 +294,15 @@ public class registro_cargos extends JFrame {
 				iconopeq.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
 		label_2.setIcon(logo2);
 
-		btnActualizarDatosCargo = new JButton("Actualizar");
-		btnActualizarDatosCargo.setBounds(305, 395, 99, 23);
-		panelTablaCargos.add(btnActualizarDatosCargo);
-		btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarDatosCargo.setBackground(new Color(240, 230, 140));
-
 		btnBuscarCargo = new JButton("");
 		btnBuscarCargo.setBounds(311, 70, 34, 23);
 		panelTablaCargos.add(btnBuscarCargo);
+
+		btnActualizarDatosCargo = new JButton("Actualizar Datos");
+		btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarDatosCargo.setBackground(new Color(60, 179, 113));
+		btnActualizarDatosCargo.setBounds(267, 396, 137, 23);
+		panelTablaCargos.add(btnActualizarDatosCargo);
 
 		JLabel label_5 = new JLabel();
 		label_5.setBounds(0, 0, 431, 449);
