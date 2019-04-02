@@ -202,6 +202,11 @@ public class ventana_principal extends JFrame {
 		        control.pistasCargo();
 		        formulario.construirTabla();
 		        formulario.obtenerUltimoId();
+		        formulario.btnBorrarCargo.setVisible(false);
+				formulario.btnGuardarCargo.setVisible(true);
+				formulario.btnNuevoCargo.setVisible(true);
+				formulario.btnActualizarCargo.setVisible(false);
+				formulario.btnActualizarDatosCargo.setVisible(true);
 				dispose();	
 			}
 		});

@@ -78,6 +78,15 @@ public class control_cargo implements ActionListener {
 					formularioCargo.txtSueldoCargo.setText(sueldo);
 					formularioCargo.txtHoraExtraCargo.setText(horaextra);
 					formularioCargo.txtFuncionesCargo.setText(funciones);
+					
+					formularioCargo.btnBorrarCargo.setVisible(true);
+					formularioCargo.btnGuardarCargo.setVisible(false);
+					formularioCargo.btnNuevoCargo.setVisible(true);
+					formularioCargo.btnActualizarCargo.setVisible(true);
+					formularioCargo.btnActualizarDatosCargo.setVisible(true);
+					
+					
+					
 				}
 
 			} catch (HeadlessException ex) {
@@ -88,6 +97,22 @@ public class control_cargo implements ActionListener {
 		
 		/* Actualizar */
 		if (e.getSource() == formularioCargo.btnActualizarCargo) {
+			claseCargo.setId_cargo(Integer.parseInt(formularioCargo.txtCodigoCargo.getText()));
+			claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
+			claseCargo.setNombre_cargo(formularioCargo.txtNombreCargo.getText());
+			claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
+			claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
+			claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
+
+			if (consultasCargo.actualizar(claseCargo)) {
+				JOptionPane.showMessageDialog(null, "Cargo Actualizado!");
+				limpiar();
+				formularioCargo.construirTabla();
+				formularioCargo.obtenerUltimoId();
+			} else {
+				JOptionPane.showMessageDialog(null, "Error! Cargo no Actualizado");
+				limpiar();
+			}
 			               
 			}
 
@@ -115,6 +140,11 @@ public class control_cargo implements ActionListener {
 		if (e.getSource() == formularioCargo.btnNuevoCargo) {
 			limpiar();
 			formularioCargo.obtenerUltimoId();
+			formularioCargo.btnBorrarCargo.setVisible(false);
+			formularioCargo.btnGuardarCargo.setVisible(true);
+			formularioCargo.btnNuevoCargo.setVisible(true);
+			formularioCargo.btnActualizarCargo.setVisible(false);
+			formularioCargo.btnActualizarDatosCargo.setVisible(true);
 		}
 
 	}
@@ -134,11 +164,11 @@ public class control_cargo implements ActionListener {
 	/* Metodo para darle pistas de insercion de datos al usuario */
 	public void pistasCargo() {
 		PlaceHolder pistasCargo;
-		pistasCargo = new PlaceHolder(formularioCargo.txtNombreCargo, "Escriba nombre de cargo.");
-		pistasCargo = new PlaceHolder(formularioCargo.txtSueldoCargo, "Ingrese el sueldo bruto");
-		pistasCargo = new PlaceHolder(formularioCargo.txtHoraExtraCargo, "Ingrese precio hora extra.");
+		pistasCargo = new PlaceHolder(formularioCargo.txtNombreCargo, "Escriba el nombre del cargo.");
+		pistasCargo = new PlaceHolder(formularioCargo.txtSueldoCargo, "Digite el sueldo");
+		pistasCargo = new PlaceHolder(formularioCargo.txtHoraExtraCargo, "Digite hora extra.");
 		pistasCargo = new PlaceHolder(formularioCargo.txtFuncionesCargo, "Escriba funciones asignadas.");
-		pistasCargo = new PlaceHolder(formularioCargo.txtBusquedaCargos, "Escriba: codigo, nombre o area para buscar");
+		pistasCargo = new PlaceHolder(formularioCargo.txtBusquedaCargos, "Escriba para buscar");
 	}
 
 	/* Metodos para mostrar datos en tabla Cargos */

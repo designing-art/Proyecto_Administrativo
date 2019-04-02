@@ -58,6 +58,7 @@ public class consultas_cargo extends conexion {
              ps.setDouble(4, cargo.getSueldo_cargo());
              ps.setDouble(5, cargo.getValor_hora_extra_cargo());
              ps.setString(6, cargo.getFunciones_cargo());
+             ps.setInt(7, cargo.getId_cargo());
              ps.execute();
             
             return true;

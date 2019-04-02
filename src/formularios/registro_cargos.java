@@ -82,6 +82,14 @@ public class registro_cargos extends JFrame {
 		btnAtras.setBackground(new Color(255, 127, 80));
 		btnAtras.setBounds(717, 20, 102, 23);
 		contentPane.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ventana_principal principal = new ventana_principal();
+				principal.setVisible(true);
+				principal.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 
 		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DE CARGOS");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -215,7 +223,7 @@ public class registro_cargos extends JFrame {
 		scrollPane.setViewportView(txtFuncionesCargo);
 
 		txtNombreCargo = new JTextField();
-		txtNombreCargo.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtNombreCargo.setHorizontalAlignment(SwingConstants.LEFT);
 		txtNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtNombreCargo.setColumns(10);
 		txtNombreCargo.setBounds(142, 141, 174, 20);
@@ -275,7 +283,7 @@ public class registro_cargos extends JFrame {
 		panelTablaCargos.add(label_3);
 
 		txtBusquedaCargos = new JTextField();
-		txtBusquedaCargos.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtBusquedaCargos.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBusquedaCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaCargos.setColumns(10);
 		txtBusquedaCargos.setBounds(119, 64, 228, 21);
@@ -329,15 +337,6 @@ public class registro_cargos extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono2.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
-
-		btnAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				registro_empleados empleado = new registro_empleados();
-				empleado.setVisible(true);
-				empleado.setLocationRelativeTo(null);
-				dispose();
-			}
-		});
 
 	}
 	
