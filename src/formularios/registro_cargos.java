@@ -14,18 +14,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.TableRowSorter;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import clases.cargo;
+import conexion.conexion;
 import consultas.consultas_cargo;
 import controles.control_cargo;
 
@@ -45,7 +51,6 @@ public class registro_cargos extends JFrame {
 	public JButton btnNuevoCargo;
 	public JButton btnActualizarDatosCargo;
 	public JButton btnBorrarCargo;
-	public JButton btnBuscarCargo;
 	public JButton btnActualizarCargo;
 
 	public JPanel contentPane;
@@ -53,6 +58,9 @@ public class registro_cargos extends JFrame {
 	public JScrollPane barraCargos;
 	public JTable tablaCargos;
 	public JTextField txtCodigoCargo;
+	
+	public TableRowSorter trsfiltroCodigo;
+	String filtroCodigo;
 
 	public registro_cargos() {
 		setType(Type.UTILITY);
@@ -88,7 +96,7 @@ public class registro_cargos extends JFrame {
 		panelRegistro.setLayout(null);
 
 		JLabel label = new JLabel();
-		label.setBounds(268, 43, 49, 44);
+		label.setBounds(265, 48, 49, 44);
 		panelRegistro.add(label);
 		final ImageIcon iconopeq = new ImageIcon(
 				logopeq.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
@@ -258,20 +266,35 @@ public class registro_cargos extends JFrame {
 
 		JLabel lblCargosRegistrados = new JLabel("Cargos registrados :");
 		lblCargosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblCargosRegistrados.setBounds(28, 41, 166, 32);
+		lblCargosRegistrados.setBounds(30, 41, 166, 19);
 		panelTablaCargos.add(lblCargosRegistrados);
 
 		JLabel label_3 = new JLabel("Buscar Cargo :");
 		label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_3.setBounds(28, 71, 99, 22);
+		label_3.setBounds(30, 63, 99, 22);
 		panelTablaCargos.add(label_3);
 
 		txtBusquedaCargos = new JTextField();
 		txtBusquedaCargos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtBusquedaCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaCargos.setColumns(10);
-		txtBusquedaCargos.setBounds(117, 72, 184, 20);
+		txtBusquedaCargos.setBounds(119, 64, 228, 21);
 		panelTablaCargos.add(txtBusquedaCargos);
+		txtBusquedaCargos.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
+				 tablaCargos.setRowSorter(trsfiltroCodigo);	 
+			}
+			public void keyPressed(KeyEvent ke) {
+			}
+			public void keyReleased(KeyEvent ke) {
+				String cadena = (txtBusquedaCargos.getText());
+				txtBusquedaCargos.setText(cadena);
+				repaint();
+				filtro();
+			}
+		});
 
 		btnBorrarCargo = new JButton("Borrar");
 		btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -281,7 +304,7 @@ public class registro_cargos extends JFrame {
 
 		barraCargos = new JScrollPane();
 		panelTablaCargos.add(barraCargos);
-		barraCargos.setBounds(28, 104, 376, 280);
+		barraCargos.setBounds(28, 90, 376, 294);
 
 		tablaCargos = new JTable();
 		barraCargos.setViewportView(tablaCargos);
@@ -293,10 +316,6 @@ public class registro_cargos extends JFrame {
 		final ImageIcon logo2 = new ImageIcon(
 				iconopeq.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
 		label_2.setIcon(logo2);
-
-		btnBuscarCargo = new JButton("");
-		btnBuscarCargo.setBounds(311, 70, 34, 23);
-		panelTablaCargos.add(btnBuscarCargo);
 
 		btnActualizarDatosCargo = new JButton("Actualizar Datos");
 		btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -321,11 +340,48 @@ public class registro_cargos extends JFrame {
 		});
 
 	}
+	
 
 	public void construirTabla() {
 		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funsiones" };
 		String informacion[][] = control_cargo.obtenerMatriz();
 		tablaCargos = new JTable(informacion, titulos);
 		barraCargos.setViewportView(tablaCargos);
+		for (int c = 0; c < tablaCargos.getColumnCount(); c++)
+		{
+		    Class<?> col_class = tablaCargos.getColumnClass(c);
+		    tablaCargos.setDefaultEditor(col_class, null);  
+		}
+	}
+	
+	
+	
+	public void filtro() {
+		filtroCodigo = txtBusquedaCargos.getText();
+		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0,1,2,3,4,5));
+		}
+	
+	public void obtenerUltimoId() {
+	String ultimoValor = null;
+	int valor;
+	String id = null;
+	conexion objCon = new conexion();
+	Connection conn = objCon.getConexion();
+	try {
+	    PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM cargos ORDER BY id_cargo DESC");
+	    ResultSet rsr = stmtr.executeQuery();
+	    if(rsr.next()){
+	    	ultimoValor = rsr.getString("id_cargo");
+	    	valor = Integer.parseInt(ultimoValor);
+	    	valor = valor + 1;
+	    	id = String.valueOf(valor);	
+	    }
+	    txtCodigoCargo.setText(id);;
+	    stmtr.close();
+	    rsr.close();
+	    conn.close();
+	} catch (Exception e) {
+	        e.printStackTrace();
+	}
 	}
 }

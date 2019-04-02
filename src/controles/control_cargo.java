@@ -36,6 +36,7 @@ public class control_cargo implements ActionListener {
 		this.formularioCargo.btnBorrarCargo.addActionListener(this);
 
 	}
+
 	public void actionPerformed(ActionEvent e) {
 		/* Insertar */
 		if (e.getSource() == formularioCargo.btnGuardarCargo) {
@@ -49,6 +50,7 @@ public class control_cargo implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Cargo registrado!");
 				limpiar();
 				formularioCargo.construirTabla();
+				formularioCargo.obtenerUltimoId();
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! Cargo no Registrado");
 				limpiar();
@@ -86,23 +88,8 @@ public class control_cargo implements ActionListener {
 		
 		/* Actualizar */
 		if (e.getSource() == formularioCargo.btnActualizarCargo) {
-			
-			claseCargo.setId_cargo(Integer.parseInt(formularioCargo.txtCodigoCargo.getText()));
-			claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
-			claseCargo.setNombre_cargo(formularioCargo.txtNombreCargo.getText());
-			claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
-			claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
-			claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
-            
-            if(consultasCargo.actualizar(claseCargo))
-            {
-                JOptionPane.showMessageDialog(null, "Registro Modificado");
-                limpiar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al Modificar");
-                limpiar();
-            }
-        }
+			               
+			}
 
 		/* Borrar */
 		if (e.getSource() == formularioCargo.btnBorrarCargo) {
@@ -127,13 +114,14 @@ public class control_cargo implements ActionListener {
 		/* Limpiar */
 		if (e.getSource() == formularioCargo.btnNuevoCargo) {
 			limpiar();
+			formularioCargo.obtenerUltimoId();
 		}
 
 	}
 
 	/* Metodos para implementar */
-	
-	/* Metodo para el boton nuevo que limpia los datos de los txtFields*/
+
+	/* Metodo para el boton nuevo que limpia los datos de los txtFields */
 	public void limpiar() {
 		formularioCargo.txtCodigoCargo.setText(null);
 		formularioCargo.txtNombreCargo.setText(null);
@@ -143,17 +131,17 @@ public class control_cargo implements ActionListener {
 		formularioCargo.txtBusquedaCargos.setText(null);
 	}
 
-	/* Metodo para darle pistas de insercion de datos al usuario*/
+	/* Metodo para darle pistas de insercion de datos al usuario */
 	public void pistasCargo() {
 		PlaceHolder pistasCargo;
 		pistasCargo = new PlaceHolder(formularioCargo.txtNombreCargo, "Escriba nombre de cargo.");
 		pistasCargo = new PlaceHolder(formularioCargo.txtSueldoCargo, "Ingrese el sueldo bruto");
 		pistasCargo = new PlaceHolder(formularioCargo.txtHoraExtraCargo, "Ingrese precio hora extra.");
 		pistasCargo = new PlaceHolder(formularioCargo.txtFuncionesCargo, "Escriba funciones asignadas.");
-		pistasCargo = new PlaceHolder(formularioCargo.txtBusquedaCargos, "buscar: codigo -- Nombre -- area");
+		pistasCargo = new PlaceHolder(formularioCargo.txtBusquedaCargos, "Escriba: codigo, nombre o area para buscar");
 	}
-	
-	/* Metodos para mostrar datos en tabla Cargos*/
+
+	/* Metodos para mostrar datos en tabla Cargos */
 	public static ArrayList<cargo> buscarUsuariosConMatriz() {
 		conexion conex = new conexion();
 		ArrayList<cargo> miLista = new ArrayList<cargo>();
@@ -198,5 +186,5 @@ public class control_cargo implements ActionListener {
 
 		return matrizInfo;
 	}
-	
+
 }
