@@ -9,9 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+
 import com.placeholder.PlaceHolder;
 
 import clases.cargo;
@@ -40,11 +43,21 @@ public class control_cargo implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		/* Insertar */
 		if (e.getSource() == formularioCargo.btnGuardarCargo) {
+			
+			if(formularioCargo.txtNombreCargo.getText().isEmpty() 
+					|| formularioCargo.txtSueldoCargo.getText().isEmpty() 
+					|| formularioCargo.txtHoraExtraCargo.getText().isEmpty()
+					|| formularioCargo.txtFuncionesCargo.getText().isEmpty())
+			{
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el cargo!");
+			}else {	
 			claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
 			claseCargo.setNombre_cargo(formularioCargo.txtNombreCargo.getText());
 			claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
 			claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
 			claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
+			
+			
 
 			if (consultasCargo.insertar(claseCargo)) {
 				JOptionPane.showMessageDialog(null, "Cargo registrado!");
@@ -55,6 +68,7 @@ public class control_cargo implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Error! Cargo no Registrado");
 				limpiar();
 			}
+		}
 		}
 		
 		/* Pasar datos de la tabla al formulario para actualizar */
@@ -97,6 +111,16 @@ public class control_cargo implements ActionListener {
 		
 		/* Actualizar */
 		if (e.getSource() == formularioCargo.btnActualizarCargo) {
+			
+			if(formularioCargo.txtNombreCargo.getText().isEmpty() 
+					|| formularioCargo.txtSueldoCargo.getText().isEmpty() 
+					|| formularioCargo.txtHoraExtraCargo.getText().isEmpty()
+					|| formularioCargo.txtFuncionesCargo.getText().isEmpty())
+			{
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el cargo!");
+			}else {	
+				
+			
 			claseCargo.setId_cargo(Integer.parseInt(formularioCargo.txtCodigoCargo.getText()));
 			claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
 			claseCargo.setNombre_cargo(formularioCargo.txtNombreCargo.getText());
@@ -115,6 +139,7 @@ public class control_cargo implements ActionListener {
 			}
 			               
 			}
+		}
 
 		/* Borrar */
 		if (e.getSource() == formularioCargo.btnBorrarCargo) {
@@ -159,16 +184,6 @@ public class control_cargo implements ActionListener {
 		formularioCargo.txtHoraExtraCargo.setText(null);
 		formularioCargo.txtFuncionesCargo.setText(null);
 		formularioCargo.txtBusquedaCargos.setText(null);
-	}
-
-	/* Metodo para darle pistas de insercion de datos al usuario */
-	public void pistasCargo() {
-		PlaceHolder pistasCargo;
-		pistasCargo = new PlaceHolder(formularioCargo.txtNombreCargo, "Escriba el nombre del cargo.");
-		pistasCargo = new PlaceHolder(formularioCargo.txtSueldoCargo, "Digite el sueldo");
-		pistasCargo = new PlaceHolder(formularioCargo.txtHoraExtraCargo, "Digite hora extra.");
-		pistasCargo = new PlaceHolder(formularioCargo.txtFuncionesCargo, "Escriba funciones asignadas.");
-		pistasCargo = new PlaceHolder(formularioCargo.txtBusquedaCargos, "Escriba para buscar");
 	}
 
 	/* Metodos para mostrar datos en tabla Cargos */

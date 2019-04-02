@@ -23,10 +23,12 @@ import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -352,9 +354,7 @@ public class registro_cargos extends JFrame {
 		    tablaCargos.setDefaultEditor(col_class, null);  
 		}
 	}
-	
-	
-	
+
 	public void filtro() {
 		filtroCodigo = txtBusquedaCargos.getText();
 		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0,1,2,3,4,5));

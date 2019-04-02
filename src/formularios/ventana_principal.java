@@ -199,7 +199,6 @@ public class ventana_principal extends JFrame {
 		        formulario.setVisible(true);
 		        formulario.setLocationRelativeTo(null);
 		        formulario.txtNombreCargo.requestFocusInWindow();
-		        control.pistasCargo();
 		        formulario.construirTabla();
 		        formulario.obtenerUltimoId();
 		        formulario.btnBorrarCargo.setVisible(false);
