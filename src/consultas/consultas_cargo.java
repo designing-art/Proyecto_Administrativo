@@ -72,43 +72,7 @@ public class consultas_cargo extends conexion {
                 System.err.println(e);
             }
         }
-    }
     
-    /*Buscar*/  
-    public boolean buscar(cargo cargo) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConexion();
-
-        String sql = "SELECT * FROM cargos WHERE id_cargo = ? ";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, cargo.getId_cargo());
-            rs = ps.executeQuery();
-            
-            if(rs.next())
-            {      	
-            	cargo.setId_cargo(Integer.parseInt(rs.getString("id_cargo")));
-            	cargo.setArea_cargo(rs.getString("area_cargo"));
-            	cargo.setNombre_cargo(rs.getString("nombre_cargo"));
-            	cargo.setSueldo_cargo(Double.parseDouble(rs.getString("sueldo_cargo")));
-            	cargo.setValor_hora_extra_cargo(Double.parseDouble(rs.getString("valor_hora_extra_cargo")));
-            	cargo.setFunciones_cargo(rs.getString("funciones_cargo"));
-            	
-               return true;
-            }
-            return false;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
     }
         
 }

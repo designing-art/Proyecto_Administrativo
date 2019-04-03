@@ -8,8 +8,7 @@ public class empleado {
 	private String identidad_empleado;
 	private String genero_empleado;
 	private int edad_empleado;
-	private String telefono1_empleado;
-	private String telefono2_empleado;
+	private String telefono_empleado;
 	private String correo_empleado;
 	private String direccion_empleado;
 	private int foto_empleado;
@@ -68,20 +67,12 @@ public class empleado {
 		this.edad_empleado = edad_empleado;
 	}
 
-	public String getTelefono1_empleado() {
-		return telefono1_empleado;
+	public String getTelefono_empleado() {
+		return telefono_empleado;
 	}
 
-	public void setTelefono1_empleado(String telefono1_empleado) {
-		this.telefono1_empleado = telefono1_empleado;
-	}
-
-	public String getTelefono2_empleado() {
-		return telefono2_empleado;
-	}
-
-	public void setTelefono2_empleado(String telefono2_empleado) {
-		this.telefono2_empleado = telefono2_empleado;
+	public void setTelefono_empleado(String telefono1_empleado) {
+		this.telefono_empleado = telefono1_empleado;
 	}
 
 	public String getCorreo_empleado() {

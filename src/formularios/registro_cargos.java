@@ -1,12 +1,13 @@
 package formularios;
 
 import java.awt.Color;
-
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
@@ -57,14 +59,13 @@ public class registro_cargos extends JFrame {
 	public JButton btnActualizarCargo;
 	public JButton btnMostrar;
 	public JButton btnAceptar;
-	
 
 	public JPanel contentPane;
 	public JTextField txtBusquedaCargos;
 	public JScrollPane barraCargos;
 	public JTable tablaCargos;
 	public JTextField txtCodigoCargo;
-	
+
 	public TableRowSorter trsfiltroCodigo;
 	String filtroCodigo;
 
@@ -139,6 +140,9 @@ public class registro_cargos extends JFrame {
 		txtSueldoCargo.setColumns(10);
 		txtSueldoCargo.setHorizontalAlignment(JTextField.RIGHT);
 		panelRegistro.add(txtSueldoCargo);
+		InputMap map2 = txtSueldoCargo.getInputMap(txtSueldoCargo.WHEN_FOCUSED);
+	      map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+
 		txtSueldoCargo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -158,6 +162,8 @@ public class registro_cargos extends JFrame {
 		txtHoraExtraCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtHoraExtraCargo.setBounds(188, 201, 128, 20);
 		panelRegistro.add(txtHoraExtraCargo);
+		InputMap map = txtHoraExtraCargo.getInputMap(txtHoraExtraCargo.WHEN_FOCUSED);
+	      map.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtHoraExtraCargo.setColumns(10);
 		txtHoraExtraCargo.setHorizontalAlignment(JTextField.RIGHT);
 		txtHoraExtraCargo.addKeyListener(new KeyListener() {
@@ -228,6 +234,8 @@ public class registro_cargos extends JFrame {
 		txtFuncionesCargo = new JTextArea();
 		txtFuncionesCargo.setBackground(new Color(192, 192, 192));
 		scrollPane.setViewportView(txtFuncionesCargo);
+		InputMap map5 = txtFuncionesCargo.getInputMap(txtFuncionesCargo.WHEN_FOCUSED);
+	      map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtNombreCargo = new JTextField();
 		txtNombreCargo.setHorizontalAlignment(SwingConstants.LEFT);
@@ -235,6 +243,8 @@ public class registro_cargos extends JFrame {
 		txtNombreCargo.setColumns(10);
 		txtNombreCargo.setBounds(142, 141, 174, 20);
 		panelRegistro.add(txtNombreCargo);
+		InputMap map3 = txtNombreCargo.getInputMap(txtNombreCargo.WHEN_FOCUSED);
+	      map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
@@ -264,19 +274,19 @@ public class registro_cargos extends JFrame {
 		btnActualizarCargo.setBackground(new Color(60, 179, 113));
 		btnActualizarCargo.setBounds(218, 355, 99, 23);
 		panelRegistro.add(btnActualizarCargo);
-		
+
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAceptar.setBackground(new Color(0, 206, 209));
 		btnAceptar.setBounds(27, 355, 99, 23);
 		panelRegistro.add(btnAceptar);
-		
-				JLabel lblImagenLibreta = new JLabel();
-				lblImagenLibreta.setBounds(0, 0, 341, 450);
-				panelRegistro.add(lblImagenLibreta);
-				final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-						lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-				lblImagenLibreta.setIcon(logo);
+
+		JLabel lblImagenLibreta = new JLabel();
+		lblImagenLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblImagenLibreta);
+		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblImagenLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -301,14 +311,19 @@ public class registro_cargos extends JFrame {
 		txtBusquedaCargos.setColumns(10);
 		txtBusquedaCargos.setBounds(119, 64, 228, 21);
 		panelTablaCargos.add(txtBusquedaCargos);
+		InputMap map4 = txtBusquedaCargos.getInputMap(txtBusquedaCargos.WHEN_FOCUSED);
+	      map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaCargos.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
-				 tablaCargos.setRowSorter(trsfiltroCodigo);	 
+				tablaCargos.setRowSorter(trsfiltroCodigo);
 			}
+
 			public void keyPressed(KeyEvent ke) {
+				
 			}
+
 			public void keyReleased(KeyEvent ke) {
 				String cadena = (txtBusquedaCargos.getText());
 				txtBusquedaCargos.setText(cadena);
@@ -343,61 +358,60 @@ public class registro_cargos extends JFrame {
 		btnActualizarDatosCargo.setBackground(new Color(60, 179, 113));
 		btnActualizarDatosCargo.setBounds(267, 396, 137, 23);
 		panelTablaCargos.add(btnActualizarDatosCargo);
-		
+
 		btnMostrar = new JButton("Ver detalles");
 		btnMostrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnMostrar.setBackground(new Color(0, 206, 209));
 		btnMostrar.setBounds(149, 395, 108, 23);
 		panelTablaCargos.add(btnMostrar);
-		
-				JLabel label_5 = new JLabel();
-				label_5.setBounds(0, 0, 431, 449);
-				panelTablaCargos.add(label_5);
-				final ImageIcon logo1 = new ImageIcon(
-						icono2.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-				label_5.setIcon(logo1);
+
+		JLabel label_5 = new JLabel();
+		label_5.setBounds(0, 0, 431, 449);
+		panelTablaCargos.add(label_5);
+		final ImageIcon logo1 = new ImageIcon(
+				icono2.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+		label_5.setIcon(logo1);
 
 	}
-	
 
 	public void construirTabla() {
 		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funciones" };
 		String informacion[][] = control_cargo.obtenerMatriz();
 		tablaCargos = new JTable(informacion, titulos);
 		barraCargos.setViewportView(tablaCargos);
-		for (int c = 0; c < tablaCargos.getColumnCount(); c++)
-		{
-		    Class<?> col_class = tablaCargos.getColumnClass(c);
-		    tablaCargos.setDefaultEditor(col_class, null);  
+		for (int c = 0; c < tablaCargos.getColumnCount(); c++) {
+			Class<?> col_class = tablaCargos.getColumnClass(c);
+			tablaCargos.setDefaultEditor(col_class, null);
 		}
 	}
 
 	public void filtro() {
 		filtroCodigo = txtBusquedaCargos.getText();
-		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0,1,2,3,4,5));
-		}
-	
-	public void obtenerUltimoId() {
-	String ultimoValor = null;
-	int valor;
-	String id = null;
-	conexion objCon = new conexion();
-	Connection conn = objCon.getConexion();
-	try {
-	    PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM cargos ORDER BY id_cargo DESC");
-	    ResultSet rsr = stmtr.executeQuery();
-	    if(rsr.next()){
-	    	ultimoValor = rsr.getString("id_cargo");
-	    	valor = Integer.parseInt(ultimoValor);
-	    	valor = valor + 1;
-	    	id = String.valueOf(valor);	
-	    }
-	    txtCodigoCargo.setText(id);;
-	    stmtr.close();
-	    rsr.close();
-	    conn.close();
-	} catch (Exception e) {
-	        e.printStackTrace();
+		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0, 1, 2, 3, 4, 5));
 	}
+
+	public void obtenerUltimoId() {
+		String ultimoValor = null;
+		int valor;
+		String id = null;
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM cargos ORDER BY id_cargo DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				ultimoValor = rsr.getString("id_cargo");
+				valor = Integer.parseInt(ultimoValor);
+				valor = valor + 1;
+				id = String.valueOf(valor);
+			}
+			txtCodigoCargo.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
