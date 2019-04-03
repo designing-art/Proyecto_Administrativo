@@ -206,6 +206,8 @@ public class ventana_principal extends JFrame {
 				formulario.btnNuevoCargo.setVisible(true);
 				formulario.btnActualizarCargo.setVisible(false);
 				formulario.btnActualizarDatosCargo.setVisible(true);
+				formulario.btnMostrar.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
 				dispose();	
 			}
 		});

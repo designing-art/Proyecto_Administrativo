@@ -1,5 +1,6 @@
 package controles;
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 
@@ -37,6 +38,8 @@ public class control_cargo implements ActionListener {
 		this.formularioCargo.btnActualizarCargo.addActionListener(this);
 		this.formularioCargo.btnActualizarDatosCargo.addActionListener(this);
 		this.formularioCargo.btnBorrarCargo.addActionListener(this);
+		this.formularioCargo.btnMostrar.addActionListener(this);
+		this.formularioCargo.btnAceptar.addActionListener(this);
 
 	}
 
@@ -95,12 +98,61 @@ public class control_cargo implements ActionListener {
 					
 					formularioCargo.btnBorrarCargo.setVisible(true);
 					formularioCargo.btnGuardarCargo.setVisible(false);
-					formularioCargo.btnNuevoCargo.setVisible(true);
+					formularioCargo.btnNuevoCargo.setVisible(false);
 					formularioCargo.btnActualizarCargo.setVisible(true);
 					formularioCargo.btnActualizarDatosCargo.setVisible(true);
+					formularioCargo.btnMostrar.setVisible(false);
+					formularioCargo.btnAceptar.setText("Cancelar");
+					formularioCargo.btnAceptar.setVisible(true);
 					
 					
 					
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+		/* Pasar datos de la tabla al formulario para ver los datos */
+		if (e.getSource() == formularioCargo.btnMostrar) {
+			int fila;
+			try {
+				fila = formularioCargo.tablaCargos.getSelectedRow();
+				if (fila == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String codigo = formularioCargo.tablaCargos.getValueAt(fila, 0).toString();
+					String area = formularioCargo.tablaCargos.getValueAt(fila, 1).toString();
+					String nombre = formularioCargo.tablaCargos.getValueAt(fila, 2).toString();
+					String sueldo = formularioCargo.tablaCargos.getValueAt(fila, 3).toString();
+					String horaextra = formularioCargo.tablaCargos.getValueAt(fila, 4).toString();
+					String funciones = formularioCargo.tablaCargos.getValueAt(fila, 5).toString();
+
+					formularioCargo.txtCodigoCargo.setText(codigo);
+					formularioCargo.cbxTipoCargo.setSelectedItem(area);
+					formularioCargo.txtNombreCargo.setText(nombre);
+					formularioCargo.txtSueldoCargo.setText(sueldo);
+					formularioCargo.txtHoraExtraCargo.setText(horaextra);
+					formularioCargo.txtFuncionesCargo.setText(funciones);
+					
+					formularioCargo.btnBorrarCargo.setVisible(false);
+					formularioCargo.btnGuardarCargo.setVisible(false);
+					formularioCargo.btnNuevoCargo.setVisible(false);
+					formularioCargo.btnActualizarCargo.setVisible(false);
+					formularioCargo.btnActualizarDatosCargo.setVisible(false);
+					formularioCargo.btnAceptar.setText("Aceptar");
+					formularioCargo.btnAceptar.setVisible(true);
+					
+					formularioCargo.cbxTipoCargo.setEditable(false);
+					formularioCargo.txtNombreCargo.setEditable(false);
+					formularioCargo.txtSueldoCargo.setEditable(false);
+					formularioCargo.txtHoraExtraCargo.setEditable(false);
+					formularioCargo.txtFuncionesCargo.setEditable(false);
+					formularioCargo.txtFuncionesCargo.setCaretColor(Color.gray);
+					formularioCargo.btnActualizarCargo.setVisible(false);
+	
 				}
 
 			} catch (HeadlessException ex) {
@@ -133,6 +185,7 @@ public class control_cargo implements ActionListener {
 				limpiar();
 				formularioCargo.construirTabla();
 				formularioCargo.obtenerUltimoId();
+				formularioCargo.btnActualizarCargo.setVisible(false);
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! Cargo no Actualizado");
 				limpiar();
@@ -144,7 +197,12 @@ public class control_cargo implements ActionListener {
 		/* Borrar */
 		if (e.getSource() == formularioCargo.btnBorrarCargo) {
 			PreparedStatement ps = null;
+			int filaseleccionada;
 			try {
+					filaseleccionada = formularioCargo.tablaCargos.getSelectedRow();
+					if (filaseleccionada == -1) {
+						JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+					} else {
 				conexion objCon = new conexion();
 				Connection conn = objCon.getConexion();
 				int Fila = formularioCargo.tablaCargos.getSelectedRow();
@@ -155,11 +213,21 @@ public class control_cargo implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Cargo Eliminado");
 				limpiar();
 				formularioCargo.construirTabla();
+				
+				formularioCargo.cbxTipoCargo.setEditable(false);
+				formularioCargo.txtNombreCargo.setEditable(false);
+				formularioCargo.txtSueldoCargo.setEditable(false);
+				formularioCargo.txtHoraExtraCargo.setEditable(false);
+				formularioCargo.txtFuncionesCargo.setEditable(false);
+				formularioCargo.btnActualizarCargo.setVisible(false);
+				
+					}
 			} catch (SQLException ex) {
 				JOptionPane.showMessageDialog(null, "Error al Eliminar Cargo");
 				System.out.println(ex.toString());
 			}
 		}
+		
 
 		/* Limpiar */
 		if (e.getSource() == formularioCargo.btnNuevoCargo) {
@@ -167,9 +235,33 @@ public class control_cargo implements ActionListener {
 			formularioCargo.obtenerUltimoId();
 			formularioCargo.btnBorrarCargo.setVisible(false);
 			formularioCargo.btnGuardarCargo.setVisible(true);
+			formularioCargo.btnMostrar.setVisible(true);
 			formularioCargo.btnNuevoCargo.setVisible(true);
 			formularioCargo.btnActualizarCargo.setVisible(false);
-			formularioCargo.btnActualizarDatosCargo.setVisible(true);
+			formularioCargo.btnActualizarDatosCargo.setVisible(true);		
+			formularioCargo.txtNombreCargo.setEditable(true);
+			formularioCargo.txtSueldoCargo.setEditable(true);
+			formularioCargo.txtHoraExtraCargo.setEditable(true);
+			formularioCargo.txtFuncionesCargo.setEditable(true);
+			formularioCargo.btnActualizarCargo.setVisible(false);
+		}
+		
+		/* Aceptar */
+		if (e.getSource() == formularioCargo.btnAceptar) {
+			limpiar();
+			formularioCargo.obtenerUltimoId();
+			formularioCargo.btnBorrarCargo.setVisible(false);
+			formularioCargo.btnGuardarCargo.setVisible(true);
+			formularioCargo.btnNuevoCargo.setVisible(true);
+			formularioCargo.btnActualizarCargo.setVisible(false);
+			formularioCargo.btnActualizarDatosCargo.setVisible(true);		
+			formularioCargo.txtNombreCargo.setEditable(true);
+			formularioCargo.txtSueldoCargo.setEditable(true);
+			formularioCargo.txtHoraExtraCargo.setEditable(true);
+			formularioCargo.txtFuncionesCargo.setEditable(true);
+			formularioCargo.btnActualizarCargo.setVisible(false);
+			formularioCargo.btnMostrar.setVisible(true);
+			formularioCargo.btnAceptar.setVisible(false);
 		}
 
 	}
@@ -178,6 +270,7 @@ public class control_cargo implements ActionListener {
 
 	/* Metodo para el boton nuevo que limpia los datos de los txtFields */
 	public void limpiar() {
+		formularioCargo.cbxTipoCargo.getSelectedItem().equals(null);
 		formularioCargo.txtCodigoCargo.setText(null);
 		formularioCargo.txtNombreCargo.setText(null);
 		formularioCargo.txtSueldoCargo.setText(null);
