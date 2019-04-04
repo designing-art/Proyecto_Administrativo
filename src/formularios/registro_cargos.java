@@ -36,6 +36,8 @@ import javax.swing.text.MaskFormatter;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
+import com.placeholder.PlaceHolder;
+
 import clases.cargo;
 import conexion.conexion;
 import consultas.consultas_cargo;
@@ -52,6 +54,8 @@ public class registro_cargos extends JFrame {
 	public JTextField txtSueldoCargo;
 	public JTextArea txtFuncionesCargo;
 	public JScrollPane scrollFunciones;
+	public PlaceHolder pista;
+	public JScrollPane scrollPane;
 
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
@@ -229,11 +233,11 @@ public class registro_cargos extends JFrame {
 		label_1.setBounds(168, 208, 17, 14);
 		panelRegistro.add(label_1);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(122, 233, 193, 111);
 		panelRegistro.add(scrollPane);
 		txtFuncionesCargo = new JTextArea();
-		txtFuncionesCargo.setBackground(new Color(192, 192, 192));
+		txtFuncionesCargo.setBackground(Color.WHITE);
 		scrollPane.setViewportView(txtFuncionesCargo);
 		InputMap map5 = txtFuncionesCargo.getInputMap(txtFuncionesCargo.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -396,6 +400,14 @@ public class registro_cargos extends JFrame {
 	public void filtro() {
 		filtroCodigo = txtBusquedaCargos.getText();
 		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0, 1, 2, 3, 4, 5));
+	}
+	
+	public void pistas() {
+		pista = new PlaceHolder(txtBusquedaCargos, "Escriba para buscar.");
+		pista = new PlaceHolder(txtNombreCargo, "Ingrese el nombre del cargo.");
+		pista = new PlaceHolder(txtSueldoCargo, "Digite el sueldo.");
+		pista = new PlaceHolder(txtHoraExtraCargo, "Digite precio hora extra.");
+		pista = new PlaceHolder(txtFuncionesCargo, "Ingrese las Funciones.");		
 	}
 
 	public void obtenerUltimoId() {

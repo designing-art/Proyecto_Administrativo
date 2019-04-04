@@ -48,11 +48,16 @@ public class control_cargo implements ActionListener {
 		if (e.getSource() == formularioCargo.btnGuardarCargo) {
 			
 			if(formularioCargo.txtNombreCargo.getText().isEmpty() 
-					|| formularioCargo.txtSueldoCargo.getText().isEmpty() 
-					|| formularioCargo.txtHoraExtraCargo.getText().isEmpty()
-					|| formularioCargo.txtFuncionesCargo.getText().isEmpty())
+				|| formularioCargo.txtSueldoCargo.getText().isEmpty() 
+				|| formularioCargo.txtHoraExtraCargo.getText().isEmpty()
+				|| formularioCargo.txtFuncionesCargo.getText().isEmpty()
+				|| formularioCargo.txtNombreCargo.getText().toString().equalsIgnoreCase("Ingrese el nombre del cargo.")
+				|| formularioCargo.txtSueldoCargo.getText().toString().equalsIgnoreCase("Digite el sueldo.")
+				|| formularioCargo.txtHoraExtraCargo.getText().toString().equalsIgnoreCase("Digite precio hora extra.")
+				|| formularioCargo.txtFuncionesCargo.getText().toString().equalsIgnoreCase("Ingrese las Funciones.")) 
 			{
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el cargo!");
+				
 			}else {	
 			claseCargo.setArea_cargo(formularioCargo.cbxTipoCargo.getSelectedItem().toString());
 			claseCargo.setNombre_cargo(formularioCargo.txtNombreCargo.getText());
@@ -96,6 +101,13 @@ public class control_cargo implements ActionListener {
 					formularioCargo.txtHoraExtraCargo.setText(horaextra);
 					formularioCargo.txtFuncionesCargo.setText(funciones);
 					
+					formularioCargo.txtCodigoCargo.setForeground(Color.BLACK);
+					formularioCargo.cbxTipoCargo.setForeground(Color.BLACK);
+					formularioCargo.txtNombreCargo.setForeground(Color.BLACK);
+					formularioCargo.txtSueldoCargo.setForeground(Color.BLACK);
+					formularioCargo.txtHoraExtraCargo.setForeground(Color.BLACK);
+					formularioCargo.txtFuncionesCargo.setForeground(Color.BLACK);
+					
 					formularioCargo.btnBorrarCargo.setVisible(true);
 					formularioCargo.btnGuardarCargo.setVisible(false);
 					formularioCargo.btnNuevoCargo.setVisible(false);
@@ -105,7 +117,7 @@ public class control_cargo implements ActionListener {
 					formularioCargo.btnAceptar.setText("Cancelar");
 					formularioCargo.btnAceptar.setVisible(true);
 					
-					
+					formularioCargo.txtNombreCargo.requestFocusInWindow();
 					
 				}
 
@@ -129,13 +141,20 @@ public class control_cargo implements ActionListener {
 					String sueldo = formularioCargo.tablaCargos.getValueAt(fila, 3).toString();
 					String horaextra = formularioCargo.tablaCargos.getValueAt(fila, 4).toString();
 					String funciones = formularioCargo.tablaCargos.getValueAt(fila, 5).toString();
-
+					
 					formularioCargo.txtCodigoCargo.setText(codigo);
 					formularioCargo.cbxTipoCargo.setSelectedItem(area);
 					formularioCargo.txtNombreCargo.setText(nombre);
 					formularioCargo.txtSueldoCargo.setText(sueldo);
 					formularioCargo.txtHoraExtraCargo.setText(horaextra);
 					formularioCargo.txtFuncionesCargo.setText(funciones);
+					
+					formularioCargo.txtCodigoCargo.setForeground(Color.BLACK);
+					formularioCargo.cbxTipoCargo.setForeground(Color.BLACK);
+					formularioCargo.txtNombreCargo.setForeground(Color.BLACK);
+					formularioCargo.txtSueldoCargo.setForeground(Color.BLACK);
+					formularioCargo.txtHoraExtraCargo.setForeground(Color.BLACK);
+					formularioCargo.txtFuncionesCargo.setForeground(Color.BLACK);
 					
 					formularioCargo.btnBorrarCargo.setVisible(false);
 					formularioCargo.btnGuardarCargo.setVisible(false);
@@ -150,8 +169,9 @@ public class control_cargo implements ActionListener {
 					formularioCargo.txtSueldoCargo.setEditable(false);
 					formularioCargo.txtHoraExtraCargo.setEditable(false);
 					formularioCargo.txtFuncionesCargo.setEditable(false);
-					formularioCargo.txtFuncionesCargo.setCaretColor(Color.gray);
+					formularioCargo.txtFuncionesCargo.setBackground(Color.LIGHT_GRAY);
 					formularioCargo.btnActualizarCargo.setVisible(false);
+					
 	
 				}
 
@@ -167,7 +187,11 @@ public class control_cargo implements ActionListener {
 			if(formularioCargo.txtNombreCargo.getText().isEmpty() 
 					|| formularioCargo.txtSueldoCargo.getText().isEmpty() 
 					|| formularioCargo.txtHoraExtraCargo.getText().isEmpty()
-					|| formularioCargo.txtFuncionesCargo.getText().isEmpty())
+					|| formularioCargo.txtFuncionesCargo.getText().isEmpty()
+					|| formularioCargo.txtNombreCargo.getText().toString().equalsIgnoreCase("Ingrese el nombre del cargo.")
+					|| formularioCargo.txtSueldoCargo.getText().toString().equalsIgnoreCase("Digite el sueldo.")
+					|| formularioCargo.txtHoraExtraCargo.getText().toString().equalsIgnoreCase("Digite precio hora extra.")
+					|| formularioCargo.txtFuncionesCargo.getText().toString().equalsIgnoreCase("Ingrese las Funciones.")) 
 			{
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el cargo!");
 			}else {	
@@ -186,6 +210,11 @@ public class control_cargo implements ActionListener {
 				formularioCargo.construirTabla();
 				formularioCargo.obtenerUltimoId();
 				formularioCargo.btnActualizarCargo.setVisible(false);
+				formularioCargo.txtNombreCargo.setEditable(false);
+				formularioCargo.txtSueldoCargo.setEditable(false);
+				formularioCargo.txtHoraExtraCargo.setEditable(false);
+				formularioCargo.txtFuncionesCargo.setEditable(false);
+				formularioCargo.txtFuncionesCargo.setBackground(Color.LIGHT_GRAY);
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! Cargo no Actualizado");
 				limpiar();
@@ -244,6 +273,9 @@ public class control_cargo implements ActionListener {
 			formularioCargo.txtHoraExtraCargo.setEditable(true);
 			formularioCargo.txtFuncionesCargo.setEditable(true);
 			formularioCargo.btnActualizarCargo.setVisible(false);
+			formularioCargo.pistas();
+			formularioCargo.construirTabla();
+			formularioCargo.txtFuncionesCargo.setBackground(Color.WHITE);
 		}
 		
 		/* Aceptar */
@@ -262,6 +294,9 @@ public class control_cargo implements ActionListener {
 			formularioCargo.btnActualizarCargo.setVisible(false);
 			formularioCargo.btnMostrar.setVisible(true);
 			formularioCargo.btnAceptar.setVisible(false);
+			formularioCargo.txtFuncionesCargo.setBackground(Color.WHITE);
+			formularioCargo.pistas();
+			formularioCargo.construirTabla();
 		}
 
 	}

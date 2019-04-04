@@ -188,7 +188,7 @@ public class ventana_principal extends JFrame {
 		        formularioEmpleado.setLocationRelativeTo(null);
 		        formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
 		        formularioEmpleado.obtenerUltimoId();
-				formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+		        formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 				formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 				formularioEmpleado.btnActualizarEmpleado.setVisible(false);
 				formularioEmpleado.btnCancelarEmpleado.setVisible(false);
@@ -214,6 +214,7 @@ public class ventana_principal extends JFrame {
 		        formulario.txtNombreCargo.requestFocusInWindow();
 		        formulario.construirTabla();
 		        formulario.obtenerUltimoId();
+		        formulario.pistas();
 		        formulario.btnBorrarCargo.setVisible(false);
 				formulario.btnGuardarCargo.setVisible(true);
 				formulario.btnNuevoCargo.setVisible(true);
