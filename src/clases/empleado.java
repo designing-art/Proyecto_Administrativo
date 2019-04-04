@@ -1,5 +1,7 @@
 package clases;
 
+import java.sql.Date;
+
 public class empleado {
 
 	private int id_empleado;
@@ -14,9 +16,9 @@ public class empleado {
 	private int foto_empleado;
 	private String referencia_empleado;
 	private String telefono_referencia;
-	private String fecha_nacimiento_empleado;
-	private String fecha_registro_empleado;
-	private String fecha_inicio_labores_empleado;
+	private Date fecha_nacimiento_empleado;
+	private Date fecha_registro_empleado;
+	private Date fecha_inicio_labores_empleado;
 	private String estado_empleado;
 
 	public int getId_empleado() {
@@ -115,27 +117,28 @@ public class empleado {
 		this.telefono_referencia = telefono_referencia;
 	}
 
-	public String getFecha_nacimiento_empleado() {
+	
+	public Date getFecha_nacimiento_empleado() {
 		return fecha_nacimiento_empleado;
 	}
 
-	public void setFecha_nacimiento_empleado(String fecha_nacimiento_empleado) {
+	public void setFecha_nacimiento_empleado(Date fecha_nacimiento_empleado) {
 		this.fecha_nacimiento_empleado = fecha_nacimiento_empleado;
 	}
 
-	public String getFecha_registro_empleado() {
+	public Date getFecha_registro_empleado() {
 		return fecha_registro_empleado;
 	}
 
-	public void setFecha_registro_empleado(String fecha_registro_empleado) {
+	public void setFecha_registro_empleado(Date fecha_registro_empleado) {
 		this.fecha_registro_empleado = fecha_registro_empleado;
 	}
 
-	public String getFecha_inicio_labores_empleado() {
+	public Date getFecha_inicio_labores_empleado() {
 		return fecha_inicio_labores_empleado;
 	}
 
-	public void setFecha_inicio_labores_empleado(String fecha_inicio_labores_empleado) {
+	public void setFecha_inicio_labores_empleado(Date fecha_inicio_labores_empleado) {
 		this.fecha_inicio_labores_empleado = fecha_inicio_labores_empleado;
 	}
 

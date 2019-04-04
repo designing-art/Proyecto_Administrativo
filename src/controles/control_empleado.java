@@ -12,41 +12,41 @@ import formularios.registro_empleados;
 
 public class control_empleado implements ActionListener {
 
-    private empleado modEmpleado;
-    private consultas_empleado modCEmpleado;
-    private registro_empleados frmEmpleado;
+    private empleado claseEmpleado;
+    private consultas_empleado consultaEmpleado;
+    private registro_empleados formularioEmpleado;
 
     public control_empleado(empleado modEmpleado, consultas_empleado modCempleado, registro_empleados frmEmpleado) {
-        this.modEmpleado = modEmpleado;
-        this.modCEmpleado = modCempleado;
-        this.frmEmpleado = frmEmpleado;
-        this.frmEmpleado.btnGuardar.addActionListener(this);
-        this.frmEmpleado.btnActualizar.addActionListener(this);
-        this.frmEmpleado.btnNuevo.addActionListener(this);
+        this.claseEmpleado = modEmpleado;
+        this.consultaEmpleado = modCempleado;
+        this.formularioEmpleado = frmEmpleado;
+        this.formularioEmpleado.btnGuardarEmpleado.addActionListener(this);
+        this.formularioEmpleado.btnActualizarEmpleado.addActionListener(this);
+        this.formularioEmpleado.btnNuevoEmpleado.addActionListener(this);
+        this.formularioEmpleado.btnCancelarEmpleado.addActionListener(this);
+        this.formularioEmpleado.btnEmpleados.addActionListener(this);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == frmEmpleado.btnGuardar) {
-            modEmpleado.setId_empleado(Integer.parseInt(frmEmpleado.txtcodigo.getText()));
-            modEmpleado.setNombres_empleado(frmEmpleado.txtnombres.getText());
-            modEmpleado.setApellidos_empleado(frmEmpleado.txtapellidos.getText());
-            modEmpleado.setIdentidad_empleado(frmEmpleado.txtidentidad.getText());
-            modEmpleado.setGenero_empleado(frmEmpleado.cbxgenero.getSelectedItem().toString());
-            modEmpleado.setEdad_empleado(Integer.parseInt(frmEmpleado.txtedad.getText()));
-            modEmpleado.setTelefono1_empleado(frmEmpleado.txttelefono1.getText());
-            modEmpleado.setTelefono2_empleado(frmEmpleado.txttelefono2.getText());
-            modEmpleado.setCorreo_empleado(frmEmpleado.txtcorreo.getText());
-            modEmpleado.setDireccion_empleado(frmEmpleado.txtdireccion.getText());
-            modEmpleado.setReferencia_empleado(frmEmpleado.txtnombrereferencia.getText());
-            modEmpleado.setTelefono_referencia(frmEmpleado.txttelefonoreferencia.getText());
-            modEmpleado.setFecha_nacimiento_empleado(frmEmpleado.date);
-            modEmpleado.setFecha_registro_empleado(Date.valueOf(frmEmpleado.txtfechanacimiento.ge()));
-            modEmpleado.setFecha_inicio_labores_empleado(frmEmpleado.txtfechalabores.getText());
-            modEmpleado.setEstado_empleado(frmEmpleado.cbxestado.getSelectedItem().toString());
+        if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
+            claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+            claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+            claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+            claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+            claseEmpleado.setEdad_empleado(Integer.parseInt(formularioEmpleado.txtEdadEmpleado.getText()));
+            claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText());
+            claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText());
+            claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText());
+            claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText());
+            claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText());
+            claseEmpleado.setFecha_nacimiento_empleado(Date.valueOf(formularioEmpleado.dateFechaNacimiento.getToolTipText()));
+            claseEmpleado.setFecha_registro_empleado((Date)formularioEmpleado.dateFechaRegistro.getDate());
+            claseEmpleado.setFecha_inicio_labores_empleado((Date)formularioEmpleado.dateFechaLabores.getDate());
+            claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
             
-            if(modCEmpleado.registrar(modEmpleado))
+            if(consultaEmpleado.registrar(claseEmpleado))
             {
                 JOptionPane.showMessageDialog(null, "Registro Guardado");
                 limpiar();
@@ -56,26 +56,25 @@ public class control_empleado implements ActionListener {
             }
         }
         
-        if (e.getSource() == frmEmpleado.btnActualizar) {
+        if (e.getSource() == formularioEmpleado.btnActualizarEmpleado) {
             
-            modEmpleado.setId_empleado(Integer.parseInt(frmEmpleado.txtcodigo.getText()));
-            modEmpleado.setNombres_empleado(frmEmpleado.txtnombres.getText());
-            modEmpleado.setApellidos_empleado(frmEmpleado.txtapellidos.getText());
-            modEmpleado.setIdentidad_empleado(frmEmpleado.txtidentidad.getText());
-            modEmpleado.setGenero_empleado(frmEmpleado.txtgenero.getText());
-            modEmpleado.setEdad_empleado(Integer.parseInt(frmEmpleado.txtedad.getText()));
-            modEmpleado.setTelefono1_empleado(frmEmpleado.txttelefono1.getText());
-            modEmpleado.setTelefono2_empleado(frmEmpleado.txttelefono2.getText());
-            modEmpleado.setCorreo_empleado(frmEmpleado.txtcorreo.getText());
-            modEmpleado.setDireccion_empleado(frmEmpleado.txtdireccion.getText());
-            modEmpleado.setReferencia_empleado(frmEmpleado.txtnombrereferencia.getText());
-            modEmpleado.setTelefono_referencia(frmEmpleado.txttelefonoreferencia.getText());
-            modEmpleado.setFecha_nacimiento_empleado(frmEmpleado.txtfechanacimiento.getText());
-            modEmpleado.setFecha_registro_empleado(frmEmpleado.txtfecharegistro.getText());
-            modEmpleado.setFecha_inicio_labores_empleado(frmEmpleado.txtfechalabores.getText());
-            modEmpleado.setEstado_empleado(frmEmpleado.txtestado.getText());
-            
-            if(modCEmpleado.modificar(modEmpleado))
+        	  claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));
+              claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+              claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+              claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+              claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+              claseEmpleado.setEdad_empleado(Integer.parseInt(formularioEmpleado.txtEdadEmpleado.getText()));
+              claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText());
+              claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText());
+              claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText());
+              claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText());
+              claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText());
+              claseEmpleado.setFecha_nacimiento_empleado((Date) formularioEmpleado.dateFechaNacimiento.getDate());
+              claseEmpleado.setFecha_registro_empleado((Date)formularioEmpleado.dateFechaRegistro.getDate());
+              claseEmpleado.setFecha_inicio_labores_empleado((Date)formularioEmpleado.dateFechaLabores.getDate());
+              claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
+             
+            if(consultaEmpleado.modificar(claseEmpleado))
             {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
                 limpiar();
@@ -85,50 +84,9 @@ public class control_empleado implements ActionListener {
             }
         }
         
-        if (e.getSource() == frmEmpleado.btnBorrar) {
-            modEmpleado.setId_empleado(Integer.parseInt(frmEmpleado.txtcodigo.getText()));
-            
-            if(modCEmpleado.eliminar(modEmpleado))
-            {
-                JOptionPane.showMessageDialog(null, "Registro Eliminado");
-                limpiar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar");
-                limpiar();
-            }
-        }
         
-        if (e.getSource() == frmEmpleado.btnBuscar) {
-            modEmpleado.setId_empleado(Integer.parseInt(frmEmpleado.txtcodigo.getText()));
-            
-            if(modCEmpleado.buscar(modEmpleado))
-            {
-            	
-            	frmEmpleado.txtcodigo.setText(String.valueOf(modEmpleado.getId_empleado()));
-                frmEmpleado.txtnombres.setText(modEmpleado.getNombres_empleado());
-                frmEmpleado.txtapellidos.setText(modEmpleado.getApellidos_empleado());
-                frmEmpleado.txtidentidad.setText(modEmpleado.getIdentidad_empleado());
-                frmEmpleado.txtgenero.setText(modEmpleado.getGenero_empleado());
-                frmEmpleado.txtedad.setText(String.valueOf(modEmpleado.getEdad_empleado()));
-                frmEmpleado.txttelefono1.setText(modEmpleado.getTelefono1_empleado());
-                frmEmpleado.txttelefono2.setText(modEmpleado.getTelefono2_empleado());
-                frmEmpleado.txtcorreo.setText(modEmpleado.getCorreo_empleado());
-                frmEmpleado.txtdireccion.setText(modEmpleado.getDireccion_empleado());
-                frmEmpleado.txtnombrereferencia.setText(modEmpleado.getReferencia_empleado());
-                frmEmpleado.txttelefonoreferencia.setText(modEmpleado.getTelefono_referencia());
-                frmEmpleado.txtfechanacimiento.setText(modEmpleado.getFecha_nacimiento_empleado());
-                frmEmpleado.txtfecharegistro.setText(modEmpleado.getFecha_registro_empleado());
-                frmEmpleado.txtfechalabores.setText(modEmpleado.getFecha_inicio_labores_empleado());
-                frmEmpleado.txtestado.setText(modEmpleado.getEstado_empleado());
-                
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro registro");
-                limpiar();
-            }
-        }
         
-        if (e.getSource() == frmEmpleado.btnNuevo) {
+        if (e.getSource() == formularioEmpleado.btnNuevoEmpleado) {
             limpiar();
         }
 
@@ -136,22 +94,21 @@ public class control_empleado implements ActionListener {
     
     public void limpiar()
     {
-    	frmEmpleado.txtcodigo.setText(null);
-        frmEmpleado.txtnombres.setText(null);
-        frmEmpleado.txtapellidos.setText(null);
-        frmEmpleado.txtidentidad.setText(null);
-        frmEmpleado.txtgenero.setText(null);
-        frmEmpleado.txtedad.setText(null);
-        frmEmpleado.txttelefono1.setText(null);
-        frmEmpleado.txttelefono2.setText(null);
-        frmEmpleado.txtcorreo.setText(null);
-        frmEmpleado.txtdireccion.setText(null);
-        frmEmpleado.txtnombrereferencia.setText(null);
-        frmEmpleado.txttelefonoreferencia.setText(null);
-        frmEmpleado.txtfechanacimiento.setText(null);
-        frmEmpleado.txtfecharegistro.setText(null);
-        frmEmpleado.txtfechalabores.setText(null);
-        frmEmpleado.txtestado.setText(null);
+    	formularioEmpleado.txtCodigoEmpleado.setText(null);
+        formularioEmpleado.txtNombresEmpleado.setText(null);
+        formularioEmpleado.txtApellidosEmpleado.setText(null);
+        formularioEmpleado.txtIdentidadEmpleado.setText(null);
+        formularioEmpleado.cbxGeneroEmpleado.setDefaultLocale(null);
+        formularioEmpleado.txtEdadEmpleado.setText(null);
+        formularioEmpleado.txtTelefonoEmpleado.setText(null);
+        formularioEmpleado.txtCorreoEmpleado.setText(null);
+        formularioEmpleado.txtDireccionEmpleado.setText(null);
+        formularioEmpleado.txtNombreReferencia.setText(null);
+        formularioEmpleado.txtTelefonoReferencia.setText(null);
+        formularioEmpleado.dateFechaLabores.setToolTipText(null);
+        formularioEmpleado.dateFechaNacimiento.setToolTipText(null);
+        formularioEmpleado.dateFechaRegistro.setToolTipText(null);
+        formularioEmpleado.cbxEstadoEmpleado.setToolTipText(null);
     }
 
 	

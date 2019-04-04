@@ -12,8 +12,12 @@ import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
 import clases.cargo;
+import clases.contrato_empleado;
+import clases.empleado;
 import consultas.consultas_cargo;
+import consultas.consultas_empleado;
 import controles.control_cargo;
+import controles.control_empleado;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -176,10 +180,19 @@ public class ventana_principal extends JFrame {
 		panel.add(registroEmpleado);
 		registroEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				registro_empleados empleados = new registro_empleados();
-				empleados.setVisible(true);
-				empleados.setLocationRelativeTo(null);
-				dispose();
+				empleado claseEmpleado = new empleado();
+		        consultas_empleado consultaEmpleado = new consultas_empleado();
+		        registro_empleados formularioEmpleado = new registro_empleados();
+		        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado);
+		        formularioEmpleado.setVisible(true);
+		        formularioEmpleado.setLocationRelativeTo(null);
+		        formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+		        formularioEmpleado.obtenerUltimoId();
+				formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+				formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+				formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+				formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+				dispose();	
 				
 			}
 		});

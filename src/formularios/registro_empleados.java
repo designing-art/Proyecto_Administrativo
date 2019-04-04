@@ -17,6 +17,9 @@ import java.awt.Image;
 import javax.swing.SpringLayout;
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -24,35 +27,51 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import clases.cargo;
+import conexion.conexion;
 import consultas.consultas_cargo;
 import controles.control_cargo;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class registro_empleados extends JFrame {
 
+	JPanel contentPane;
+	public JTextField txtCodigoEmpleado;
+	public JTextField txtNombresEmpleado;
+	public JTextField txtApellidosEmpleado;
+	public JTextField txtCorreoEmpleado;
+	public JTextField txtIdentidadEmpleado;
+	public JTextField txtNombreReferencia;
+	public JTextField txtTelefonoReferencia;
+	public JTextField txtEdadEmpleado;
+	public JTextField txtTelefonoEmpleado;
+	public JComboBox<?> cbxGeneroEmpleado;
+	public JComboBox<?> cbxEstadoEmpleado;
+	public JLabel lblFotoEmpleado;
+	public JScrollPane scrollPane;
+	public JTextArea txtDireccionEmpleado;
+	public JDateChooser dateFechaLabores;
+	public JDateChooser dateFechaRegistro;
+	public JDateChooser dateFechaNacimiento;
 
-	 JPanel contentPane;
-	 public JTextField txtcodigo;
-	 public JTextField txtnombres;
-	 public JTextField txtapellidos;
-	 public JTextField txtdireccion;
-	 public JTextField txtcorreo;
-	 public JTextField txtidentidad;
-	 public JTextField txttelefono2;
-	 public JTextField txtnombrereferencia;
-	 public JTextField txttelefonoreferencia;
-	 public JTextField txtedad;
-	 public JTextField txttelefono1;
-	 public JButton btnGuardar;
-	 public JButton btnActualizar;
-	 public JButton btnNuevo;
-	 public JButton btnSalir;
-	 
-	 public JButton btnBuscar;
-	 public JTextField txtbuscar;
-	 public JComboBox<?> cbxgenero;
-	 public JComboBox<?> cbxestado;
-	 
-	 
+	public JButton btnTomarFoto;
+	public JButton btnSubirFoto;
+	
+	public JButton btnNuevoEmpleado;
+	public JButton btnGuardarEmpleado;
+	public JButton btnActualizarEmpleado;
+	public JButton btnCancelarEmpleado;
+	public JButton btnEmpleados;
+
+	public JTextField txtHoraEntrada;
+	public JTextField txtHoraSalida;
+	public JTextField txtTiempoContrato;
+	public JTextField txtTipoContrato;
+	public JTextField txtNombreCargo;
+	public JTextField txtSueldoCargo;
+	public JTextField txtFuncionesCargo;
+
+	public JButton btnRegresar;
 
 	/**
 	 * Launch the application.
@@ -77,279 +96,451 @@ public class registro_empleados extends JFrame {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 529);
+		setBounds(100, 100, 800, 720);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-
-		
-		JLabel lblRegistroDeEmpleados = new JLabel("Registro del empleado.");
-		lblRegistroDeEmpleados.setBounds(245, 4, 197, 21);
-		lblRegistroDeEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		contentPane.add(lblRegistroDeEmpleados);
-		
-		JLabel lblNombres = new JLabel("Nombres :");
-		lblNombres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblNombres.setBounds(46, 131, 83, 14);
-		contentPane.add(lblNombres);
-		
-		JLabel lblApellidos = new JLabel("Apellidos :");
-		lblApellidos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblApellidos.setBounds(46, 155, 83, 14);
-		contentPane.add(lblApellidos);
-		
-		JLabel lblDireccion = new JLabel("Direccion :");
-		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDireccion.setBounds(46, 309, 83, 14);
-		contentPane.add(lblDireccion);
-		
-		JLabel lblCodigo = new JLabel("Codigo :");
-		lblCodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCodigo.setBounds(46, 105, 83, 17);
-		contentPane.add(lblCodigo);
-		
-		JLabel lblCorreo = new JLabel("Correo :");
-		lblCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCorreo.setBounds(46, 259, 83, 14);
-		contentPane.add(lblCorreo);
-		
-		JLabel lblGenero = new JLabel("Genero :");
-		lblGenero.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblGenero.setBounds(46, 234, 76, 14);
-		contentPane.add(lblGenero);
-		
-		JLabel lblIdentidad = new JLabel("Identidad :");
-		lblIdentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblIdentidad.setBounds(46, 181, 83, 14);
-		contentPane.add(lblIdentidad);
-		
-		JLabel lblReferencia = new JLabel("Nombre completo de referencia :");
-		lblReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblReferencia.setBounds(379, 214, 248, 23);
-		contentPane.add(lblReferencia);
-		
-		JPanel pnlfotoempleado = new JPanel();
-		pnlfotoempleado.setBounds(465, 83, 126, 132);
-		contentPane.add(pnlfotoempleado);
-		
-		JLabel lblFotografia = new JLabel("Fotografia :");
-		lblFotografia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFotografia.setBounds(379, 80, 93, 17);
-		contentPane.add(lblFotografia);
-		
-		JButton btnTomar = new JButton("Subir");
-		btnTomar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnTomar.setBounds(379, 136, 76, 23);
-		contentPane.add(btnTomar);
-		
-		JButton button = new JButton("Tomar");
-		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button.setBounds(379, 108, 76, 23);
-		contentPane.add(button);
-		
-		JLabel lblTelefonoDeLa = new JLabel("Telefono de Referencia :");
-		lblTelefonoDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTelefonoDeLa.setBounds(379, 259, 202, 14);
-		contentPane.add(lblTelefonoDeLa);
-		
-		JLabel lblFechaDeNacimiento = new JLabel("Fecha de nacimiento :");
-		lblFechaDeNacimiento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaDeNacimiento.setBounds(46, 364, 151, 28);
-		contentPane.add(lblFechaDeNacimiento);
-		
-		JLabel lblFechaDeRegistro = new JLabel("Fecha de Registro :");
-		lblFechaDeRegistro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaDeRegistro.setBounds(46, 403, 151, 17);
-		contentPane.add(lblFechaDeRegistro);
-		
-		JLabel lblFechaDeComienso = new JLabel("Fecha Inicio Labores :");
-		lblFechaDeComienso.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaDeComienso.setBounds(46, 430, 151, 28);
-		contentPane.add(lblFechaDeComienso);
-		
-		JLabel lblEstado = new JLabel("Estado :");
-		lblEstado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblEstado.setBounds(379, 306, 63, 14);
-		contentPane.add(lblEstado);
-		
-		txtcodigo = new JTextField();
-		txtcodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtcodigo.setEditable(false);
-		txtcodigo.setBounds(120, 103, 47, 20);
-		contentPane.add(txtcodigo);
-		txtcodigo.setColumns(10);
-		
-		txtnombres = new JTextField();
-		txtnombres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtnombres.setBounds(120, 128, 215, 20);
-		contentPane.add(txtnombres);
-		txtnombres.setColumns(10);
-		
-		txtapellidos = new JTextField();
-		txtapellidos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtapellidos.setBounds(120, 152, 215, 20);
-		txtapellidos.setColumns(10);
-		contentPane.add(txtapellidos);
-		
-		txtdireccion = new JTextField();
-		txtdireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtdireccion.setBounds(120, 309, 215, 48);
-		txtdireccion.setColumns(10);
-		contentPane.add(txtdireccion);
-		
-		txtcorreo = new JTextField();
-		txtcorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtcorreo.setBounds(120, 259, 215, 20);
-		txtcorreo.setColumns(10);
-		contentPane.add(txtcorreo);
-		
-		txtidentidad = new JTextField();
-		txtidentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtidentidad.setBounds(120, 178, 215, 20);
-		txtidentidad.setColumns(10);
-		contentPane.add(txtidentidad);
-		
-		txttelefono2 = new JTextField();
-		txttelefono2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txttelefono2.setBounds(236, 284, 99, 20);
-		txttelefono2.setColumns(10);
-		contentPane.add(txttelefono2);
-		
-		txtnombrereferencia = new JTextField();
-		txtnombrereferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtnombrereferencia.setBounds(379, 235, 260, 20);
-		txtnombrereferencia.setColumns(10);
-		contentPane.add(txtnombrereferencia);
-		
-		txttelefonoreferencia = new JTextField();
-		txttelefonoreferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txttelefonoreferencia.setBounds(379, 275, 260, 20);
-		txttelefonoreferencia.setColumns(10);
-		contentPane.add(txttelefonoreferencia);
-		
-		JLabel lblDatosGenerales = new JLabel("Datos del Registro :");
-		lblDatosGenerales.setBounds(46, 80, 151, 14);
-		lblDatosGenerales.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		contentPane.add(lblDatosGenerales);
-		
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardar.setBounds(540, 433, 99, 23);
-		btnGuardar.setBackground(new Color(0, 255, 127));
-		contentPane.add(btnGuardar);
-		
-		btnSalir = new JButton("Regresar");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ventana_principal principal = new ventana_principal();
-		 		principal.setVisible(true);
-		 		principal.setLocationRelativeTo(null);
-				dispose();
-			}
-		});
-		btnSalir.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnSalir.setBounds(10, 4, 99, 23);
-		btnSalir.setBackground(new Color(255, 127, 80));
-		contentPane.add(btnSalir);
-		
-		JLabel lblEdad = new JLabel("Edad :");
-		lblEdad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblEdad.setBounds(46, 206, 83, 14);
-		contentPane.add(lblEdad);
-		
-		txtedad = new JTextField();
-		txtedad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtedad.setBounds(120, 203, 50, 20);
-		contentPane.add(txtedad);
-		txtedad.setColumns(10);
-		
-		JLabel lblTelefonos = new JLabel("Telefonos :");
-		lblTelefonos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTelefonos.setBounds(46, 285, 83, 14);
-		contentPane.add(lblTelefonos);
-		
-		txttelefono1 = new JTextField();
-		txttelefono1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txttelefono1.setBounds(120, 284, 93, 20);
-		txttelefono1.setColumns(10);
-		contentPane.add(txttelefono1);
-		
-		btnNuevo = new JButton("Nuevo");
-		btnNuevo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnNuevo.setBackground(new Color(0, 139, 139));
-		btnNuevo.setBounds(379, 433, 99, 23);
-		contentPane.add(btnNuevo);
-		
-		btnActualizar = new JButton("Actualizar");
-		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizar.setBackground(new Color(240, 230, 140));
-		btnActualizar.setBounds(379, 400, 99, 23);
-		contentPane.add(btnActualizar);
-		
-		cbxgenero = new JComboBox();
-		cbxgenero.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxgenero.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
-		cbxgenero.setBounds(120, 231, 50, 20);
-		contentPane.add(cbxgenero);
-		
-		cbxestado = new JComboBox();
-		cbxestado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxestado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-		cbxestado.setBounds(439, 303, 76, 20);
-		contentPane.add(cbxestado);
-		
-		JButton btnListaDeEmpleados = new JButton("Siguiente");
-		btnListaDeEmpleados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cargo clase = new cargo();
-		        consultas_cargo consulta = new consultas_cargo();
-		        registro_cargos formulario = new registro_cargos();
-		        control_cargo control = new control_cargo(clase, consulta, formulario);
-		        formulario.setVisible(true);
-		        formulario.setLocationRelativeTo(null);
-				dispose();
-			}
-		});
-		btnListaDeEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnListaDeEmpleados.setBackground(new Color(0, 255, 127));
-		btnListaDeEmpleados.setBounds(585, 4, 99, 23);
-		contentPane.add(btnListaDeEmpleados);
-		
-		JDateChooser dateFechaNacimiento = new JDateChooser();
-		dateFechaNacimiento.setDateFormatString("dd-MMM-yyyy HH:mm:ss");
-		dateFechaNacimiento.setBounds(184, 368, 151, 20);
-		contentPane.add(dateFechaNacimiento);
-		
-		JDateChooser dateFechaRegistro = new JDateChooser();
-		dateFechaRegistro.setDateFormatString("dd-MMM-yyyy HH:mm:ss");
-		dateFechaRegistro.setBounds(184, 399, 151, 20);
-		contentPane.add(dateFechaRegistro);
-		
-		JDateChooser dateFechaLabores = new JDateChooser();
-		dateFechaLabores.setDateFormatString("dd-MMM-yyyy HH:mm:ss");
-		dateFechaLabores.setBounds(184, 431, 151, 20);
-		contentPane.add(dateFechaLabores);
-		
-		JLabel lblMensajeConfirmacionRegistroEmpleado = new JLabel("");
-		lblMensajeConfirmacionRegistroEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblMensajeConfirmacionRegistroEmpleado.setBounds(379, 400, 260, 58);
-		contentPane.add(lblMensajeConfirmacionRegistroEmpleado);
-		
-		JLabel label_1 = new JLabel("");
-		label_1.setBounds(601, 83, 46, 39);
-		contentPane.add(label_1);
 		final ImageIcon icono1 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon logo1 = new ImageIcon(icono1.getImage().getScaledInstance(label_1.getWidth(),label_1.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/material/usuario.png"));
+
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(18, 36, 766, 644);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JLabel lblDatosGenerales = new JLabel("Datos del Registro :");
+		lblDatosGenerales.setBounds(57, 60, 151, 14);
+		panel.add(lblDatosGenerales);
+		lblDatosGenerales.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		JLabel lblCodigo = new JLabel("1. Codigo :");
+		lblCodigo.setBounds(57, 85, 83, 17);
+		panel.add(lblCodigo);
+		lblCodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtCodigoEmpleado = new JTextField();
+		txtCodigoEmpleado.setBounds(140, 85, 47, 20);
+		panel.add(txtCodigoEmpleado);
+		txtCodigoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtCodigoEmpleado.setEditable(false);
+		txtCodigoEmpleado.setColumns(10);
+
+		JLabel lblNombres = new JLabel("2. Nombres :");
+		lblNombres.setBounds(57, 111, 83, 14);
+		panel.add(lblNombres);
+		lblNombres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtNombresEmpleado = new JTextField();
+		txtNombresEmpleado.setBounds(140, 108, 210, 20);
+		panel.add(txtNombresEmpleado);
+		txtNombresEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtNombresEmpleado.setColumns(10);
+
+		JLabel lblApellidos = new JLabel("3. Apellidos :");
+		lblApellidos.setBounds(57, 135, 83, 14);
+		panel.add(lblApellidos);
+		lblApellidos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtApellidosEmpleado = new JTextField();
+		txtApellidosEmpleado.setBounds(140, 132, 210, 20);
+		panel.add(txtApellidosEmpleado);
+		txtApellidosEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtApellidosEmpleado.setColumns(10);
+
+		JLabel lblIdentidad = new JLabel("4. Identidad :");
+		lblIdentidad.setBounds(57, 161, 83, 14);
+		panel.add(lblIdentidad);
+		lblIdentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtIdentidadEmpleado = new JTextField();
+		txtIdentidadEmpleado.setBounds(140, 158, 210, 20);
+		panel.add(txtIdentidadEmpleado);
+		txtIdentidadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtIdentidadEmpleado.setColumns(10);
+
+		JLabel lblEdad = new JLabel("5. Edad :");
+		lblEdad.setBounds(57, 186, 83, 14);
+		panel.add(lblEdad);
+		lblEdad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtEdadEmpleado = new JTextField();
+		txtEdadEmpleado.setBounds(140, 183, 50, 20);
+		panel.add(txtEdadEmpleado);
+		txtEdadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtEdadEmpleado.setColumns(10);
+
+		JLabel lblGenero = new JLabel("6. Genero :");
+		lblGenero.setBounds(57, 214, 76, 14);
+		panel.add(lblGenero);
+		lblGenero.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		cbxGeneroEmpleado = new JComboBox();
+		cbxGeneroEmpleado.setBounds(140, 211, 50, 20);
+		panel.add(cbxGeneroEmpleado);
+		cbxGeneroEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxGeneroEmpleado.setModel(new DefaultComboBoxModel(new String[] { "F", "M" }));
+
+		JLabel lblCorreo = new JLabel("7. Correo :");
+		lblCorreo.setBounds(57, 239, 83, 14);
+		panel.add(lblCorreo);
+		lblCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtCorreoEmpleado = new JTextField();
+		txtCorreoEmpleado.setBounds(140, 239, 210, 20);
+		panel.add(txtCorreoEmpleado);
+		txtCorreoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtCorreoEmpleado.setColumns(10);
+
+		JLabel lblTelefonos = new JLabel("8. Telefono :");
+		lblTelefonos.setBounds(57, 265, 83, 14);
+		panel.add(lblTelefonos);
+		lblTelefonos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtTelefonoEmpleado = new JTextField();
+		txtTelefonoEmpleado.setBounds(140, 264, 210, 20);
+		panel.add(txtTelefonoEmpleado);
+		txtTelefonoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtTelefonoEmpleado.setColumns(10);
+
+		JLabel lblDireccion = new JLabel("9. Direccion :");
+		lblDireccion.setBounds(57, 290, 83, 14);
+		panel.add(lblDireccion);
+		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JLabel lblFechaDeNacimiento = new JLabel("10. Fecha de nacimiento :");
+		lblFechaDeNacimiento.setBounds(57, 349, 140, 20);
+		panel.add(lblFechaDeNacimiento);
+		lblFechaDeNacimiento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JLabel lblFechaDeRegistro = new JLabel("11. Fecha de registro :");
+		lblFechaDeRegistro.setBounds(57, 380, 140, 20);
+		panel.add(lblFechaDeRegistro);
+		lblFechaDeRegistro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JLabel lblFechaDeComienso = new JLabel("12. Fecha inicio labores :");
+		lblFechaDeComienso.setBounds(57, 411, 140, 20);
+		panel.add(lblFechaDeComienso);
+		lblFechaDeComienso.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		dateFechaLabores = new JDateChooser();
+		dateFechaLabores.setBounds(198, 411, 151, 20);
+		panel.add(dateFechaLabores);
+		dateFechaLabores.setDateFormatString("dd-MMM-yyyy");
+
+		dateFechaRegistro = new JDateChooser();
+		dateFechaRegistro.setBounds(198, 380, 151, 20);
+		panel.add(dateFechaRegistro);
+		dateFechaRegistro.setDateFormatString("dd-MMM-yyyy");
+
+		dateFechaNacimiento = new JDateChooser();
+		dateFechaNacimiento.setBounds(198, 349, 151, 20);
+		panel.add(dateFechaNacimiento);
+		dateFechaNacimiento.setDateFormatString("dd-MMM-yyyy");
+
+		JLabel label_1 = new JLabel("");
+		label_1.setBounds(648, 60, 63, 58);
+		panel.add(label_1);
+		final ImageIcon logo1 = new ImageIcon(
+				icono1.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
 		label_1.setIcon(logo1);
-		
+
+		JLabel lblReferencia = new JLabel("13. Nombre completo de referencia :");
+		lblReferencia.setBounds(56, 442, 248, 23);
+		panel.add(lblReferencia);
+		lblReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtNombreReferencia = new JTextField();
+		txtNombreReferencia.setBounds(56, 463, 293, 20);
+		panel.add(txtNombreReferencia);
+		txtNombreReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtNombreReferencia.setColumns(10);
+
+		JLabel lblTelefonoDeLa = new JLabel("14. Telefono de referencia :");
+		lblTelefonoDeLa.setBounds(56, 487, 202, 14);
+		panel.add(lblTelefonoDeLa);
+		lblTelefonoDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtTelefonoReferencia = new JTextField();
+		txtTelefonoReferencia.setBounds(56, 503, 293, 20);
+		panel.add(txtTelefonoReferencia);
+		txtTelefonoReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtTelefonoReferencia.setColumns(10);
+
+		JLabel lblEstado = new JLabel("15. Estado :");
+		lblEstado.setBounds(56, 534, 83, 14);
+		panel.add(lblEstado);
+		lblEstado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		cbxEstadoEmpleado = new JComboBox();
+		cbxEstadoEmpleado.setBounds(139, 534, 72, 20);
+		panel.add(cbxEstadoEmpleado);
+		cbxEstadoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxEstadoEmpleado.setModel(new DefaultComboBoxModel(new String[] { "Activo", "Inactivo" }));
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.LIGHT_GRAY);
+		panel_1.setBounds(387, 208, 324, 293);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+
+		JLabel lblAsignaciones = new JLabel("Asignaciones : ");
+		lblAsignaciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblAsignaciones.setBounds(10, 11, 151, 14);
+		panel_1.add(lblAsignaciones);
+
+		JLabel lblCargo = new JLabel("Cargo :");
+		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblCargo.setBounds(10, 36, 83, 14);
+		panel_1.add(lblCargo);
+
+		JComboBox cbxCargoAsignado = new JComboBox();
+		cbxCargoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxCargoAsignado.setBounds(81, 33, 151, 20);
+		panel_1.add(cbxCargoAsignado);
+
+		JLabel lblHorario = new JLabel("Horario :");
+		lblHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblHorario.setBounds(10, 156, 83, 14);
+		panel_1.add(lblHorario);
+
+		JComboBox cbxHorarioAsignado = new JComboBox();
+		cbxHorarioAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxHorarioAsignado.setBounds(81, 153, 151, 20);
+		panel_1.add(cbxHorarioAsignado);
+
+		JLabel lblContrato = new JLabel("Contrato :");
+		lblContrato.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblContrato.setBounds(10, 225, 83, 14);
+		panel_1.add(lblContrato);
+
+		JComboBox cbxContratoAsignado = new JComboBox();
+		cbxContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxContratoAsignado.setBounds(81, 222, 151, 20);
+		panel_1.add(cbxContratoAsignado);
+
+		txtHoraEntrada = new JTextField();
+		txtHoraEntrada.setEditable(false);
+		txtHoraEntrada.setBounds(10, 196, 142, 20);
+		panel_1.add(txtHoraEntrada);
+		txtHoraEntrada.setColumns(10);
+
+		txtHoraSalida = new JTextField();
+		txtHoraSalida.setEditable(false);
+		txtHoraSalida.setColumns(10);
+		txtHoraSalida.setBounds(172, 196, 142, 20);
+		panel_1.add(txtHoraSalida);
+
+		JLabel lblEntra = new JLabel("Entrada :");
+		lblEntra.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblEntra.setBounds(10, 181, 83, 14);
+		panel_1.add(lblEntra);
+
+		JLabel lblSalida = new JLabel("Salida :");
+		lblSalida.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblSalida.setBounds(172, 181, 100, 14);
+		panel_1.add(lblSalida);
+
+		txtTiempoContrato = new JTextField();
+		txtTiempoContrato.setEditable(false);
+		txtTiempoContrato.setColumns(10);
+		txtTiempoContrato.setBounds(172, 256, 142, 20);
+		panel_1.add(txtTiempoContrato);
+
+		JLabel lblTipo = new JLabel("Tipo :");
+		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipo.setBounds(10, 241, 83, 14);
+		panel_1.add(lblTipo);
+
+		txtTipoContrato = new JTextField();
+		txtTipoContrato.setEditable(false);
+		txtTipoContrato.setColumns(10);
+		txtTipoContrato.setBounds(10, 256, 142, 20);
+		panel_1.add(txtTipoContrato);
+
+		JLabel lblTiempo = new JLabel("Tiempo :");
+		lblTiempo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTiempo.setBounds(172, 241, 83, 14);
+		panel_1.add(lblTiempo);
+
+		JLabel lblNombreDelCargo = new JLabel("Nombre del cargo :");
+		lblNombreDelCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblNombreDelCargo.setBounds(10, 58, 136, 14);
+		panel_1.add(lblNombreDelCargo);
+
+		txtNombreCargo = new JTextField();
+		txtNombreCargo.setEditable(false);
+		txtNombreCargo.setColumns(10);
+		txtNombreCargo.setBounds(10, 73, 142, 20);
+		panel_1.add(txtNombreCargo);
+
+		JLabel lblSueldo = new JLabel("Sueldo");
+		lblSueldo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblSueldo.setBounds(172, 58, 100, 14);
+		panel_1.add(lblSueldo);
+
+		txtSueldoCargo = new JTextField();
+		txtSueldoCargo.setEditable(false);
+		txtSueldoCargo.setColumns(10);
+		txtSueldoCargo.setBounds(172, 73, 142, 20);
+		panel_1.add(txtSueldoCargo);
+
+		JLabel lblFunciones = new JLabel("Funciones :");
+		lblFunciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblFunciones.setBounds(10, 96, 83, 14);
+		panel_1.add(lblFunciones);
+
+		txtFuncionesCargo = new JTextField();
+		txtFuncionesCargo.setEditable(false);
+		txtFuncionesCargo.setColumns(10);
+		txtFuncionesCargo.setBounds(10, 113, 304, 37);
+		panel_1.add(txtFuncionesCargo);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(140, 294, 210, 44);
+		panel.add(scrollPane);
+
+		txtDireccionEmpleado = new JTextArea();
+		scrollPane.setViewportView(txtDireccionEmpleado);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.LIGHT_GRAY);
+		panel_2.setBounds(59, 562, 290, 39);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+
+		JLabel label_2 = new JLabel("Usuario del sistema :");
+		label_2.setBounds(10, 14, 157, 14);
+		panel_2.add(label_2);
+		label_2.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Si", "No" }));
+		comboBox.setBounds(167, 11, 55, 20);
+		panel_2.add(comboBox);
+		comboBox.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JButton btnAsignarUsuario = new JButton("");
+		btnAsignarUsuario.setBackground(new Color(0, 128, 0));
+		btnAsignarUsuario.setBounds(232, 11, 48, 23);
+		panel_2.add(btnAsignarUsuario);
+
+		btnTomarFoto = new JButton("Tomar");
+		btnTomarFoto.setBackground(new Color(0, 255, 127));
+		btnTomarFoto.setBounds(387, 82, 83, 23);
+		panel.add(btnTomarFoto);
+
+		btnSubirFoto = new JButton("Subir");
+		btnSubirFoto.setBackground(new Color(250, 128, 114));
+		btnSubirFoto.setBounds(387, 107, 83, 23);
+		panel.add(btnSubirFoto);
+
+		JLabel lblFoto = new JLabel("16. Foto :");
+		lblFoto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblFoto.setBounds(387, 60, 83, 17);
+		panel.add(lblFoto);
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(491, 60, 140, 137);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
+
+		lblFotoEmpleado = new JLabel("");
+		lblFotoEmpleado.setBounds(0, 0, 139, 137);
+		panel_3.add(lblFotoEmpleado);
+		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(),
+				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoEmpleado.setIcon(logoFoto);
+
+		btnCancelarEmpleado = new JButton("Cancelar");
+		btnCancelarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnCancelarEmpleado.setBackground(new Color(0, 206, 209));
+		btnCancelarEmpleado.setBounds(491, 564, 99, 23);
+		panel.add(btnCancelarEmpleado);
+
+		btnActualizarEmpleado = new JButton("Actualizar");
+		btnActualizarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarEmpleado.setBackground(new Color(60, 179, 113));
+		btnActualizarEmpleado.setBounds(491, 534, 99, 23);
+		panel.add(btnActualizarEmpleado);
+
+		btnNuevoEmpleado = new JButton("Nuevo");
+		btnNuevoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnNuevoEmpleado.setBackground(new Color(107, 142, 35));
+		btnNuevoEmpleado.setBounds(387, 564, 99, 23);
+		panel.add(btnNuevoEmpleado);
+
+		btnGuardarEmpleado = new JButton("Guardar");
+		btnGuardarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarEmpleado.setBackground(new Color(60, 179, 113));
+		btnGuardarEmpleado.setBounds(387, 534, 99, 23);
+		panel.add(btnGuardarEmpleado);
+
+		btnEmpleados = new JButton("Empleados");
+		btnEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnEmpleados.setBackground(new Color(107, 142, 35));
+		btnEmpleados.setBounds(596, 512, 115, 89);
+		panel.add(btnEmpleados);
+
 		JLabel label = new JLabel();
-		label.setBounds(0, 34, 695, 455);
-		contentPane.add(label);
-		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(label.getWidth(),
-				label.getHeight(), Image.SCALE_DEFAULT));
+		label.setBounds(0, 0, 766, 644);
+		panel.add(label);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 		label.setIcon(logo);
+
+		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
+		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
+		lblRegistroYMantenimiento.setBounds(18, 0, 466, 39);
+		contentPane.add(lblRegistroYMantenimiento);
+
+		btnRegresar = new JButton("Regresar");
+		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresar.setBackground(new Color(255, 127, 80));
+		btnRegresar.setBounds(882, 10, 102, 23);
+		contentPane.add(btnRegresar);
+
+		JButton btnRegresar_1 = new JButton("Regresar");
+		btnRegresar_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresar_1.setBackground(new Color(255, 165, 0));
+		btnRegresar_1.setBounds(685, 10, 99, 23);
+		contentPane.add(btnRegresar_1);
+		btnRegresar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ventana_principal principal = new ventana_principal();
+				principal.setVisible(true);
+				principal.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
+
+	}
+
+	public void obtenerUltimoId() {
+		String ultimoValor = null;
+		int valor;
+		String id = null;
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM empleados ORDER BY id_empleado DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				ultimoValor = rsr.getString("id_empleado");
+				valor = Integer.parseInt(ultimoValor);
+				valor = valor + 1;
+				id = String.valueOf(valor);
+			}
+			txtCodigoEmpleado.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

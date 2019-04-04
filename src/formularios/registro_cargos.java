@@ -30,6 +30,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
@@ -141,7 +142,7 @@ public class registro_cargos extends JFrame {
 		txtSueldoCargo.setHorizontalAlignment(JTextField.RIGHT);
 		panelRegistro.add(txtSueldoCargo);
 		InputMap map2 = txtSueldoCargo.getInputMap(txtSueldoCargo.WHEN_FOCUSED);
-	      map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtSueldoCargo.addKeyListener(new KeyListener() {
 			@Override
@@ -163,7 +164,7 @@ public class registro_cargos extends JFrame {
 		txtHoraExtraCargo.setBounds(188, 201, 128, 20);
 		panelRegistro.add(txtHoraExtraCargo);
 		InputMap map = txtHoraExtraCargo.getInputMap(txtHoraExtraCargo.WHEN_FOCUSED);
-	      map.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		map.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtHoraExtraCargo.setColumns(10);
 		txtHoraExtraCargo.setHorizontalAlignment(JTextField.RIGHT);
 		txtHoraExtraCargo.addKeyListener(new KeyListener() {
@@ -235,7 +236,7 @@ public class registro_cargos extends JFrame {
 		txtFuncionesCargo.setBackground(new Color(192, 192, 192));
 		scrollPane.setViewportView(txtFuncionesCargo);
 		InputMap map5 = txtFuncionesCargo.getInputMap(txtFuncionesCargo.WHEN_FOCUSED);
-	      map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtNombreCargo = new JTextField();
 		txtNombreCargo.setHorizontalAlignment(SwingConstants.LEFT);
@@ -244,7 +245,7 @@ public class registro_cargos extends JFrame {
 		txtNombreCargo.setBounds(142, 141, 174, 20);
 		panelRegistro.add(txtNombreCargo);
 		InputMap map3 = txtNombreCargo.getInputMap(txtNombreCargo.WHEN_FOCUSED);
-	      map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
@@ -312,7 +313,7 @@ public class registro_cargos extends JFrame {
 		txtBusquedaCargos.setBounds(119, 64, 228, 21);
 		panelTablaCargos.add(txtBusquedaCargos);
 		InputMap map4 = txtBusquedaCargos.getInputMap(txtBusquedaCargos.WHEN_FOCUSED);
-	      map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaCargos.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -321,7 +322,7 @@ public class registro_cargos extends JFrame {
 			}
 
 			public void keyPressed(KeyEvent ke) {
-				
+
 			}
 
 			public void keyReleased(KeyEvent ke) {
@@ -382,6 +383,13 @@ public class registro_cargos extends JFrame {
 		for (int c = 0; c < tablaCargos.getColumnCount(); c++) {
 			Class<?> col_class = tablaCargos.getColumnClass(c);
 			tablaCargos.setDefaultEditor(col_class, null);
+			
+			// alinear datos de sueldo y horaextra a la derecha
+			DefaultTableCellRenderer tcr;
+			tcr = new DefaultTableCellRenderer();
+			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+			tablaCargos.getColumnModel().getColumn(3).setCellRenderer(tcr);
+			tablaCargos.getColumnModel().getColumn(4).setCellRenderer(tcr);
 		}
 	}
 
