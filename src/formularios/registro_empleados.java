@@ -1,28 +1,48 @@
 package formularios;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
+
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
+
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+
+import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
@@ -31,6 +51,7 @@ import conexion.conexion;
 import consultas.consultas_cargo;
 import controles.control_cargo;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 public class registro_empleados extends JFrame {
@@ -40,7 +61,7 @@ public class registro_empleados extends JFrame {
 	public JTextField txtNombresEmpleado;
 	public JTextField txtApellidosEmpleado;
 	public JTextField txtCorreoEmpleado;
-	public JTextField txtIdentidadEmpleado;
+	public JFormattedTextField txtIdentidadEmpleado;
 	public JTextField txtNombreReferencia;
 	public JTextField txtTelefonoReferencia;
 	public JTextField txtEdadEmpleado;
@@ -53,10 +74,11 @@ public class registro_empleados extends JFrame {
 	public JDateChooser dateFechaLabores;
 	public JDateChooser dateFechaRegistro;
 	public JDateChooser dateFechaNacimiento;
+	public PlaceHolder pista;
 
 	public JButton btnTomarFoto;
 	public JButton btnSubirFoto;
-	
+
 	public JButton btnNuevoEmpleado;
 	public JButton btnGuardarEmpleado;
 	public JButton btnActualizarEmpleado;
@@ -72,6 +94,7 @@ public class registro_empleados extends JFrame {
 	public JTextField txtFuncionesCargo;
 
 	public JButton btnRegresar;
+	public JTextField txtDireccionFoto;
 
 	/**
 	 * Launch the application.
@@ -156,11 +179,11 @@ public class registro_empleados extends JFrame {
 		panel.add(lblIdentidad);
 		lblIdentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		txtIdentidadEmpleado = new JTextField();
+		txtIdentidadEmpleado = new JFormattedTextField();
 		txtIdentidadEmpleado.setBounds(140, 158, 210, 20);
-		panel.add(txtIdentidadEmpleado);
 		txtIdentidadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtIdentidadEmpleado.setColumns(10);
+		panel.add(txtIdentidadEmpleado);
 
 		JLabel lblEdad = new JLabel("5. Edad :");
 		lblEdad.setBounds(57, 186, 83, 14);
@@ -229,17 +252,14 @@ public class registro_empleados extends JFrame {
 		dateFechaLabores = new JDateChooser();
 		dateFechaLabores.setBounds(198, 411, 151, 20);
 		panel.add(dateFechaLabores);
-		dateFechaLabores.setDateFormatString("dd-MMM-yyyy");
 
 		dateFechaRegistro = new JDateChooser();
 		dateFechaRegistro.setBounds(198, 380, 151, 20);
 		panel.add(dateFechaRegistro);
-		dateFechaRegistro.setDateFormatString("dd-MMM-yyyy");
 
 		dateFechaNacimiento = new JDateChooser();
 		dateFechaNacimiento.setBounds(198, 349, 151, 20);
 		panel.add(dateFechaNacimiento);
-		dateFechaNacimiento.setDateFormatString("dd-MMM-yyyy");
 
 		JLabel label_1 = new JLabel("");
 		label_1.setBounds(648, 60, 63, 58);
@@ -429,11 +449,21 @@ public class registro_empleados extends JFrame {
 		panel_2.add(btnAsignarUsuario);
 
 		btnTomarFoto = new JButton("Tomar");
+		btnTomarFoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tomarFoto();
+			}
+		});
 		btnTomarFoto.setBackground(new Color(0, 255, 127));
 		btnTomarFoto.setBounds(387, 82, 83, 23);
 		panel.add(btnTomarFoto);
 
 		btnSubirFoto = new JButton("Subir");
+		btnSubirFoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selecionarFoto();
+			}
+		});
 		btnSubirFoto.setBackground(new Color(250, 128, 114));
 		btnSubirFoto.setBounds(387, 107, 83, 23);
 		panel.add(btnSubirFoto);
@@ -449,7 +479,7 @@ public class registro_empleados extends JFrame {
 		panel_3.setLayout(null);
 
 		lblFotoEmpleado = new JLabel("");
-		lblFotoEmpleado.setBounds(0, 0, 139, 137);
+		lblFotoEmpleado.setBounds(0, 0, 140, 137);
 		panel_3.add(lblFotoEmpleado);
 		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(),
 				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
@@ -479,18 +509,35 @@ public class registro_empleados extends JFrame {
 		btnGuardarEmpleado.setBounds(387, 534, 99, 23);
 		panel.add(btnGuardarEmpleado);
 
+		// Boton de lista de empleados en la tabla.
+
 		btnEmpleados = new JButton("Empleados");
 		btnEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnEmpleados.setBackground(new Color(107, 142, 35));
 		btnEmpleados.setBounds(596, 512, 115, 89);
+		btnEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lista_empleados empleados = new lista_empleados();
+				empleados.setVisible(true);
+				empleados.setLocationRelativeTo(null);
+				empleados.construirTablaEmpleados();
+				dispose();
+			}
+		});
 		panel.add(btnEmpleados);
-
-		JLabel label = new JLabel();
-		label.setBounds(0, 0, 766, 644);
-		panel.add(label);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-		label.setIcon(logo);
+		
+		txtDireccionFoto = new JTextField();
+		txtDireccionFoto.setEditable(false);
+		txtDireccionFoto.setBounds(387, 135, 83, 20);
+		panel.add(txtDireccionFoto);
+		txtDireccionFoto.setColumns(10);
+		
+				JLabel label = new JLabel();
+				label.setBounds(0, 0, 766, 644);
+				panel.add(label);
+				final ImageIcon logo = new ImageIcon(
+						icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+				label.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -517,6 +564,40 @@ public class registro_empleados extends JFrame {
 			}
 		});
 
+	}
+
+	public void selecionarFoto() {
+		JFileChooser archivo = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
+				"jpeg");
+		archivo.addChoosableFileFilter(filtro);
+		archivo.setDialogTitle("Abrir Archivo");
+		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotos_empleados");
+		archivo.setCurrentDirectory(ruta);
+		int ventana = archivo.showOpenDialog(null);
+		if (ventana == JFileChooser.APPROVE_OPTION) {
+			File file = archivo.getSelectedFile();
+			txtDireccionFoto.setText(String.valueOf(file));
+			Image foto = getToolkit().getImage(txtDireccionFoto.getText());
+			foto = foto.getScaledInstance(lblFotoEmpleado.getHeight(), lblFotoEmpleado.getWidth(), Image.SCALE_DEFAULT);
+			lblFotoEmpleado.setIcon(new ImageIcon(foto));
+		}
+	}
+	
+	public void tomarFoto() {
+				Runtime camara = Runtime.getRuntime();
+				try {
+					camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+	}
+
+	public void pistas() {
+		pista = new PlaceHolder(txtNombresEmpleado, "Ingrese el nombre del cargo.");
 	}
 
 	public void obtenerUltimoId() {

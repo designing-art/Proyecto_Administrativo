@@ -349,7 +349,6 @@ public class registro_cargos extends JFrame {
 
 		tablaCargos = new JTable();
 		barraCargos.setViewportView(tablaCargos);
-		barraCargos.setViewportView(tablaCargos);
 
 		JLabel label_2 = new JLabel();
 		label_2.setBounds(355, 41, 49, 44);

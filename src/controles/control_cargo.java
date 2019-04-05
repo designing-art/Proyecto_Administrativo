@@ -65,8 +65,6 @@ public class control_cargo implements ActionListener {
 			claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
 			claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
 			
-			
-
 			if (consultasCargo.insertar(claseCargo)) {
 				JOptionPane.showMessageDialog(null, "Cargo registrado!");
 				limpiar();

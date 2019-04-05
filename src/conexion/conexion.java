@@ -25,7 +25,7 @@ public class conexion {
         {
             System.err.println(e);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        	Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
       return con;  
     }
