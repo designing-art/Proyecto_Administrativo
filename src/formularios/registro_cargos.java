@@ -369,13 +369,13 @@ public class registro_cargos extends JFrame {
 		btnMostrar.setBackground(new Color(0, 206, 209));
 		btnMostrar.setBounds(149, 395, 108, 23);
 		panelTablaCargos.add(btnMostrar);
-
-		JLabel label_5 = new JLabel();
-		label_5.setBounds(0, 0, 431, 449);
-		panelTablaCargos.add(label_5);
-		final ImageIcon logo1 = new ImageIcon(
-				icono2.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-		label_5.setIcon(logo1);
+		
+				JLabel label_5 = new JLabel();
+				label_5.setBounds(388, 61, 431, 449);
+				contentPane.add(label_5);
+				final ImageIcon logo1 = new ImageIcon(
+						icono2.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+				label_5.setIcon(logo1);
 
 	}
 

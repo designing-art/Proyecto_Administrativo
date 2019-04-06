@@ -1,34 +1,19 @@
 package clases;
 
 public class horario {
-	
-	int id_horario;
-	String tipo_horario;   
+	int id;
+	String tipo_horario;
 	String hora_inicio_horario;
-	String hora_final_horario;
+	String hora_final_de_horario;
 	String dias_horario;
 	String descripcion_horario;
-	String observacion_horario;
-	
-	
-	    public horario(int id_horario, String tipo_horario, String hora_inicio_horario, String hora_final_horario,
-			String dias_horario, String descripcion_horario, String observacion_horario) {
-		super();
-		this.id_horario = id_horario;
-		this.tipo_horario = tipo_horario;
-		this.hora_inicio_horario = hora_inicio_horario;
-		this.hora_final_horario = hora_final_horario;
-		this.dias_horario = dias_horario;
-		this.descripcion_horario = descripcion_horario;
-		this.observacion_horario = observacion_horario;
+    String observacion_horario;
+	public int getId() {
+		return id;
 	}
-	public int getId_horario() {
-		return id_horario;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public void setId_horario(int id_horario) {
-		this.id_horario = id_horario;
-	}
-	
 	public String getTipo_horario() {
 		return tipo_horario;
 	}
@@ -41,11 +26,11 @@ public class horario {
 	public void setHora_inicio_horario(String hora_inicio_horario) {
 		this.hora_inicio_horario = hora_inicio_horario;
 	}
-	public String getHora_final_horario() {
-		return hora_final_horario;
+	public String getHora_final_de_horario() {
+		return hora_final_de_horario;
 	}
-	public void setHora_final_horario(String hora_final_horario) {
-		this.hora_final_horario = hora_final_horario;
+	public void setHora_final_de_horario(String hora_final_de_horario) {
+		this.hora_final_de_horario = hora_final_de_horario;
 	}
 	public String getDias_horario() {
 		return dias_horario;
@@ -65,7 +50,8 @@ public class horario {
 	public void setObservacion_horario(String observacion_horario) {
 		this.observacion_horario = observacion_horario;
 	}
-	
-	
+    
 
+    
+    
 }

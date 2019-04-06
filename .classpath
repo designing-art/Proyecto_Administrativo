@@ -5,5 +5,10 @@
 	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/mysql-connector-java-8.0.15.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/PlaceHolder.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/miglayout-src.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/PlaceHolder.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
