@@ -2,20 +2,13 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/mysql-connector-java-8.0.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/PlaceHolder.jar"/>
-
-	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/miglayout-src.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/mysql-connector-java-8.0.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Fabiola Oyuela/Documents/GitHub/Proyecto_Administrativo/PlaceHolder.jar"/>
-
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/bridj-0.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/slf4j-simple-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/webcam-capture-0.3.10.jar"/>
-
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/bridj-0.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/PlaceHolder.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/webcam-capture-0.3.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
