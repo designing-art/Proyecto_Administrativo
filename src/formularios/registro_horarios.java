@@ -1,63 +1,87 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.TextArea;
+import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.RowFilter;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
+import com.placeholder.PlaceHolder;
+
+import clases.horario;
+import conexion.conexion;
+import consultas.consultas_horario;
+import controles.control_horario;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class registro_horarios extends JFrame {
 	public JTextField txtidhorario;
 	public JTextField txttipohorario;
-
-
+	public JScrollPane scrollPane;
+	public PlaceHolder pista;
 	public JPanel contentPane;
-	public JButton btnGuardarHorario;
+	public JButton btnAceptarHorario;
 	public JButton btnActualizarHorario;
+	public JButton btnActualizardDatosHorario;
 	public JButton btnNuevoHorario;
 	public JButton btnSalirHorario;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	public JButton btnAceptar;
+	public JButton btnMostrar;
+	public JButton btnRegresar;
+	public JButton btnSiguiente;
+	public JButton btnBorrarHorario;
+	public JButton btnVerDetalleHorario;
+	public JButton btnGuardarHorario;
+	public JScrollPane barraHorarios;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					registro_horarios frame = new registro_horarios();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	public JTextField textCodigoHorario;
+	public JTextField textDescripcioHorario;
+	public JTextField textObservacionHorario;
+	public JTextField textBuscarHorario;
+	public JTable tablaHorario;
+	public TableRowSorter trsfiltroCodigo;
+	String filtroCodigo;
+	
 	/**
 	 * Create the frame.
 	 */
 	public registro_horarios() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 701, 500);
+		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,27 +90,27 @@ public class registro_horarios extends JFrame {
 		JTextField txtidhorario = new JTextField();
 		contentPane.setLayout(null);
 		
-		JButton button_1 = new JButton("Regresar");
-		button_1.addActionListener(new ActionListener() {
+		btnRegresar= new JButton("Regresar");
+	    btnRegresar.setBounds(10, 8, 99, 23);
+		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresar.setBackground(new Color(255, 127, 80));
+		contentPane.add(btnRegresar);
+		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				registro_cargos cargos = new registro_cargos();
-				cargos.setVisible(true);
-				cargos.setLocationRelativeTo(null);
-				dispose();	
+				ventana_principal principal = new ventana_principal();
+				principal.setVisible(true);
+				principal.setLocationRelativeTo(null);
+				dispose();
 			}
 		});
-		button_1.setBounds(10, 8, 99, 23);
-		button_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button_1.setBackground(new Color(255, 127, 80));
-		contentPane.add(button_1);
 		
 		JLabel lblAsignarUnHorario = new JLabel("Asignar un horario.");
 		lblAsignarUnHorario.setBounds(271, 0, 197, 36);
 		lblAsignarUnHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
 		contentPane.add(lblAsignarUnHorario);
 		
-		JButton button_2 = new JButton("Siguiente");
-		button_2.addActionListener(new ActionListener() {
+		 btnSiguiente= new JButton("Siguiente");
+		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				registro_contratos_empleados contrato = new registro_contratos_empleados();
 				contrato.setVisible(true);
@@ -94,15 +118,15 @@ public class registro_horarios extends JFrame {
 				dispose();
 			}
 		});
-		button_2.setBounds(585, 9, 99, 23);
-		button_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button_2.setBackground(new Color(0, 255, 127));
-		contentPane.add(button_2);
+		btnSiguiente.setBounds(871, 13, 99, 23);
+		btnSiguiente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnSiguiente.setBackground(new Color(0, 255, 127));
+		contentPane.add(btnSiguiente);
 		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(176, 47, 341, 401);
+		panel.setBounds(91, 59, 341, 401);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -116,20 +140,20 @@ public class registro_horarios extends JFrame {
 		lblDescripcionHorario.setBounds(30, 181, 150, 14);
 		panel.add(lblDescripcionHorario);
 		
-		JLabel lblDiasDel = new JLabel("4. Dias del horario :");
-		lblDiasDel.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDiasDel.setBounds(30, 152, 150, 14);
-		panel.add(lblDiasDel);
+		JLabel lblDiasDelHorario = new JLabel("4. Dias del horario :");
+		lblDiasDelHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblDiasDelHorario.setBounds(30, 152, 150, 14);
+		panel.add(lblDiasDelHorario);
 		
-		JLabel lblHoraDe = new JLabel("3. Horas al dia :");
-		lblHoraDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblHoraDe.setBounds(31, 128, 177, 14);
-		panel.add(lblHoraDe);
+		JLabel lblHoraDelHorario = new JLabel("3. Horas al dia :");
+		lblHoraDelHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblHoraDelHorario.setBounds(31, 128, 177, 14);
+		panel.add(lblHoraDelHorario);
 		
-		JLabel lblTipoDe = new JLabel("2. Tipo de horario :");
-		lblTipoDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipoDe.setBounds(31, 103, 130, 14);
-		panel.add(lblTipoDe);
+		JLabel lblTipoDeHorario = new JLabel("2. Tipo de horario :");
+		lblTipoDeHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipoDeHorario.setBounds(31, 103, 130, 14);
+		panel.add(lblTipoDeHorario);
 		
 		JLabel lblCodigo = new JLabel("1. Codigo :");
 		lblCodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -138,57 +162,61 @@ public class registro_horarios extends JFrame {
 		
 		JLabel lblDatosDelRegistro = new JLabel("Datos del registro.");
 		lblDatosDelRegistro.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDatosDelRegistro.setBounds(31, 41, 197, 36);
+		lblDatosDelRegistro.setBounds(30, 41, 197, 36);
 		panel.add(lblDatosDelRegistro);
 		
-		JButton button = new JButton("Actualizar");
-		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button.setBackground(new Color(240, 230, 140));
-		button.setBounds(40, 313, 99, 23);
-		panel.add(button);
+		btnAceptarHorario = new JButton("Aceptar");
+		btnAceptarHorario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnAceptarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAceptarHorario.setBackground(new Color(240, 230, 140));
+		btnAceptarHorario.setBounds(40, 313, 99, 23);
+		panel.add(btnAceptarHorario);
 		
-		JButton button_3 = new JButton("Nuevo");
-		button_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button_3.setBackground(new Color(0, 139, 139));
-		button_3.setBounds(40, 344, 99, 23);
-		panel.add(button_3);
+		btnNuevoHorario = new JButton("Nuevo");
+		btnNuevoHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnNuevoHorario.setBackground(new Color(0, 139, 139));
+		btnNuevoHorario.setBounds(40, 344, 99, 23);
+		panel.add(btnNuevoHorario);
 		
-		JButton button_4 = new JButton("Guardar");
-		button_4.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button_4.setBackground(new Color(0, 255, 127));
-		button_4.setBounds(214, 313, 99, 23);
-		panel.add(button_4);
+		btnActualizarHorario = new JButton("Actualizar");
+		btnActualizarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarHorario.setBackground(new Color(0, 255, 127));
+		btnActualizarHorario.setBounds(214, 313, 99, 23);
+		panel.add(btnActualizarHorario);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(202, 76, 46, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textCodigoHorario = new JTextField();
+		textCodigoHorario.setEditable(false);
+		textCodigoHorario.setBounds(202, 76, 46, 20);
+		panel.add(textCodigoHorario);
+		textCodigoHorario.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Matutino", "Vespertino", "Nocturno"}));
-		comboBox.setBounds(202, 101, 111, 20);
-		panel.add(comboBox);
+		JComboBox tipoHorario = new JComboBox();
+		tipoHorario.setModel(new DefaultComboBoxModel(new String[] {"Matutino", "Vespertino", "Nocturno"}));
+		tipoHorario.setBounds(202, 101, 111, 20);
+		panel.add(tipoHorario);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"6:00 am - 2:00 pm", "2:00 pm - 10:00 pm", "8:00 am - 2:00 pm", "2:00 pm - 9:00 pm", "10:00 pm - 6:00 am"}));
-		comboBox_1.setBounds(202, 126, 111, 20);
-		panel.add(comboBox_1);
+		JComboBox HorasDia= new JComboBox();
+		HorasDia.setModel(new DefaultComboBoxModel(new String[] {"6:00 am - 2:00 pm", "2:00 pm - 10:00 pm", "8:00 am - 2:00 pm", "2:00 pm - 9:00 pm", "10:00 pm - 6:00 am"}));
+		HorasDia.setBounds(202, 126, 111, 20);
+		panel.add(HorasDia);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"De Lunes a Viernes", "Sabado y Domingo", "Toda la semana"}));
-		comboBox_2.setBounds(202, 150, 111, 20);
-		panel.add(comboBox_2);
+		JComboBox diasHorario= new JComboBox();
+		diasHorario.setModel(new DefaultComboBoxModel(new String[] {"De Lunes a Viernes", "Sabado y Domingo", "Toda la semana"}));
+		diasHorario.setBounds(202, 150, 111, 20);
+		panel.add(diasHorario);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(20);
-		textField_1.setBounds(172, 185, 141, 57);
-		panel.add(textField_1);
+	    textDescripcioHorario = new JTextField();
+		textDescripcioHorario.setColumns(20);
+		textDescripcioHorario.setBounds(172, 185, 141, 57);
+		panel.add(textDescripcioHorario);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(172, 245, 141, 57);
-		panel.add(textField_2);
+		textObservacionHorario = new JTextField();
+		textObservacionHorario.setColumns(10);
+		textObservacionHorario.setBounds(172, 245, 141, 57);
+		panel.add(textObservacionHorario);
 		
 		JLabel label_1 = new JLabel();
 		label_1.setBounds(264, 41, 49, 44);
@@ -197,14 +225,155 @@ public class registro_horarios extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(icono1.getImage().getScaledInstance(label_1.getWidth(),label_1.getHeight(), Image.SCALE_DEFAULT));
 		label_1.setIcon(logo1);
 		
-		JLabel label = new JLabel();
-		label.setBounds(0, 0, 341, 401);
-		panel.add(label);
+		btnGuardarHorario = new JButton("Guardar");
+		btnGuardarHorario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnGuardarHorario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnGuardarHorario.setBounds(214, 345, 99, 23);
+		panel.add(btnGuardarHorario);
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
+		
+		JLabel label = new JLabel();
+		label.setBounds(31, 47, 341, 401);
+		contentPane.add(label);
 		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_DEFAULT));
 		label.setIcon(logo);
 		
+		JPanel panelTablaHorario = new JPanel();
+		panelTablaHorario.setLayout(null);
+		panelTablaHorario.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelTablaHorario.setBackground(Color.WHITE);
+		panelTablaHorario.setBounds(499, 59, 431, 401);
+		contentPane.add(panelTablaHorario);
 		
+		JLabel lblHorarioRegistrados = new JLabel("Horario registrados :");
+		lblHorarioRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblHorarioRegistrados.setBounds(30, 41, 166, 19);
+		panelTablaHorario.add(lblHorarioRegistrados);
+		
+		JLabel lblBuscarHorario = new JLabel("Buscar Horario :");
+		lblBuscarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblBuscarHorario.setBounds(30, 63, 99, 22);
+		panelTablaHorario.add(lblBuscarHorario);
+		
+		textBuscarHorario = new JTextField();
+		textBuscarHorario.setHorizontalAlignment(SwingConstants.CENTER);
+		textBuscarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		textBuscarHorario.setColumns(10);
+		textBuscarHorario.setBounds(128, 64, 228, 21);
+		panelTablaHorario.add(textBuscarHorario);
+		InputMap map4 = textBuscarHorario.getInputMap(textBuscarHorario.WHEN_FOCUSED);
+		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		textBuscarHorario.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				trsfiltroCodigo = new TableRowSorter(tablaHorario.getModel());
+				 tablaHorario.setRowSorter(trsfiltroCodigo);
+			}
+
+			public void keyPressed(KeyEvent ke) {
+
+			}
+
+			public void keyReleased(KeyEvent ke) {
+				String cadena = (textBuscarHorario.getText());
+				textBuscarHorario.setText(cadena);
+				repaint();
+				filtro();
+			}
+			public void construirTabla() {
+				String titulos[] = { "CodigoHorario", "descripciOnHorario", "observacionHorario", "buscarHorario" };
+				String informacion[][] = control_horario.obtenerMatriz();
+				tablaHorario = new JTable(informacion, titulos);
+				barraHorarios.setViewportView(tablaHorario);
+				for (int c = 0; c < tablaHorario.getColumnCount(); c++) {
+					Class<?> col_class = tablaHorario.getColumnClass(c);
+					tablaHorario.setDefaultEditor(col_class, null);
+					
+					// alinear datos de sueldo y horaextra a la derecha
+					DefaultTableCellRenderer tcr;
+					tcr = new DefaultTableCellRenderer();
+					tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+					tablaHorario.getColumnModel().getColumn(3).setCellRenderer(tcr);
+					tablaHorario.getColumnModel().getColumn(4).setCellRenderer(tcr);
+				}
+			}
+
+			
+				
+			
+		});
+
+		
+		btnBorrarHorario= new JButton("Borrar");
+		btnBorrarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBorrarHorario.setBackground(new Color(220, 20, 60));
+		btnBorrarHorario.setBounds(30, 354, 99, 23);
+		panelTablaHorario.add(btnBorrarHorario);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 96, 376, 233);
+		panelTablaHorario.add(scrollPane);
+		
+		JLabel label_4 = new JLabel();
+		label_4.setBounds(355, 41, 49, 44);
+		panelTablaHorario.add(label_4);
+		
+		btnActualizardDatosHorario = new JButton("Actualizar Datos");
+	    btnActualizardDatosHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizardDatosHorario.setBackground(new Color(60, 179, 113));
+		btnActualizardDatosHorario.setBounds(267, 354, 137, 23);
+        panelTablaHorario.add(btnActualizardDatosHorario);
+		
+	    btnVerDetalleHorario = new JButton("Ver detalles");
+		btnVerDetalleHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+	    btnVerDetalleHorario.setBackground(new Color(0, 206, 209));
+		btnVerDetalleHorario.setBounds(139, 354, 108, 23);
+		panelTablaHorario.add(btnVerDetalleHorario);
+		
+	}
+		
+		public void pistas() {
+			pista = new PlaceHolder(textBuscarHorario, "Escriba para buscar.");
+			pista = new PlaceHolder(textBuscarHorario, "Ingrese el nombre del Horario.");
+			pista = new PlaceHolder(textBuscarHorario, "Digite las horas laborales.");
+			
+		}
+		
+		
+		public void filtro() {
+			filtroCodigo = textBuscarHorario.getText();
+			trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(textBuscarHorario.getText(), 0, 1, 2, 3, 4, 5));
+		}
+			
+
+		public void obtenerUltimoId() {
+			String ultimoValor = null;
+			int valor;
+			String id = null;
+			conexion objCon = new conexion();
+			Connection conn = objCon.getConexion();
+			try {
+				PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM horarioss ORDER BY id_horario DESC");
+				ResultSet rsr = stmtr.executeQuery();
+				if (rsr.next()) {
+					ultimoValor = rsr.getString("id_horario");
+					valor = Integer.parseInt(ultimoValor);
+					valor = valor + 1;
+					id = String.valueOf(valor);
+				}
+				textCodigoHorario.setText(id);
+				;
+				stmtr.close();
+				rsr.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		
@@ -215,4 +384,4 @@ public class registro_horarios extends JFrame {
 		
 		
 	}
-}
+
