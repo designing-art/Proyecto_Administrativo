@@ -11,22 +11,25 @@ import conexion.conexion;
 
 public class consultas_horario extends conexion {
 
-    public boolean registrar(horario horario) {
+/*Consultas para Horario*/
+	
+	/*Registrar*/
+	public boolean insertar(horario horario) {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO cargos (id_horario, horainicio_horario, horafinal_horario, dias_horario, descripcion_horario, observacion_horario) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO horarios ( tipo_horario, hora_inicio_horario, hora_final_horario, dias_horario,descripcion_horario,observacion_horario) VALUES(?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, horario.getId_horario());
+            ps.setString(1,horario.getTipo_horario());
             ps.setString(2, horario.getHora_inicio_horario());
-            ps.setString(3, horario.getHora_final_horario());
+            ps.setString(3, horario.getHora_final_de_horario());
             ps.setString(4, horario.getDias_horario());
             ps.setString(5, horario.getDescripcion_horario());
             ps.setString(6, horario.getObservacion_horario());
-            ps.execute();
             
+            ps.execute();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -39,84 +42,26 @@ public class consultas_horario extends conexion {
             }
         }
     }
-    
-    public boolean modificar(horario horario) {
+	
+	/*Actualizar*/  
+    public boolean actualizar(horario horario) {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "UPDATE horarios SET id_horario=?, horainicio_horario=?, horafinal_horario=?, dias_horario=?, descripcion_horario=?, observacion_horario=? WHERE id_horario=? ";
+        String sql = "UPDATE horarios SET id_horario=?, tipo_horario=?,hora_inicio_horario =?, hora_final_horario=?, dias_horario=?, descripcion_horario=?,observacion_horario=? WHERE id_horario=? ";
 
         try {
         	 ps = con.prepareStatement(sql);
-             ps.setInt(1, horario.getId_horario());
+             ps.setInt(1,horario.getId());
              ps.setString(2, horario.getHora_inicio_horario());
-             ps.setString(3, horario.getHora_final_horario());
+             ps.setString(3, horario.getHora_final_de_horario());
              ps.setString(4, horario.getDias_horario());
              ps.setString(5, horario.getDescripcion_horario());
              ps.setString(6, horario.getObservacion_horario());
+             ps.setInt(7, horario.getId());
              ps.execute();
-             
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
-
-    public boolean eliminar(horario horario) {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-
-        String sql = "DELETE FROM horarios WHERE id_horario=? ";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, horario.getId_horario());
-            ps.execute();
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
-    
-    public boolean buscar(horario horario) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConexion();
-
-        String sql = "SELECT * FROM horarios WHERE id_horario = ? ";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, horario.getId_horario());
-            rs = ps.executeQuery();
             
-            if(rs.next())
-            {
-            	
-            	horario.setId_horario(Integer.parseInt(rs.getString("id_cargo")));
-            	horario.setHora_inicio_horario(rs.getString("horainicio_horario"));
-            	horario.setHora_final_horario(rs.getString("horafinal_horario"));
-            	horario.setDias_horario(rs.getString("dias_horario"));
-            	horario.setDescripcion_horario(rs.getString("descripcion_horario"));
-            	horario.setObservacion_horario(rs.getString("observacion_horario"));
-            	
-               return true;
-            }
-            return false;
+            return true;
         } catch (SQLException e) {
             System.err.println(e);
             return false;
@@ -127,5 +72,6 @@ public class consultas_horario extends conexion {
                 System.err.println(e);
             }
         }
+    
     }
 }
