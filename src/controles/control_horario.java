@@ -33,6 +33,12 @@ public class control_horario implements ActionListener {
         this.formularioHorario.btnActualizarHorario.addActionListener(this);
         this.formularioHorario.btnSalirHorario.addActionListener(this);
         this.formularioHorario.btnNuevoHorario.addActionListener(this);
+        this.formularioHorario.btnAceptarHorario.addActionListener(this);
+        this.formularioHorario.btnActualizardDatosHorario.addActionListener(this);
+        this.formularioHorario.btnBorrarHorario.addActionListener(this);
+        this.formularioHorario.btnRegresarHorario.addActionListener(this);
+        this.formularioHorario.btnMostrarHorario.addActionListener(this);
+    
     }
 
 
@@ -40,27 +46,24 @@ public class control_horario implements ActionListener {
 		/* Insertar */
 		if (e.getSource() == formularioHorario.btnGuardarHorario) {
 			
-			if(formularioHorario.txtNombreCargo.getText().isEmpty() 
-				|| formularioHorario.txtSueldoCargo.getText().isEmpty() 
-				|| formularioHorario.txtHoraExtraCargo.getText().isEmpty()
-				|| formularioHorario.txtFuncionesCargo.getText().isEmpty()
-				|| formularioHorario.txtNombreCargo.getText().toString().equalsIgnoreCase("Ingrese el nombre del cargo.")
-				|| formularioHorario.txtSueldoCargo.getText().toString().equalsIgnoreCase("Digite el sueldo.")
-				|| formularioHorario.txtHoraExtraCargo.getText().toString().equalsIgnoreCase("Digite precio hora extra.")
-				|| formularioHorario.txtFuncionesCargo.getText().toString().equalsIgnoreCase("Ingrese las Funciones.")) 
+			if(formularioHorario.txtidhorario.getText().isEmpty() 
+				|| formularioHorario.textBuscarHorario.getText().isEmpty() 
+				|| formularioHorario.textCodigoHorario.getText().isEmpty()
+				|| formularioHorario.textDescripcioHorario.getText().isEmpty())
+				
 			{
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el cargo!");
 				
 			}else {	
-			claseHorario.setArea_cargo(formularioHorario.cbxTipoCargo.getSelectedItem().toString());
-			claseHorario.setNombre_cargo(formularioHorario.txtNombreCargo.getText());
-			claseHorario.setSueldo_cargo(Double.parseDouble(formularioHorario.txtSueldoCargo.getText()));
-			claseHorario.setValor_hora_extra_cargo(Double.parseDouble(formularioHorario.txtHoraExtraCargo.getText()));
-			claseHorario.setFunciones_cargo(formularioHorario.txtFuncionesCargo.getText());
+			claseHorario.setTipo_horario(formularioHorario.cbxtipoHorario.getSelectedItem().toString());
+			claseHorario.setDescripcion_horario(formularioHorario.textDescripcioHorario.getText());
+			claseHorario.setDias_horario(formularioHorario.textCodigoHorario.getText());
+			claseHorario.setObservacion_horario(formularioHorario.textObservacionHorario.getText());
+			claseHorario.setDias_horario(formularioHorario.textCodigoHorario.getText());
 			
 			
 
-			if (consultasCargo.insertar(claseHorario)) {
+			if (consultasHorario.insertar(claseHorario)) {
 				JOptionPane.showMessageDialog(null, "Cargo registrado!");
 				limpiar();
 				formularioHorario.construirTabla();
@@ -73,45 +76,43 @@ public class control_horario implements ActionListener {
 		}
 		
 		/* Pasar datos de la tabla al formulario para actualizar */
-		if (e.getSource() == formularioHorario.btnActualizarDatosCargo) {
+		if (e.getSource() == formularioHorario.btnActualizardDatosHorario) {
 			int filaseleccionada;
 			try {
-				filaseleccionada = formularioHorario.tablaCargos.getSelectedRow();
+				filaseleccionada = formularioHorario.tablaHorario.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					String codigo = formularioHorario.tablaCargos.getValueAt(filaseleccionada, 0).toString();
-					String area = formularioHorario.tablaCargos.getValueAt(filaseleccionada, 1).toString();
-					String nombre = formularioHorario.tablaCargos.getValueAt(filaseleccionada, 2).toString();
-					String sueldo = formularioHorario.tablaCargos.getValueAt(filaseleccionada, 3).toString();
-					String horaextra = formularioHorario.tablaCargos.getValueAt(filaseleccionada, 4).toString();
-					String funciones = formularioHorario.tablaCargos.getValueAt(filaseleccionada, 5).toString();
-
-					formularioHorario.txtCodigoCargo.setText(codigo);
-					formularioHorario.cbxTipoCargo.setSelectedItem(area);
-					formularioHorario.txtNombreCargo.setText(nombre);
-					formularioHorario.txtSueldoCargo.setText(sueldo);
-					formularioHorario.txtHoraExtraCargo.setText(horaextra);
-					formularioHorario.txtFuncionesCargo.setText(funciones);
+					String codigoHorario = formularioHorario.tablaHorario.getValueAt(filaseleccionada, 0).toString();
+					String descripcion_Horario= formularioHorario.tablaHorario.getValueAt(filaseleccionada, 1).toString();
+					String odservacion_Horario= formularioHorario.tablaHorario.getValueAt(filaseleccionada, 2).toString();
+					String  horaInicial_Horario= formularioHorario.tablaHorario.getValueAt(filaseleccionada, 3).toString();
+					String horafinal_Horario = formularioHorario.tablaHorario.getValueAt(filaseleccionada, 4).toString();
+					String dias_Horario = formularioHorario.tablaHorario.getValueAt(filaseleccionada, 5).toString();
+					String buscar_Horario= formularioHorario.tablaHorario.getValueAt(filaseleccionada, 6).toString();;
 					
-					formularioHorario.txtCodigoCargo.setForeground(Color.BLACK);
-					formularioHorario.cbxTipoCargo.setForeground(Color.BLACK);
-					formularioHorario.txtNombreCargo.setForeground(Color.BLACK);
-					formularioHorario.txtSueldoCargo.setForeground(Color.BLACK);
-					formularioHorario.txtHoraExtraCargo.setForeground(Color.BLACK);
-					formularioHorario.txtFuncionesCargo.setForeground(Color.BLACK);
+					formularioHorario.textCodigoHorario.setText(codigoHorario);
+					formularioHorario.textDescripcioHorario.setText(dias_Horario);
+					formularioHorario.textObservacionHorario.setText(odservacion_Horario);
+					formularioHorario.textBuscarHorario.setText(buscar_Horario);
+				
 					
-					formularioHorario.btnBorrarCargo.setVisible(true);
-					formularioHorario.btnGuardarCargo.setVisible(false);
-					formularioHorario.btnNuevoCargo.setVisible(false);
-					formularioHorario.btnActualizarCargo.setVisible(true);
-					formularioHorario.btnActualizarDatosCargo.setVisible(true);
-					formularioHorario.btnMostrar.setVisible(false);
-					formularioHorario.btnAceptar.setText("Cancelar");
-					formularioHorario.btnAceptar.setVisible(true);
+					formularioHorario.textCodigoHorario.setForeground(Color.BLACK);
+					formularioHorario.cbxtipoHorario.setForeground(Color.BLACK);
+					formularioHorario.textBuscarHorario.setForeground(Color.BLACK);
+					formularioHorario.textDescripcioHorario.setForeground(Color.BLACK);
+					formularioHorario.textObservacionHorario.setForeground(Color.BLACK);
 					
-					formularioHorario.txtNombreCargo.requestFocusInWindow();
+					formularioHorario.btnBorrarHorario.setVisible(true);
+					formularioHorario.btnGuardarHorario.setVisible(false);
+					formularioHorario.btnNuevoHorario.setVisible(false);
+					formularioHorario.btnActualizarHorario.setVisible(true);
+					formularioHorario.btnActualizardDatosHorario.setVisible(true);
+					formularioHorario.btnMostrarHorario.setVisible(false);
+					formularioHorario.btnAceptarHorario.setText("Cancelar");
+					formularioHorario.btnAceptarHorario.setVisible(true);
 					
+				
 				}
 
 			} catch (HeadlessException ex) {
@@ -121,49 +122,56 @@ public class control_horario implements ActionListener {
 		}
 		
 		/* Pasar datos de la tabla al formulario para ver los datos */
-		if (e.getSource() == formularioHorario.btnMostrar) {
+		if (e.getSource() == formularioHorario.btnMostrarHorario) {
 			int fila;
 			try {
-				fila = formularioHorario.tablaCargos.getSelectedRow();
+				fila = formularioHorario.tablaHorario.getSelectedRow();
 				if (fila == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					String codigo = formularioHorario.tablaCargos.getValueAt(fila, 0).toString();
-					String area = formularioHorario.tablaCargos.getValueAt(fila, 1).toString();
-					String nombre = formularioHorario.tablaCargos.getValueAt(fila, 2).toString();
-					String sueldo = formularioHorario.tablaCargos.getValueAt(fila, 3).toString();
-					String horaextra = formularioHorario.tablaCargos.getValueAt(fila, 4).toString();
-					String funciones = formularioHorario.tablaCargos.getValueAt(fila, 5).toString();
 					
-					formularioHorario.txtCodigoCargo.setText(codigo);
-					formularioHorario.cbxTipoCargo.setSelectedItem(area);
-					formularioHorario.txtNombreCargo.setText(nombre);
-					formularioHorario.txtSueldoCargo.setText(sueldo);
-					formularioHorario.txtHoraExtraCargo.setText(horaextra);
-					formularioHorario.txtFuncionesCargo.setText(funciones);
+							fila = formularioHorario.tablaHorario.getSelectedRow();
+							if (fila == -1) {
+								JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+							} else {
 					
-					formularioHorario.txtCodigoCargo.setForeground(Color.BLACK);
-					formularioHorario.cbxTipoCargo.setForeground(Color.BLACK);
-					formularioHorario.txtNombreCargo.setForeground(Color.BLACK);
-					formularioHorario.txtSueldoCargo.setForeground(Color.BLACK);
-					formularioHorario.txtHoraExtraCargo.setForeground(Color.BLACK);
-					formularioHorario.txtFuncionesCargo.setForeground(Color.BLACK);
+					String tipo_horario = formularioHorario.tablaHorario.getValueAt(fila, 0).toString();
+				    String hora_inicio_horario= formularioHorario.tablaHorario.getValueAt(fila, 1).toString();
+				    String hora_final_de_horario= formularioHorario.tablaHorario.getValueAt(fila, 2).toString();
+				    String dias_horario= formularioHorario.tablaHorario.getValueAt(fila, 3).toString();
+				    String descripcion_horario= formularioHorario.tablaHorario.getValueAt(fila, 4).toString();
+				    String observacion_horario = formularioHorario.tablaHorario.getValueAt(fila, 5).toString();
+				    String codigo_Horario = formularioHorario.tablaHorario.getValueAt(fila, 5).toString();
 					
-					formularioHorario.btnBorrarCargo.setVisible(false);
-					formularioHorario.btnGuardarCargo.setVisible(false);
-					formularioHorario.btnNuevoCargo.setVisible(false);
-					formularioHorario.btnActualizarCargo.setVisible(false);
-					formularioHorario.btnActualizarDatosCargo.setVisible(false);
-					formularioHorario.btnAceptar.setText("Aceptar");
-					formularioHorario.btnAceptar.setVisible(true);
+					formularioHorario.textCodigoHorario.setText(codigo_Horario);
+					formularioHorario.cbxtipoHorario.setSelectedItem(tipo_horario);
+					formularioHorario.textDescripcioHorario.setText(dias_horario);
+					formularioHorario.textObservacionHorario.setText(observacion_horario);
+					formularioHorario.textBuscarHorario.setText(hora_inicio_horario);
 					
-					formularioHorario.cbxTipoCargo.setEditable(false);
-					formularioHorario.txtNombreCargo.setEditable(false);
-					formularioHorario.txtSueldoCargo.setEditable(false);
-					formularioHorario.txtHoraExtraCargo.setEditable(false);
-					formularioHorario.txtFuncionesCargo.setEditable(false);
-					formularioHorario.txtFuncionesCargo.setBackground(Color.LIGHT_GRAY);
-					formularioHorario.btnActualizarCargo.setVisible(false);
+					
+				    formularioHorario.textCodigoHorario.setForeground(Color.BLACK);
+					formularioHorario.cbxtipoHorario.setForeground(Color.BLACK);
+					formularioHorario.textDescripcioHorario.setForeground(Color.BLACK);
+					formularioHorario.textObservacionHorario.setForeground(Color.BLACK);
+					formularioHorario.textBuscarHorario.setForeground(Color.BLACK);
+					
+					
+					formularioHorario.btnBorrarHorario.setVisible(false);
+					formularioHorario.btnGuardarHorario.setVisible(false);
+					formularioHorario.btnNuevoHorario.setVisible(false);
+					formularioHorario.btnActualizarHorario.setVisible(false);
+					formularioHorario.btnActualizardDatosHorario.setVisible(false);
+					formularioHorario.btnAceptarHorario.setText("Aceptar");
+					formularioHorario.btnAceptarHorario.setVisible(true);
+					
+					formularioHorario.cbxtipoHorario.setEditable(false);
+					formularioHorario.textBuscarHorario.setEditable(false);
+					formularioHorario.textCodigoHorario.setEditable(false);
+					formularioHorario.textDescripcioHorario.setEditable(false);
+					formularioHorario.textObservacionHorario.setEditable(false);
+					
+					formularioHorario.btnActualizarHorario.setVisible(false);
 					
 	
 				}
@@ -177,25 +185,22 @@ public class control_horario implements ActionListener {
 		/* Actualizar */
 		if (e.getSource() == formularioHorario.btnActualizarHorario) {
 			
-			if(formularioHorario.txtNombreCargo.getText().isEmpty() 
-					|| formularioHorario.txtSueldoCargo.getText().isEmpty() 
-					|| formularioHorario.txtHoraExtraCargo.getText().isEmpty()
-					|| formularioHorario.txtFuncionesCargo.getText().isEmpty()
-					|| formularioHorario.txtNombreCargo.getText().toString().equalsIgnoreCase("Ingrese el nombre del cargo.")
-					|| formularioHorario.txtSueldoCargo.getText().toString().equalsIgnoreCase("Digite el sueldo.")
-					|| formularioHorario.txtHoraExtraCargo.getText().toString().equalsIgnoreCase("Digite precio hora extra.")
-					|| formularioHorario.txtFuncionesCargo.getText().toString().equalsIgnoreCase("Ingrese las Funciones.")) 
+			if(formularioHorario.txtidhorario.getText().isEmpty() 
+					|| formularioHorario.textBuscarHorario.getText().isEmpty() 
+					|| formularioHorario.textCodigoHorario.getText().isEmpty()
+					|| formularioHorario.textDescripcioHorario.getText().isEmpty())
+					
 			{
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el cargo!");
 			}else {	
 				
 			
-			claseHorario.setId_cargo(Integer.parseInt(formularioHorario.txtCodigoCargo.getText()));
-			claseHorario.setArea_cargo(formularioHorario.cbxTipoCargo.getSelectedItem().toString());
-			claseHorario.setNombre_cargo(formularioHorario.txtNombre.getText());
-			claseHorario.setSueldo_cargo(Double.parseDouble(formularioHorario.txtSueldoCargo.getText()));
-			claseHorario.setValor_hora_extra_cargo(Double.parseDouble(formularioHorario.txtHoraExtraCargo.getText()));
-			claseHorario.setFunciones_cargo(formularioHorario.txtFuncionesCargo.getText());
+			claseHorario.setId(Integer.parseInt(formularioHorario.textCodigoHorario.getText()));
+			claseHorario.setTipo_horario(formularioHorario.cbxtipoHorario.getSelectedItem().toString());
+			claseHorario.setDias_horario(formularioHorario.textBuscarHorario.getText());
+			claseHorario.setHora_final_de_horario(formularioHorario.textDescripcioHorario.getText());
+			claseHorario.setHora_inicio_horario(formularioHorario.textObservacionHorario.getText());
+			
 
 			if (consultasHorario.actualizar(claseHorario)) {
 				JOptionPane.showMessageDialog(null, "Horario Actualizado!");
@@ -203,11 +208,11 @@ public class control_horario implements ActionListener {
 				formularioHorario.construirTabla();
 				formularioHorario.obtenerUltimoId();
 				formularioHorario.btnActualizarHorario.setVisible(false);
-				formularioHorario.txtNombreCargo.setEditable(false);
-				formularioHorario.txtSueldoCargo.setEditable(false);
-				formularioHorario.txtHoraExtraCargo.setEditable(false);
-				formularioHorario.txtFuncionesCargo.setEditable(false);
-				formularioHorario.txtFuncionesCargo.setBackground(Color.LIGHT_GRAY);
+				formularioHorario.textBuscarHorario.setEditable(false);
+				formularioHorario.textCodigoHorario.setEditable(false);
+				formularioHorario.textObservacionHorario.setEditable(false);
+				formularioHorario.textDescripcioHorario.setEditable(false);
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! Cargo no Actualizado");
 				limpiar();
@@ -228,7 +233,7 @@ public class control_horario implements ActionListener {
 				conexion objCon = new conexion();
 				Connection conn = objCon.getConexion();
 				int Fila = formularioHorario.tablaHorario.getSelectedRow();
-				String codigo = formularioHorario.tablahorario.getValueAt(Fila, 0).toString();
+				String codigo = formularioHorario.tablaHorario.getValueAt(Fila, 0).toString();
 				ps = conn.prepareStatement("DELETE FROM cargos WHERE id_cargo=?");
 				ps.setString(1, codigo);
 				ps.execute();
@@ -236,12 +241,12 @@ public class control_horario implements ActionListener {
 				limpiar();
 				formularioHorario.construirTabla();
 				
-				formularioHorario.cbxTipoCargo.setEditable(false);
-				formularioHorario.txtNombreCargo.setEditable(false);
-				formularioHorario.txtSueldoCargo.setEditable(false);
-				formularioHorario.txtHoraExtraCargo.setEditable(false);
-				formularioHorario.txtFuncionesCargo.setEditable(false);
-				formularioHorario.btnActualizarCargo.setVisible(false);
+				formularioHorario.cbxtipoHorario.setEditable(false);
+				formularioHorario.textBuscarHorario.setEditable(false);
+				formularioHorario.textCodigoHorario.setEditable(false);
+				formularioHorario.textDescripcioHorario.setEditable(false);
+				formularioHorario.textObservacionHorario.setEditable(false);
+		       formularioHorario.btnActualizarHorario.setVisible(false);
 				
 					}
 			} catch (SQLException ex) {
@@ -252,42 +257,42 @@ public class control_horario implements ActionListener {
 		
 
 		/* Limpiar */
-		if (e.getSource() == formularioHorario.btnNuevoCargo) {
+		if (e.getSource() == formularioHorario.btnNuevoHorario) {
 			limpiar();
 			formularioHorario.obtenerUltimoId();
 			formularioHorario.btnBorrarHorario.setVisible(false);
 			formularioHorario.btnGuardarHorario.setVisible(true);
-			formularioHorario.btnMostrar.setVisible(true);
+			formularioHorario.btnMostrarHorario.setVisible(true);
 			formularioHorario.btnNuevoHorario.setVisible(true);
 			formularioHorario .btnActualizarHorario.setVisible(false);
-			formularioHorario.btnActualizarDatosHorario.setVisible(true);		
-			formularioHorario.txtNombreCargo.setEditable(true);
-			formularioHorario.txtSueldoCargo.setEditable(true);
-			formularioHorario.txtHoraExtraCargo.setEditable(true);
-			formularioHorario.txtFuncionesCargo.setEditable(true);
+			formularioHorario.btnActualizardDatosHorario.setVisible(true);		
+			formularioHorario.textBuscarHorario.setEditable(true);
+			formularioHorario.textCodigoHorario.setEditable(true);
+			formularioHorario.textDescripcioHorario.setEditable(true);
+			formularioHorario.textObservacionHorario.setEditable(true);
 			formularioHorario.btnActualizarHorario.setVisible(false);
 			formularioHorario.pistas();
 			formularioHorario.construirTabla();
-			formularioHorario.txtFuncionesHorario.setBackground(Color.WHITE);
+			
 		}
 		
 		/* Aceptar */
-		if (e.getSource() == formularioHorario.btnAceptar) {
+		if (e.getSource() == formularioHorario.btnAceptarHorario) {
 			limpiar();
 			formularioHorario.obtenerUltimoId();
 			formularioHorario.btnBorrarHorario.setVisible(false);
 			formularioHorario.btnGuardarHorario.setVisible(true);
 			formularioHorario.btnNuevoHorario.setVisible(true);
 			formularioHorario.btnActualizarHorario.setVisible(false);
-			formularioHorario.btnActualizarDatosHorario.setVisible(true);		
-			formularioHorario.txtNombreCargo.setEditable(true);
-			formularioHorario.txtSueldoCargo.setEditable(true);
-			formularioHorario.txtHoraExtraCargo.setEditable(true);
-			formularioHorario.txtFuncionesCargo.setEditable(true);
-			formularioHorario.btnActualizarCargo.setVisible(false);
-			formularioHorario.btnMostrar.setVisible(true);
-			formularioHorario.btnAceptar.setVisible(false);
-			formularioHorario.txtFuncionesCargo.setBackground(Color.WHITE);
+			formularioHorario.btnActualizardDatosHorario.setVisible(true);		
+			formularioHorario.textBuscarHorario.setEditable(true);
+			formularioHorario.textObservacionHorario.setEditable(true);
+			formularioHorario.textDescripcioHorario.setEditable(true);
+			formularioHorario.textCodigoHorario.setEditable(true);
+			formularioHorario.btnActualizarHorario.setVisible(false);
+			formularioHorario.btnMostrarHorario.setVisible(true);
+			formularioHorario.btnAceptarHorario.setVisible(false);
+			
 			formularioHorario.pistas();
 			formularioHorario.construirTabla();
 		}
@@ -298,13 +303,12 @@ public class control_horario implements ActionListener {
 
 	/* Metodo para el boton nuevo que limpia los datos de los txtFields */
 	public void limpiar() {
-		formularioHorario.cbxTipoCargo.getSelectedItem().equals(null);
-		formularioHorario.txtCodigoCargo.setText(null);
-		formularioHorario.txtNombreCargo.setText(null)
-		formularioHorario.txtSueldoCargo.setText(null);
-		formularioHorario.txtHoraExtraCargo.setText(null);
-		formularioHorario.txtFuncionesCargo.setText(null);
-		formularioHorario.txtBusquedaCargos.setText(null);
+		formularioHorario.cbxtipoHorario.getSelectedItem().equals(null);
+		formularioHorario.textCodigoHorario.setText(null);
+		formularioHorario.textBuscarHorario.setText(null);
+		formularioHorario.textObservacionHorario.setText(null);
+		formularioHorario.textDescripcioHorario.setText(null);
+		
 	}
 
 	/* Metodos para mostrar datos en tabla Cargos */
