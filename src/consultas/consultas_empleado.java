@@ -21,7 +21,7 @@ public class consultas_empleado extends conexion {
 			ps.setString(2, empleado.getApellidos_empleado());
 			ps.setString(3, empleado.getIdentidad_empleado());
 			ps.setString(4, empleado.getGenero_empleado());
-			ps.setInt(5, empleado.getEdad_empleado());
+			ps.setString(5, empleado.getEdad_empleado());
 			ps.setString(6, empleado.getTelefono_empleado());
 			ps.setString(7, empleado.getCorreo_empleado());
 			ps.setString(8, empleado.getDireccion_empleado());
@@ -60,7 +60,7 @@ public class consultas_empleado extends conexion {
 			ps.setString(3, empleado.getApellidos_empleado());
 			ps.setString(4, empleado.getIdentidad_empleado());
 			ps.setString(5, empleado.getGenero_empleado());
-			ps.setInt(6, empleado.getEdad_empleado());
+			ps.setString(6, empleado.getEdad_empleado());
 			ps.setString(7, empleado.getTelefono_empleado());
 			ps.setString(8, empleado.getCorreo_empleado());
 			ps.setString(9, empleado.getDireccion_empleado());

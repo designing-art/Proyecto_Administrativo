@@ -11,7 +11,7 @@ public class empleado {
 	String apellidos_empleado;
 	String identidad_empleado;
 	String genero_empleado;
-	int edad_empleado;
+	String edad_empleado;
 	String telefono_empleado;
 	String correo_empleado;
 	String direccion_empleado;
@@ -63,12 +63,13 @@ public class empleado {
 		this.genero_empleado = genero_empleado;
 	}
 
-	public int getEdad_empleado() {
+
+	public String getEdad_empleado() {
 		return edad_empleado;
 	}
 
-	public void setEdad_empleado(int edad_empleado) {
-		this.edad_empleado = edad_empleado;
+	public void setEdad_empleado(String edad_Empleado) {
+		this.edad_empleado = edad_Empleado;
 	}
 
 	public String getTelefono_empleado() {

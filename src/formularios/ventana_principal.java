@@ -190,6 +190,7 @@ public class ventana_principal extends JFrame {
 		        formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
 		        formularioEmpleado.obtenerUltimoId();
 		        formularioEmpleado.pistas();
+		        formularioEmpleado.establecerFechaRegistro();
 		        formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 				formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 				formularioEmpleado.btnActualizarEmpleado.setVisible(false);

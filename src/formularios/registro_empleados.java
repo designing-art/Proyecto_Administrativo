@@ -36,12 +36,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
+import com.github.sarxos.webcam.Webcam;
 import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
@@ -84,6 +92,7 @@ public class registro_empleados extends JFrame {
 	public JButton btnActualizarEmpleado;
 	public JButton btnCancelarEmpleado;
 	public JButton btnEmpleados;
+	public JButton btnAgregarEdad;
 
 	public JTextField txtHoraEntrada;
 	public JTextField txtHoraSalida;
@@ -146,7 +155,7 @@ public class registro_empleados extends JFrame {
 		lblCodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtCodigoEmpleado = new JTextField();
-		txtCodigoEmpleado.setBounds(140, 85, 47, 20);
+		txtCodigoEmpleado.setBounds(140, 85, 50, 20);
 		panel.add(txtCodigoEmpleado);
 		txtCodigoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCodigoEmpleado.setEditable(false);
@@ -185,80 +194,81 @@ public class registro_empleados extends JFrame {
 		txtIdentidadEmpleado.setColumns(10);
 		panel.add(txtIdentidadEmpleado);
 
-		JLabel lblEdad = new JLabel("5. Edad :");
-		lblEdad.setBounds(57, 186, 83, 14);
+		JLabel lblEdad = new JLabel("10. Edad :");
+		lblEdad.setBounds(57, 352, 83, 14);
 		panel.add(lblEdad);
 		lblEdad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtEdadEmpleado = new JTextField();
-		txtEdadEmpleado.setBounds(140, 183, 50, 20);
-		panel.add(txtEdadEmpleado);
+		txtEdadEmpleado.setEditable(false);
+		txtEdadEmpleado.setBounds(234, 352, 93, 20);
 		txtEdadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtEdadEmpleado.setColumns(10);
+		panel.add(txtEdadEmpleado);
 
-		JLabel lblGenero = new JLabel("6. Genero :");
-		lblGenero.setBounds(57, 214, 76, 14);
+		JLabel lblGenero = new JLabel("5. Genero :");
+		lblGenero.setBounds(57, 186, 76, 17);
 		panel.add(lblGenero);
 		lblGenero.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		cbxGeneroEmpleado = new JComboBox();
-		cbxGeneroEmpleado.setBounds(140, 211, 50, 20);
+		cbxGeneroEmpleado.setBounds(140, 186, 50, 20);
 		panel.add(cbxGeneroEmpleado);
 		cbxGeneroEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxGeneroEmpleado.setModel(new DefaultComboBoxModel(new String[] { "F", "M" }));
+		cbxGeneroEmpleado.setModel(new DefaultComboBoxModel(new String[] { "M", "F" }));
 
-		JLabel lblCorreo = new JLabel("7. Correo :");
-		lblCorreo.setBounds(57, 239, 83, 14);
+		JLabel lblCorreo = new JLabel("6. Correo :");
+		lblCorreo.setBounds(57, 211, 83, 14);
 		panel.add(lblCorreo);
 		lblCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtCorreoEmpleado = new JTextField();
-		txtCorreoEmpleado.setBounds(140, 239, 210, 20);
+		txtCorreoEmpleado.setBounds(140, 211, 210, 20);
 		panel.add(txtCorreoEmpleado);
 		txtCorreoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCorreoEmpleado.setColumns(10);
 
-		JLabel lblTelefonos = new JLabel("8. Telefono :");
-		lblTelefonos.setBounds(57, 265, 83, 14);
+		JLabel lblTelefonos = new JLabel("7. Telefono :");
+		lblTelefonos.setBounds(57, 237, 83, 14);
 		panel.add(lblTelefonos);
 		lblTelefonos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtTelefonoEmpleado = new JTextField();
-		txtTelefonoEmpleado.setBounds(140, 264, 210, 20);
+		txtTelefonoEmpleado.setBounds(140, 236, 210, 20);
 		panel.add(txtTelefonoEmpleado);
 		txtTelefonoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTelefonoEmpleado.setColumns(10);
 
-		JLabel lblDireccion = new JLabel("9. Direccion :");
-		lblDireccion.setBounds(57, 290, 83, 14);
+		JLabel lblDireccion = new JLabel("8. Direccion :");
+		lblDireccion.setBounds(57, 262, 83, 14);
 		panel.add(lblDireccion);
 		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblFechaDeNacimiento = new JLabel("10. Fecha de nacimiento :");
-		lblFechaDeNacimiento.setBounds(57, 349, 140, 20);
+		JLabel lblFechaDeNacimiento = new JLabel("9. Fecha de nacimiento :");
+		lblFechaDeNacimiento.setBounds(58, 322, 167, 20);
 		panel.add(lblFechaDeNacimiento);
 		lblFechaDeNacimiento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblFechaDeRegistro = new JLabel("11. Fecha de registro :");
-		lblFechaDeRegistro.setBounds(57, 380, 140, 20);
+		lblFechaDeRegistro.setBounds(57, 380, 167, 20);
 		panel.add(lblFechaDeRegistro);
 		lblFechaDeRegistro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblFechaDeComienso = new JLabel("12. Fecha inicio labores :");
-		lblFechaDeComienso.setBounds(57, 411, 140, 20);
+		lblFechaDeComienso.setBounds(57, 411, 167, 20);
 		panel.add(lblFechaDeComienso);
 		lblFechaDeComienso.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		dateFechaLabores = new JDateChooser();
-		dateFechaLabores.setBounds(198, 411, 151, 20);
+		dateFechaLabores.setBounds(234, 411, 115, 20);
 		panel.add(dateFechaLabores);
 
 		dateFechaRegistro = new JDateChooser();
-		dateFechaRegistro.setBounds(198, 380, 151, 20);
+		dateFechaRegistro.setBounds(234, 380, 115, 20);
 		panel.add(dateFechaRegistro);
 
 		dateFechaNacimiento = new JDateChooser();
-		dateFechaNacimiento.setBounds(198, 349, 151, 20);
+		dateFechaNacimiento.setBounds(235, 322, 115, 20);
 		panel.add(dateFechaNacimiento);
 
 		JLabel label_1 = new JLabel("");
@@ -420,7 +430,7 @@ public class registro_empleados extends JFrame {
 		panel_1.add(txtFuncionesCargo);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(140, 294, 210, 44);
+		scrollPane.setBounds(140, 262, 210, 49);
 		panel.add(scrollPane);
 
 		txtDireccionEmpleado = new JTextArea();
@@ -515,6 +525,7 @@ public class registro_empleados extends JFrame {
 		btnEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnEmpleados.setBackground(new Color(107, 142, 35));
 		btnEmpleados.setBounds(596, 512, 115, 89);
+		panel.add(btnEmpleados);
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lista_empleados empleados = new lista_empleados();
@@ -524,13 +535,21 @@ public class registro_empleados extends JFrame {
 				dispose();
 			}
 		});
-		panel.add(btnEmpleados);
-		
+
 		txtDireccionFoto = new JTextField();
 		txtDireccionFoto.setEditable(false);
 		txtDireccionFoto.setBounds(387, 135, 83, 20);
 		panel.add(txtDireccionFoto);
 		txtDireccionFoto.setColumns(10);
+		
+		JButton btnCalcularEdad = new JButton("");
+		btnCalcularEdad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				calcularEdad();
+			}
+		});
+		btnCalcularEdad.setBounds(326, 352, 24, 20);
+		panel.add(btnCalcularEdad);
 		
 				JLabel label = new JLabel();
 				label.setBounds(0, 0, 766, 644);
@@ -583,21 +602,53 @@ public class registro_empleados extends JFrame {
 			lblFotoEmpleado.setIcon(new ImageIcon(foto));
 		}
 	}
-	
+
 	public void tomarFoto() {
-				Runtime camara = Runtime.getRuntime();
-				try {
-					camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
+
+		Runtime camara = Runtime.getRuntime();
+		try {
+			camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void pistas() {
-		pista = new PlaceHolder(txtNombresEmpleado, "Ingrese el nombre del cargo.");
+		pista = new PlaceHolder(txtNombresEmpleado, "Ingrese nombres del empleado.");
+		pista = new PlaceHolder(txtApellidosEmpleado, "Ingrese apellidos del empleado.");
+		pista = new PlaceHolder(txtIdentidadEmpleado, "Ingrese la identidad del empleado.");
+		pista = new PlaceHolder(txtTelefonoEmpleado, "Ingrese el telefono del empleado.");
+		pista = new PlaceHolder(txtDireccionEmpleado, "Ingrese la direccion del empleado.");
+		pista = new PlaceHolder(txtNombreReferencia, "Ingrese nombre completo de la referencia.");
+		pista = new PlaceHolder(txtTelefonoReferencia, "Ingrese el telefono de la referencia.");
+		pista = new PlaceHolder(txtCorreoEmpleado, "Ingrese el correo del la empleado");
+	}
+
+	public void establecerFechaRegistro() {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			Date date = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			dateFechaRegistro.setDate(date);
+		} catch (Exception e) {
+
+		}
+
+	}
+
+	public void calcularEdad() {
+		try {
+			Date fechaNacimiento = new Date();
+			fechaNacimiento = dateFechaNacimiento.getDate();
+			LocalDate fechaCumpleaños = fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate fechaActual = LocalDate.now();
+			Period periodo = Period.between(fechaCumpleaños, fechaActual);
+			String resultado = periodo.getYears() + " Años.";
+			txtEdadEmpleado.setText(resultado);
+		} catch (Exception e) {
+
+		}
 	}
 
 	public void obtenerUltimoId() {
