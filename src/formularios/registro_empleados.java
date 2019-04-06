@@ -13,9 +13,11 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Event;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -23,12 +25,15 @@ import javax.swing.JFormattedTextField;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,11 +53,13 @@ import java.awt.event.ActionEvent;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 
 import com.github.sarxos.webcam.Webcam;
 import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.cargo;
 import clases.empleado;
@@ -77,7 +84,7 @@ public class registro_empleados extends JFrame {
 	public JTextField txtNombreReferencia;
 	public JTextField txtTelefonoReferencia;
 	public JTextField txtEdadEmpleado;
-	public JTextField txtTelefonoEmpleado;
+	public JFormattedTextField txtTelefonoEmpleado;
 	public JComboBox<?> cbxGeneroEmpleado;
 	public JComboBox<?> cbxEstadoEmpleado;
 	public JLabel lblFotoEmpleado;
@@ -140,7 +147,6 @@ public class registro_empleados extends JFrame {
 		contentPane.setLayout(null);
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon icono1 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -164,6 +170,9 @@ public class registro_empleados extends JFrame {
 		txtCodigoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCodigoEmpleado.setEditable(false);
 		txtCodigoEmpleado.setColumns(10);
+		txtCodigoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map9 = txtCodigoEmpleado.getInputMap(txtCodigoEmpleado.WHEN_FOCUSED);
+		map9.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblNombres = new JLabel("2. Nombres :");
 		lblNombres.setBounds(57, 111, 83, 14);
@@ -175,28 +184,91 @@ public class registro_empleados extends JFrame {
 		panel.add(txtNombresEmpleado);
 		txtNombresEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtNombresEmpleado.setColumns(10);
+		InputMap map5 = txtNombresEmpleado.getInputMap(txtNombresEmpleado.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtNombresEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNombresEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblApellidos = new JLabel("3. Apellidos :");
 		lblApellidos.setBounds(57, 135, 83, 14);
 		panel.add(lblApellidos);
 		lblApellidos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		InputMap map6 = lblApellidos.getInputMap(lblApellidos.WHEN_FOCUSED);
+		map6.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtApellidosEmpleado = new JTextField();
 		txtApellidosEmpleado.setBounds(140, 132, 210, 20);
 		panel.add(txtApellidosEmpleado);
 		txtApellidosEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtApellidosEmpleado.setColumns(10);
+		txtApellidosEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map7 = txtApellidosEmpleado.getInputMap(txtApellidosEmpleado.WHEN_FOCUSED);
+		map7.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtApellidosEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblIdentidad = new JLabel("4. Identidad :");
 		lblIdentidad.setBounds(57, 161, 83, 14);
 		panel.add(lblIdentidad);
 		lblIdentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		txtIdentidadEmpleado = new JFormattedTextField();
+		MaskFormatter formatter = null;
+		try {
+			formatter = new MaskFormatter("####-####-#####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtIdentidadEmpleado = new JFormattedTextField(formatter);
 		txtIdentidadEmpleado.setBounds(140, 158, 210, 20);
 		txtIdentidadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtIdentidadEmpleado.setColumns(10);
+		txtIdentidadEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(txtIdentidadEmpleado);
+		InputMap map2 = txtIdentidadEmpleado.getInputMap(txtIdentidadEmpleado.WHEN_FOCUSED);
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtIdentidadEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblEdad = new JLabel("10. Edad :");
 		lblEdad.setBounds(57, 352, 83, 14);
@@ -208,6 +280,7 @@ public class registro_empleados extends JFrame {
 		txtEdadEmpleado.setBounds(234, 352, 93, 20);
 		txtEdadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtEdadEmpleado.setColumns(10);
+		txtEdadEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(txtEdadEmpleado);
 
 		JLabel lblGenero = new JLabel("5. Genero :");
@@ -231,17 +304,44 @@ public class registro_empleados extends JFrame {
 		panel.add(txtCorreoEmpleado);
 		txtCorreoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCorreoEmpleado.setColumns(10);
+		txtCorreoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map8 = txtCorreoEmpleado.getInputMap(txtCorreoEmpleado.WHEN_FOCUSED);
+		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblTelefonos = new JLabel("7. Telefono :");
 		lblTelefonos.setBounds(57, 237, 83, 14);
 		panel.add(lblTelefonos);
 		lblTelefonos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		txtTelefonoEmpleado = new JTextField();
+		MaskFormatter formatter1 = null;
+		try {
+			formatter1 = new MaskFormatter("+(504) ####-####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtTelefonoEmpleado = new JFormattedTextField(formatter1);
 		txtTelefonoEmpleado.setBounds(140, 236, 210, 20);
 		panel.add(txtTelefonoEmpleado);
+		txtIdentidadEmpleado = new JFormattedTextField(formatter);
 		txtTelefonoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTelefonoEmpleado.setColumns(10);
+		txtTelefonoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map3 = txtTelefonoEmpleado.getInputMap(txtTelefonoEmpleado.WHEN_FOCUSED);
+		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtTelefonoEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblDireccion = new JLabel("8. Direccion :");
 		lblDireccion.setBounds(57, 262, 83, 14);
@@ -266,20 +366,25 @@ public class registro_empleados extends JFrame {
 		dateFechaLabores = new JDateChooser();
 		dateFechaLabores.setBounds(234, 411, 115, 20);
 		panel.add(dateFechaLabores);
+		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateFechaLabores.getDateEditor();
+		editor.setEditable(false);
 
 		dateFechaRegistro = new JDateChooser();
 		dateFechaRegistro.setBounds(234, 380, 115, 20);
 		panel.add(dateFechaRegistro);
+		JTextFieldDateEditor editor2 = (JTextFieldDateEditor) dateFechaRegistro.getDateEditor();
+		editor2.setEditable(false);
 
 		dateFechaNacimiento = new JDateChooser();
 		dateFechaNacimiento.setBounds(235, 322, 115, 20);
 		panel.add(dateFechaNacimiento);
+		JTextFieldDateEditor editor3 = (JTextFieldDateEditor) dateFechaNacimiento.getDateEditor();
+		editor3.setEditable(false);
 
 		JLabel label_1 = new JLabel("");
-		label_1.setBounds(648, 60, 63, 58);
+		label_1.setBounds(652, 67, 63, 58);
 		panel.add(label_1);
-		final ImageIcon logo1 = new ImageIcon(
-				icono1.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo1 = new ImageIcon(icono1.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
 		label_1.setIcon(logo1);
 
 		JLabel lblReferencia = new JLabel("13. Nombre completo de referencia :");
@@ -292,17 +397,59 @@ public class registro_empleados extends JFrame {
 		panel.add(txtNombreReferencia);
 		txtNombreReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtNombreReferencia.setColumns(10);
+		txtNombreReferencia.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map14 = txtNombreReferencia.getInputMap(txtNombreReferencia.WHEN_FOCUSED);
+		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtNombreReferencia.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblTelefonoDeLa = new JLabel("14. Telefono de referencia :");
 		lblTelefonoDeLa.setBounds(56, 487, 202, 14);
 		panel.add(lblTelefonoDeLa);
 		lblTelefonoDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		txtTelefonoReferencia = new JTextField();
+		MaskFormatter formatter3 = null;
+		try {
+			formatter3 = new MaskFormatter("+(504) ####-####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtTelefonoReferencia = new JFormattedTextField(formatter3);
 		txtTelefonoReferencia.setBounds(56, 503, 293, 20);
 		panel.add(txtTelefonoReferencia);
+		txtTelefonoReferencia.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTelefonoReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTelefonoReferencia.setColumns(10);
+		InputMap map4 = txtTelefonoReferencia.getInputMap(txtTelefonoReferencia.WHEN_FOCUSED);
+		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtTelefonoReferencia.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblEstado = new JLabel("15. Estado :");
 		lblEstado.setBounds(56, 534, 83, 14);
@@ -438,6 +585,8 @@ public class registro_empleados extends JFrame {
 		panel.add(scrollPane);
 
 		txtDireccionEmpleado = new JTextArea();
+		InputMap map90 = txtDireccionEmpleado.getInputMap(txtDireccionEmpleado.WHEN_FOCUSED);
+		map90.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		scrollPane.setViewportView(txtDireccionEmpleado);
 
 		JPanel panel_2 = new JPanel();
@@ -487,18 +636,6 @@ public class registro_empleados extends JFrame {
 		lblFoto.setBounds(387, 60, 83, 17);
 		panel.add(lblFoto);
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(491, 60, 140, 137);
-		panel.add(panel_3);
-		panel_3.setLayout(null);
-
-		lblFotoEmpleado = new JLabel("");
-		lblFotoEmpleado.setBounds(0, 0, 140, 137);
-		panel_3.add(lblFotoEmpleado);
-		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(),
-				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
-		lblFotoEmpleado.setIcon(logoFoto);
-
 		btnCancelarEmpleado = new JButton("Cancelar");
 		btnCancelarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnCancelarEmpleado.setBackground(new Color(0, 206, 209));
@@ -533,17 +670,18 @@ public class registro_empleados extends JFrame {
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				empleado claseEmpleado = new empleado();
-		        consultas_empleado consultaEmpleado = new consultas_empleado();
-		        registro_empleados formularioEmpleado = new registro_empleados();
-		        lista_empleados listaEmpleados = new lista_empleados();
-		        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado, listaEmpleados);
-		        listaEmpleados.btnBorrarEmpleado.setVisible(true);
-		        listaEmpleados.btnNuevoEmpleado.setVisible(true);
-		        listaEmpleados.btnActualizarDatosEmpleado.setVisible(true);
-		        listaEmpleados.btnMostrarEmpleado.setVisible(true);
-		        listaEmpleados.setVisible(true);
-		        listaEmpleados.setLocationRelativeTo(null);
-		        listaEmpleados.construirTablaEmpleados();
+				consultas_empleado consultaEmpleado = new consultas_empleado();
+				registro_empleados formularioEmpleado = new registro_empleados();
+				lista_empleados listaEmpleados = new lista_empleados();
+				control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado,
+						formularioEmpleado, listaEmpleados);
+				listaEmpleados.btnBorrarEmpleado.setVisible(true);
+				listaEmpleados.btnNuevoEmpleado.setVisible(true);
+				listaEmpleados.btnActualizarDatosEmpleado.setVisible(true);
+				listaEmpleados.btnMostrarEmpleado.setVisible(true);
+				listaEmpleados.setVisible(true);
+				listaEmpleados.setLocationRelativeTo(null);
+				listaEmpleados.construirTablaEmpleados();
 				dispose();
 			}
 		});
@@ -553,21 +691,32 @@ public class registro_empleados extends JFrame {
 		txtDireccionFoto.setBounds(387, 135, 83, 20);
 		panel.add(txtDireccionFoto);
 		txtDireccionFoto.setColumns(10);
+		InputMap map10 = txtDireccionFoto.getInputMap(txtDireccionFoto.WHEN_FOCUSED);
+		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JButton btnCalcularEdad = new JButton("");
+		btnCalcularEdad.setBackground(new Color(220, 20, 60));
 		btnCalcularEdad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				calcularEdad();
+				btnCalcularEdad.setBackground(Color.GREEN);
 			}
 		});
 		btnCalcularEdad.setBounds(326, 352, 24, 20);
 		panel.add(btnCalcularEdad);
 
+		lblFotoEmpleado = new JLabel("");
+		lblFotoEmpleado.setBackground(new Color(255, 255, 224));
+		lblFotoEmpleado.setBounds(491, 60, 151, 143);
+		panel.add(lblFotoEmpleado);
+		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(), lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoEmpleado.setIcon(logoFoto);
+
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 766, 644);
 		panel.add(label);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 		label.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
@@ -603,7 +752,7 @@ public class registro_empleados extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotos_empleados");
+		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -622,7 +771,6 @@ public class registro_empleados extends JFrame {
 			camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -636,6 +784,7 @@ public class registro_empleados extends JFrame {
 		pista = new PlaceHolder(txtNombreReferencia, "Ingrese nombre completo de la referencia.");
 		pista = new PlaceHolder(txtTelefonoReferencia, "Ingrese el telefono de la referencia.");
 		pista = new PlaceHolder(txtCorreoEmpleado, "Ingrese el correo del la empleado");
+		pista = new PlaceHolder(txtDireccionFoto, "Foto.");
 	}
 
 	public void establecerFechaRegistro() {
