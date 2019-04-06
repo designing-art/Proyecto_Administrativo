@@ -55,9 +55,13 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import clases.cargo;
+import clases.empleado;
 import conexion.conexion;
 import consultas.consultas_cargo;
+import consultas.consultas_empleado;
 import controles.control_cargo;
+import controles.control_empleado;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -528,10 +532,18 @@ public class registro_empleados extends JFrame {
 		panel.add(btnEmpleados);
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lista_empleados empleados = new lista_empleados();
-				empleados.setVisible(true);
-				empleados.setLocationRelativeTo(null);
-				empleados.construirTablaEmpleados();
+				empleado claseEmpleado = new empleado();
+		        consultas_empleado consultaEmpleado = new consultas_empleado();
+		        registro_empleados formularioEmpleado = new registro_empleados();
+		        lista_empleados listaEmpleados = new lista_empleados();
+		        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado, listaEmpleados);
+		        listaEmpleados.btnBorrarEmpleado.setVisible(true);
+		        listaEmpleados.btnNuevoEmpleado.setVisible(true);
+		        listaEmpleados.btnActualizarDatosEmpleado.setVisible(true);
+		        listaEmpleados.btnMostrarEmpleado.setVisible(true);
+		        listaEmpleados.setVisible(true);
+		        listaEmpleados.setLocationRelativeTo(null);
+		        listaEmpleados.construirTablaEmpleados();
 				dispose();
 			}
 		});
@@ -541,7 +553,7 @@ public class registro_empleados extends JFrame {
 		txtDireccionFoto.setBounds(387, 135, 83, 20);
 		panel.add(txtDireccionFoto);
 		txtDireccionFoto.setColumns(10);
-		
+
 		JButton btnCalcularEdad = new JButton("");
 		btnCalcularEdad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -550,13 +562,13 @@ public class registro_empleados extends JFrame {
 		});
 		btnCalcularEdad.setBounds(326, 352, 24, 20);
 		panel.add(btnCalcularEdad);
-		
-				JLabel label = new JLabel();
-				label.setBounds(0, 0, 766, 644);
-				panel.add(label);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-				label.setIcon(logo);
+
+		JLabel label = new JLabel();
+		label.setBounds(0, 0, 766, 644);
+		panel.add(label);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+		label.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -608,7 +620,7 @@ public class registro_empleados extends JFrame {
 		Runtime camara = Runtime.getRuntime();
 		try {
 			camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

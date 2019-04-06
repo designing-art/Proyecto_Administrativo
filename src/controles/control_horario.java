@@ -130,11 +130,6 @@ public class control_horario implements ActionListener {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
 					
-							fila = formularioHorario.tablaHorario.getSelectedRow();
-							if (fila == -1) {
-								JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-							} else {
-					
 					String tipo_horario = formularioHorario.tablaHorario.getValueAt(fila, 0).toString();
 				    String hora_inicio_horario= formularioHorario.tablaHorario.getValueAt(fila, 1).toString();
 				    String hora_final_de_horario= formularioHorario.tablaHorario.getValueAt(fila, 2).toString();

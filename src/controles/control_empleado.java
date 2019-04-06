@@ -1,6 +1,7 @@
 package controles;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -60,30 +61,25 @@ public class control_empleado implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
-			
 			claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
 			claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
 			claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
 			claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-
 			int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
 			int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
 			String dateFechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
 			claseEmpleado.setFecha_nacimiento_empleado(dateFechaNacimiento);
-
 			int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
 			int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
 			String dateFechaRegistro = dia2 + "-" + mes2 + "-" + año2;
 			claseEmpleado.setFecha_registro_empleado(dateFechaRegistro);
-
 			int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
 			int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
 			String dateFechaLabores = dia3 + "-" + mes3 + "-" + año3;
 			claseEmpleado.setFecha_inicio_labores_empleado(dateFechaLabores);
-			
 			claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
 			claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
 			claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
@@ -92,7 +88,6 @@ public class control_empleado implements ActionListener {
 			claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
 			claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 			claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-
 			if (consultaEmpleado.registrar(claseEmpleado)) {
 				JOptionPane.showMessageDialog(null, "Registro Guardado");
 				limpiar();
@@ -104,31 +99,26 @@ public class control_empleado implements ActionListener {
 
 		/* Actualizar Empleado */
 		if (e.getSource() == formularioEmpleado.btnActualizarEmpleado) {
-
 			claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));
 			claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
 			claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
 			claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
 			claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-
 			int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
 			int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
 			String dateFechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
 			claseEmpleado.setFecha_nacimiento_empleado(dateFechaNacimiento);
-
 			int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
 			int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
 			String dateFechaRegistro = dia2 + "-" + mes2 + "-" + año2;
 			claseEmpleado.setFecha_registro_empleado(dateFechaRegistro);
-
 			int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
 			int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
 			String dateFechaLabores = dia3 + "-" + mes3 + "-" + año3;
 			claseEmpleado.setFecha_inicio_labores_empleado(dateFechaLabores);
-			
 			claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
 			claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
 			claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
@@ -137,7 +127,6 @@ public class control_empleado implements ActionListener {
 			claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
 			claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 			claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-
 			if (consultaEmpleado.modificar(claseEmpleado)) {
 				JOptionPane.showMessageDialog(null, "Registro Modificado");
 				limpiar();
@@ -160,27 +149,112 @@ public class control_empleado implements ActionListener {
 					Connection conn = objCon.getConexion();
 					int Fila = listaEmpleado.tablaEmpleados.getSelectedRow();
 					String codigo = listaEmpleado.tablaEmpleados.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM cargos WHERE id_cargo=?");
+					ps = conn.prepareStatement("DELETE FROM empleados WHERE id_empleado=?");
 					ps.setString(1, codigo);
 					ps.execute();
-					JOptionPane.showMessageDialog(null, "Cargo Eliminado");
+					JOptionPane.showMessageDialog(null, "Datos del Empleado Eliminados");
 					limpiar();
 					listaEmpleado.construirTablaEmpleados();
-
 				}
 			} catch (SQLException ex) {
-				JOptionPane.showMessageDialog(null, "Error al Eliminar Cargo");
+				JOptionPane.showMessageDialog(null, "Error al Eliminar Datos del Empleado");
 				System.out.println(ex.toString());
 			}
 		}
-
+		
 		/* Limpiar */
 		if (e.getSource() == listaEmpleado.btnNuevoEmpleado) {
-			limpiar();
-			formularioEmpleado.obtenerUltimoId();
-			formularioEmpleado.pistas();
-			formularioEmpleado.txtDireccionEmpleado.setBackground(Color.WHITE);
+			empleado claseEmpleado = new empleado();
+	        consultas_empleado consultaEmpleado = new consultas_empleado();
+	        registro_empleados formularioEmpleado = new registro_empleados();
+	        lista_empleados listaEmpleados = new lista_empleados();
+	        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado, listaEmpleados);
+	        formularioEmpleado.setVisible(true);
+	        formularioEmpleado.setLocationRelativeTo(null);
+	        formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+	        formularioEmpleado.obtenerUltimoId();
+	        formularioEmpleado.pistas();
+	        formularioEmpleado.establecerFechaRegistro();
+	        formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+			formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+			formularioEmpleado.btnCancelarEmpleado.setVisible(false);
 		}
+
+		/* Pasar datos de la tabla al formulario para actualizar */
+		if (e.getSource() == listaEmpleado.btnActualizarDatosEmpleado) {
+			int filaseleccionada;
+			try {
+				filaseleccionada = listaEmpleado.tablaEmpleados.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String codigo = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 0).toString();
+					String nombres = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 1).toString();
+					String apellidos = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 2).toString();
+					String identidad = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String genero = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 4).toString();
+					String edad = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 5).toString();
+					String telefono = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 6).toString();
+					String correo = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 7).toString();
+					String direccion = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 8).toString();
+					String direccion_foto = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9).toString();
+					String referencia = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 10).toString();
+					String t_referencia = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 11).toString();
+					String fecha_nac = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 12).toString();
+					String fecha_reg = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 13).toString();
+					String fecha_lab = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 14).toString();
+					String estado = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 15).toString();
+					
+					formularioEmpleado.txtCodigoEmpleado.setText(codigo);
+					formularioEmpleado.txtNombresEmpleado.setText(nombres);
+					formularioEmpleado.txtApellidosEmpleado.setText(apellidos);
+					formularioEmpleado.txtIdentidadEmpleado.setText(identidad);
+					formularioEmpleado.cbxGeneroEmpleado.setSelectedItem(genero);
+					formularioEmpleado.txtEdadEmpleado.setText(edad);
+					formularioEmpleado.txtTelefonoEmpleado.setText(telefono);
+					formularioEmpleado.txtCorreoEmpleado.setText(correo);
+					formularioEmpleado.txtDireccionEmpleado.setText(direccion);
+					formularioEmpleado.txtDireccionFoto.setText(direccion_foto);
+					formularioEmpleado.txtNombreReferencia.setText(referencia);
+					formularioEmpleado.txtTelefonoReferencia.setText(t_referencia);
+					formularioEmpleado.dateFechaNacimiento.setDateFormatString(fecha_nac);
+					formularioEmpleado.dateFechaRegistro.setDateFormatString(fecha_reg);
+					formularioEmpleado.dateFechaLabores.setDateFormatString(fecha_lab);
+					formularioEmpleado.txtSueldoCargo.setText(estado);
+					
+					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtIdentidadEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.cbxGeneroEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtEdadEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtTelefonoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtCorreoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtDireccionEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtDireccionFoto.setForeground(Color.BLACK);
+					formularioEmpleado.txtNombreReferencia.setForeground(Color.BLACK);
+					formularioEmpleado.txtTelefonoReferencia.setForeground(Color.BLACK);
+					formularioEmpleado.dateFechaNacimiento.setForeground(Color.BLACK);
+					formularioEmpleado.dateFechaRegistro.setForeground(Color.BLACK);
+					formularioEmpleado.dateFechaLabores.setForeground(Color.BLACK);
+					formularioEmpleado.txtSueldoCargo.setForeground(Color.BLACK);
+					
+					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
+					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
+					formularioEmpleado.btnActualizarEmpleado.setVisible(true);
+					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
+					
+					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+					
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
 	}
 
 	public void limpiar() {
@@ -201,7 +275,7 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.cbxEstadoEmpleado.setToolTipText(null);
 	}
 
-	/* Metodos para mostrar datos en tabla Cargos */
+	/* Metodos para mostrar datos en tabla empleados */
 	public static ArrayList<empleado> buscarUsuariosConMatriz() {
 		conexion conex = new conexion();
 		ArrayList<empleado> miLista = new ArrayList<empleado>();
