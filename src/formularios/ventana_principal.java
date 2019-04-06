@@ -183,11 +183,14 @@ public class ventana_principal extends JFrame {
 				empleado claseEmpleado = new empleado();
 		        consultas_empleado consultaEmpleado = new consultas_empleado();
 		        registro_empleados formularioEmpleado = new registro_empleados();
-		        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado);
+		        lista_empleados listaEmpleados = new lista_empleados();
+		        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado, listaEmpleados);
 		        formularioEmpleado.setVisible(true);
 		        formularioEmpleado.setLocationRelativeTo(null);
 		        formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
 		        formularioEmpleado.obtenerUltimoId();
+		        formularioEmpleado.pistas();
+		        formularioEmpleado.establecerFechaRegistro();
 		        formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 				formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 				formularioEmpleado.btnActualizarEmpleado.setVisible(false);

@@ -1,25 +1,27 @@
 package clases;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Date;
 
 public class empleado {
 
-	private int id_empleado;
-	private String nombres_empleado;
-	private String apellidos_empleado;
-	private String identidad_empleado;
-	private String genero_empleado;
-	private int edad_empleado;
-	private String telefono_empleado;
-	private String correo_empleado;
-	private String direccion_empleado;
-	private int foto_empleado;
-	private String referencia_empleado;
-	private String telefono_referencia;
-	private Date fecha_nacimiento_empleado;
-	private Date fecha_registro_empleado;
-	private Date fecha_inicio_labores_empleado;
-	private String estado_empleado;
+	int id_empleado;
+	String nombres_empleado;
+	String apellidos_empleado;
+	String identidad_empleado;
+	String genero_empleado;
+	String edad_empleado;
+	String telefono_empleado;
+	String correo_empleado;
+	String direccion_empleado;
+	String direccion_foto_empleado;
+	String referencia_empleado;
+	String telefono_referencia;
+	String fecha_nacimiento_empleado;
+	String fecha_registro_empleado;
+	String fecha_inicio_labores_empleado;
+	String estado_empleado;
 
 	public int getId_empleado() {
 		return id_empleado;
@@ -61,20 +63,21 @@ public class empleado {
 		this.genero_empleado = genero_empleado;
 	}
 
-	public int getEdad_empleado() {
+
+	public String getEdad_empleado() {
 		return edad_empleado;
 	}
 
-	public void setEdad_empleado(int edad_empleado) {
-		this.edad_empleado = edad_empleado;
+	public void setEdad_empleado(String edad_Empleado) {
+		this.edad_empleado = edad_Empleado;
 	}
 
 	public String getTelefono_empleado() {
 		return telefono_empleado;
 	}
 
-	public void setTelefono_empleado(String telefono1_empleado) {
-		this.telefono_empleado = telefono1_empleado;
+	public void setTelefono_empleado(String telefono_empleado) {
+		this.telefono_empleado = telefono_empleado;
 	}
 
 	public String getCorreo_empleado() {
@@ -92,13 +95,14 @@ public class empleado {
 	public void setDireccion_empleado(String direccion_empleado) {
 		this.direccion_empleado = direccion_empleado;
 	}
+	
 
-	public int getFoto_empleado() {
-		return foto_empleado;
+	public String getDireccion_foto_empleado() {
+		return direccion_foto_empleado;
 	}
 
-	public void setFoto_empleado(int foto_empleado) {
-		this.foto_empleado = foto_empleado;
+	public void setDireccion_foto_empleado(String direccion_foto_empleado) {
+		this.direccion_foto_empleado = direccion_foto_empleado;
 	}
 
 	public String getReferencia_empleado() {
@@ -117,28 +121,27 @@ public class empleado {
 		this.telefono_referencia = telefono_referencia;
 	}
 
-	
-	public Date getFecha_nacimiento_empleado() {
+	public String getFecha_nacimiento_empleado() {
 		return fecha_nacimiento_empleado;
 	}
 
-	public void setFecha_nacimiento_empleado(Date fecha_nacimiento_empleado) {
+	public void setFecha_nacimiento_empleado(String fecha_nacimiento_empleado) {
 		this.fecha_nacimiento_empleado = fecha_nacimiento_empleado;
 	}
 
-	public Date getFecha_registro_empleado() {
+	public String getFecha_registro_empleado() {
 		return fecha_registro_empleado;
 	}
 
-	public void setFecha_registro_empleado(Date fecha_registro_empleado) {
+	public void setFecha_registro_empleado(String fecha_registro_empleado) {
 		this.fecha_registro_empleado = fecha_registro_empleado;
 	}
 
-	public Date getFecha_inicio_labores_empleado() {
+	public String getFecha_inicio_labores_empleado() {
 		return fecha_inicio_labores_empleado;
 	}
 
-	public void setFecha_inicio_labores_empleado(Date fecha_inicio_labores_empleado) {
+	public void setFecha_inicio_labores_empleado(String fecha_inicio_labores_empleado) {
 		this.fecha_inicio_labores_empleado = fecha_inicio_labores_empleado;
 	}
 
