@@ -11,6 +11,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Event;
@@ -97,6 +99,7 @@ public class registro_empleados extends JFrame {
 
 	public JButton btnTomarFoto;
 	public JButton btnSubirFoto;
+	public JButton btnCalcularEdad;
 
 	public JButton btnNuevoEmpleado;
 	public JButton btnGuardarEmpleado;
@@ -280,6 +283,7 @@ public class registro_empleados extends JFrame {
 		txtEdadEmpleado.setBounds(234, 352, 93, 20);
 		txtEdadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtEdadEmpleado.setColumns(10);
+		txtEdadEmpleado.setText("Click -->");
 		txtEdadEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(txtEdadEmpleado);
 
@@ -382,9 +386,10 @@ public class registro_empleados extends JFrame {
 		editor3.setEditable(false);
 
 		JLabel label_1 = new JLabel("");
-		label_1.setBounds(652, 67, 63, 58);
+		label_1.setBounds(661, 60, 63, 58);
 		panel.add(label_1);
-		final ImageIcon logo1 = new ImageIcon(icono1.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo1 = new ImageIcon(
+				icono1.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
 		label_1.setIcon(logo1);
 
 		JLabel lblReferencia = new JLabel("13. Nombre completo de referencia :");
@@ -694,14 +699,17 @@ public class registro_empleados extends JFrame {
 		InputMap map10 = txtDireccionFoto.getInputMap(txtDireccionFoto.WHEN_FOCUSED);
 		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
-		JButton btnCalcularEdad = new JButton("");
-		btnCalcularEdad.setBackground(new Color(220, 20, 60));
+		btnCalcularEdad = new JButton();
 		btnCalcularEdad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				
 				calcularEdad();
 				btnCalcularEdad.setBackground(Color.GREEN);
+
 			}
 		});
+		btnCalcularEdad.setBackground(new Color(220, 20, 60));
 		btnCalcularEdad.setBounds(326, 352, 24, 20);
 		panel.add(btnCalcularEdad);
 
@@ -710,13 +718,15 @@ public class registro_empleados extends JFrame {
 		lblFotoEmpleado.setBounds(491, 60, 151, 143);
 		panel.add(lblFotoEmpleado);
 		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/material/usuario.png"));
-		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(), lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(),
+				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpleado.setIcon(logoFoto);
 
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 766, 644);
 		panel.add(label);
-		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 		label.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
@@ -778,13 +788,9 @@ public class registro_empleados extends JFrame {
 	public void pistas() {
 		pista = new PlaceHolder(txtNombresEmpleado, "Ingrese nombres del empleado.");
 		pista = new PlaceHolder(txtApellidosEmpleado, "Ingrese apellidos del empleado.");
-		pista = new PlaceHolder(txtIdentidadEmpleado, "Ingrese la identidad del empleado.");
-		pista = new PlaceHolder(txtTelefonoEmpleado, "Ingrese el telefono del empleado.");
 		pista = new PlaceHolder(txtDireccionEmpleado, "Ingrese la direccion del empleado.");
 		pista = new PlaceHolder(txtNombreReferencia, "Ingrese nombre completo de la referencia.");
-		pista = new PlaceHolder(txtTelefonoReferencia, "Ingrese el telefono de la referencia.");
 		pista = new PlaceHolder(txtCorreoEmpleado, "Ingrese el correo del la empleado");
-		pista = new PlaceHolder(txtDireccionFoto, "Foto.");
 	}
 
 	public void establecerFechaRegistro() {

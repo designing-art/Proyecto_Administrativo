@@ -38,6 +38,9 @@ public class control_empleado implements ActionListener {
 	public consultas_empleado consultaEmpleado;
 	public registro_empleados formularioEmpleado;
 	public lista_empleados listaEmpleado;
+	public String fechaNacimiento;
+	public String fechaRegistro;
+	public String fechaLabores;
 
 	public control_empleado(empleado claseEmpleado, consultas_empleado consultaEmpleado,
 			registro_empleados formularioEmpleado, lista_empleados listaEmpleado) {
@@ -60,79 +63,145 @@ public class control_empleado implements ActionListener {
 	/* Insertar Empleado */
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
-			claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
-			claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-			claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
-			claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-			int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
-			int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
-			String dateFechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
-			claseEmpleado.setFecha_nacimiento_empleado(dateFechaNacimiento);
-			int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
-			int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
-			String dateFechaRegistro = dia2 + "-" + mes2 + "-" + año2;
-			claseEmpleado.setFecha_registro_empleado(dateFechaRegistro);
-			int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
-			int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
-			String dateFechaLabores = dia3 + "-" + mes3 + "-" + año3;
-			claseEmpleado.setFecha_inicio_labores_empleado(dateFechaLabores);
-			claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-			claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
-			claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
-			claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
-			claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
-			claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
-			claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
-			claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-			if (consultaEmpleado.registrar(claseEmpleado)) {
-				JOptionPane.showMessageDialog(null, "Registro Guardado");
-				limpiar();
-			} else {
-				JOptionPane.showMessageDialog(null, "Error al Guardar");
-				limpiar();
+			if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
+				
+				if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
+				||formularioEmpleado.txtDireccionFoto.getText().isEmpty()
+				||formularioEmpleado.txtNombreReferencia.getText().isEmpty()
+				||formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()	
+				||formularioEmpleado.txtNombresEmpleado.getText().toString().equalsIgnoreCase("Ingrese nombres del empleado.")
+				||formularioEmpleado.txtApellidosEmpleado.getText().toString().equalsIgnoreCase("Ingrese apellidos del empleado.")
+				||formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
+				||formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
+				||formularioEmpleado.txtCorreoEmpleado.getText().toString().equalsIgnoreCase("Ingrese el correo del empleado.")
+				||formularioEmpleado.txtDireccionEmpleado.getText().toString().equalsIgnoreCase("Ingrese la direccion del empleado.")
+				||formularioEmpleado.txtDireccionFoto.getText().equals("")
+				||formularioEmpleado.txtEdadEmpleado.getText().equals("")
+				||formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
+				||formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
+				||formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
+				||formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
+				||formularioEmpleado.txtNombreReferencia.getText().toString().equalsIgnoreCase("Ingrese nombre completo de la referencia.")
+				||formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
+				
+				{
+					JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar los datos del empleado!");
+
+				} else {
+				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+				int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
+				int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+				int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
+				fechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
+				claseEmpleado.setFecha_nacimiento_empleado(fechaNacimiento);
+				int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
+				int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
+				int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
+				fechaRegistro = dia2 + "-" + mes2 + "-" + año2;
+				claseEmpleado.setFecha_registro_empleado(fechaRegistro);
+				int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
+				int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
+				int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
+				fechaLabores = dia3 + "-" + mes3 + "-" + año3;
+				claseEmpleado.setFecha_inicio_labores_empleado(fechaLabores);
+				claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
+				claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+				claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
+				claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
+				claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
+				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
+				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
+				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
+				if (consultaEmpleado.registrar(claseEmpleado)) {
+					JOptionPane.showMessageDialog(null, "Registro Guardado");
+					limpiar();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error al Guardar");
+					limpiar();
+				}
 			}
 		}
 
 		/* Actualizar Empleado */
 		if (e.getSource() == formularioEmpleado.btnActualizarEmpleado) {
-			claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));
-			claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
-			claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-			claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
-			claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-			int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
-			int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
-			String dateFechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
-			claseEmpleado.setFecha_nacimiento_empleado(dateFechaNacimiento);
-			int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
-			int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
-			String dateFechaRegistro = dia2 + "-" + mes2 + "-" + año2;
-			claseEmpleado.setFecha_registro_empleado(dateFechaRegistro);
-			int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
-			int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
-			String dateFechaLabores = dia3 + "-" + mes3 + "-" + año3;
-			claseEmpleado.setFecha_inicio_labores_empleado(dateFechaLabores);
-			claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-			claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
-			claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
-			claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
-			claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
-			claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
-			claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
-			claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
+			
+			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
+					||formularioEmpleado.txtDireccionFoto.getText().isEmpty()
+					||formularioEmpleado.txtNombreReferencia.getText().isEmpty()
+					||formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()	
+					||formularioEmpleado.txtNombresEmpleado.getText().toString().equalsIgnoreCase("Ingrese nombres del empleado.")
+					||formularioEmpleado.txtApellidosEmpleado.getText().toString().equalsIgnoreCase("Ingrese apellidos del empleado.")
+					||formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
+					||formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
+					||formularioEmpleado.txtCorreoEmpleado.getText().toString().equalsIgnoreCase("Ingrese el correo del empleado.")
+					||formularioEmpleado.txtDireccionEmpleado.getText().toString().equalsIgnoreCase("Ingrese la direccion del empleado.")
+					||formularioEmpleado.txtDireccionFoto.getText().equals("")
+					||formularioEmpleado.txtEdadEmpleado.getText().equals("")
+					||formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
+					||formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
+					||formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
+					||formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
+					||formularioEmpleado.txtNombreReferencia.getText().toString().equalsIgnoreCase("Ingrese nombre completo de la referencia.")
+					||formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
+					
+					{
+						JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar los datos del empleado!");
+
+					} else {
+						
+					claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));	
+					claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+					claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+					claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+					claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+					int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
+					int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+					int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
+					fechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
+					claseEmpleado.setFecha_nacimiento_empleado(fechaNacimiento);
+					int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
+					int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
+					int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
+					fechaRegistro = dia2 + "-" + mes2 + "-" + año2;
+					claseEmpleado.setFecha_registro_empleado(fechaRegistro);
+					int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
+					int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
+					int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
+					fechaLabores = dia3 + "-" + mes3 + "-" + año3;
+					claseEmpleado.setFecha_inicio_labores_empleado(fechaLabores);
+					claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
+					claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+					claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
+					claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
+					claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
+					claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
+					claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
+					claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
+
+			
 			if (consultaEmpleado.modificar(claseEmpleado)) {
 				JOptionPane.showMessageDialog(null, "Registro Modificado");
 				limpiar();
 			} else {
 				JOptionPane.showMessageDialog(null, "Error al Modificar");
 				limpiar();
+			}
+					
 			}
 		}
 
@@ -165,22 +234,23 @@ public class control_empleado implements ActionListener {
 		/* Limpiar */
 		if (e.getSource() == listaEmpleado.btnNuevoEmpleado) {
 			empleado claseEmpleado = new empleado();
-	        consultas_empleado consultaEmpleado = new consultas_empleado();
-	        registro_empleados formularioEmpleado = new registro_empleados();
-	        lista_empleados listaEmpleados = new lista_empleados();
-	        control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado, listaEmpleados);
-	        formularioEmpleado.setVisible(true);
-	        formularioEmpleado.setLocationRelativeTo(null);
-	        formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
-	        formularioEmpleado.obtenerUltimoId();
-	        formularioEmpleado.pistas();
-	        formularioEmpleado.establecerFechaRegistro();
-	        formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+			consultas_empleado consultaEmpleado = new consultas_empleado();
+			registro_empleados formularioEmpleado = new registro_empleados();
+			lista_empleados listaEmpleados = new lista_empleados();
+			control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado,
+					listaEmpleados);
+			formularioEmpleado.setVisible(true);
+			formularioEmpleado.setLocationRelativeTo(null);
+			formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+			formularioEmpleado.obtenerUltimoId();
+			formularioEmpleado.pistas();
+			formularioEmpleado.establecerFechaRegistro();
+			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 			formularioEmpleado.btnActualizarEmpleado.setVisible(false);
 			formularioEmpleado.btnCancelarEmpleado.setVisible(false);
 		}
-
+		
 		/* Pasar datos de la tabla al formulario para actualizar */
 		if (e.getSource() == listaEmpleado.btnActualizarDatosEmpleado) {
 			int filaseleccionada;
@@ -205,7 +275,7 @@ public class control_empleado implements ActionListener {
 					String fecha_reg = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 13).toString();
 					String fecha_lab = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 14).toString();
 					String estado = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 15).toString();
-					
+
 					formularioEmpleado.txtCodigoEmpleado.setText(codigo);
 					formularioEmpleado.txtNombresEmpleado.setText(nombres);
 					formularioEmpleado.txtApellidosEmpleado.setText(apellidos);
@@ -222,7 +292,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.dateFechaRegistro.setDateFormatString(fecha_reg);
 					formularioEmpleado.dateFechaLabores.setDateFormatString(fecha_lab);
 					formularioEmpleado.txtSueldoCargo.setText(estado);
-					
+
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
@@ -239,14 +309,14 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.dateFechaRegistro.setForeground(Color.BLACK);
 					formularioEmpleado.dateFechaLabores.setForeground(Color.BLACK);
 					formularioEmpleado.txtSueldoCargo.setForeground(Color.BLACK);
-					
+
 					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarEmpleado.setVisible(true);
 					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
-					
+
 					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
-					
+
 				}
 
 			} catch (HeadlessException ex) {
@@ -262,7 +332,6 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.txtNombresEmpleado.setText(null);
 		formularioEmpleado.txtApellidosEmpleado.setText(null);
 		formularioEmpleado.txtIdentidadEmpleado.setText(null);
-		formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().equals(null);
 		formularioEmpleado.txtEdadEmpleado.setText(null);
 		formularioEmpleado.txtTelefonoEmpleado.setText(null);
 		formularioEmpleado.txtCorreoEmpleado.setText(null);
@@ -295,8 +364,9 @@ public class control_empleado implements ActionListener {
 				empleado.setTelefono_empleado(rs.getString("telefono_empleado"));
 				empleado.setCorreo_empleado(rs.getString("correo_empleado"));
 				empleado.setDireccion_empleado(rs.getString("direccion_empleado"));
+				empleado.setDireccion_foto_empleado(rs.getString("direccion_foto_empleado"));
 				empleado.setReferencia_empleado(rs.getString("referencia_empleado"));
-				empleado.setTelefono_empleado(rs.getString("telefono_referencia"));
+				empleado.setTelefono_referencia(rs.getString("telefono_referencia"));
 				empleado.setFecha_nacimiento_empleado(rs.getString("fecha_nacimiento_empleado"));
 				empleado.setFecha_registro_empleado(rs.getString("fecha_registro_empleado"));
 				empleado.setFecha_inicio_labores_empleado(rs.getString("fecha_inicio_labores_empleado"));

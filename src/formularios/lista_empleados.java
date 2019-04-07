@@ -248,13 +248,6 @@ public class lista_empleados extends JFrame {
 		for (int c = 0; c < tablaEmpleados.getColumnCount(); c++) {
 			Class<?> col_class = tablaEmpleados.getColumnClass(c);
 			tablaEmpleados.setDefaultEditor(col_class, null);
-			
-			// alinear datos de sueldo y horaextra a la derecha
-			DefaultTableCellRenderer tcr;
-			tcr = new DefaultTableCellRenderer();
-			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaEmpleados.getColumnModel().getColumn(3).setCellRenderer(tcr);
-			tablaEmpleados.getColumnModel().getColumn(4).setCellRenderer(tcr);
 		}
 	}
 
