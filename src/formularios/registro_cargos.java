@@ -292,89 +292,89 @@ public class registro_cargos extends JFrame {
 		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
 				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblImagenLibreta.setIcon(logo);
-
-		JPanel panelTablaCargos = new JPanel();
-		panelTablaCargos.setLayout(null);
-		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panelTablaCargos.setBackground(Color.WHITE);
-		panelTablaCargos.setBounds(388, 61, 431, 449);
-		contentPane.add(panelTablaCargos);
-
-		JLabel lblCargosRegistrados = new JLabel("Cargos registrados :");
-		lblCargosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblCargosRegistrados.setBounds(30, 41, 166, 19);
-		panelTablaCargos.add(lblCargosRegistrados);
-
-		JLabel label_3 = new JLabel("Buscar Cargo :");
-		label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_3.setBounds(30, 63, 99, 22);
-		panelTablaCargos.add(label_3);
-
-		txtBusquedaCargos = new JTextField();
-		txtBusquedaCargos.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBusquedaCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtBusquedaCargos.setColumns(10);
-		txtBusquedaCargos.setBounds(119, 64, 228, 21);
-		panelTablaCargos.add(txtBusquedaCargos);
-		InputMap map4 = txtBusquedaCargos.getInputMap(txtBusquedaCargos.WHEN_FOCUSED);
-		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtBusquedaCargos.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent ke) {
-				trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
-				tablaCargos.setRowSorter(trsfiltroCodigo);
-			}
-
-			public void keyPressed(KeyEvent ke) {
-
-			}
-
-			public void keyReleased(KeyEvent ke) {
-				String cadena = (txtBusquedaCargos.getText());
-				txtBusquedaCargos.setText(cadena);
-				repaint();
-				filtro();
-			}
-		});
-
-		btnBorrarCargo = new JButton("Borrar");
-		btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnBorrarCargo.setBackground(new Color(220, 20, 60));
-		btnBorrarCargo.setBounds(30, 395, 99, 23);
-		panelTablaCargos.add(btnBorrarCargo);
-
-		barraCargos = new JScrollPane();
-		panelTablaCargos.add(barraCargos);
-		barraCargos.setBounds(28, 90, 376, 294);
-
-		tablaCargos = new JTable();
-		barraCargos.setViewportView(tablaCargos);
-
-		JLabel label_2 = new JLabel();
-		label_2.setBounds(355, 41, 49, 44);
-		panelTablaCargos.add(label_2);
-		final ImageIcon logo2 = new ImageIcon(
-				iconopeq.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
-		label_2.setIcon(logo2);
-
-		btnActualizarDatosCargo = new JButton("Actualizar Datos");
-		btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarDatosCargo.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosCargo.setBounds(267, 396, 137, 23);
-		panelTablaCargos.add(btnActualizarDatosCargo);
-
-		btnMostrar = new JButton("Ver detalles");
-		btnMostrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnMostrar.setBackground(new Color(0, 206, 209));
-		btnMostrar.setBounds(149, 395, 108, 23);
-		panelTablaCargos.add(btnMostrar);
 		
-				JLabel label_5 = new JLabel();
-				label_5.setBounds(388, 61, 431, 449);
-				contentPane.add(label_5);
-				final ImageIcon logo1 = new ImageIcon(
-						icono2.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-				label_5.setIcon(logo1);
+				JPanel panelTablaCargos = new JPanel();
+				panelTablaCargos.setLayout(null);
+				panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+				panelTablaCargos.setBackground(Color.WHITE);
+				panelTablaCargos.setBounds(388, 61, 431, 449);
+				contentPane.add(panelTablaCargos);
+				
+						JLabel lblCargosRegistrados = new JLabel("Cargos registrados :");
+						lblCargosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+						lblCargosRegistrados.setBounds(30, 41, 166, 19);
+						panelTablaCargos.add(lblCargosRegistrados);
+						
+								JLabel label_3 = new JLabel("Buscar Cargo :");
+								label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+								label_3.setBounds(30, 63, 99, 22);
+								panelTablaCargos.add(label_3);
+								
+										txtBusquedaCargos = new JTextField();
+										txtBusquedaCargos.setHorizontalAlignment(SwingConstants.CENTER);
+										txtBusquedaCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+										txtBusquedaCargos.setColumns(10);
+										txtBusquedaCargos.setBounds(119, 64, 228, 21);
+										panelTablaCargos.add(txtBusquedaCargos);
+										InputMap map4 = txtBusquedaCargos.getInputMap(txtBusquedaCargos.WHEN_FOCUSED);
+										txtBusquedaCargos.addKeyListener(new KeyListener() {
+											@Override
+											public void keyTyped(KeyEvent ke) {
+												trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
+												tablaCargos.setRowSorter(trsfiltroCodigo);
+											}
+
+											public void keyPressed(KeyEvent ke) {
+
+											}
+
+											public void keyReleased(KeyEvent ke) {
+												String cadena = (txtBusquedaCargos.getText());
+												txtBusquedaCargos.setText(cadena);
+												repaint();
+												filtro();
+											}
+										});
+										
+												btnBorrarCargo = new JButton("Borrar");
+												btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+												btnBorrarCargo.setBackground(new Color(220, 20, 60));
+												btnBorrarCargo.setBounds(30, 395, 99, 23);
+												panelTablaCargos.add(btnBorrarCargo);
+												
+														barraCargos = new JScrollPane();
+														panelTablaCargos.add(barraCargos);
+														barraCargos.setBounds(28, 90, 376, 294);
+														
+																tablaCargos = new JTable();
+																barraCargos.setViewportView(tablaCargos);
+																
+																		JLabel label_2 = new JLabel();
+																		label_2.setBounds(355, 41, 49, 44);
+																		panelTablaCargos.add(label_2);
+																		final ImageIcon logo2 = new ImageIcon(
+																				iconopeq.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+																		label_2.setIcon(logo2);
+																		
+																				btnActualizarDatosCargo = new JButton("Actualizar Datos");
+																				btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																				btnActualizarDatosCargo.setBackground(new Color(60, 179, 113));
+																				btnActualizarDatosCargo.setBounds(267, 396, 137, 23);
+																				panelTablaCargos.add(btnActualizarDatosCargo);
+																				
+																						btnMostrar = new JButton("Ver detalles");
+																						btnMostrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																						btnMostrar.setBackground(new Color(0, 206, 209));
+																						btnMostrar.setBounds(149, 395, 108, 23);
+																						panelTablaCargos.add(btnMostrar);
+																						
+																								JLabel label_5 = new JLabel();
+																								label_5.setBounds(0, 0, 431, 449);
+																								panelTablaCargos.add(label_5);
+																								final ImageIcon logo1 = new ImageIcon(icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+																								label_5.setIcon(logo1);
+		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+				
 
 	}
 

@@ -1,64 +1,45 @@
 package controles;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
-import com.toedter.calendar.JDateChooser;
-
-import clases.cargo;
 import clases.empleado;
 import conexion.conexion;
 import consultas.consultas_empleado;
-import formularios.lista_empleados;
 import formularios.registro_empleados;
-import formularios.ventana_principal;
 
 public class control_empleado implements ActionListener {
 
 	public empleado claseEmpleado;
 	public consultas_empleado consultaEmpleado;
 	public registro_empleados formularioEmpleado;
-	public lista_empleados listaEmpleado;
 	public String fechaNacimiento;
 	public String fechaRegistro;
 	public String fechaLabores;
 
 	public control_empleado(empleado claseEmpleado, consultas_empleado consultaEmpleado,
-			registro_empleados formularioEmpleado, lista_empleados listaEmpleado) {
+			registro_empleados formularioEmpleado) {
 		this.claseEmpleado = claseEmpleado;
 		this.consultaEmpleado = consultaEmpleado;
 		this.formularioEmpleado = formularioEmpleado;
-		this.listaEmpleado = listaEmpleado;
 		this.formularioEmpleado.btnGuardarEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnActualizarEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnNuevoEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnCancelarEmpleado.addActionListener(this);
-		this.formularioEmpleado.btnEmpleados.addActionListener(this);
-		this.listaEmpleado.btnNuevoEmpleado.addActionListener(this);
-		this.listaEmpleado.btnActualizarDatosEmpleado.addActionListener(this);
-		this.listaEmpleado.btnBorrarEmpleado.addActionListener(this);
-		this.listaEmpleado.btnMostrarEmpleado.addActionListener(this);
+		this.formularioEmpleado.btnActualizarDatosEmpleado.addActionListener(this);
+		this.formularioEmpleado.btnBorrarEmpleado.addActionListener(this);
+		this.formularioEmpleado.btnMostrarEmpleado.addActionListener(this);
 	}
 
 	@Override
@@ -68,6 +49,8 @@ public class control_empleado implements ActionListener {
 		if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
 
 			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
+					
+					//validaciones para datos vacios
 					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
@@ -77,6 +60,8 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
+					
+					//validaciones para datos con mascara y pista.
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese nombres del empleado.")
 					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
@@ -89,7 +74,7 @@ public class control_empleado implements ActionListener {
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
 					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
 					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Dar Click ->")
 					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
 					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
 					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
@@ -131,15 +116,18 @@ public class control_empleado implements ActionListener {
 				if (consultaEmpleado.registrar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Registro Guardado");
 					limpiar();
-					empleado claseEmpleado = new empleado();
-					consultas_empleado consultaEmpleado = new consultas_empleado();
-					registro_empleados formularioEmpleado = new registro_empleados();
-					lista_empleados listaEmpleados = new lista_empleados();
-					control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado,
-							formularioEmpleado, listaEmpleados);
-					listaEmpleados.setVisible(true);
-					listaEmpleados.setLocationRelativeTo(null);
-					listaEmpleados.txtBusquedaEmpleado.requestFocusInWindow();
+					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+					formularioEmpleado.obtenerUltimoId();
+					formularioEmpleado.pistas();
+					formularioEmpleado.establecerFechaRegistro();
+					formularioEmpleado.construirTablaEmpleados();
+					formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+					formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
+					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+					formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error al Guardar");
 					limpiar();
@@ -160,6 +148,7 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
+					
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese nombres del empleado.")
 					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
@@ -172,7 +161,7 @@ public class control_empleado implements ActionListener {
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
 					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
 					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Dar Click ->")
 					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
 					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
 					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
@@ -181,15 +170,12 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
 
 			{
-				JOptionPane.showMessageDialog(null,
-						"Porfavor llene los campos para actualizar los datos del empleado!");
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar los datos del empleado!");
 
 			} else {
-
-				claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));
 				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
 				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
 				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
 				int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
 				int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
@@ -214,7 +200,6 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-
 				if (consultaEmpleado.modificar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Registro Modificado");
 					limpiar();
@@ -227,60 +212,137 @@ public class control_empleado implements ActionListener {
 		}
 
 		/* Borrar */
-		if (e.getSource() == listaEmpleado.btnBorrarEmpleado) {
+		if (e.getSource() == formularioEmpleado.btnBorrarEmpleado) {
 			PreparedStatement ps = null;
 			int filaseleccionada;
 			try {
-				filaseleccionada = listaEmpleado.tablaEmpleados.getSelectedRow();
+				filaseleccionada = formularioEmpleado.tablaEmpleados.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
 					conexion objCon = new conexion();
 					Connection conn = objCon.getConexion();
-					int Fila = listaEmpleado.tablaEmpleados.getSelectedRow();
-					String codigo = listaEmpleado.tablaEmpleados.getValueAt(Fila, 0).toString();
+					int Fila = formularioEmpleado.tablaEmpleados.getSelectedRow();
+					String codigo = formularioEmpleado.tablaEmpleados.getValueAt(Fila, 0).toString();
 					ps = conn.prepareStatement("DELETE FROM empleados WHERE id_empleado=?");
 					ps.setString(1, codigo);
 					ps.execute();
 					JOptionPane.showMessageDialog(null, "Datos del Empleado Eliminados");
 					limpiar();
-					listaEmpleado.construirTablaEmpleados();
+					formularioEmpleado.construirTablaEmpleados();
+					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+					formularioEmpleado.btnCalcularEdad.setEnabled(false);
+					formularioEmpleado.txtCodigoEmpleado.setEditable(false);
+					formularioEmpleado.txtCodigoEmpleado.setText("");
+					formularioEmpleado.txtNombresEmpleado.setEditable(false);
+					formularioEmpleado.txtApellidosEmpleado.setEditable(false);
+					formularioEmpleado.txtIdentidadEmpleado.setEnabled(false);
+					formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
+					formularioEmpleado.txtEdadEmpleado.setEditable(false);
+					formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
+					formularioEmpleado.txtCorreoEmpleado.setEditable(false);
+					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
+					formularioEmpleado.txtDireccionEmpleado.setBackground(Color.LIGHT_GRAY);
+					formularioEmpleado.txtDireccionFoto.setEditable(false);
+					formularioEmpleado.txtNombreReferencia.setEditable(false);
+					formularioEmpleado.txtTelefonoReferencia.setEditable(false);
+					formularioEmpleado.dateFechaNacimiento.setEnabled(false);
+					formularioEmpleado.dateFechaRegistro.setEnabled(false);
+					formularioEmpleado.dateFechaLabores.setEnabled(false);
+					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
+					formularioEmpleado.btnTomarFoto.setEnabled(false);
+					formularioEmpleado.btnSubirFoto.setEnabled(false);
+						
+					
 				}
 			} catch (SQLException ex) {
 				JOptionPane.showMessageDialog(null, "Error al Eliminar Datos del Empleado");
 				System.out.println(ex.toString());
 			}
 		}
+		
 
+		/* Cancelar */
+		if (e.getSource() == formularioEmpleado.btnCancelarEmpleado) {
+			limpiar();
+			formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+			formularioEmpleado.obtenerUltimoId();
+			formularioEmpleado.pistas();
+			formularioEmpleado.establecerFechaRegistro();
+			formularioEmpleado.construirTablaEmpleados();
+			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+			formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+			formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
+			formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+			formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+			formularioEmpleado.btnBorrarEmpleado.setVisible(false);	
+			
+			
+			formularioEmpleado.txtNombresEmpleado.setEditable(true);
+			formularioEmpleado.txtApellidosEmpleado.setEditable(true);
+			formularioEmpleado.txtIdentidadEmpleado.setEnabled(true);
+			formularioEmpleado.cbxGeneroEmpleado.setEditable(true);
+			formularioEmpleado.txtEdadEmpleado.setEditable(true);
+			formularioEmpleado.txtTelefonoEmpleado.setEditable(true);
+			formularioEmpleado.txtTelefonoEmpleado.setText(null);
+			formularioEmpleado.txtCorreoEmpleado.setEditable(true);
+			formularioEmpleado.txtDireccionEmpleado.setEditable(true);
+			formularioEmpleado.txtDireccionFoto.setEditable(false);
+			formularioEmpleado.txtDireccionFoto.setText(null);
+			formularioEmpleado.txtNombreReferencia.setEditable(true);
+			formularioEmpleado.txtTelefonoReferencia.setEditable(true);
+			formularioEmpleado.txtTelefonoReferencia.setText(null);
+			formularioEmpleado.dateFechaNacimiento.setEnabled(true);
+			formularioEmpleado.dateFechaRegistro.setVisible(false);
+			formularioEmpleado.dateFechaLabores.setEnabled(true);
+			formularioEmpleado.cbxEstadoEmpleado.setEditable(true);
+			formularioEmpleado.btnTomarFoto.setEnabled(true);
+			formularioEmpleado.btnSubirFoto.setEnabled(true);
+			formularioEmpleado.lblFechaDeRegistro.setVisible(false);
+		}
+		
+		
 		/* Limpiar */
-		if (e.getSource() == listaEmpleado.btnNuevoEmpleado) {
-			crearNuevoEmpleado();
+		if (e.getSource() == formularioEmpleado.btnNuevoEmpleado) {
+			formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+			formularioEmpleado.obtenerUltimoId();
+			formularioEmpleado.pistas();
+			formularioEmpleado.establecerFechaRegistro();
+			formularioEmpleado.construirTablaEmpleados();
+			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+			formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+			formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
+			formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+			formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+			formularioEmpleado.btnBorrarEmpleado.setVisible(false);		
 		}
 
 		/* Pasar datos de la tabla al formulario para actualizar */
-		if (e.getSource() == listaEmpleado.btnActualizarDatosEmpleado) {
+		if (e.getSource() == formularioEmpleado.btnActualizarDatosEmpleado) {
 			int filaseleccionada;
 			try {
-				filaseleccionada = listaEmpleado.tablaEmpleados.getSelectedRow();
+				filaseleccionada = formularioEmpleado.tablaEmpleados.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					String codigo = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 0).toString();
-					String nombres = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 1).toString();
-					String apellidos = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 2).toString();
-					String identidad = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 3).toString();
-					String genero = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 4).toString();
-					String edad = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 5).toString();
-					String telefono = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 6).toString();
-					String correo = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 7).toString();
-					String direccion = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 8).toString();
-					String direccion_foto = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9).toString();
-					String referencia = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 10).toString();
-					String t_referencia = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 11).toString();
-					String fecha_nac = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 12).toString();
-					String fecha_reg = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 13).toString();
-					String fecha_lab = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 14).toString();
-					String estado = listaEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 15).toString();
+					String codigo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 0).toString();
+					String nombres = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 1).toString();
+					String apellidos = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 2).toString();
+					String identidad = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String genero = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 4).toString();
+					String edad = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 5).toString();
+					String telefono = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 6).toString();
+					String correo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 7).toString();
+					String direccion = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 8).toString();
+					String direccion_foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9).toString();
+					String referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 10).toString();
+					String t_referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 11).toString();
+					String fecha_nac = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 12).toString();
+					String fecha_reg = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 13).toString();
+					String fecha_lab = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 14).toString();
+					String estado = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 15).toString();
 
 					formularioEmpleado.txtCodigoEmpleado.setText(codigo);
 					formularioEmpleado.txtNombresEmpleado.setText(nombres);
@@ -297,7 +359,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.dateFechaNacimiento.setDateFormatString(fecha_nac);
 					formularioEmpleado.dateFechaRegistro.setDateFormatString(fecha_reg);
 					formularioEmpleado.dateFechaLabores.setDateFormatString(fecha_lab);
-					formularioEmpleado.txtSueldoCargo.setText(estado);
+					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
@@ -314,15 +376,18 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.dateFechaNacimiento.setForeground(Color.BLACK);
 					formularioEmpleado.dateFechaRegistro.setForeground(Color.BLACK);
 					formularioEmpleado.dateFechaLabores.setForeground(Color.BLACK);
-					formularioEmpleado.txtSueldoCargo.setForeground(Color.BLACK);
+					formularioEmpleado.cbxEstadoEmpleado.setForeground(Color.BLACK);
 
 					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarEmpleado.setVisible(true);
 					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
-
-					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
-
+					formularioEmpleado.btnBorrarEmpleado.setVisible(true);
+					formularioEmpleado.btnMostrarEmpleado.setVisible(false);
+					formularioEmpleado.dateFechaRegistro.setVisible(true);
+					formularioEmpleado.dateFechaRegistro.setEnabled(false);
+					formularioEmpleado.lblFechaDeRegistro.setVisible(true);
+					
 				}
 
 			} catch (HeadlessException ex) {
@@ -414,22 +479,6 @@ public class control_empleado implements ActionListener {
 		}
 
 		return matrizInfo;
-	}
-
-	public void crearNuevoEmpleado() {
-		formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
-		formularioEmpleado.obtenerUltimoId();
-		formularioEmpleado.pistas();
-		formularioEmpleado.establecerFechaRegistro();
-		formularioEmpleado.btnGuardarEmpleado.setVisible(true);
-		formularioEmpleado.btnNuevoEmpleado.setVisible(true);
-		formularioEmpleado.btnActualizarEmpleado.setVisible(false);
-		formularioEmpleado.btnCancelarEmpleado.setVisible(false);
-		registro_empleados formularioEmpleado = new registro_empleados();
-		lista_empleados listaEmpleados = new lista_empleados();
-		formularioEmpleado.setVisible(true);
-		formularioEmpleado.setLocationRelativeTo(null);
-		
 	}
 
 }

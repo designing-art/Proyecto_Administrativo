@@ -75,9 +75,6 @@ public class registro_contratos_empleados extends JFrame {
 		contentPane.add(FinalizarRegistroEmpleado);
 		FinalizarRegistroEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lista_empleados ListaEmpleados = new lista_empleados();
-				ListaEmpleados.setVisible(true);
-				ListaEmpleados.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
