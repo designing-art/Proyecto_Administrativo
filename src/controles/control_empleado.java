@@ -1,6 +1,7 @@
 package controles;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ import conexion.conexion;
 import consultas.consultas_empleado;
 import formularios.lista_empleados;
 import formularios.registro_empleados;
+import formularios.ventana_principal;
 
 public class control_empleado implements ActionListener {
 
@@ -63,40 +65,45 @@ public class control_empleado implements ActionListener {
 	/* Insertar Empleado */
 	public void actionPerformed(ActionEvent e) {
 
-			if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
-				
-				if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
-				||formularioEmpleado.txtDireccionFoto.getText().isEmpty()
-				||formularioEmpleado.txtNombreReferencia.getText().isEmpty()
-				||formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()	
-				||formularioEmpleado.txtNombresEmpleado.getText().toString().equalsIgnoreCase("Ingrese nombres del empleado.")
-				||formularioEmpleado.txtApellidosEmpleado.getText().toString().equalsIgnoreCase("Ingrese apellidos del empleado.")
-				||formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
-				||formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
-				||formularioEmpleado.txtCorreoEmpleado.getText().toString().equalsIgnoreCase("Ingrese el correo del empleado.")
-				||formularioEmpleado.txtDireccionEmpleado.getText().toString().equalsIgnoreCase("Ingrese la direccion del empleado.")
-				||formularioEmpleado.txtDireccionFoto.getText().equals("")
-				||formularioEmpleado.txtEdadEmpleado.getText().equals("")
-				||formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
-				||formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
-				||formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
-				||formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
-				||formularioEmpleado.txtNombreReferencia.getText().toString().equalsIgnoreCase("Ingrese nombre completo de la referencia.")
-				||formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
-				
-				{
-					JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar los datos del empleado!");
+		if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
 
-				} else {
+			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
+					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
+					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
+					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese nombres del empleado.")
+					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese apellidos del empleado.")
+					|| formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
+					|| formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
+					|| formularioEmpleado.txtCorreoEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese el correo del empleado.")
+					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese la direccion del empleado.")
+					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
+					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
+					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
+					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
+					|| formularioEmpleado.txtNombreReferencia.getText().toString()
+							.equalsIgnoreCase("Ingrese nombre completo de la referencia.")
+					|| formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
+
+			{
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar los datos del empleado!");
+
+			} else {
 				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
 				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
 				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
 				int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
 				int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
@@ -124,6 +131,15 @@ public class control_empleado implements ActionListener {
 				if (consultaEmpleado.registrar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Registro Guardado");
 					limpiar();
+					empleado claseEmpleado = new empleado();
+					consultas_empleado consultaEmpleado = new consultas_empleado();
+					registro_empleados formularioEmpleado = new registro_empleados();
+					lista_empleados listaEmpleados = new lista_empleados();
+					control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado,
+							formularioEmpleado, listaEmpleados);
+					listaEmpleados.setVisible(true);
+					listaEmpleados.setLocationRelativeTo(null);
+					listaEmpleados.txtBusquedaEmpleado.requestFocusInWindow();
 				} else {
 					JOptionPane.showMessageDialog(null, "Error al Guardar");
 					limpiar();
@@ -133,75 +149,80 @@ public class control_empleado implements ActionListener {
 
 		/* Actualizar Empleado */
 		if (e.getSource() == formularioEmpleado.btnActualizarEmpleado) {
-			
+
 			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
-					||formularioEmpleado.txtDireccionFoto.getText().isEmpty()
-					||formularioEmpleado.txtNombreReferencia.getText().isEmpty()
-					||formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()	
-					||formularioEmpleado.txtNombresEmpleado.getText().toString().equalsIgnoreCase("Ingrese nombres del empleado.")
-					||formularioEmpleado.txtApellidosEmpleado.getText().toString().equalsIgnoreCase("Ingrese apellidos del empleado.")
-					||formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
-					||formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
-					||formularioEmpleado.txtCorreoEmpleado.getText().toString().equalsIgnoreCase("Ingrese el correo del empleado.")
-					||formularioEmpleado.txtDireccionEmpleado.getText().toString().equalsIgnoreCase("Ingrese la direccion del empleado.")
-					||formularioEmpleado.txtDireccionFoto.getText().equals("")
-					||formularioEmpleado.txtEdadEmpleado.getText().equals("")
-					||formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
-					||formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
-					||formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
-					||formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
-					||formularioEmpleado.txtNombreReferencia.getText().toString().equalsIgnoreCase("Ingrese nombre completo de la referencia.")
-					||formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
-					
-					{
-						JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar los datos del empleado!");
+					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
+					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
+					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
+					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
+					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese nombres del empleado.")
+					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese apellidos del empleado.")
+					|| formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
+					|| formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
+					|| formularioEmpleado.txtCorreoEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese el correo del empleado.")
+					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
+							.equalsIgnoreCase("Ingrese la direccion del empleado.")
+					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Click -->")
+					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
+					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
+					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
+					|| formularioEmpleado.txtNombreReferencia.getText().toString()
+							.equalsIgnoreCase("Ingrese nombre completo de la referencia.")
+					|| formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
 
-					} else {
-						
-					claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));	
-					claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
-					claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-					claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
-					claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-					int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
-					int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
-					int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
-					fechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
-					claseEmpleado.setFecha_nacimiento_empleado(fechaNacimiento);
-					int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
-					int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
-					int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
-					fechaRegistro = dia2 + "-" + mes2 + "-" + año2;
-					claseEmpleado.setFecha_registro_empleado(fechaRegistro);
-					int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
-					int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
-					int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
-					fechaLabores = dia3 + "-" + mes3 + "-" + año3;
-					claseEmpleado.setFecha_inicio_labores_empleado(fechaLabores);
-					claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-					claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
-					claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
-					claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
-					claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
-					claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
-					claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
-					claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
+			{
+				JOptionPane.showMessageDialog(null,
+						"Porfavor llene los campos para actualizar los datos del empleado!");
 
-			
-			if (consultaEmpleado.modificar(claseEmpleado)) {
-				JOptionPane.showMessageDialog(null, "Registro Modificado");
-				limpiar();
 			} else {
-				JOptionPane.showMessageDialog(null, "Error al Modificar");
-				limpiar();
-			}
-					
+
+				claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText()));
+				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText());
+				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+				int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
+				int dia1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+				int mes1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.MONTH);
+				fechaNacimiento = dia1 + "-" + mes1 + "-" + año1;
+				claseEmpleado.setFecha_nacimiento_empleado(fechaNacimiento);
+				int año2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.YEAR);
+				int dia2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.DAY_OF_MONTH);
+				int mes2 = formularioEmpleado.dateFechaRegistro.getCalendar().get(Calendar.MONTH);
+				fechaRegistro = dia2 + "-" + mes2 + "-" + año2;
+				claseEmpleado.setFecha_registro_empleado(fechaRegistro);
+				int año3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.YEAR);
+				int dia3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.DAY_OF_MONTH);
+				int mes3 = formularioEmpleado.dateFechaLabores.getCalendar().get(Calendar.MONTH);
+				fechaLabores = dia3 + "-" + mes3 + "-" + año3;
+				claseEmpleado.setFecha_inicio_labores_empleado(fechaLabores);
+				claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
+				claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+				claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
+				claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
+				claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
+				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
+				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
+				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
+
+				if (consultaEmpleado.modificar(claseEmpleado)) {
+					JOptionPane.showMessageDialog(null, "Registro Modificado");
+					limpiar();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error al Modificar");
+					limpiar();
+				}
+
 			}
 		}
 
@@ -230,27 +251,12 @@ public class control_empleado implements ActionListener {
 				System.out.println(ex.toString());
 			}
 		}
-		
+
 		/* Limpiar */
 		if (e.getSource() == listaEmpleado.btnNuevoEmpleado) {
-			empleado claseEmpleado = new empleado();
-			consultas_empleado consultaEmpleado = new consultas_empleado();
-			registro_empleados formularioEmpleado = new registro_empleados();
-			lista_empleados listaEmpleados = new lista_empleados();
-			control_empleado controlEmpleado = new control_empleado(claseEmpleado, consultaEmpleado, formularioEmpleado,
-					listaEmpleados);
-			formularioEmpleado.setVisible(true);
-			formularioEmpleado.setLocationRelativeTo(null);
-			formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
-			formularioEmpleado.obtenerUltimoId();
-			formularioEmpleado.pistas();
-			formularioEmpleado.establecerFechaRegistro();
-			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
-			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
-			formularioEmpleado.btnActualizarEmpleado.setVisible(false);
-			formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+			crearNuevoEmpleado();
 		}
-		
+
 		/* Pasar datos de la tabla al formulario para actualizar */
 		if (e.getSource() == listaEmpleado.btnActualizarDatosEmpleado) {
 			int filaseleccionada;
@@ -328,7 +334,6 @@ public class control_empleado implements ActionListener {
 	}
 
 	public void limpiar() {
-		formularioEmpleado.txtCodigoEmpleado.setText(null);
 		formularioEmpleado.txtNombresEmpleado.setText(null);
 		formularioEmpleado.txtApellidosEmpleado.setText(null);
 		formularioEmpleado.txtIdentidadEmpleado.setText(null);
@@ -409,6 +414,22 @@ public class control_empleado implements ActionListener {
 		}
 
 		return matrizInfo;
+	}
+
+	public void crearNuevoEmpleado() {
+		formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+		formularioEmpleado.obtenerUltimoId();
+		formularioEmpleado.pistas();
+		formularioEmpleado.establecerFechaRegistro();
+		formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+		formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+		formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+		formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+		registro_empleados formularioEmpleado = new registro_empleados();
+		lista_empleados listaEmpleados = new lista_empleados();
+		formularioEmpleado.setVisible(true);
+		formularioEmpleado.setLocationRelativeTo(null);
+		
 	}
 
 }

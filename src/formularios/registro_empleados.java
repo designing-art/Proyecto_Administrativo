@@ -150,6 +150,7 @@ public class registro_empleados extends JFrame {
 		contentPane.setLayout(null);
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon icono1 = new ImageIcon(getClass().getResource("/material/logo.png"));
+		final ImageIcon lista_empleados = new ImageIcon(getClass().getResource("/material/lista_empleados.png"));
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -665,13 +666,57 @@ public class registro_empleados extends JFrame {
 		btnGuardarEmpleado.setBounds(387, 534, 99, 23);
 		panel.add(btnGuardarEmpleado);
 
+		txtDireccionFoto = new JTextField();
+		txtDireccionFoto.setEditable(false);
+		txtDireccionFoto.setBounds(387, 135, 83, 20);
+		panel.add(txtDireccionFoto);
+		txtDireccionFoto.setColumns(10);
+		InputMap map10 = txtDireccionFoto.getInputMap(txtDireccionFoto.WHEN_FOCUSED);
+		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+
+		btnCalcularEdad = new JButton();
+		btnCalcularEdad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				calcularEdad();
+				btnCalcularEdad.setBackground(Color.GREEN);
+
+			}
+		});
+		btnCalcularEdad.setBackground(new Color(220, 20, 60));
+		btnCalcularEdad.setBounds(326, 352, 24, 20);
+		panel.add(btnCalcularEdad);
+
+		lblFotoEmpleado = new JLabel("");
+		lblFotoEmpleado.setBackground(new Color(255, 255, 224));
+		lblFotoEmpleado.setBounds(491, 60, 151, 143);
+		panel.add(lblFotoEmpleado);
+		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(),
+				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoEmpleado.setIcon(logoFoto);
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBounds(594, 503, 117, 106);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
+
 		// Boton de lista de empleados en la tabla.
 
 		btnEmpleados = new JButton("Empleados");
+		btnEmpleados.setBounds(0, 84, 117, 22);
+		panel_3.add(btnEmpleados);
 		btnEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnEmpleados.setBackground(new Color(107, 142, 35));
-		btnEmpleados.setBounds(596, 512, 115, 89);
-		panel.add(btnEmpleados);
+		btnEmpleados.setBackground(Color.ORANGE);
+		
+		JLabel lblListaEmpleados = new JLabel("");
+		lblListaEmpleados.setBounds(10, 0, 97, 83);
+		panel_3.add(lblListaEmpleados);
+		final ImageIcon lista = new ImageIcon(lista_empleados.getImage().getScaledInstance(lblListaEmpleados.getWidth(),
+				lblListaEmpleados.getHeight(), Image.SCALE_DEFAULT));
+		lblListaEmpleados.setIcon(lista);
+
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				empleado claseEmpleado = new empleado();
@@ -690,37 +735,6 @@ public class registro_empleados extends JFrame {
 				dispose();
 			}
 		});
-
-		txtDireccionFoto = new JTextField();
-		txtDireccionFoto.setEditable(false);
-		txtDireccionFoto.setBounds(387, 135, 83, 20);
-		panel.add(txtDireccionFoto);
-		txtDireccionFoto.setColumns(10);
-		InputMap map10 = txtDireccionFoto.getInputMap(txtDireccionFoto.WHEN_FOCUSED);
-		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-
-		btnCalcularEdad = new JButton();
-		btnCalcularEdad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				
-				calcularEdad();
-				btnCalcularEdad.setBackground(Color.GREEN);
-
-			}
-		});
-		btnCalcularEdad.setBackground(new Color(220, 20, 60));
-		btnCalcularEdad.setBounds(326, 352, 24, 20);
-		panel.add(btnCalcularEdad);
-
-		lblFotoEmpleado = new JLabel("");
-		lblFotoEmpleado.setBackground(new Color(255, 255, 224));
-		lblFotoEmpleado.setBounds(491, 60, 151, 143);
-		panel.add(lblFotoEmpleado);
-		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/material/usuario.png"));
-		final ImageIcon logoFoto = new ImageIcon(iconoFoto.getImage().getScaledInstance(lblFotoEmpleado.getWidth(),
-				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
-		lblFotoEmpleado.setIcon(logoFoto);
 
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 766, 644);
