@@ -14,10 +14,13 @@ import javax.swing.border.LineBorder;
 import clases.cargo;
 import clases.contrato_empleado;
 import clases.empleado;
+import clases.horario;
 import consultas.consultas_cargo;
 import consultas.consultas_empleado;
+import consultas.consultas_horario;
 import controles.control_cargo;
 import controles.control_empleado;
+import controles.control_horario;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -250,6 +253,28 @@ public class ventana_principal extends JFrame {
 		registroHorario.setBackground(new Color(102, 205, 170));
 		registroHorario.setBounds(224, 19, 97, 21);
 		panel.add(registroHorario);
+		registroHorario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				horario clase = new horario();
+				consultas_horario consulta = new consultas_horario();
+				registro_horarios formulario = new registro_horarios();
+				control_horario control = new control_horario(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtDescripcionHorario.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.btnBorrarHorario.setVisible(false);
+				formulario.btnGuardarHorario.setVisible(true);
+				formulario.btnNuevoHorario.setVisible(true);
+				formulario.btnActualizarHorario.setVisible(false);
+				formulario.btnActualizarDatosHorario.setVisible(true);
+				formulario.btnMostrarHorario.setVisible(true);
+				formulario.btnAceptarHorario.setVisible(false);
+				dispose();
+			}
+		});
 
 		JLabel label_2 = new JLabel("Empleados :");
 		label_2.setForeground(Color.BLACK);

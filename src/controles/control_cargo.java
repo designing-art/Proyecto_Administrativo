@@ -212,6 +212,8 @@ public class control_cargo implements ActionListener {
 				formularioCargo.txtSueldoCargo.setEditable(false);
 				formularioCargo.txtHoraExtraCargo.setEditable(false);
 				formularioCargo.txtFuncionesCargo.setEditable(false);
+				formularioCargo.cbxTipoCargo.setEditable(false);
+				formularioCargo.txtCodigoCargo.setText(null);
 				formularioCargo.txtFuncionesCargo.setBackground(Color.LIGHT_GRAY);
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! Cargo no Actualizado");

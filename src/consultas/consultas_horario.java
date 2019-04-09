@@ -18,18 +18,17 @@ public class consultas_horario extends conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO horarios ( tipo_horario, hora_inicio_horario, hora_final_horario, dias_horario,descripcion_horario,observacion_horario) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO horarios ( tipo_horario, dias_horario, horas_horario, descripcion_horario, observacion_horario) VALUES(?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1,horario.getTipo_horario());
-            ps.setString(2, horario.getHora_inicio_horario());
-            ps.setString(3, horario.getHora_final_de_horario());
-            ps.setString(4, horario.getDias_horario());
-            ps.setString(5, horario.getDescripcion_horario());
-            ps.setString(6, horario.getObservacion_horario());
-            
+            ps.setString(1, horario.getTipo_horario());
+            ps.setString(2, horario.getDias_horario());  
+            ps.setString(3, horario.getHoras_horario());
+            ps.setString(4, horario.getDescripcion_horario());
+            ps.setString(5, horario.getObservacion_horario());
             ps.execute();
+            
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -48,17 +47,17 @@ public class consultas_horario extends conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "UPDATE horarios SET id_horario=?, tipo_horario=?,hora_inicio_horario =?, hora_final_horario=?, dias_horario=?, descripcion_horario=?,observacion_horario=? WHERE id_horario=? ";
+        String sql = "UPDATE horarios SET id_horario=?, tipo_horario=?, dias_horario=?, horas_horario=?, descripcion_horario=?,observacion_horario=? WHERE id_horario=? ";
 
         try {
         	 ps = con.prepareStatement(sql);
-             ps.setInt(1,horario.getId());
-             ps.setString(2, horario.getHora_inicio_horario());
-             ps.setString(3, horario.getHora_final_de_horario());
-             ps.setString(4, horario.getDias_horario());
+             ps.setInt(1,horario.getId_horario());
+             ps.setString(2, horario.getTipo_horario());
+             ps.setString(3, horario.getDias_horario());  
+             ps.setString(4, horario.getHoras_horario());
              ps.setString(5, horario.getDescripcion_horario());
              ps.setString(6, horario.getObservacion_horario());
-             ps.setInt(7, horario.getId());
+             ps.setInt(7, horario.getId_horario());
              ps.execute();
             
             return true;
