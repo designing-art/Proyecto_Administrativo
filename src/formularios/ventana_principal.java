@@ -16,9 +16,11 @@ import clases.contrato_empleado;
 import clases.empleado;
 import clases.horario;
 import consultas.consultas_cargo;
+import consultas.consultas_contrato_empleado;
 import consultas.consultas_empleado;
 import consultas.consultas_horario;
 import controles.control_cargo;
+import controles.control_contrato_empleado;
 import controles.control_empleado;
 import controles.control_horario;
 
@@ -170,6 +172,26 @@ public class ventana_principal extends JFrame {
 		panel.add(registroPlanilla);
 
 		registroContrato = new JButton("Contratos");
+		registroContrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contrato_empleado clase = new contrato_empleado();
+				consultas_contrato_empleado consulta = new consultas_contrato_empleado();
+				registro_contratos_empleados formulario = new registro_contratos_empleados();
+				control_contrato_empleado control = new control_contrato_empleado(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.construirTabla();
+				formulario.btnGuardarContrato.setVisible(true);
+				formulario.btnNuevoContrato.setVisible(true);
+				formulario.btnActualizarContrato.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrarContrato.setVisible(false);
+				dispose();
+			}
+		});
 		registroContrato.setForeground(Color.BLACK);
 		registroContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		registroContrato.setBackground(new Color(102, 205, 170));
