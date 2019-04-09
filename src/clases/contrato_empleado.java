@@ -2,49 +2,37 @@ package clases;
 
 public class contrato_empleado {
 	
-	int id_contratoEmpleado;
-	String tipo_contratoEmpleado;
-	String tiempo_contratoEmpleado;
-	int foto_contratoEmpleado;
+	int id_contrato_empleado;
+	String tipo_contrato_empleado;
+	String tiempo_contrato_empleado;
+	String direccion_foto_contrato_empleado;
 	
-	
-	
-	
-	public int getId_contratoEmpleado() {
-		return id_contratoEmpleado;
+	public int getId_contrato_empleado() {
+		return id_contrato_empleado;
 	}
-	
-	public void setId_contratoEmpleado(int id_contratoEmpleado) {
-		this.id_contratoEmpleado = id_contratoEmpleado;
+	public void setId_contrato_empleado(int id_contrato_empleado) {
+		this.id_contrato_empleado = id_contrato_empleado;
 	}
-	
-	
-	public String getTipo_contratoEmpleado() {
-		return tipo_contratoEmpleado;
+	public String getTipo_contrato_empleado() {
+		return tipo_contrato_empleado;
 	}
-	
-	public void setTipo_contratoEmpleado(String tipo_contratoEmpleado) {
-		this.tipo_contratoEmpleado = tipo_contratoEmpleado;
+	public void setTipo_contrato_empleado(String tipo_contrato_empleado) {
+		this.tipo_contrato_empleado = tipo_contrato_empleado;
 	}
-	
-	public String getTiempo_contratoEmpleado() {
-		return tiempo_contratoEmpleado;
-		
+	public String getTiempo_contrato_empleado() {
+		return tiempo_contrato_empleado;
 	}
-	
-	public void setTiempo_contratoEmpleado(String tiempo_contratoEmpleado) {
-		this.tiempo_contratoEmpleado = tiempo_contratoEmpleado;
-		
+	public void setTiempo_contrato_empleado(String tiempo_contrato_empleado) {
+		this.tiempo_contrato_empleado = tiempo_contrato_empleado;
+	}
+	public String getDireccion_foto_contrato_empleado() {
+		return direccion_foto_contrato_empleado;
+	}
+	public void setDireccion_foto_contrato_empleado(String direccion_foto_contrato_empleado) {
+		this.direccion_foto_contrato_empleado = direccion_foto_contrato_empleado;
 	}
 	
 	
-	public int getFoto_contratoEmpleado() {
-		return foto_contratoEmpleado;
-		
-   }
 	
-	public void setFoto_contratoEmpleado(int foto_contratoEmpleado) {
-		this.foto_contratoEmpleado = foto_contratoEmpleado;
-	}
 	
 }
