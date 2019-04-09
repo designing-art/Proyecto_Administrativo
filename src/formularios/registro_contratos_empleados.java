@@ -194,16 +194,14 @@ public class registro_contratos_empleados extends JFrame {
 		lbl_foto_contrato = new JLabel();
 		lbl_foto_contrato.setBounds(173, 201, 141, 147);
 		panelRegistro.add(lbl_foto_contrato);
-		final ImageIcon iconofoto = new ImageIcon(logopeq.getImage().getScaledInstance(lbl_foto_contrato.getWidth(),
-				lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
+				.getScaledInstance(lbl_foto_contrato.getWidth(), lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 		lbl_foto_contrato.setIcon(iconofoto);
 
 		JLabel lblFoto = new JLabel("4. Foto del contrato :");
 		lblFoto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblFoto.setBounds(27, 170, 136, 17);
 		panelRegistro.add(lblFoto);
-		
-		
 
 		btnSubirFotoContrato = new JButton("Subir");
 		btnSubirFotoContrato.addActionListener(new ActionListener() {
@@ -346,7 +344,7 @@ public class registro_contratos_empleados extends JFrame {
 	public void pistas() {
 		pista = new PlaceHolder(txtBusquedaContratosEmpleados, "Escriba para buscar.");
 	}
-	
+
 	public void selecionarFoto() {
 		JFileChooser archivo = new JFileChooser();
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
@@ -360,7 +358,8 @@ public class registro_contratos_empleados extends JFrame {
 			File file = archivo.getSelectedFile();
 			txtDireccionFotoContrato.setText(String.valueOf(file));
 			Image foto = getToolkit().getImage(txtDireccionFotoContrato.getText());
-			foto = foto.getScaledInstance(lbl_foto_contrato.getHeight(), lbl_foto_contrato.getWidth(), Image.SCALE_DEFAULT);
+			foto = foto.getScaledInstance(lbl_foto_contrato.getHeight(), lbl_foto_contrato.getWidth(),
+					Image.SCALE_DEFAULT);
 			lbl_foto_contrato.setIcon(new ImageIcon(foto));
 		}
 	}
