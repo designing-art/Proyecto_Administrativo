@@ -519,7 +519,7 @@ public class registro_empleados extends JFrame {
 
 		btnCancelarEmpleado = new JButton("Cancelar");
 		btnCancelarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnCancelarEmpleado.setBackground(new Color(0, 206, 209));
+		btnCancelarEmpleado.setBackground(new Color(255, 255, 255));
 		btnCancelarEmpleado.setBounds(39, 509, 99, 23);
 		panel.add(btnCancelarEmpleado);
 
@@ -535,7 +535,7 @@ public class registro_empleados extends JFrame {
 			}
 		});
 		btnNuevoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnNuevoEmpleado.setBackground(new Color(107, 142, 35));
+		btnNuevoEmpleado.setBackground(new Color(255, 255, 255));
 		btnNuevoEmpleado.setBounds(39, 543, 99, 23);
 		panel.add(btnNuevoEmpleado);
 
@@ -634,7 +634,7 @@ public class registro_empleados extends JFrame {
 			}
 		});
 		
-		barraTablaEmpleados = new JScrollPane();
+		barraTablaEmpleados = new JScrollPane(tablaEmpleados, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		barraTablaEmpleados.setBounds(34, 109, 553, 422);
 		panel_1.add(barraTablaEmpleados);
 		
@@ -757,6 +757,9 @@ public class registro_empleados extends JFrame {
 		String informacion[][] = control_empleado.obtenerMatriz();
 		tablaEmpleados = new JTable(informacion, titulos);
 		barraTablaEmpleados.setViewportView(tablaEmpleados);
+		tablaEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaEmpleados.getTableHeader().setReorderingAllowed(false);
+
 		for (int c = 0; c < tablaEmpleados.getColumnCount(); c++) {
 			Class<?> col_class = tablaEmpleados.getColumnClass(c);
 			tablaEmpleados.setDefaultEditor(col_class, null);

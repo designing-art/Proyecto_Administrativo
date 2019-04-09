@@ -258,7 +258,7 @@ public class control_cargo implements ActionListener {
 		}
 		
 
-		/* Limpiar */
+		/* Nuevo */
 		if (e.getSource() == formularioCargo.btnNuevoCargo) {
 			limpiar();
 			formularioCargo.obtenerUltimoId();

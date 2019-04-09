@@ -126,13 +126,13 @@ public class registro_cargos extends JFrame {
 		btnNuevoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevoCargo.setBounds(27, 393, 99, 23);
 		panelRegistro.add(btnNuevoCargo);
-		btnNuevoCargo.setBackground(new Color(107, 142, 35));
+		btnNuevoCargo.setBackground(new Color(255, 255, 255));
 
 		btnGuardarCargo = new JButton("Guardar");
 		btnGuardarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardarCargo.setBounds(218, 393, 99, 23);
 		panelRegistro.add(btnGuardarCargo);
-		btnGuardarCargo.setBackground(new Color(107, 142, 35));
+		btnGuardarCargo.setBackground(new Color(60, 179, 113));
 
 		JLabel lblHoraExtraCargo = new JLabel("5. Precio hora extra :");
 		lblHoraExtraCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -282,7 +282,7 @@ public class registro_cargos extends JFrame {
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnAceptar.setBackground(new Color(0, 206, 209));
+		btnAceptar.setBackground(new Color(255, 255, 255));
 		btnAceptar.setBounds(27, 355, 99, 23);
 		panelRegistro.add(btnAceptar);
 
@@ -342,7 +342,7 @@ public class registro_cargos extends JFrame {
 		btnBorrarCargo.setBounds(30, 395, 99, 23);
 		panelTablaCargos.add(btnBorrarCargo);
 
-		barraCargos = new JScrollPane();
+		barraCargos = new JScrollPane(tablaCargos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraCargos);
 		barraCargos.setBounds(28, 90, 376, 294);
 
@@ -386,6 +386,8 @@ public class registro_cargos extends JFrame {
 		for (int c = 0; c < tablaCargos.getColumnCount(); c++) {
 			Class<?> col_class = tablaCargos.getColumnClass(c);
 			tablaCargos.setDefaultEditor(col_class, null);
+			tablaCargos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaCargos.getTableHeader().setReorderingAllowed(false);
 
 			// alinear datos de sueldo y horaextra a la derecha
 			DefaultTableCellRenderer tcr;

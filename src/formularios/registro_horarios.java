@@ -116,22 +116,22 @@ public class registro_horarios extends JFrame {
 		
 		JLabel lblObservacionHorario = new JLabel("6. Observacion horario :");
 		lblObservacionHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblObservacionHorario.setBounds(30, 241, 150, 14);
+		lblObservacionHorario.setBounds(30, 247, 150, 14);
 		panel.add(lblObservacionHorario);
 		
 		JLabel lblDescripcionHorario = new JLabel("5. Descripcion Horario :");
 		lblDescripcionHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDescripcionHorario.setBounds(30, 181, 150, 14);
+		lblDescripcionHorario.setBounds(30, 187, 150, 14);
 		panel.add(lblDescripcionHorario);
 		
-		JLabel lblDiasDelHorario = new JLabel("4. Dias del horario :");
+		JLabel lblDiasDelHorario = new JLabel("3. Dias del horario :");
 		lblDiasDelHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDiasDelHorario.setBounds(30, 152, 150, 14);
+		lblDiasDelHorario.setBounds(30, 130, 150, 14);
 		panel.add(lblDiasDelHorario);
 		
-		JLabel lblHoraDelHorario = new JLabel("3. Horas al dia :");
+		JLabel lblHoraDelHorario = new JLabel("4. Horas al dia :");
 		lblHoraDelHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblHoraDelHorario.setBounds(31, 128, 177, 14);
+		lblHoraDelHorario.setBounds(30, 157, 177, 14);
 		panel.add(lblHoraDelHorario);
 		
 		JLabel lblTipoDeHorario = new JLabel("2. Tipo de horario :");
@@ -155,20 +155,20 @@ public class registro_horarios extends JFrame {
 			}
 		});
 		btnAceptarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnAceptarHorario.setBackground(new Color(240, 230, 140));
-		btnAceptarHorario.setBounds(40, 313, 99, 23);
+		btnAceptarHorario.setBackground(new Color(255, 255, 224));
+		btnAceptarHorario.setBounds(30, 317, 99, 23);
 		panel.add(btnAceptarHorario);
 		
 		btnNuevoHorario = new JButton("Nuevo");
 		btnNuevoHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnNuevoHorario.setBackground(new Color(0, 139, 139));
-		btnNuevoHorario.setBounds(40, 344, 99, 23);
+		btnNuevoHorario.setBackground(Color.WHITE);
+		btnNuevoHorario.setBounds(30, 348, 99, 23);
 		panel.add(btnNuevoHorario);
 		
 		btnActualizarHorario = new JButton("Actualizar");
 		btnActualizarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarHorario.setBackground(new Color(0, 255, 127));
-		btnActualizarHorario.setBounds(214, 313, 99, 23);
+		btnActualizarHorario.setBackground(new Color(60, 179, 113));
+		btnActualizarHorario.setBounds(214, 317, 99, 23);
 		panel.add(btnActualizarHorario);
 		
 		txtCodigoHorario = new JTextField();
@@ -185,12 +185,12 @@ public class registro_horarios extends JFrame {
 		
 		cbxHorasDia= new JComboBox();
 		cbxHorasDia.setModel(new DefaultComboBoxModel(new String[] {"6:00 am - 2:00 pm", "2:00 pm - 10:00 pm", "8:00 am - 2:00 pm", "2:00 pm - 9:00 pm", "10:00 pm - 6:00 am"}));
-		cbxHorasDia.setBounds(202, 126, 111, 20);
+		cbxHorasDia.setBounds(201, 155, 111, 20);
 		panel.add(cbxHorasDia);
 		
 		cbxDiasHorario= new JComboBox();
 		cbxDiasHorario.setModel(new DefaultComboBoxModel(new String[] {"De Lunes a Viernes", "Sabado y Domingo", "Toda la semana"}));
-		cbxDiasHorario.setBounds(202, 150, 111, 20);
+		cbxDiasHorario.setBounds(202, 128, 111, 20);
 		panel.add(cbxDiasHorario);
 		
 		JLabel label_1 = new JLabel();
@@ -201,24 +201,25 @@ public class registro_horarios extends JFrame {
 		label_1.setIcon(logo1);
 		
 		btnGuardarHorario = new JButton("Guardar");
+		btnGuardarHorario.setBackground(new Color(60, 179, 113));
 		btnGuardarHorario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnGuardarHorario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGuardarHorario.setBounds(214, 345, 99, 23);
+		btnGuardarHorario.setBounds(214, 349, 99, 23);
 		panel.add(btnGuardarHorario);
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(178, 181, 135, 53);
+		scrollPane_1.setBounds(178, 182, 135, 44);
 		panel.add(scrollPane_1);
 		
 		txtDescripcionHorario = new JTextArea();
 		scrollPane_1.setViewportView(txtDescripcionHorario);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(178, 241, 135, 53);
+		scrollPane_2.setBounds(178, 242, 135, 44);
 		panel.add(scrollPane_2);
 		
 		txtObservacionHorario = new JTextArea();
@@ -251,7 +252,7 @@ public class registro_horarios extends JFrame {
 		txtBusquedaHorario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBusquedaHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaHorario.setColumns(10);
-		txtBusquedaHorario.setBounds(128, 63, 228, 21);
+		txtBusquedaHorario.setBounds(128, 63, 219, 21);
 		panelTablaHorario.add(txtBusquedaHorario);
 		InputMap map4 = txtBusquedaHorario.getInputMap(txtBusquedaHorario.WHEN_FOCUSED);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -280,16 +281,17 @@ public class registro_horarios extends JFrame {
 		btnBorrarHorario= new JButton("Borrar");
 		btnBorrarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarHorario.setBackground(new Color(220, 20, 60));
-		btnBorrarHorario.setBounds(30, 354, 99, 23);
+		btnBorrarHorario.setBounds(30, 347, 99, 23);
 		panelTablaHorario.add(btnBorrarHorario);
 		
 		
-		barraHorarios = new JScrollPane();
-		barraHorarios.setBounds(30, 95, 377, 248);
+		barraHorarios = new JScrollPane(tablaHorario, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraHorarios.setBounds(30, 95, 377, 231);
 		panelTablaHorario.add(barraHorarios);
 
 		tablaHorario = new JTable();
 		barraHorarios.setViewportView(tablaHorario);
+		
 		
 		JLabel label_4 = new JLabel();
 		label_4.setBounds(358, 40, 49, 44);
@@ -301,13 +303,13 @@ public class registro_horarios extends JFrame {
 		btnActualizarDatosHorario = new JButton("Actualizar Datos");
 	    btnActualizarDatosHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosHorario.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosHorario.setBounds(271, 354, 137, 23);
+		btnActualizarDatosHorario.setBounds(270, 347, 137, 23);
         panelTablaHorario.add(btnActualizarDatosHorario);
 		
 	    btnMostrarHorario = new JButton("Ver detalles");
 		btnMostrarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 	    btnMostrarHorario.setBackground(new Color(0, 206, 209));
-		btnMostrarHorario.setBounds(153, 354, 108, 23);
+		btnMostrarHorario.setBounds(152, 347, 108, 23);
 		panelTablaHorario.add(btnMostrarHorario);
 		
 		JLabel label_2 = new JLabel();
@@ -341,6 +343,8 @@ public class registro_horarios extends JFrame {
 			String informacion[][] = control_horario.obtenerMatriz();
 			tablaHorario = new JTable(informacion, titulos);
 			barraHorarios.setViewportView(tablaHorario);
+			tablaHorario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaHorario.getTableHeader().setReorderingAllowed(false);
 			for (int c = 0; c < tablaHorario.getColumnCount(); c++) {
 				Class<?> col_class = tablaHorario.getColumnClass(c);
 				tablaHorario.setDefaultEditor(col_class, null);
