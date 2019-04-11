@@ -94,6 +94,14 @@ public class ventana_principal extends JFrame {
 		contentPane.add(lblBienvenidoAlSistema);
 
 		JButton lblInformacionEmpresa = new JButton("\u00BFmas informacion sobre la empresa?");
+		lblInformacionEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				registro_empresa formulario = new registro_empresa();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 		lblInformacionEmpresa.setBackground(new Color(64, 224, 208));
 		lblInformacionEmpresa.setBounds(410, 428, 274, 23);
 		lblInformacionEmpresa.setForeground(Color.BLACK);
@@ -403,92 +411,92 @@ public class ventana_principal extends JFrame {
 		panel_4.setBounds(481, 41, 133, 26);
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
-		
-				lbl_horaSistema = new JLabel();
-				lbl_horaSistema.setBounds(0, 0, 131, 26);
-				panel_4.add(lbl_horaSistema);
-				lbl_horaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-				lbl_horaSistema.setBackground(UIManager.getColor("Button.background"));
-				lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
-				
-				JPanel panel_5 = new JPanel();
-				panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel_5.setBackground(Color.WHITE);
-				panel_5.setBounds(410, 73, 274, 135);
-				contentPane.add(panel_5);
-				panel_5.setLayout(null);
-						
-						JLabel lblSuperUsuario = new JLabel("Super usuario");
-						lblSuperUsuario.setBounds(10, 110, 119, 14);
-						panel_5.add(lblSuperUsuario);
-						lblSuperUsuario.setForeground(Color.BLACK);
-						lblSuperUsuario.setFont(new Font("Dialog", Font.PLAIN, 12));
-						
-						JLabel lblUsuario_1 = new JLabel("Usuario :");
-						lblUsuario_1.setBounds(10, 96, 75, 14);
-						panel_5.add(lblUsuario_1);
-						lblUsuario_1.setForeground(Color.BLACK);
-						lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-						
-								JLabel lblDeveloper = new JLabel("Developer");
-								lblDeveloper.setBounds(10, 79, 119, 20);
-								panel_5.add(lblDeveloper);
-								lblDeveloper.setForeground(Color.BLACK);
-								lblDeveloper.setFont(new Font("Dialog", Font.PLAIN, 12));
-								
-										JLabel lblCargo = new JLabel("Cargo :");
-										lblCargo.setBounds(10, 68, 75, 14);
-										panel_5.add(lblCargo);
-										lblCargo.setForeground(Color.BLACK);
-										lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-										
-										JLabel lblDiazRodriguez = new JLabel("Diaz Rodriguez");
-										lblDiazRodriguez.setBounds(10, 54, 131, 14);
-										panel_5.add(lblDiazRodriguez);
-										lblDiazRodriguez.setForeground(Color.BLACK);
-										lblDiazRodriguez.setFont(new Font("Dialog", Font.PLAIN, 12));
-										
-												JLabel lblCristianDiaz = new JLabel("Cristian Emmanuel");
-												lblCristianDiaz.setBounds(10, 40, 131, 14);
-												panel_5.add(lblCristianDiaz);
-												lblCristianDiaz.setForeground(Color.BLACK);
-												lblCristianDiaz.setFont(new Font("Dialog", Font.PLAIN, 12));
-												
-														JLabel lblUsuario = new JLabel("Nombre completo :");
-														lblUsuario.setBounds(10, 23, 131, 20);
-														panel_5.add(lblUsuario);
-														lblUsuario.setForeground(Color.BLACK);
-														lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-														
-														JLabel lblDatosDeUsuario = new JLabel("DATOS DEL USUARIO");
-														lblDatosDeUsuario.setForeground(Color.BLACK);
-														lblDatosDeUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
-														lblDatosDeUsuario.setBounds(10, 0, 144, 28);
-														panel_5.add(lblDatosDeUsuario);
-														
-																JLabel labelfotousuario = new JLabel();
-																labelfotousuario.setBounds(151, 12, 113, 112);
-																panel_5.add(labelfotousuario);
-																labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
-																labelfotousuario.setForeground(Color.LIGHT_GRAY);
-																final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
-																		.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
-																labelfotousuario.setIcon(iconousuario);
-														
-														JPanel panel_6 = new JPanel();
-														panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-														panel_6.setBackground(Color.WHITE);
-														panel_6.setBounds(410, 11, 274, 26);
-														contentPane.add(panel_6);
-														panel_6.setLayout(null);
-														
-																lbl_fechaSistema = new JLabel();
-																lbl_fechaSistema.setBounds(0, 0, 274, 26);
-																panel_6.add(lbl_fechaSistema);
-																lbl_fechaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-																lbl_fechaSistema.setBackground(Color.WHITE);
-																lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
-																lbl_fechaSistema.setText(getFecha());
+
+		lbl_horaSistema = new JLabel();
+		lbl_horaSistema.setBounds(0, 0, 131, 26);
+		panel_4.add(lbl_horaSistema);
+		lbl_horaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_horaSistema.setBackground(UIManager.getColor("Button.background"));
+		lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_5.setBackground(Color.WHITE);
+		panel_5.setBounds(410, 73, 274, 135);
+		contentPane.add(panel_5);
+		panel_5.setLayout(null);
+
+		JLabel lblSuperUsuario = new JLabel("Super usuario");
+		lblSuperUsuario.setBounds(10, 110, 119, 14);
+		panel_5.add(lblSuperUsuario);
+		lblSuperUsuario.setForeground(Color.BLACK);
+		lblSuperUsuario.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		JLabel lblUsuario_1 = new JLabel("Usuario :");
+		lblUsuario_1.setBounds(10, 96, 75, 14);
+		panel_5.add(lblUsuario_1);
+		lblUsuario_1.setForeground(Color.BLACK);
+		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+
+		JLabel lblDeveloper = new JLabel("Developer");
+		lblDeveloper.setBounds(10, 79, 119, 20);
+		panel_5.add(lblDeveloper);
+		lblDeveloper.setForeground(Color.BLACK);
+		lblDeveloper.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		JLabel lblCargo = new JLabel("Cargo :");
+		lblCargo.setBounds(10, 68, 75, 14);
+		panel_5.add(lblCargo);
+		lblCargo.setForeground(Color.BLACK);
+		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+
+		JLabel lblDiazRodriguez = new JLabel("Diaz Rodriguez");
+		lblDiazRodriguez.setBounds(10, 54, 131, 14);
+		panel_5.add(lblDiazRodriguez);
+		lblDiazRodriguez.setForeground(Color.BLACK);
+		lblDiazRodriguez.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		JLabel lblCristianDiaz = new JLabel("Cristian Emmanuel");
+		lblCristianDiaz.setBounds(10, 40, 131, 14);
+		panel_5.add(lblCristianDiaz);
+		lblCristianDiaz.setForeground(Color.BLACK);
+		lblCristianDiaz.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		JLabel lblUsuario = new JLabel("Nombre completo :");
+		lblUsuario.setBounds(10, 23, 131, 20);
+		panel_5.add(lblUsuario);
+		lblUsuario.setForeground(Color.BLACK);
+		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+
+		JLabel lblDatosDeUsuario = new JLabel("DATOS DEL USUARIO");
+		lblDatosDeUsuario.setForeground(Color.BLACK);
+		lblDatosDeUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblDatosDeUsuario.setBounds(10, 0, 144, 28);
+		panel_5.add(lblDatosDeUsuario);
+
+		JLabel labelfotousuario = new JLabel();
+		labelfotousuario.setBounds(151, 12, 113, 112);
+		panel_5.add(labelfotousuario);
+		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
+		labelfotousuario.setForeground(Color.LIGHT_GRAY);
+		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
+				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+		labelfotousuario.setIcon(iconousuario);
+
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_6.setBackground(Color.WHITE);
+		panel_6.setBounds(410, 11, 274, 26);
+		contentPane.add(panel_6);
+		panel_6.setLayout(null);
+
+		lbl_fechaSistema = new JLabel();
+		lbl_fechaSistema.setBounds(0, 0, 274, 26);
+		panel_6.add(lbl_fechaSistema);
+		lbl_fechaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_fechaSistema.setBackground(Color.WHITE);
+		lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_fechaSistema.setText(getFecha());
 
 	}
 
@@ -523,13 +531,13 @@ public class ventana_principal extends JFrame {
 			lbl_horaSistema.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
-	
+
 	public static String getFecha() {
-		Date date= new Date();
+		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
 		date = cal.getTime();
-		return df.format(date); 
-		}
+		return df.format(date);
+	}
 }

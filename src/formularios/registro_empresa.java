@@ -24,10 +24,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -256,7 +260,7 @@ public class registro_empresa extends JFrame {
 		btnFacebook.setIcon(logo);
 		btnFacebook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				goToURL("https://es-la.facebook.com/");
 			}
 		});
 
@@ -271,9 +275,9 @@ public class registro_empresa extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				logoyoutube.getImage().getScaledInstance(btnYoutube.getWidth(), btnYoutube.getHeight(), Image.SCALE_DEFAULT));
 		btnYoutube.setIcon(logo1);
-		btnFacebook.addActionListener(new ActionListener() {
+		btnYoutube.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				goToURL("https://www.youtube.com/");
 			}
 		});
 
@@ -285,9 +289,9 @@ public class registro_empresa extends JFrame {
 		final ImageIcon logo2 = new ImageIcon(
 				logowhatsapp.getImage().getScaledInstance(btnWhatsapp.getWidth(), btnWhatsapp.getHeight(), Image.SCALE_DEFAULT));
 		btnWhatsapp.setIcon(logo2);
-		btnFacebook.addActionListener(new ActionListener() {
+		btnWhatsapp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				goToURL("https://www.whatsapp.com/");
 			}
 		});
 
@@ -299,4 +303,19 @@ public class registro_empresa extends JFrame {
 		lblLibreta.setIcon(logo3);
 
 	}
+	
+	 public void goToURL(String URL){
+         if (java.awt.Desktop.isDesktopSupported()) {
+          java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+          if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+              try {
+                  java.net.URI uri = new java.net.URI(URL);
+                  desktop.browse(uri);
+              } catch (URISyntaxException | IOException ex) {
+                  Logger.getLogger(registro_empresa.class.getName()).log(Level.SEVERE, null, ex);
+              }
+          }
+      }
+  }
 }
