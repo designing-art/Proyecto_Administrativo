@@ -51,6 +51,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
 import java.awt.event.ActionEvent;
 
 import javax.imageio.ImageIO;
@@ -680,6 +681,8 @@ public class registro_empleados extends JFrame {
 				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
 				dispose();
+				Timer time = new Timer();
+				time.schedule(principal.tarea, 0, 1000);
 			}
 		});
 

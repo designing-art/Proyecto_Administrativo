@@ -28,6 +28,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -104,6 +105,8 @@ public class registro_horarios extends JFrame {
 				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
 				dispose();
+				Timer time = new Timer();
+				time.schedule(principal.tarea, 0, 1000);
 			}
 		});
 		

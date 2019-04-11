@@ -4,21 +4,20 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -28,27 +27,17 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.MaskFormatter;
-
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import com.placeholder.PlaceHolder;
 
-import clases.cargo;
 import conexion.conexion;
-import consultas.consultas_cargo;
-import controles.control_cargo;
 import controles.control_contrato_empleado;
-
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class registro_contratos_empleados extends JFrame {
@@ -71,7 +60,7 @@ public class registro_contratos_empleados extends JFrame {
 	public JTable tablaContratosEmpleados;
 	public JTextField txtCodigoContratoEmpleado;
 
-	public TableRowSorter trsfiltroCodigo;
+	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
 	public JTextField txtDireccionFotoContrato;
 	public JButton btnSubirFotoContrato;
@@ -101,11 +90,14 @@ public class registro_contratos_empleados extends JFrame {
 		btnAtras.setBounds(717, 20, 102, 23);
 		contentPane.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
 				dispose();
+				Timer time = new Timer();
+				time.schedule(principal.tarea, 0, 1000);
 			}
 		});
 
@@ -116,7 +108,7 @@ public class registro_contratos_empleados extends JFrame {
 		scrollFunciones = new JScrollPane();
 
 		JPanel panelRegistro = new JPanel();
-		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelRegistro.setBounds(28, 60, 341, 450);
 		contentPane.add(panelRegistro);
 		panelRegistro.setLayout(null);
@@ -205,6 +197,7 @@ public class registro_contratos_empleados extends JFrame {
 
 		btnSubirFotoContrato = new JButton("Subir");
 		btnSubirFotoContrato.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				selecionarFoto();
 			}
@@ -216,17 +209,17 @@ public class registro_contratos_empleados extends JFrame {
 		txtDireccionFotoContrato = new JTextField();
 		txtDireccionFotoContrato.setEditable(false);
 		txtDireccionFotoContrato.setColumns(10);
-		txtDireccionFotoContrato.setBounds(27, 328, 136, 20);
+		txtDireccionFotoContrato.setBounds(27, 190, 136, 20);
 		panelRegistro.add(txtDireccionFotoContrato);
 
 		btnImprimirContrato = new JButton("imprimir");
 		btnImprimirContrato.setBackground(new Color(250, 128, 114));
-		btnImprimirContrato.setBounds(52, 297, 83, 23);
+		btnImprimirContrato.setBounds(51, 252, 83, 23);
 		panelRegistro.add(btnImprimirContrato);
 
 		btnVerFotoContrato = new JButton("Ver");
 		btnVerFotoContrato.setBackground(new Color(250, 128, 114));
-		btnVerFotoContrato.setBounds(52, 267, 83, 23);
+		btnVerFotoContrato.setBounds(51, 222, 83, 23);
 		panelRegistro.add(btnVerFotoContrato);
 
 		JLabel lblLibreta = new JLabel();
@@ -238,7 +231,7 @@ public class registro_contratos_empleados extends JFrame {
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
-		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelTablaCargos.setBackground(Color.WHITE);
 		panelTablaCargos.setBounds(388, 61, 431, 449);
 		contentPane.add(panelTablaCargos);
@@ -259,7 +252,7 @@ public class registro_contratos_empleados extends JFrame {
 		txtBusquedaContratosEmpleados.setColumns(10);
 		txtBusquedaContratosEmpleados.setBounds(138, 64, 209, 21);
 		panelTablaCargos.add(txtBusquedaContratosEmpleados);
-		InputMap map4 = txtBusquedaContratosEmpleados.getInputMap(txtBusquedaContratosEmpleados.WHEN_FOCUSED);
+		InputMap map4 = txtBusquedaContratosEmpleados.getInputMap(JComponent.WHEN_FOCUSED);
 		txtBusquedaContratosEmpleados.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -267,10 +260,12 @@ public class registro_contratos_empleados extends JFrame {
 				tablaContratosEmpleados.setRowSorter(trsfiltroCodigo);
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 				String cadena = (txtBusquedaContratosEmpleados.getText());
 				txtBusquedaContratosEmpleados.setText(cadena);
@@ -285,8 +280,8 @@ public class registro_contratos_empleados extends JFrame {
 		btnBorrarContrato.setBounds(30, 395, 99, 23);
 		panelTablaCargos.add(btnBorrarContrato);
 
-		barraContratos = new JScrollPane(tablaContratosEmpleados, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraContratos = new JScrollPane(tablaContratosEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraContratos);
 		barraContratos.setBounds(28, 90, 376, 294);
 

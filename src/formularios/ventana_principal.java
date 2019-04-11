@@ -3,6 +3,9 @@ package formularios;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -25,12 +28,19 @@ import controles.control_empleado;
 import controles.control_horario;
 
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
+import javax.swing.border.MatteBorder;
 
 public class ventana_principal extends JFrame {
 
 	private JPanel contentPane;
-
 	public JButton registroPlanilla;
 	public JButton registroContrato;
 	public JButton registroEmpleado;
@@ -38,24 +48,10 @@ public class ventana_principal extends JFrame {
 	public JButton registroDeduccion;
 	public JButton registroBonificacion;
 	public JButton registroHorario;
+	public JLabel lbl_horaSistema;
+	public JLabel lbl_fechaSistema;
+	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ventana_principal frame = new ventana_principal();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ventana_principal() {
 		setResizable(false);
 		setType(Type.UTILITY);
@@ -66,15 +62,15 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
-		lblCanalCoffee.setBounds(410, 202, 274, 36);
+		lblCanalCoffee.setBounds(410, 219, 274, 19);
 		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		contentPane.add(lblCanalCoffee);
 
 		JLabel lblEmpresa = new JLabel();
-		lblEmpresa.setBounds(448, 236, 201, 186);
+		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEmpresa.setBounds(420, 236, 252, 190);
 		contentPane.add(lblEmpresa);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon icono = new ImageIcon(
@@ -87,69 +83,38 @@ public class ventana_principal extends JFrame {
 		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		contentPane.add(lblBienvenidoAlSistema);
 
-		JLabel lblInformacionEmpresa = new JLabel("\u00BFmas informacion sobre la empresa?");
-		lblInformacionEmpresa.setBounds(427, 433, 267, 14);
+		JButton lblInformacionEmpresa = new JButton("\u00BFmas informacion sobre la empresa?");
+		lblInformacionEmpresa.setBackground(new Color(255, 165, 0));
+		lblInformacionEmpresa.setBounds(410, 437, 274, 23);
 		lblInformacionEmpresa.setForeground(new Color(0, 128, 0));
 		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(lblInformacionEmpresa);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-
-		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setForeground(Color.LIGHT_GRAY);
-		labelfotousuario.setBounds(495, 43, 109, 123);
-		contentPane.add(labelfotousuario);
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
-		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
-				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
-		labelfotousuario.setIcon(iconousuario);
 
 		JLabel lblUsuario = new JLabel("Usuario :");
 		lblUsuario.setForeground(new Color(0, 128, 0));
 		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblUsuario.setBounds(467, 177, 75, 14);
+		lblUsuario.setBounds(575, 73, 75, 14);
 		contentPane.add(lblUsuario);
 
 		JLabel lblCargo = new JLabel("Cargo :");
 		lblCargo.setForeground(new Color(0, 128, 0));
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblCargo.setBounds(479, 191, 75, 14);
+		lblCargo.setBounds(575, 115, 75, 14);
 		contentPane.add(lblCargo);
 
 		JLabel lblCristianDiaz = new JLabel("Cristian Diaz");
 		lblCristianDiaz.setForeground(new Color(0, 128, 0));
 		lblCristianDiaz.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblCristianDiaz.setBounds(540, 177, 97, 14);
+		lblCristianDiaz.setBounds(575, 90, 97, 14);
 		contentPane.add(lblCristianDiaz);
 
 		JLabel lblDeveloper = new JLabel("Developer");
 		lblDeveloper.setForeground(new Color(0, 128, 0));
 		lblDeveloper.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblDeveloper.setBounds(552, 191, 83, 14);
+		lblDeveloper.setBounds(575, 129, 83, 14);
 		contentPane.add(lblDeveloper);
-
-		JLabel lblHora = new JLabel("Hora  :");
-		lblHora.setForeground(new Color(0, 0, 0));
-		lblHora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblHora.setBounds(427, 18, 50, 14);
-		contentPane.add(lblHora);
-
-		JLabel lblFecha = new JLabel("Fecha :");
-		lblFecha.setForeground(new Color(0, 0, 0));
-		lblFecha.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblFecha.setBounds(529, 18, 63, 14);
-		contentPane.add(lblFecha);
-
-		JLabel label = new JLabel("00:00");
-		label.setForeground(Color.BLACK);
-		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		label.setBounds(475, 18, 55, 14);
-		contentPane.add(label);
-
-		JLabel label_1 = new JLabel("00/00/0000");
-		label_1.setForeground(Color.BLACK);
-		label_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		label_1.setBounds(585, 18, 87, 14);
-		contentPane.add(label_1);
 
 		JLabel lblMenuDeOpciones = new JLabel("Menu de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.DARK_GRAY);
@@ -189,6 +154,8 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarContrato.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
+				formulario.btnImprimirContrato.setVisible(false);
+				formulario.btnVerFotoContrato.setVisible(false);
 				dispose();
 			}
 		});
@@ -443,6 +410,92 @@ public class ventana_principal extends JFrame {
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
 				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
 		lblMenuOpciones.setIcon(icono2);
+
+		lbl_horaSistema = new JLabel();
+		lbl_horaSistema.setBounds(553, 11, 131, 32);
+		contentPane.add(lbl_horaSistema);
+		lbl_horaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_horaSistema.setBackground(Color.LIGHT_GRAY);
+		lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel_5.setBackground(Color.WHITE);
+		panel_5.setBounds(410, 11, 133, 32);
+		contentPane.add(panel_5);
+		panel_5.setLayout(null);
+
+		lbl_fechaSistema = new JLabel();
+		lbl_fechaSistema.setBounds(0, 0, 133, 32);
+		panel_5.add(lbl_fechaSistema);
+		lbl_fechaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_fechaSistema.setBackground(Color.LIGHT_GRAY);
+		lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
+		panel_4.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel_4.setBounds(551, 11, 133, 32);
+		contentPane.add(panel_4);
+		panel_4.setLayout(null);
+
+		JLabel labelfotousuario = new JLabel();
+		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
+		labelfotousuario.setForeground(Color.LIGHT_GRAY);
+		labelfotousuario.setBounds(410, 54, 133, 154);
+		contentPane.add(labelfotousuario);
+		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
+				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+		labelfotousuario.setIcon(iconousuario);
+
+	}
+
+	Timer time = new Timer();
+	public TimerTask tarea = new TimerTask() {
+		public void run() {
+			Calendar calendario = new GregorianCalendar();
+			Date fechaHoraActual = new Date();
+			calendario.setTime(fechaHoraActual);
+			String horas;
+			String minutos;
+			String segundos;
+			String ampm;
+			Thread hilo = null;
+			Thread hilo2;
+			hilo2 = Thread.currentThread();
+			hilo = new Thread();
+			hilo.start();
+			ampm = calendario.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+			if (ampm.equals("PM")) {
+				int h = calendario.get(Calendar.HOUR_OF_DAY) - 12;
+				horas = h > 9 ? "" + h : "0" + h;
+			} else {
+				horas = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY)
+						: "0" + calendario.get(Calendar.HOUR_OF_DAY);
+			}
+			minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE)
+					: "0" + calendario.get(Calendar.MINUTE);
+			segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND)
+					: "0" + calendario.get(Calendar.SECOND);
+
+			lbl_horaSistema.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
+
+		}
+	};
+
+	public void verfechaSistema() {
+		try {
+			Calendar calendario = new GregorianCalendar();
+			Date fechaHoraActual = new Date();
+			calendario.setTime(fechaHoraActual);
+			int dia = calendario.get(Calendar.DAY_OF_MONTH);
+			int mes = calendario.get(Calendar.MONTH);
+			int año = calendario.get(Calendar.YEAR);
+			String fecha = dia + "-" + mes + "-" + año;
+			lbl_fechaSistema.setText(fecha);
+		} catch (Exception e) {
+
+		}
 
 	}
 }
