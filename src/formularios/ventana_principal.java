@@ -46,6 +46,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.CompoundBorder;
 
 public class ventana_principal extends JFrame {
 
@@ -68,7 +69,7 @@ public class ventana_principal extends JFrame {
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -79,7 +80,7 @@ public class ventana_principal extends JFrame {
 
 		JLabel lblEmpresa = new JLabel();
 		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmpresa.setBounds(420, 233, 252, 190);
+		lblEmpresa.setBounds(420, 240, 252, 177);
 		contentPane.add(lblEmpresa);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon icono = new ImageIcon(
@@ -88,21 +89,21 @@ public class ventana_principal extends JFrame {
 
 		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
 		lblBienvenidoAlSistema.setBounds(21, 0, 379, 32);
-		lblBienvenidoAlSistema.setForeground(Color.DARK_GRAY);
+		lblBienvenidoAlSistema.setForeground(Color.BLACK);
 		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		contentPane.add(lblBienvenidoAlSistema);
 
 		JButton lblInformacionEmpresa = new JButton("\u00BFmas informacion sobre la empresa?");
-		lblInformacionEmpresa.setBackground(Color.WHITE);
-		lblInformacionEmpresa.setBounds(410, 428, 274, 32);
-		lblInformacionEmpresa.setForeground(Color.DARK_GRAY);
+		lblInformacionEmpresa.setBackground(new Color(64, 224, 208));
+		lblInformacionEmpresa.setBounds(410, 428, 274, 23);
+		lblInformacionEmpresa.setForeground(Color.BLACK);
 		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(lblInformacionEmpresa);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
 		JLabel lblMenuDeOpciones = new JLabel("Menu de Opciones :");
-		lblMenuDeOpciones.setForeground(Color.DARK_GRAY);
+		lblMenuDeOpciones.setForeground(Color.BLACK);
 		lblMenuDeOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblMenuDeOpciones.setBounds(146, 72, 145, 14);
 		contentPane.add(lblMenuDeOpciones);
@@ -411,7 +412,7 @@ public class ventana_principal extends JFrame {
 				lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
 				
 				JPanel panel_5 = new JPanel();
-				panel_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+				panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				panel_5.setBackground(Color.WHITE);
 				panel_5.setBounds(410, 73, 274, 135);
 				contentPane.add(panel_5);
@@ -461,8 +462,8 @@ public class ventana_principal extends JFrame {
 														
 														JLabel lblDatosDeUsuario = new JLabel("DATOS DEL USUARIO");
 														lblDatosDeUsuario.setForeground(Color.BLACK);
-														lblDatosDeUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-														lblDatosDeUsuario.setBounds(10, 11, 144, 17);
+														lblDatosDeUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+														lblDatosDeUsuario.setBounds(10, 0, 144, 28);
 														panel_5.add(lblDatosDeUsuario);
 														
 																JLabel labelfotousuario = new JLabel();
@@ -475,7 +476,7 @@ public class ventana_principal extends JFrame {
 																labelfotousuario.setIcon(iconousuario);
 														
 														JPanel panel_6 = new JPanel();
-														panel_6.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+														panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 														panel_6.setBackground(Color.WHITE);
 														panel_6.setBounds(410, 11, 274, 26);
 														contentPane.add(panel_6);
