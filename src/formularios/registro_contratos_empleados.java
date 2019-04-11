@@ -68,6 +68,11 @@ public class registro_contratos_empleados extends JFrame {
 	public JButton btnVerFotoContrato;
 	public JLabel lbl_foto_contrato;
 
+	public ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
+	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
+	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+
 	public registro_contratos_empleados() {
 		setType(Type.UTILITY);
 		setResizable(false);
@@ -78,11 +83,6 @@ public class registro_contratos_empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
 
 		JButton btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

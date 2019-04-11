@@ -28,8 +28,12 @@ import controles.control_empleado;
 import controles.control_horario;
 
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -37,6 +41,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
+import javax.swing.UIManager;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class ventana_principal extends JFrame {
 
@@ -59,18 +68,18 @@ public class ventana_principal extends JFrame {
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(null);
+		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
-		lblCanalCoffee.setBounds(410, 219, 274, 19);
+		lblCanalCoffee.setBounds(410, 206, 274, 32);
 		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		contentPane.add(lblCanalCoffee);
 
 		JLabel lblEmpresa = new JLabel();
 		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmpresa.setBounds(420, 236, 252, 190);
+		lblEmpresa.setBounds(420, 233, 252, 190);
 		contentPane.add(lblEmpresa);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon icono = new ImageIcon(
@@ -84,37 +93,13 @@ public class ventana_principal extends JFrame {
 		contentPane.add(lblBienvenidoAlSistema);
 
 		JButton lblInformacionEmpresa = new JButton("\u00BFmas informacion sobre la empresa?");
-		lblInformacionEmpresa.setBackground(new Color(255, 165, 0));
-		lblInformacionEmpresa.setBounds(410, 437, 274, 23);
-		lblInformacionEmpresa.setForeground(new Color(0, 128, 0));
+		lblInformacionEmpresa.setBackground(Color.WHITE);
+		lblInformacionEmpresa.setBounds(410, 428, 274, 32);
+		lblInformacionEmpresa.setForeground(Color.DARK_GRAY);
 		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(lblInformacionEmpresa);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
-
-		JLabel lblUsuario = new JLabel("Usuario :");
-		lblUsuario.setForeground(new Color(0, 128, 0));
-		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblUsuario.setBounds(575, 73, 75, 14);
-		contentPane.add(lblUsuario);
-
-		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setForeground(new Color(0, 128, 0));
-		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblCargo.setBounds(575, 115, 75, 14);
-		contentPane.add(lblCargo);
-
-		JLabel lblCristianDiaz = new JLabel("Cristian Diaz");
-		lblCristianDiaz.setForeground(new Color(0, 128, 0));
-		lblCristianDiaz.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblCristianDiaz.setBounds(575, 90, 97, 14);
-		contentPane.add(lblCristianDiaz);
-
-		JLabel lblDeveloper = new JLabel("Developer");
-		lblDeveloper.setForeground(new Color(0, 128, 0));
-		lblDeveloper.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblDeveloper.setBounds(575, 129, 83, 14);
-		contentPane.add(lblDeveloper);
 
 		JLabel lblMenuDeOpciones = new JLabel("Menu de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.DARK_GRAY);
@@ -411,42 +396,98 @@ public class ventana_principal extends JFrame {
 				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
 		lblMenuOpciones.setIcon(icono2);
 
-		lbl_horaSistema = new JLabel();
-		lbl_horaSistema.setBounds(553, 11, 131, 32);
-		contentPane.add(lbl_horaSistema);
-		lbl_horaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lbl_horaSistema.setBackground(Color.LIGHT_GRAY);
-		lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
-
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(410, 11, 133, 32);
-		contentPane.add(panel_5);
-		panel_5.setLayout(null);
-
-		lbl_fechaSistema = new JLabel();
-		lbl_fechaSistema.setBounds(0, 0, 133, 32);
-		panel_5.add(lbl_fechaSistema);
-		lbl_fechaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lbl_fechaSistema.setBackground(Color.LIGHT_GRAY);
-		lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
-
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
-		panel_4.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel_4.setBounds(551, 11, 133, 32);
+		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_4.setBounds(481, 41, 133, 26);
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
-
-		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
-		labelfotousuario.setForeground(Color.LIGHT_GRAY);
-		labelfotousuario.setBounds(410, 54, 133, 154);
-		contentPane.add(labelfotousuario);
-		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
-				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
-		labelfotousuario.setIcon(iconousuario);
+		
+				lbl_horaSistema = new JLabel();
+				lbl_horaSistema.setBounds(0, 0, 131, 26);
+				panel_4.add(lbl_horaSistema);
+				lbl_horaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+				lbl_horaSistema.setBackground(UIManager.getColor("Button.background"));
+				lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				JPanel panel_5 = new JPanel();
+				panel_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+				panel_5.setBackground(Color.WHITE);
+				panel_5.setBounds(410, 73, 274, 135);
+				contentPane.add(panel_5);
+				panel_5.setLayout(null);
+						
+						JLabel lblSuperUsuario = new JLabel("Super usuario");
+						lblSuperUsuario.setBounds(10, 110, 119, 14);
+						panel_5.add(lblSuperUsuario);
+						lblSuperUsuario.setForeground(Color.BLACK);
+						lblSuperUsuario.setFont(new Font("Dialog", Font.PLAIN, 12));
+						
+						JLabel lblUsuario_1 = new JLabel("Usuario :");
+						lblUsuario_1.setBounds(10, 96, 75, 14);
+						panel_5.add(lblUsuario_1);
+						lblUsuario_1.setForeground(Color.BLACK);
+						lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+						
+								JLabel lblDeveloper = new JLabel("Developer");
+								lblDeveloper.setBounds(10, 79, 119, 20);
+								panel_5.add(lblDeveloper);
+								lblDeveloper.setForeground(Color.BLACK);
+								lblDeveloper.setFont(new Font("Dialog", Font.PLAIN, 12));
+								
+										JLabel lblCargo = new JLabel("Cargo :");
+										lblCargo.setBounds(10, 68, 75, 14);
+										panel_5.add(lblCargo);
+										lblCargo.setForeground(Color.BLACK);
+										lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+										
+										JLabel lblDiazRodriguez = new JLabel("Diaz Rodriguez");
+										lblDiazRodriguez.setBounds(10, 54, 131, 14);
+										panel_5.add(lblDiazRodriguez);
+										lblDiazRodriguez.setForeground(Color.BLACK);
+										lblDiazRodriguez.setFont(new Font("Dialog", Font.PLAIN, 12));
+										
+												JLabel lblCristianDiaz = new JLabel("Cristian Emmanuel");
+												lblCristianDiaz.setBounds(10, 40, 131, 14);
+												panel_5.add(lblCristianDiaz);
+												lblCristianDiaz.setForeground(Color.BLACK);
+												lblCristianDiaz.setFont(new Font("Dialog", Font.PLAIN, 12));
+												
+														JLabel lblUsuario = new JLabel("Nombre completo :");
+														lblUsuario.setBounds(10, 23, 131, 20);
+														panel_5.add(lblUsuario);
+														lblUsuario.setForeground(Color.BLACK);
+														lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+														
+														JLabel lblDatosDeUsuario = new JLabel("DATOS DEL USUARIO");
+														lblDatosDeUsuario.setForeground(Color.BLACK);
+														lblDatosDeUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+														lblDatosDeUsuario.setBounds(10, 11, 144, 17);
+														panel_5.add(lblDatosDeUsuario);
+														
+																JLabel labelfotousuario = new JLabel();
+																labelfotousuario.setBounds(151, 12, 113, 112);
+																panel_5.add(labelfotousuario);
+																labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
+																labelfotousuario.setForeground(Color.LIGHT_GRAY);
+																final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
+																		.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+																labelfotousuario.setIcon(iconousuario);
+														
+														JPanel panel_6 = new JPanel();
+														panel_6.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+														panel_6.setBackground(Color.WHITE);
+														panel_6.setBounds(410, 11, 274, 26);
+														contentPane.add(panel_6);
+														panel_6.setLayout(null);
+														
+																lbl_fechaSistema = new JLabel();
+																lbl_fechaSistema.setBounds(0, 0, 274, 26);
+																panel_6.add(lbl_fechaSistema);
+																lbl_fechaSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+																lbl_fechaSistema.setBackground(Color.WHITE);
+																lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
+																lbl_fechaSistema.setText(getFecha());
 
 	}
 
@@ -479,23 +520,15 @@ public class ventana_principal extends JFrame {
 					: "0" + calendario.get(Calendar.SECOND);
 
 			lbl_horaSistema.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
-
 		}
 	};
-
-	public void verfechaSistema() {
-		try {
-			Calendar calendario = new GregorianCalendar();
-			Date fechaHoraActual = new Date();
-			calendario.setTime(fechaHoraActual);
-			int dia = calendario.get(Calendar.DAY_OF_MONTH);
-			int mes = calendario.get(Calendar.MONTH);
-			int año = calendario.get(Calendar.YEAR);
-			String fecha = dia + "-" + mes + "-" + año;
-			lbl_fechaSistema.setText(fecha);
-		} catch (Exception e) {
-
+	
+	public static String getFecha() {
+		Date date= new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
+		date = cal.getTime();
+		return df.format(date); 
 		}
-
-	}
 }
