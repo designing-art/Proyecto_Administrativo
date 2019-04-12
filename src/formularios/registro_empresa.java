@@ -58,7 +58,7 @@ public class registro_empresa extends JFrame {
 
 	public ImageIcon logoCanal = new ImageIcon(getClass().getResource("/material/logo.png"));
 	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/material/logoEmpresa.jpg"));
-	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libro4.jpg"));
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libro_empresa.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/material/logof.jpg"));
 	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/material/logoy.jpg"));
@@ -113,7 +113,7 @@ public class registro_empresa extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(378, 43, 309, 404);
+		panel.setBounds(389, 43, 309, 404);
 		panelRegistro.add(panel);
 		panel.setLayout(null);
 
@@ -187,7 +187,7 @@ public class registro_empresa extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(53, 43, 326, 404);
+		panel_1.setBounds(31, 43, 326, 404);
 		panelRegistro.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -307,13 +307,13 @@ public class registro_empresa extends JFrame {
 		textField.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		textField.setEditable(false);
 		textField.setColumns(10);
-
-		JLabel lblLibreta = new JLabel();
-		lblLibreta.setBounds(0, 0, 739, 476);
-		panelRegistro.add(lblLibreta);
-		final ImageIcon logo3 = new ImageIcon(
-				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-		lblLibreta.setIcon(logo3);
+		
+				JLabel lblLibreta = new JLabel();
+				lblLibreta.setBounds(0, 0, 740, 476);
+				panelRegistro.add(lblLibreta);
+				final ImageIcon logo3 = new ImageIcon(
+						icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+				lblLibreta.setIcon(logo3);
 		btnWhatsapp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				goToURL("https://www.whatsapp.com/");
