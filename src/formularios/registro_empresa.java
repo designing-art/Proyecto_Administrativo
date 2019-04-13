@@ -112,25 +112,25 @@ public class registro_empresa extends JFrame {
 		panelRegistro.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(389, 43, 309, 404);
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBounds(395, 23, 309, 404);
 		panelRegistro.add(panel);
 		panel.setLayout(null);
 
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(85, 375, 99, 23);
+		btnGuardar.setBounds(10, 375, 99, 23);
 		panel.add(btnGuardar);
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(60, 179, 113));
 
 		btnActualizarContrato = new JButton("Editar");
-		btnActualizarContrato.setBounds(187, 375, 99, 23);
+		btnActualizarContrato.setBounds(200, 375, 99, 23);
 		panel.add(btnActualizarContrato);
 		btnActualizarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarContrato.setBackground(new Color(60, 179, 113));
 
 		JLabel label_1 = new JLabel();
-		label_1.setBounds(27, 246, 164, 119);
+		label_1.setBounds(27, 236, 164, 129);
 		panel.add(label_1);
 		final ImageIcon logo00 = new ImageIcon(
 				logoEmpresa.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
@@ -147,18 +147,18 @@ public class registro_empresa extends JFrame {
 		button.setBackground(new Color(250, 128, 114));
 
 		textField_2 = new JTextField();
-		textField_2.setBounds(27, 213, 258, 20);
+		textField_2.setBounds(28, 195, 258, 20);
 		panel.add(textField_2);
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
 
 		JLabel lblFotografiaDelLocal = new JLabel("Fotografia del local de la empresa.");
-		lblFotografiaDelLocal.setBounds(27, 190, 258, 17);
+		lblFotografiaDelLocal.setBounds(27, 213, 258, 17);
 		panel.add(lblFotografiaDelLocal);
 		lblFotografiaDelLocal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel label_5 = new JLabel();
-		label_5.setBounds(27, 65, 131, 119);
+		label_5.setBounds(27, 55, 164, 129);
 		panel.add(label_5);
 		final ImageIcon logo5 = new ImageIcon(
 				logoCanal.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
@@ -175,19 +175,19 @@ public class registro_empresa extends JFrame {
 		button_1.setBackground(new Color(250, 128, 114));
 
 		textField_3 = new JTextField();
-		textField_3.setBounds(27, 34, 258, 20);
+		textField_3.setBounds(27, 11, 258, 20);
 		panel.add(textField_3);
 		textField_3.setEditable(false);
 		textField_3.setColumns(10);
 
 		JLabel lblLogoOficialDe = new JLabel("Logo Oficial de la empresa.");
-		lblLogoOficialDe.setBounds(27, 11, 259, 17);
+		lblLogoOficialDe.setBounds(27, 30, 259, 17);
 		panel.add(lblLogoOficialDe);
 		lblLogoOficialDe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(31, 43, 326, 404);
+		panel_1.setBounds(38, 23, 326, 404);
 		panelRegistro.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -309,7 +309,7 @@ public class registro_empresa extends JFrame {
 		textField.setColumns(10);
 		
 				JLabel lblLibreta = new JLabel();
-				lblLibreta.setBounds(0, 0, 740, 476);
+				lblLibreta.setBounds(0, -18, 740, 494);
 				panelRegistro.add(lblLibreta);
 				final ImageIcon logo3 = new ImageIcon(
 						icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
