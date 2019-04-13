@@ -6,6 +6,8 @@ import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -27,6 +29,10 @@ import controles.control_empresa;
 import controles.control_horario;
 
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +44,15 @@ import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
+import java.sql.Connection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import clases.empresa;
+import conexion.conexion;
+
 public class ventana_principal extends JFrame {
 
 	private JPanel contentPane;
@@ -47,10 +62,15 @@ public class ventana_principal extends JFrame {
 	public JButton registroCargo;
 	public JButton registroDeduccion;
 	public JButton registroBonificacion;
+	public JButton btnInformacionEmpresa;
 	public JButton registroHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
 	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
+
+	public empresa clase;
+	public consultas_empresa consulta;
+	public registro_empresa formulario;
 
 	public ventana_principal() {
 		setResizable(false);
@@ -64,6 +84,7 @@ public class ventana_principal extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
+		lblCanalCoffee.setForeground(Color.BLACK);
 		lblCanalCoffee.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCanalCoffee.setBounds(420, 219, 252, 19);
 		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
@@ -78,9 +99,13 @@ public class ventana_principal extends JFrame {
 				logo.getImage().getScaledInstance(lblEmpresa.getWidth(), lblEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpresa.setIcon(icono);
 
-		JButton lblInformacionEmpresa = new JButton("Mas Informacion de la empresa?");
-		lblInformacionEmpresa.addActionListener(new ActionListener() {
-			@Override
+		btnInformacionEmpresa = new JButton("Mas Informacion de la empresa?");
+		btnInformacionEmpresa.setBackground(Color.WHITE);
+		btnInformacionEmpresa.setBounds(420, 428, 252, 23);
+		btnInformacionEmpresa.setForeground(Color.BLACK);
+		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		contentPane.add(btnInformacionEmpresa);
+		btnInformacionEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				empresa clase = new empresa();
 				consultas_empresa consulta = new consultas_empresa();
@@ -89,16 +114,10 @@ public class ventana_principal extends JFrame {
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.mostrarEmpresa();
-				formulario.btnActualizarEmpresa.setVisible(true);
-				formulario.btnGuardarEmpresa.setVisible(false);
 				dispose();
 			}
 		});
-		lblInformacionEmpresa.setBackground(Color.WHITE);
-		lblInformacionEmpresa.setBounds(420, 428, 252, 23);
-		lblInformacionEmpresa.setForeground(Color.BLACK);
-		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		contentPane.add(lblInformacionEmpresa);
+		
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
@@ -493,25 +512,25 @@ public class ventana_principal extends JFrame {
 		lbl_fechaSistema.setBackground(Color.WHITE);
 		lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fechaSistema.setText(getFecha());
-		
+
 		JPanel panel_7 = new JPanel();
 		panel_7.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_7.setBackground(Color.WHITE);
 		panel_7.setBounds(410, 219, 274, 241);
 		contentPane.add(panel_7);
 		panel_7.setLayout(null);
-		
+
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_8.setBackground(Color.WHITE);
 		panel_8.setBounds(21, 11, 379, 34);
 		contentPane.add(panel_8);
-		
-				JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
-				panel_8.add(lblBienvenidoAlSistema);
-				lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
-				lblBienvenidoAlSistema.setForeground(Color.BLACK);
-				lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
+
+		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
+		panel_8.add(lblBienvenidoAlSistema);
+		lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBienvenidoAlSistema.setForeground(Color.BLACK);
+		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 
 	}
 
@@ -556,4 +575,5 @@ public class ventana_principal extends JFrame {
 		date = cal.getTime();
 		return df.format(date);
 	}
+
 }

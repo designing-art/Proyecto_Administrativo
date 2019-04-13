@@ -5,13 +5,16 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Timer;
@@ -19,9 +22,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
+
+import clases.empresa;
+import consultas.consultas_empresa;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
@@ -32,7 +39,10 @@ public class registro_empresa extends JFrame {
 	public PlaceHolder pista;
 	public JButton btnActualizarEmpresa;
 	public JButton btnGuardarEmpresa;
-
+	public JButton btnSubirFotoEmpresa; 
+	public JButton btnSubirLogoEmpresa; 
+	public JLabel lblFotoEmpresa;
+	public JLabel lblLogoEmpresa;
 	public JPanel contentPane;
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
@@ -113,22 +123,27 @@ public class registro_empresa extends JFrame {
 		btnActualizarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarEmpresa.setBackground(new Color(60, 179, 113));
 
-		JLabel label_1 = new JLabel();
-		label_1.setBounds(27, 236, 164, 129);
-		panel.add(label_1);
+		lblFotoEmpresa = new JLabel();
+		lblFotoEmpresa.setBounds(27, 236, 164, 129);
+		panel.add(lblFotoEmpresa);
 		final ImageIcon logo00 = new ImageIcon(
-				logoEmpresa.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
-		label_1.setIcon(logo00);
+				logoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(), lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoEmpresa.setIcon(logo00);
 
 		JButton button_2 = new JButton("Ver");
 		button_2.setBounds(203, 280, 83, 23);
 		panel.add(button_2);
 		button_2.setBackground(Color.WHITE);
 
-		JButton button = new JButton("Subir");
-		button.setBounds(203, 246, 83, 23);
-		panel.add(button);
-		button.setBackground(new Color(250, 128, 114));
+		btnSubirFotoEmpresa = new JButton("Subir");
+		btnSubirFotoEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selecionarFoto();
+			}
+		});
+		btnSubirFotoEmpresa.setBounds(203, 246, 83, 23);
+		panel.add(btnSubirFotoEmpresa);
+		btnSubirFotoEmpresa.setBackground(new Color(250, 128, 114));
 
 		txtDireccionFotoEmpresa = new JTextField();
 		txtDireccionFotoEmpresa.setBounds(28, 195, 258, 20);
@@ -141,22 +156,27 @@ public class registro_empresa extends JFrame {
 		panel.add(lblFotografiaDelLocal);
 		lblFotografiaDelLocal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JLabel label_5 = new JLabel();
-		label_5.setBounds(27, 55, 164, 129);
-		panel.add(label_5);
+		lblLogoEmpresa = new JLabel();
+		lblLogoEmpresa.setBounds(27, 55, 164, 129);
+		panel.add(lblLogoEmpresa);
 		final ImageIcon logo5 = new ImageIcon(
-				logoCanal.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-		label_5.setIcon(logo5);
+				logoCanal.getImage().getScaledInstance(lblLogoEmpresa.getWidth(), lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		lblLogoEmpresa.setIcon(logo5);
 
 		JButton btnVer = new JButton("Ver");
 		btnVer.setBounds(203, 99, 83, 23);
 		panel.add(btnVer);
 		btnVer.setBackground(Color.WHITE);
 
-		JButton button_1 = new JButton("Subir");
-		button_1.setBounds(203, 65, 83, 23);
-		panel.add(button_1);
-		button_1.setBackground(new Color(250, 128, 114));
+		btnSubirLogoEmpresa = new JButton("Subir");
+		btnSubirLogoEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selecionarLogo();
+			}
+		});
+		btnSubirLogoEmpresa.setBounds(203, 65, 83, 23);
+		panel.add(btnSubirLogoEmpresa);
+		btnSubirLogoEmpresa.setBackground(new Color(250, 128, 114));
 
 		txtDireccionLogoEmpresa = new JTextField();
 		txtDireccionLogoEmpresa.setBounds(27, 11, 258, 20);
@@ -286,11 +306,11 @@ public class registro_empresa extends JFrame {
 
 		txtCodigoEmpresa = new JTextField();
 		txtCodigoEmpresa.setBounds(10, 373, 50, 20);
-		panel_1.add(txtCodigoEmpresa);
 		txtCodigoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCodigoEmpresa.setEditable(false);
 		txtCodigoEmpresa.setColumns(10);
+		panel_1.add(txtCodigoEmpresa);
 		
 				JLabel lblLibreta = new JLabel();
 				lblLibreta.setBounds(0, -18, 740, 494);
@@ -318,6 +338,68 @@ public class registro_empresa extends JFrame {
 		});
 
 	}
+	
+	public void mostrarEmpresa() {
+		consultas_empresa consulta = new consultas_empresa();
+		empresa clase = new  empresa();
+		if (consulta.buscar(clase)) {
+			txtCodigoEmpresa.setText(String.valueOf(clase.getId_empresa()));
+			txtNombreEmpresa.setText(String.valueOf(clase.getNombre_empresa()));
+			txtDireccionEmpresa.setText(String.valueOf(clase.getDireccion_empresa()));
+			txtTelefonoEmpresa.setText(String.valueOf(clase.getTelefono_empresa()));
+			txtRTNempresa.setText(String.valueOf(clase.getRtn_empresa()));
+			txtDireccionLogoEmpresa.setText(String.valueOf(clase.getDireccion_logo_empresa()));
+			txtDireccionFotoEmpresa.setText(String.valueOf(clase.getDireccion_foto_empresa()));
+			txtCorreoEmpresa.setText(String.valueOf(clase.getCorreo_empresa()));
+			txtCuentaEmpresa.setText(String.valueOf(clase.getCuenta_bancaria_empresa()));
+		} else {
+			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
+			JOptionPane.showMessageDialog(null, "Por favor ingrese los datos de la empresa.");
+			btnGuardarEmpresa.setVisible(true);
+			txtDireccionFotoEmpresa.setVisible(true);
+			txtDireccionLogoEmpresa.setVisible(true);
+			btnSubirFotoEmpresa.setVisible(true);
+			btnSubirFotoEmpresa.setVisible(true);
+		}
+	}
+	
+	public void selecionarFoto() {
+		JFileChooser archivo = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
+				"jpeg");
+		archivo.addChoosableFileFilter(filtro);
+		archivo.setDialogTitle("Abrir Archivo");
+		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		archivo.setCurrentDirectory(ruta);
+		int ventana = archivo.showOpenDialog(null);
+		if (ventana == JFileChooser.APPROVE_OPTION) {
+			File file = archivo.getSelectedFile();
+			txtDireccionFotoEmpresa.setText(String.valueOf(file));
+			Image foto = getToolkit().getImage(txtDireccionFotoEmpresa.getText());
+			foto = foto.getScaledInstance(lblFotoEmpresa.getHeight(), lblFotoEmpresa.getWidth(),
+					Image.SCALE_DEFAULT);
+			lblFotoEmpresa.setIcon(new ImageIcon(foto));
+		}
+	}
+	
+	public void selecionarLogo() {
+		JFileChooser archivo = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
+				"jpeg");
+		archivo.addChoosableFileFilter(filtro);
+		archivo.setDialogTitle("Abrir Archivo");
+		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		archivo.setCurrentDirectory(ruta);
+		int ventana = archivo.showOpenDialog(null);
+		if (ventana == JFileChooser.APPROVE_OPTION) {
+			File file = archivo.getSelectedFile();
+			txtDireccionLogoEmpresa.setText(String.valueOf(file));
+			Image foto = getToolkit().getImage(txtDireccionLogoEmpresa.getText());
+			foto = foto.getScaledInstance(lblLogoEmpresa.getHeight(), lblLogoEmpresa.getWidth(),
+					Image.SCALE_DEFAULT);
+			lblLogoEmpresa.setIcon(new ImageIcon(foto));
+		}
+	}
 
 	public void goToURL(String URL) {
 		if (java.awt.Desktop.isDesktopSupported()) {
@@ -332,10 +414,5 @@ public class registro_empresa extends JFrame {
 				}
 			}
 		}
-	}
-
-	public void mostrarEmpresa() {
-		
-		
 	}
 }

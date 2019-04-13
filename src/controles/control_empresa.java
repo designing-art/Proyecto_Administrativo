@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import clases.empresa;
 import consultas.consultas_empresa;
 import formularios.registro_empresa;
+import formularios.ventana_principal;
 
 public class control_empresa implements ActionListener {
 
@@ -51,6 +52,15 @@ public class control_empresa implements ActionListener {
 				
 				if (consulta.insertar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! se guardo la informacion de la empresa!");
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtNombreEmpresa.setEditable(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 				}
@@ -69,7 +79,7 @@ public class control_empresa implements ActionListener {
 					||formulario.txtCorreoEmpresa.getText().isEmpty()
 					||formulario.txtCuentaEmpresa.getText().isEmpty()) {
 				
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la informacion.");
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la informacion.");
 
 			} else {
 
@@ -87,7 +97,7 @@ public class control_empresa implements ActionListener {
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! se actualizo la informacion de la empresa!");
 				} else {
-					JOptionPane.showMessageDialog(null, "Error! datos no registrados");
+					JOptionPane.showMessageDialog(null, "Error! datos no actualizados.");
 				}
 
 			}

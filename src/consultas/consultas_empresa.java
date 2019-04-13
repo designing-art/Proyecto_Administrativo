@@ -84,10 +84,9 @@ public class consultas_empresa extends conexion {
         ResultSet rs = null;
         Connection con = getConexion();
 
-        String sql = "SELECT * FROM empresa WHERE id_empresa=? ";
+        String sql = "SELECT * FROM empresa WHERE id_empresa = 1 ";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, empresa.getId_empresa());
             rs = ps.executeQuery();
             if(rs.next())
             {
