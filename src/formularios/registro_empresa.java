@@ -49,7 +49,7 @@ import javax.swing.border.BevelBorder;
 public class registro_empresa extends JFrame {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
-	public JButton btnActualizarContrato;
+	public JButton btnActualizarEmpresa;
 
 	public JPanel contentPane;
 
@@ -63,13 +63,13 @@ public class registro_empresa extends JFrame {
 	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/material/logof.jpg"));
 	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/material/logoy.jpg"));
 	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/material/logow.jpg"));
-	private JTextField textField;
+	private JTextField txtCodigoEmpresa;
 	private JTextField txtNombreEmpresa;
-	private JTextField textField_3;
+	private JTextField txtDireccionLogoEmpresa;
 	private JTextField txtTelefonoEmpresa;
 	private JTextField txtRTNempresa;
-	private JTextField txtCorreo;
-	private JTextField textField_2;
+	private JTextField txtCorreoEmpresa;
+	private JTextField txtDireccionFotoEmpresa;
 
 	public registro_empresa() {
 		setType(Type.UTILITY);
@@ -117,17 +117,17 @@ public class registro_empresa extends JFrame {
 		panelRegistro.add(panel);
 		panel.setLayout(null);
 
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(10, 375, 99, 23);
-		panel.add(btnGuardar);
-		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardar.setBackground(new Color(60, 179, 113));
+		JButton btnGuardarEmpresa = new JButton("Guardar");
+		btnGuardarEmpresa.setBounds(27, 375, 99, 23);
+		panel.add(btnGuardarEmpresa);
+		btnGuardarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarEmpresa.setBackground(new Color(60, 179, 113));
 
-		btnActualizarContrato = new JButton("Editar");
-		btnActualizarContrato.setBounds(200, 375, 99, 23);
-		panel.add(btnActualizarContrato);
-		btnActualizarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarContrato.setBackground(new Color(60, 179, 113));
+		btnActualizarEmpresa = new JButton("Editar");
+		btnActualizarEmpresa.setBounds(187, 375, 99, 23);
+		panel.add(btnActualizarEmpresa);
+		btnActualizarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarEmpresa.setBackground(new Color(60, 179, 113));
 
 		JLabel label_1 = new JLabel();
 		label_1.setBounds(27, 236, 164, 129);
@@ -146,11 +146,11 @@ public class registro_empresa extends JFrame {
 		panel.add(button);
 		button.setBackground(new Color(250, 128, 114));
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(28, 195, 258, 20);
-		panel.add(textField_2);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
+		txtDireccionFotoEmpresa = new JTextField();
+		txtDireccionFotoEmpresa.setBounds(28, 195, 258, 20);
+		panel.add(txtDireccionFotoEmpresa);
+		txtDireccionFotoEmpresa.setEditable(false);
+		txtDireccionFotoEmpresa.setColumns(10);
 
 		JLabel lblFotografiaDelLocal = new JLabel("Fotografia del local de la empresa.");
 		lblFotografiaDelLocal.setBounds(27, 213, 258, 17);
@@ -174,11 +174,11 @@ public class registro_empresa extends JFrame {
 		panel.add(button_1);
 		button_1.setBackground(new Color(250, 128, 114));
 
-		textField_3 = new JTextField();
-		textField_3.setBounds(27, 11, 258, 20);
-		panel.add(textField_3);
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
+		txtDireccionLogoEmpresa = new JTextField();
+		txtDireccionLogoEmpresa.setBounds(27, 11, 258, 20);
+		panel.add(txtDireccionLogoEmpresa);
+		txtDireccionLogoEmpresa.setEditable(false);
+		txtDireccionLogoEmpresa.setColumns(10);
 
 		JLabel lblLogoOficialDe = new JLabel("Logo Oficial de la empresa.");
 		lblLogoOficialDe.setBounds(27, 30, 259, 17);
@@ -218,8 +218,8 @@ public class registro_empresa extends JFrame {
 		scrollPane.setBounds(93, 61, 210, 44);
 		panel_1.add(scrollPane);
 
-		JTextArea txtDireccion = new JTextArea();
-		scrollPane.setViewportView(txtDireccion);
+		JTextArea txtDireccionEmpresa = new JTextArea();
+		scrollPane.setViewportView(txtDireccionEmpresa);
 
 		JLabel lblTelefono = new JLabel("Telefono :");
 		lblTelefono.setBounds(10, 119, 83, 14);
@@ -245,12 +245,12 @@ public class registro_empresa extends JFrame {
 		txtRTNempresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtRTNempresa.setColumns(10);
 
-		txtCorreo = new JTextField();
-		txtCorreo.setBounds(93, 172, 210, 20);
-		panel_1.add(txtCorreo);
-		txtCorreo.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtCorreo.setColumns(10);
+		txtCorreoEmpresa = new JTextField();
+		txtCorreoEmpresa.setBounds(93, 172, 210, 20);
+		panel_1.add(txtCorreoEmpresa);
+		txtCorreoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCorreoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtCorreoEmpresa.setColumns(10);
 
 		JLabel lblCorreo = new JLabel("Correo :");
 		lblCorreo.setBounds(10, 175, 83, 14);
@@ -300,13 +300,13 @@ public class registro_empresa extends JFrame {
 		panel_1.add(lblRedesSociales);
 		lblRedesSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		textField = new JTextField();
-		textField.setBounds(10, 373, 50, 20);
-		panel_1.add(textField);
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		textField.setEditable(false);
-		textField.setColumns(10);
+		txtCodigoEmpresa = new JTextField();
+		txtCodigoEmpresa.setBounds(10, 373, 50, 20);
+		panel_1.add(txtCodigoEmpresa);
+		txtCodigoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCodigoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtCodigoEmpresa.setEditable(false);
+		txtCodigoEmpresa.setColumns(10);
 		
 				JLabel lblLibreta = new JLabel();
 				lblLibreta.setBounds(0, -18, 740, 494);
