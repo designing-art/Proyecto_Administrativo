@@ -50,6 +50,7 @@ public class registro_empresa extends JFrame {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
 	public JButton btnActualizarEmpresa;
+	public JButton btnGuardarEmpresa;
 
 	public JPanel contentPane;
 
@@ -63,13 +64,15 @@ public class registro_empresa extends JFrame {
 	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/material/logof.jpg"));
 	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/material/logoy.jpg"));
 	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/material/logow.jpg"));
-	private JTextField txtCodigoEmpresa;
-	private JTextField txtNombreEmpresa;
-	private JTextField txtDireccionLogoEmpresa;
-	private JTextField txtTelefonoEmpresa;
-	private JTextField txtRTNempresa;
-	private JTextField txtCorreoEmpresa;
-	private JTextField txtDireccionFotoEmpresa;
+	public JTextField txtCodigoEmpresa;
+	public JTextField txtNombreEmpresa;
+	public JTextField txtDireccionLogoEmpresa;
+	public JTextField txtTelefonoEmpresa;
+	public JTextField txtRTNempresa;
+	public JTextField txtCorreoEmpresa;
+	public JTextField txtDireccionFotoEmpresa;
+	public JTextArea txtDireccionEmpresa;
+	public JTextArea txtCuentaEmpresa;
 
 	public registro_empresa() {
 		setType(Type.UTILITY);
@@ -117,7 +120,7 @@ public class registro_empresa extends JFrame {
 		panelRegistro.add(panel);
 		panel.setLayout(null);
 
-		JButton btnGuardarEmpresa = new JButton("Guardar");
+		btnGuardarEmpresa = new JButton("Guardar");
 		btnGuardarEmpresa.setBounds(27, 375, 99, 23);
 		panel.add(btnGuardarEmpresa);
 		btnGuardarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -218,7 +221,7 @@ public class registro_empresa extends JFrame {
 		scrollPane.setBounds(93, 61, 210, 44);
 		panel_1.add(scrollPane);
 
-		JTextArea txtDireccionEmpresa = new JTextArea();
+		txtDireccionEmpresa = new JTextArea();
 		scrollPane.setViewportView(txtDireccionEmpresa);
 
 		JLabel lblTelefono = new JLabel("Telefono :");
@@ -266,7 +269,7 @@ public class registro_empresa extends JFrame {
 		scrollPane_1.setBounds(93, 203, 210, 106);
 		panel_1.add(scrollPane_1);
 
-		JTextArea txtCuentaEmpresa = new JTextArea();
+		txtCuentaEmpresa = new JTextArea();
 		scrollPane_1.setViewportView(txtCuentaEmpresa);
 
 		JButton btnFacebook = new JButton("");
