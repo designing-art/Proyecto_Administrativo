@@ -40,6 +40,7 @@ import controles.control_cargo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import java.awt.Window.Type;
 
 public class registro_cargos extends JFrame {
 	public JComboBox<?> cbxTipoCargo;
@@ -69,7 +70,6 @@ public class registro_cargos extends JFrame {
 	String filtroCodigo;
 
 	public registro_cargos() {
-		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
@@ -78,6 +78,7 @@ public class registro_cargos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
 		final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));

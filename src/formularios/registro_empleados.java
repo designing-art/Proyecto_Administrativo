@@ -136,7 +136,6 @@ public class registro_empleados extends JFrame {
 	 * Create the frame.
 	 */
 	public registro_empleados() {
-		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1250, 720);
@@ -145,6 +144,7 @@ public class registro_empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon icono1 = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon lista_empleados = new ImageIcon(getClass().getResource("/material/lista_empleados.png"));

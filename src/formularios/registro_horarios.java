@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
@@ -80,6 +82,7 @@ public class registro_horarios extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 		
 		JTextField txtidhorario = new JTextField();
 		contentPane.setLayout(null);

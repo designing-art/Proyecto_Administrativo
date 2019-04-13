@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
@@ -39,6 +41,7 @@ import conexion.conexion;
 import controles.control_contrato_empleado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
+import java.awt.Window.Type;
 
 public class registro_contratos_empleados extends JFrame {
 	public JComboBox<?> cbxTiempoContratoEmpleado;
@@ -74,7 +77,6 @@ public class registro_contratos_empleados extends JFrame {
 	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
 
 	public registro_contratos_empleados() {
-		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
@@ -83,6 +85,7 @@ public class registro_contratos_empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
 		JButton btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

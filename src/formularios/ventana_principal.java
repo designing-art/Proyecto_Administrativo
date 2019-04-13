@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import clases.cargo;
@@ -52,6 +54,7 @@ import java.sql.SQLException;
 
 import clases.empresa;
 import conexion.conexion;
+import java.awt.Window.Type;
 
 public class ventana_principal extends JFrame {
 
@@ -73,8 +76,8 @@ public class ventana_principal extends JFrame {
 	public registro_empresa formulario;
 
 	public ventana_principal() {
+		setType(Type.POPUP);
 		setResizable(false);
-		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -82,6 +85,7 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
 		lblCanalCoffee.setForeground(Color.BLACK);
