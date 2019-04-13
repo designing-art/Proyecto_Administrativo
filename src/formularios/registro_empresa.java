@@ -1,47 +1,28 @@
 package formularios;
 
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.InputMap;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.RowFilter;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
-import conexion.conexion;
-import controles.control_contrato_empleado;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
@@ -318,16 +299,19 @@ public class registro_empresa extends JFrame {
 						icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 				lblLibreta.setIcon(logo3);
 		btnWhatsapp.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				goToURL("https://www.whatsapp.com/");
 			}
 		});
 		btnYoutube.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				goToURL("https://www.youtube.com/");
 			}
 		});
 		btnFacebook.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				goToURL("https://es-la.facebook.com/");
 			}
@@ -348,5 +332,10 @@ public class registro_empresa extends JFrame {
 				}
 			}
 		}
+	}
+
+	public void mostrarEmpresa() {
+		
+		
 	}
 }

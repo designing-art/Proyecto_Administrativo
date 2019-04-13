@@ -1,9 +1,7 @@
 package formularios;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
@@ -12,41 +10,33 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.border.LineBorder;
-
 import clases.cargo;
 import clases.contrato_empleado;
 import clases.empleado;
+import clases.empresa;
 import clases.horario;
 import consultas.consultas_cargo;
 import consultas.consultas_contrato_empleado;
 import consultas.consultas_empleado;
+import consultas.consultas_empresa;
 import consultas.consultas_horario;
 import controles.control_cargo;
 import controles.control_contrato_empleado;
 import controles.control_empleado;
+import controles.control_empresa;
 import controles.control_horario;
 
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
-import javax.swing.border.MatteBorder;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.CompoundBorder;
 
 public class ventana_principal extends JFrame {
 
@@ -69,13 +59,14 @@ public class ventana_principal extends JFrame {
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
-		lblCanalCoffee.setBounds(410, 206, 274, 32);
-		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lblCanalCoffee.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCanalCoffee.setBounds(420, 219, 252, 19);
+		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
 		contentPane.add(lblCanalCoffee);
 
 		JLabel lblEmpresa = new JLabel();
@@ -87,23 +78,24 @@ public class ventana_principal extends JFrame {
 				logo.getImage().getScaledInstance(lblEmpresa.getWidth(), lblEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpresa.setIcon(icono);
 
-		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
-		lblBienvenidoAlSistema.setBounds(21, 0, 379, 32);
-		lblBienvenidoAlSistema.setForeground(Color.BLACK);
-		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		contentPane.add(lblBienvenidoAlSistema);
-
-		JButton lblInformacionEmpresa = new JButton("\u00BFmas informacion sobre la empresa?");
+		JButton lblInformacionEmpresa = new JButton("Mas Informacion de la empresa?");
 		lblInformacionEmpresa.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				empresa clase = new empresa();
+				consultas_empresa consulta = new consultas_empresa();
 				registro_empresa formulario = new registro_empresa();
+				control_empresa control = new control_empresa(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
+				formulario.mostrarEmpresa();
+				formulario.btnActualizarEmpresa.setVisible(true);
+				formulario.btnGuardarEmpresa.setVisible(false);
 				dispose();
 			}
 		});
-		lblInformacionEmpresa.setBackground(new Color(64, 224, 208));
-		lblInformacionEmpresa.setBounds(410, 428, 274, 23);
+		lblInformacionEmpresa.setBackground(Color.WHITE);
+		lblInformacionEmpresa.setBounds(420, 428, 252, 23);
 		lblInformacionEmpresa.setForeground(Color.BLACK);
 		lblInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(lblInformacionEmpresa);
@@ -113,13 +105,13 @@ public class ventana_principal extends JFrame {
 		JLabel lblMenuDeOpciones = new JLabel("Menu de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.BLACK);
 		lblMenuDeOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblMenuDeOpciones.setBounds(146, 72, 145, 14);
+		lblMenuDeOpciones.setBounds(146, 77, 145, 23);
 		contentPane.add(lblMenuDeOpciones);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(46, 88, 327, 92);
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBounds(46, 99, 327, 92);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -132,6 +124,7 @@ public class ventana_principal extends JFrame {
 
 		registroContrato = new JButton("Contratos");
 		registroContrato.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				contrato_empleado clase = new contrato_empleado();
 				consultas_contrato_empleado consulta = new consultas_contrato_empleado();
@@ -166,6 +159,7 @@ public class ventana_principal extends JFrame {
 		registroEmpleado.setBounds(10, 19, 97, 21);
 		panel.add(registroEmpleado);
 		registroEmpleado.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();
@@ -194,6 +188,7 @@ public class ventana_principal extends JFrame {
 		registroCargo.setBounds(117, 19, 97, 21);
 		panel.add(registroCargo);
 		registroCargo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cargo clase = new cargo();
 				consultas_cargo consulta = new consultas_cargo();
@@ -237,6 +232,7 @@ public class ventana_principal extends JFrame {
 		registroHorario.setBounds(224, 19, 97, 21);
 		panel.add(registroHorario);
 		registroHorario.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				horario clase = new horario();
 				consultas_horario consulta = new consultas_horario();
@@ -261,19 +257,19 @@ public class ventana_principal extends JFrame {
 
 		JLabel label_2 = new JLabel("Empleados :");
 		label_2.setForeground(Color.BLACK);
-		label_2.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_2.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_2.setBounds(10, 0, 97, 21);
 		panel.add(label_2);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(46, 180, 327, 69);
+		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_1.setBounds(46, 192, 327, 72);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
 		JLabel label_3 = new JLabel("Clientes :");
 		label_3.setForeground(Color.BLACK);
-		label_3.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_3.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_3.setBounds(10, 0, 97, 21);
 		panel_1.add(label_3);
 
@@ -307,14 +303,14 @@ public class ventana_principal extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_2.setBounds(46, 249, 327, 92);
+		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_2.setBounds(46, 263, 327, 92);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
 		JLabel label_4 = new JLabel("Finanzas :");
 		label_4.setForeground(Color.BLACK);
-		label_4.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_4.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_4.setBounds(10, 0, 174, 21);
 		panel_2.add(label_4);
 
@@ -334,7 +330,7 @@ public class ventana_principal extends JFrame {
 
 		JLabel label_5 = new JLabel("Facturas :");
 		label_5.setForeground(Color.BLACK);
-		label_5.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_5.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_5.setBounds(10, 40, 97, 21);
 		panel_2.add(label_5);
 
@@ -353,14 +349,14 @@ public class ventana_principal extends JFrame {
 		panel_2.add(button_14);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_3.setBounds(46, 340, 327, 83);
+		panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_3.setBounds(46, 354, 327, 83);
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 
 		JLabel label_6 = new JLabel("Inventario :");
 		label_6.setForeground(Color.BLACK);
-		label_6.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_6.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_6.setBounds(10, 0, 174, 21);
 		panel_3.add(label_6);
 
@@ -387,7 +383,7 @@ public class ventana_principal extends JFrame {
 
 		JLabel label_7 = new JLabel("Reportes :");
 		label_7.setForeground(Color.BLACK);
-		label_7.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		label_7.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_7.setBounds(132, 39, 87, 21);
 		panel_3.add(label_7);
 
@@ -399,7 +395,7 @@ public class ventana_principal extends JFrame {
 		panel_3.add(button_18);
 
 		JLabel lblMenuOpciones = new JLabel();
-		lblMenuOpciones.setBounds(21, 29, 379, 431);
+		lblMenuOpciones.setBounds(21, 43, 379, 417);
 		contentPane.add(lblMenuOpciones);
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
 				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
@@ -470,7 +466,7 @@ public class ventana_principal extends JFrame {
 
 		JLabel lblDatosDeUsuario = new JLabel("DATOS DEL USUARIO");
 		lblDatosDeUsuario.setForeground(Color.BLACK);
-		lblDatosDeUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblDatosDeUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		lblDatosDeUsuario.setBounds(10, 0, 144, 28);
 		panel_5.add(lblDatosDeUsuario);
 
@@ -497,11 +493,31 @@ public class ventana_principal extends JFrame {
 		lbl_fechaSistema.setBackground(Color.WHITE);
 		lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fechaSistema.setText(getFecha());
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_7.setBackground(Color.WHITE);
+		panel_7.setBounds(410, 219, 274, 241);
+		contentPane.add(panel_7);
+		panel_7.setLayout(null);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_8.setBackground(Color.WHITE);
+		panel_8.setBounds(21, 11, 379, 34);
+		contentPane.add(panel_8);
+		
+				JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
+				panel_8.add(lblBienvenidoAlSistema);
+				lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
+				lblBienvenidoAlSistema.setForeground(Color.BLACK);
+				lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 
 	}
 
 	Timer time = new Timer();
 	public TimerTask tarea = new TimerTask() {
+		@Override
 		public void run() {
 			Calendar calendario = new GregorianCalendar();
 			Date fechaHoraActual = new Date();

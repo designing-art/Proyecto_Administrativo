@@ -1,6 +1,5 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -27,6 +26,7 @@ public class registro_sar extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					registro_sar frame = new registro_sar();

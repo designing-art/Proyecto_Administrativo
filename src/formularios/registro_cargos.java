@@ -10,14 +10,15 @@ import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -26,22 +27,14 @@ import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.MaskFormatter;
-
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import com.placeholder.PlaceHolder;
 
-import clases.cargo;
 import conexion.conexion;
-import consultas.consultas_cargo;
 import controles.control_cargo;
 
 import javax.swing.DefaultComboBoxModel;
@@ -96,6 +89,7 @@ public class registro_cargos extends JFrame {
 		btnAtras.setBounds(717, 20, 102, 23);
 		contentPane.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);
@@ -113,7 +107,7 @@ public class registro_cargos extends JFrame {
 		scrollFunciones = new JScrollPane();
 
 		JPanel panelRegistro = new JPanel();
-		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelRegistro.setBounds(28, 60, 341, 450);
 		contentPane.add(panelRegistro);
 		panelRegistro.setLayout(null);
@@ -146,9 +140,9 @@ public class registro_cargos extends JFrame {
 		txtSueldoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtSueldoCargo.setBounds(188, 169, 128, 20);
 		txtSueldoCargo.setColumns(10);
-		txtSueldoCargo.setHorizontalAlignment(JTextField.RIGHT);
+		txtSueldoCargo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelRegistro.add(txtSueldoCargo);
-		InputMap map2 = txtSueldoCargo.getInputMap(txtSueldoCargo.WHEN_FOCUSED);
+		InputMap map2 = txtSueldoCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtSueldoCargo.addKeyListener(new KeyListener() {
@@ -159,9 +153,11 @@ public class registro_cargos extends JFrame {
 					ke.consume();
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -170,10 +166,10 @@ public class registro_cargos extends JFrame {
 		txtHoraExtraCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtHoraExtraCargo.setBounds(188, 201, 128, 20);
 		panelRegistro.add(txtHoraExtraCargo);
-		InputMap map = txtHoraExtraCargo.getInputMap(txtHoraExtraCargo.WHEN_FOCUSED);
+		InputMap map = txtHoraExtraCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtHoraExtraCargo.setColumns(10);
-		txtHoraExtraCargo.setHorizontalAlignment(JTextField.RIGHT);
+		txtHoraExtraCargo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtHoraExtraCargo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -182,9 +178,11 @@ public class registro_cargos extends JFrame {
 					ke.consume();
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -242,7 +240,7 @@ public class registro_cargos extends JFrame {
 		txtFuncionesCargo = new JTextArea();
 		txtFuncionesCargo.setBackground(Color.WHITE);
 		scrollPane.setViewportView(txtFuncionesCargo);
-		InputMap map5 = txtFuncionesCargo.getInputMap(txtFuncionesCargo.WHEN_FOCUSED);
+		InputMap map5 = txtFuncionesCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtNombreCargo = new JTextField();
@@ -251,7 +249,7 @@ public class registro_cargos extends JFrame {
 		txtNombreCargo.setColumns(10);
 		txtNombreCargo.setBounds(142, 141, 174, 20);
 		panelRegistro.add(txtNombreCargo);
-		InputMap map3 = txtNombreCargo.getInputMap(txtNombreCargo.WHEN_FOCUSED);
+		InputMap map3 = txtNombreCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtNombreCargo.addKeyListener(new KeyListener() {
@@ -264,9 +262,11 @@ public class registro_cargos extends JFrame {
 				}
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -298,7 +298,7 @@ public class registro_cargos extends JFrame {
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
-		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelTablaCargos.setBackground(Color.WHITE);
 		panelTablaCargos.setBounds(388, 61, 431, 449);
 		contentPane.add(panelTablaCargos);
@@ -319,7 +319,7 @@ public class registro_cargos extends JFrame {
 		txtBusquedaCargos.setColumns(10);
 		txtBusquedaCargos.setBounds(119, 64, 228, 21);
 		panelTablaCargos.add(txtBusquedaCargos);
-		InputMap map4 = txtBusquedaCargos.getInputMap(txtBusquedaCargos.WHEN_FOCUSED);
+		InputMap map4 = txtBusquedaCargos.getInputMap(JComponent.WHEN_FOCUSED);
 		txtBusquedaCargos.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -327,10 +327,12 @@ public class registro_cargos extends JFrame {
 				tablaCargos.setRowSorter(trsfiltroCodigo);
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 				String cadena = (txtBusquedaCargos.getText());
 				txtBusquedaCargos.setText(cadena);
@@ -345,7 +347,7 @@ public class registro_cargos extends JFrame {
 		btnBorrarCargo.setBounds(30, 395, 99, 23);
 		panelTablaCargos.add(btnBorrarCargo);
 
-		barraCargos = new JScrollPane(tablaCargos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraCargos = new JScrollPane(tablaCargos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraCargos);
 		barraCargos.setBounds(28, 90, 376, 294);
 

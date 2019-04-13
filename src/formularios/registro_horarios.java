@@ -4,20 +4,19 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -26,23 +25,14 @@ import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.MaskFormatter;
-
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import com.placeholder.PlaceHolder;
 
-import clases.horario;
 import conexion.conexion;
-import consultas.consultas_horario;
 import controles.control_horario;
 
 import javax.swing.DefaultComboBoxModel;
@@ -100,6 +90,7 @@ public class registro_horarios extends JFrame {
 		btnRegresar.setBackground(new Color(255, 127, 80));
 		contentPane.add(btnRegresar);
 		btnRegresar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);
@@ -154,6 +145,7 @@ public class registro_horarios extends JFrame {
 		
 		btnAceptarHorario = new JButton("Aceptar");
 		btnAceptarHorario.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
@@ -207,6 +199,7 @@ public class registro_horarios extends JFrame {
 		btnGuardarHorario.setBackground(new Color(60, 179, 113));
 		btnGuardarHorario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnGuardarHorario.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -236,7 +229,7 @@ public class registro_horarios extends JFrame {
 		
 		JPanel panelTablaHorario = new JPanel();
 		panelTablaHorario.setLayout(null);
-		panelTablaHorario.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panelTablaHorario.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelTablaHorario.setBackground(Color.WHITE);
 		panelTablaHorario.setBounds(386, 59, 440, 401);
 		contentPane.add(panelTablaHorario);
@@ -257,7 +250,7 @@ public class registro_horarios extends JFrame {
 		txtBusquedaHorario.setColumns(10);
 		txtBusquedaHorario.setBounds(128, 63, 219, 21);
 		panelTablaHorario.add(txtBusquedaHorario);
-		InputMap map4 = txtBusquedaHorario.getInputMap(txtBusquedaHorario.WHEN_FOCUSED);
+		InputMap map4 = txtBusquedaHorario.getInputMap(JComponent.WHEN_FOCUSED);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaHorario.addKeyListener(new KeyListener() {
 			
@@ -267,10 +260,12 @@ public class registro_horarios extends JFrame {
 				 tablaHorario.setRowSorter(trsfiltroCodigo);
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 				String cadena = (txtBusquedaHorario.getText());
 				txtBusquedaHorario.setText(cadena);
@@ -288,7 +283,7 @@ public class registro_horarios extends JFrame {
 		panelTablaHorario.add(btnBorrarHorario);
 		
 		
-		barraHorarios = new JScrollPane(tablaHorario, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraHorarios = new JScrollPane(tablaHorario, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		barraHorarios.setBounds(30, 95, 377, 231);
 		panelTablaHorario.add(barraHorarios);
 

@@ -42,6 +42,7 @@ public class control_horario implements ActionListener {
 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		/* Insertar */
 		if (e.getSource() == formularioHorario.btnGuardarHorario) {

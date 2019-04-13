@@ -1,6 +1,5 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -25,6 +24,7 @@ public class registro_permisos extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					registro_permisos frame = new registro_permisos();

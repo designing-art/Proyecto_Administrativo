@@ -1,6 +1,5 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -30,6 +29,7 @@ public class registro_ingresos extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					registro_ingresos frame = new registro_ingresos();
@@ -100,6 +100,7 @@ public class registro_ingresos extends JFrame {
 		
 		JButton btnNuevo = new JButton("NUEVO");
 		btnNuevo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});

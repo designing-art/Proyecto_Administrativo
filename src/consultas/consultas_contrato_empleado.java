@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import clases.contrato_empleado;
-import clases.empleado;
 import conexion.conexion;
 
 public class consultas_contrato_empleado extends conexion {

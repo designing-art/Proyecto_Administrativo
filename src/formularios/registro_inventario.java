@@ -1,6 +1,5 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -10,10 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JProgressBar;
 import javax.swing.JButton;
 
 public class registro_inventario extends JFrame {
@@ -38,6 +34,7 @@ public class registro_inventario extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					registro_inventario frame = new registro_inventario();

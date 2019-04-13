@@ -1,22 +1,20 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
-import java.awt.Window.Type;
 
 public class reportes extends JFrame {
 
@@ -28,6 +26,7 @@ public class reportes extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					reportes frame = new reportes();
@@ -45,7 +44,7 @@ public class reportes extends JFrame {
 	public reportes() {
 		setResizable(false);
 		setType(Type.UTILITY);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 600, 750);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -109,6 +108,7 @@ public class reportes extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(new Color(0, 139, 139));
 		btnCancelar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventana_principal vp = new ventana_principal();
 				vp.setVisible(true);

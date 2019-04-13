@@ -1,9 +1,5 @@
 package controles;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
-
 import clases.deduccion;
 import consultas.cosultas_deduccion;
 import formularios.registro_deducciones;

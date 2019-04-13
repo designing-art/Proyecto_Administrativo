@@ -10,14 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
-
-import com.placeholder.PlaceHolder;
-
 import clases.cargo;
 import conexion.conexion;
 import consultas.consultas_cargo;
@@ -43,6 +38,7 @@ public class control_cargo implements ActionListener {
 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		/* Insertar */
 		if (e.getSource() == formularioCargo.btnGuardarCargo) {

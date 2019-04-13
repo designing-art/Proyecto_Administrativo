@@ -1,28 +1,24 @@
 package formularios;
 
-import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Event;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 
@@ -30,14 +26,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -45,32 +38,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 
-import com.github.sarxos.webcam.Webcam;
 import com.placeholder.PlaceHolder;
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
-import clases.cargo;
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_cargo;
-import consultas.consultas_empleado;
-import controles.control_cargo;
 import controles.control_empleado;
 
 import javax.swing.JScrollPane;
@@ -138,6 +120,7 @@ public class registro_empleados extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					registro_empleados frame = new registro_empleados();
@@ -189,7 +172,7 @@ public class registro_empleados extends JFrame {
 		txtCodigoEmpleado.setEditable(false);
 		txtCodigoEmpleado.setColumns(10);
 		txtCodigoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map9 = txtCodigoEmpleado.getInputMap(txtCodigoEmpleado.WHEN_FOCUSED);
+		InputMap map9 = txtCodigoEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map9.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblNombres = new JLabel("2. Nombres :");
@@ -202,7 +185,7 @@ public class registro_empleados extends JFrame {
 		panel.add(txtNombresEmpleado);
 		txtNombresEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtNombresEmpleado.setColumns(10);
-		InputMap map5 = txtNombresEmpleado.getInputMap(txtNombresEmpleado.WHEN_FOCUSED);
+		InputMap map5 = txtNombresEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtNombresEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNombresEmpleado.addKeyListener(new KeyListener() {
@@ -215,9 +198,11 @@ public class registro_empleados extends JFrame {
 				}
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -226,7 +211,7 @@ public class registro_empleados extends JFrame {
 		lblApellidos.setBounds(39, 142, 83, 14);
 		panel.add(lblApellidos);
 		lblApellidos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		InputMap map6 = lblApellidos.getInputMap(lblApellidos.WHEN_FOCUSED);
+		InputMap map6 = lblApellidos.getInputMap(JComponent.WHEN_FOCUSED);
 		map6.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtApellidosEmpleado = new JTextField();
@@ -235,7 +220,7 @@ public class registro_empleados extends JFrame {
 		txtApellidosEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtApellidosEmpleado.setColumns(10);
 		txtApellidosEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map7 = txtApellidosEmpleado.getInputMap(txtApellidosEmpleado.WHEN_FOCUSED);
+		InputMap map7 = txtApellidosEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map7.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtApellidosEmpleado.addKeyListener(new KeyListener() {
 			@Override
@@ -247,9 +232,11 @@ public class registro_empleados extends JFrame {
 				}
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -271,7 +258,7 @@ public class registro_empleados extends JFrame {
 		txtIdentidadEmpleado.setColumns(10);
 		txtIdentidadEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(txtIdentidadEmpleado);
-		InputMap map2 = txtIdentidadEmpleado.getInputMap(txtIdentidadEmpleado.WHEN_FOCUSED);
+		InputMap map2 = txtIdentidadEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtIdentidadEmpleado.addKeyListener(new KeyListener() {
 			@Override
@@ -281,9 +268,11 @@ public class registro_empleados extends JFrame {
 					ke.consume();
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -323,7 +312,7 @@ public class registro_empleados extends JFrame {
 		txtCorreoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCorreoEmpleado.setColumns(10);
 		txtCorreoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map8 = txtCorreoEmpleado.getInputMap(txtCorreoEmpleado.WHEN_FOCUSED);
+		InputMap map8 = txtCorreoEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblTelefonos = new JLabel("7. Telefono :");
@@ -343,7 +332,7 @@ public class registro_empleados extends JFrame {
 		txtTelefonoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTelefonoEmpleado.setColumns(10);
 		txtTelefonoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map3 = txtTelefonoEmpleado.getInputMap(txtTelefonoEmpleado.WHEN_FOCUSED);
+		InputMap map3 = txtTelefonoEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtTelefonoEmpleado.addKeyListener(new KeyListener() {
 			@Override
@@ -353,9 +342,11 @@ public class registro_empleados extends JFrame {
 					ke.consume();
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -420,7 +411,7 @@ public class registro_empleados extends JFrame {
 		txtNombreReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtNombreReferencia.setColumns(10);
 		txtNombreReferencia.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map14 = txtNombreReferencia.getInputMap(txtNombreReferencia.WHEN_FOCUSED);
+		InputMap map14 = txtNombreReferencia.getInputMap(JComponent.WHEN_FOCUSED);
 		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtNombreReferencia.addKeyListener(new KeyListener() {
 			@Override
@@ -432,9 +423,11 @@ public class registro_empleados extends JFrame {
 				}
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -456,7 +449,7 @@ public class registro_empleados extends JFrame {
 		txtTelefonoReferencia.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTelefonoReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTelefonoReferencia.setColumns(10);
-		InputMap map4 = txtTelefonoReferencia.getInputMap(txtTelefonoReferencia.WHEN_FOCUSED);
+		InputMap map4 = txtTelefonoReferencia.getInputMap(JComponent.WHEN_FOCUSED);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtTelefonoReferencia.addKeyListener(new KeyListener() {
 			@Override
@@ -466,9 +459,11 @@ public class registro_empleados extends JFrame {
 					ke.consume();
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
@@ -490,11 +485,12 @@ public class registro_empleados extends JFrame {
 
 		txtDireccionEmpleado = new JTextArea();
 		scrollPane.setViewportView(txtDireccionEmpleado);
-		InputMap map90 = txtDireccionEmpleado.getInputMap(txtDireccionEmpleado.WHEN_FOCUSED);
+		InputMap map90 = txtDireccionEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map90.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		btnTomarFoto = new JButton("Tomar");
 		btnTomarFoto.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				tomarFoto();
 			}
@@ -505,6 +501,7 @@ public class registro_empleados extends JFrame {
 
 		btnSubirFoto = new JButton("Subir");
 		btnSubirFoto.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				selecionarFoto();
 			}
@@ -532,6 +529,7 @@ public class registro_empleados extends JFrame {
 
 		btnNuevoEmpleado = new JButton("Nuevo");
 		btnNuevoEmpleado.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -551,11 +549,12 @@ public class registro_empleados extends JFrame {
 		txtDireccionFoto.setBounds(354, 166, 179, 20);
 		panel.add(txtDireccionFoto);
 		txtDireccionFoto.setColumns(10);
-		InputMap map10 = txtDireccionFoto.getInputMap(txtDireccionFoto.WHEN_FOCUSED);
+		InputMap map10 = txtDireccionFoto.getInputMap(JComponent.WHEN_FOCUSED);
 		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		btnCalcularEdad = new JButton();
 		btnCalcularEdad.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				calcularEdad();
@@ -614,7 +613,7 @@ public class registro_empleados extends JFrame {
 		txtBusquedaEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaEmpleado.setColumns(10);
 		txtBusquedaEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map41 = txtBusquedaEmpleado.getInputMap(txtBusquedaEmpleado.WHEN_FOCUSED);
+		InputMap map41 = txtBusquedaEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map41.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaEmpleado.addKeyListener(new KeyListener() {
 			@Override
@@ -623,10 +622,12 @@ public class registro_empleados extends JFrame {
 				tablaEmpleados.setRowSorter(trsfiltroCodigoEmpleado);
 			}
 
+			@Override
 			public void keyPressed(KeyEvent ke) {
 
 			}
 
+			@Override
 			public void keyReleased(KeyEvent ke) {
 				String cadena = (txtBusquedaEmpleado.getText());
 				txtBusquedaEmpleado.setText(cadena);
@@ -635,7 +636,7 @@ public class registro_empleados extends JFrame {
 			}
 		});
 		
-		barraTablaEmpleados = new JScrollPane(tablaEmpleados, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraTablaEmpleados = new JScrollPane(tablaEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		barraTablaEmpleados.setBounds(34, 109, 553, 422);
 		panel_1.add(barraTablaEmpleados);
 		
@@ -676,6 +677,7 @@ public class registro_empleados extends JFrame {
 		lblEmpleados.setIcon(logo11);
 		
 		btnRegresar_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);

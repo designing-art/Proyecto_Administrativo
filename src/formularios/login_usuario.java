@@ -1,20 +1,13 @@
 package formularios;
 
-import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Window.Type;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
-
-import clases.usuario;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -37,6 +30,7 @@ public class login_usuario extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					login_usuario frame = new login_usuario();
@@ -63,7 +57,7 @@ public class login_usuario extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(129, 159, 435, 223);
 		contentPane.add(panel);
@@ -109,6 +103,7 @@ public class login_usuario extends JFrame {
 		txtContraseña.setBounds(164, 95, 220, 20);
 		panel.add(txtContraseña);
 		btnIngresar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ingresar();
 			}
@@ -119,6 +114,7 @@ public class login_usuario extends JFrame {
 		btnSalir.setBounds(586, 426, 98, 34);
 		contentPane.add(btnSalir);
 		btnSalir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				salir();
 			}

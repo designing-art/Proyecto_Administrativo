@@ -1,6 +1,5 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -38,6 +37,7 @@ public class registro_clientes extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					registro_clientes frame = new registro_clientes();
@@ -222,6 +222,7 @@ public class registro_clientes extends JFrame {
 		JButton btnRegistrar = new JButton("GUARDAR");
 		btnRegistrar.setBounds(408, 242, 109, 23);
 		btnRegistrar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
@@ -235,6 +236,7 @@ public class registro_clientes extends JFrame {
 		
 		JButton btnBorrar = new JButton("ACTUALIZAR");
 		btnBorrar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -245,6 +247,7 @@ public class registro_clientes extends JFrame {
 		JButton btnSalir = new JButton("SALIR");
 		btnSalir.setBounds(527, 271, 101, 23);
 		btnSalir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});

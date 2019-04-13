@@ -34,7 +34,8 @@ public class control_bonificacion implements ActionListener {
         frmBonificaciones.setLocationRelativeTo(null);
     }
 
-    public void actionPerformed(ActionEvent e) {
+    @Override
+	public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == frmBonificaciones.btnGuardarBonificacion) {
         	modBonificacion.setId_bonificacion(Integer.parseInt(frmBonificaciones.txtCodigoBonificacion.getText()));
