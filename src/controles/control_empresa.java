@@ -1,8 +1,12 @@
 package controles;
 
+import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import clases.empresa;
 import consultas.consultas_empresa;
@@ -61,6 +65,18 @@ public class control_empresa implements ActionListener {
 					formulario.txtNombreEmpresa.setEditable(false);
 					formulario.txtNombreEmpresa.setEditable(false);
 					formulario.txtNombreEmpresa.setEditable(false);
+					String foto = formulario.txtDireccionFotoEmpresa.getText().toString();
+					String logo = formulario.txtDireccionLogoEmpresa.getText().toString();
+					final ImageIcon foto_empresa = new ImageIcon(foto);
+					final ImageIcon logo1 = new ImageIcon(
+							foto_empresa.getImage().getScaledInstance(formulario.lblFotoEmpresa.getWidth(),
+									formulario.lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lblFotoEmpresa.setIcon(logo1);
+					final ImageIcon logo_empresa = new ImageIcon(logo);
+					final ImageIcon logo2 = new ImageIcon(
+							logo_empresa.getImage().getScaledInstance(formulario.lblLogoEmpresa.getWidth(),
+									formulario.lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lblLogoEmpresa.setIcon(logo2);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 				}
@@ -96,6 +112,41 @@ public class control_empresa implements ActionListener {
 				
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! se actualizo la informacion de la empresa!");
+					formulario.txtCodigoEmpresa.setVisible(false);
+					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtDireccionEmpresa.setEditable(false);
+					formulario.txtDireccionEmpresa.setBackground(Color.lightGray);
+					formulario.txtTelefonoEmpresa.setEditable(false);
+					formulario.txtRTNempresa.setEditable(false);
+					formulario.txtDireccionLogoEmpresa.setVisible(false);
+					formulario.txtDireccionFotoEmpresa.setVisible(false);
+					formulario.txtCorreoEmpresa.setEditable(false);
+					formulario.txtCuentaEmpresa.setEditable(false);
+					formulario.txtCuentaEmpresa.setBackground(Color.lightGray);
+
+					formulario.btnActualizarEmpresa.setVisible(false);
+					formulario.btnGuardarEmpresa.setVisible(false);
+					formulario.btnCancelar.setVisible(false);
+					formulario.btnSubirFotoEmpresa.setVisible(false);
+					formulario.btnSubirLogoEmpresa.setVisible(false);
+					formulario.btnVerFotoEmpresa.setVisible(true);
+					formulario.btnVerLogoEmpresa.setVisible(true);
+					formulario.btnCancelar.setVisible(false);
+					
+					formulario.btnActualizarDatos.setVisible(true);
+					
+					String foto = formulario.txtDireccionFotoEmpresa.getText().toString();
+					String logo = formulario.txtDireccionLogoEmpresa.getText().toString();
+					final ImageIcon foto_empresa = new ImageIcon(foto);
+					final ImageIcon logo1 = new ImageIcon(
+							foto_empresa.getImage().getScaledInstance(formulario.lblFotoEmpresa.getWidth(),
+									formulario.lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lblFotoEmpresa.setIcon(logo1);
+					final ImageIcon logo_empresa = new ImageIcon(logo);
+					final ImageIcon logo2 = new ImageIcon(
+							logo_empresa.getImage().getScaledInstance(formulario.lblLogoEmpresa.getWidth(),
+									formulario.lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lblLogoEmpresa.setIcon(logo2);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! datos no actualizados.");
 				}

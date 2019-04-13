@@ -39,8 +39,12 @@ public class registro_empresa extends JFrame {
 	public PlaceHolder pista;
 	public JButton btnActualizarEmpresa;
 	public JButton btnGuardarEmpresa;
-	public JButton btnSubirFotoEmpresa; 
-	public JButton btnSubirLogoEmpresa; 
+	public JButton btnSubirFotoEmpresa;
+	public JButton btnSubirLogoEmpresa;
+	public JButton btnVerFotoEmpresa;
+	public JButton btnActualizarDatos;
+	public JButton btnVerLogoEmpresa;
+	public JButton btnCancelar;
 	public JLabel lblFotoEmpresa;
 	public JLabel lblLogoEmpresa;
 	public JPanel contentPane;
@@ -117,8 +121,8 @@ public class registro_empresa extends JFrame {
 		btnGuardarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardarEmpresa.setBackground(new Color(60, 179, 113));
 
-		btnActualizarEmpresa = new JButton("Editar");
-		btnActualizarEmpresa.setBounds(187, 375, 99, 23);
+		btnActualizarEmpresa = new JButton("Actualizar");
+		btnActualizarEmpresa.setBounds(200, 375, 99, 23);
 		panel.add(btnActualizarEmpresa);
 		btnActualizarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarEmpresa.setBackground(new Color(60, 179, 113));
@@ -126,14 +130,14 @@ public class registro_empresa extends JFrame {
 		lblFotoEmpresa = new JLabel();
 		lblFotoEmpresa.setBounds(27, 236, 164, 129);
 		panel.add(lblFotoEmpresa);
-		final ImageIcon logo00 = new ImageIcon(
-				logoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(), lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo00 = new ImageIcon(logoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpresa.setIcon(logo00);
 
-		JButton button_2 = new JButton("Ver");
-		button_2.setBounds(203, 280, 83, 23);
-		panel.add(button_2);
-		button_2.setBackground(Color.WHITE);
+		btnVerFotoEmpresa = new JButton("Ver");
+		btnVerFotoEmpresa.setBounds(203, 280, 83, 23);
+		panel.add(btnVerFotoEmpresa);
+		btnVerFotoEmpresa.setBackground(Color.WHITE);
 
 		btnSubirFotoEmpresa = new JButton("Subir");
 		btnSubirFotoEmpresa.addActionListener(new ActionListener() {
@@ -159,14 +163,14 @@ public class registro_empresa extends JFrame {
 		lblLogoEmpresa = new JLabel();
 		lblLogoEmpresa.setBounds(27, 55, 164, 129);
 		panel.add(lblLogoEmpresa);
-		final ImageIcon logo5 = new ImageIcon(
-				logoCanal.getImage().getScaledInstance(lblLogoEmpresa.getWidth(), lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo5 = new ImageIcon(logoCanal.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
+				lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblLogoEmpresa.setIcon(logo5);
 
-		JButton btnVer = new JButton("Ver");
-		btnVer.setBounds(203, 99, 83, 23);
-		panel.add(btnVer);
-		btnVer.setBackground(Color.WHITE);
+		btnVerLogoEmpresa = new JButton("Ver");
+		btnVerLogoEmpresa.setBounds(203, 99, 83, 23);
+		panel.add(btnVerLogoEmpresa);
+		btnVerLogoEmpresa.setBackground(Color.WHITE);
 
 		btnSubirLogoEmpresa = new JButton("Subir");
 		btnSubirLogoEmpresa.addActionListener(new ActionListener() {
@@ -188,6 +192,40 @@ public class registro_empresa extends JFrame {
 		lblLogoOficialDe.setBounds(27, 30, 259, 17);
 		panel.add(lblLogoOficialDe);
 		lblLogoOficialDe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtCodigoEmpresa.setVisible(false);
+				txtNombreEmpresa.setEditable(false);
+				txtDireccionEmpresa.setEditable(false);
+				txtDireccionEmpresa.setBackground(Color.lightGray);
+				txtTelefonoEmpresa.setEditable(false);
+				txtRTNempresa.setEditable(false);
+				txtDireccionLogoEmpresa.setVisible(false);
+				txtDireccionFotoEmpresa.setVisible(false);
+				txtCorreoEmpresa.setEditable(false);
+				txtCuentaEmpresa.setEditable(false);
+				txtCuentaEmpresa.setBackground(Color.lightGray);
+
+				btnActualizarEmpresa.setVisible(false);
+				btnGuardarEmpresa.setVisible(false);
+				btnCancelar.setVisible(false);
+				btnSubirFotoEmpresa.setVisible(false);
+				btnSubirLogoEmpresa.setVisible(false);
+				btnVerFotoEmpresa.setVisible(true);
+				btnVerLogoEmpresa.setVisible(true);
+				btnCancelar.setVisible(false);
+				
+				btnActualizarDatos.setVisible(true);
+				
+				
+			}
+		});
+		btnCancelar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnCancelar.setBackground(new Color(60, 179, 113));
+		btnCancelar.setBounds(200, 341, 99, 23);
+		panel.add(btnCancelar);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -311,13 +349,44 @@ public class registro_empresa extends JFrame {
 		txtCodigoEmpresa.setEditable(false);
 		txtCodigoEmpresa.setColumns(10);
 		panel_1.add(txtCodigoEmpresa);
-		
-				JLabel lblLibreta = new JLabel();
-				lblLibreta.setBounds(0, -18, 740, 494);
-				panelRegistro.add(lblLibreta);
-				final ImageIcon logo3 = new ImageIcon(
-						icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-				lblLibreta.setIcon(logo3);
+
+		JLabel lblLibreta = new JLabel();
+		lblLibreta.setBounds(0, -18, 740, 494);
+		panelRegistro.add(lblLibreta);
+		final ImageIcon logo3 = new ImageIcon(
+				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblLibreta.setIcon(logo3);
+
+		btnActualizarDatos = new JButton("Actualizar Datos");
+		btnActualizarDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtCodigoEmpresa.setEditable(true);
+				txtNombreEmpresa.setEditable(true);
+				txtDireccionEmpresa.setEditable(true);
+				txtDireccionEmpresa.setBackground(Color.WHITE);
+				txtTelefonoEmpresa.setEditable(true);
+				txtRTNempresa.setEditable(true);
+				txtDireccionLogoEmpresa.setVisible(true);
+				txtDireccionFotoEmpresa.setVisible(true);
+				txtCorreoEmpresa.setEditable(true);
+				txtCuentaEmpresa.setEditable(true);
+				txtCuentaEmpresa.setBackground(Color.white);
+				btnActualizarEmpresa.setVisible(true);
+				btnGuardarEmpresa.setVisible(false);
+				btnCancelar.setVisible(true);
+				btnSubirFotoEmpresa.setVisible(true);
+				btnSubirLogoEmpresa.setVisible(true);
+				btnVerFotoEmpresa.setVisible(false);
+				btnVerLogoEmpresa.setVisible(false);
+				btnActualizarDatos.setVisible(false);
+				
+			}
+		});
+		btnActualizarDatos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarDatos.setBackground(new Color(60, 179, 113));
+		btnActualizarDatos.setBounds(518, 8, 138, 23);
+		contentPane.add(btnActualizarDatos);
+
 		btnWhatsapp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -338,10 +407,10 @@ public class registro_empresa extends JFrame {
 		});
 
 	}
-	
+
 	public void mostrarEmpresa() {
 		consultas_empresa consulta = new consultas_empresa();
-		empresa clase = new  empresa();
+		empresa clase = new empresa();
 		if (consulta.buscar(clase)) {
 			txtCodigoEmpresa.setText(String.valueOf(clase.getId_empresa()));
 			txtNombreEmpresa.setText(String.valueOf(clase.getNombre_empresa()));
@@ -352,17 +421,50 @@ public class registro_empresa extends JFrame {
 			txtDireccionFotoEmpresa.setText(String.valueOf(clase.getDireccion_foto_empresa()));
 			txtCorreoEmpresa.setText(String.valueOf(clase.getCorreo_empresa()));
 			txtCuentaEmpresa.setText(String.valueOf(clase.getCuenta_bancaria_empresa()));
+			txtCodigoEmpresa.setVisible(false);
+			txtNombreEmpresa.setEditable(false);
+			txtDireccionEmpresa.setEditable(false);
+			txtDireccionEmpresa.setBackground(Color.lightGray);
+			txtTelefonoEmpresa.setEditable(false);
+			txtRTNempresa.setEditable(false);
+			txtDireccionLogoEmpresa.setVisible(false);
+			txtDireccionFotoEmpresa.setVisible(false);
+			txtCorreoEmpresa.setEditable(false);
+			txtCuentaEmpresa.setEditable(false);
+			txtCuentaEmpresa.setBackground(Color.lightGray);
+			btnActualizarEmpresa.setVisible(false);
+			btnGuardarEmpresa.setVisible(false);
+			btnCancelar.setVisible(false);
+			btnSubirFotoEmpresa.setVisible(false);
+			btnSubirLogoEmpresa.setVisible(false);
+			btnVerFotoEmpresa.setVisible(true);
+			btnVerLogoEmpresa.setVisible(true);
+			btnCancelar.setVisible(false);
+			
+			String foto = txtDireccionFotoEmpresa.getText().toString();
+			String logo = txtDireccionLogoEmpresa.getText().toString();
+			final ImageIcon foto_empresa = new ImageIcon(foto);
+			final ImageIcon logo1 = new ImageIcon(
+					foto_empresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+							lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+			lblFotoEmpresa.setIcon(logo1);
+			final ImageIcon logo_empresa = new ImageIcon(logo);
+			final ImageIcon logo2 = new ImageIcon(
+					logo_empresa.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
+							lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+			lblLogoEmpresa.setIcon(logo2);
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 			JOptionPane.showMessageDialog(null, "Por favor ingrese los datos de la empresa.");
 			btnGuardarEmpresa.setVisible(true);
+			btnActualizarEmpresa.setVisible(false);
 			txtDireccionFotoEmpresa.setVisible(true);
 			txtDireccionLogoEmpresa.setVisible(true);
 			btnSubirFotoEmpresa.setVisible(true);
 			btnSubirFotoEmpresa.setVisible(true);
 		}
 	}
-	
+
 	public void selecionarFoto() {
 		JFileChooser archivo = new JFileChooser();
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
@@ -376,12 +478,11 @@ public class registro_empresa extends JFrame {
 			File file = archivo.getSelectedFile();
 			txtDireccionFotoEmpresa.setText(String.valueOf(file));
 			Image foto = getToolkit().getImage(txtDireccionFotoEmpresa.getText());
-			foto = foto.getScaledInstance(lblFotoEmpresa.getHeight(), lblFotoEmpresa.getWidth(),
-					Image.SCALE_DEFAULT);
+			foto = foto.getScaledInstance(lblFotoEmpresa.getHeight(), lblFotoEmpresa.getWidth(), Image.SCALE_DEFAULT);
 			lblFotoEmpresa.setIcon(new ImageIcon(foto));
 		}
 	}
-	
+
 	public void selecionarLogo() {
 		JFileChooser archivo = new JFileChooser();
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
@@ -395,8 +496,7 @@ public class registro_empresa extends JFrame {
 			File file = archivo.getSelectedFile();
 			txtDireccionLogoEmpresa.setText(String.valueOf(file));
 			Image foto = getToolkit().getImage(txtDireccionLogoEmpresa.getText());
-			foto = foto.getScaledInstance(lblLogoEmpresa.getHeight(), lblLogoEmpresa.getWidth(),
-					Image.SCALE_DEFAULT);
+			foto = foto.getScaledInstance(lblLogoEmpresa.getHeight(), lblLogoEmpresa.getWidth(), Image.SCALE_DEFAULT);
 			lblLogoEmpresa.setIcon(new ImageIcon(foto));
 		}
 	}
