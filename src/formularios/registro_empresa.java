@@ -75,7 +75,7 @@ public class registro_empresa extends JFrame {
 	public registro_empresa() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 808, 550);
+		setBounds(100, 100, 808, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -138,13 +138,13 @@ public class registro_empresa extends JFrame {
 				
 						JPanel panelRegistro = new JPanel();
 						panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-						panelRegistro.setBounds(28, 34, 740, 456);
+						panelRegistro.setBounds(28, 56, 740, 462);
 						contentPane.add(panelRegistro);
 						panelRegistro.setLayout(null);
 						
 								JPanel panel = new JPanel();
 								panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-								panel.setBounds(395, 23, 309, 404);
+								panel.setBounds(395, 34, 309, 404);
 								panelRegistro.add(panel);
 								panel.setLayout(null);
 								
@@ -270,7 +270,7 @@ public class registro_empresa extends JFrame {
 																																
 																																		JPanel panel_1 = new JPanel();
 																																		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-																																		panel_1.setBounds(37, 23, 326, 404);
+																																		panel_1.setBounds(38, 34, 326, 404);
 																																		panelRegistro.add(panel_1);
 																																		panel_1.setLayout(null);
 																																		
@@ -392,7 +392,7 @@ public class registro_empresa extends JFrame {
 																																																																												panel_1.add(txtCodigoEmpresa);
 																																																																												
 																																																																														JLabel lblLibreta = new JLabel();
-																																																																														lblLibreta.setBounds(0, 0, 740, 480);
+																																																																														lblLibreta.setBounds(0, 0, 740, 462);
 																																																																														panelRegistro.add(lblLibreta);
 																																																																														final ImageIcon logo3 = new ImageIcon(
 																																																																																icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
