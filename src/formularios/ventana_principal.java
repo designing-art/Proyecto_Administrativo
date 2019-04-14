@@ -1,6 +1,7 @@
 package formularios;
 
 import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -29,6 +30,7 @@ import controles.control_contrato_empleado;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
+import ventanas.visor_imagen;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;

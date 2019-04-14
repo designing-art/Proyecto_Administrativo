@@ -31,7 +31,7 @@ import com.placeholder.PlaceHolder;
 
 import clases.empresa;
 import consultas.consultas_empresa;
-
+import ventanas.visor_imagen;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
@@ -171,6 +171,14 @@ public class registro_empresa extends JFrame {
 		lblLogoEmpresa.setIcon(logo5);
 
 		btnVerLogoEmpresa = new JButton("Ver");
+		btnVerLogoEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				visor_imagen visor = new visor_imagen();
+				visor.setVisible(true);
+				visor.setLocationRelativeTo(null);
+				verImagenLogo();
+			}
+		});
 		btnVerLogoEmpresa.setBounds(203, 99, 83, 23);
 		panel.add(btnVerLogoEmpresa);
 		btnVerLogoEmpresa.setBackground(Color.WHITE);
@@ -485,6 +493,26 @@ public class registro_empresa extends JFrame {
 			lblFotoEmpresa.setIcon(new ImageIcon(foto));
 		}
 	}
+	
+	public void verImagenLogo() {
+		if(txtDireccionLogoEmpresa.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");	
+		}else {
+			try {
+				visor_imagen visor = new visor_imagen();
+				String foto = txtDireccionLogoEmpresa.getText().toString();
+				visor.txtRutaImagen.setText(foto);	
+		    	final ImageIcon imagen = new ImageIcon(visor.txtRutaImagen.getText().toString());
+		    	final ImageIcon logo = new ImageIcon(
+		    			imagen.getImage().getScaledInstance(visor.lblImagen.getWidth(),
+		    					visor.lblImagen.getHeight(), Image.SCALE_DEFAULT));
+		    	visor.lblImagen.setIcon(logo);
+		    	
+			} catch (Exception e) {
+			}
+		}
+    	
+    }
 
 	public void selecionarLogo() {
 		JFileChooser archivo = new JFileChooser();
