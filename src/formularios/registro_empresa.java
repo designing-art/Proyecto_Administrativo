@@ -362,7 +362,7 @@ public class registro_empresa extends JFrame {
 		panel_1.add(txtCodigoEmpresa);
 
 		JLabel lblLibreta = new JLabel();
-		lblLibreta.setBounds(0, -18, 740, 494);
+		lblLibreta.setBounds(0, -26, 740, 502);
 		panelRegistro.add(lblLibreta);
 		final ImageIcon logo3 = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
