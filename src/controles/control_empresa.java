@@ -56,15 +56,29 @@ public class control_empresa implements ActionListener {
 				
 				if (consulta.insertar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! se guardo la informacion de la empresa!");
+					formulario.txtCodigoEmpresa.setVisible(false);
 					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
-					formulario.txtNombreEmpresa.setEditable(false);
+					formulario.txtDireccionEmpresa.setEditable(false);
+					formulario.txtDireccionEmpresa.setBackground(Color.lightGray);
+					formulario.txtTelefonoEmpresa.setEditable(false);
+					formulario.txtRTNempresa.setEditable(false);
+					formulario.txtDireccionLogoEmpresa.setVisible(false);
+					formulario.txtDireccionFotoEmpresa.setVisible(false);
+					formulario.txtCorreoEmpresa.setEditable(false);
+					formulario.txtCuentaEmpresa.setEditable(false);
+					formulario.txtCuentaEmpresa.setBackground(Color.lightGray);
+
+					formulario.btnActualizarEmpresa.setVisible(false);
+					formulario.btnGuardarEmpresa.setVisible(false);
+					formulario.btnCancelar.setVisible(false);
+					formulario.btnSubirFotoEmpresa.setVisible(false);
+					formulario.btnSubirLogoEmpresa.setVisible(false);
+					formulario.btnVerFotoEmpresa.setVisible(true);
+					formulario.btnVerLogoEmpresa.setVisible(true);
+					formulario.btnCancelar.setVisible(false);
+					
+					formulario.btnActualizarDatos.setVisible(false);
+					
 					String foto = formulario.txtDireccionFotoEmpresa.getText().toString();
 					String logo = formulario.txtDireccionLogoEmpresa.getText().toString();
 					final ImageIcon foto_empresa = new ImageIcon(foto);

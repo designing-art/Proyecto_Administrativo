@@ -6,14 +6,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import formularios.registro_empresa;
+
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JLabel;
@@ -28,6 +36,7 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
@@ -147,6 +156,17 @@ public class visor_imagen extends JFrame {
 			JOptionPane.showMessageDialog(null, "No existen impresoras instaladas.");
 		}
 		inputStream.close();
+
+	}
+
+	public void verImagenLogo() {
+		registro_empresa empresa = new registro_empresa();
+				String ruta = empresa.txtDireccionLogoEmpresa.getText().toString();
+				txtRutaImagen.setText(String.valueOf(ruta));
+				final ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
+				final ImageIcon logo = new ImageIcon(imagen.getImage()
+						.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+				lblImagen.setIcon(logo);
 
 	}
 
