@@ -106,268 +106,6 @@ public class registro_empresa extends JFrame {
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
-		JPanel panelRegistro = new JPanel();
-		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-		panelRegistro.setBounds(28, 34, 740, 476);
-		contentPane.add(panelRegistro);
-		panelRegistro.setLayout(null);
-
-		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(395, 23, 309, 404);
-		panelRegistro.add(panel);
-		panel.setLayout(null);
-
-		btnGuardarEmpresa = new JButton("Guardar");
-		btnGuardarEmpresa.setBounds(27, 375, 99, 23);
-		panel.add(btnGuardarEmpresa);
-		btnGuardarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarEmpresa.setBackground(new Color(60, 179, 113));
-
-		btnActualizarEmpresa = new JButton("Actualizar");
-		btnActualizarEmpresa.setBounds(200, 375, 99, 23);
-		panel.add(btnActualizarEmpresa);
-		btnActualizarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarEmpresa.setBackground(new Color(60, 179, 113));
-
-		lblFotoEmpresa = new JLabel();
-		lblFotoEmpresa.setBounds(27, 236, 164, 129);
-		panel.add(lblFotoEmpresa);
-		final ImageIcon logo00 = new ImageIcon(logoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
-				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
-		lblFotoEmpresa.setIcon(logo00);
-
-		btnVerFotoEmpresa = new JButton("Ver");
-		btnVerFotoEmpresa.setBounds(203, 280, 83, 23);
-		panel.add(btnVerFotoEmpresa);
-		btnVerFotoEmpresa.setBackground(Color.WHITE);
-
-		btnSubirFotoEmpresa = new JButton("Subir");
-		btnSubirFotoEmpresa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				selecionarFoto();
-			}
-		});
-		btnSubirFotoEmpresa.setBounds(203, 246, 83, 23);
-		panel.add(btnSubirFotoEmpresa);
-		btnSubirFotoEmpresa.setBackground(new Color(250, 128, 114));
-
-		txtDireccionFotoEmpresa = new JTextField();
-		txtDireccionFotoEmpresa.setBounds(28, 195, 258, 20);
-		panel.add(txtDireccionFotoEmpresa);
-		txtDireccionFotoEmpresa.setEditable(false);
-		txtDireccionFotoEmpresa.setColumns(10);
-
-		JLabel lblFotografiaDelLocal = new JLabel("Fotografia del local de la empresa.");
-		lblFotografiaDelLocal.setBounds(27, 213, 258, 17);
-		panel.add(lblFotografiaDelLocal);
-		lblFotografiaDelLocal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-		lblLogoEmpresa = new JLabel();
-		lblLogoEmpresa.setBounds(27, 55, 164, 129);
-		panel.add(lblLogoEmpresa);
-		final ImageIcon logo5 = new ImageIcon(logoCanal.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
-				lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
-		lblLogoEmpresa.setIcon(logo5);
-
-		btnVerLogoEmpresa = new JButton("Ver");
-		btnVerLogoEmpresa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				visor_imagen visor = new visor_imagen();
-				visor.setVisible(true);
-				visor.setLocationRelativeTo(null);
-				verImagenLogo();
-			}
-		});
-		btnVerLogoEmpresa.setBounds(203, 99, 83, 23);
-		panel.add(btnVerLogoEmpresa);
-		btnVerLogoEmpresa.setBackground(Color.WHITE);
-
-		btnSubirLogoEmpresa = new JButton("Subir");
-		btnSubirLogoEmpresa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				selecionarLogo();
-			}
-		});
-		btnSubirLogoEmpresa.setBounds(203, 65, 83, 23);
-		panel.add(btnSubirLogoEmpresa);
-		btnSubirLogoEmpresa.setBackground(new Color(250, 128, 114));
-
-		txtDireccionLogoEmpresa = new JTextField();
-		txtDireccionLogoEmpresa.setBounds(27, 11, 258, 20);
-		panel.add(txtDireccionLogoEmpresa);
-		txtDireccionLogoEmpresa.setEditable(false);
-		txtDireccionLogoEmpresa.setColumns(10);
-
-		JLabel lblLogoOficialDe = new JLabel("Logo Oficial de la empresa.");
-		lblLogoOficialDe.setBounds(27, 30, 259, 17);
-		panel.add(lblLogoOficialDe);
-		lblLogoOficialDe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtCodigoEmpresa.setVisible(false);
-				txtNombreEmpresa.setEditable(false);
-				txtDireccionEmpresa.setEditable(false);
-				txtDireccionEmpresa.setBackground(Color.lightGray);
-				txtTelefonoEmpresa.setEditable(false);
-				txtRTNempresa.setEditable(false);
-				txtDireccionLogoEmpresa.setVisible(false);
-				txtDireccionFotoEmpresa.setVisible(false);
-				txtCorreoEmpresa.setEditable(false);
-				txtCuentaEmpresa.setEditable(false);
-				txtCuentaEmpresa.setBackground(Color.lightGray);
-
-				btnActualizarEmpresa.setVisible(false);
-				btnGuardarEmpresa.setVisible(false);
-				btnCancelar.setVisible(false);
-				btnSubirFotoEmpresa.setVisible(false);
-				btnSubirLogoEmpresa.setVisible(false);
-				btnVerFotoEmpresa.setVisible(true);
-				btnVerLogoEmpresa.setVisible(true);
-				btnCancelar.setVisible(false);
-				
-				btnActualizarDatos.setVisible(true);
-				
-				
-			}
-		});
-		btnCancelar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnCancelar.setBackground(new Color(60, 179, 113));
-		btnCancelar.setBounds(200, 341, 99, 23);
-		panel.add(btnCancelar);
-
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(38, 23, 326, 404);
-		panelRegistro.add(panel_1);
-		panel_1.setLayout(null);
-
-		JLabel lblNombre = new JLabel("Nombre :");
-		lblNombre.setBounds(10, 36, 83, 14);
-		panel_1.add(lblNombre);
-		lblNombre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		txtNombreEmpresa = new JTextField();
-		txtNombreEmpresa.setBounds(93, 33, 210, 20);
-		panel_1.add(txtNombreEmpresa);
-		txtNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		txtNombreEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtNombreEmpresa.setColumns(10);
-
-		JLabel lblDatosDeLa = new JLabel("Datos de la empresa :");
-		lblDatosDeLa.setBounds(10, 0, 175, 31);
-		panel_1.add(lblDatosDeLa);
-		lblDatosDeLa.setForeground(Color.BLACK);
-		lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-		JLabel lblDireccion = new JLabel("Direccion :");
-		lblDireccion.setBounds(10, 64, 83, 14);
-		panel_1.add(lblDireccion);
-		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(93, 61, 210, 44);
-		panel_1.add(scrollPane);
-
-		txtDireccionEmpresa = new JTextArea();
-		scrollPane.setViewportView(txtDireccionEmpresa);
-
-		JLabel lblTelefono = new JLabel("Telefono :");
-		lblTelefono.setBounds(10, 119, 83, 14);
-		panel_1.add(lblTelefono);
-		lblTelefono.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		txtTelefonoEmpresa = new JTextField();
-		txtTelefonoEmpresa.setBounds(93, 116, 210, 20);
-		panel_1.add(txtTelefonoEmpresa);
-		txtTelefonoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTelefonoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtTelefonoEmpresa.setColumns(10);
-
-		JLabel lblRtn = new JLabel("RTN :");
-		lblRtn.setBounds(10, 147, 83, 14);
-		panel_1.add(lblRtn);
-		lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		txtRTNempresa = new JTextField();
-		txtRTNempresa.setBounds(93, 144, 210, 20);
-		panel_1.add(txtRTNempresa);
-		txtRTNempresa.setHorizontalAlignment(SwingConstants.CENTER);
-		txtRTNempresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtRTNempresa.setColumns(10);
-
-		txtCorreoEmpresa = new JTextField();
-		txtCorreoEmpresa.setBounds(93, 172, 210, 20);
-		panel_1.add(txtCorreoEmpresa);
-		txtCorreoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCorreoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtCorreoEmpresa.setColumns(10);
-
-		JLabel lblCorreo = new JLabel("Correo :");
-		lblCorreo.setBounds(10, 175, 83, 14);
-		panel_1.add(lblCorreo);
-		lblCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		JLabel lblCuentaBancaria = new JLabel("Cuentas :");
-		lblCuentaBancaria.setBounds(10, 203, 83, 14);
-		panel_1.add(lblCuentaBancaria);
-		lblCuentaBancaria.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(93, 203, 210, 106);
-		panel_1.add(scrollPane_1);
-
-		txtCuentaEmpresa = new JTextArea();
-		scrollPane_1.setViewportView(txtCuentaEmpresa);
-
-		JButton btnFacebook = new JButton("");
-		btnFacebook.setBounds(93, 320, 62, 58);
-		panel_1.add(btnFacebook);
-		final ImageIcon logo = new ImageIcon(logofacebook.getImage().getScaledInstance(btnFacebook.getWidth(),
-				btnFacebook.getHeight(), Image.SCALE_DEFAULT));
-		btnFacebook.setIcon(logo);
-
-		JLabel lblSociales = new JLabel("\r\nSociales.");
-		lblSociales.setBounds(10, 336, 125, 14);
-		panel_1.add(lblSociales);
-		lblSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		JButton btnYoutube = new JButton("");
-		btnYoutube.setBounds(169, 320, 62, 58);
-		panel_1.add(btnYoutube);
-		final ImageIcon logo1 = new ImageIcon(logoyoutube.getImage().getScaledInstance(btnYoutube.getWidth(),
-				btnYoutube.getHeight(), Image.SCALE_DEFAULT));
-		btnYoutube.setIcon(logo1);
-
-		JButton btnWhatsapp = new JButton("");
-		btnWhatsapp.setBounds(241, 320, 62, 58);
-		panel_1.add(btnWhatsapp);
-		final ImageIcon logo2 = new ImageIcon(logowhatsapp.getImage().getScaledInstance(btnWhatsapp.getWidth(),
-				btnWhatsapp.getHeight(), Image.SCALE_DEFAULT));
-		btnWhatsapp.setIcon(logo2);
-
-		JLabel lblRedesSociales = new JLabel("Redes");
-		lblRedesSociales.setBounds(10, 320, 125, 14);
-		panel_1.add(lblRedesSociales);
-		lblRedesSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		txtCodigoEmpresa = new JTextField();
-		txtCodigoEmpresa.setBounds(10, 373, 50, 20);
-		txtCodigoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCodigoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtCodigoEmpresa.setEditable(false);
-		txtCodigoEmpresa.setColumns(10);
-		panel_1.add(txtCodigoEmpresa);
-
-		JLabel lblLibreta = new JLabel();
-		lblLibreta.setBounds(0, -26, 740, 502);
-		panelRegistro.add(lblLibreta);
-		final ImageIcon logo3 = new ImageIcon(
-				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-		lblLibreta.setIcon(logo3);
-
 		btnActualizarDatos = new JButton("Actualizar Datos");
 		btnActualizarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -397,6 +135,268 @@ public class registro_empresa extends JFrame {
 		btnActualizarDatos.setBackground(new Color(60, 179, 113));
 		btnActualizarDatos.setBounds(518, 8, 138, 23);
 		contentPane.add(btnActualizarDatos);
+				
+						JPanel panelRegistro = new JPanel();
+						panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
+						panelRegistro.setBounds(28, 34, 740, 456);
+						contentPane.add(panelRegistro);
+						panelRegistro.setLayout(null);
+						
+								JPanel panel = new JPanel();
+								panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+								panel.setBounds(395, 23, 309, 404);
+								panelRegistro.add(panel);
+								panel.setLayout(null);
+								
+										btnGuardarEmpresa = new JButton("Guardar");
+										btnGuardarEmpresa.setBounds(27, 375, 99, 23);
+										panel.add(btnGuardarEmpresa);
+										btnGuardarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+										btnGuardarEmpresa.setBackground(new Color(60, 179, 113));
+										
+												btnActualizarEmpresa = new JButton("Actualizar");
+												btnActualizarEmpresa.setBounds(200, 375, 99, 23);
+												panel.add(btnActualizarEmpresa);
+												btnActualizarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+												btnActualizarEmpresa.setBackground(new Color(60, 179, 113));
+												
+														lblFotoEmpresa = new JLabel();
+														lblFotoEmpresa.setBounds(27, 236, 164, 129);
+														panel.add(lblFotoEmpresa);
+														final ImageIcon logo00 = new ImageIcon(logoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+																lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+														lblFotoEmpresa.setIcon(logo00);
+														
+																btnVerFotoEmpresa = new JButton("Ver");
+																btnVerFotoEmpresa.setBounds(203, 280, 83, 23);
+																panel.add(btnVerFotoEmpresa);
+																btnVerFotoEmpresa.setBackground(Color.WHITE);
+																
+																		btnSubirFotoEmpresa = new JButton("Subir");
+																		btnSubirFotoEmpresa.addActionListener(new ActionListener() {
+																			public void actionPerformed(ActionEvent e) {
+																				selecionarFoto();
+																			}
+																		});
+																		btnSubirFotoEmpresa.setBounds(203, 246, 83, 23);
+																		panel.add(btnSubirFotoEmpresa);
+																		btnSubirFotoEmpresa.setBackground(new Color(250, 128, 114));
+																		
+																				txtDireccionFotoEmpresa = new JTextField();
+																				txtDireccionFotoEmpresa.setBounds(28, 195, 258, 20);
+																				panel.add(txtDireccionFotoEmpresa);
+																				txtDireccionFotoEmpresa.setEditable(false);
+																				txtDireccionFotoEmpresa.setColumns(10);
+																				
+																						JLabel lblFotografiaDelLocal = new JLabel("Fotografia del local de la empresa.");
+																						lblFotografiaDelLocal.setBounds(27, 213, 258, 17);
+																						panel.add(lblFotografiaDelLocal);
+																						lblFotografiaDelLocal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+																						
+																								lblLogoEmpresa = new JLabel();
+																								lblLogoEmpresa.setBounds(27, 55, 164, 129);
+																								panel.add(lblLogoEmpresa);
+																								final ImageIcon logo5 = new ImageIcon(logoCanal.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
+																										lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+																								lblLogoEmpresa.setIcon(logo5);
+																								
+																										btnVerLogoEmpresa = new JButton("Ver");
+																										btnVerLogoEmpresa.addActionListener(new ActionListener() {
+																											public void actionPerformed(ActionEvent arg0) {
+																												visor_imagen visor = new visor_imagen();
+																												visor.setVisible(true);
+																												visor.setLocationRelativeTo(null);
+																												verImagenLogo();
+																											}
+																										});
+																										btnVerLogoEmpresa.setBounds(203, 99, 83, 23);
+																										panel.add(btnVerLogoEmpresa);
+																										btnVerLogoEmpresa.setBackground(Color.WHITE);
+																										
+																												btnSubirLogoEmpresa = new JButton("Subir");
+																												btnSubirLogoEmpresa.addActionListener(new ActionListener() {
+																													public void actionPerformed(ActionEvent arg0) {
+																														selecionarLogo();
+																													}
+																												});
+																												btnSubirLogoEmpresa.setBounds(203, 65, 83, 23);
+																												panel.add(btnSubirLogoEmpresa);
+																												btnSubirLogoEmpresa.setBackground(new Color(250, 128, 114));
+																												
+																														txtDireccionLogoEmpresa = new JTextField();
+																														txtDireccionLogoEmpresa.setBounds(27, 11, 258, 20);
+																														panel.add(txtDireccionLogoEmpresa);
+																														txtDireccionLogoEmpresa.setEditable(false);
+																														txtDireccionLogoEmpresa.setColumns(10);
+																														
+																																JLabel lblLogoOficialDe = new JLabel("Logo Oficial de la empresa.");
+																																lblLogoOficialDe.setBounds(27, 30, 259, 17);
+																																panel.add(lblLogoOficialDe);
+																																lblLogoOficialDe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+																																
+																																btnCancelar = new JButton("Cancelar");
+																																btnCancelar.addActionListener(new ActionListener() {
+																																	public void actionPerformed(ActionEvent arg0) {
+																																		txtCodigoEmpresa.setVisible(false);
+																																		txtNombreEmpresa.setEditable(false);
+																																		txtDireccionEmpresa.setEditable(false);
+																																		txtDireccionEmpresa.setBackground(Color.lightGray);
+																																		txtTelefonoEmpresa.setEditable(false);
+																																		txtRTNempresa.setEditable(false);
+																																		txtDireccionLogoEmpresa.setVisible(false);
+																																		txtDireccionFotoEmpresa.setVisible(false);
+																																		txtCorreoEmpresa.setEditable(false);
+																																		txtCuentaEmpresa.setEditable(false);
+																																		txtCuentaEmpresa.setBackground(Color.lightGray);
+
+																																		btnActualizarEmpresa.setVisible(false);
+																																		btnGuardarEmpresa.setVisible(false);
+																																		btnCancelar.setVisible(false);
+																																		btnSubirFotoEmpresa.setVisible(false);
+																																		btnSubirLogoEmpresa.setVisible(false);
+																																		btnVerFotoEmpresa.setVisible(true);
+																																		btnVerLogoEmpresa.setVisible(true);
+																																		btnCancelar.setVisible(false);
+																																		
+																																		btnActualizarDatos.setVisible(true);
+																																		
+																																		
+																																	}
+																																});
+																																btnCancelar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																btnCancelar.setBackground(new Color(60, 179, 113));
+																																btnCancelar.setBounds(200, 341, 99, 23);
+																																panel.add(btnCancelar);
+																																
+																																		JPanel panel_1 = new JPanel();
+																																		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+																																		panel_1.setBounds(37, 23, 326, 404);
+																																		panelRegistro.add(panel_1);
+																																		panel_1.setLayout(null);
+																																		
+																																				JLabel lblNombre = new JLabel("Nombre :");
+																																				lblNombre.setBounds(10, 36, 83, 14);
+																																				panel_1.add(lblNombre);
+																																				lblNombre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																				
+																																						txtNombreEmpresa = new JTextField();
+																																						txtNombreEmpresa.setBounds(93, 33, 210, 20);
+																																						panel_1.add(txtNombreEmpresa);
+																																						txtNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+																																						txtNombreEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																						txtNombreEmpresa.setColumns(10);
+																																						
+																																								JLabel lblDatosDeLa = new JLabel("Datos de la empresa :");
+																																								lblDatosDeLa.setBounds(10, 0, 175, 31);
+																																								panel_1.add(lblDatosDeLa);
+																																								lblDatosDeLa.setForeground(Color.BLACK);
+																																								lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+																																								
+																																										JLabel lblDireccion = new JLabel("Direccion :");
+																																										lblDireccion.setBounds(10, 64, 83, 14);
+																																										panel_1.add(lblDireccion);
+																																										lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																										
+																																												JScrollPane scrollPane = new JScrollPane();
+																																												scrollPane.setBounds(93, 61, 210, 44);
+																																												panel_1.add(scrollPane);
+																																												
+																																														txtDireccionEmpresa = new JTextArea();
+																																														scrollPane.setViewportView(txtDireccionEmpresa);
+																																														
+																																																JLabel lblTelefono = new JLabel("Telefono :");
+																																																lblTelefono.setBounds(10, 119, 83, 14);
+																																																panel_1.add(lblTelefono);
+																																																lblTelefono.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																
+																																																		txtTelefonoEmpresa = new JTextField();
+																																																		txtTelefonoEmpresa.setBounds(93, 116, 210, 20);
+																																																		panel_1.add(txtTelefonoEmpresa);
+																																																		txtTelefonoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+																																																		txtTelefonoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																		txtTelefonoEmpresa.setColumns(10);
+																																																		
+																																																				JLabel lblRtn = new JLabel("RTN :");
+																																																				lblRtn.setBounds(10, 147, 83, 14);
+																																																				panel_1.add(lblRtn);
+																																																				lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																				
+																																																						txtRTNempresa = new JTextField();
+																																																						txtRTNempresa.setBounds(93, 144, 210, 20);
+																																																						panel_1.add(txtRTNempresa);
+																																																						txtRTNempresa.setHorizontalAlignment(SwingConstants.CENTER);
+																																																						txtRTNempresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																						txtRTNempresa.setColumns(10);
+																																																						
+																																																								txtCorreoEmpresa = new JTextField();
+																																																								txtCorreoEmpresa.setBounds(93, 172, 210, 20);
+																																																								panel_1.add(txtCorreoEmpresa);
+																																																								txtCorreoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+																																																								txtCorreoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																								txtCorreoEmpresa.setColumns(10);
+																																																								
+																																																										JLabel lblCorreo = new JLabel("Correo :");
+																																																										lblCorreo.setBounds(10, 175, 83, 14);
+																																																										panel_1.add(lblCorreo);
+																																																										lblCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																										
+																																																												JLabel lblCuentaBancaria = new JLabel("Cuentas :");
+																																																												lblCuentaBancaria.setBounds(10, 203, 83, 14);
+																																																												panel_1.add(lblCuentaBancaria);
+																																																												lblCuentaBancaria.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																												
+																																																														JScrollPane scrollPane_1 = new JScrollPane();
+																																																														scrollPane_1.setBounds(93, 203, 210, 106);
+																																																														panel_1.add(scrollPane_1);
+																																																														
+																																																																txtCuentaEmpresa = new JTextArea();
+																																																																scrollPane_1.setViewportView(txtCuentaEmpresa);
+																																																																
+																																																																		JButton btnFacebook = new JButton("");
+																																																																		btnFacebook.setBounds(93, 320, 62, 58);
+																																																																		panel_1.add(btnFacebook);
+																																																																		final ImageIcon logo = new ImageIcon(logofacebook.getImage().getScaledInstance(btnFacebook.getWidth(),
+																																																																				btnFacebook.getHeight(), Image.SCALE_DEFAULT));
+																																																																		btnFacebook.setIcon(logo);
+																																																																		
+																																																																				JLabel lblSociales = new JLabel("\r\nSociales.");
+																																																																				lblSociales.setBounds(10, 336, 125, 14);
+																																																																				panel_1.add(lblSociales);
+																																																																				lblSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																																				
+																																																																						JButton btnYoutube = new JButton("");
+																																																																						btnYoutube.setBounds(169, 320, 62, 58);
+																																																																						panel_1.add(btnYoutube);
+																																																																						final ImageIcon logo1 = new ImageIcon(logoyoutube.getImage().getScaledInstance(btnYoutube.getWidth(),
+																																																																								btnYoutube.getHeight(), Image.SCALE_DEFAULT));
+																																																																						btnYoutube.setIcon(logo1);
+																																																																						
+																																																																								JButton btnWhatsapp = new JButton("");
+																																																																								btnWhatsapp.setBounds(241, 320, 62, 58);
+																																																																								panel_1.add(btnWhatsapp);
+																																																																								final ImageIcon logo2 = new ImageIcon(logowhatsapp.getImage().getScaledInstance(btnWhatsapp.getWidth(),
+																																																																										btnWhatsapp.getHeight(), Image.SCALE_DEFAULT));
+																																																																								btnWhatsapp.setIcon(logo2);
+																																																																								
+																																																																										JLabel lblRedesSociales = new JLabel("Redes");
+																																																																										lblRedesSociales.setBounds(10, 320, 125, 14);
+																																																																										panel_1.add(lblRedesSociales);
+																																																																										lblRedesSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																																										
+																																																																												txtCodigoEmpresa = new JTextField();
+																																																																												txtCodigoEmpresa.setBounds(10, 373, 50, 20);
+																																																																												txtCodigoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+																																																																												txtCodigoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+																																																																												txtCodigoEmpresa.setEditable(false);
+																																																																												txtCodigoEmpresa.setColumns(10);
+																																																																												panel_1.add(txtCodigoEmpresa);
+																																																																												
+																																																																														JLabel lblLibreta = new JLabel();
+																																																																														lblLibreta.setBounds(0, 0, 740, 480);
+																																																																														panelRegistro.add(lblLibreta);
+																																																																														final ImageIcon logo3 = new ImageIcon(
+																																																																																icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+																																																																														lblLibreta.setIcon(logo3);
 
 		btnWhatsapp.addActionListener(new ActionListener() {
 			@Override
