@@ -59,6 +59,7 @@ public class visor_imagen extends JFrame {
 				try {
 					visor_imagen frame = new visor_imagen();
 					frame.setVisible(true);
+					frame.verImagenLogo();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -96,7 +97,6 @@ public class visor_imagen extends JFrame {
 		JMenuItem IMPRIMIR = new JMenuItem("Imprimir");
 		IMPRIMIR.setBackground(Color.WHITE);
 		menu.add(IMPRIMIR);
-
 
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder("Controles de imagen"));
@@ -161,12 +161,12 @@ public class visor_imagen extends JFrame {
 
 	public void verImagenLogo() {
 		registro_empresa empresa = new registro_empresa();
-				String ruta = empresa.txtDireccionLogoEmpresa.getText().toString();
-				txtRutaImagen.setText(String.valueOf(ruta));
-				final ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
-				final ImageIcon logo = new ImageIcon(imagen.getImage()
-						.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
-				lblImagen.setIcon(logo);
+		String ruta = empresa.txtDireccionLogoEmpresa.getText();
+		txtRutaImagen.setText(ruta);
+		final ImageIcon imagen = new ImageIcon(ruta);
+		final ImageIcon logo = new ImageIcon(
+				imagen.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+		lblImagen.setIcon(logo);
 
 	}
 
