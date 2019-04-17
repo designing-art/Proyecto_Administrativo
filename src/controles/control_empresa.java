@@ -1,6 +1,7 @@
 package controles;
 
 import java.awt.Color;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 
@@ -8,10 +9,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 import clases.empresa;
 import consultas.consultas_empresa;
 import formularios.registro_empresa;
-import formularios.ventana_principal;
 
 public class control_empresa implements ActionListener {
 
@@ -19,10 +20,10 @@ public class control_empresa implements ActionListener {
 	public consultas_empresa consulta;
 	public registro_empresa formulario;
 
-	public control_empresa(empresa clase, consultas_empresa consulta,
-			registro_empresa formulario) {
+	public control_empresa(empresa clase, consultas_empresa consulta, registro_empresa formulario) {
 		this.clase = clase;
 		this.consulta = consulta;
+		this.formulario = formulario;
 		this.formulario = formulario;
 		this.formulario.btnGuardarEmpresa.addActionListener(this);
 		this.formulario.btnActualizarEmpresa.addActionListener(this);
@@ -33,14 +34,12 @@ public class control_empresa implements ActionListener {
 		/* Insertar */
 		if (e.getSource() == formulario.btnGuardarEmpresa) {
 
-			if (formulario.txtNombreEmpresa.getText().isEmpty()
-					||formulario.txtDireccionEmpresa.getText().isEmpty()
-					||formulario.txtTelefonoEmpresa.getText().isEmpty()
-					||formulario.txtRTNempresa.getText().isEmpty()
-					||formulario.txtDireccionLogoEmpresa.getText().isEmpty()
-					||formulario.txtDireccionFotoEmpresa.getText().isEmpty()
-					||formulario.txtCorreoEmpresa.getText().isEmpty()
-					||formulario.txtCuentaEmpresa.getText().isEmpty()) {
+			if (formulario.txtNombreEmpresa.getText().isEmpty() || formulario.txtDireccionEmpresa.getText().isEmpty()
+					|| formulario.txtTelefonoEmpresa.getText().isEmpty() || formulario.txtRTNempresa.getText().isEmpty()
+					|| formulario.txtDireccionLogoEmpresa.getText().isEmpty()
+					|| formulario.txtDireccionFotoEmpresa.getText().isEmpty()
+					|| formulario.txtCorreoEmpresa.getText().isEmpty()
+					|| formulario.txtCuentaEmpresa.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la informacion!");
 
 			} else {
@@ -53,7 +52,7 @@ public class control_empresa implements ActionListener {
 				clase.setDireccion_foto_empresa(formulario.txtDireccionFotoEmpresa.getText().toString());
 				clase.setCorreo_empresa(formulario.txtCorreoEmpresa.getText().toString());
 				clase.setCuenta_bancaria_empresa(formulario.txtCuentaEmpresa.getText().toString());
-				
+
 				if (consulta.insertar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! se guardo la informacion de la empresa!");
 					formulario.txtCodigoEmpresa.setVisible(false);
@@ -76,9 +75,9 @@ public class control_empresa implements ActionListener {
 					formulario.btnVerFotoEmpresa.setVisible(true);
 					formulario.btnVerLogoEmpresa.setVisible(true);
 					formulario.btnCancelar.setVisible(false);
-					
+
 					formulario.btnActualizarDatos.setVisible(false);
-					
+
 					String foto = formulario.txtDireccionFotoEmpresa.getText().toString();
 					String logo = formulario.txtDireccionLogoEmpresa.getText().toString();
 					final ImageIcon foto_empresa = new ImageIcon(foto);
@@ -100,15 +99,13 @@ public class control_empresa implements ActionListener {
 		/* Actualizar */
 		if (e.getSource() == formulario.btnActualizarEmpresa) {
 
-			if (formulario.txtNombreEmpresa.getText().isEmpty()
-					||formulario.txtDireccionEmpresa.getText().isEmpty()
-					||formulario.txtTelefonoEmpresa.getText().isEmpty()
-					||formulario.txtRTNempresa.getText().isEmpty()
-					||formulario.txtDireccionLogoEmpresa.getText().isEmpty()
-					||formulario.txtDireccionFotoEmpresa.getText().isEmpty()
-					||formulario.txtCorreoEmpresa.getText().isEmpty()
-					||formulario.txtCuentaEmpresa.getText().isEmpty()) {
-				
+			if (formulario.txtNombreEmpresa.getText().isEmpty() || formulario.txtDireccionEmpresa.getText().isEmpty()
+					|| formulario.txtTelefonoEmpresa.getText().isEmpty() || formulario.txtRTNempresa.getText().isEmpty()
+					|| formulario.txtDireccionLogoEmpresa.getText().isEmpty()
+					|| formulario.txtDireccionFotoEmpresa.getText().isEmpty()
+					|| formulario.txtCorreoEmpresa.getText().isEmpty()
+					|| formulario.txtCuentaEmpresa.getText().isEmpty()) {
+
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la informacion.");
 
 			} else {
@@ -123,7 +120,7 @@ public class control_empresa implements ActionListener {
 				clase.setCorreo_empresa(formulario.txtCorreoEmpresa.getText().toString());
 				clase.setCuenta_bancaria_empresa(formulario.txtCuentaEmpresa.getText().toString());
 				clase.setId_empresa(Integer.parseInt(formulario.txtCodigoEmpresa.getText()));
-				
+
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! se actualizo la informacion de la empresa!");
 					formulario.txtCodigoEmpresa.setVisible(false);
@@ -146,9 +143,9 @@ public class control_empresa implements ActionListener {
 					formulario.btnVerFotoEmpresa.setVisible(true);
 					formulario.btnVerLogoEmpresa.setVisible(true);
 					formulario.btnCancelar.setVisible(false);
-					
+
 					formulario.btnActualizarDatos.setVisible(true);
-					
+
 					String foto = formulario.txtDireccionFotoEmpresa.getText().toString();
 					String logo = formulario.txtDireccionLogoEmpresa.getText().toString();
 					final ImageIcon foto_empresa = new ImageIcon(foto);
@@ -166,8 +163,7 @@ public class control_empresa implements ActionListener {
 				}
 
 			}
+
 		}
 	}
 }
-
-

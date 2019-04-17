@@ -7,8 +7,6 @@ import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -30,13 +28,7 @@ import controles.control_contrato_empleado;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
-import ventanas.visor_imagen;
-
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,16 +39,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
-
-import java.sql.Connection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import clases.empresa;
-import conexion.conexion;
-import java.awt.Window.Type;
 
 public class ventana_principal extends JFrame {
 
@@ -112,6 +94,7 @@ public class ventana_principal extends JFrame {
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		contentPane.add(btnInformacionEmpresa);
 		btnInformacionEmpresa.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				empresa clase = new empresa();
 				consultas_empresa consulta = new consultas_empresa();

@@ -41,7 +41,6 @@ import conexion.conexion;
 import controles.control_contrato_empleado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
-import java.awt.Window.Type;
 
 public class registro_contratos_empleados extends JFrame {
 	public JComboBox<?> cbxTiempoContratoEmpleado;

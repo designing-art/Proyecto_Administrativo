@@ -1,6 +1,7 @@
 package formularios;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -31,11 +32,11 @@ import com.placeholder.PlaceHolder;
 
 import clases.empresa;
 import consultas.consultas_empresa;
-import ventanas.visor_imagen;
+import utilidades.visor_imagen;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
-import java.awt.Window.Type;
 
 public class registro_empresa extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -52,12 +53,19 @@ public class registro_empresa extends JFrame {
 	public JLabel lblLogoEmpresa;
 	public JPanel contentPane;
 
+	public static String ruta;
+	public static ImageIcon imagen;
+	public static ImageIcon imagenLogo;
+	public static ImageIcon imagenFoto;
+
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
+	
+
 
 	public ImageIcon logoCanal = new ImageIcon(getClass().getResource("/material/logo.png"));
 	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/material/logoEmpresa.jpg"));
-	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libro_empresa.png"));
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libro.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/material/logof.jpg"));
 	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/material/logoy.jpg"));
@@ -108,6 +116,7 @@ public class registro_empresa extends JFrame {
 
 		btnActualizarDatos = new JButton("Actualizar Datos");
 		btnActualizarDatos.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				txtCodigoEmpresa.setEditable(true);
 				txtNombreEmpresa.setEditable(true);
@@ -170,10 +179,17 @@ public class registro_empresa extends JFrame {
 		btnVerFotoEmpresa = new JButton("Ver");
 		btnVerFotoEmpresa.setBounds(203, 280, 83, 23);
 		panel.add(btnVerFotoEmpresa);
+		btnVerFotoEmpresa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				verFoto();
+			}
+		});
 		btnVerFotoEmpresa.setBackground(Color.WHITE);
 
 		btnSubirFotoEmpresa = new JButton("Subir");
 		btnSubirFotoEmpresa.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				selecionarFoto();
 			}
@@ -202,15 +218,9 @@ public class registro_empresa extends JFrame {
 
 		btnVerLogoEmpresa = new JButton("Ver");
 		btnVerLogoEmpresa.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (txtDireccionLogoEmpresa.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
-				} else {
-					visor_imagen visor = new visor_imagen();
-					visor.setVisible(true);
-					visor.setLocationRelativeTo(null);
-					visor.verImagenLogo();
-				}
+				verLogo();
 			}
 		});
 		btnVerLogoEmpresa.setBounds(203, 99, 83, 23);
@@ -219,6 +229,7 @@ public class registro_empresa extends JFrame {
 
 		btnSubirLogoEmpresa = new JButton("Subir");
 		btnSubirLogoEmpresa.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				selecionarLogo();
 			}
@@ -240,6 +251,7 @@ public class registro_empresa extends JFrame {
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				txtCodigoEmpresa.setVisible(false);
 				txtNombreEmpresa.setEditable(false);
@@ -527,4 +539,33 @@ public class registro_empresa extends JFrame {
 			}
 		}
 	}
+
+	public void verFoto() {
+		visor_imagen visor = new visor_imagen();
+		ruta = txtDireccionFotoEmpresa.getText().toString();
+		visor.txtRutaImagen.setText(ruta);
+		visor.setVisible(true);
+		visor.setLocationRelativeTo(null);
+		if (visor.txtRutaImagen.equals(null)) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
+		}
+	}
+
+	public void verLogo() {
+		visor_imagen visor = new visor_imagen();
+		ruta = txtDireccionLogoEmpresa.getText().toString();
+		visor.txtRutaImagen.setText(ruta);
+		visor.setVisible(true);
+		visor.setLocationRelativeTo(null);
+		if (visor.txtRutaImagen.equals(null)) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
+		}
+	}
+
 }

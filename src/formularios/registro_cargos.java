@@ -40,7 +40,6 @@ import controles.control_cargo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import java.awt.Window.Type;
 
 public class registro_cargos extends JFrame {
 	public JComboBox<?> cbxTipoCargo;
