@@ -60,8 +60,6 @@ public class registro_empresa extends JFrame {
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
-	
-
 
 	public ImageIcon logoCanal = new ImageIcon(getClass().getResource("/material/logo.png"));
 	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/material/logoEmpresa.jpg"));
@@ -541,28 +539,28 @@ public class registro_empresa extends JFrame {
 	}
 
 	public void verFoto() {
-		visor_imagen visor = new visor_imagen();
-		ruta = txtDireccionFotoEmpresa.getText().toString();
-		visor.txtRutaImagen.setText(ruta);
-		visor.setVisible(true);
-		visor.setLocationRelativeTo(null);
-		if (visor.txtRutaImagen.equals(null)) {
+		if (txtDireccionFotoEmpresa.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
 		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtDireccionFotoEmpresa.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
 			imagen = new ImageIcon(ruta);
 			visor_imagen.lblImagen.setIcon(imagen);
 		}
 	}
 
 	public void verLogo() {
-		visor_imagen visor = new visor_imagen();
-		ruta = txtDireccionLogoEmpresa.getText().toString();
-		visor.txtRutaImagen.setText(ruta);
-		visor.setVisible(true);
-		visor.setLocationRelativeTo(null);
-		if (visor.txtRutaImagen.equals(null)) {
+		if (txtDireccionLogoEmpresa.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
 		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtDireccionLogoEmpresa.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
 			imagen = new ImageIcon(ruta);
 			visor_imagen.lblImagen.setIcon(imagen);
 		}

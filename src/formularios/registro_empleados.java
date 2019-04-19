@@ -9,6 +9,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Event;
 
@@ -54,6 +56,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 
 import conexion.conexion;
 import controles.control_empleado;
+import utilidades.visor_imagen;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -81,7 +84,10 @@ public class registro_empleados extends JFrame {
 	public JDateChooser dateFechaRegistro;
 	public JDateChooser dateFechaNacimiento;
 	public PlaceHolder pista;
-	
+	public JButton btnVerFotoEmpleado;
+	public static String ruta;
+	public static ImageIcon imagen;
+
 	public JTextField txtBusquedaEmpleado;
 	public JLabel lblAreasDelModulo;
 	public JComboBox comboBox;
@@ -95,10 +101,10 @@ public class registro_empleados extends JFrame {
 	public JButton btnMenuInicial;
 	public JTable tablaEmpleados;
 	public JScrollPane barraTablaEmpleados;
-	
+
 	public TableRowSorter trsfiltroCodigoEmpleado;
 	String filtroCodigoEmpleado;
-	
+
 	public JButton btnBorrarEmpleado;
 	public JButton btnActualizarDatosEmpleado;
 	public JButton btnMostrarEmpleado;
@@ -574,6 +580,16 @@ public class registro_empleados extends JFrame {
 				lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpleado.setIcon(logoFoto);
 
+		btnVerFotoEmpleado = new JButton("Ver");
+		btnVerFotoEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				verFotoEmpleado();
+			}
+		});
+		btnVerFotoEmpleado.setBackground(Color.WHITE);
+		btnVerFotoEmpleado.setBounds(450, 139, 83, 23);
+		panel.add(btnVerFotoEmpleado);
+
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 571, 604);
 		panel.add(label);
@@ -591,22 +607,22 @@ public class registro_empleados extends JFrame {
 		btnRegresar_1.setBackground(new Color(255, 165, 0));
 		btnRegresar_1.setBounds(1122, 11, 99, 23);
 		contentPane.add(btnRegresar_1);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(599, 54, 622, 605);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		JLabel lblEmpleadosRegistrados = new JLabel("Empleados registrados :");
 		lblEmpleadosRegistrados.setBounds(34, 54, 206, 19);
 		panel_1.add(lblEmpleadosRegistrados);
 		lblEmpleadosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		
+
 		JLabel label_2 = new JLabel("Buscar empleado :");
 		label_2.setBounds(34, 81, 142, 14);
 		panel_1.add(label_2);
 		label_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		
+
 		txtBusquedaEmpleado = new JTextField();
 		txtBusquedaEmpleado.setBounds(157, 78, 360, 20);
 		panel_1.add(txtBusquedaEmpleado);
@@ -635,47 +651,49 @@ public class registro_empleados extends JFrame {
 				filtro();
 			}
 		});
-		
-		barraTablaEmpleados = new JScrollPane(tablaEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		barraTablaEmpleados = new JScrollPane(tablaEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		barraTablaEmpleados.setBounds(34, 109, 553, 422);
 		panel_1.add(barraTablaEmpleados);
-		
+
 		tablaEmpleados = new JTable();
 		barraTablaEmpleados.setViewportView(tablaEmpleados);
-		
-		
+
 		btnBorrarEmpleado = new JButton("Borrar");
 		btnBorrarEmpleado.setBounds(34, 542, 99, 23);
 		panel_1.add(btnBorrarEmpleado);
 		btnBorrarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarEmpleado.setBackground(new Color(220, 20, 60));
-		
+
 		btnMostrarEmpleado = new JButton("Ver detalles");
 		btnMostrarEmpleado.setBounds(332, 542, 108, 23);
 		panel_1.add(btnMostrarEmpleado);
 		btnMostrarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnMostrarEmpleado.setBackground(new Color(0, 206, 209));
-		
+
 		btnActualizarDatosEmpleado = new JButton("Actualizar Datos");
 		btnActualizarDatosEmpleado.setBounds(450, 542, 137, 23);
 		panel_1.add(btnActualizarDatosEmpleado);
 		btnActualizarDatosEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosEmpleado.setBackground(new Color(60, 179, 113));
-		
+
 		JLabel label_6 = new JLabel();
 		label_6.setBounds(527, 54, 58, 50);
 		panel_1.add(label_6);
 		final ImageIcon iconoo22 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon logo12 = new ImageIcon(iconoo22.getImage().getScaledInstance(label_6.getWidth(),label_6.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo12 = new ImageIcon(
+				iconoo22.getImage().getScaledInstance(label_6.getWidth(), label_6.getHeight(), Image.SCALE_DEFAULT));
 		label_6.setIcon(logo12);
-		
+
 		JLabel lblEmpleados = new JLabel("");
 		lblEmpleados.setBounds(0, 0, 622, 605);
 		panel_1.add(lblEmpleados);
 		final ImageIcon iconoo = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon logo11 = new ImageIcon(iconoo.getImage().getScaledInstance(lblEmpleados.getWidth(),lblEmpleados.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logo11 = new ImageIcon(iconoo.getImage().getScaledInstance(lblEmpleados.getWidth(),
+				lblEmpleados.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpleados.setIcon(logo11);
-		
+
 		btnRegresar_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -754,11 +772,11 @@ public class registro_empleados extends JFrame {
 
 		}
 	}
-	
+
 	public void construirTablaEmpleados() {
-		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero",
-				"Edad", "Telefono", "Correo", "Direccion", "Foto", "Nombre_Referencia",
-				"Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro", "Fecha_Labores", "Estado" };
+		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero", "Edad", "Telefono", "Correo",
+				"Direccion", "Foto", "Nombre_Referencia", "Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro",
+				"Fecha_Labores", "Estado" };
 		String informacion[][] = control_empleado.obtenerMatriz();
 		tablaEmpleados = new JTable(informacion, titulos);
 		barraTablaEmpleados.setViewportView(tablaEmpleados);
@@ -773,7 +791,22 @@ public class registro_empleados extends JFrame {
 
 	public void filtro() {
 		filtroCodigoEmpleado = txtBusquedaEmpleado.getText();
-		trsfiltroCodigoEmpleado.setRowFilter(RowFilter.regexFilter(txtBusquedaEmpleado.getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
+		trsfiltroCodigoEmpleado.setRowFilter(RowFilter.regexFilter(txtBusquedaEmpleado.getText(), 0, 1, 2, 3, 4, 5, 6,
+				7, 8, 9, 10, 11, 12, 13, 14, 15));
+	}
+
+	public void verFotoEmpleado() {
+		if (txtDireccionFoto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtDireccionFoto.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
+		}
 	}
 
 	public void obtenerUltimoId() {

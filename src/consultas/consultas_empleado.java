@@ -51,7 +51,7 @@ public class consultas_empleado extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE empleados SET id_empleado=?, nombres_empleado=?, apellidos_empleado=?, identidad_empleado=?, genero_empleado=?, edad_empleado=?, telefono1_empleado=?, telefono2_empleado=?, correo_empleado=?, direccion_empleado=?, foto_empleado=?, referencia_empleado=?, telefono_referencia=?, fecha_nacimiento_empleado=?, fecha_registro_empleado=?, fecha_inicio_labores_empleado=?, estado_empleado=? WHERE id_empleados=? ";
+		String sql = "UPDATE empleados SET id_empleado=?, nombres_empleado=?, apellidos_empleado=?, identidad_empleado=?, genero_empleado=?, edad_empleado=?, telefono_empleado=?, correo_empleado=?, direccion_empleado=?, direccion_foto_empleado=?, referencia_empleado=?, telefono_referencia=?, fecha_nacimiento_empleado=?, fecha_registro_empleado=?, fecha_inicio_labores_empleado=?, estado_empleado=? WHERE id_empleado=? ";
 
 		try {
 			ps = con.prepareStatement(sql);

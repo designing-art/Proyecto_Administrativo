@@ -148,20 +148,16 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
-					
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese nombres del empleado.")
 					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese apellidos del empleado.")
-					|| formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
-					|| formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
 					|| formularioEmpleado.txtCorreoEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese el correo del empleado.")
 					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
 					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
 					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Dar Click ->")
 					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
 					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
 					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
@@ -252,6 +248,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
 					formularioEmpleado.btnTomarFoto.setEnabled(false);
 					formularioEmpleado.btnSubirFoto.setEnabled(false);
+					formularioEmpleado.btnVerFotoEmpleado.setEnabled(false);
 						
 					
 				}
