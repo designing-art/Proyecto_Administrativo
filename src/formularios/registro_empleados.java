@@ -39,6 +39,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -381,7 +382,7 @@ public class registro_empleados extends JFrame {
 
 		dateFechaLabores = new JDateChooser();
 		dateFechaLabores.setBounds(199, 478, 133, 20);
-		dateFechaLabores.setDateFormatString("dd-M-yyyy");
+		dateFechaLabores.setDateFormatString("dd-MMMMM-yyyy");
 		panel.add(dateFechaLabores);
 		editor = (JTextFieldDateEditor) dateFechaLabores.getDateEditor();
 		editor.setEditable(false);
@@ -389,7 +390,7 @@ public class registro_empleados extends JFrame {
 
 		dateFechaRegistro = new JDateChooser();
 		dateFechaRegistro.setBounds(354, 407, 179, 20);
-		dateFechaRegistro.setDateFormatString("dd-M-yyyy");
+		dateFechaRegistro.setDateFormatString("dd-MMMMM-yyyy");
 		panel.add(dateFechaRegistro);
 		editor2 = (JTextFieldDateEditor) dateFechaRegistro.getDateEditor();
 		editor2.setEditable(false);
@@ -398,7 +399,7 @@ public class registro_empleados extends JFrame {
 
 		dateFechaNacimiento = new JDateChooser();
 		dateFechaNacimiento.setBounds(199, 331, 132, 20);
-		dateFechaNacimiento.setDateFormatString("dd-M-yyyy");
+		dateFechaNacimiento.setDateFormatString("dd-MMMMM-yyyy");
 		panel.add(dateFechaNacimiento);
 		editor3 = (JTextFieldDateEditor) dateFechaNacimiento.getDateEditor();
 		editor3.setEditable(false);
