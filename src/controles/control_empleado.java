@@ -2,6 +2,7 @@ package controles;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import clases.empleado;
@@ -66,21 +68,17 @@ public class control_empleado implements ActionListener {
 							.equalsIgnoreCase("Ingrese nombres del empleado.")
 					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese apellidos del empleado.")
-					|| formularioEmpleado.txtIdentidadEmpleado.getText().equals("   -   -     ")
-					|| formularioEmpleado.txtTelefonoEmpleado.getText().equals("+(504)   -    ")
 					|| formularioEmpleado.txtCorreoEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese el correo del empleado.")
 					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
-					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Dar Click ->")
-					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
-					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
-					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Calcular edad ->")
+					|| formularioEmpleado.editor.getText().toString().equalsIgnoreCase("")
+					|| formularioEmpleado.editor2.getText().toString().equalsIgnoreCase("")
+					|| formularioEmpleado.editor3.getText().toString().equalsIgnoreCase("")
+					
 					|| formularioEmpleado.txtNombreReferencia.getText().toString()
-							.equalsIgnoreCase("Ingrese nombre completo de la referencia.")
-					|| formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
+							.equalsIgnoreCase("Ingrese nombre completo de la referencia."))
 
 			{
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar los datos del empleado!");
@@ -114,7 +112,7 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
 				if (consultaEmpleado.registrar(claseEmpleado)) {
-					JOptionPane.showMessageDialog(null, "Registro Guardado");
+					JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
 					limpiar();
 					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
 					formularioEmpleado.obtenerUltimoId();
@@ -128,6 +126,13 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
 					formularioEmpleado.btnCancelarEmpleado.setVisible(false);
 					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
+					formularioEmpleado.btnCalcularEdad.setBackground(Color.RED);
+					formularioEmpleado.txtDireccionFoto.setText("");
+					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
+							.getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(), formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Error al Guardar");
 					limpiar();
@@ -139,6 +144,8 @@ public class control_empleado implements ActionListener {
 		if (e.getSource() == formularioEmpleado.btnActualizarEmpleado) {
 
 			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
+					
+					//validaciones para datos vacios
 					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
@@ -148,6 +155,8 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
+					
+					//validaciones para datos con mascara y pista.
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese nombres del empleado.")
 					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
@@ -156,21 +165,21 @@ public class control_empleado implements ActionListener {
 							.equalsIgnoreCase("Ingrese el correo del empleado.")
 					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
-					|| formularioEmpleado.txtDireccionFoto.getText().equals("")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("")
-					|| formularioEmpleado.dateFechaNacimiento.getDate().toString().isEmpty()
-					|| formularioEmpleado.dateFechaRegistro.getDate().toString().isEmpty()
-					|| formularioEmpleado.dateFechaLabores.getDate().toString().isEmpty()
+					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Calcular edad ->")
+					|| formularioEmpleado.editor.getText().toString().equalsIgnoreCase("")
+					|| formularioEmpleado.editor2.getText().toString().equalsIgnoreCase("")
+					|| formularioEmpleado.editor3.getText().toString().equalsIgnoreCase("")
+					
 					|| formularioEmpleado.txtNombreReferencia.getText().toString()
-							.equalsIgnoreCase("Ingrese nombre completo de la referencia.")
-					|| formularioEmpleado.txtTelefonoReferencia.getText().equals("+(504)   -    "))
+							.equalsIgnoreCase("Ingrese nombre completo de la referencia."))
 
 			{
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar los datos del empleado!");
 
 			} else {
-				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
-				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+				claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
+				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText().toString());
+				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText().toString());
 				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
 				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
 				int año1 = formularioEmpleado.dateFechaNacimiento.getCalendar().get(Calendar.YEAR);
@@ -196,9 +205,27 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-				if (consultaEmpleado.modificar(claseEmpleado)) {
-					JOptionPane.showMessageDialog(null, "Registro Modificado");
+				if (consultaEmpleado.modificar(claseEmpleado)) 
+				{
+					JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
 					limpiar();
+					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+					formularioEmpleado.obtenerUltimoId();
+					formularioEmpleado.pistas();
+					formularioEmpleado.establecerFechaRegistro();
+					formularioEmpleado.construirTablaEmpleados();
+					formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+					formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
+					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+					formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
+					final ImageIcon icono = new ImageIcon(getClass().getResource("/material/usuario.png"));
+					final ImageIcon iconofoto = new ImageIcon(icono.getImage()
+							.getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(), formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Error al Modificar");
 					limpiar();
@@ -240,6 +267,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
 					formularioEmpleado.txtDireccionEmpleado.setBackground(Color.LIGHT_GRAY);
 					formularioEmpleado.txtDireccionFoto.setEditable(false);
+					formularioEmpleado.txtDireccionFoto.setText("");
 					formularioEmpleado.txtNombreReferencia.setEditable(false);
 					formularioEmpleado.txtTelefonoReferencia.setEditable(false);
 					formularioEmpleado.dateFechaNacimiento.setEnabled(false);
@@ -249,6 +277,12 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.btnTomarFoto.setEnabled(false);
 					formularioEmpleado.btnSubirFoto.setEnabled(false);
 					formularioEmpleado.btnVerFotoEmpleado.setEnabled(false);
+					
+					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/usuario.png"));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
+							.getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(), formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+					
 						
 					
 				}
@@ -290,18 +324,26 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.txtNombreReferencia.setEditable(true);
 			formularioEmpleado.txtTelefonoReferencia.setEditable(true);
 			formularioEmpleado.txtTelefonoReferencia.setText(null);
-			formularioEmpleado.dateFechaNacimiento.setEnabled(true);
 			formularioEmpleado.dateFechaRegistro.setVisible(false);
-			formularioEmpleado.dateFechaLabores.setEnabled(true);
 			formularioEmpleado.cbxEstadoEmpleado.setEditable(true);
 			formularioEmpleado.btnTomarFoto.setEnabled(true);
 			formularioEmpleado.btnSubirFoto.setEnabled(true);
 			formularioEmpleado.lblFechaDeRegistro.setVisible(false);
+			formularioEmpleado.txtDireccionEmpleado.setBackground(Color.WHITE);
+			formularioEmpleado.txtIdentidadEmpleado.setEditable(true);
+			
+			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/usuario.png"));
+			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
+					.getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(), formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+			formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+			
+			
 		}
 		
 		
-		/* Limpiar */
+		/* Nuevo */
 		if (e.getSource() == formularioEmpleado.btnNuevoEmpleado) {
+			limpiar();
 			formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
 			formularioEmpleado.obtenerUltimoId();
 			formularioEmpleado.pistas();
@@ -313,7 +355,40 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
 			formularioEmpleado.btnActualizarEmpleado.setVisible(false);
 			formularioEmpleado.btnCancelarEmpleado.setVisible(false);
-			formularioEmpleado.btnBorrarEmpleado.setVisible(false);		
+			formularioEmpleado.btnBorrarEmpleado.setVisible(false);	
+			
+			
+			formularioEmpleado.txtNombresEmpleado.setEditable(true);
+			formularioEmpleado.txtApellidosEmpleado.setEditable(true);
+			formularioEmpleado.txtIdentidadEmpleado.setEnabled(true);
+			formularioEmpleado.cbxGeneroEmpleado.setEditable(true);
+			formularioEmpleado.txtEdadEmpleado.setEditable(true);
+			formularioEmpleado.txtTelefonoEmpleado.setEditable(true);
+			formularioEmpleado.txtTelefonoEmpleado.setText(null);
+			formularioEmpleado.txtCorreoEmpleado.setEditable(true);
+			formularioEmpleado.txtDireccionEmpleado.setEditable(true);
+			formularioEmpleado.txtDireccionFoto.setEditable(false);
+			formularioEmpleado.txtDireccionFoto.setText(null);
+			formularioEmpleado.txtNombreReferencia.setEditable(true);
+			formularioEmpleado.txtTelefonoReferencia.setEditable(true);
+			formularioEmpleado.txtTelefonoReferencia.setText(null);
+			formularioEmpleado.dateFechaRegistro.setVisible(false);
+			formularioEmpleado.cbxEstadoEmpleado.setEditable(true);
+			formularioEmpleado.btnTomarFoto.setEnabled(true);
+			formularioEmpleado.btnSubirFoto.setEnabled(true);
+			formularioEmpleado.lblFechaDeRegistro.setVisible(false);
+			formularioEmpleado.txtDireccionEmpleado.setBackground(Color.WHITE);
+			formularioEmpleado.txtIdentidadEmpleado.setEditable(true);
+			
+			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/usuario.png"));
+			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
+					.getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(), formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+			formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+			
+			
+
+			
+			
 		}
 
 		/* Pasar datos de la tabla al formulario para actualizar */
@@ -351,13 +426,17 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtCorreoEmpleado.setText(correo);
 					formularioEmpleado.txtDireccionEmpleado.setText(direccion);
 					formularioEmpleado.txtDireccionFoto.setText(direccion_foto);
+					final ImageIcon foto_contrato = new ImageIcon(direccion_foto);
+					final ImageIcon logo = new ImageIcon(
+							foto_contrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
+									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+					formularioEmpleado.lblFotoEmpleado.setIcon(logo);
 					formularioEmpleado.txtNombreReferencia.setText(referencia);
 					formularioEmpleado.txtTelefonoReferencia.setText(t_referencia);
-					formularioEmpleado.dateFechaNacimiento.setDateFormatString(fecha_nac);
-					formularioEmpleado.dateFechaRegistro.setDateFormatString(fecha_reg);
-					formularioEmpleado.dateFechaLabores.setDateFormatString(fecha_lab);
+					formularioEmpleado.editor3.setText(fecha_nac);
+					formularioEmpleado.editor2.setText(fecha_reg);
+					formularioEmpleado.editor.setText(fecha_lab);
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
-
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
@@ -370,9 +449,9 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtDireccionFoto.setForeground(Color.BLACK);
 					formularioEmpleado.txtNombreReferencia.setForeground(Color.BLACK);
 					formularioEmpleado.txtTelefonoReferencia.setForeground(Color.BLACK);
-					formularioEmpleado.dateFechaNacimiento.setForeground(Color.BLACK);
-					formularioEmpleado.dateFechaRegistro.setForeground(Color.BLACK);
-					formularioEmpleado.dateFechaLabores.setForeground(Color.BLACK);
+					formularioEmpleado.editor3.setForeground(Color.BLACK);
+					formularioEmpleado.editor2.setForeground(Color.BLACK);
+					formularioEmpleado.editor.setForeground(Color.BLACK);
 					formularioEmpleado.cbxEstadoEmpleado.setForeground(Color.BLACK);
 
 					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
@@ -381,10 +460,8 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
 					formularioEmpleado.btnBorrarEmpleado.setVisible(true);
 					formularioEmpleado.btnMostrarEmpleado.setVisible(false);
-					formularioEmpleado.dateFechaRegistro.setVisible(true);
-					formularioEmpleado.dateFechaRegistro.setEnabled(false);
 					formularioEmpleado.lblFechaDeRegistro.setVisible(true);
-					
+					formularioEmpleado.dateFechaRegistro.setVisible(true);	
 				}
 
 			} catch (HeadlessException ex) {
@@ -392,6 +469,104 @@ public class control_empleado implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		/* Pasar datos de la tabla al formulario para visualizar */
+		if (e.getSource() == formularioEmpleado.btnMostrarEmpleado) {
+			int filaseleccionada;
+			try {
+				filaseleccionada = formularioEmpleado.tablaEmpleados.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String codigo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 0).toString();
+					String nombres = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 1).toString();
+					String apellidos = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 2).toString();
+					String identidad = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String genero = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 4).toString();
+					String edad = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 5).toString();
+					String telefono = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 6).toString();
+					String correo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 7).toString();
+					String direccion = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 8).toString();
+					String direccion_foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9).toString();
+					String referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 10).toString();
+					String t_referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 11).toString();
+					String fecha_nac = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 12).toString();
+					String fecha_reg = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 13).toString();
+					String fecha_lab = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 14).toString();
+					String estado = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 15).toString();
+
+					formularioEmpleado.txtCodigoEmpleado.setText(codigo);
+					formularioEmpleado.txtNombresEmpleado.setText(nombres);
+					formularioEmpleado.txtApellidosEmpleado.setText(apellidos);
+					formularioEmpleado.txtIdentidadEmpleado.setText(identidad);
+					formularioEmpleado.cbxGeneroEmpleado.setSelectedItem(genero);
+					formularioEmpleado.txtEdadEmpleado.setText(edad);
+					formularioEmpleado.txtTelefonoEmpleado.setText(telefono);
+					formularioEmpleado.txtCorreoEmpleado.setText(correo);
+					formularioEmpleado.txtDireccionEmpleado.setText(direccion);
+					formularioEmpleado.txtDireccionFoto.setText(direccion_foto);
+					final ImageIcon foto_contrato = new ImageIcon(direccion_foto);
+					final ImageIcon logo = new ImageIcon(
+							foto_contrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
+									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+					formularioEmpleado.lblFotoEmpleado.setIcon(logo);
+					formularioEmpleado.txtNombreReferencia.setText(referencia);
+					formularioEmpleado.txtTelefonoReferencia.setText(t_referencia);
+					formularioEmpleado.editor3.setText(fecha_nac);
+					formularioEmpleado.editor2.setText(fecha_reg);
+					formularioEmpleado.editor.setText(fecha_lab);
+					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
+					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtIdentidadEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.cbxGeneroEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtEdadEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtTelefonoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtCorreoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtDireccionEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.txtDireccionEmpleado.setBackground(Color.LIGHT_GRAY);
+					formularioEmpleado.txtDireccionFoto.setForeground(Color.BLACK);
+					formularioEmpleado.txtNombreReferencia.setForeground(Color.BLACK);
+					formularioEmpleado.txtTelefonoReferencia.setForeground(Color.BLACK);
+					formularioEmpleado.editor3.setForeground(Color.BLACK);
+					formularioEmpleado.editor2.setForeground(Color.BLACK);
+					formularioEmpleado.editor.setForeground(Color.BLACK);
+					formularioEmpleado.cbxEstadoEmpleado.setForeground(Color.BLACK);
+
+					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
+					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
+					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(false);
+					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
+					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
+					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+					formularioEmpleado.lblFechaDeRegistro.setVisible(true);
+					formularioEmpleado.dateFechaRegistro.setVisible(true);
+					
+					formularioEmpleado.txtNombresEmpleado.setEditable(false);
+					formularioEmpleado.txtApellidosEmpleado.setEditable(false);
+					formularioEmpleado.txtIdentidadEmpleado.setEditable(false);
+					formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
+					formularioEmpleado.txtEdadEmpleado.setEditable(false);
+					formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
+					formularioEmpleado.txtCorreoEmpleado.setEditable(false);
+					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
+					formularioEmpleado.txtDireccionFoto.setEditable(false);
+					formularioEmpleado.txtNombreReferencia.setEditable(false);
+					formularioEmpleado.txtTelefonoReferencia.setEditable(false);
+					formularioEmpleado.editor3.setEditable(false);
+					formularioEmpleado.editor2.setEditable(false);
+					formularioEmpleado.editor.setEditable(false);
+					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
 
 	}
 
@@ -405,9 +580,9 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.txtDireccionEmpleado.setText(null);
 		formularioEmpleado.txtNombreReferencia.setText(null);
 		formularioEmpleado.txtTelefonoReferencia.setText(null);
-		formularioEmpleado.dateFechaLabores.setToolTipText(null);
-		formularioEmpleado.dateFechaNacimiento.setToolTipText(null);
-		formularioEmpleado.dateFechaRegistro.setToolTipText(null);
+		formularioEmpleado.editor.setText("");
+		formularioEmpleado.editor2.setText("");
+		formularioEmpleado.editor3.setText("");
 		formularioEmpleado.cbxEstadoEmpleado.setToolTipText(null);
 	}
 

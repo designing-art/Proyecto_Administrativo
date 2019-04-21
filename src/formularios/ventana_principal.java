@@ -103,6 +103,7 @@ public class ventana_principal extends JFrame {
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.mostrarEmpresa();
+				formulario.pistas();
 				dispose();
 			}
 		});
@@ -182,9 +183,11 @@ public class ventana_principal extends JFrame {
 				formulario.construirTablaEmpleados();
 				formulario.btnGuardarEmpleado.setVisible(true);
 				formulario.btnNuevoEmpleado.setVisible(true);
+				formulario.btnMostrarEmpleado.setVisible(true);
+				formulario.btnActualizarDatosEmpleado.setVisible(true);
 				formulario.btnActualizarEmpleado.setVisible(false);
 				formulario.btnCancelarEmpleado.setVisible(false);
-				formulario.btnBorrarEmpleado.setVisible(false);
+				formulario.btnBorrarEmpleado.setVisible(false);	
 				dispose();
 			}
 		});

@@ -34,12 +34,23 @@ public class control_empresa implements ActionListener {
 		/* Insertar */
 		if (e.getSource() == formulario.btnGuardarEmpresa) {
 
-			if (formulario.txtNombreEmpresa.getText().isEmpty() || formulario.txtDireccionEmpresa.getText().isEmpty()
-					|| formulario.txtTelefonoEmpresa.getText().isEmpty() || formulario.txtRTNempresa.getText().isEmpty()
+			if (// validar datos vacios
+					formulario.txtNombreEmpresa.getText().isEmpty() 
+					|| formulario.txtDireccionEmpresa.getText().isEmpty()
+					|| formulario.txtTelefonoEmpresa.getText().isEmpty() 
+					|| formulario.txtRTNempresa.getText().isEmpty()
 					|| formulario.txtDireccionLogoEmpresa.getText().isEmpty()
 					|| formulario.txtDireccionFotoEmpresa.getText().isEmpty()
 					|| formulario.txtCorreoEmpresa.getText().isEmpty()
-					|| formulario.txtCuentaEmpresa.getText().isEmpty()) {
+					|| formulario.txtCuentaEmpresa.getText().isEmpty()
+					// validar pistas
+					|| formulario.txtNombreEmpresa.getText().equalsIgnoreCase("Ingrese el nombre de la empresa.")
+					|| formulario.txtDireccionEmpresa.getText().equalsIgnoreCase("Ingrese la direccion de la empresa.")
+					|| formulario.txtCorreoEmpresa.getText().equalsIgnoreCase("Ingrese el correo del la empresa.")
+					|| formulario.txtCuentaEmpresa.getText().equalsIgnoreCase("Escriba la o las cuentas bancarias.")
+					// validar mascaras
+					|| formulario.txtTelefonoEmpresa.getText().equalsIgnoreCase("   -    ")
+					|| formulario.txtRTNempresa.getText().equalsIgnoreCase("              ")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la informacion!");
 
 			} else {
@@ -99,12 +110,23 @@ public class control_empresa implements ActionListener {
 		/* Actualizar */
 		if (e.getSource() == formulario.btnActualizarEmpresa) {
 
-			if (formulario.txtNombreEmpresa.getText().isEmpty() || formulario.txtDireccionEmpresa.getText().isEmpty()
-					|| formulario.txtTelefonoEmpresa.getText().isEmpty() || formulario.txtRTNempresa.getText().isEmpty()
+			if (// validar datos vacios
+					formulario.txtNombreEmpresa.getText().isEmpty() 
+					|| formulario.txtDireccionEmpresa.getText().isEmpty()
+					|| formulario.txtTelefonoEmpresa.getText().isEmpty() 
+					|| formulario.txtRTNempresa.getText().isEmpty()
 					|| formulario.txtDireccionLogoEmpresa.getText().isEmpty()
 					|| formulario.txtDireccionFotoEmpresa.getText().isEmpty()
 					|| formulario.txtCorreoEmpresa.getText().isEmpty()
-					|| formulario.txtCuentaEmpresa.getText().isEmpty()) {
+					|| formulario.txtCuentaEmpresa.getText().isEmpty()
+					// validar pistas
+					|| formulario.txtNombreEmpresa.getText().equalsIgnoreCase("Ingrese el nombre de la empresa.")
+					|| formulario.txtDireccionEmpresa.getText().equalsIgnoreCase("Ingrese la direccion de la empresa.")
+					|| formulario.txtCorreoEmpresa.getText().equalsIgnoreCase("Ingrese el correo del la empresa.")
+					|| formulario.txtCuentaEmpresa.getText().equalsIgnoreCase("Escriba la o las cuentas bancarias.")
+					// validar mascaras
+					|| formulario.txtTelefonoEmpresa.getText().equalsIgnoreCase("   -    ")
+					|| formulario.txtRTNempresa.getText().equalsIgnoreCase("              ")) {
 
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la informacion.");
 

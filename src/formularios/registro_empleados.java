@@ -77,7 +77,6 @@ public class registro_empleados extends JFrame {
 	public JComboBox<?> cbxGeneroEmpleado;
 	public JComboBox<?> cbxEstadoEmpleado;
 	public JLabel lblFotoEmpleado;
-	public JTextField lblFechaDeRegistro;
 	public JScrollPane scrollPane;
 	public JTextArea txtDireccionEmpleado;
 	public JDateChooser dateFechaLabores;
@@ -87,6 +86,11 @@ public class registro_empleados extends JFrame {
 	public JButton btnVerFotoEmpleado;
 	public static String ruta;
 	public static ImageIcon imagen;
+	public JLabel lblFechaDeRegistro;
+
+	public JTextFieldDateEditor editor;
+	public JTextFieldDateEditor editor2;
+	public JTextFieldDateEditor editor3;
 
 	public JTextField txtBusquedaEmpleado;
 	public JLabel lblAreasDelModulo;
@@ -121,9 +125,6 @@ public class registro_empleados extends JFrame {
 	public JTextField txtDireccionFoto;
 	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -289,12 +290,12 @@ public class registro_empleados extends JFrame {
 		lblEdad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtEdadEmpleado = new JTextField();
-		txtEdadEmpleado.setEditable(false);
 		txtEdadEmpleado.setBounds(199, 356, 111, 20);
 		txtEdadEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtEdadEmpleado.setColumns(10);
 		txtEdadEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(txtEdadEmpleado);
+		txtEdadEmpleado.setEditable(false);
 
 		JLabel lblGenero = new JLabel("5. Genero :");
 		lblGenero.setBounds(39, 193, 76, 17);
@@ -321,14 +322,14 @@ public class registro_empleados extends JFrame {
 		InputMap map8 = txtCorreoEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
-		JLabel lblTelefonos = new JLabel("7. Telefono :");
+		JLabel lblTelefonos = new JLabel("7.Nº Celular :");
 		lblTelefonos.setBounds(39, 244, 83, 14);
 		panel.add(lblTelefonos);
 		lblTelefonos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		MaskFormatter formatter1 = null;
 		try {
-			formatter1 = new MaskFormatter("+(504) ####-####");
+			formatter1 = new MaskFormatter("+504 ####-####");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -367,12 +368,11 @@ public class registro_empleados extends JFrame {
 		panel.add(lblFechaDeNacimiento);
 		lblFechaDeNacimiento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		lblFechaDeRegistro = new JTextField("16. Fecha de registro :");
-		lblFechaDeRegistro.setEditable(false);
+		lblFechaDeRegistro = new JLabel("16. Fecha de registro :");
 		lblFechaDeRegistro.setBounds(354, 382, 157, 20);
 		panel.add(lblFechaDeRegistro);
-		lblFechaDeRegistro.setVisible(false);
 		lblFechaDeRegistro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblFechaDeRegistro.setVisible(false);
 
 		JLabel lblFechaDeComienso = new JLabel("13. Fecha inicio labores :");
 		lblFechaDeComienso.setBounds(39, 478, 167, 20);
@@ -381,23 +381,28 @@ public class registro_empleados extends JFrame {
 
 		dateFechaLabores = new JDateChooser();
 		dateFechaLabores.setBounds(199, 478, 133, 20);
+		dateFechaLabores.setDateFormatString("dd-M-yyyy");
 		panel.add(dateFechaLabores);
-		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateFechaLabores.getDateEditor();
+		editor = (JTextFieldDateEditor) dateFechaLabores.getDateEditor();
 		editor.setEditable(false);
+		editor.setHorizontalAlignment(SwingConstants.CENTER);
 
 		dateFechaRegistro = new JDateChooser();
-		dateFechaRegistro.setBackground(Color.WHITE);
 		dateFechaRegistro.setBounds(354, 407, 179, 20);
+		dateFechaRegistro.setDateFormatString("dd-M-yyyy");
 		panel.add(dateFechaRegistro);
-		dateFechaRegistro.setVisible(false);
-		JTextFieldDateEditor editor2 = (JTextFieldDateEditor) dateFechaRegistro.getDateEditor();
+		editor2 = (JTextFieldDateEditor) dateFechaRegistro.getDateEditor();
 		editor2.setEditable(false);
+		editor2.setHorizontalAlignment(SwingConstants.CENTER);
+		dateFechaRegistro.setVisible(false);
 
 		dateFechaNacimiento = new JDateChooser();
 		dateFechaNacimiento.setBounds(199, 331, 132, 20);
+		dateFechaNacimiento.setDateFormatString("dd-M-yyyy");
 		panel.add(dateFechaNacimiento);
-		JTextFieldDateEditor editor3 = (JTextFieldDateEditor) dateFechaNacimiento.getDateEditor();
+		editor3 = (JTextFieldDateEditor) dateFechaNacimiento.getDateEditor();
 		editor3.setEditable(false);
+		editor3.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel label_1 = new JLabel("");
 		label_1.setBounds(461, 58, 72, 62);
@@ -438,14 +443,14 @@ public class registro_empleados extends JFrame {
 			}
 		});
 
-		JLabel lblTelefonoDeLa = new JLabel("12. Telefono de referencia :");
+		JLabel lblTelefonoDeLa = new JLabel("12.Nº Celular Referencia:");
 		lblTelefonoDeLa.setBounds(39, 432, 202, 14);
 		panel.add(lblTelefonoDeLa);
 		lblTelefonoDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		MaskFormatter formatter3 = null;
 		try {
-			formatter3 = new MaskFormatter("+(504) ####-####");
+			formatter3 = new MaskFormatter("+504 ####-####");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -534,11 +539,6 @@ public class registro_empleados extends JFrame {
 		panel.add(btnActualizarEmpleado);
 
 		btnNuevoEmpleado = new JButton("Nuevo");
-		btnNuevoEmpleado.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnNuevoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevoEmpleado.setBackground(new Color(255, 255, 255));
 		btnNuevoEmpleado.setBounds(39, 543, 99, 23);
@@ -563,8 +563,11 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				calcularEdad();
-				btnCalcularEdad.setBackground(Color.GREEN);
+				if (editor3.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese su fecha de nacimiento");
+				} else {
+					calcularEdad();
+				}
 
 			}
 		});
@@ -582,6 +585,7 @@ public class registro_empleados extends JFrame {
 
 		btnVerFotoEmpleado = new JButton("Ver");
 		btnVerFotoEmpleado.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				verFotoEmpleado();
 			}
@@ -742,9 +746,9 @@ public class registro_empleados extends JFrame {
 		pista = new PlaceHolder(txtApellidosEmpleado, "Ingrese apellidos del empleado.");
 		pista = new PlaceHolder(txtDireccionEmpleado, "Ingrese la direccion del empleado.");
 		pista = new PlaceHolder(txtNombreReferencia, "Ingrese nombre completo de la referencia.");
-		pista = new PlaceHolder(txtCorreoEmpleado, "Ingrese el correo del la empleado");
+		pista = new PlaceHolder(txtCorreoEmpleado, "Ingrese el correo del empleado");
 		pista = new PlaceHolder(txtBusquedaEmpleado, "Escriba para buscar");
-		pista = new PlaceHolder(txtEdadEmpleado, "Calcular edad");
+		pista = new PlaceHolder(txtEdadEmpleado, "Calcular edad ->");
 	}
 
 	public void establecerFechaRegistro() {
@@ -759,17 +763,29 @@ public class registro_empleados extends JFrame {
 	}
 
 	public void calcularEdad() {
-		try {
-			Date fechaNacimiento = new Date();
-			fechaNacimiento = dateFechaNacimiento.getDate();
-			LocalDate fechaCumpleaños = fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			LocalDate fechaActual = LocalDate.now();
-			Period periodo = Period.between(fechaCumpleaños, fechaActual);
-			String resultado = periodo.getYears() + " Años.";
-			txtEdadEmpleado.setForeground(Color.BLACK);
-			txtEdadEmpleado.setText(resultado);
-		} catch (Exception e) {
+		Date fechaNacimiento = new Date();
+		fechaNacimiento = dateFechaNacimiento.getDate();
+		LocalDate fechaCumpleaños = fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate fechaActual = LocalDate.now();
+		Period periodo = Period.between(fechaCumpleaños, fechaActual);
+		String resultado = periodo.getYears() + " Años.";
+		int edad = 0;
+		edad = periodo.getYears();
 
+		if (edad < 18) {
+			JOptionPane.showMessageDialog(null, "Ingrese su fecha de nacimiento correcta, "
+					+ " (Menores de edad no pueden trabajar en esta empresa.)");
+			editor3.setText("");
+		} else {
+			if (edad > 75) {
+				JOptionPane.showMessageDialog(null, "Ingrese su fecha de nacimiento correcta, "
+						+ " (Personas Mayores de 75 años no pueden trabajar en esta empresa.)");
+				editor3.setText("");
+			} else {
+				txtEdadEmpleado.setForeground(Color.BLACK);
+				txtEdadEmpleado.setText(resultado);
+				btnCalcularEdad.setBackground(Color.GREEN);
+			}
 		}
 	}
 

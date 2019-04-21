@@ -1,25 +1,32 @@
 package formularios;
 
 import java.awt.Color;
-
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +35,8 @@ import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
+
 import com.placeholder.PlaceHolder;
 
 import clases.empresa;
@@ -71,8 +80,8 @@ public class registro_empresa extends JFrame {
 	public JTextField txtCodigoEmpresa;
 	public JTextField txtNombreEmpresa;
 	public JTextField txtDireccionLogoEmpresa;
-	public JTextField txtTelefonoEmpresa;
-	public JTextField txtRTNempresa;
+	public JFormattedTextField txtTelefonoEmpresa;
+	public JFormattedTextField txtRTNempresa;
 	public JTextField txtCorreoEmpresa;
 	public JTextField txtDireccionFotoEmpresa;
 	public JTextArea txtDireccionEmpresa;
@@ -201,6 +210,8 @@ public class registro_empresa extends JFrame {
 		panel.add(txtDireccionFotoEmpresa);
 		txtDireccionFotoEmpresa.setEditable(false);
 		txtDireccionFotoEmpresa.setColumns(10);
+		InputMap map18 = txtDireccionFotoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map18.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblFotografiaDelLocal = new JLabel("Fotografia del local de la empresa.");
 		lblFotografiaDelLocal.setBounds(27, 213, 258, 17);
@@ -241,6 +252,8 @@ public class registro_empresa extends JFrame {
 		panel.add(txtDireccionLogoEmpresa);
 		txtDireccionLogoEmpresa.setEditable(false);
 		txtDireccionLogoEmpresa.setColumns(10);
+		InputMap map17 = txtDireccionLogoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map17.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblLogoOficialDe = new JLabel("Logo Oficial de la empresa.");
 		lblLogoOficialDe.setBounds(27, 30, 259, 17);
@@ -298,6 +311,8 @@ public class registro_empresa extends JFrame {
 		txtNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNombreEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtNombreEmpresa.setColumns(10);
+		InputMap map10 = txtNombreEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblDatosDeLa = new JLabel("Datos de la empresa :");
 		lblDatosDeLa.setBounds(10, 0, 175, 31);
@@ -316,30 +331,81 @@ public class registro_empresa extends JFrame {
 
 		txtDireccionEmpresa = new JTextArea();
 		scrollPane.setViewportView(txtDireccionEmpresa);
+		InputMap map11 = txtDireccionEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map11.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		
 
 		JLabel lblTelefono = new JLabel("Telefono :");
 		lblTelefono.setBounds(10, 119, 83, 14);
 		panel_1.add(lblTelefono);
 		lblTelefono.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		txtTelefonoEmpresa = new JTextField();
+		MaskFormatter formato = null;
+		try {
+			formato = new MaskFormatter("####-####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtTelefonoEmpresa = new JFormattedTextField(formato);
 		txtTelefonoEmpresa.setBounds(93, 116, 210, 20);
 		panel_1.add(txtTelefonoEmpresa);
 		txtTelefonoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTelefonoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTelefonoEmpresa.setColumns(10);
+		InputMap map12 = txtTelefonoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map12.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtTelefonoEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblRtn = new JLabel("RTN :");
 		lblRtn.setBounds(10, 147, 83, 14);
 		panel_1.add(lblRtn);
 		lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		txtRTNempresa = new JTextField();
+		MaskFormatter formato1 = null;
+		try {
+			formato1 = new MaskFormatter("##############");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtRTNempresa = new JFormattedTextField(formato1);
 		txtRTNempresa.setBounds(93, 144, 210, 20);
 		panel_1.add(txtRTNempresa);
 		txtRTNempresa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRTNempresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtRTNempresa.setColumns(10);
+		InputMap map13 = txtRTNempresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map13.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtRTNempresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtCorreoEmpresa = new JTextField();
 		txtCorreoEmpresa.setBounds(93, 172, 210, 20);
@@ -347,6 +413,8 @@ public class registro_empresa extends JFrame {
 		txtCorreoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCorreoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCorreoEmpresa.setColumns(10);
+		InputMap map14 = txtCorreoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblCorreo = new JLabel("Correo :");
 		lblCorreo.setBounds(10, 175, 83, 14);
@@ -364,6 +432,8 @@ public class registro_empresa extends JFrame {
 
 		txtCuentaEmpresa = new JTextArea();
 		scrollPane_1.setViewportView(txtCuentaEmpresa);
+		InputMap map15 = txtCuentaEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map15.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JButton btnFacebook = new JButton("");
 		btnFacebook.setBounds(93, 320, 62, 58);
@@ -403,6 +473,8 @@ public class registro_empresa extends JFrame {
 		txtCodigoEmpresa.setEditable(false);
 		txtCodigoEmpresa.setColumns(10);
 		panel_1.add(txtCodigoEmpresa);
+		InputMap map16 = txtCodigoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
+		map16.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 740, 462);
@@ -478,6 +550,7 @@ public class registro_empresa extends JFrame {
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 			JOptionPane.showMessageDialog(null, "Por favor ingrese los datos de la empresa.");
+			txtNombreEmpresa.requestFocusInWindow();
 			btnGuardarEmpresa.setVisible(true);
 			btnActualizarEmpresa.setVisible(false);
 			txtDireccionFotoEmpresa.setVisible(true);
@@ -564,6 +637,12 @@ public class registro_empresa extends JFrame {
 			imagen = new ImageIcon(ruta);
 			visor_imagen.lblImagen.setIcon(imagen);
 		}
+	}
+	public void pistas() {
+		pista = new PlaceHolder(txtNombreEmpresa, "Ingrese el nombre de la empresa.");
+		pista = new PlaceHolder(txtDireccionEmpresa, "Ingrese la direccion de la empresa.");
+		pista = new PlaceHolder(txtCorreoEmpresa, "Ingrese el correo del la empresa.");
+		pista = new PlaceHolder(txtCuentaEmpresa, "Escriba la o las cuentas bancarias.");
 	}
 
 }
