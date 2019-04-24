@@ -13,7 +13,7 @@ public class consultas_empleado extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO empleados (nombres_empleado, apellidos_empleado , identidad_empleado, genero_empleado, edad_empleado, telefono_empleado, correo_empleado, direccion_empleado, direccion_foto_empleado, referencia_empleado, telefono_referencia, fecha_nacimiento_empleado, fecha_registro_empleado, fecha_inicio_labores_empleado, estado_empleado, nombre_cargo_empleado, sueldo_cargo_empleado, hora_extra_cargo_empleado, obligaciones_cargo_empleado, tipo_horario_empleado, dias_horario_empleado, horas_horario_empleado, identidad_contrato_empleado_asignado, tipo_contrato_empleado_asignado, tiempo_contrato_empleado_asignado, foto_contrato_empleado_asignado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO empleados (nombres_empleado, apellidos_empleado , identidad_empleado, genero_empleado, edad_empleado, telefono_empleado, correo_empleado, direccion_empleado, direccion_foto_empleado, referencia_empleado, telefono_referencia, fecha_nacimiento_empleado, fecha_registro_empleado, fecha_inicio_labores_empleado, estado_empleado, nombre_cargo_empleado, sueldo_cargo_empleado, hora_extra_cargo_empleado, obligaciones_cargo_empleado, tipo_horario_empleado, dias_horario_empleado, horas_horario_empleado, identidad_contrato_empleado_asignado, tipo_contrato_empleado_asignado, tiempo_contrato_empleado_asignado, foto_contrato_empleado_asignado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);

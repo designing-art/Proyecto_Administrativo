@@ -1057,9 +1057,11 @@ public class registro_empleados extends JFrame {
 	}
 
 	public void construirTablaEmpleados() {
-		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero", "Edad", "Telefono", "Correo",
-				"Direccion", "Foto", "Nombre_Referencia", "Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro",
-				"Fecha_Labores", "Estado", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario", "Dias", "Horas", "Identidad_Contrato", "Tipo", "Tiempo", "Foto"};
+		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero",
+				"Edad", "Telefono", "Correo","Direccion", "Foto", "Nombre_Referencia",
+				"Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro","Fecha_Labores",
+				"Estado", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario",
+				"Dias", "Horas", "Identidad_Contrato", "Tipo", "Tiempo", "Foto"};
 		String informacion[][] = control_empleado.obtenerMatriz();
 		tablaEmpleados = new JTable(informacion, titulos);
 		barraTablaEmpleados.setViewportView(tablaEmpleados);
