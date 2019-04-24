@@ -13,18 +13,25 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+
+import clases.bonificacion;
 import clases.cargo;
 import clases.contrato_empleado;
+import clases.deduccion;
 import clases.empleado;
 import clases.empresa;
 import clases.horario;
+import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
 import consultas.consultas_contrato_empleado;
+import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_horario;
+import controles.control_bonificacion;
 import controles.control_cargo;
 import controles.control_contrato_empleado;
+import controles.control_deduccion;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
@@ -223,6 +230,29 @@ public class ventana_principal extends JFrame {
 		});
 
 		registroBonificacion = new JButton("Bonificaciones");
+		registroBonificacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				bonificacion clase = new bonificacion();
+				consultas_bonificacion consulta = new consultas_bonificacion();
+				registro_bonificaciones formulario = new registro_bonificaciones();
+				control_bonificacion control = new control_bonificacion(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarBonificacion.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosBonificacion.setVisible(true);
+				formulario.btnVerBonificacion.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				dispose();	
+			}
+		});
 		registroBonificacion.setForeground(Color.BLACK);
 		registroBonificacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		registroBonificacion.setBackground(new Color(102, 205, 170));
@@ -230,6 +260,29 @@ public class ventana_principal extends JFrame {
 		panel.add(registroBonificacion);
 
 		registroDeduccion = new JButton("Deducciones");
+		registroDeduccion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deduccion clase = new deduccion();
+				consultas_deduccion consulta = new consultas_deduccion();
+				registro_deducciones formulario = new registro_deducciones();
+				control_deduccion control = new control_deduccion(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarDeduccion.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosDeduccion.setVisible(true);
+				formulario.btnVerDeduccion.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				dispose();	
+			}
+		});
 		registroDeduccion.setForeground(Color.BLACK);
 		registroDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		registroDeduccion.setBackground(new Color(102, 205, 170));

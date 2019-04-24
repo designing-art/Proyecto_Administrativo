@@ -5,27 +5,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import clases.bonificacion;
 import clases.deduccion;
 import clases.empleado;
 import clases.empresa;
 import conexion.conexion;
 
-public class consultas_bonificacion extends conexion {
+public class consultas_deduccion extends conexion {
 
-	public boolean registrar(bonificacion bonificacion) {
+	public boolean registrar(deduccion deduccion) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO bonificaciones (tipo_bonificacion, observacion_bonificacion, identidad_empleado_bonificacion, cantidad_bonificacion, fecha_bonificacion) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO deducciones (tipo_deduccion, observacion_deduccion, identidad_empleado_deduccion, cantidad_deduccion, fecha_deduccion) VALUES(?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, bonificacion.getTipo_bonificacion());
-			ps.setString(2, bonificacion.getObservacion_bonificacion());
-			ps.setString(3, bonificacion.getIdentidad_empleado_bonificacion());
-			ps.setDouble(4, bonificacion.getCantidad_bonificacion());
-			ps.setString(5, bonificacion.getFecha_bonificacion());
+			ps.setString(1, deduccion.getTipo_deduccion());
+			ps.setString(2, deduccion.getObservacion_deduccion());
+			ps.setString(3, deduccion.getIdentidad_empleado_deduccion());
+			ps.setDouble(4, deduccion.getCantidad_deduccion());
+			ps.setString(5, deduccion.getFecha_deduccion());
 			ps.execute();
 
 			return true;
@@ -41,21 +40,21 @@ public class consultas_bonificacion extends conexion {
 		}
 	}
 
-	public boolean modificar(bonificacion bonificacion) {
+	public boolean modificar(deduccion deduccion) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE bonificaciones SET id_bonificacion=?, tipo_bonificacion=?, observacion_bonificacion=?, identidad_empleado_bonificacion=?, cantidad_bonificacion=?, fecha_bonificacion=? WHERE id_bonificacion=? ";
+		String sql = "UPDATE deducciones SET id_deduccion=?, tipo_deduccion=?, observacion_deduccion=?, identidad_empleado_deduccion=?, cantidad_deduccion=?, fecha_deduccion=? WHERE id_deduccion=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, bonificacion.getId_bonificacion());
-			ps.setString(1, bonificacion.getTipo_bonificacion());
-			ps.setString(2, bonificacion.getObservacion_bonificacion());
-			ps.setString(3, bonificacion.getIdentidad_empleado_bonificacion());
-			ps.setDouble(4, bonificacion.getCantidad_bonificacion());
-			ps.setString(5, bonificacion.getFecha_bonificacion());
-			ps.setInt(7, bonificacion.getId_bonificacion());
+			ps.setInt(1, deduccion.getId_deduccion());
+			ps.setString(2, deduccion.getTipo_deduccion());
+			ps.setString(3, deduccion.getObservacion_deduccion());
+			ps.setString(4, deduccion.getIdentidad_empleado_deduccion());
+			ps.setDouble(5, deduccion.getCantidad_deduccion());
+			ps.setString(6, deduccion.getFecha_deduccion());
+			ps.setInt(7, deduccion.getId_deduccion());
 			ps.execute();
 
 			return true;
@@ -72,7 +71,7 @@ public class consultas_bonificacion extends conexion {
 	}
 	
 	 
-	public boolean buscar(empleado empleado) {
+    public boolean buscar(empleado empleado) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();

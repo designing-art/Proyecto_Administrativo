@@ -59,7 +59,6 @@ public class empleado {
 		this.genero_empleado = genero_empleado;
 	}
 
-
 	public String getEdad_empleado() {
 		return edad_empleado;
 	}
@@ -91,7 +90,6 @@ public class empleado {
 	public void setDireccion_empleado(String direccion_empleado) {
 		this.direccion_empleado = direccion_empleado;
 	}
-	
 
 	public String getDireccion_foto_empleado() {
 		return direccion_foto_empleado;

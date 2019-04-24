@@ -1,134 +1,60 @@
 package clases;
 
 public class deduccion {
-	int id_deduccion;
-	double prestamo_localDeduccion;
-	double adelanto_deduccion;
-	double embargo_deduccion;
-	double plan_telefonicoDeduccion;
-	double deduccion_bancaria;
-	double cooperativa_deduccion;
-	double ihss_deduccion;
-	double rap_deduccion;
-	double otras_deduccion;
-	
 
-	public int getId_Deduccion() {
-		
+	int id_deduccion;
+	String tipo_deduccion;
+	String observacion_deduccion;
+	String identidad_empleado_deduccion;
+	double cantidad_deduccion;
+	String fecha_deduccion;
+
+	public int getId_deduccion() {
 		return id_deduccion;
 	}
-	
-	
-	public void setId_Deduccion(int id_deduccion) {
-		
+
+	public void setId_deduccion(int id_deduccion) {
 		this.id_deduccion = id_deduccion;
-	
 	}
-	
-	public double getPrestamo_localDeduccion() {
-		
-		return prestamo_localDeduccion;
+
+	public String getTipo_deduccion() {
+		return tipo_deduccion;
 	}
-	
-	
-	public void setPrestamo_localDeduccion(double prestamo_localDeduccion) {
-		
-		this.prestamo_localDeduccion = prestamo_localDeduccion;
+
+	public void setTipo_deduccion(String tipo_deduccion) {
+		this.tipo_deduccion = tipo_deduccion;
 	}
-	
-	
-	public double getAdelanto_deduccion() {
-		
-		return adelanto_deduccion;
+
+	public String getObservacion_deduccion() {
+		return observacion_deduccion;
 	}
-	
-	
-	public void setAdelanto_deduccion(double adelanto_deduccion) {
-		
-		this.adelanto_deduccion = adelanto_deduccion;
+
+	public void setObservacion_deduccion(String observacion_deduccion) {
+		this.observacion_deduccion = observacion_deduccion;
 	}
-	
-	
-	public double getEmbargo_deduccion() {
-		
-		return embargo_deduccion;
+
+	public String getIdentidad_empleado_deduccion() {
+		return identidad_empleado_deduccion;
 	}
-	
-	
-	public void setEmbargo_deduccion(double embargo_deduccion) {
-		
-		this.embargo_deduccion = embargo_deduccion;
+
+	public void setIdentidad_empleado_deduccion(String identidad_empleado_deduccion) {
+		this.identidad_empleado_deduccion = identidad_empleado_deduccion;
 	}
-	
-	public double getPlan_telefonicoDeduccion() {
-		
-		return plan_telefonicoDeduccion;
+
+	public double getCantidad_deduccion() {
+		return cantidad_deduccion;
 	}
-	
-	public void setPlan_telefonicoDeduccion(double plan_telefonicoDeduccion) {
-		
-		this.plan_telefonicoDeduccion = plan_telefonicoDeduccion;
+
+	public void setCantidad_deduccion(double cantidad_deduccion) {
+		this.cantidad_deduccion = cantidad_deduccion;
 	}
-	
-	
-	public double getDeduccion_bancaria() {
-		
-		return deduccion_bancaria;
+
+	public String getFecha_deduccion() {
+		return fecha_deduccion;
 	}
-	
-	public void setDeduccion_bancaria(double deduccion_bancaria) {
-		
-		this.deduccion_bancaria = deduccion_bancaria;
+
+	public void setFecha_deduccion(String fecha_deduccion) {
+		this.fecha_deduccion = fecha_deduccion;
 	}
-	
-	
-	public double getCooperativa_deduccion() {
-		
-		return cooperativa_deduccion;
-	}
-	
-	
-	public void setCooperativa_deduccion(double cooperativa_deduccion) {
-		
-		this.cooperativa_deduccion = cooperativa_deduccion;
-		
-	}
-	
-	
-	public double getIhss_deduccion() {
-		
-		return ihss_deduccion;
-	}
-	
-	
-	public void setIhss_deduccion(double ihss_deduccion) {
-		
-		this.ihss_deduccion = ihss_deduccion;
-	}
-	
-	
-	public double getRap_deduccion() {
-		
-		return rap_deduccion;
-	}
-	
-	
-	public void setRap_deduccion(double rap_deduccion) {
-		
-		this.rap_deduccion = rap_deduccion;
-		
-	}
-	
-	
-	public double getOtras_deduccion() {
-		
-		return otras_deduccion;
-	}
-	
-	
-	public void setOtras_deduccion(double otras_deduccion) {
-		
-		this.otras_deduccion = otras_deduccion;
-	}
-	
+
 }
