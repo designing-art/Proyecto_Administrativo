@@ -18,6 +18,17 @@ public class empleado {
 	String fecha_registro_empleado;
 	String fecha_inicio_labores_empleado;
 	String estado_empleado;
+	String nombre_cargo_empleado;
+	String sueldo_cargo_empleado;
+	String hora_extra_cargo_empleado;
+	String obligaciones_cargo_empleado;
+	String tipo_horario_empleado;
+	String dias_horario_empleado;
+	String horas_horario_empleado;
+	String identidad_contrato_empleado_asignado;
+	String tipo_contrato_empleado_asignado;
+	String tiempo_contrato_empleado_asignado;
+	String foto_contrato_empleado_asignado;
 
 	public int getId_empleado() {
 		return id_empleado;
@@ -145,6 +156,94 @@ public class empleado {
 
 	public void setEstado_empleado(String estado_empleado) {
 		this.estado_empleado = estado_empleado;
+	}
+
+	public String getNombre_cargo_empleado() {
+		return nombre_cargo_empleado;
+	}
+
+	public void setNombre_cargo_empleado(String nombre_cargo_empleado) {
+		this.nombre_cargo_empleado = nombre_cargo_empleado;
+	}
+
+	public String getSueldo_cargo_empleado() {
+		return sueldo_cargo_empleado;
+	}
+
+	public void setSueldo_cargo_empleado(String sueldo_cargo_empleado) {
+		this.sueldo_cargo_empleado = sueldo_cargo_empleado;
+	}
+
+	public String getHora_extra_cargo_empleado() {
+		return hora_extra_cargo_empleado;
+	}
+
+	public void setHora_extra_cargo_empleado(String hora_extra_cargo_empleado) {
+		this.hora_extra_cargo_empleado = hora_extra_cargo_empleado;
+	}
+
+	public String getObligaciones_cargo_empleado() {
+		return obligaciones_cargo_empleado;
+	}
+
+	public void setObligaciones_cargo_empleado(String obligaciones_cargo_empleado) {
+		this.obligaciones_cargo_empleado = obligaciones_cargo_empleado;
+	}
+
+	public String getTipo_horario_empleado() {
+		return tipo_horario_empleado;
+	}
+
+	public void setTipo_horario_empleado(String tipo_horario_empleado) {
+		this.tipo_horario_empleado = tipo_horario_empleado;
+	}
+
+	public String getDias_horario_empleado() {
+		return dias_horario_empleado;
+	}
+
+	public void setDias_horario_empleado(String dias_horario_empleado) {
+		this.dias_horario_empleado = dias_horario_empleado;
+	}
+
+	public String getHoras_horario_empleado() {
+		return horas_horario_empleado;
+	}
+
+	public void setHoras_horario_empleado(String horas_horario_empleado) {
+		this.horas_horario_empleado = horas_horario_empleado;
+	}
+
+	public String getIdentidad_contrato_empleado_asignado() {
+		return identidad_contrato_empleado_asignado;
+	}
+
+	public void setIdentidad_contrato_empleado_asignado(String identidad_contrato_empleado_asignado) {
+		this.identidad_contrato_empleado_asignado = identidad_contrato_empleado_asignado;
+	}
+
+	public String getTipo_contrato_empleado_asignado() {
+		return tipo_contrato_empleado_asignado;
+	}
+
+	public void setTipo_contrato_empleado_asignado(String tipo_contrato_empleado_asignado) {
+		this.tipo_contrato_empleado_asignado = tipo_contrato_empleado_asignado;
+	}
+
+	public String getTiempo_contrato_empleado_asignado() {
+		return tiempo_contrato_empleado_asignado;
+	}
+
+	public void setTiempo_contrato_empleado_asignado(String tiempo_contrato_empleado_asignado) {
+		this.tiempo_contrato_empleado_asignado = tiempo_contrato_empleado_asignado;
+	}
+
+	public String getFoto_contrato_empleado_asignado() {
+		return foto_contrato_empleado_asignado;
+	}
+
+	public void setFoto_contrato_empleado_asignado(String foto_contrato_empleado_asignado) {
+		this.foto_contrato_empleado_asignado = foto_contrato_empleado_asignado;
 	}
 
 }

@@ -157,8 +157,6 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarContrato.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
-				formulario.btnImprimirContrato.setVisible(false);
-				formulario.btnVerFotoContrato.setVisible(false);
 				dispose();
 			}
 		});
@@ -195,6 +193,9 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarEmpleado.setVisible(false);
 				formulario.btnCancelarEmpleado.setVisible(false);
 				formulario.btnBorrarEmpleado.setVisible(false);	
+				control.consultarContratos();
+				control.consultarCargos();
+				control.consultarHorarios();
 				dispose();
 			}
 		});

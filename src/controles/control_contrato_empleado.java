@@ -46,7 +46,8 @@ public class control_contrato_empleado implements ActionListener {
 		/* Insertar */
 		if (e.getSource() == formulario.btnGuardarContrato) {
 
-			if (formulario.txtDireccionFotoContrato.getText().isEmpty()) {
+			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
+					||formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el contrato!");
 
 			} else {
@@ -54,6 +55,7 @@ public class control_contrato_empleado implements ActionListener {
 				clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
 				clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
 				clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
+				clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
 
 				if (consulta.insertar(clase)) {
 					JOptionPane.showMessageDialog(null, "Contrato registrado!");
@@ -83,11 +85,14 @@ public class control_contrato_empleado implements ActionListener {
 					String tipo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 1).toString();
 					String tiempo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 2).toString();
 					String foto = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String identidad = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 4).toString();
 
+					
 					formulario.txtCodigoContratoEmpleado.setText(codigo);
 					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
 					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
 					formulario.txtDireccionFotoContrato.setText(foto);
+					formulario.txtIdentidadContratoEmpleado.setText(foto);
 					
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -99,6 +104,7 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.cbxTipoContratoEmpleado.setForeground(Color.BLACK);
 					formulario.cbxTiempoContratoEmpleado.setForeground(Color.BLACK);
 					formulario.txtDireccionFotoContrato.setForeground(Color.BLACK);
+					formulario.txtIdentidadContratoEmpleado.setForeground(Color.BLACK);
 
 					formulario.btnBorrarContrato.setVisible(true);
 					formulario.btnGuardarContrato.setVisible(false);
@@ -131,11 +137,15 @@ public class control_contrato_empleado implements ActionListener {
 					String tipo = formulario.tablaContratosEmpleados.getValueAt(fila, 1).toString();
 					String tiempo = formulario.tablaContratosEmpleados.getValueAt(fila, 2).toString();
 					String foto = formulario.tablaContratosEmpleados.getValueAt(fila, 3).toString();
+					String identidad = formulario.tablaContratosEmpleados.getValueAt(fila, 4).toString();
+
 
 					formulario.txtCodigoContratoEmpleado.setText(codigo);
 					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
 					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
 					formulario.txtDireccionFotoContrato.setText(foto);
+					formulario.txtIdentidadContratoEmpleado.setText(foto);
+					
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -147,6 +157,7 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.cbxTipoContratoEmpleado.setForeground(Color.BLACK);
 					formulario.cbxTiempoContratoEmpleado.setForeground(Color.BLACK);
 					formulario.txtDireccionFotoContrato.setForeground(Color.BLACK);
+					formulario.txtIdentidadContratoEmpleado.setForeground(Color.BLACK);
 
 					formulario.btnBorrarContrato.setVisible(false);
 					formulario.btnGuardarContrato.setVisible(false);
@@ -167,7 +178,8 @@ public class control_contrato_empleado implements ActionListener {
 		/* Actualizar */
 		if (e.getSource() == formulario.btnActualizarContrato) {
 
-			if (formulario.txtDireccionFotoContrato.getText().isEmpty()) {
+			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
+					||formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el contrato!");
 
 			} else {
@@ -177,6 +189,7 @@ public class control_contrato_empleado implements ActionListener {
 				clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
 				clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
 				clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
+				clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
 				clase.setId_contrato_empleado(
 						Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
 
@@ -186,9 +199,7 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.btnActualizarContrato.setVisible(false);
-					formulario.btnVerFotoContrato.setVisible(false);
 					formulario.btnSubirFotoContrato.setVisible(false);
-					formulario.btnImprimirContrato.setVisible(false);
 					formulario.txtCodigoContratoEmpleado.setEnabled(false);
 					formulario.txtCodigoContratoEmpleado.setText(null);
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
@@ -228,9 +239,6 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.btnSubirFotoContrato.setEnabled(false);
 					formulario.lbl_foto_contrato.setEnabled(false);
 					formulario.btnAceptar.setEnabled(true);
-					formulario.btnVerFotoContrato.setVisible(false);
-					formulario.btnImprimirContrato.setVisible(false);
-
 					formulario.btnActualizarContrato.setVisible(false);
 					formulario.btnGuardarContrato.setVisible(false);
 					formulario.btnNuevoContrato.setVisible(false);
@@ -253,8 +261,6 @@ public class control_contrato_empleado implements ActionListener {
 			formulario.btnActualizarContrato.setVisible(false);
 			formulario.btnActualizarDatosContrato.setVisible(true);
 			formulario.txtDireccionFotoContrato.setEditable(false);
-			formulario.btnVerFotoContrato.setVisible(false);
-			formulario.btnImprimirContrato.setVisible(false);
 			formulario.btnMostrarContrato.setVisible(true);
 			formulario.btnAceptar.setVisible(false);
 			formulario.pistas();
@@ -280,8 +286,6 @@ public class control_contrato_empleado implements ActionListener {
 			formulario.btnActualizarContrato.setVisible(false);
 			formulario.btnActualizarDatosContrato.setVisible(true);
 			formulario.txtDireccionFotoContrato.setEditable(false);
-			formulario.btnVerFotoContrato.setVisible(false);
-			formulario.btnImprimirContrato.setVisible(false);
 			formulario.btnMostrarContrato.setVisible(true);
 			formulario.btnAceptar.setVisible(false);
 			formulario.txtCodigoContratoEmpleado.setEnabled(true);
@@ -304,6 +308,7 @@ public class control_contrato_empleado implements ActionListener {
 	public void limpiar() {
 		formulario.txtBusquedaContratosEmpleados.setText(null);
 		formulario.txtDireccionFotoContrato.setText(null);
+		formulario.txtIdentidadContratoEmpleado.setText(null);
 	}
 
 	/* Metodos para mostrar datos en tabla Contratos de los empleados */
@@ -318,6 +323,7 @@ public class control_contrato_empleado implements ActionListener {
 			while (rs.next()) {
 				contrato = new contrato_empleado();
 				contrato.setId_contrato_empleado(Integer.parseInt(rs.getString("id_contrato_empleado")));
+				contrato.setIdentidad_contrato_empleado(rs.getString("identidad_contrato_empleado"));
 				contrato.setTipo_contrato_empleado(rs.getString("tipo_contrato_empleado"));
 				contrato.setTiempo_contrato_empleado(rs.getString("tiempo_contrato_empleado"));
 				contrato.setDireccion_foto_contrato_empleado(rs.getString("direccion_foto_contrato_empleado"));
@@ -337,12 +343,14 @@ public class control_contrato_empleado implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<contrato_empleado> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][4];
+		String matrizInfo[][] = new String[miLista.size()][5];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_contrato_empleado() + "";
-			matrizInfo[i][1] = miLista.get(i).getTipo_contrato_empleado() + "";
-			matrizInfo[i][2] = miLista.get(i).getTiempo_contrato_empleado() + "";
-			matrizInfo[i][3] = miLista.get(i).getDireccion_foto_contrato_empleado() + "";
+			matrizInfo[i][1] = miLista.get(i).getIdentidad_contrato_empleado() + "";
+			matrizInfo[i][2] = miLista.get(i).getTipo_contrato_empleado() + "";
+			matrizInfo[i][3] = miLista.get(i).getTiempo_contrato_empleado() + "";
+			matrizInfo[i][4] = miLista.get(i).getDireccion_foto_contrato_empleado() + "";
+			
 		}
 
 		return matrizInfo;

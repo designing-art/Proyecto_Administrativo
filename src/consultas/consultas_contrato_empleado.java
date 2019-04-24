@@ -15,13 +15,14 @@ public class consultas_contrato_empleado extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO contrato_empleado (tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado) VALUES(?,?,?)";
+		String sql = "INSERT INTO contrato_empleado (identidad_contrato_empleado, tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado) VALUES(?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, contrato.getTipo_contrato_empleado());
-			ps.setString(2, contrato.getTiempo_contrato_empleado());
-			ps.setString(3, contrato.getDireccion_foto_contrato_empleado());
+			ps.setString(1, contrato.getIdentidad_contrato_empleado());
+			ps.setString(2, contrato.getTipo_contrato_empleado());
+			ps.setString(3, contrato.getTiempo_contrato_empleado());
+			ps.setString(4, contrato.getDireccion_foto_contrato_empleado());
 			ps.execute();
 			return true;
 		} catch (SQLException e) {
@@ -41,15 +42,16 @@ public class consultas_contrato_empleado extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE contrato_empleado SET id_contrato_empleado=?, tipo_contrato_empleado=?, tiempo_contrato_empleado=?, direccion_foto_contrato_empleado=? WHERE id_contrato_empleado=? ";
+		String sql = "UPDATE contrato_empleado SET id_contrato_empleado=?, identidad_contrato_empleado=?, tipo_contrato_empleado=?, tiempo_contrato_empleado=?, direccion_foto_contrato_empleado=? WHERE id_contrato_empleado=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, contrato.getId_contrato_empleado());
-			ps.setString(2, contrato.getTipo_contrato_empleado());
-			ps.setString(3, contrato.getTiempo_contrato_empleado());
-			ps.setString(4, contrato.getDireccion_foto_contrato_empleado());
-			ps.setInt(5, contrato.getId_contrato_empleado());
+			ps.setString(2, contrato.getIdentidad_contrato_empleado());
+			ps.setString(3, contrato.getTipo_contrato_empleado());
+			ps.setString(4, contrato.getTiempo_contrato_empleado());
+			ps.setString(5, contrato.getDireccion_foto_contrato_empleado());
+			ps.setInt(6, contrato.getId_contrato_empleado());
 			ps.execute();
 
 			return true;

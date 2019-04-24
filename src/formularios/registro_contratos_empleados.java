@@ -12,8 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -29,16 +31,21 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
+
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
 import controles.control_contrato_empleado;
+import utilidades.visor_imagen;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 
@@ -56,6 +63,9 @@ public class registro_contratos_empleados extends JFrame {
 	public JButton btnMostrarContrato;
 	public JButton btnAceptar;
 
+	public static String ruta;
+	public static ImageIcon imagen;
+
 	public JPanel contentPane;
 	public JTextField txtBusquedaContratosEmpleados;
 	public JScrollPane barraContratos;
@@ -66,7 +76,6 @@ public class registro_contratos_empleados extends JFrame {
 	String filtroCodigo;
 	public JTextField txtDireccionFotoContrato;
 	public JButton btnSubirFotoContrato;
-	public JButton btnImprimirContrato;
 	public JButton btnVerFotoContrato;
 	public JLabel lbl_foto_contrato;
 
@@ -74,6 +83,8 @@ public class registro_contratos_empleados extends JFrame {
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+	public JLabel lblNumeroDe;
+	public JFormattedTextField txtIdentidadContratoEmpleado;
 
 	public registro_contratos_empleados() {
 		setResizable(false);
@@ -214,15 +225,51 @@ public class registro_contratos_empleados extends JFrame {
 		txtDireccionFotoContrato.setBounds(27, 190, 136, 20);
 		panelRegistro.add(txtDireccionFotoContrato);
 
-		btnImprimirContrato = new JButton("imprimir");
-		btnImprimirContrato.setBackground(new Color(250, 128, 114));
-		btnImprimirContrato.setBounds(51, 252, 83, 23);
-		panelRegistro.add(btnImprimirContrato);
-
 		btnVerFotoContrato = new JButton("Ver");
-		btnVerFotoContrato.setBackground(new Color(250, 128, 114));
+		btnVerFotoContrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verFotoContratoEmpleado();
+			}
+		});
+		btnVerFotoContrato.setBackground(Color.WHITE);
 		btnVerFotoContrato.setBounds(51, 222, 83, 23);
 		panelRegistro.add(btnVerFotoContrato);
+
+		lblNumeroDe = new JLabel("5. N\u00BA de Identidad :");
+		lblNumeroDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblNumeroDe.setBounds(27, 256, 158, 17);
+		panelRegistro.add(lblNumeroDe);
+		
+
+		MaskFormatter formato = null;
+		try {
+			formato = new MaskFormatter("####-####-#####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtIdentidadContratoEmpleado = new JFormattedTextField(formato);
+		txtIdentidadContratoEmpleado.setColumns(10);
+		txtIdentidadContratoEmpleado.setBounds(27, 276, 136, 20);
+		txtIdentidadContratoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		panelRegistro.add(txtIdentidadContratoEmpleado);
+		InputMap map2 = txtIdentidadContratoEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtIdentidadContratoEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 341, 450);
@@ -320,7 +367,7 @@ public class registro_contratos_empleados extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Tipo", "Tiempo", "Foto" };
+		String titulos[] = { "Codigo", "Identidad", "Tipo", "Tiempo", "Foto"};
 		String informacion[][] = control_contrato_empleado.obtenerMatriz();
 		tablaContratosEmpleados = new JTable(informacion, titulos);
 		barraContratos.setViewportView(tablaContratosEmpleados);
@@ -335,7 +382,7 @@ public class registro_contratos_empleados extends JFrame {
 
 	public void filtro() {
 		filtroCodigo = txtBusquedaContratosEmpleados.getText();
-		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaContratosEmpleados.getText(), 0, 1, 2, 3, 4, 5));
+		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaContratosEmpleados.getText(), 0, 1, 2, 3, 4, 5, 6));
 	}
 
 	public void pistas() {
@@ -384,6 +431,20 @@ public class registro_contratos_empleados extends JFrame {
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void verFotoContratoEmpleado() {
+		if (txtDireccionFotoContrato.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtDireccionFotoContrato.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
 		}
 	}
 }

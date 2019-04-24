@@ -6,6 +6,7 @@ public class contrato_empleado {
 	String tipo_contrato_empleado;
 	String tiempo_contrato_empleado;
 	String direccion_foto_contrato_empleado;
+	String identidad_contrato_empleado;
 	
 	public int getId_contrato_empleado() {
 		return id_contrato_empleado;
@@ -31,8 +32,11 @@ public class contrato_empleado {
 	public void setDireccion_foto_contrato_empleado(String direccion_foto_contrato_empleado) {
 		this.direccion_foto_contrato_empleado = direccion_foto_contrato_empleado;
 	}
-	
-	
-	
-	
+	public String getIdentidad_contrato_empleado() {
+		return identidad_contrato_empleado;
+	}
+	public void setIdentidad_contrato_empleado(String identidad_contrato_empleado) {
+		this.identidad_contrato_empleado = identidad_contrato_empleado;
+	}
+
 }
