@@ -82,17 +82,18 @@ public class control_contrato_empleado implements ActionListener {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
 					String codigo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 1).toString();
-					String tiempo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 2).toString();
-					String foto = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 3).toString();
-					String identidad = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 4).toString();
+					String identidad = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 1).toString();
+					String tipo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 2).toString();
+					String tiempo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String foto = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 4).toString();
+					
 
 					
 					formulario.txtCodigoContratoEmpleado.setText(codigo);
 					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
 					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
 					formulario.txtDireccionFotoContrato.setText(foto);
-					formulario.txtIdentidadContratoEmpleado.setText(foto);
+					formulario.txtIdentidadContratoEmpleado.setText(identidad);
 					
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -134,17 +135,18 @@ public class control_contrato_empleado implements ActionListener {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
 					String codigo = formulario.tablaContratosEmpleados.getValueAt(fila, 0).toString();
-					String tipo = formulario.tablaContratosEmpleados.getValueAt(fila, 1).toString();
-					String tiempo = formulario.tablaContratosEmpleados.getValueAt(fila, 2).toString();
-					String foto = formulario.tablaContratosEmpleados.getValueAt(fila, 3).toString();
-					String identidad = formulario.tablaContratosEmpleados.getValueAt(fila, 4).toString();
+					String identidad = formulario.tablaContratosEmpleados.getValueAt(fila, 1).toString();
+					String tipo = formulario.tablaContratosEmpleados.getValueAt(fila, 2).toString();
+					String tiempo = formulario.tablaContratosEmpleados.getValueAt(fila, 3).toString();
+					String foto = formulario.tablaContratosEmpleados.getValueAt(fila, 4).toString();
+					
 
 
 					formulario.txtCodigoContratoEmpleado.setText(codigo);
 					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
 					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
 					formulario.txtDireccionFotoContrato.setText(foto);
-					formulario.txtIdentidadContratoEmpleado.setText(foto);
+					formulario.txtIdentidadContratoEmpleado.setText(identidad);
 					
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);

@@ -2,16 +2,19 @@ package formularios;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Event;
 
 import javax.swing.JButton;
@@ -29,6 +32,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -59,10 +64,18 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.cargo;
+import clases.contrato_empleado;
 import clases.empleado;
+import clases.horario;
 import conexion.conexion;
+import consultas.consultas_cargo;
+import consultas.consultas_contrato_empleado;
 import consultas.consultas_empleado;
+import consultas.consultas_horario;
+import controles.control_cargo;
+import controles.control_contrato_empleado;
 import controles.control_empleado;
+import controles.control_horario;
 import utilidades.visor_imagen;
 
 import javax.swing.JScrollPane;
@@ -71,7 +84,8 @@ import javax.swing.JTextArea;
 
 public class registro_empleados extends JFrame {
 
-	JPanel contentPane;
+	public JPanel contentPane;
+	public JPanel panel;
 	public JTextField txtCodigoEmpleado;
 	public JTextField txtNombresEmpleado;
 	public JTextField txtApellidosEmpleado;
@@ -94,6 +108,7 @@ public class registro_empleados extends JFrame {
 	public static String ruta;
 	public static ImageIcon imagen;
 	public JLabel lblFechaDeRegistro;
+	public JPanel panelAsignaciones;
 
 	public JTextFieldDateEditor editor;
 	public JTextFieldDateEditor editor2;
@@ -153,6 +168,9 @@ public class registro_empleados extends JFrame {
 	public JButton btnNewButton;
 	public JTextField txtTipoContratoAsignado;
 	public JLabel lblTipo_1;
+	public JButton btnActualizarAsignaciones;
+	public JButton btnAsgnaciones;
+	private JButton btnCerrar;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -185,11 +203,376 @@ public class registro_empleados extends JFrame {
 		final ImageIcon icono1 = new ImageIcon(getClass().getResource("/material/logo.png"));
 		final ImageIcon lista_empleados = new ImageIcon(getClass().getResource("/material/lista_empleados.png"));
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, 45, 579, 635);
 		contentPane.add(panel);
 		panel.setLayout(null);
+
+		panelAsignaciones = new JPanel();
+		panelAsignaciones.setBounds(0, 0, 579, 304);
+		panel.add(panelAsignaciones);
+		panelAsignaciones.setLayout(null);
+
+		JLabel lblNombreDelCargo = new JLabel("Sueldo.");
+		lblNombreDelCargo.setBounds(294, 43, 83, 14);
+		panelAsignaciones.add(lblNombreDelCargo);
+		lblNombreDelCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtSueldoAsignado = new JTextField();
+		txtSueldoAsignado.setBounds(294, 60, 123, 20);
+		panelAsignaciones.add(txtSueldoAsignado);
+		txtSueldoAsignado.setEditable(false);
+		txtSueldoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSueldoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtSueldoAsignado.setColumns(10);
+		txtSueldoAsignado.setHorizontalAlignment(SwingConstants.RIGHT);
+
+		JLabel lblCargo = new JLabel("Cargo :");
+		lblCargo.setBounds(39, 62, 76, 17);
+		panelAsignaciones.add(lblCargo);
+		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		cbxCargoAsignado = new JComboBox<String>();
+		cbxCargoAsignado.setBounds(109, 60, 128, 23);
+		panelAsignaciones.add(cbxCargoAsignado);
+		cbxCargoAsignado.setBackground(Color.WHITE);
+		cbxCargoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JLabel lblAsignacionesDelEmpleado = new JLabel("Asignaciones del empleado :");
+		lblAsignacionesDelEmpleado.setBounds(39, 24, 293, 33);
+		panelAsignaciones.add(lblAsignacionesDelEmpleado);
+		lblAsignacionesDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		JLabel lblValorHoraExtra = new JLabel("Valor hora extra.");
+		lblValorHoraExtra.setBounds(423, 43, 123, 14);
+		panelAsignaciones.add(lblValorHoraExtra);
+		lblValorHoraExtra.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtHoraExtraAsignado = new JTextField();
+		txtHoraExtraAsignado.setBounds(423, 60, 123, 20);
+		panelAsignaciones.add(txtHoraExtraAsignado);
+		txtHoraExtraAsignado.setEditable(false);
+		txtHoraExtraAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtHoraExtraAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtHoraExtraAsignado.setColumns(10);
+		txtHoraExtraAsignado.setHorizontalAlignment(SwingConstants.RIGHT);
+
+		JLabel lblHorario = new JLabel("Horario :");
+		lblHorario.setBounds(39, 150, 76, 17);
+		panelAsignaciones.add(lblHorario);
+		lblHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		cbxHorarioAsignado = new JComboBox<String>();
+		cbxHorarioAsignado.setBounds(109, 147, 128, 23);
+		panelAsignaciones.add(cbxHorarioAsignado);
+		cbxHorarioAsignado.setBackground(Color.WHITE);
+		cbxHorarioAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtDiasAsignado = new JTextField();
+		txtDiasAsignado.setBounds(294, 146, 123, 20);
+		panelAsignaciones.add(txtDiasAsignado);
+		txtDiasAsignado.setEditable(false);
+		txtDiasAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtDiasAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtDiasAsignado.setColumns(10);
+
+		JLabel lblHoras = new JLabel("Horas.");
+		lblHoras.setBounds(423, 129, 83, 14);
+		panelAsignaciones.add(lblHoras);
+		lblHoras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JLabel lblDias = new JLabel("Dias.");
+		lblDias.setBounds(294, 129, 123, 14);
+		panelAsignaciones.add(lblDias);
+		lblDias.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtHorasAsignado = new JTextField();
+		txtHorasAsignado.setBounds(423, 146, 123, 20);
+		panelAsignaciones.add(txtHorasAsignado);
+		txtHorasAsignado.setEditable(false);
+		txtHorasAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtHorasAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtHorasAsignado.setColumns(10);
+
+		lblContrato = new JLabel("Contrato :");
+		lblContrato.setBounds(39, 197, 76, 17);
+		panelAsignaciones.add(lblContrato);
+		lblContrato.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		cbxContratoAsignado = new JComboBox<String>();
+		cbxContratoAsignado.setBounds(109, 195, 128, 23);
+		panelAsignaciones.add(cbxContratoAsignado);
+		cbxContratoAsignado.setBackground(Color.WHITE);
+		cbxContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		lblTipo = new JLabel("Fotografia del Contrato.");
+		lblTipo.setBounds(141, 225, 152, 19);
+		panelAsignaciones.add(lblTipo);
+		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtFotoContratoAsignado = new JTextField();
+		txtFotoContratoAsignado.setBounds(294, 224, 183, 20);
+		panelAsignaciones.add(txtFotoContratoAsignado);
+		txtFotoContratoAsignado.setEditable(false);
+		txtFotoContratoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFotoContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtFotoContratoAsignado.setColumns(10);
+
+		lblTiempo = new JLabel("Tiempo");
+		lblTiempo.setBounds(423, 177, 83, 14);
+		panelAsignaciones.add(lblTiempo);
+		lblTiempo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		txtTiempoContratoAsignado = new JTextField();
+		txtTiempoContratoAsignado.setBounds(423, 194, 123, 20);
+		panelAsignaciones.add(txtTiempoContratoAsignado);
+		txtTiempoContratoAsignado.setEditable(false);
+		txtTiempoContratoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTiempoContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtTiempoContratoAsignado.setColumns(10);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(294, 86, 252, 38);
+		panelAsignaciones.add(scrollPane_1);
+
+		txtObligacionesAsignado = new JTextArea();
+		txtObligacionesAsignado.setEditable(false);
+		scrollPane_1.setViewportView(txtObligacionesAsignado);
+
+		JLabel lblObligaciones = new JLabel("Obligaciones del empleado.");
+		lblObligaciones.setBounds(119, 91, 174, 32);
+		panelAsignaciones.add(lblObligaciones);
+		lblObligaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		btnNewButton = new JButton("Ver");
+		btnNewButton.setBounds(487, 225, 59, 21);
+		panelAsignaciones.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				verFotoEmpleado();
+			}
+		});
+		btnNewButton.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		btnNewButton.setBackground(Color.WHITE);
+
+		txtTipoContratoAsignado = new JTextField();
+		txtTipoContratoAsignado.setBounds(294, 194, 123, 20);
+		panelAsignaciones.add(txtTipoContratoAsignado);
+		txtTipoContratoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTipoContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtTipoContratoAsignado.setEditable(false);
+		txtTipoContratoAsignado.setColumns(10);
+
+		lblTipo_1 = new JLabel("Tipo.");
+		lblTipo_1.setBounds(294, 177, 123, 14);
+		panelAsignaciones.add(lblTipo_1);
+		lblTipo_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+
+		JButton btnCargos = new JButton("+");
+		btnCargos.setBounds(240, 60, 39, 23);
+		panelAsignaciones.add(btnCargos);
+		btnCargos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cargo clase = new cargo();
+				consultas_cargo consulta = new consultas_cargo();
+				registro_cargos formulario = new registro_cargos();
+				control_cargo control = new control_cargo(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombreCargo.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.btnBorrarCargo.setVisible(false);
+				formulario.btnGuardarCargo.setVisible(true);
+				formulario.btnNuevoCargo.setVisible(true);
+				formulario.btnActualizarCargo.setVisible(false);
+				formulario.btnActualizarDatosCargo.setVisible(true);
+				formulario.btnMostrar.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				formulario.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			}
+		});
+		btnCargos.setBackground(new Color(0, 250, 154));
+		btnCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+
+		JButton btnHorarios = new JButton("+");
+		btnHorarios.setBounds(240, 147, 39, 23);
+		panelAsignaciones.add(btnHorarios);
+		btnHorarios.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				horario clase = new horario();
+				consultas_horario consulta = new consultas_horario();
+				registro_horarios formulario = new registro_horarios();
+				control_horario control = new control_horario(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtDescripcionHorario.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.btnBorrarHorario.setVisible(false);
+				formulario.btnGuardarHorario.setVisible(true);
+				formulario.btnNuevoHorario.setVisible(true);
+				formulario.btnActualizarHorario.setVisible(false);
+				formulario.btnActualizarDatosHorario.setVisible(true);
+				formulario.btnMostrarHorario.setVisible(true);
+				formulario.btnAceptarHorario.setVisible(false);
+				formulario.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			}
+		});
+		btnHorarios.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		btnHorarios.setBackground(new Color(0, 250, 154));
+
+		JButton btnContratos = new JButton("+");
+		btnContratos.setBounds(240, 195, 39, 23);
+		panelAsignaciones.add(btnContratos);
+		btnContratos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				contrato_empleado clase = new contrato_empleado();
+				consultas_contrato_empleado consulta = new consultas_contrato_empleado();
+				registro_contratos_empleados formulario = new registro_contratos_empleados();
+				control_contrato_empleado control = new control_contrato_empleado(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.construirTabla();
+				formulario.btnGuardarContrato.setVisible(true);
+				formulario.btnNuevoContrato.setVisible(true);
+				formulario.btnActualizarContrato.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrarContrato.setVisible(false);
+				formulario.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			}
+		});
+		btnContratos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		btnContratos.setBackground(new Color(0, 250, 154));
+
+		btnActualizarAsignaciones = new JButton("Refrescar");
+		btnActualizarAsignaciones.setBounds(294, 256, 99, 23);
+		panelAsignaciones.add(btnActualizarAsignaciones);
+		btnActualizarAsignaciones.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				empleado clase = new empleado();
+				consultas_empleado consulta = new consultas_empleado();
+				registro_empleados formulario = new registro_empleados();
+				control_empleado control = new control_empleado(clase, consulta, formulario);
+				control.consultarCargos();
+				control.consultarHorarios();
+				control.consultarContratos();
+			}
+		});
+		btnActualizarAsignaciones.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnActualizarAsignaciones.setBackground(new Color(0, 206, 209));
+
+		btnGuardarEmpleado = new JButton("Guardar");
+		btnGuardarEmpleado.setBounds(447, 255, 99, 23);
+		panelAsignaciones.add(btnGuardarEmpleado);
+		btnGuardarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarEmpleado.setBackground(new Color(60, 179, 113));
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelAsignaciones.setVisible(false);
+				panel.setVisible(true);
+				btnGuardarEmpleado.setVisible(false);
+			}
+		});
+		btnCerrar.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnCerrar.setBackground(new Color(165, 42, 42));
+		btnCerrar.setBounds(37, 256, 99, 23);
+		panelAsignaciones.add(btnCerrar);
+		
+				label_3 = new JLabel("");
+				label_3.setBounds(0, 0, 579, 304);
+				panelAsignaciones.add(label_3);
+				final ImageIcon logo13 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_3.getWidth(), label_3.getHeight(), Image.SCALE_DEFAULT));
+				label_3.setIcon(logo13);
+		cbxContratoAsignado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e1) {
+				conexion objCon = new conexion();
+				Connection conn = objCon.getConexion();
+				try {
+					if (contador3 > 0) {
+						PreparedStatement stmtr = conn.prepareStatement(
+								"SELECT identidad_contrato_empleado, tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
+										+ cbxContratoAsignado.getSelectedItem() + "'");
+						ResultSet rsr = stmtr.executeQuery();
+						rsr.next();
+						txtTipoContratoAsignado.setText(rsr.getString("tipo_contrato_empleado"));
+						txtTiempoContratoAsignado.setText(rsr.getString("tiempo_contrato_empleado"));
+						txtFotoContratoAsignado.setText(rsr.getString("direccion_foto_contrato_empleado"));
+						;
+						stmtr.close();
+						rsr.close();
+					}
+					conn.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
+		cbxHorarioAsignado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				conexion objCon = new conexion();
+				Connection conn = objCon.getConexion();
+				try {
+					if (contador2 > 0) {
+						PreparedStatement stmtr = conn.prepareStatement(
+								"SELECT dias_horario, horas_horario FROM horarios where tipo_horario = '"
+										+ cbxHorarioAsignado.getSelectedItem() + "'");
+						ResultSet rsr = stmtr.executeQuery();
+						rsr.next();
+						txtDiasAsignado.setText(rsr.getString("dias_horario"));
+						txtHorasAsignado.setText(rsr.getString("horas_horario"));
+						;
+						stmtr.close();
+						rsr.close();
+					}
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
+		cbxCargoAsignado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				conexion objCon = new conexion();
+				Connection conn = objCon.getConexion();
+				try {
+					if (contador1 > 0) {
+						PreparedStatement stmtr = conn.prepareStatement(
+								"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
+										+ cbxCargoAsignado.getSelectedItem() + "'");
+						ResultSet rsr = stmtr.executeQuery();
+						rsr.next();
+						txtSueldoAsignado.setText(rsr.getString("sueldo_cargo"));
+						txtHoraExtraAsignado.setText(rsr.getString("valor_hora_extra_cargo"));
+						txtObligacionesAsignado.setText(rsr.getString("funciones_cargo"));
+						;
+						stmtr.close();
+						rsr.close();
+					}
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 		JLabel lblDatosGenerales = new JLabel("Datos del registro :");
 		lblDatosGenerales.setBounds(39, 58, 151, 29);
@@ -573,12 +956,6 @@ public class registro_empleados extends JFrame {
 		btnNuevoEmpleado.setBounds(39, 571, 99, 23);
 		panel.add(btnNuevoEmpleado);
 
-		btnGuardarEmpleado = new JButton("Guardar");
-		btnGuardarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarEmpleado.setBackground(new Color(60, 179, 113));
-		btnGuardarEmpleado.setBounds(444, 571, 99, 23);
-		panel.add(btnGuardarEmpleado);
-
 		txtDireccionFoto = new JTextField();
 		txtDireccionFoto.setEditable(false);
 		txtDireccionFoto.setBounds(354, 166, 189, 20);
@@ -623,6 +1000,40 @@ public class registro_empleados extends JFrame {
 		btnVerFotoEmpleado.setBounds(460, 139, 83, 23);
 		panel.add(btnVerFotoEmpleado);
 
+		btnAsgnaciones = new JButton("Asignaciones");
+		btnAsgnaciones.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panelAsignaciones.setVisible(true);
+				panel.setVisible(false);
+				panelAsignaciones.setBounds(10, 45, 579, 635);
+				contentPane.add(panelAsignaciones);
+				btnGuardarEmpleado.setVisible(true);
+			}
+		});
+		btnAsgnaciones.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnAsgnaciones.setBackground(new Color(218, 165, 32));
+		btnAsgnaciones.setBounds(354, 501, 189, 23);
+		panel.add(btnAsgnaciones);
+
+		JLabel lblAsignaciones = new JLabel("17. Asignaciones :");
+		lblAsignaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblAsignaciones.setBounds(354, 432, 133, 14);
+		panel.add(lblAsignaciones);
+
+		JLabel lblAntesDeFinalizar = new JLabel("Antes de finalizar el registro usted");
+		lblAntesDeFinalizar.setBounds(354, 467, 182, 12);
+		panel.add(lblAntesDeFinalizar);
+
+		JLabel lblNota = new JLabel("Nota.");
+		lblNota.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		lblNota.setBounds(354, 448, 46, 17);
+		panel.add(lblNota);
+
+		JLabel lblDebeAsignarCargo = new JLabel("debe asignar cargo, horario y contrato.");
+		lblDebeAsignarCargo.setBounds(354, 482, 202, 12);
+		panel.add(lblDebeAsignarCargo);
+
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 579, 635);
 		panel.add(label);
@@ -649,17 +1060,17 @@ public class registro_empleados extends JFrame {
 		panel_1.setLayout(null);
 
 		JLabel lblEmpleadosRegistrados = new JLabel("Empleados registrados :");
-		lblEmpleadosRegistrados.setBounds(39, 284, 206, 19);
+		lblEmpleadosRegistrados.setBounds(39, 62, 206, 29);
 		panel_1.add(lblEmpleadosRegistrados);
 		lblEmpleadosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel label_2 = new JLabel("Buscar empleado :");
-		label_2.setBounds(39, 311, 142, 14);
+		label_2.setBounds(39, 102, 142, 14);
 		panel_1.add(label_2);
 		label_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtBusquedaEmpleado = new JTextField();
-		txtBusquedaEmpleado.setBounds(158, 308, 239, 20);
+		txtBusquedaEmpleado.setBounds(158, 99, 239, 20);
 		panel_1.add(txtBusquedaEmpleado);
 		txtBusquedaEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaEmpleado.setColumns(10);
@@ -688,277 +1099,43 @@ public class registro_empleados extends JFrame {
 
 		barraTablaEmpleados = new JScrollPane(tablaEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		barraTablaEmpleados.setBounds(39, 335, 514, 239);
+		barraTablaEmpleados.setBounds(39, 130, 514, 421);
 		panel_1.add(barraTablaEmpleados);
 
 		tablaEmpleados = new JTable();
 		barraTablaEmpleados.setViewportView(tablaEmpleados);
 
 		btnBorrarEmpleado = new JButton("Borrar");
-		btnBorrarEmpleado.setBounds(39, 581, 99, 23);
+		btnBorrarEmpleado.setBounds(39, 565, 99, 23);
 		panel_1.add(btnBorrarEmpleado);
 		btnBorrarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarEmpleado.setBackground(new Color(220, 20, 60));
 
 		btnMostrarEmpleado = new JButton("Ver detalles");
-		btnMostrarEmpleado.setBounds(294, 581, 108, 23);
+		btnMostrarEmpleado.setBounds(294, 565, 108, 23);
 		panel_1.add(btnMostrarEmpleado);
 		btnMostrarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnMostrarEmpleado.setBackground(new Color(0, 206, 209));
 
 		btnActualizarDatosEmpleado = new JButton("Actualizar Datos");
-		btnActualizarDatosEmpleado.setBounds(416, 581, 137, 23);
+		btnActualizarDatosEmpleado.setBounds(416, 565, 137, 23);
 		panel_1.add(btnActualizarDatosEmpleado);
 		btnActualizarDatosEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosEmpleado.setBackground(new Color(60, 179, 113));
 
 		JLabel label_6 = new JLabel();
-		label_6.setBounds(509, 293, 44, 32);
+		label_6.setBounds(482, 62, 71, 60);
 		panel_1.add(label_6);
 		final ImageIcon logo12 = new ImageIcon(
 				iconoo22.getImage().getScaledInstance(label_6.getWidth(), label_6.getHeight(), Image.SCALE_DEFAULT));
 		label_6.setIcon(logo12);
 
 		JLabel lblEmpleados = new JLabel("");
-		lblEmpleados.setBounds(0, 250, 593, 385);
+		lblEmpleados.setBounds(0, 0, 593, 635);
 		panel_1.add(lblEmpleados);
 		final ImageIcon logo11 = new ImageIcon(iconoo.getImage().getScaledInstance(lblEmpleados.getWidth(),
 				lblEmpleados.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpleados.setIcon(logo11);
-
-		JLabel lblNombreDelCargo = new JLabel("Sueldo.");
-		lblNombreDelCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblNombreDelCargo.setBounds(294, 30, 83, 14);
-		panel_1.add(lblNombreDelCargo);
-
-		txtSueldoAsignado = new JTextField();
-		txtSueldoAsignado.setEditable(false);
-		txtSueldoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtSueldoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtSueldoAsignado.setColumns(10);
-		txtSueldoAsignado.setBounds(294, 47, 123, 20);
-		panel_1.add(txtSueldoAsignado);
-
-		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblCargo.setBounds(45, 50, 76, 17);
-		panel_1.add(lblCargo);
-
-		cbxCargoAsignado = new JComboBox<String>();
-		cbxCargoAsignado.setBackground(Color.WHITE);
-		cbxCargoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxCargoAsignado.setBounds(123, 47, 152, 20);
-		panel_1.add(cbxCargoAsignado);
-		cbxCargoAsignado.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				conexion objCon = new conexion();
-				Connection conn = objCon.getConexion();
-				try {
-					if (contador1 > 0) {
-						PreparedStatement stmtr = conn.prepareStatement(
-								"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
-										+ cbxCargoAsignado.getSelectedItem() + "'");
-						ResultSet rsr = stmtr.executeQuery();
-						rsr.next();
-						txtSueldoAsignado.setText(rsr.getString("sueldo_cargo"));
-						txtHoraExtraAsignado.setText(rsr.getString("valor_hora_extra_cargo"));
-						txtObligacionesAsignado.setText(rsr.getString("funciones_cargo"));
-						;
-						stmtr.close();
-						rsr.close();
-					}
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-		JLabel lblAsignacionesDelEmpleado = new JLabel("Asignaciones del empleado :");
-		lblAsignacionesDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblAsignacionesDelEmpleado.setBounds(45, 24, 293, 19);
-		panel_1.add(lblAsignacionesDelEmpleado);
-
-		JLabel lblValorHoraExtra = new JLabel("Valor hora extra.");
-		lblValorHoraExtra.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblValorHoraExtra.setBounds(423, 30, 123, 14);
-		panel_1.add(lblValorHoraExtra);
-
-		txtHoraExtraAsignado = new JTextField();
-		txtHoraExtraAsignado.setEditable(false);
-		txtHoraExtraAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtHoraExtraAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtHoraExtraAsignado.setColumns(10);
-		txtHoraExtraAsignado.setBounds(423, 47, 123, 20);
-		panel_1.add(txtHoraExtraAsignado);
-
-		JLabel lblHorario = new JLabel("Horario :");
-		lblHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblHorario.setBounds(45, 136, 76, 17);
-		panel_1.add(lblHorario);
-
-		cbxHorarioAsignado = new JComboBox<String>();
-		cbxHorarioAsignado.setBackground(Color.WHITE);
-		cbxHorarioAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxHorarioAsignado.setBounds(123, 133, 152, 20);
-		panel_1.add(cbxHorarioAsignado);
-		cbxHorarioAsignado.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				conexion objCon = new conexion();
-				Connection conn = objCon.getConexion();
-				try {
-					if (contador2 > 0) {
-						PreparedStatement stmtr = conn.prepareStatement(
-								"SELECT dias_horario, horas_horario FROM horarios where tipo_horario = '"
-										+ cbxHorarioAsignado.getSelectedItem() + "'");
-						ResultSet rsr = stmtr.executeQuery();
-						rsr.next();
-						txtDiasAsignado.setText(rsr.getString("dias_horario"));
-						txtHorasAsignado.setText(rsr.getString("horas_horario"));
-						;
-						stmtr.close();
-						rsr.close();
-					}
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
-
-		txtDiasAsignado = new JTextField();
-		txtDiasAsignado.setEditable(false);
-		txtDiasAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtDiasAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtDiasAsignado.setColumns(10);
-		txtDiasAsignado.setBounds(294, 133, 123, 20);
-		panel_1.add(txtDiasAsignado);
-
-		JLabel lblHoras = new JLabel("Horas.");
-		lblHoras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblHoras.setBounds(423, 116, 83, 14);
-		panel_1.add(lblHoras);
-
-		JLabel lblDias = new JLabel("Dias.");
-		lblDias.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDias.setBounds(294, 116, 123, 14);
-		panel_1.add(lblDias);
-
-		txtHorasAsignado = new JTextField();
-		txtHorasAsignado.setEditable(false);
-		txtHorasAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtHorasAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtHorasAsignado.setColumns(10);
-		txtHorasAsignado.setBounds(423, 133, 123, 20);
-		panel_1.add(txtHorasAsignado);
-
-		lblContrato = new JLabel("Contrato :");
-		lblContrato.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblContrato.setBounds(45, 184, 76, 17);
-		panel_1.add(lblContrato);
-
-		cbxContratoAsignado = new JComboBox<String>();
-		cbxContratoAsignado.setBackground(Color.WHITE);
-		cbxContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxContratoAsignado.setBounds(123, 181, 152, 20);
-		panel_1.add(cbxContratoAsignado);
-		cbxContratoAsignado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e1) {
-				conexion objCon = new conexion();
-				Connection conn = objCon.getConexion();
-				try {
-					if (contador3 > 0) {
-						PreparedStatement stmtr = conn.prepareStatement(
-								"SELECT identidad_contrato_empleado, tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
-										+ cbxContratoAsignado.getSelectedItem() + "'");
-						ResultSet rsr = stmtr.executeQuery();
-						rsr.next();
-						txtTipoContratoAsignado.setText(rsr.getString("tipo_contrato_empleado"));
-						txtTiempoContratoAsignado.setText(rsr.getString("tiempo_contrato_empleado"));
-						txtFotoContratoAsignado.setText(rsr.getString("direccion_foto_contrato_empleado"));
-						;
-						stmtr.close();
-						rsr.close();
-					}
-					conn.close();
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
-		});
-
-		lblTipo = new JLabel("Fotografia del Contrato.");
-		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipo.setBounds(145, 207, 152, 19);
-		panel_1.add(lblTipo);
-
-		txtFotoContratoAsignado = new JTextField();
-		txtFotoContratoAsignado.setEditable(false);
-		txtFotoContratoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtFotoContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtFotoContratoAsignado.setColumns(10);
-		txtFotoContratoAsignado.setBounds(294, 206, 183, 20);
-		panel_1.add(txtFotoContratoAsignado);
-
-		lblTiempo = new JLabel("Tiempo");
-		lblTiempo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTiempo.setBounds(423, 164, 83, 14);
-		panel_1.add(lblTiempo);
-
-		txtTiempoContratoAsignado = new JTextField();
-		txtTiempoContratoAsignado.setEditable(false);
-		txtTiempoContratoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTiempoContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtTiempoContratoAsignado.setColumns(10);
-		txtTiempoContratoAsignado.setBounds(423, 181, 123, 20);
-		panel_1.add(txtTiempoContratoAsignado);
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(294, 73, 252, 38);
-		panel_1.add(scrollPane_1);
-
-		txtObligacionesAsignado = new JTextArea();
-		txtObligacionesAsignado.setEditable(false);
-		scrollPane_1.setViewportView(txtObligacionesAsignado);
-
-		JLabel lblObligaciones = new JLabel("Obligaciones del empleado.");
-		lblObligaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblObligaciones.setBounds(123, 78, 174, 32);
-		panel_1.add(lblObligaciones);
-
-		btnNewButton = new JButton("Ver");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				verFotoEmpleado();
-			}
-		});
-		btnNewButton.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setBounds(487, 206, 59, 21);
-		panel_1.add(btnNewButton);
-
-		txtTipoContratoAsignado = new JTextField();
-		txtTipoContratoAsignado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTipoContratoAsignado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtTipoContratoAsignado.setEditable(false);
-		txtTipoContratoAsignado.setColumns(10);
-		txtTipoContratoAsignado.setBounds(294, 181, 123, 20);
-		panel_1.add(txtTipoContratoAsignado);
-
-		lblTipo_1 = new JLabel("Tipo.");
-		lblTipo_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipo_1.setBounds(294, 164, 123, 14);
-		panel_1.add(lblTipo_1);
-
-		label_3 = new JLabel("");
-		label_3.setBounds(0, 0, 593, 250);
-		panel_1.add(label_3);
-		final ImageIcon logo13 = new ImageIcon(
-				iconoo.getImage().getScaledInstance(label_3.getWidth(), label_3.getHeight(), Image.SCALE_DEFAULT));
-		label_3.setIcon(logo13);
 
 		lblAsignacionesYLista = new JLabel("ASIGNACIONES Y LISTA DE EMPLEADOS.");
 		lblAsignacionesYLista.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -1057,16 +1234,21 @@ public class registro_empleados extends JFrame {
 	}
 
 	public void construirTablaEmpleados() {
-		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero",
-				"Edad", "Telefono", "Correo","Direccion", "Foto", "Nombre_Referencia",
-				"Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro","Fecha_Labores",
-				"Estado", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario",
-				"Dias", "Horas", "Identidad_Contrato", "Tipo", "Tiempo", "Foto"};
+		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero", "Edad", "Telefono", "Correo",
+				"Direccion", "Foto", "Nombre_Referencia", "Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro",
+				"Fecha_Labores", "Estado", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario", "Dias", "Horas",
+				"Identidad_Contrato", "Tipo", "Tiempo", "Foto" };
 		String informacion[][] = control_empleado.obtenerMatriz();
 		tablaEmpleados = new JTable(informacion, titulos);
 		barraTablaEmpleados.setViewportView(tablaEmpleados);
 		tablaEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tablaEmpleados.getTableHeader().setReorderingAllowed(false);
+
+		DefaultTableCellRenderer tcr;
+		tcr = new DefaultTableCellRenderer();
+		tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+		tablaEmpleados.getColumnModel().getColumn(18).setCellRenderer(tcr);
+		tablaEmpleados.getColumnModel().getColumn(19).setCellRenderer(tcr);
 
 		for (int c = 0; c < tablaEmpleados.getColumnCount(); c++) {
 			Class<?> col_class = tablaEmpleados.getColumnClass(c);

@@ -5,6 +5,9 @@ import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +19,8 @@ import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.text.Document;
 
 import clases.empleado;
 import conexion.conexion;
@@ -134,6 +139,10 @@ public class control_empleado implements ActionListener {
 							iconoContrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
 									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
 					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+					
+					formularioEmpleado.panelAsignaciones.setVisible(false);
+					formularioEmpleado.panel.setVisible(true);
+					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error al Guardar");
@@ -823,6 +832,7 @@ public class control_empleado implements ActionListener {
 
 		}
 
-	}
+	}      
+    
 
 }

@@ -196,6 +196,8 @@ public class ventana_principal extends JFrame {
 				control.consultarContratos();
 				control.consultarCargos();
 				control.consultarHorarios();
+				formulario.btnGuardarEmpleado.setVisible(false);
+				formulario.panelAsignaciones.setVisible(false);
 				dispose();
 			}
 		});
