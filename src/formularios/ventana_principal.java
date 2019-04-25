@@ -21,6 +21,7 @@ import clases.deduccion;
 import clases.empleado;
 import clases.empresa;
 import clases.horario;
+import clases.planilla;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
 import consultas.consultas_contrato_empleado;
@@ -28,6 +29,7 @@ import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_horario;
+import consultas.consultas_planilla;
 import controles.control_bonificacion;
 import controles.control_cargo;
 import controles.control_contrato_empleado;
@@ -35,6 +37,8 @@ import controles.control_deduccion;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
+import controles.control_planilla;
+
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -132,6 +136,31 @@ public class ventana_principal extends JFrame {
 		panel.setLayout(null);
 
 		registroPlanilla = new JButton("Planillas");
+		registroPlanilla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				planilla clase = new planilla();
+				consultas_planilla consulta = new consultas_planilla();
+				registro_planillas formulario = new registro_planillas();
+				control_planilla control = new control_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);	
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+				dispose();
+			}
+		});
 		registroPlanilla.setForeground(Color.BLACK);
 		registroPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		registroPlanilla.setBackground(new Color(102, 205, 170));

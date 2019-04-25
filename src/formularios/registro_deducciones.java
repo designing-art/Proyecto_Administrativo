@@ -85,7 +85,7 @@ public class registro_deducciones extends JFrame {
 	public JTextField txtBusquedaDeduccion;
 	public JTextField txtTotalDeducciones;
 	public JLabel lblFotoDeduccion;
-	public JButton button;
+	public JButton btnAtras;
 	public PlaceHolder pista;
 	public JDateChooser dateFechaDeduccion;
 
@@ -119,6 +119,7 @@ public class registro_deducciones extends JFrame {
 	public JLabel label;
 	public JTextField txtCodigo;
 	private JLabel lblFecha;
+	private JButton btnPlanillaDeducciones;
 
 	public registro_deducciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -204,16 +205,16 @@ public class registro_deducciones extends JFrame {
 
 		barraTablaDeduccion = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		barraTablaDeduccion.setBounds(26, 95, 376, 266);
+		barraTablaDeduccion.setBounds(26, 95, 376, 239);
 		panel_2.add(barraTablaDeduccion);
 
 		lblTotalDeducciones = new JLabel("Total deducciones :");
-		lblTotalDeducciones.setBounds(28, 372, 150, 14);
+		lblTotalDeducciones.setBounds(28, 347, 150, 14);
 		panel_2.add(lblTotalDeducciones);
 		lblTotalDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		txtTotalDeducciones = new JTextField();
-		txtTotalDeducciones.setBounds(188, 370, 122, 20);
+		txtTotalDeducciones.setBounds(184, 345, 108, 20);
 		panel_2.add(txtTotalDeducciones);
 		txtTotalDeducciones.setEditable(false);
 		txtTotalDeducciones.setColumns(10);
@@ -226,21 +227,40 @@ public class registro_deducciones extends JFrame {
 			}
 		});
 		btnCalcularDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		btnCalcularDeducciones.setBounds(320, 370, 82, 21);
+		btnCalcularDeducciones.setBounds(303, 345, 99, 21);
 		panel_2.add(btnCalcularDeducciones);
 		btnCalcularDeducciones.setBackground(new Color(60, 179, 113));
 
 		label = new JLabel("L.");
-		label.setBounds(170, 372, 28, 18);
+		label.setBounds(168, 345, 28, 18);
 		panel_2.add(label);
 		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-		label_8 = new JLabel("");
-		label_8.setBounds(0, 0, 430, 456);
-		panel_2.add(label_8);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-		label_8.setIcon(logo);
+		
+		btnPlanillaDeducciones = new JButton("Planilla");
+		btnPlanillaDeducciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtTotalDeducciones.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No hay bonificaciones para este empleado.");
+				} else {
+					registro_planillas.txtTotalDeduccionesPlanilla.setText(txtTotalDeducciones.getText());
+					JOptionPane.showMessageDialog(null, "Deducciones agregadas a la planilla.");
+					dispose();
+						
+				}
+			}
+		});
+		btnPlanillaDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		btnPlanillaDeducciones.setBackground(Color.YELLOW);
+		btnPlanillaDeducciones.setBounds(303, 371, 99, 23);
+		btnPlanillaDeducciones.setVisible(false);
+		panel_2.add(btnPlanillaDeducciones);
+		
+				label_8 = new JLabel("");
+				label_8.setBounds(0, 0, 430, 456);
+				panel_2.add(label_8);
+				final ImageIcon logo = new ImageIcon(
+						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+				label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE DEDUCCIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -527,8 +547,8 @@ public class registro_deducciones extends JFrame {
 				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
 		label_7.setIcon(logo21);
 
-		button = new JButton("Regresar");
-		button.addActionListener(new ActionListener() {
+		btnAtras = new JButton("Regresar");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);
@@ -538,10 +558,10 @@ public class registro_deducciones extends JFrame {
 				time.schedule(principal.tarea, 0, 1000);
 			}
 		});
-		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button.setBackground(new Color(255, 127, 80));
-		button.setBounds(772, 12, 102, 23);
-		contentPane.add(button);
+		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAtras.setBackground(new Color(255, 127, 80));
+		btnAtras.setBounds(772, 12, 102, 23);
+		contentPane.add(btnAtras);
 	}
 
 	public void establecerFechaRegistro() {
@@ -622,6 +642,7 @@ public class registro_deducciones extends JFrame {
 				t+=p;
 			}
 			txtTotalDeducciones.setText(String.valueOf(t));
+			btnPlanillaDeducciones.setVisible(true);
 		}else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}

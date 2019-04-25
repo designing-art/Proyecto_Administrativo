@@ -9,6 +9,7 @@ import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
+import clases.bonificacion;
 import clases.empleado;
 import clases.empresa;
 import conexion.conexion;
@@ -85,9 +86,9 @@ public class registro_bonificaciones extends JFrame {
 	public JPanel panel_2;
 	public JLabel label_8;
 	public JTextField txtBusquedaBonificacion;
-	public JTextField txtTotalBonificacion;
+	public static JTextField txtTotalBonificacion;
 	public JLabel lblFotoBonificacion;
-	public JButton button;
+	public JButton btnAtras;
 	public PlaceHolder pista;
 	public JDateChooser dateFechaBonificacion;
 
@@ -113,6 +114,8 @@ public class registro_bonificaciones extends JFrame {
 
 	public static String ruta;
 	public static ImageIcon imagen;
+	
+	public static String bonificaciones;
 
 	public JComboBox<?> cbxTipoBonificacion;
 	public JTextField txtDireccionFoto;
@@ -120,7 +123,8 @@ public class registro_bonificaciones extends JFrame {
 	public JLabel lblL;
 	public JLabel label;
 	public JTextField txtCodigo;
-	private JLabel lblFecha;
+	public JLabel lblFecha;
+	public JButton btnPlanilla;
 
 	public registro_bonificaciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,33 +193,33 @@ public class registro_bonificaciones extends JFrame {
 		btnBorrarBonificacion = new JButton("Borrar");
 		btnBorrarBonificacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarBonificacion.setBackground(new Color(220, 20, 60));
-		btnBorrarBonificacion.setBounds(28, 401, 99, 23);
+		btnBorrarBonificacion.setBounds(28, 406, 99, 23);
 		panel_2.add(btnBorrarBonificacion);
 
 		btnVerBonificacion = new JButton("Ver detalles");
 		btnVerBonificacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnVerBonificacion.setBackground(new Color(0, 206, 209));
-		btnVerBonificacion.setBounds(147, 401, 108, 23);
+		btnVerBonificacion.setBounds(147, 406, 108, 23);
 		panel_2.add(btnVerBonificacion);
 
 		btnActualizarDatosBonificacion = new JButton("Actualizar Datos");
 		btnActualizarDatosBonificacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosBonificacion.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosBonificacion.setBounds(265, 402, 137, 23);
+		btnActualizarDatosBonificacion.setBounds(265, 407, 137, 23);
 		panel_2.add(btnActualizarDatosBonificacion);
 
 		barraTablaBonificacion = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		barraTablaBonificacion.setBounds(26, 95, 376, 266);
+		barraTablaBonificacion.setBounds(26, 95, 376, 247);
 		panel_2.add(barraTablaBonificacion);
 
 		lblTotalDeducciones = new JLabel("Total bonificaciones:");
-		lblTotalDeducciones.setBounds(28, 372, 150, 14);
+		lblTotalDeducciones.setBounds(28, 349, 150, 26);
 		panel_2.add(lblTotalDeducciones);
-		lblTotalDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblTotalDeducciones.setFont(new Font("Dialog", Font.BOLD, 12));
 
 		txtTotalBonificacion = new JTextField();
-		txtTotalBonificacion.setBounds(188, 370, 122, 20);
+		txtTotalBonificacion.setBounds(178, 353, 115, 22);
 		panel_2.add(txtTotalBonificacion);
 		txtTotalBonificacion.setEditable(false);
 		txtTotalBonificacion.setColumns(10);
@@ -228,14 +232,33 @@ public class registro_bonificaciones extends JFrame {
 			}
 		});
 		btnCalcularBonificacion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		btnCalcularBonificacion.setBounds(320, 370, 82, 21);
+		btnCalcularBonificacion.setBounds(303, 353, 99, 23);
 		panel_2.add(btnCalcularBonificacion);
 		btnCalcularBonificacion.setBackground(new Color(60, 179, 113));
 
 		label = new JLabel("L.");
-		label.setBounds(170, 372, 28, 18);
+		label.setBounds(157, 353, 28, 18);
 		panel_2.add(label);
 		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		btnPlanilla = new JButton("Planilla");
+		btnPlanilla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtTotalBonificacion.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No hay bonificaciones para este empleado.");
+				} else {
+					registro_planillas.txtTotalBonificacionesPlanilla.setText(txtTotalBonificacion.getText());
+					dispose();
+					JOptionPane.showMessageDialog(null, "Bonificaciones agregadas a la planilla.");	
+				}
+
+			}
+		});
+		btnPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		btnPlanilla.setBackground(new Color(255, 255, 0));
+		btnPlanilla.setBounds(303, 378, 99, 23);
+		panel_2.add(btnPlanilla);
+		btnPlanilla.setVisible(false);
 
 		label_8 = new JLabel("");
 		label_8.setBounds(0, 0, 430, 456);
@@ -376,8 +399,9 @@ public class registro_bonificaciones extends JFrame {
 		panel_1.add(lblTipo);
 
 		cbxTipoBonificacion = new JComboBox();
-		cbxTipoBonificacion.setModel(
-				new DefaultComboBoxModel(new String[] {"Bono por comision.", "Bono Navide\u00F1o.", "Bono por antiguedad.", "Bono por  publicidad.", "Pago por Edicion.", "Pago por Trabajo Grabacion.", "Pago or Tomas.", "Pago por venta de publicidad."}));
+		cbxTipoBonificacion.setModel(new DefaultComboBoxModel(new String[] { "Bono por comision.",
+				"Bono Navide\u00F1o.", "Bono por antiguedad.", "Bono por  publicidad.", "Pago por Edicion.",
+				"Pago por Trabajo Grabacion.", "Pago or Tomas.", "Pago por venta de publicidad." }));
 		cbxTipoBonificacion.setBounds(137, 255, 132, 20);
 		panel_1.add(cbxTipoBonificacion);
 
@@ -528,8 +552,8 @@ public class registro_bonificaciones extends JFrame {
 				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
 		label_7.setIcon(logo21);
 
-		button = new JButton("Regresar");
-		button.addActionListener(new ActionListener() {
+		btnAtras = new JButton("Regresar");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);
@@ -539,10 +563,10 @@ public class registro_bonificaciones extends JFrame {
 				time.schedule(principal.tarea, 0, 1000);
 			}
 		});
-		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button.setBackground(new Color(255, 127, 80));
-		button.setBounds(772, 12, 102, 23);
-		contentPane.add(button);
+		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAtras.setBackground(new Color(255, 127, 80));
+		btnAtras.setBounds(772, 12, 102, 23);
+		contentPane.add(btnAtras);
 	}
 
 	public void establecerFechaRegistro() {
@@ -596,7 +620,8 @@ public class registro_bonificaciones extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM bonificaciones ORDER BY id_bonificacion DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM bonificaciones ORDER BY id_bonificacion DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				ultimoValor = rsr.getString("id_bonificacion");
@@ -613,17 +638,18 @@ public class registro_bonificaciones extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void totalizar() {
 		double t = 0;
 		double p = 0;
-		if(tablaBonificaciones.getRowCount()>0) {
-			for(int i = 0; i < tablaBonificaciones.getRowCount(); i++) {
-				p= Double.parseDouble(tablaBonificaciones.getValueAt(i, 4).toString());
-				t+=p;
+		if (tablaBonificaciones.getRowCount() > 0) {
+			for (int i = 0; i < tablaBonificaciones.getRowCount(); i++) {
+				p = Double.parseDouble(tablaBonificaciones.getValueAt(i, 4).toString());
+				t += p;
 			}
 			txtTotalBonificacion.setText(String.valueOf(t));
-		}else {
+			btnPlanilla.setVisible(true);
+		} else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}
 	}
@@ -654,4 +680,5 @@ public class registro_bonificaciones extends JFrame {
 
 		}
 	}
+
 }
