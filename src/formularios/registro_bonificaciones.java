@@ -9,17 +9,10 @@ import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
-import clases.bonificacion;
 import clases.empleado;
-import clases.empresa;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
-import consultas.consultas_deduccion;
-import consultas.consultas_empleado;
-import consultas.consultas_empresa;
 import controles.control_bonificacion;
-import controles.control_cargo;
-import controles.control_deduccion;
 import utilidades.visor_imagen;
 
 import java.awt.Color;
@@ -227,6 +220,7 @@ public class registro_bonificaciones extends JFrame {
 
 		JButton btnCalcularBonificacion = new JButton("Calcular");
 		btnCalcularBonificacion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				totalizar();
 			}
@@ -243,6 +237,7 @@ public class registro_bonificaciones extends JFrame {
 
 		btnPlanilla = new JButton("Planilla");
 		btnPlanilla.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (txtTotalBonificacion.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "No hay bonificaciones para este empleado.");
@@ -474,6 +469,7 @@ public class registro_bonificaciones extends JFrame {
 
 		btnBuscarIdentidadDeduccion = new JButton("Buscar");
 		btnBuscarIdentidadDeduccion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtIdentidadEmpleadoBonificacion.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Por favor ingrese la identidad antes buscar");
@@ -497,6 +493,7 @@ public class registro_bonificaciones extends JFrame {
 		btnVer.setBounds(308, 218, 73, 15);
 		panel_1.add(btnVer);
 		btnVer.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtDireccionFoto.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -554,6 +551,7 @@ public class registro_bonificaciones extends JFrame {
 
 		btnAtras = new JButton("Regresar");
 		btnAtras.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);

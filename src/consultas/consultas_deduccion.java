@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import clases.deduccion;
 import clases.empleado;
-import clases.empresa;
 import conexion.conexion;
 
 public class consultas_deduccion extends conexion {

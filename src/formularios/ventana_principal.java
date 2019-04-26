@@ -137,6 +137,7 @@ public class ventana_principal extends JFrame {
 
 		registroPlanilla = new JButton("Planillas");
 		registroPlanilla.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				planilla clase = new planilla();
 				consultas_planilla consulta = new consultas_planilla();
@@ -263,6 +264,7 @@ public class ventana_principal extends JFrame {
 
 		registroBonificacion = new JButton("Bonificaciones");
 		registroBonificacion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				bonificacion clase = new bonificacion();
 				consultas_bonificacion consulta = new consultas_bonificacion();
@@ -293,6 +295,7 @@ public class ventana_principal extends JFrame {
 
 		registroDeduccion = new JButton("Deducciones");
 		registroDeduccion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				deduccion clase = new deduccion();
 				consultas_deduccion consulta = new consultas_deduccion();

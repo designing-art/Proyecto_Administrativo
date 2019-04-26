@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Event;
 
 import javax.swing.JButton;
@@ -32,7 +31,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import java.awt.event.ActionListener;
@@ -41,12 +39,9 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -58,7 +53,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 
-import com.mysql.cj.xdevapi.Statement;
 import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -481,6 +475,7 @@ public class registro_empleados extends JFrame {
 		
 		btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				panelAsignaciones.setVisible(false);
 				panel.setVisible(true);

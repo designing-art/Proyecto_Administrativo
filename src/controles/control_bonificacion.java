@@ -16,12 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import clases.bonificacion;
-import clases.deduccion;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
-import consultas.consultas_deduccion;
 import formularios.registro_bonificaciones;
-import formularios.registro_deducciones;
 
 public class control_bonificacion implements ActionListener {
 
@@ -44,6 +41,7 @@ public class control_bonificacion implements ActionListener {
 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == formulario.btnGuardar) {
 
@@ -335,7 +333,7 @@ public class control_bonificacion implements ActionListener {
 		formulario.txtObservacionBonificacion.setText(null);
 		formulario.txtCantidadBonificacion.setText(null);
 		formulario.txtIdentidadEmpleadoBonificacion.setText(null);
-		formulario.txtTotalBonificacion.setText(null);
+		registro_bonificaciones.txtTotalBonificacion.setText(null);
 		formulario.txtNombresBonificacion.setText(null);
 		formulario.txtApellidosBonificacion.setText(null);
 		formulario.txtIdentidadBonificacion.setText(null);

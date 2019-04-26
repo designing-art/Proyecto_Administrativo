@@ -227,6 +227,7 @@ public class registro_contratos_empleados extends JFrame {
 
 		btnVerFotoContrato = new JButton("Ver");
 		btnVerFotoContrato.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				verFotoContratoEmpleado();
 			}

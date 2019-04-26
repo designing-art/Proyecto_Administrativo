@@ -12,15 +12,11 @@ import com.placeholder.PlaceHolder;
 import clases.bonificacion;
 import clases.deduccion;
 import clases.empleado;
-import clases.empresa;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_deduccion;
-import consultas.consultas_empleado;
-import consultas.consultas_empresa;
 import consultas.consultas_planilla;
 import controles.control_bonificacion;
-import controles.control_cargo;
 import controles.control_deduccion;
 import controles.control_planilla;
 import utilidades.visor_imagen;
@@ -66,7 +62,6 @@ import java.awt.Component;
 import java.awt.Event;
 
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -256,6 +251,7 @@ public class registro_planillas extends JFrame {
 
 		JButton btnCalcularPlanilla = new JButton("Calcular");
 		btnCalcularPlanilla.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				totalizar();
 			}
@@ -323,6 +319,7 @@ public class registro_planillas extends JFrame {
 		
 				button_1 = new JButton("=");
 				button_1.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(txtCantidadPlanilla.getText().isEmpty() && txtTotalBonificacionesPlanilla.getText().isEmpty())
 						{
@@ -342,6 +339,7 @@ public class registro_planillas extends JFrame {
 				
 						button_2 = new JButton("=");
 						button_2.addActionListener(new ActionListener() {
+							@Override
 							public void actionPerformed(ActionEvent e) {
 								if(txtSueldoNetoPlanilla.getText().isEmpty() && txtTotalDeduccionesPlanilla.getText().isEmpty())
 								{
@@ -531,6 +529,7 @@ public class registro_planillas extends JFrame {
 
 		btnBuscarIdentidadPlanilla = new JButton("Buscar");
 		btnBuscarIdentidadPlanilla.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtIdentidadEmpleadoPlanilla.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Por favor ingrese la identidad antes buscar");
@@ -554,6 +553,7 @@ public class registro_planillas extends JFrame {
 		btnVer.setBounds(308, 218, 73, 15);
 		panel_1.add(btnVer);
 		btnVer.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtDireccionFoto.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -693,6 +693,7 @@ public class registro_planillas extends JFrame {
 
 		btnActualizar_Bonificaciones = new JButton("Actualizar");
 		btnActualizar_Bonificaciones.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				bonificacion clase = new bonificacion();
 				consultas_bonificacion consulta = new consultas_bonificacion();
@@ -722,6 +723,7 @@ public class registro_planillas extends JFrame {
 
 		btnActualizar_Deducciones = new JButton("Actualizar");
 		btnActualizar_Deducciones.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				deduccion clase = new deduccion();
 				consultas_deduccion consulta = new consultas_deduccion();
@@ -758,6 +760,7 @@ public class registro_planillas extends JFrame {
 
 		button = new JButton("Regresar");
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventana_principal principal = new ventana_principal();
 				principal.setVisible(true);
@@ -851,7 +854,7 @@ public class registro_planillas extends JFrame {
 		double p = 0;
 		if (tablaPlanilla.getRowCount() > 0) {
 			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
-				p = Double.parseDouble(tablaPlanilla.getValueAt(i, 4).toString());
+				p = Double.parseDouble(tablaPlanilla.getValueAt(i, 11).toString());
 				t += p;
 			}
 			txtTotalPlanilla.setText(String.valueOf(t));

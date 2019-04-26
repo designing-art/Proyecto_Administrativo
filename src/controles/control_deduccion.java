@@ -41,6 +41,7 @@ public class control_deduccion implements ActionListener {
 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == formulario.btnGuardar) {
 

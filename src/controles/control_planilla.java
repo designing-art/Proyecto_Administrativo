@@ -15,15 +15,9 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import clases.bonificacion;
-import clases.deduccion;
 import clases.planilla;
 import conexion.conexion;
-import consultas.consultas_bonificacion;
-import consultas.consultas_deduccion;
 import consultas.consultas_planilla;
-import formularios.registro_bonificaciones;
-import formularios.registro_deducciones;
 import formularios.registro_planillas;
 
 public class control_planilla implements ActionListener {
@@ -47,16 +41,17 @@ public class control_planilla implements ActionListener {
 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == formulario.btnGuardar) {
 
 			if (formulario.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
 					|| formulario.txtIdentidadPlanilla.getText().isEmpty()
-					|| formulario.txtCantidadPlanilla.getText().isEmpty()
-					|| formulario.txtTotalBonificacionesPlanilla.getText().isEmpty()
-					|| formulario.txtTotalDeduccionesPlanilla.getText().isEmpty()
-					|| formulario.txtTotalPagoEmpleado.getText().isEmpty()
-					|| formulario.txtCantidadPlanilla.getText().isEmpty()) {
+					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()
+					|| registro_planillas.txtTotalBonificacionesPlanilla.getText().isEmpty()
+					|| registro_planillas.txtTotalDeduccionesPlanilla.getText().isEmpty()
+					|| registro_planillas.txtTotalPagoEmpleado.getText().isEmpty()
+					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar en la planilla!");
 
 			} else {
@@ -66,11 +61,11 @@ public class control_planilla implements ActionListener {
 				clase.setApellidos_planilla(formulario.txtApellidosPlanilla.getText());
 				clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
 				clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
-				clase.setSueldo_bruto_planilla(Double.parseDouble(formulario.txtCantidadPlanilla.getText()));
-				clase.setTotal_deducciones_planilla(Double.parseDouble(formulario.txtTotalDeduccionesPlanilla.getText()));
-				clase.setTotal_bonificaciones_planilla(Double.parseDouble(formulario.txtTotalBonificacionesPlanilla.getText()));
-				clase.setSueldo_neto_planilla(Double.parseDouble(formulario.txtSueldoNetoPlanilla.getText()));
-				clase.setTotal_apagar_planilla(Double.parseDouble(formulario.txtTotalPagoEmpleado.getText()));
+				clase.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
+				clase.setTotal_deducciones_planilla(Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+				clase.setTotal_bonificaciones_planilla(Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+				clase.setSueldo_neto_planilla(Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
+				clase.setTotal_apagar_planilla(Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
 				
 
 				if (consulta.registrar(clase)) {
@@ -124,11 +119,11 @@ public class control_planilla implements ActionListener {
 					formulario.txtApellidosPlanilla.setText(apellidos);
 					formulario.txtIdentidadPlanilla.setText(identidad);
 					formulario.txtCargoPlanilla.setText(cargo);
-					formulario.txtCantidadPlanilla.setText(sueldob);
-					formulario.txtTotalDeduccionesPlanilla.setText(deduc);
-					formulario.txtTotalBonificacionesPlanilla.setText(bonif);
-					formulario.txtSueldoNetoPlanilla.setText(sueldon);
-					formulario.txtTotalPagoEmpleado.setText(total);
+					registro_planillas.txtCantidadPlanilla.setText(sueldob);
+					registro_planillas.txtTotalDeduccionesPlanilla.setText(deduc);
+					registro_planillas.txtTotalBonificacionesPlanilla.setText(bonif);
+					registro_planillas.txtSueldoNetoPlanilla.setText(sueldon);
+					registro_planillas.txtTotalPagoEmpleado.setText(total);
 
 					formulario.txtCodigoPlanilla.setForeground(Color.BLACK);
 					formulario.cbxTipoPlanilla.setForeground(Color.BLACK);
@@ -184,11 +179,11 @@ public class control_planilla implements ActionListener {
 					formulario.txtApellidosPlanilla.setText(apellidos);
 					formulario.txtIdentidadPlanilla.setText(identidad);
 					formulario.txtCargoPlanilla.setText(cargo);
-					formulario.txtCantidadPlanilla.setText(sueldob);
-					formulario.txtTotalDeduccionesPlanilla.setText(deduc);
-					formulario.txtTotalBonificacionesPlanilla.setText(bonif);
-					formulario.txtSueldoNetoPlanilla.setText(sueldon);
-					formulario.txtTotalPagoEmpleado.setText(total);
+					registro_planillas.txtCantidadPlanilla.setText(sueldob);
+					registro_planillas.txtTotalDeduccionesPlanilla.setText(deduc);
+					registro_planillas.txtTotalBonificacionesPlanilla.setText(bonif);
+					registro_planillas.txtSueldoNetoPlanilla.setText(sueldon);
+					registro_planillas.txtTotalPagoEmpleado.setText(total);
 
 					formulario.txtCodigoPlanilla.setForeground(Color.BLACK);
 					formulario.cbxTipoPlanilla.setForeground(Color.BLACK);
@@ -218,11 +213,11 @@ public class control_planilla implements ActionListener {
 
 			if (formulario.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
 					|| formulario.txtIdentidadPlanilla.getText().isEmpty()
-					|| formulario.txtCantidadPlanilla.getText().isEmpty()
-					|| formulario.txtTotalBonificacionesPlanilla.getText().isEmpty()
-					|| formulario.txtTotalDeduccionesPlanilla.getText().isEmpty()
-					|| formulario.txtTotalPagoEmpleado.getText().isEmpty()
-					|| formulario.txtCantidadPlanilla.getText().isEmpty()) {
+					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()
+					|| registro_planillas.txtTotalBonificacionesPlanilla.getText().isEmpty()
+					|| registro_planillas.txtTotalDeduccionesPlanilla.getText().isEmpty()
+					|| registro_planillas.txtTotalPagoEmpleado.getText().isEmpty()
+					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 
 			} else {
@@ -233,11 +228,11 @@ public class control_planilla implements ActionListener {
 				clase.setApellidos_planilla(formulario.txtApellidosPlanilla.getText());
 				clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
 				clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
-				clase.setSueldo_bruto_planilla(Double.parseDouble(formulario.txtCantidadPlanilla.getText()));
-				clase.setTotal_deducciones_planilla(Double.parseDouble(formulario.txtTotalDeduccionesPlanilla.getText()));
-				clase.setTotal_bonificaciones_planilla(Double.parseDouble(formulario.txtTotalBonificacionesPlanilla.getText()));
-				clase.setSueldo_neto_planilla(Double.parseDouble(formulario.txtSueldoNetoPlanilla.getText()));
-				clase.setTotal_apagar_planilla(Double.parseDouble(formulario.txtTotalPagoEmpleado.getText()));
+				clase.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
+				clase.setTotal_deducciones_planilla(Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+				clase.setTotal_bonificaciones_planilla(Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+				clase.setSueldo_neto_planilla(Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
+				clase.setTotal_apagar_planilla(Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
 				clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
 
 				if (consulta.modificar(clase)) {
@@ -354,11 +349,11 @@ public class control_planilla implements ActionListener {
 		formulario.txtBusquedaPlanilla.setText(null);
 		formulario.txtTotalPlanilla.setText(null);
 		formulario.txtDireccionFoto.setText(null);
-		formulario.txtTotalPagoEmpleado.setText(null);
-		formulario.txtTotalBonificacionesPlanilla.setText(null);
-		formulario.txtTotalDeduccionesPlanilla.setText(null);
-		formulario.txtCantidadPlanilla.setText(null);
-		formulario.txtSueldoNetoPlanilla.setText(null);
+		registro_planillas.txtTotalPagoEmpleado.setText(null);
+		registro_planillas.txtTotalBonificacionesPlanilla.setText(null);
+		registro_planillas.txtTotalDeduccionesPlanilla.setText(null);
+		registro_planillas.txtCantidadPlanilla.setText(null);
+		registro_planillas.txtSueldoNetoPlanilla.setText(null);
 		formulario.txtIdentidadEmpleadoPlanilla.setText(null);
 	}
 

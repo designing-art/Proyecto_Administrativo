@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import clases.bonificacion;
-import clases.deduccion;
 import clases.empleado;
-import clases.empresa;
 import clases.planilla;
 import conexion.conexion;
 

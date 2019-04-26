@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import clases.bonificacion;
-import clases.deduccion;
 import clases.empleado;
-import clases.empresa;
 import conexion.conexion;
 
 public class consultas_bonificacion extends conexion {
