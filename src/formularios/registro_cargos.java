@@ -144,9 +144,9 @@ public class registro_cargos extends JFrame {
 		panelRegistro.add(txtSueldoCargo);
 		InputMap map2 = txtSueldoCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-
 		txtSueldoCargo.addKeyListener(new KeyListener() {
 			@Override
+			//Metodo que valida el ingreso de solo numeros
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
@@ -254,6 +254,7 @@ public class registro_cargos extends JFrame {
 
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
+			//metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (Character.isDigit(c)) {
@@ -322,6 +323,7 @@ public class registro_cargos extends JFrame {
 		InputMap map4 = txtBusquedaCargos.getInputMap(JComponent.WHEN_FOCUSED);
 		txtBusquedaCargos.addKeyListener(new KeyListener() {
 			@Override
+			// metodo para buscar en la tabla
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
 				tablaCargos.setRowSorter(trsfiltroCodigo);
@@ -394,7 +396,7 @@ public class registro_cargos extends JFrame {
 			tablaCargos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			tablaCargos.getTableHeader().setReorderingAllowed(false);
 
-			// alinear datos de sueldo y horaextra a la derecha
+			// alinear datos de sueldo y horaextra a la derecha en la tabla
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
