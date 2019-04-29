@@ -68,39 +68,37 @@ public class consultas_deduccion extends conexion {
 			}
 		}
 	}
-	
-	 
-    public boolean buscar(empleado empleado) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConexion();
 
-        String sql = "SELECT id_empleado, nombres_empleado, apellidos_empleado, identidad_empleado, direccion_foto_empleado FROM empleados WHERE identidad_empleado = ? ";
+	public boolean buscar(empleado empleado) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = getConexion();
 
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, empleado.getIdentidad_empleado());
-            rs = ps.executeQuery();
-            
-            if(rs.next())
-            {
-            	empleado.setId_empleado(rs.getInt("id_empleado"));
-            	empleado.setNombres_empleado(rs.getString("nombres_empleado"));
+		String sql = "SELECT id_empleado, nombres_empleado, apellidos_empleado, identidad_empleado, direccion_foto_empleado FROM empleados WHERE identidad_empleado = ? ";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, empleado.getIdentidad_empleado());
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				empleado.setId_empleado(rs.getInt("id_empleado"));
+				empleado.setNombres_empleado(rs.getString("nombres_empleado"));
 				empleado.setApellidos_empleado(rs.getString("apellidos_empleado"));
 				empleado.setIdentidad_empleado(rs.getString("identidad_empleado"));
 				empleado.setDireccion_foto_empleado(rs.getString("direccion_foto_empleado"));
-               return true;
-            }
-            return false;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
 		}
 	}
 }

@@ -35,10 +35,8 @@ public class control_empresa implements ActionListener {
 		if (e.getSource() == formulario.btnGuardarEmpresa) {
 
 			if (// validar datos vacios
-					formulario.txtNombreEmpresa.getText().isEmpty() 
-					|| formulario.txtDireccionEmpresa.getText().isEmpty()
-					|| formulario.txtTelefonoEmpresa.getText().isEmpty() 
-					|| formulario.txtRTNempresa.getText().isEmpty()
+			formulario.txtNombreEmpresa.getText().isEmpty() || formulario.txtDireccionEmpresa.getText().isEmpty()
+					|| formulario.txtTelefonoEmpresa.getText().isEmpty() || formulario.txtRTNempresa.getText().isEmpty()
 					|| formulario.txtDireccionLogoEmpresa.getText().isEmpty()
 					|| formulario.txtDireccionFotoEmpresa.getText().isEmpty()
 					|| formulario.txtCorreoEmpresa.getText().isEmpty()
@@ -111,10 +109,8 @@ public class control_empresa implements ActionListener {
 		if (e.getSource() == formulario.btnActualizarEmpresa) {
 
 			if (// validar datos vacios
-					formulario.txtNombreEmpresa.getText().isEmpty() 
-					|| formulario.txtDireccionEmpresa.getText().isEmpty()
-					|| formulario.txtTelefonoEmpresa.getText().isEmpty() 
-					|| formulario.txtRTNempresa.getText().isEmpty()
+			formulario.txtNombreEmpresa.getText().isEmpty() || formulario.txtDireccionEmpresa.getText().isEmpty()
+					|| formulario.txtTelefonoEmpresa.getText().isEmpty() || formulario.txtRTNempresa.getText().isEmpty()
 					|| formulario.txtDireccionLogoEmpresa.getText().isEmpty()
 					|| formulario.txtDireccionFotoEmpresa.getText().isEmpty()
 					|| formulario.txtCorreoEmpresa.getText().isEmpty()

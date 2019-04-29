@@ -99,7 +99,6 @@ public class registro_planillas extends JFrame {
 	public JButton button_1;
 	public JButton button_2;
 
-
 	public JButton btnBorrarPlanilla;
 	public JButton btnVerPlanilla;
 	public JButton btnActualizarDatosPlanilla;
@@ -316,52 +315,50 @@ public class registro_planillas extends JFrame {
 		panel_1.setBounds(10, 46, 424, 554);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
-				button_1 = new JButton("=");
-				button_1.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if(txtCantidadPlanilla.getText().isEmpty() && txtTotalBonificacionesPlanilla.getText().isEmpty())
-						{
-						JOptionPane.showMessageDialog(null, "Se requieren los datos de sueldo y bonificaciones");	
-						}else {
-							double a = 0;
-							double b = 0;
-							double c = 0;
-							a = Double.valueOf(txtCantidadPlanilla.getText());
-							b = Double.valueOf(txtCantidadPlanilla.getText());
-							c = a+b;
-							txtSueldoNetoPlanilla.setText(String.valueOf(c));	
-						}
-						
-					}
-				});
-				
-						button_2 = new JButton("=");
-						button_2.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								if(txtSueldoNetoPlanilla.getText().isEmpty() && txtTotalDeduccionesPlanilla.getText().isEmpty())
-								{
-								JOptionPane.showMessageDialog(null, "Se requieren los datos de sueldo y bonificaciones");	
-								}else {
-									double a = 0;
-									double b = 0;
-									double c = 0;
-									a = Double.valueOf(txtSueldoNetoPlanilla.getText());
-									b = Double.valueOf(txtTotalDeduccionesPlanilla.getText());
-									c = a+b;
-									txtTotalPagoEmpleado.setText(String.valueOf(c));	
-								}
-								
-							}
-						});
-						button_2.setBackground(new Color(255, 215, 0));
-						button_2.setBounds(274, 428, 46, 14);
-						panel_1.add(button_2);
-				button_1.setBackground(new Color(255, 215, 0));
-				button_1.setBounds(274, 363, 46, 14);
-				panel_1.add(button_1);
+
+		button_1 = new JButton("=");
+		button_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (txtCantidadPlanilla.getText().isEmpty() && txtTotalBonificacionesPlanilla.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Se requieren los datos de sueldo y bonificaciones");
+				} else {
+					double a = 0;
+					double b = 0;
+					double c = 0;
+					a = Double.valueOf(txtCantidadPlanilla.getText());
+					b = Double.valueOf(txtCantidadPlanilla.getText());
+					c = a + b;
+					txtSueldoNetoPlanilla.setText(String.valueOf(c));
+				}
+
+			}
+		});
+
+		button_2 = new JButton("=");
+		button_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (txtSueldoNetoPlanilla.getText().isEmpty() && txtTotalDeduccionesPlanilla.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Se requieren los datos de sueldo y bonificaciones");
+				} else {
+					double a = 0;
+					double b = 0;
+					double c = 0;
+					a = Double.valueOf(txtSueldoNetoPlanilla.getText());
+					b = Double.valueOf(txtTotalDeduccionesPlanilla.getText());
+					c = a + b;
+					txtTotalPagoEmpleado.setText(String.valueOf(c));
+				}
+
+			}
+		});
+		button_2.setBackground(new Color(255, 215, 0));
+		button_2.setBounds(274, 428, 46, 14);
+		panel_1.add(button_2);
+		button_1.setBackground(new Color(255, 215, 0));
+		button_1.setBounds(274, 363, 46, 14);
+		panel_1.add(button_1);
 
 		JLabel lblRegistrarDeducciones = new JLabel("Registrar Planilla.");
 		lblRegistrarDeducciones.setBounds(35, 39, 207, 28);
@@ -618,7 +615,6 @@ public class registro_planillas extends JFrame {
 		txtTotalBonificacionesPlanilla.setColumns(10);
 		txtTotalBonificacionesPlanilla.setBounds(153, 338, 116, 20);
 		panel_1.add(txtTotalBonificacionesPlanilla);
-		
 
 		JLabel lblDeducciones = new JLabel("(Deducciones) :");
 		lblDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -926,7 +922,7 @@ public class registro_planillas extends JFrame {
 			lbl_hora.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
-	
+
 	public static String getFecha() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();

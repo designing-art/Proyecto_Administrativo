@@ -232,7 +232,7 @@ public class registro_deducciones extends JFrame {
 		label.setBounds(168, 345, 28, 18);
 		panel_2.add(label);
 		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		
+
 		btnPlanillaDeducciones = new JButton("Planilla");
 		btnPlanillaDeducciones.addActionListener(new ActionListener() {
 			@Override
@@ -243,7 +243,7 @@ public class registro_deducciones extends JFrame {
 					registro_planillas.txtTotalDeduccionesPlanilla.setText(txtTotalDeducciones.getText());
 					JOptionPane.showMessageDialog(null, "Deducciones agregadas a la planilla.");
 					dispose();
-						
+
 				}
 			}
 		});
@@ -252,13 +252,13 @@ public class registro_deducciones extends JFrame {
 		btnPlanillaDeducciones.setBounds(303, 371, 99, 23);
 		btnPlanillaDeducciones.setVisible(false);
 		panel_2.add(btnPlanillaDeducciones);
-		
-				label_8 = new JLabel("");
-				label_8.setBounds(0, 0, 430, 456);
-				panel_2.add(label_8);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-				label_8.setIcon(logo);
+
+		label_8 = new JLabel("");
+		label_8.setBounds(0, 0, 430, 456);
+		panel_2.add(label_8);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+		label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE DEDUCCIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -633,18 +633,18 @@ public class registro_deducciones extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void totalizar() {
 		double t = 0;
 		double p = 0;
-		if(tablaDeducciones.getRowCount()>0) {
-			for(int i = 0; i < tablaDeducciones.getRowCount(); i++) {
-				p= Double.parseDouble(tablaDeducciones.getValueAt(i, 4).toString());
-				t+=p;
+		if (tablaDeducciones.getRowCount() > 0) {
+			for (int i = 0; i < tablaDeducciones.getRowCount(); i++) {
+				p = Double.parseDouble(tablaDeducciones.getValueAt(i, 4).toString());
+				t += p;
 			}
 			txtTotalDeducciones.setText(String.valueOf(t));
 			btnPlanillaDeducciones.setVisible(true);
-		}else {
+		} else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}
 	}

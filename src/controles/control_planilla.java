@@ -62,11 +62,12 @@ public class control_planilla implements ActionListener {
 				clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
 				clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
 				clase.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
-				clase.setTotal_deducciones_planilla(Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
-				clase.setTotal_bonificaciones_planilla(Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+				clase.setTotal_deducciones_planilla(
+						Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+				clase.setTotal_bonificaciones_planilla(
+						Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
 				clase.setSueldo_neto_planilla(Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
 				clase.setTotal_apagar_planilla(Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
-				
 
 				if (consulta.registrar(clase)) {
 					JOptionPane.showMessageDialog(null, "Exito! Empleado agregado a la panilla!");
@@ -74,7 +75,7 @@ public class control_planilla implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();
-					
+
 					final ImageIcon logo = new ImageIcon(
 							usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
 									formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
@@ -82,7 +83,6 @@ public class control_planilla implements ActionListener {
 					formulario.txtDireccionFoto.setText(null);
 					formulario.lblFotoPlanilla.setText(null);
 					formulario.lblFotoPlanilla.requestFocusInWindow();
-					
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error!  no Registrado");
@@ -229,8 +229,10 @@ public class control_planilla implements ActionListener {
 				clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
 				clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
 				clase.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
-				clase.setTotal_deducciones_planilla(Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
-				clase.setTotal_bonificaciones_planilla(Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+				clase.setTotal_deducciones_planilla(
+						Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+				clase.setTotal_bonificaciones_planilla(
+						Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
 				clase.setSueldo_neto_planilla(Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
 				clase.setTotal_apagar_planilla(Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
 				clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
@@ -246,7 +248,6 @@ public class control_planilla implements ActionListener {
 									formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoPlanilla.setIcon(logo);
 					formulario.txtBusquedaPlanilla.requestFocusInWindow();
-
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
@@ -275,13 +276,12 @@ public class control_planilla implements ActionListener {
 					limpiar();
 					formulario.construirTabla();
 					formulario.btnActualizar.setVisible(false);
-					
+
 					final ImageIcon logo = new ImageIcon(
 							usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
 									formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoPlanilla.setIcon(logo);
 					formulario.txtDireccionFoto.setText(null);
-					
 
 				}
 			} catch (SQLException ex) {
@@ -303,13 +303,13 @@ public class control_planilla implements ActionListener {
 			formulario.construirTabla();
 			formulario.establecerFechaRegistro();
 			formulario.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
-			
+
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
 							formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoPlanilla.setIcon(logo);
 			formulario.txtDireccionFoto.setText(null);
-			
+
 		}
 
 		if (e.getSource() == formulario.btnAceptar) {
@@ -328,13 +328,13 @@ public class control_planilla implements ActionListener {
 			formulario.establecerFechaRegistro();
 			formulario.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
 			formulario.txtIdentidadEmpleadoPlanilla.setEditable(true);
-			
+
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
 							formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoPlanilla.setIcon(logo);
 			formulario.txtDireccionFoto.setText(null);
-			
+
 		}
 
 	}
@@ -376,7 +376,8 @@ public class control_planilla implements ActionListener {
 				planilla.setCargo_planilla(rs.getString("cargo_planilla"));
 				planilla.setSueldo_bruto_planilla(Double.parseDouble(rs.getString("sueldo_bruto_planilla")));
 				planilla.setTotal_deducciones_planilla(Double.parseDouble(rs.getString("total_deducciones_planilla")));
-				planilla.setTotal_bonificaciones_planilla(Double.parseDouble(rs.getString("total_bonificaciones_planilla")));
+				planilla.setTotal_bonificaciones_planilla(
+						Double.parseDouble(rs.getString("total_bonificaciones_planilla")));
 				planilla.setSueldo_neto_planilla(Double.parseDouble(rs.getString("sueldo_neto_planilla")));
 				planilla.setTotal_apagar_planilla(Double.parseDouble(rs.getString("total_apagar_planilla")));
 				miLista.add(planilla);

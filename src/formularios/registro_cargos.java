@@ -146,7 +146,7 @@ public class registro_cargos extends JFrame {
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtSueldoCargo.addKeyListener(new KeyListener() {
 			@Override
-			//Metodo que valida el ingreso de solo numeros
+			// Metodo que valida el ingreso de solo numeros
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
@@ -254,7 +254,7 @@ public class registro_cargos extends JFrame {
 
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
-			//metodo de solo letras y simbolos
+			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (Character.isDigit(c)) {
@@ -349,7 +349,8 @@ public class registro_cargos extends JFrame {
 		btnBorrarCargo.setBounds(30, 395, 99, 23);
 		panelTablaCargos.add(btnBorrarCargo);
 
-		barraCargos = new JScrollPane(tablaCargos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraCargos = new JScrollPane(tablaCargos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraCargos);
 		barraCargos.setBounds(28, 90, 376, 294);
 

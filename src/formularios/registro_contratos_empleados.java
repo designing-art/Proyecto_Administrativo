@@ -240,7 +240,6 @@ public class registro_contratos_empleados extends JFrame {
 		lblNumeroDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblNumeroDe.setBounds(27, 256, 158, 17);
 		panelRegistro.add(lblNumeroDe);
-		
 
 		MaskFormatter formato = null;
 		try {
@@ -368,7 +367,7 @@ public class registro_contratos_empleados extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Identidad", "Tipo", "Tiempo", "Foto"};
+		String titulos[] = { "Codigo", "Identidad", "Tipo", "Tiempo", "Foto" };
 		String informacion[][] = control_contrato_empleado.obtenerMatriz();
 		tablaContratosEmpleados = new JTable(informacion, titulos);
 		barraContratos.setViewportView(tablaContratosEmpleados);
@@ -383,7 +382,8 @@ public class registro_contratos_empleados extends JFrame {
 
 	public void filtro() {
 		filtroCodigo = txtBusquedaContratosEmpleados.getText();
-		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaContratosEmpleados.getText(), 0, 1, 2, 3, 4, 5, 6));
+		trsfiltroCodigo
+				.setRowFilter(RowFilter.regexFilter(txtBusquedaContratosEmpleados.getText(), 0, 1, 2, 3, 4, 5, 6));
 	}
 
 	public void pistas() {

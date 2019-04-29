@@ -68,7 +68,7 @@ public class control_deduccion implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();
-					
+
 					final ImageIcon logo = new ImageIcon(
 							usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
 									formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
@@ -222,7 +222,6 @@ public class control_deduccion implements ActionListener {
 					formulario.lblFotoDeduccion.setIcon(logo);
 					formulario.txtBusquedaDeduccion.requestFocusInWindow();
 
-
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Deduccion no Actualizado");
 					limpiar();
@@ -256,13 +255,12 @@ public class control_deduccion implements ActionListener {
 					formulario.txtCantidadDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
-					
+
 					final ImageIcon logo = new ImageIcon(
 							usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
 									formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoDeduccion.setIcon(logo);
 					formulario.txtDireccionFoto.setText(null);
-					
 
 				}
 			} catch (SQLException ex) {
@@ -287,13 +285,13 @@ public class control_deduccion implements ActionListener {
 			formulario.establecerFechaRegistro();
 			formulario.txtObservacionDeduccion.setBackground(Color.WHITE);
 			formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
-			
+
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
 							formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoDeduccion.setIcon(logo);
 			formulario.txtDireccionFoto.setText(null);
-			
+
 		}
 
 		if (e.getSource() == formulario.btnAceptar) {
@@ -315,13 +313,13 @@ public class control_deduccion implements ActionListener {
 			formulario.txtObservacionDeduccion.setBackground(Color.WHITE);
 			formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
 			formulario.txtIdentidadEmpleadoDeduccion.setEditable(true);
-			
+
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
 							formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoDeduccion.setIcon(logo);
 			formulario.txtDireccionFoto.setText(null);
-			
+
 		}
 
 	}

@@ -333,7 +333,6 @@ public class registro_empresa extends JFrame {
 		scrollPane.setViewportView(txtDireccionEmpresa);
 		InputMap map11 = txtDireccionEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map11.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		
 
 		JLabel lblTelefono = new JLabel("Telefono :");
 		lblTelefono.setBounds(10, 119, 83, 14);
@@ -638,6 +637,7 @@ public class registro_empresa extends JFrame {
 			visor_imagen.lblImagen.setIcon(imagen);
 		}
 	}
+
 	public void pistas() {
 		pista = new PlaceHolder(txtNombreEmpresa, "Ingrese el nombre de la empresa.");
 		pista = new PlaceHolder(txtDireccionEmpresa, "Ingrese la direccion de la empresa.");

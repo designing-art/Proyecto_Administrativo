@@ -96,17 +96,25 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-				claseEmpleado.setNombre_cargo_empleado(registro_empleados.cbxCargoAsignado.getSelectedItem().toString());
+				claseEmpleado
+						.setNombre_cargo_empleado(registro_empleados.cbxCargoAsignado.getSelectedItem().toString());
 				claseEmpleado.setSueldo_cargo_empleado(formularioEmpleado.txtSueldoAsignado.getText().toString());
-				claseEmpleado.setHora_extra_cargo_empleado(formularioEmpleado.txtHoraExtraAsignado.getText().toString());
-				claseEmpleado.setObligaciones_cargo_empleado(formularioEmpleado.txtObligacionesAsignado.getText().toString());
-				claseEmpleado.setTipo_horario_empleado(registro_empleados.cbxHorarioAsignado.getSelectedItem().toString());
+				claseEmpleado
+						.setHora_extra_cargo_empleado(formularioEmpleado.txtHoraExtraAsignado.getText().toString());
+				claseEmpleado.setObligaciones_cargo_empleado(
+						formularioEmpleado.txtObligacionesAsignado.getText().toString());
+				claseEmpleado
+						.setTipo_horario_empleado(registro_empleados.cbxHorarioAsignado.getSelectedItem().toString());
 				claseEmpleado.setDias_horario_empleado(formularioEmpleado.txtDiasAsignado.getText().toString());
 				claseEmpleado.setHoras_horario_empleado(formularioEmpleado.txtHorasAsignado.getText().toString());
-				claseEmpleado.setIdentidad_contrato_empleado_asignado(registro_empleados.cbxContratoAsignado.getSelectedItem().toString());
-				claseEmpleado.setTipo_contrato_empleado_asignado(formularioEmpleado.txtTipoContratoAsignado.getText().toString());
-				claseEmpleado.setTiempo_contrato_empleado_asignado(formularioEmpleado.txtTiempoContratoAsignado.getText().toString());
-				claseEmpleado.setFoto_contrato_empleado_asignado(formularioEmpleado.txtFotoContratoAsignado.getText().toString());
+				claseEmpleado.setIdentidad_contrato_empleado_asignado(
+						registro_empleados.cbxContratoAsignado.getSelectedItem().toString());
+				claseEmpleado.setTipo_contrato_empleado_asignado(
+						formularioEmpleado.txtTipoContratoAsignado.getText().toString());
+				claseEmpleado.setTiempo_contrato_empleado_asignado(
+						formularioEmpleado.txtTiempoContratoAsignado.getText().toString());
+				claseEmpleado.setFoto_contrato_empleado_asignado(
+						formularioEmpleado.txtFotoContratoAsignado.getText().toString());
 
 				if (consultaEmpleado.registrar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
@@ -130,7 +138,7 @@ public class control_empleado implements ActionListener {
 							iconoContrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
 									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
 					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
-					
+
 					formularioEmpleado.panelAsignaciones.setVisible(false);
 					formularioEmpleado.panel.setVisible(true);
 					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
@@ -180,7 +188,8 @@ public class control_empleado implements ActionListener {
 						"Porfavor llene los campos para actualizar los datos del empleado!");
 
 			} else {
-				claseEmpleado.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
+				claseEmpleado
+						.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
 				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
 				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
 				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
@@ -196,17 +205,25 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-				claseEmpleado.setNombre_cargo_empleado(registro_empleados.cbxCargoAsignado.getSelectedItem().toString());
+				claseEmpleado
+						.setNombre_cargo_empleado(registro_empleados.cbxCargoAsignado.getSelectedItem().toString());
 				claseEmpleado.setSueldo_cargo_empleado(formularioEmpleado.txtSueldoAsignado.getText().toString());
-				claseEmpleado.setHora_extra_cargo_empleado(formularioEmpleado.txtHoraExtraAsignado.getText().toString());
-				claseEmpleado.setObligaciones_cargo_empleado(formularioEmpleado.txtObligacionesAsignado.getText().toString());
-				claseEmpleado.setTipo_horario_empleado(registro_empleados.cbxHorarioAsignado.getSelectedItem().toString());
+				claseEmpleado
+						.setHora_extra_cargo_empleado(formularioEmpleado.txtHoraExtraAsignado.getText().toString());
+				claseEmpleado.setObligaciones_cargo_empleado(
+						formularioEmpleado.txtObligacionesAsignado.getText().toString());
+				claseEmpleado
+						.setTipo_horario_empleado(registro_empleados.cbxHorarioAsignado.getSelectedItem().toString());
 				claseEmpleado.setDias_horario_empleado(formularioEmpleado.txtDiasAsignado.getText().toString());
 				claseEmpleado.setHoras_horario_empleado(formularioEmpleado.txtHorasAsignado.getText().toString());
-				claseEmpleado.setIdentidad_contrato_empleado_asignado(registro_empleados.cbxContratoAsignado.getSelectedItem().toString());
-				claseEmpleado.setTipo_contrato_empleado_asignado(formularioEmpleado.txtTipoContratoAsignado.getText().toString());
-				claseEmpleado.setTiempo_contrato_empleado_asignado(formularioEmpleado.txtTiempoContratoAsignado.getText().toString());
-				claseEmpleado.setFoto_contrato_empleado_asignado(formularioEmpleado.txtFotoContratoAsignado.getText().toString());
+				claseEmpleado.setIdentidad_contrato_empleado_asignado(
+						registro_empleados.cbxContratoAsignado.getSelectedItem().toString());
+				claseEmpleado.setTipo_contrato_empleado_asignado(
+						formularioEmpleado.txtTipoContratoAsignado.getText().toString());
+				claseEmpleado.setTiempo_contrato_empleado_asignado(
+						formularioEmpleado.txtTiempoContratoAsignado.getText().toString());
+				claseEmpleado.setFoto_contrato_empleado_asignado(
+						formularioEmpleado.txtFotoContratoAsignado.getText().toString());
 
 				if (consultaEmpleado.modificar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
@@ -417,7 +434,8 @@ public class control_empleado implements ActionListener {
 					String telefono = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 6).toString();
 					String correo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 7).toString();
 					String direccion = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 8).toString();
-					String direccion_foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9).toString();
+					String direccion_foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9)
+							.toString();
 					String referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 10).toString();
 					String t_referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 11).toString();
 					String fecha_nac = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 12).toString();
@@ -532,7 +550,8 @@ public class control_empleado implements ActionListener {
 					String telefono = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 6).toString();
 					String correo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 7).toString();
 					String direccion = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 8).toString();
-					String direccion_foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9).toString();
+					String direccion_foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 9)
+							.toString();
 					String referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 10).toString();
 					String t_referencia = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 11).toString();
 					String fecha_nac = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 12).toString();
@@ -823,7 +842,6 @@ public class control_empleado implements ActionListener {
 
 		}
 
-	}      
-    
+	}
 
 }

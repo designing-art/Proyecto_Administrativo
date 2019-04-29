@@ -2,7 +2,6 @@ package formularios;
 
 import java.awt.EventQueue;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -472,7 +471,7 @@ public class registro_empleados extends JFrame {
 		panelAsignaciones.add(btnGuardarEmpleado);
 		btnGuardarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardarEmpleado.setBackground(new Color(60, 179, 113));
-		
+
 		btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(new ActionListener() {
 			@Override
@@ -486,13 +485,13 @@ public class registro_empleados extends JFrame {
 		btnCerrar.setBackground(new Color(165, 42, 42));
 		btnCerrar.setBounds(37, 256, 99, 23);
 		panelAsignaciones.add(btnCerrar);
-		
-				label_3 = new JLabel("");
-				label_3.setBounds(0, 0, 579, 304);
-				panelAsignaciones.add(label_3);
-				final ImageIcon logo13 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_3.getWidth(), label_3.getHeight(), Image.SCALE_DEFAULT));
-				label_3.setIcon(logo13);
+
+		label_3 = new JLabel("");
+		label_3.setBounds(0, 0, 579, 304);
+		panelAsignaciones.add(label_3);
+		final ImageIcon logo13 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_3.getWidth(), label_3.getHeight(), Image.SCALE_DEFAULT));
+		label_3.setIcon(logo13);
 		cbxContratoAsignado.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e1) {

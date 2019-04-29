@@ -107,7 +107,7 @@ public class registro_bonificaciones extends JFrame {
 
 	public static String ruta;
 	public static ImageIcon imagen;
-	
+
 	public static String bonificaciones;
 
 	public JComboBox<?> cbxTipoBonificacion;
@@ -244,7 +244,7 @@ public class registro_bonificaciones extends JFrame {
 				} else {
 					registro_planillas.txtTotalBonificacionesPlanilla.setText(txtTotalBonificacion.getText());
 					dispose();
-					JOptionPane.showMessageDialog(null, "Bonificaciones agregadas a la planilla.");	
+					JOptionPane.showMessageDialog(null, "Bonificaciones agregadas a la planilla.");
 				}
 
 			}

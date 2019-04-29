@@ -27,7 +27,8 @@ public class control_bonificacion implements ActionListener {
 	public registro_bonificaciones formulario;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
-	public control_bonificacion(bonificacion clase, consultas_bonificacion consulta, registro_bonificaciones formulario) {
+	public control_bonificacion(bonificacion clase, consultas_bonificacion consulta,
+			registro_bonificaciones formulario) {
 		this.clase = clase;
 		this.consulta = consulta;
 		this.formulario = formulario;
@@ -52,7 +53,8 @@ public class control_bonificacion implements ActionListener {
 							.equalsIgnoreCase("Ingrese el nombre del cargo.")
 					|| formulario.txtIdentidadEmpleadoBonificacion.getText().toString()
 							.equalsIgnoreCase("Escriba una observacion.")
-					|| formulario.txtCantidadBonificacion.getText().toString().equalsIgnoreCase("Digite la cantidad.")) {
+					|| formulario.txtCantidadBonificacion.getText().toString()
+							.equalsIgnoreCase("Digite la cantidad.")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la bonificacion!");
 
 			} else {
@@ -68,7 +70,7 @@ public class control_bonificacion implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();
-					
+
 					final ImageIcon logo = new ImageIcon(
 							usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
 									formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
@@ -193,7 +195,8 @@ public class control_bonificacion implements ActionListener {
 							.equalsIgnoreCase("Ingrese el nombre del cargo.")
 					|| formulario.txtIdentidadEmpleadoBonificacion.getText().toString()
 							.equalsIgnoreCase("Escriba una observacion.")
-					|| formulario.txtCantidadBonificacion.getText().toString().equalsIgnoreCase("Digite la cantidad.")) {
+					|| formulario.txtCantidadBonificacion.getText().toString()
+							.equalsIgnoreCase("Digite la cantidad.")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la bonificacion!");
 
 			} else {
@@ -221,7 +224,6 @@ public class control_bonificacion implements ActionListener {
 									formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoBonificacion.setIcon(logo);
 					formulario.txtBusquedaBonificacion.requestFocusInWindow();
-
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Bonificacion no Actualizado");
@@ -256,13 +258,12 @@ public class control_bonificacion implements ActionListener {
 					formulario.txtCantidadBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
-					
+
 					final ImageIcon logo = new ImageIcon(
 							usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
 									formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoBonificacion.setIcon(logo);
 					formulario.txtDireccionFoto.setText(null);
-					
 
 				}
 			} catch (SQLException ex) {
@@ -287,13 +288,13 @@ public class control_bonificacion implements ActionListener {
 			formulario.establecerFechaRegistro();
 			formulario.txtObservacionBonificacion.setBackground(Color.WHITE);
 			formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
-			
+
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
 							formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoBonificacion.setIcon(logo);
 			formulario.txtDireccionFoto.setText(null);
-			
+
 		}
 
 		if (e.getSource() == formulario.btnAceptar) {
@@ -315,13 +316,13 @@ public class control_bonificacion implements ActionListener {
 			formulario.txtObservacionBonificacion.setBackground(Color.WHITE);
 			formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
 			formulario.txtIdentidadEmpleadoBonificacion.setEditable(true);
-			
+
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
 							formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoBonificacion.setIcon(logo);
 			formulario.txtDireccionFoto.setText(null);
-			
+
 		}
 
 	}

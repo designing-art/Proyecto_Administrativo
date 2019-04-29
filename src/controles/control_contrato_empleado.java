@@ -47,7 +47,7 @@ public class control_contrato_empleado implements ActionListener {
 		if (e.getSource() == formulario.btnGuardarContrato) {
 
 			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
-					||formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
+					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el contrato!");
 
 			} else {
@@ -63,8 +63,9 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
-					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
-							.getScaledInstance(formulario.lbl_foto_contrato.getWidth(), formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(
+							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lbl_foto_contrato.setIcon(iconofoto);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! contrato no registrado");
@@ -86,15 +87,13 @@ public class control_contrato_empleado implements ActionListener {
 					String tipo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 2).toString();
 					String tiempo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 3).toString();
 					String foto = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 4).toString();
-					
 
-					
 					formulario.txtCodigoContratoEmpleado.setText(codigo);
 					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
 					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
 					formulario.txtDireccionFotoContrato.setText(foto);
 					formulario.txtIdentidadContratoEmpleado.setText(identidad);
-					
+
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
 							foto_contrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
@@ -139,15 +138,12 @@ public class control_contrato_empleado implements ActionListener {
 					String tipo = formulario.tablaContratosEmpleados.getValueAt(fila, 2).toString();
 					String tiempo = formulario.tablaContratosEmpleados.getValueAt(fila, 3).toString();
 					String foto = formulario.tablaContratosEmpleados.getValueAt(fila, 4).toString();
-					
-
 
 					formulario.txtCodigoContratoEmpleado.setText(codigo);
 					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
 					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
 					formulario.txtDireccionFotoContrato.setText(foto);
 					formulario.txtIdentidadContratoEmpleado.setText(identidad);
-					
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -181,7 +177,7 @@ public class control_contrato_empleado implements ActionListener {
 		if (e.getSource() == formulario.btnActualizarContrato) {
 
 			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
-					||formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
+					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el contrato!");
 
 			} else {
@@ -205,10 +201,10 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.txtCodigoContratoEmpleado.setEnabled(false);
 					formulario.txtCodigoContratoEmpleado.setText(null);
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
-					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
-							.getScaledInstance(formulario.lbl_foto_contrato.getWidth(), formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(
+							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lbl_foto_contrato.setIcon(iconofoto);
-					
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! contrato no Actualizado");
@@ -268,16 +264,15 @@ public class control_contrato_empleado implements ActionListener {
 			formulario.pistas();
 			formulario.construirTabla();
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
-			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
-					.getScaledInstance(formulario.lbl_foto_contrato.getWidth(), formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+			final ImageIcon iconofoto = new ImageIcon(
+					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
 		}
 		/* Ver Contrato */
 		if (e.getSource() == formulario.btnNuevoContrato) {
-			
+
 		}
-		
-	
 
 		/* Aceptar */
 		if (e.getSource() == formulario.btnAceptar) {
@@ -296,10 +291,11 @@ public class control_contrato_empleado implements ActionListener {
 			formulario.pistas();
 			formulario.construirTabla();
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
-			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
-					.getScaledInstance(formulario.lbl_foto_contrato.getWidth(), formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+			final ImageIcon iconofoto = new ImageIcon(
+					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
-			
+
 		}
 
 	}
@@ -352,7 +348,7 @@ public class control_contrato_empleado implements ActionListener {
 			matrizInfo[i][2] = miLista.get(i).getTipo_contrato_empleado() + "";
 			matrizInfo[i][3] = miLista.get(i).getTiempo_contrato_empleado() + "";
 			matrizInfo[i][4] = miLista.get(i).getDireccion_foto_contrato_empleado() + "";
-			
+
 		}
 
 		return matrizInfo;

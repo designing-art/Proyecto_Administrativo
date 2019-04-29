@@ -118,7 +118,7 @@ public class ventana_principal extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
@@ -156,7 +156,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnActualizarDatosPlanilla.setVisible(true);
 				formulario.btnVerPlanilla.setVisible(true);
-				formulario.btnAceptar.setVisible(false);	
+				formulario.btnAceptar.setVisible(false);
 				Timer time = new Timer();
 				time.schedule(formulario.tarea, 0, 1000);
 				dispose();
@@ -222,7 +222,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosEmpleado.setVisible(true);
 				formulario.btnActualizarEmpleado.setVisible(false);
 				formulario.btnCancelarEmpleado.setVisible(false);
-				formulario.btnBorrarEmpleado.setVisible(false);	
+				formulario.btnBorrarEmpleado.setVisible(false);
 				control.consultarContratos();
 				control.consultarCargos();
 				control.consultarHorarios();
@@ -284,7 +284,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosBonificacion.setVisible(true);
 				formulario.btnVerBonificacion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
-				dispose();	
+				dispose();
 			}
 		});
 		registroBonificacion.setForeground(Color.BLACK);
@@ -315,7 +315,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosDeduccion.setVisible(true);
 				formulario.btnVerDeduccion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
-				dispose();	
+				dispose();
 			}
 		});
 		registroDeduccion.setForeground(Color.BLACK);
