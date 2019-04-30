@@ -41,8 +41,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
+import clases.empleado;
 import conexion.conexion;
+import consultas.consultas_empleado;
 import controles.control_cargo;
+import controles.control_empleado;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
@@ -57,6 +60,8 @@ public class registro_cargos extends JFrame {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
 	public JScrollPane scrollPane;
+	public JButton btnAtras;
+	public JButton btnRegresarALas;
 
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
@@ -78,7 +83,7 @@ public class registro_cargos extends JFrame {
 
 	public registro_cargos() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -91,7 +96,7 @@ public class registro_cargos extends JFrame {
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 
-		JButton btnAtras = new JButton("Regresar");
+		btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
 		btnAtras.setBounds(717, 20, 102, 23);
@@ -210,7 +215,7 @@ public class registro_cargos extends JFrame {
 		lblTipoDeCargo.setBounds(27, 109, 105, 23);
 		panelRegistro.add(lblTipoDeCargo);
 
-		JLabel lblCodigoCargo = new JLabel("1. Codigo :");
+		JLabel lblCodigoCargo = new JLabel("1. C\u00F3digo :");
 		lblCodigoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblCodigoCargo.setBounds(27, 84, 63, 14);
 		panelRegistro.add(lblCodigoCargo);
@@ -389,8 +394,9 @@ public class registro_cargos extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Date date = new Date();
 				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-				hora_fecha_reporte = ("Hora y fecha del reporte : " +hourdateFormat.format(date));
-				utilJTablePrint(tablaCargos, "Canal 40 (COFFEE TV CHANNEL)", "Reporte de Cargos.   " + hora_fecha_reporte, true);
+				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
+				utilJTablePrint(tablaCargos, "Canal 40 (COFFEE TV CHANNEL)",
+						"Reporte de Cargos.____. " + hora_fecha_reporte, true);
 			}
 		});
 		btnImprimirReporte.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -404,6 +410,29 @@ public class registro_cargos extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
+
+		btnRegresarALas = new JButton("Regresar a las Asignaciones");
+		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresarALas.setBackground(new Color(255, 165, 0));
+		btnRegresarALas.setBounds(585, 20, 234, 23);
+		contentPane.add(btnRegresarALas);
+		btnRegresarALas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				empleado clase = new empleado();
+				consultas_empleado consulta = new consultas_empleado();
+				registro_empleados formulario = new registro_empleados();
+				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
+				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
+				formulario2.setVisible(true);
+				formulario2.setLocationRelativeTo(null);
+				control.consultarContratos();
+				control.consultarCargos();
+				control.consultarHorarios();
+				dispose();
+			}
+		});
+		btnRegresarALas.setVisible(false);
+		
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}
@@ -418,6 +447,13 @@ public class registro_cargos extends JFrame {
 			tablaCargos.setDefaultEditor(col_class, null);
 			tablaCargos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			tablaCargos.getTableHeader().setReorderingAllowed(false);
+			
+			tablaCargos.getColumnModel().getColumn(0).setPreferredWidth(50);
+			tablaCargos.getColumnModel().getColumn(1).setPreferredWidth(100);
+			tablaCargos.getColumnModel().getColumn(2).setPreferredWidth(100);
+			tablaCargos.getColumnModel().getColumn(3).setPreferredWidth(80);
+			tablaCargos.getColumnModel().getColumn(4).setPreferredWidth(80);
+			tablaCargos.getColumnModel().getColumn(5).setPreferredWidth(200);
 
 			// alinear datos de sueldo y horaextra a la derecha en la tabla
 			DefaultTableCellRenderer tcr;
@@ -425,6 +461,11 @@ public class registro_cargos extends JFrame {
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
 			tablaCargos.getColumnModel().getColumn(3).setCellRenderer(tcr);
 			tablaCargos.getColumnModel().getColumn(4).setCellRenderer(tcr);
+			
+			DefaultTableCellRenderer tcr1;
+			tcr1 = new DefaultTableCellRenderer();
+			tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+			tablaCargos.getColumnModel().getColumn(0).setCellRenderer(tcr1);
 		}
 	}
 

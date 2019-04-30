@@ -98,7 +98,7 @@ public class ventana_principal extends JFrame {
 				logo.getImage().getScaledInstance(lblEmpresa.getWidth(), lblEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblEmpresa.setIcon(icono);
 
-		btnInformacionEmpresa = new JButton("Mas Informacion de la empresa?");
+		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
 		btnInformacionEmpresa.setBackground(Color.WHITE);
 		btnInformacionEmpresa.setBounds(420, 428, 252, 23);
 		btnInformacionEmpresa.setForeground(Color.BLACK);
@@ -122,7 +122,7 @@ public class ventana_principal extends JFrame {
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
-		JLabel lblMenuDeOpciones = new JLabel("Menu de Opciones :");
+		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.BLACK);
 		lblMenuDeOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblMenuDeOpciones.setBounds(146, 77, 145, 23);
@@ -208,7 +208,8 @@ public class ventana_principal extends JFrame {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();
 				registro_empleados formulario = new registro_empleados();
-				control_empleado control = new control_empleado(clase, consulta, formulario);
+				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
+				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.txtNombresEmpleado.requestFocusInWindow();
@@ -216,18 +217,12 @@ public class ventana_principal extends JFrame {
 				formulario.pistas();
 				formulario.establecerFechaRegistro();
 				formulario.construirTablaEmpleados();
-				formulario.btnGuardarEmpleado.setVisible(true);
 				formulario.btnNuevoEmpleado.setVisible(true);
 				formulario.btnMostrarEmpleado.setVisible(true);
 				formulario.btnActualizarDatosEmpleado.setVisible(true);
 				formulario.btnActualizarEmpleado.setVisible(false);
 				formulario.btnCancelarEmpleado.setVisible(false);
 				formulario.btnBorrarEmpleado.setVisible(false);
-				control.consultarContratos();
-				control.consultarCargos();
-				control.consultarHorarios();
-				formulario.btnGuardarEmpleado.setVisible(false);
-				formulario.panelAsignaciones.setVisible(false);
 				dispose();
 			}
 		});

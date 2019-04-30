@@ -37,10 +37,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -104,6 +108,7 @@ public class registro_bonificaciones extends JFrame {
 
 	public TableRowSorter trsfiltro;
 	String filtro;
+	public static String hora_fecha_reporte;
 
 	public static String ruta;
 	public static ImageIcon imagen;
@@ -118,6 +123,7 @@ public class registro_bonificaciones extends JFrame {
 	public JTextField txtCodigo;
 	public JLabel lblFecha;
 	public JButton btnPlanilla;
+	private JButton button;
 
 	public registro_bonificaciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -178,9 +184,9 @@ public class registro_bonificaciones extends JFrame {
 				icono2.getImage().getScaledInstance(label_10.getWidth(), label_10.getHeight(), Image.SCALE_DEFAULT));
 		label_10.setIcon(logo2);
 
-		JLabel lblDeduccionesRegistradas = new JLabel("Bonificaciones registradas :");
+		JLabel lblDeduccionesRegistradas = new JLabel("Bonificaciones");
 		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDeduccionesRegistradas.setBounds(28, 41, 227, 19);
+		lblDeduccionesRegistradas.setBounds(28, 41, 150, 19);
 		panel_2.add(lblDeduccionesRegistradas);
 
 		btnBorrarBonificacion = new JButton("Borrar");
@@ -254,13 +260,28 @@ public class registro_bonificaciones extends JFrame {
 		btnPlanilla.setBounds(303, 378, 99, 23);
 		panel_2.add(btnPlanilla);
 		btnPlanilla.setVisible(false);
-
-		label_8 = new JLabel("");
-		label_8.setBounds(0, 0, 430, 456);
-		panel_2.add(label_8);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-		label_8.setIcon(logo);
+		
+		button = new JButton("Imprimir Reporte");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
+				utilJTablePrint(tablaBonificaciones, "Canal 40 (COFFEE TV CHANNEL)",
+						"Reporte de Bonificaciones.____. " + hora_fecha_reporte, true);
+			}
+		});
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(60, 179, 113));
+		button.setBounds(206, 41, 137, 19);
+		panel_2.add(button);
+		
+				label_8 = new JLabel("");
+				label_8.setBounds(0, 0, 430, 456);
+				panel_2.add(label_8);
+				final ImageIcon logo = new ImageIcon(
+						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+				label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE BONIFICACIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -676,6 +697,30 @@ public class registro_bonificaciones extends JFrame {
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 
+		}
+	}
+	
+	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
+		boolean fitWidth = true;
+		boolean interactive = true;
+		// We define the print mode (Definimos el modo de impresión)
+		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+		try {
+			// Print the table (Imprimo la tabla)
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
+					null, interactive);
+			if (complete) {
+				// Mostramos el mensaje de impresión existosa
+				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
+						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				// Mostramos un mensaje indicando que la impresión fue cancelada
+				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
+						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
+			}
+		} catch (PrinterException pe) {
+			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
+					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

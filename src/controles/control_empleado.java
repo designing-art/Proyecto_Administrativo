@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import clases.empleado;
 import conexion.conexion;
 import consultas.consultas_empleado;
+import formularios.registro_asignaciones_empleados;
 import formularios.registro_empleados;
 
 public class control_empleado implements ActionListener {
@@ -23,16 +24,18 @@ public class control_empleado implements ActionListener {
 	public empleado claseEmpleado;
 	public consultas_empleado consultaEmpleado;
 	public registro_empleados formularioEmpleado;
+	public registro_asignaciones_empleados formularioAsignacion;
 	public String fechaNacimiento;
 	public String fechaRegistro;
 	public String fechaLabores;
 
 	public control_empleado(empleado claseEmpleado, consultas_empleado consultaEmpleado,
-			registro_empleados formularioEmpleado) {
+			registro_empleados formularioEmpleado, registro_asignaciones_empleados formularioAsignacion) {
 		this.claseEmpleado = claseEmpleado;
 		this.consultaEmpleado = consultaEmpleado;
 		this.formularioEmpleado = formularioEmpleado;
-		this.formularioEmpleado.btnGuardarEmpleado.addActionListener(this);
+		this.formularioAsignacion = formularioAsignacion;
+		this.formularioAsignacion.btnGuardarEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnActualizarEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnNuevoEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnCancelarEmpleado.addActionListener(this);
@@ -45,7 +48,7 @@ public class control_empleado implements ActionListener {
 	/* Insertar Empleado */
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
+		if (e.getSource() == formularioAsignacion.btnGuardarEmpleado) {
 
 			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
 
@@ -97,24 +100,24 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
 				claseEmpleado
-						.setNombre_cargo_empleado(registro_empleados.cbxCargoAsignado.getSelectedItem().toString());
-				claseEmpleado.setSueldo_cargo_empleado(formularioEmpleado.txtSueldoAsignado.getText().toString());
+						.setNombre_cargo_empleado(formularioAsignacion.cbxCargoAsignacion.getSelectedItem().toString());
+				claseEmpleado.setSueldo_cargo_empleado(formularioAsignacion.txtSueldoAsignacion.getText().toString());
 				claseEmpleado
-						.setHora_extra_cargo_empleado(formularioEmpleado.txtHoraExtraAsignado.getText().toString());
+						.setHora_extra_cargo_empleado(formularioAsignacion.txtHoraExtraAsignacion.getText().toString());
 				claseEmpleado.setObligaciones_cargo_empleado(
-						formularioEmpleado.txtObligacionesAsignado.getText().toString());
-				claseEmpleado
-						.setTipo_horario_empleado(registro_empleados.cbxHorarioAsignado.getSelectedItem().toString());
-				claseEmpleado.setDias_horario_empleado(formularioEmpleado.txtDiasAsignado.getText().toString());
-				claseEmpleado.setHoras_horario_empleado(formularioEmpleado.txtHorasAsignado.getText().toString());
+						formularioAsignacion.txtFuncionesAsignacion.getText().toString());
+				claseEmpleado.setTipo_horario_empleado(
+						formularioAsignacion.cbxHorarioAsignacion.getSelectedItem().toString());
+				claseEmpleado.setDias_horario_empleado(formularioAsignacion.txtDiasAsignacion.getText().toString());
+				claseEmpleado.setHoras_horario_empleado(formularioAsignacion.txtHorasAsignacion.getText().toString());
 				claseEmpleado.setIdentidad_contrato_empleado_asignado(
-						registro_empleados.cbxContratoAsignado.getSelectedItem().toString());
+						formularioAsignacion.cbxContratoAsignacion.getSelectedItem().toString());
 				claseEmpleado.setTipo_contrato_empleado_asignado(
-						formularioEmpleado.txtTipoContratoAsignado.getText().toString());
+						formularioAsignacion.txtTipoContratoAsignacion.getText().toString());
 				claseEmpleado.setTiempo_contrato_empleado_asignado(
-						formularioEmpleado.txtTiempoContratoAsignado.getText().toString());
+						formularioAsignacion.txtTiempoContratoAsignacion.getText().toString());
 				claseEmpleado.setFoto_contrato_empleado_asignado(
-						formularioEmpleado.txtFotoContratoAsignado.getText().toString());
+						formularioAsignacion.txtDireccionFotoContratoAsignacion.getText().toString());
 
 				if (consultaEmpleado.registrar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
@@ -124,7 +127,6 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.pistas();
 					formularioEmpleado.establecerFechaRegistro();
 					formularioEmpleado.construirTablaEmpleados();
-					formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 					formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
 					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
@@ -138,10 +140,6 @@ public class control_empleado implements ActionListener {
 							iconoContrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
 									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
 					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
-
-					formularioEmpleado.panelAsignaciones.setVisible(false);
-					formularioEmpleado.panel.setVisible(true);
-					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error al Guardar");
@@ -206,30 +204,29 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
 				claseEmpleado
-						.setNombre_cargo_empleado(registro_empleados.cbxCargoAsignado.getSelectedItem().toString());
-				claseEmpleado.setSueldo_cargo_empleado(formularioEmpleado.txtSueldoAsignado.getText().toString());
+						.setNombre_cargo_empleado(formularioAsignacion.cbxCargoAsignacion.getSelectedItem().toString());
+				claseEmpleado.setSueldo_cargo_empleado(formularioAsignacion.txtSueldoAsignacion.getText().toString());
 				claseEmpleado
-						.setHora_extra_cargo_empleado(formularioEmpleado.txtHoraExtraAsignado.getText().toString());
+						.setHora_extra_cargo_empleado(formularioAsignacion.txtHoraExtraAsignacion.getText().toString());
 				claseEmpleado.setObligaciones_cargo_empleado(
-						formularioEmpleado.txtObligacionesAsignado.getText().toString());
-				claseEmpleado
-						.setTipo_horario_empleado(registro_empleados.cbxHorarioAsignado.getSelectedItem().toString());
-				claseEmpleado.setDias_horario_empleado(formularioEmpleado.txtDiasAsignado.getText().toString());
-				claseEmpleado.setHoras_horario_empleado(formularioEmpleado.txtHorasAsignado.getText().toString());
+						formularioAsignacion.txtFuncionesAsignacion.getText().toString());
+				claseEmpleado.setTipo_horario_empleado(
+						formularioAsignacion.cbxHorarioAsignacion.getSelectedItem().toString());
+				claseEmpleado.setDias_horario_empleado(formularioAsignacion.txtDiasAsignacion.getText().toString());
+				claseEmpleado.setHoras_horario_empleado(formularioAsignacion.txtHorasAsignacion.getText().toString());
 				claseEmpleado.setIdentidad_contrato_empleado_asignado(
-						registro_empleados.cbxContratoAsignado.getSelectedItem().toString());
+						formularioAsignacion.cbxContratoAsignacion.getSelectedItem().toString());
 				claseEmpleado.setTipo_contrato_empleado_asignado(
-						formularioEmpleado.txtTipoContratoAsignado.getText().toString());
+						formularioAsignacion.txtTipoContratoAsignacion.getText().toString());
 				claseEmpleado.setTiempo_contrato_empleado_asignado(
-						formularioEmpleado.txtTiempoContratoAsignado.getText().toString());
+						formularioAsignacion.txtTiempoContratoAsignacion.getText().toString());
 				claseEmpleado.setFoto_contrato_empleado_asignado(
-						formularioEmpleado.txtFotoContratoAsignado.getText().toString());
+						formularioAsignacion.txtDireccionFotoContratoAsignacion.getText().toString());
 
 				if (consultaEmpleado.modificar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
 					limpiar();
 					formularioEmpleado.construirTablaEmpleados();
-					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(false);
@@ -333,7 +330,6 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.pistas();
 			formularioEmpleado.establecerFechaRegistro();
 			formularioEmpleado.construirTablaEmpleados();
-			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 			formularioEmpleado.btnMostrarEmpleado.setVisible(true);
 			formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
@@ -379,7 +375,6 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.pistas();
 			formularioEmpleado.establecerFechaRegistro();
 			formularioEmpleado.construirTablaEmpleados();
-			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 			formularioEmpleado.btnNuevoEmpleado.setVisible(true);
 			formularioEmpleado.btnMostrarEmpleado.setVisible(true);
 			formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
@@ -476,17 +471,17 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor.setText(fecha_lab);
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 
-					registro_empleados.cbxCargoAsignado.setSelectedItem(cargo);
-					formularioEmpleado.txtSueldoAsignado.setText(sueldo);
-					formularioEmpleado.txtHoraExtraAsignado.setText(horaex);
-					formularioEmpleado.txtObligacionesAsignado.setText(oblig);
-					registro_empleados.cbxHorarioAsignado.setSelectedItem(horario);
-					formularioEmpleado.txtDiasAsignado.setText(dias);
-					formularioEmpleado.txtHorasAsignado.setText(horas);
-					registro_empleados.cbxContratoAsignado.setSelectedItem(ident);
-					formularioEmpleado.txtTipoContratoAsignado.setText(tipo);
-					formularioEmpleado.txtTiempoContratoAsignado.setText(tiempo);
-					formularioEmpleado.txtFotoContratoAsignado.setText(foto);
+					formularioAsignacion.cbxCargoAsignacion.setSelectedItem(cargo);
+					formularioAsignacion.txtSueldoAsignacion.setText(sueldo);
+					formularioAsignacion.txtHoraExtraAsignacion.setText(horaex);
+					formularioAsignacion.txtFuncionesAsignacion.setText(oblig);
+					formularioAsignacion.cbxHorarioAsignacion.setSelectedItem(horario);
+					formularioAsignacion.txtDiasAsignacion.setText(dias);
+					formularioAsignacion.txtHorasAsignacion.setText(horas);
+					formularioAsignacion.cbxContratoAsignacion.setSelectedItem(ident);
+					formularioAsignacion.txtTipoContratoAsignacion.setText(tipo);
+					formularioAsignacion.txtTiempoContratoAsignacion.setText(tiempo);
+					formularioAsignacion.txtDireccionFotoContratoAsignacion.setText(foto);
 
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
@@ -504,20 +499,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor3.setForeground(Color.BLACK);
 					formularioEmpleado.editor2.setForeground(Color.BLACK);
 					formularioEmpleado.editor.setForeground(Color.BLACK);
-					formularioEmpleado.cbxEstadoEmpleado.setForeground(Color.BLACK);
-					registro_empleados.cbxCargoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtSueldoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtHoraExtraAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtObligacionesAsignado.setForeground(Color.BLACK);
-					registro_empleados.cbxHorarioAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtDiasAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtHorasAsignado.setForeground(Color.BLACK);
-					registro_empleados.cbxContratoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtTipoContratoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtTiempoContratoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtFotoContratoAsignado.setForeground(Color.BLACK);
 
-					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarEmpleado.setVisible(true);
 					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
@@ -531,6 +513,10 @@ public class control_empleado implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
+		}
+		
+		if (e.getSource() == formularioAsignacion.cbxCargoAsignacion) {
+			cargarDatosCargoAsignado();
 		}
 
 		/* Pasar datos de la tabla al formulario para visualizar */
@@ -591,17 +577,18 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor2.setText(fecha_reg);
 					formularioEmpleado.editor.setText(fecha_lab);
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
-					registro_empleados.cbxCargoAsignado.setSelectedItem(cargo);
-					formularioEmpleado.txtSueldoAsignado.setText(sueldo);
-					formularioEmpleado.txtHoraExtraAsignado.setText(horaex);
-					formularioEmpleado.txtObligacionesAsignado.setText(oblig);
-					registro_empleados.cbxHorarioAsignado.setSelectedItem(horario);
-					formularioEmpleado.txtDiasAsignado.setText(dias);
-					formularioEmpleado.txtHorasAsignado.setText(horas);
-					registro_empleados.cbxContratoAsignado.setSelectedItem(ident);
-					formularioEmpleado.txtTipoContratoAsignado.setText(tipo);
-					formularioEmpleado.txtTiempoContratoAsignado.setText(tiempo);
-					formularioEmpleado.txtFotoContratoAsignado.setText(foto);
+
+					formularioAsignacion.cbxCargoAsignacion.setSelectedItem(cargo);
+					formularioAsignacion.txtSueldoAsignacion.setText(sueldo);
+					formularioAsignacion.txtHoraExtraAsignacion.setText(horaex);
+					formularioAsignacion.txtFuncionesAsignacion.setText(oblig);
+					formularioAsignacion.cbxHorarioAsignacion.setSelectedItem(horario);
+					formularioAsignacion.txtDiasAsignacion.setText(dias);
+					formularioAsignacion.txtHorasAsignacion.setText(horas);
+					formularioAsignacion.cbxContratoAsignacion.setSelectedItem(ident);
+					formularioAsignacion.txtTipoContratoAsignacion.setText(tipo);
+					formularioAsignacion.txtTiempoContratoAsignacion.setText(tiempo);
+					formularioAsignacion.txtDireccionFotoContratoAsignacion.setText(foto);
 
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
@@ -620,19 +607,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor2.setForeground(Color.BLACK);
 					formularioEmpleado.editor.setForeground(Color.BLACK);
 					formularioEmpleado.cbxEstadoEmpleado.setForeground(Color.BLACK);
-					registro_empleados.cbxCargoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtSueldoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtHoraExtraAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtObligacionesAsignado.setForeground(Color.BLACK);
-					registro_empleados.cbxHorarioAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtDiasAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtHorasAsignado.setForeground(Color.BLACK);
-					registro_empleados.cbxContratoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtTipoContratoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtTiempoContratoAsignado.setForeground(Color.BLACK);
-					formularioEmpleado.txtFotoContratoAsignado.setForeground(Color.BLACK);
 
-					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(false);
@@ -664,7 +639,6 @@ public class control_empleado implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
 	}
 
 	public void limpiar() {
@@ -681,14 +655,14 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.editor2.setText("");
 		formularioEmpleado.editor3.setText("");
 		formularioEmpleado.cbxEstadoEmpleado.setToolTipText(null);
-		formularioEmpleado.txtSueldoAsignado.setText(null);
-		formularioEmpleado.txtHoraExtraAsignado.setText(null);
-		formularioEmpleado.txtObligacionesAsignado.setText(null);
-		formularioEmpleado.txtDiasAsignado.setText(null);
-		formularioEmpleado.txtHorasAsignado.setText(null);
-		formularioEmpleado.txtTipoContratoAsignado.setText(null);
-		formularioEmpleado.txtTiempoContratoAsignado.setText(null);
-		formularioEmpleado.txtFotoContratoAsignado.setText(null);
+		formularioAsignacion.txtSueldoAsignacion.setText(null);
+		formularioAsignacion.txtHoraExtraAsignacion.setText(null);
+		formularioAsignacion.txtFuncionesAsignacion.setText(null);
+		formularioAsignacion.txtDiasAsignacion.setText(null);
+		formularioAsignacion.txtHorasAsignacion.setText(null);
+		formularioAsignacion.txtTipoContratoAsignacion.setText(null);
+		formularioAsignacion.txtTiempoContratoAsignacion.setText(null);
+		formularioAsignacion.txtDireccionFotoContratoAsignacion.setText(null);
 
 	}
 
@@ -787,7 +761,7 @@ public class control_empleado implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT nombre_cargo FROM cargos");
 
 			while (rs.next()) {
-				registro_empleados.cbxCargoAsignado.addItem(rs.getString("nombre_cargo"));
+				formularioAsignacion.cbxCargoAsignacion.addItem(rs.getString("nombre_cargo"));
 			}
 			formularioEmpleado.contador1++;
 			rs.close();
@@ -808,7 +782,7 @@ public class control_empleado implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT tipo_horario FROM horarios");
 
 			while (rs.next()) {
-				registro_empleados.cbxHorarioAsignado.addItem(rs.getString("tipo_horario"));
+				formularioAsignacion.cbxHorarioAsignacion.addItem(rs.getString("tipo_horario"));
 			}
 			formularioEmpleado.contador2++;
 			rs.close();
@@ -829,7 +803,7 @@ public class control_empleado implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT identidad_contrato_empleado FROM contrato_empleado");
 
 			while (rs.next()) {
-				registro_empleados.cbxContratoAsignado.addItem(rs.getString("identidad_contrato_empleado"));
+				formularioAsignacion.cbxContratoAsignacion.addItem(rs.getString("identidad_contrato_empleado"));
 			}
 			formularioEmpleado.contador3++;
 			rs.close();
@@ -843,5 +817,30 @@ public class control_empleado implements ActionListener {
 		}
 
 	}
+	
+	public void cargarDatosCargoAsignado() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
+							+ formularioAsignacion.cbxCargoAsignacion.getSelectedItem() + "'");
 
+			rs.next();
+			formularioAsignacion.txtSueldoAsignacion.setText(rs.getString("sueldo_cargo"));
+			formularioAsignacion.txtHoraExtraAsignacion.setText(rs.getString("valor_hora_extra_cargo"));
+			formularioAsignacion.txtFuncionesAsignacion.setText(rs.getString("funciones_cargo"));
+			;
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+	
 }

@@ -37,7 +37,7 @@ public class control_horario implements ActionListener {
 		this.formularioHorario.btnAceptarHorario.addActionListener(this);
 		this.formularioHorario.btnActualizarDatosHorario.addActionListener(this);
 		this.formularioHorario.btnBorrarHorario.addActionListener(this);
-		this.formularioHorario.btnRegresar.addActionListener(this);
+		this.formularioHorario.btnAtras.addActionListener(this);
 		this.formularioHorario.btnMostrarHorario.addActionListener(this);
 
 	}

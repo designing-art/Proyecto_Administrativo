@@ -27,11 +27,16 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
@@ -42,8 +47,11 @@ import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
+import clases.empleado;
 import conexion.conexion;
+import consultas.consultas_empleado;
 import controles.control_contrato_empleado;
+import controles.control_empleado;
 import utilidades.visor_imagen;
 
 import javax.swing.DefaultComboBoxModel;
@@ -62,6 +70,7 @@ public class registro_contratos_empleados extends JFrame {
 	public JButton btnActualizarContrato;
 	public JButton btnMostrarContrato;
 	public JButton btnAceptar;
+	public static String hora_fecha_reporte;
 
 	public static String ruta;
 	public static ImageIcon imagen;
@@ -85,10 +94,13 @@ public class registro_contratos_empleados extends JFrame {
 	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
 	public JLabel lblNumeroDe;
 	public JFormattedTextField txtIdentidadContratoEmpleado;
+	public JButton btnRegresarALas;
+	public JButton btnAtras;
+	private JButton button;
 
 	public registro_contratos_empleados() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -97,10 +109,10 @@ public class registro_contratos_empleados extends JFrame {
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
-		JButton btnAtras = new JButton("Regresar");
+		btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
-		btnAtras.setBounds(717, 20, 102, 23);
+		btnAtras.setBounds(717, 25, 102, 23);
 		contentPane.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			@Override
@@ -116,7 +128,7 @@ public class registro_contratos_empleados extends JFrame {
 
 		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DE CONTRATOS DE LOS EMPLEADOS");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistrarCargo.setBounds(28, 10, 693, 39);
+		lblRegistrarCargo.setBounds(28, 20, 693, 29);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
@@ -355,13 +367,50 @@ public class registro_contratos_empleados extends JFrame {
 		btnMostrarContrato.setBackground(new Color(0, 206, 209));
 		btnMostrarContrato.setBounds(149, 395, 108, 23);
 		panelTablaCargos.add(btnMostrarContrato);
-
-		JLabel label_5 = new JLabel();
-		label_5.setBounds(0, 0, 431, 449);
-		panelTablaCargos.add(label_5);
-		final ImageIcon logo1 = new ImageIcon(
-				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-		label_5.setIcon(logo1);
+		
+		button = new JButton("Imprimir Reporte");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
+				utilJTablePrint(tablaContratosEmpleados, "Canal 40 (COFFEE TV CHANNEL)",
+						"Reporte contratos de los empleados.____. " + hora_fecha_reporte, true);
+			}
+		});
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(60, 179, 113));
+		button.setBounds(210, 40, 137, 19);
+		panelTablaCargos.add(button);
+		
+				JLabel label_5 = new JLabel();
+				label_5.setBounds(0, 0, 431, 449);
+				panelTablaCargos.add(label_5);
+				final ImageIcon logo1 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+				label_5.setIcon(logo1);
+		
+		btnRegresarALas = new JButton("Regresar a las Asignaciones");
+		btnRegresarALas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				empleado clase = new empleado();
+				consultas_empleado consulta = new consultas_empleado();
+				registro_empleados formulario = new registro_empleados();
+				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
+				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
+				formulario2.setVisible(true);
+				formulario2.setLocationRelativeTo(null);
+				control.consultarContratos();
+				control.consultarCargos();
+				control.consultarHorarios();
+				dispose();
+			}
+		});
+		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresarALas.setBackground(new Color(255, 127, 80));
+		btnRegresarALas.setBounds(574, 0, 245, 23);
+		contentPane.add(btnRegresarALas);
+		btnRegresarALas.setVisible(false);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}
@@ -446,6 +495,30 @@ public class registro_contratos_empleados extends JFrame {
 			visor.setLocationRelativeTo(null);
 			imagen = new ImageIcon(ruta);
 			visor_imagen.lblImagen.setIcon(imagen);
+		}
+	}
+	
+	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
+		boolean fitWidth = true;
+		boolean interactive = true;
+		// We define the print mode (Definimos el modo de impresión)
+		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+		try {
+			// Print the table (Imprimo la tabla)
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
+					null, interactive);
+			if (complete) {
+				// Mostramos el mensaje de impresión existosa
+				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
+						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				// Mostramos un mensaje indicando que la impresión fue cancelada
+				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
+						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
+			}
+		} catch (PrinterException pe) {
+			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
+					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

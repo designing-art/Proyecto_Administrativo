@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -24,9 +25,14 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
@@ -34,7 +40,10 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
+import clases.empleado;
 import conexion.conexion;
+import consultas.consultas_empleado;
+import controles.control_empleado;
 import controles.control_horario;
 
 import javax.swing.DefaultComboBoxModel;
@@ -54,7 +63,7 @@ public class registro_horarios extends JFrame {
 	public JButton btnSalirHorario;
 	public JButton btnAceptar;
 	public JButton btnMostrar;
-	public JButton btnRegresar;
+	public JButton btnAtras;
 	public JButton btnBorrarHorario;
 	public JButton btnMostrarHorario;
 	public JButton btnGuardarHorario;
@@ -64,19 +73,22 @@ public class registro_horarios extends JFrame {
 	public JComboBox<?> cbxTipoHorario;
 	public JComboBox<?> cbxHorasDia;
 	public JComboBox<?> cbxDiasHorario;
+	public JButton btnRegresarALas;
 
 	public JTextField txtCodigoHorario;
 	public JTextField txtBusquedaHorario;
 	public JTable tablaHorario;
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
+	private JButton button;
+	public static String hora_fecha_reporte;
 
 	/**
 	 * Create the frame.
 	 */
 	public registro_horarios() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 865, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -87,12 +99,12 @@ public class registro_horarios extends JFrame {
 		JTextField txtidhorario = new JTextField();
 		contentPane.setLayout(null);
 
-		btnRegresar = new JButton("Regresar");
-		btnRegresar.setBounds(727, 11, 99, 23);
-		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnRegresar.setBackground(new Color(255, 127, 80));
-		contentPane.add(btnRegresar);
-		btnRegresar.addActionListener(new ActionListener() {
+		btnAtras = new JButton("Regresar");
+		btnAtras.setBounds(727, 11, 99, 23);
+		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAtras.setBackground(new Color(255, 127, 80));
+		contentPane.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
@@ -312,19 +324,56 @@ public class registro_horarios extends JFrame {
 		btnMostrarHorario.setBackground(new Color(0, 206, 209));
 		btnMostrarHorario.setBounds(152, 347, 108, 23);
 		panelTablaHorario.add(btnMostrarHorario);
-
-		JLabel label_2 = new JLabel();
-		label_2.setBounds(0, 0, 440, 401);
-		panelTablaHorario.add(label_2);
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon logo2 = new ImageIcon(
-				icono2.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
-		label_2.setIcon(logo2);
+		
+		button = new JButton("Imprimir Reporte");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
+				utilJTablePrint(tablaHorario, "Canal 40 (COFFEE TV CHANNEL)",
+						"Reporte de Horarios.____. " + hora_fecha_reporte, true);
+			}
+		});
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(60, 179, 113));
+		button.setBounds(210, 39, 137, 19);
+		panelTablaHorario.add(button);
+		
+				JLabel label_2 = new JLabel();
+				label_2.setBounds(0, 0, 440, 401);
+				panelTablaHorario.add(label_2);
+				final ImageIcon logo2 = new ImageIcon(
+						icono2.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+				label_2.setIcon(logo2);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE HORARIOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblRegistroYMantenimiento.setBounds(24, 11, 466, 39);
 		contentPane.add(lblRegistroYMantenimiento);
+		
+		btnRegresarALas = new JButton("Regresar a las Asignaciones");
+		btnRegresarALas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				empleado clase = new empleado();
+				consultas_empleado consulta = new consultas_empleado();
+				registro_empleados formulario = new registro_empleados();
+				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
+				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
+				formulario2.setVisible(true);
+				formulario2.setLocationRelativeTo(null);
+				control.consultarContratos();
+				control.consultarCargos();
+				control.consultarHorarios();
+				dispose();
+			}
+		});
+		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresarALas.setBackground(new Color(255, 127, 80));
+		btnRegresarALas.setBounds(596, 11, 230, 23);
+		contentPane.add(btnRegresarALas);
+		btnRegresarALas.setVisible(false);
 
 	}
 
@@ -374,6 +423,30 @@ public class registro_horarios extends JFrame {
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
+		boolean fitWidth = true;
+		boolean interactive = true;
+		// We define the print mode (Definimos el modo de impresión)
+		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+		try {
+			// Print the table (Imprimo la tabla)
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
+					null, interactive);
+			if (complete) {
+				// Mostramos el mensaje de impresión existosa
+				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
+						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				// Mostramos un mensaje indicando que la impresión fue cancelada
+				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
+						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
+			}
+		} catch (PrinterException pe) {
+			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
+					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
