@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -24,9 +25,15 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
@@ -67,6 +74,7 @@ public class registro_cargos extends JFrame {
 
 	public TableRowSorter trsfiltroCodigo;
 	String filtroCodigo;
+	public static String hora_fecha_reporte;
 
 	public registro_cargos() {
 		setResizable(false);
@@ -376,6 +384,20 @@ public class registro_cargos extends JFrame {
 		btnMostrar.setBounds(149, 395, 108, 23);
 		panelTablaCargos.add(btnMostrar);
 
+		JButton btnImprimirReporte = new JButton("Imprimir Reporte");
+		btnImprimirReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+				hora_fecha_reporte = ("Hora y fecha del reporte : " +hourdateFormat.format(date));
+				utilJTablePrint(tablaCargos, "Canal 40 (COFFEE TV CHANNEL)", "Reporte de Cargos.   " + hora_fecha_reporte, true);
+			}
+		});
+		btnImprimirReporte.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnImprimirReporte.setBackground(new Color(60, 179, 113));
+		btnImprimirReporte.setBounds(210, 40, 137, 19);
+		panelTablaCargos.add(btnImprimirReporte);
+
 		JLabel label_5 = new JLabel();
 		label_5.setBounds(0, 0, 431, 449);
 		panelTablaCargos.add(label_5);
@@ -441,6 +463,30 @@ public class registro_cargos extends JFrame {
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
+		boolean fitWidth = true;
+		boolean interactive = true;
+		// We define the print mode (Definimos el modo de impresión)
+		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+		try {
+			// Print the table (Imprimo la tabla)
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
+					null, interactive);
+			if (complete) {
+				// Mostramos el mensaje de impresión existosa
+				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
+						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				// Mostramos un mensaje indicando que la impresión fue cancelada
+				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
+						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
+			}
+		} catch (PrinterException pe) {
+			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
+					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
