@@ -514,10 +514,6 @@ public class control_empleado implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
-		if (e.getSource() == formularioAsignacion.cbxCargoAsignacion) {
-			cargarDatosCargoAsignado();
-		}
 
 		/* Pasar datos de la tabla al formulario para visualizar */
 		if (e.getSource() == formularioEmpleado.btnMostrarEmpleado) {
@@ -806,31 +802,6 @@ public class control_empleado implements ActionListener {
 				formularioAsignacion.cbxContratoAsignacion.addItem(rs.getString("identidad_contrato_empleado"));
 			}
 			formularioEmpleado.contador3++;
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-
-	}
-	
-	public void cargarDatosCargoAsignado() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery(
-					"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
-							+ formularioAsignacion.cbxCargoAsignacion.getSelectedItem() + "'");
-
-			rs.next();
-			formularioAsignacion.txtSueldoAsignacion.setText(rs.getString("sueldo_cargo"));
-			formularioAsignacion.txtHoraExtraAsignacion.setText(rs.getString("valor_hora_extra_cargo"));
-			formularioAsignacion.txtFuncionesAsignacion.setText(rs.getString("funciones_cargo"));
-			;
 			rs.close();
 			estatuto.close();
 			conex.desconectar();

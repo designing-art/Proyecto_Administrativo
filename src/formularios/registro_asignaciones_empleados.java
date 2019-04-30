@@ -108,6 +108,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label);
 
 		txtSueldoAsignacion = new JTextField();
+		txtSueldoAsignacion.setForeground(new Color(0, 0, 0));
 		txtSueldoAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSueldoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtSueldoAsignacion.setEditable(false);
@@ -121,8 +122,14 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_1);
 
 		cbxCargoAsignacion = new JComboBox<String>();
+		cbxCargoAsignacion.setForeground(new Color(0, 0, 0));
+		cbxCargoAsignacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarDatosCargoAsignado();
+			}
+		});
 		cbxCargoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxCargoAsignacion.setBackground(Color.WHITE);
+		cbxCargoAsignacion.setBackground(new Color(255, 255, 255));
 		cbxCargoAsignacion.setBounds(109, 60, 128, 23);
 		panel.add(cbxCargoAsignacion);
 
@@ -137,6 +144,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_3);
 
 		txtHoraExtraAsignacion = new JTextField();
+		txtHoraExtraAsignacion.setForeground(new Color(0, 0, 0));
 		txtHoraExtraAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtHoraExtraAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtHoraExtraAsignacion.setEditable(false);
@@ -150,12 +158,14 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_4);
 
 		cbxHorarioAsignacion = new JComboBox<String>();
+		cbxHorarioAsignacion.setForeground(new Color(0, 0, 0));
 		cbxHorarioAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxHorarioAsignacion.setBackground(Color.WHITE);
+		cbxHorarioAsignacion.setBackground(new Color(255, 255, 255));
 		cbxHorarioAsignacion.setBounds(109, 147, 128, 23);
 		panel.add(cbxHorarioAsignacion);
 
 		txtDiasAsignacion = new JTextField();
+		txtDiasAsignacion.setForeground(new Color(0, 0, 0));
 		txtDiasAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDiasAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtDiasAsignacion.setEditable(false);
@@ -174,6 +184,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_6);
 
 		txtHorasAsignacion = new JTextField();
+		txtHorasAsignacion.setForeground(new Color(0, 0, 0));
 		txtHorasAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtHorasAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtHorasAsignacion.setEditable(false);
@@ -187,8 +198,9 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_7);
 
 		cbxContratoAsignacion = new JComboBox<String>();
+		cbxContratoAsignacion.setForeground(new Color(0, 0, 0));
 		cbxContratoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxContratoAsignacion.setBackground(Color.WHITE);
+		cbxContratoAsignacion.setBackground(new Color(255, 255, 255));
 		cbxContratoAsignacion.setBounds(109, 195, 128, 23);
 		panel.add(cbxContratoAsignacion);
 
@@ -198,6 +210,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_8);
 
 		txtDireccionFotoContratoAsignacion = new JTextField();
+		txtDireccionFotoContratoAsignacion.setForeground(new Color(0, 0, 0));
 		txtDireccionFotoContratoAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDireccionFotoContratoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtDireccionFotoContratoAsignacion.setEditable(false);
@@ -211,6 +224,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_9);
 
 		txtTiempoContratoAsignacion = new JTextField();
+		txtTiempoContratoAsignacion.setForeground(new Color(0, 0, 0));
 		txtTiempoContratoAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTiempoContratoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTiempoContratoAsignacion.setEditable(false);
@@ -223,6 +237,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(scrollPane);
 
 		txtFuncionesAsignacion = new JTextArea();
+		txtFuncionesAsignacion.setForeground(new Color(0, 0, 0));
 		txtFuncionesAsignacion.setBackground(new Color(230, 230, 250));
 		txtFuncionesAsignacion.setEditable(false);
 		scrollPane.setViewportView(txtFuncionesAsignacion);
@@ -245,6 +260,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(button);
 
 		txtTipoContratoAsignacion = new JTextField();
+		txtTipoContratoAsignacion.setForeground(new Color(0, 0, 0));
 		txtTipoContratoAsignacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTipoContratoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTipoContratoAsignacion.setEditable(false);
@@ -414,33 +430,8 @@ public class registro_asignaciones_empleados extends JFrame {
 
 			}
 		});
-		cbxCargoAsignacion.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				conexion objCon = new conexion();
-				Connection conn = objCon.getConexion();
-				try {
-					if (contador1 > 0) {
-						PreparedStatement stmtr = conn.prepareStatement(
-								"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
-										+ cbxCargoAsignacion.getSelectedItem() + "'");
-						ResultSet rsr = stmtr.executeQuery();
-						rsr.next();
-						txtSueldoAsignacion.setText(rsr.getString("sueldo_cargo"));
-						txtHoraExtraAsignacion.setText(rsr.getString("valor_hora_extra_cargo"));
-						txtFuncionesAsignacion.setText(rsr.getString("funciones_cargo"));
-						;
-						stmtr.close();
-						rsr.close();
-					}
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
 	}
+		
 
 	public void verFotoEmpleado() {
 		if (txtDireccionFotoContratoAsignacion.getText().isEmpty()) {
@@ -454,5 +445,36 @@ public class registro_asignaciones_empleados extends JFrame {
 			imagen = new ImageIcon(ruta);
 			visor_imagen.lblImagen.setIcon(imagen);
 		}
+	}
+	
+	public void cargarDatosCargoAsignado() {
+		try {
+			conexion objCon = new conexion();
+			Connection conn = objCon.getConexion();
+			if (contador1 > 0) {	
+				PreparedStatement stmtr = conn.prepareStatement(
+						"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
+								+ cbxCargoAsignacion.getSelectedItem().toString() + "'");
+				ResultSet rsr = stmtr.executeQuery();
+				rsr.next();
+				txtSueldoAsignacion.setText(rsr.getString("sueldo_cargo"));
+				txtHoraExtraAsignacion.setText(rsr.getString("valor_hora_extra_cargo"));
+				txtFuncionesAsignacion.setText(rsr.getString("funciones_cargo"));
+				;
+				stmtr.close();
+				rsr.close();	
+			}
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void cargarDatosHorarioAsignado() {
+
+	}
+
+	public void cargarDatosContratoAsignado() {
+
 	}
 }
