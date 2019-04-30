@@ -39,6 +39,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class registro_asignaciones_empleados extends JFrame {
 
@@ -123,15 +125,15 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		cbxCargoAsignacion = new JComboBox<String>();
 		cbxCargoAsignacion.setForeground(new Color(0, 0, 0));
+		cbxCargoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxCargoAsignacion.setBackground(new Color(255, 255, 255));
+		cbxCargoAsignacion.setBounds(109, 60, 128, 23);
+		panel.add(cbxCargoAsignacion);
 		cbxCargoAsignacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cargarDatosCargoAsignado();
 			}
 		});
-		cbxCargoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxCargoAsignacion.setBackground(new Color(255, 255, 255));
-		cbxCargoAsignacion.setBounds(109, 60, 128, 23);
-		panel.add(cbxCargoAsignacion);
 
 		JLabel label_2 = new JLabel("Asignaciones del empleado :");
 		label_2.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -158,11 +160,16 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_4);
 
 		cbxHorarioAsignacion = new JComboBox<String>();
-		cbxHorarioAsignacion.setForeground(new Color(0, 0, 0));
+		cbxHorarioAsignacion.setForeground(Color.BLACK);
 		cbxHorarioAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxHorarioAsignacion.setBackground(new Color(255, 255, 255));
 		cbxHorarioAsignacion.setBounds(109, 147, 128, 23);
 		panel.add(cbxHorarioAsignacion);
+		cbxHorarioAsignacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarDatosHorarioAsignado();
+			}
+		});
 
 		txtDiasAsignacion = new JTextField();
 		txtDiasAsignacion.setForeground(new Color(0, 0, 0));
@@ -203,6 +210,11 @@ public class registro_asignaciones_empleados extends JFrame {
 		cbxContratoAsignacion.setBackground(new Color(255, 255, 255));
 		cbxContratoAsignacion.setBounds(109, 195, 128, 23);
 		panel.add(cbxContratoAsignacion);
+		cbxContratoAsignacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarDatosContratoAsignado();
+			}
+		});
 
 		JLabel label_8 = new JLabel("Fotografia del Contrato.");
 		label_8.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -379,60 +391,9 @@ public class registro_asignaciones_empleados extends JFrame {
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblRegistroYMantenimiento.setBounds(26, 11, 579, 23);
 		contentPane.add(lblRegistroYMantenimiento);
-		
-		cbxContratoAsignacion.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e1) {
-				conexion objCon = new conexion();
-				Connection conn = objCon.getConexion();
-				try {
-					if (contador3 > 0) {
-						PreparedStatement stmtr = conn.prepareStatement(
-								"SELECT identidad_contrato_empleado, tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
-										+ cbxContratoAsignacion.getSelectedItem() + "'");
-						ResultSet rsr = stmtr.executeQuery();
-						rsr.next();
-						txtTipoContratoAsignacion.setText(rsr.getString("tipo_contrato_empleado"));
-						txtTiempoContratoAsignacion.setText(rsr.getString("tiempo_contrato_empleado"));
-						txtDireccionFotoContratoAsignacion.setText(rsr.getString("direccion_foto_contrato_empleado"));
-						;
-						stmtr.close();
-						rsr.close();
-					}
-					conn.close();
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
-		});
-		cbxHorarioAsignacion.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				conexion objCon = new conexion();
-				Connection conn = objCon.getConexion();
-				try {
-					if (contador2 > 0) {
-						PreparedStatement stmtr = conn.prepareStatement(
-								"SELECT dias_horario, horas_horario FROM horarios where tipo_horario = '"
-										+ cbxHorarioAsignacion.getSelectedItem() + "'");
-						ResultSet rsr = stmtr.executeQuery();
-						rsr.next();
-						txtDiasAsignacion.setText(rsr.getString("dias_horario"));
-						txtHorasAsignacion.setText(rsr.getString("horas_horario"));
-						;
-						stmtr.close();
-						rsr.close();
-					}
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
+	
 	}
 		
-
 	public void verFotoEmpleado() {
 		if (txtDireccionFotoContratoAsignacion.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -471,10 +432,48 @@ public class registro_asignaciones_empleados extends JFrame {
 	}
 
 	public void cargarDatosHorarioAsignado() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			if (contador2 > 0) {
+				PreparedStatement stmtr = conn.prepareStatement(
+						"SELECT dias_horario, horas_horario FROM horarios where tipo_horario = '"
+								+ cbxHorarioAsignacion.getSelectedItem() + "'");
+				ResultSet rsr = stmtr.executeQuery();
+				rsr.next();
+				txtDiasAsignacion.setText(rsr.getString("dias_horario"));
+				txtHorasAsignacion.setText(rsr.getString("horas_horario"));
+				;
+				stmtr.close();
+				rsr.close();
+			}
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	public void cargarDatosContratoAsignado() {
-
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			if (contador3 > 0) {
+				PreparedStatement stmtr = conn.prepareStatement(
+						"SELECT identidad_contrato_empleado, tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
+								+ cbxContratoAsignacion.getSelectedItem() + "'");
+				ResultSet rsr = stmtr.executeQuery();
+				rsr.next();
+				txtTipoContratoAsignacion.setText(rsr.getString("tipo_contrato_empleado"));
+				txtTiempoContratoAsignacion.setText(rsr.getString("tiempo_contrato_empleado"));
+				txtDireccionFotoContratoAsignacion.setText(rsr.getString("direccion_foto_contrato_empleado"));
+				;
+				stmtr.close();
+				rsr.close();
+			}
+			conn.close();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 	}
 }

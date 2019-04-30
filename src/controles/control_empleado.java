@@ -759,7 +759,7 @@ public class control_empleado implements ActionListener {
 			while (rs.next()) {
 				formularioAsignacion.cbxCargoAsignacion.addItem(rs.getString("nombre_cargo"));
 			}
-			formularioEmpleado.contador1++;
+			formularioAsignacion.contador1++;
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
@@ -780,7 +780,7 @@ public class control_empleado implements ActionListener {
 			while (rs.next()) {
 				formularioAsignacion.cbxHorarioAsignacion.addItem(rs.getString("tipo_horario"));
 			}
-			formularioEmpleado.contador2++;
+			formularioAsignacion.contador2++;
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
@@ -801,7 +801,7 @@ public class control_empleado implements ActionListener {
 			while (rs.next()) {
 				formularioAsignacion.cbxContratoAsignacion.addItem(rs.getString("identidad_contrato_empleado"));
 			}
-			formularioEmpleado.contador3++;
+			formularioAsignacion.contador3++;
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
