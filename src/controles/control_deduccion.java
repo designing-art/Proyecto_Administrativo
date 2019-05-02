@@ -26,6 +26,7 @@ public class control_deduccion implements ActionListener {
 	public consultas_deduccion consulta;
 	public registro_deducciones formulario;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+	public static String identidad = null;
 
 	public control_deduccion(deduccion clase, consultas_deduccion consulta, registro_deducciones formulario) {
 		this.clase = clase;
@@ -54,8 +55,12 @@ public class control_deduccion implements ActionListener {
 							.equalsIgnoreCase("Escriba una observacion.")
 					|| formulario.txtCantidadDeduccion.getText().toString().equalsIgnoreCase("Digite la cantidad.")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la deduccion!");
-
 			} else {
+				if (formulario.txtIdentidadDeduccion.getText().toString().equals(identidad)) 
+				{
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
+				} else {
 				clase.setTipo_deduccion(formulario.cbxTipoDeduccion.getSelectedItem().toString());
 				clase.setObservacion_deduccion(formulario.txtObservacionDeduccion.getText());
 				clase.setCantidad_deduccion(Double.parseDouble(formulario.txtCantidadDeduccion.getText()));
@@ -81,6 +86,7 @@ public class control_deduccion implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Error! Deduccion no Registrado");
 					limpiar();
 				}
+			}
 			}
 		}
 
@@ -380,6 +386,30 @@ public class control_deduccion implements ActionListener {
 		}
 
 		return matrizInfo;
+	}
+	
+	public void validarIdentidad() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT identidad_empleado_deduccion FROM deducciones where identidad_empleado_deduccion = '"
+							+ formulario.txtIdentidadDeduccion.getText().toString() + "'");
+
+			if (rs.next()) {
+				identidad = (rs.getString("identidad_empleado_deduccion"));
+			}
+
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 }

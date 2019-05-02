@@ -26,6 +26,7 @@ public class control_planilla implements ActionListener {
 	public consultas_planilla consulta;
 	public registro_planillas formulario;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+	public static String identidad = null;
 
 	public control_planilla(planilla clase, consultas_planilla consulta, registro_planillas formulario) {
 		this.clase = clase;
@@ -44,6 +45,7 @@ public class control_planilla implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == formulario.btnGuardar) {
+			validarIdentidad();
 
 			if (formulario.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
 					|| formulario.txtIdentidadPlanilla.getText().isEmpty()
@@ -52,41 +54,49 @@ public class control_planilla implements ActionListener {
 					|| registro_planillas.txtTotalDeduccionesPlanilla.getText().isEmpty()
 					|| registro_planillas.txtTotalPagoEmpleado.getText().isEmpty()
 					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar en la planilla!");
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 
 			} else {
-				clase.setTipo_planilla(formulario.cbxTipoPlanilla.getSelectedItem().toString());
-				clase.setFecha_planilla(formulario.editor.getText());
-				clase.setNombres_planilla(formulario.txtNombresPlanilla.getText());
-				clase.setApellidos_planilla(formulario.txtApellidosPlanilla.getText());
-				clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
-				clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
-				clase.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
-				clase.setTotal_deducciones_planilla(
-						Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
-				clase.setTotal_bonificaciones_planilla(
-						Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
-				clase.setSueldo_neto_planilla(Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
-				clase.setTotal_apagar_planilla(Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
-
-				if (consulta.registrar(clase)) {
-					JOptionPane.showMessageDialog(null, "Exito! Empleado agregado a la panilla!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					formulario.establecerFechaRegistro();
-
-					final ImageIcon logo = new ImageIcon(
-							usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
-									formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoPlanilla.setIcon(logo);
-					formulario.txtDireccionFoto.setText(null);
-					formulario.lblFotoPlanilla.setText(null);
-					formulario.lblFotoPlanilla.requestFocusInWindow();
-
+				if (formulario.txtIdentidadPlanilla.getText().toString().equals(identidad)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Error!  no Registrado");
-					limpiar();
+					clase.setTipo_planilla(formulario.cbxTipoPlanilla.getSelectedItem().toString());
+					clase.setFecha_planilla(formulario.editor.getText());
+					clase.setNombres_planilla(formulario.txtNombresPlanilla.getText());
+					clase.setApellidos_planilla(formulario.txtApellidosPlanilla.getText());
+					clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
+					clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
+					clase.setSueldo_bruto_planilla(
+							Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
+					clase.setTotal_deducciones_planilla(
+							Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+					clase.setTotal_bonificaciones_planilla(
+							Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+					clase.setSueldo_neto_planilla(
+							Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
+					clase.setTotal_apagar_planilla(
+							Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
+
+					if (consulta.registrar(clase)) {
+						JOptionPane.showMessageDialog(null, "Exito! Empleado agregado a la panilla!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						formulario.establecerFechaRegistro();
+
+						final ImageIcon logo = new ImageIcon(
+								usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
+										formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lblFotoPlanilla.setIcon(logo);
+						formulario.txtDireccionFoto.setText(null);
+						formulario.lblFotoPlanilla.setText(null);
+						formulario.lblFotoPlanilla.requestFocusInWindow();
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Error!  no Registrado");
+						limpiar();
+					}
 				}
 			}
 		}
@@ -210,6 +220,7 @@ public class control_planilla implements ActionListener {
 		}
 
 		if (e.getSource() == formulario.btnActualizar) {
+			validarIdentidad();
 
 			if (formulario.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
 					|| formulario.txtIdentidadPlanilla.getText().isEmpty()
@@ -221,39 +232,47 @@ public class control_planilla implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 
 			} else {
-				clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
-				clase.setTipo_planilla(formulario.cbxTipoPlanilla.getSelectedItem().toString());
-				clase.setFecha_planilla(formulario.editor.getText());
-				clase.setNombres_planilla(formulario.txtNombresPlanilla.getText());
-				clase.setApellidos_planilla(formulario.txtApellidosPlanilla.getText());
-				clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
-				clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
-				clase.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
-				clase.setTotal_deducciones_planilla(
-						Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
-				clase.setTotal_bonificaciones_planilla(
-						Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
-				clase.setSueldo_neto_planilla(Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
-				clase.setTotal_apagar_planilla(Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
-				clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
-
-				if (consulta.modificar(clase)) {
-					JOptionPane.showMessageDialog(null, "Datos del pago actualizados!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					formulario.btnActualizar.setVisible(false);
-					final ImageIcon logo = new ImageIcon(
-							usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
-									formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoPlanilla.setIcon(logo);
-					formulario.txtBusquedaPlanilla.requestFocusInWindow();
-
+				if (formulario.txtIdentidadPlanilla.getText().toString().equals(identidad)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
-					limpiar();
-				}
+					clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
+					clase.setTipo_planilla(formulario.cbxTipoPlanilla.getSelectedItem().toString());
+					clase.setFecha_planilla(formulario.editor.getText());
+					clase.setNombres_planilla(formulario.txtNombresPlanilla.getText());
+					clase.setApellidos_planilla(formulario.txtApellidosPlanilla.getText());
+					clase.setIdentidad_planilla(formulario.txtIdentidadPlanilla.getText());
+					clase.setCargo_planilla(formulario.txtCargoPlanilla.getText());
+					clase.setSueldo_bruto_planilla(
+							Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
+					clase.setTotal_deducciones_planilla(
+							Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+					clase.setTotal_bonificaciones_planilla(
+							Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+					clase.setSueldo_neto_planilla(
+							Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
+					clase.setTotal_apagar_planilla(
+							Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
+					clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
 
+					if (consulta.modificar(clase)) {
+						JOptionPane.showMessageDialog(null, "Datos del pago actualizados!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						formulario.btnActualizar.setVisible(false);
+						final ImageIcon logo = new ImageIcon(
+								usuario.getImage().getScaledInstance(formulario.lblFotoPlanilla.getWidth(),
+										formulario.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lblFotoPlanilla.setIcon(logo);
+						formulario.txtBusquedaPlanilla.requestFocusInWindow();
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
+						limpiar();
+					}
+
+				}
 			}
 		}
 
@@ -413,6 +432,29 @@ public class control_planilla implements ActionListener {
 		}
 
 		return matrizInfo;
+	}
+
+	public void validarIdentidad() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT identidad_planilla FROM planillas where identidad_planilla = '"
+					+ formulario.txtIdentidadPlanilla.getText().toString() + "'");
+
+			if (rs.next()) {
+				identidad = (rs.getString("identidad_planilla"));
+			}
+
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 }

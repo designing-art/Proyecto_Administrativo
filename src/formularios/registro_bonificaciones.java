@@ -415,9 +415,7 @@ public class registro_bonificaciones extends JFrame {
 		panel_1.add(lblTipo);
 
 		cbxTipoBonificacion = new JComboBox();
-		cbxTipoBonificacion.setModel(new DefaultComboBoxModel(new String[] { "Bono por comision.",
-				"Bono Navide\u00F1o.", "Bono por antiguedad.", "Bono por  publicidad.", "Pago por Edicion.",
-				"Pago por Trabajo Grabacion.", "Pago or Tomas.", "Pago por venta de publicidad." }));
+		cbxTipoBonificacion.setModel(new DefaultComboBoxModel(new String[] {"Bono navide\u00F1o.", "Bono por antiguedad.", "Bono por  publicidad.", "Pago por editar.", "Pago por filmar evento.", "Pago por tomas.", "Pago por venta de publicidad.", "Bono por trabajos terminados."}));
 		cbxTipoBonificacion.setBounds(137, 255, 132, 20);
 		panel_1.add(cbxTipoBonificacion);
 

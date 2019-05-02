@@ -25,6 +25,7 @@ public class control_contrato_empleado implements ActionListener {
 	public contrato_empleado clase;
 	public consultas_contrato_empleado consulta;
 	public registro_contratos_empleados formulario;
+	public static String identidad = null;
 
 	public control_contrato_empleado(contrato_empleado clase, consultas_contrato_empleado consulta,
 			registro_contratos_empleados formulario) {
@@ -43,39 +44,46 @@ public class control_contrato_empleado implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		validarIdentidad();
 		/* Insertar */
 		if (e.getSource() == formulario.btnGuardarContrato) {
 
 			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
 					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el contrato!");
-
 			} else {
-
-				clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
-				clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
-				clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
-				clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
-
-				if (consulta.insertar(clase)) {
-					JOptionPane.showMessageDialog(null, "Contrato registrado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lbl_foto_contrato.setIcon(iconofoto);
+				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) 
+				{
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Error! contrato no registrado");
-					limpiar();
+					clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
+					clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
+					clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
+					clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
+
+					if (consulta.insertar(clase)) {
+						JOptionPane.showMessageDialog(null, "Contrato registrado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+						final ImageIcon iconofoto = new ImageIcon(
+								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lbl_foto_contrato.setIcon(iconofoto);
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! contrato no registrado");
+						limpiar();
+					}
 				}
 			}
+
 		}
 
 		/* Pasar datos de la tabla al formulario para actualizar */
 		if (e.getSource() == formulario.btnActualizarDatosContrato) {
+
 			int filaseleccionada;
 			try {
 				filaseleccionada = formulario.tablaContratosEmpleados.getSelectedRow();
@@ -106,6 +114,7 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.txtDireccionFotoContrato.setForeground(Color.BLACK);
 					formulario.txtIdentidadContratoEmpleado.setForeground(Color.BLACK);
 
+					formulario.txtIdentidadContratoEmpleado.setEditable(true);
 					formulario.btnBorrarContrato.setVisible(true);
 					formulario.btnGuardarContrato.setVisible(false);
 					formulario.btnNuevoContrato.setVisible(false);
@@ -157,6 +166,7 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.txtDireccionFotoContrato.setForeground(Color.BLACK);
 					formulario.txtIdentidadContratoEmpleado.setForeground(Color.BLACK);
 
+					formulario.txtIdentidadContratoEmpleado.setEditable(false);
 					formulario.btnBorrarContrato.setVisible(false);
 					formulario.btnGuardarContrato.setVisible(false);
 					formulario.btnNuevoContrato.setVisible(false);
@@ -175,13 +185,16 @@ public class control_contrato_empleado implements ActionListener {
 
 		/* Actualizar */
 		if (e.getSource() == formulario.btnActualizarContrato) {
-
+			validarIdentidad();
 			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
 					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el contrato!");
-
 			} else {
-
+				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) 
+				{
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
+				} else {
 				clase.setId_contrato_empleado(
 						Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
 				clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
@@ -211,6 +224,7 @@ public class control_contrato_empleado implements ActionListener {
 					limpiar();
 				}
 
+			}
 			}
 		}
 
@@ -261,6 +275,7 @@ public class control_contrato_empleado implements ActionListener {
 			formulario.txtDireccionFotoContrato.setEditable(false);
 			formulario.btnMostrarContrato.setVisible(true);
 			formulario.btnAceptar.setVisible(false);
+			formulario.txtIdentidadContratoEmpleado.setEditable(true);
 			formulario.pistas();
 			formulario.construirTabla();
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
@@ -287,6 +302,7 @@ public class control_contrato_empleado implements ActionListener {
 			formulario.btnAceptar.setVisible(false);
 			formulario.txtCodigoContratoEmpleado.setEnabled(true);
 			formulario.txtCodigoContratoEmpleado.setEditable(false);
+			formulario.txtIdentidadContratoEmpleado.setEditable(true);
 			formulario.obtenerUltimoId();
 			formulario.pistas();
 			formulario.construirTabla();
@@ -352,6 +368,30 @@ public class control_contrato_empleado implements ActionListener {
 		}
 
 		return matrizInfo;
+	}
+
+	public void validarIdentidad() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT identidad_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
+							+ formulario.txtIdentidadContratoEmpleado.getText().toString() + "'");
+
+			if (rs.next()) {
+				identidad = (rs.getString("identidad_contrato_empleado"));
+			}
+
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 }

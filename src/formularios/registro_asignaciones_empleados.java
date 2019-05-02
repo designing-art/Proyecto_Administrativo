@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import clases.cargo;
 import clases.contrato_empleado;
@@ -19,6 +20,8 @@ import controles.control_horario;
 import utilidades.visor_imagen;
 
 import java.awt.Color;
+import java.awt.Event;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -26,37 +29,44 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
 
 import javax.swing.JTextArea;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class registro_asignaciones_empleados extends JFrame {
 
 	public JPanel contentPane;
-	public JTextField txtSueldoAsignacion;
-	public JTextField txtHoraExtraAsignacion;
-	public JTextField txtDiasAsignacion;
-	public JTextField txtHorasAsignacion;
-	public JTextField txtDireccionFotoContratoAsignacion;
-	public JTextField txtTiempoContratoAsignacion;
-	public JTextField txtTipoContratoAsignacion;
-	public JTextArea txtFuncionesAsignacion;
+	public static JTextField txtSueldoAsignacion;
+	public static JTextField txtHoraExtraAsignacion;
+	public static JTextField txtDiasAsignacion;
+	public static JTextField txtHorasAsignacion;
+	public static JTextField txtDireccionFotoContratoAsignacion;
+	public static JTextField txtTiempoContratoAsignacion;
+	public static JTextField txtTipoContratoAsignacion;
+	public static JTextArea txtFuncionesAsignacion;
 	public JButton btnAgregarCargo;
 	public JButton btnAgregarHorario;
 	public JButton btnAgregarContrato;
-	public JButton btnGuardarEmpleado;
 	public static JComboBox<String> cbxCargoAsignacion;
 	public static JComboBox<String> cbxHorarioAsignacion;
 	public static JComboBox<String> cbxContratoAsignacion;
@@ -65,6 +75,8 @@ public class registro_asignaciones_empleados extends JFrame {
 	public int contador3 = 0;
 	public static String ruta;
 	public static ImageIcon imagen;
+	public static JFormattedTextField txtBusqueda;
+	public static String identidad = null;
 
 	/**
 	 * Launch the application.
@@ -91,7 +103,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		setResizable(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 639, 391);
+		setBounds(100, 100, 639, 409);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,7 +113,7 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(26, 37, 579, 304);
+		panel.setBounds(26, 37, 579, 332);
 		contentPane.add(panel);
 
 		JLabel label = new JLabel("Sueldo.");
@@ -156,14 +168,14 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		JLabel label_4 = new JLabel("Horario :");
 		label_4.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_4.setBounds(39, 150, 76, 17);
+		label_4.setBounds(37, 146, 76, 17);
 		panel.add(label_4);
 
 		cbxHorarioAsignacion = new JComboBox<String>();
 		cbxHorarioAsignacion.setForeground(Color.BLACK);
 		cbxHorarioAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxHorarioAsignacion.setBackground(new Color(255, 255, 255));
-		cbxHorarioAsignacion.setBounds(109, 147, 128, 23);
+		cbxHorarioAsignacion.setBounds(107, 143, 128, 23);
 		panel.add(cbxHorarioAsignacion);
 		cbxHorarioAsignacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -201,14 +213,14 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		JLabel label_7 = new JLabel("Contrato :");
 		label_7.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_7.setBounds(39, 197, 76, 17);
+		label_7.setBounds(39, 196, 76, 17);
 		panel.add(label_7);
 
 		cbxContratoAsignacion = new JComboBox<String>();
 		cbxContratoAsignacion.setForeground(new Color(0, 0, 0));
 		cbxContratoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxContratoAsignacion.setBackground(new Color(255, 255, 255));
-		cbxContratoAsignacion.setBounds(109, 195, 128, 23);
+		cbxContratoAsignacion.setBounds(109, 194, 128, 23);
 		panel.add(cbxContratoAsignacion);
 		cbxContratoAsignacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -216,10 +228,10 @@ public class registro_asignaciones_empleados extends JFrame {
 			}
 		});
 
-		JLabel label_8 = new JLabel("Fotografia del Contrato.");
-		label_8.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_8.setBounds(147, 225, 146, 19);
-		panel.add(label_8);
+		JLabel lblImagen = new JLabel("Imagen.");
+		lblImagen.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblImagen.setBounds(294, 224, 83, 19);
+		panel.add(lblImagen);
 
 		txtDireccionFotoContratoAsignacion = new JTextField();
 		txtDireccionFotoContratoAsignacion.setForeground(new Color(0, 0, 0));
@@ -227,7 +239,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		txtDireccionFotoContratoAsignacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtDireccionFotoContratoAsignacion.setEditable(false);
 		txtDireccionFotoContratoAsignacion.setColumns(10);
-		txtDireccionFotoContratoAsignacion.setBounds(294, 224, 183, 20);
+		txtDireccionFotoContratoAsignacion.setBounds(294, 243, 189, 20);
 		panel.add(txtDireccionFotoContratoAsignacion);
 
 		JLabel label_9 = new JLabel("Tiempo");
@@ -256,7 +268,7 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		JLabel lblFuncionesDelEmpleado = new JLabel("Funciones del empleado.");
 		lblFuncionesDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFuncionesDelEmpleado.setBounds(141, 86, 152, 25);
+		lblFuncionesDelEmpleado.setBounds(130, 86, 166, 25);
 		panel.add(lblFuncionesDelEmpleado);
 
 		JButton button = new JButton("Ver");
@@ -268,7 +280,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
 		button.setBackground(Color.WHITE);
-		button.setBounds(487, 225, 59, 21);
+		button.setBounds(487, 241, 59, 23);
 		panel.add(button);
 
 		txtTipoContratoAsignacion = new JTextField();
@@ -286,8 +298,8 @@ public class registro_asignaciones_empleados extends JFrame {
 		panel.add(label_11);
 
 		btnAgregarCargo = new JButton("+");
-		btnAgregarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		btnAgregarCargo.setBackground(new Color(0, 250, 154));
+		btnAgregarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		btnAgregarCargo.setBackground(new Color(50, 205, 50));
 		btnAgregarCargo.setBounds(240, 60, 46, 23);
 		panel.add(btnAgregarCargo);
 		btnAgregarCargo.addActionListener(new ActionListener() {
@@ -317,9 +329,9 @@ public class registro_asignaciones_empleados extends JFrame {
 		});
 
 		btnAgregarHorario = new JButton("+");
-		btnAgregarHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		btnAgregarHorario.setBackground(new Color(0, 250, 154));
-		btnAgregarHorario.setBounds(240, 147, 46, 23);
+		btnAgregarHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		btnAgregarHorario.setBackground(new Color(50, 205, 50));
+		btnAgregarHorario.setBounds(238, 143, 46, 23);
 		panel.add(btnAgregarHorario);
 		btnAgregarHorario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -347,9 +359,9 @@ public class registro_asignaciones_empleados extends JFrame {
 		});
 
 		btnAgregarContrato = new JButton("+");
-		btnAgregarContrato.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		btnAgregarContrato.setBackground(new Color(0, 250, 154));
-		btnAgregarContrato.setBounds(240, 195, 46, 23);
+		btnAgregarContrato.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		btnAgregarContrato.setBackground(new Color(50, 205, 50));
+		btnAgregarContrato.setBounds(240, 194, 46, 23);
 		panel.add(btnAgregarContrato);
 		btnAgregarContrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -374,14 +386,89 @@ public class registro_asignaciones_empleados extends JFrame {
 			}
 		});
 
-		btnGuardarEmpleado = new JButton("Guardar");
-		btnGuardarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarEmpleado.setBackground(new Color(60, 179, 113));
-		btnGuardarEmpleado.setBounds(447, 255, 99, 23);
-		panel.add(btnGuardarEmpleado);
+		MaskFormatter formato = null;
+		try {
+			formato = new MaskFormatter("####-####-#####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtBusqueda = new JFormattedTextField(formato);
+		txtBusqueda.setBounds(39, 244, 158, 20);
+		panel.add(txtBusqueda);
+		txtBusqueda.setColumns(10);
+		txtBusqueda.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map2 = txtBusqueda.getInputMap(JComponent.WHEN_FOCUSED);
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtBusqueda.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
+
+		JLabel lblBuscarContratoPor = new JLabel("Buscar contrato por identidad :");
+		lblBuscarContratoPor.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblBuscarContratoPor.setBounds(39, 224, 198, 19);
+		panel.add(lblBuscarContratoPor);
+
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buscarContratoPorIdentidad();
+			}
+		});
+		btnBuscar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBuscar.setBackground(new Color(60, 179, 113));
+		btnBuscar.setBounds(201, 244, 83, 19);
+		panel.add(btnBuscar);
+
+		JButton btnGuardarAsignaciones = new JButton("Guardar Asignaciones");
+		btnGuardarAsignaciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtSueldoAsignacion.getText().isEmpty()
+						|| txtHoraExtraAsignacion.getText().isEmpty()
+						|| txtFuncionesAsignacion.getText().isEmpty()
+						|| txtDiasAsignacion.getText().isEmpty()
+						|| txtHorasAsignacion.getText().isEmpty()
+						|| txtTipoContratoAsignacion.getText().isEmpty()
+						|| txtTiempoContratoAsignacion.getText().isEmpty()
+						|| txtFuncionesAsignacion.getText().isEmpty()) 
+				{
+					JOptionPane.showMessageDialog(null, "Porfavor llene todos los campos para continuar.");
+				} else {
+					registro_empleados.lbl_nombre_cargo_asignacion.setText(cbxCargoAsignacion.getSelectedItem().toString());
+					registro_empleados.lbl_sueldo_cargo_asignacion.setText(txtSueldoAsignacion.getText().toString());
+					registro_empleados.lbl_horaextra_cargo_asignacion.setText(txtHoraExtraAsignacion.getText().toString());
+					registro_empleados.lbl_funciones_cargo_asignacion.setText(txtFuncionesAsignacion.getText().toString());
+					registro_empleados.lbl_tipo_horario_asignacion.setText(cbxHorarioAsignacion.getSelectedItem().toString());
+					registro_empleados.lbl_dias_horario_asignacion.setText(txtDiasAsignacion.getText().toString());
+					registro_empleados.lbl_horas_horario_asignacion.setText(txtHorasAsignacion.getText().toString());
+					registro_empleados.lbl_contrato_empleado_asignacion.setText(cbxContratoAsignacion.getSelectedItem().toString());
+					registro_empleados.lbl_tipo_empleado_asignacion.setText(txtTipoContratoAsignacion.getText().toString());
+					registro_empleados.lbl_tiempo_empleado_asignacion.setText(txtTiempoContratoAsignacion.getText().toString());
+					registro_empleados.lbl_foto_empleado_asignacion.setText(txtDireccionFotoContratoAsignacion.getText().toString());
+					dispose();
+					JOptionPane.showMessageDialog(null, "Exito! Empleado asignado correctamente");
+				}
+			}
+		});
+		btnGuardarAsignaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarAsignaciones.setBackground(new Color(152, 251, 152));
+		btnGuardarAsignaciones.setBounds(201, 286, 182, 23);
+		panel.add(btnGuardarAsignaciones);
 
 		JLabel label_12 = new JLabel("");
-		label_12.setBounds(0, 0, 579, 304);
+		label_12.setBounds(0, 0, 579, 332);
 		panel.add(label_12);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(label_12.getWidth(), label_12.getHeight(), Image.SCALE_DEFAULT));
@@ -391,9 +478,9 @@ public class registro_asignaciones_empleados extends JFrame {
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblRegistroYMantenimiento.setBounds(26, 11, 579, 23);
 		contentPane.add(lblRegistroYMantenimiento);
-	
+
 	}
-		
+
 	public void verFotoEmpleado() {
 		if (txtDireccionFotoContratoAsignacion.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -407,12 +494,12 @@ public class registro_asignaciones_empleados extends JFrame {
 			visor_imagen.lblImagen.setIcon(imagen);
 		}
 	}
-	
+
 	public void cargarDatosCargoAsignado() {
 		try {
 			conexion objCon = new conexion();
 			Connection conn = objCon.getConexion();
-			if (contador1 > 0) {	
+			if (contador1 > 0) {
 				PreparedStatement stmtr = conn.prepareStatement(
 						"SELECT sueldo_cargo, valor_hora_extra_cargo, funciones_cargo FROM cargos where nombre_cargo = '"
 								+ cbxCargoAsignacion.getSelectedItem().toString() + "'");
@@ -423,7 +510,7 @@ public class registro_asignaciones_empleados extends JFrame {
 				txtFuncionesAsignacion.setText(rsr.getString("funciones_cargo"));
 				;
 				stmtr.close();
-				rsr.close();	
+				rsr.close();
 			}
 			conn.close();
 		} catch (Exception e) {
@@ -436,8 +523,8 @@ public class registro_asignaciones_empleados extends JFrame {
 		Connection conn = objCon.getConexion();
 		try {
 			if (contador2 > 0) {
-				PreparedStatement stmtr = conn.prepareStatement(
-						"SELECT dias_horario, horas_horario FROM horarios where tipo_horario = '"
+				PreparedStatement stmtr = conn
+						.prepareStatement("SELECT dias_horario, horas_horario FROM horarios where tipo_horario = '"
 								+ cbxHorarioAsignacion.getSelectedItem() + "'");
 				ResultSet rsr = stmtr.executeQuery();
 				rsr.next();
@@ -476,4 +563,33 @@ public class registro_asignaciones_empleados extends JFrame {
 			e2.printStackTrace();
 		}
 	}
+
+	public void buscarContratoPorIdentidad() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT identidad_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
+							+ txtBusqueda.getText().toString() + "'");
+			identidad = (rs.getString("identidad_contrato_empleado"));
+			rs.next();
+
+			if (txtBusqueda.getText().toString().equals(identidad)) {
+				cbxContratoAsignacion.setSelectedItem(identidad);
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"No se encontro ningun contrato, con esta identidad : " + identidad);
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+	
 }

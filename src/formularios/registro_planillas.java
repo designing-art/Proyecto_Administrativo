@@ -346,7 +346,7 @@ public class registro_planillas extends JFrame {
 					double b = 0;
 					double c = 0;
 					a = Double.valueOf(txtCantidadPlanilla.getText());
-					b = Double.valueOf(txtCantidadPlanilla.getText());
+					b = Double.valueOf(txtTotalBonificacionesPlanilla.getText());
 					c = a + b;
 					txtSueldoNetoPlanilla.setText(String.valueOf(c));
 				}
@@ -366,7 +366,7 @@ public class registro_planillas extends JFrame {
 					double c = 0;
 					a = Double.valueOf(txtSueldoNetoPlanilla.getText());
 					b = Double.valueOf(txtTotalDeduccionesPlanilla.getText());
-					c = a + b;
+					c = a - b;
 					txtTotalPagoEmpleado.setText(String.valueOf(c));
 				}
 
@@ -845,10 +845,10 @@ public class registro_planillas extends JFrame {
 		Connection conn = objCon.getConexion();
 		try {
 			PreparedStatement stmtr = conn
-					.prepareStatement("SELECT * FROM bonificaciones ORDER BY id_bonificacion DESC");
+					.prepareStatement("SELECT * FROM planillas ORDER BY id_planilla DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
-				ultimoValor = rsr.getString("id_bonificacion");
+				ultimoValor = rsr.getString("id_planilla");
 				valor = Integer.parseInt(ultimoValor);
 				valor = valor + 1;
 				id = String.valueOf(valor);
