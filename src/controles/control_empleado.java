@@ -180,11 +180,6 @@ public class control_empleado implements ActionListener {
 				JOptionPane.showMessageDialog(null,
 						"Porfavor llene los campos para actualizar los datos del empleado!");
 			} else {
-				if (formularioEmpleado.txtIdentidadEmpleado.getText().toString().equals(identidad)) 
-				{
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
-							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
-				} else {
 				claseEmpleado
 						.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
 				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
@@ -253,7 +248,7 @@ public class control_empleado implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Error al Modificar");
 					limpiar();
 				}
-				}
+				
 
 			}
 		}

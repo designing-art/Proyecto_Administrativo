@@ -26,6 +26,9 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.util.Timer;
 import java.util.logging.Level;
@@ -40,12 +43,14 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import clases.empresa;
+import conexion.conexion;
 import consultas.consultas_empresa;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
+import java.awt.event.KeyAdapter;
 
 public class registro_empresa extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -65,7 +70,10 @@ public class registro_empresa extends JFrame {
 	public static String ruta;
 	public static ImageIcon imagen;
 	public static ImageIcon imagenLogo;
+	public static ImageIcon imagenLogo_aplicado;
 	public static ImageIcon imagenFoto;
+	public static String nombre = null;
+	public static String ruta_logo = null;
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
@@ -78,19 +86,20 @@ public class registro_empresa extends JFrame {
 	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/material/logoy.jpg"));
 	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/material/logow.jpg"));
 	public JTextField txtCodigoEmpresa;
-	public JTextField txtNombreEmpresa;
-	public JTextField txtDireccionLogoEmpresa;
+	public static JTextField txtNombreEmpresa;
+	public static JTextField txtDireccionLogoEmpresa;
 	public JFormattedTextField txtTelefonoEmpresa;
 	public JFormattedTextField txtRTNempresa;
 	public JTextField txtCorreoEmpresa;
 	public JTextField txtDireccionFotoEmpresa;
 	public JTextArea txtDireccionEmpresa;
 	public JTextArea txtCuentaEmpresa;
+	public static JTextField txtNombre_Empresa;
 
 	public registro_empresa() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 808, 580);
+		setBounds(100, 100, 808, 561);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,23 +110,32 @@ public class registro_empresa extends JFrame {
 		JButton btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
-		btnAtras.setBounds(666, 7, 102, 23);
+		btnAtras.setBounds(666, 25, 102, 27);
 		contentPane.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
+				ruta = txtDireccionLogoEmpresa.getText().toString();
+				nombre = txtNombreEmpresa.getText().toString(); 
+				imagen = new ImageIcon(ruta);
+				imagenLogo_aplicado = new ImageIcon(imagen.getImage().getScaledInstance(principal.lbl_logo_empresa_principal.getWidth(),
+						principal.lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				principal.lbl_logo_empresa_principal.setIcon(imagenLogo_aplicado);
+				principal.lbl_nombre_empresa_principal.setText(nombre);
 				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				
+				
 			}
 		});
 
-		JLabel lblRegistrarCargo = new JLabel("EMPRESA CANAL 40 COFFEE TV CHANNEL");
+		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO EMPRESA");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistrarCargo.setBounds(28, 0, 431, 33);
+		lblRegistrarCargo.setBounds(28, 0, 480, 27);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
@@ -149,7 +167,7 @@ public class registro_empresa extends JFrame {
 		});
 		btnActualizarDatos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatos.setBackground(new Color(60, 179, 113));
-		btnActualizarDatos.setBounds(518, 8, 138, 23);
+		btnActualizarDatos.setBounds(518, 26, 138, 26);
 		contentPane.add(btnActualizarDatos);
 
 		JPanel panelRegistro = new JPanel();
@@ -165,7 +183,7 @@ public class registro_empresa extends JFrame {
 		panel.setLayout(null);
 
 		btnGuardarEmpresa = new JButton("Guardar");
-		btnGuardarEmpresa.setBounds(27, 375, 99, 23);
+		btnGuardarEmpresa.setBounds(200, 375, 99, 23);
 		panel.add(btnGuardarEmpresa);
 		btnGuardarEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardarEmpresa.setBackground(new Color(60, 179, 113));
@@ -291,21 +309,30 @@ public class registro_empresa extends JFrame {
 		});
 		btnCancelar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnCancelar.setBackground(new Color(60, 179, 113));
-		btnCancelar.setBounds(200, 341, 99, 23);
+		btnCancelar.setBounds(27, 375, 99, 23);
 		panel.add(btnCancelar);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(38, 34, 326, 404);
+		panel_1.setBounds(31, 34, 332, 404);
 		panelRegistro.add(panel_1);
 		panel_1.setLayout(null);
 
 		JLabel lblNombre = new JLabel("Nombre :");
-		lblNombre.setBounds(10, 36, 83, 14);
+		lblNombre.setBounds(29, 36, 83, 14);
 		panel_1.add(lblNombre);
 		lblNombre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtNombreEmpresa = new JTextField();
+		txtNombreEmpresa.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				String Caracteres = txtNombreEmpresa.getText(); 
+		        if(Caracteres.length()>=50){ 
+		            evt.consume(); 
+		        } 
+			}
+		});
 		txtNombreEmpresa.setBounds(93, 33, 210, 20);
 		panel_1.add(txtNombreEmpresa);
 		txtNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -315,13 +342,13 @@ public class registro_empresa extends JFrame {
 		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblDatosDeLa = new JLabel("Datos de la empresa :");
-		lblDatosDeLa.setBounds(10, 0, 175, 31);
+		lblDatosDeLa.setBounds(29, 0, 175, 31);
 		panel_1.add(lblDatosDeLa);
 		lblDatosDeLa.setForeground(Color.BLACK);
 		lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel lblDireccion = new JLabel("Direccion :");
-		lblDireccion.setBounds(10, 64, 83, 14);
+		lblDireccion.setBounds(29, 64, 83, 14);
 		panel_1.add(lblDireccion);
 		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
@@ -333,9 +360,18 @@ public class registro_empresa extends JFrame {
 		scrollPane.setViewportView(txtDireccionEmpresa);
 		InputMap map11 = txtDireccionEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map11.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDireccionEmpresa.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				String Caracteres = txtDireccionEmpresa.getText(); 
+		        if(Caracteres.length()>=50){ 
+		            evt.consume(); 
+		        } 
+			}
+		});
 
 		JLabel lblTelefono = new JLabel("Telefono :");
-		lblTelefono.setBounds(10, 119, 83, 14);
+		lblTelefono.setBounds(29, 119, 83, 14);
 		panel_1.add(lblTelefono);
 		lblTelefono.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
@@ -371,7 +407,7 @@ public class registro_empresa extends JFrame {
 		});
 
 		JLabel lblRtn = new JLabel("RTN :");
-		lblRtn.setBounds(10, 147, 83, 14);
+		lblRtn.setBounds(29, 147, 83, 14);
 		panel_1.add(lblRtn);
 		lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
@@ -416,17 +452,17 @@ public class registro_empresa extends JFrame {
 		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblCorreo = new JLabel("Correo :");
-		lblCorreo.setBounds(10, 175, 83, 14);
+		lblCorreo.setBounds(29, 175, 83, 14);
 		panel_1.add(lblCorreo);
 		lblCorreo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblCuentaBancaria = new JLabel("Cuentas :");
-		lblCuentaBancaria.setBounds(10, 203, 83, 14);
+		JLabel lblCuentaBancaria = new JLabel("Cuentas Bancarias :");
+		lblCuentaBancaria.setBounds(29, 203, 145, 14);
 		panel_1.add(lblCuentaBancaria);
 		lblCuentaBancaria.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(93, 203, 210, 106);
+		scrollPane_1.setBounds(29, 246, 274, 78);
 		panel_1.add(scrollPane_1);
 
 		txtCuentaEmpresa = new JTextArea();
@@ -435,33 +471,33 @@ public class registro_empresa extends JFrame {
 		map15.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JButton btnFacebook = new JButton("");
-		btnFacebook.setBounds(93, 320, 62, 58);
+		btnFacebook.setBounds(92, 335, 62, 58);
 		panel_1.add(btnFacebook);
 		final ImageIcon logo = new ImageIcon(logofacebook.getImage().getScaledInstance(btnFacebook.getWidth(),
 				btnFacebook.getHeight(), Image.SCALE_DEFAULT));
 		btnFacebook.setIcon(logo);
 
 		JLabel lblSociales = new JLabel("\r\nSociales.");
-		lblSociales.setBounds(10, 336, 125, 14);
+		lblSociales.setBounds(29, 351, 125, 14);
 		panel_1.add(lblSociales);
 		lblSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JButton btnYoutube = new JButton("");
-		btnYoutube.setBounds(169, 320, 62, 58);
+		btnYoutube.setBounds(168, 335, 62, 58);
 		panel_1.add(btnYoutube);
 		final ImageIcon logo1 = new ImageIcon(logoyoutube.getImage().getScaledInstance(btnYoutube.getWidth(),
 				btnYoutube.getHeight(), Image.SCALE_DEFAULT));
 		btnYoutube.setIcon(logo1);
 
 		JButton btnWhatsapp = new JButton("");
-		btnWhatsapp.setBounds(241, 320, 62, 58);
+		btnWhatsapp.setBounds(240, 335, 62, 58);
 		panel_1.add(btnWhatsapp);
 		final ImageIcon logo2 = new ImageIcon(logowhatsapp.getImage().getScaledInstance(btnWhatsapp.getWidth(),
 				btnWhatsapp.getHeight(), Image.SCALE_DEFAULT));
 		btnWhatsapp.setIcon(logo2);
 
 		JLabel lblRedesSociales = new JLabel("Redes");
-		lblRedesSociales.setBounds(10, 320, 125, 14);
+		lblRedesSociales.setBounds(29, 335, 125, 14);
 		panel_1.add(lblRedesSociales);
 		lblRedesSociales.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
@@ -470,8 +506,15 @@ public class registro_empresa extends JFrame {
 		txtCodigoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigoEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtCodigoEmpresa.setEditable(false);
+		txtCodigoEmpresa.setVisible(false);
 		txtCodigoEmpresa.setColumns(10);
 		panel_1.add(txtCodigoEmpresa);
+		
+		JLabel label = new JLabel("Ejemplo: Banco Atlantida: 100220066086");
+		label.setForeground(Color.GRAY);
+		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label.setBounds(29, 221, 293, 14);
+		panel_1.add(label);
 		InputMap map16 = txtCodigoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map16.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
@@ -481,6 +524,16 @@ public class registro_empresa extends JFrame {
 		final ImageIcon logo3 = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo3);
+		
+		txtNombre_Empresa = new JTextField();
+		txtNombre_Empresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		txtNombre_Empresa.setBackground(Color.WHITE);
+		txtNombre_Empresa.setForeground(new Color(107, 142, 35));
+		txtNombre_Empresa.setEditable(false);
+		txtNombre_Empresa.setBounds(28, 25, 480, 27);
+		contentPane.add(txtNombre_Empresa);
+		txtNombre_Empresa.setColumns(10);
+		txtNombre_Empresa.setHorizontalAlignment(SwingConstants.CENTER);
 
 		btnWhatsapp.addActionListener(new ActionListener() {
 			@Override
@@ -642,7 +695,9 @@ public class registro_empresa extends JFrame {
 		pista = new PlaceHolder(txtNombreEmpresa, "Ingrese el nombre de la empresa.");
 		pista = new PlaceHolder(txtDireccionEmpresa, "Ingrese la direccion de la empresa.");
 		pista = new PlaceHolder(txtCorreoEmpresa, "Ingrese el correo del la empresa.");
-		pista = new PlaceHolder(txtCuentaEmpresa, "Escriba la o las cuentas bancarias.");
+		pista = new PlaceHolder(txtCuentaEmpresa, "Escriba la o las cuentas bancarias.\n"
+				+ "Ejemplo: Banco Atlantida: 100220066086");
 	}
 
+	
 }
