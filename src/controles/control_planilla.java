@@ -232,10 +232,6 @@ public class control_planilla implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 
 			} else {
-				if (formulario.txtIdentidadPlanilla.getText().toString().equals(identidad)) {
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
-							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
-				} else {
 					clase.setId_planilla(Integer.parseInt(formulario.txtCodigo.getText()));
 					clase.setTipo_planilla(formulario.cbxTipoPlanilla.getSelectedItem().toString());
 					clase.setFecha_planilla(formulario.editor.getText());
@@ -273,7 +269,6 @@ public class control_planilla implements ActionListener {
 					}
 
 				}
-			}
 		}
 
 		if (e.getSource() == formulario.btnBorrarPlanilla) {
