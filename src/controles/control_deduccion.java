@@ -69,7 +69,6 @@ public class control_deduccion implements ActionListener {
 
 				if (consulta.registrar(clase)) {
 					JOptionPane.showMessageDialog(null, "Deduccion registrada!");
-					limpiar();
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();

@@ -72,7 +72,7 @@ public class registro_deducciones extends JFrame {
 	public JLabel label_5;
 	public JTextField txtIdentidadDeduccion;
 	public JLabel lblBuscarEmpleadoPor;
-	public JFormattedTextField txtIdentidadEmpleadoDeduccion;
+	public static JFormattedTextField txtIdentidadEmpleadoDeduccion;
 	public JPanel panel;
 	public JLabel label_6;
 	public JLabel lblTipo;
@@ -82,7 +82,7 @@ public class registro_deducciones extends JFrame {
 	public JLabel lblAgregarDeduccion;
 	public JPanel panel_2;
 	public JLabel label_8;
-	public JTextField txtBusquedaDeduccion;
+	public static JTextField txtBusquedaDeduccion;
 	public JTextField txtTotalDeducciones;
 	public JLabel lblFotoDeduccion;
 	public JButton btnAtras;
@@ -124,6 +124,7 @@ public class registro_deducciones extends JFrame {
 	private JButton button;
 
 	public registro_deducciones() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 550);
 		contentPane = new JPanel();
@@ -247,6 +248,13 @@ public class registro_deducciones extends JFrame {
 					JOptionPane.showMessageDialog(null, "No hay bonificaciones para este empleado.");
 				} else {
 					registro_planillas.txtTotalDeduccionesPlanilla.setText(txtTotalDeducciones.getText());
+					double a = 0;
+					double b = 0;
+					double c = 0;
+					a = Double.valueOf(registro_planillas.txtSueldoNetoPlanilla.getText());
+					b = Double.valueOf(registro_planillas.txtTotalDeduccionesPlanilla.getText());
+					c = a - b;
+					registro_planillas.txtTotalPagoEmpleado.setText(String.valueOf(c));
 					JOptionPane.showMessageDialog(null, "Deducciones agregadas a la planilla.");
 					dispose();
 

@@ -6,7 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -22,6 +26,7 @@ import clases.empleado;
 import clases.empresa;
 import clases.horario;
 import clases.planilla;
+import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
 import consultas.consultas_contrato_empleado;
@@ -40,6 +45,9 @@ import controles.control_horario;
 import controles.control_planilla;
 
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,12 +72,16 @@ public class ventana_principal extends JFrame {
 	public JButton registroHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
+	public static JLabel lbl_logo_empresa_principal;
+	public static JLabel lbl_nombre_empresa_principal;
+	public static String nombre = null;
+	public static String ruta_logo = null;
 	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 
 	public empresa clase;
 	public consultas_empresa consulta;
 	public registro_empresa formulario;
-
+	
 	public ventana_principal() {
 		setType(Type.POPUP);
 		setResizable(false);
@@ -82,21 +94,22 @@ public class ventana_principal extends JFrame {
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
-		JLabel lblCanalCoffee = new JLabel("CANAL 40 COFFEE TV CHANNEL");
-		lblCanalCoffee.setForeground(Color.BLACK);
-		lblCanalCoffee.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCanalCoffee.setBounds(420, 219, 252, 19);
-		lblCanalCoffee.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		contentPane.add(lblCanalCoffee);
+		lbl_nombre_empresa_principal = new JLabel();
+		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
+		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_nombre_empresa_principal.setBounds(420, 219, 252, 19);
+		lbl_nombre_empresa_principal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		contentPane.add(lbl_nombre_empresa_principal);
+		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
 
-		JLabel lblEmpresa = new JLabel();
-		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmpresa.setBounds(420, 240, 252, 177);
-		contentPane.add(lblEmpresa);
-		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo.png"));
+		lbl_logo_empresa_principal = new JLabel();
+		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_logo_empresa_principal.setBounds(420, 240, 252, 177);
+		contentPane.add(lbl_logo_empresa_principal);
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo_estandar.png"));
 		final ImageIcon icono = new ImageIcon(
-				logo.getImage().getScaledInstance(lblEmpresa.getWidth(), lblEmpresa.getHeight(), Image.SCALE_DEFAULT));
-		lblEmpresa.setIcon(icono);
+				logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+		lbl_logo_empresa_principal.setIcon(icono);
 
 		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
 		btnInformacionEmpresa.setBackground(Color.WHITE);
@@ -115,6 +128,8 @@ public class ventana_principal extends JFrame {
 				formulario.setLocationRelativeTo(null);
 				formulario.mostrarEmpresa();
 				formulario.pistas();
+				nombre = lbl_nombre_empresa_principal.getText().toString(); 
+				formulario.txtNombre_Empresa.setText(nombre);
 				dispose();
 			}
 		});
@@ -649,6 +664,44 @@ public class ventana_principal extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
 		date = cal.getTime();
 		return df.format(date);
+	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT nombre_empresa, direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				nombre = (rs.getString("nombre_empresa"));
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				lbl_nombre_empresa_principal.setText(nombre);
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				lbl_logo_empresa_principal.setIcon(icono);
+				JOptionPane.showMessageDialog(null,
+						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
+						+ "Empresa: " + nombre);
+			}else {
+				JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
+						+ "         Antes de comensar\n"
+						+ "         podria hacer algunos ajustes.\n"
+						+ "         Ingrese a:\n"
+						+ "   ¿MAS INFORMACION DE LA EMPRESA?\n"
+						+ "          y personalice su empresa!\n"
+						+ "            ******* Buen Dia! *******");		
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 }

@@ -66,7 +66,6 @@ public class control_bonificacion implements ActionListener {
 
 				if (consulta.registrar(clase)) {
 					JOptionPane.showMessageDialog(null, "Bonificacion registrada!");
-					limpiar();
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();

@@ -1091,8 +1091,8 @@ public class registro_empleados extends JFrame {
 		DefaultTableCellRenderer tcr;
 		tcr = new DefaultTableCellRenderer();
 		tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+		tablaEmpleados.getColumnModel().getColumn(17).setCellRenderer(tcr);
 		tablaEmpleados.getColumnModel().getColumn(18).setCellRenderer(tcr);
-		tablaEmpleados.getColumnModel().getColumn(19).setCellRenderer(tcr);
 
 		for (int c = 0; c < tablaEmpleados.getColumnCount(); c++) {
 			Class<?> col_class = tablaEmpleados.getColumnClass(c);
