@@ -123,6 +123,7 @@ public class registro_contratos_empleados extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 

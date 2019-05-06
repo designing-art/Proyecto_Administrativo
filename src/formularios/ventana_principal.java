@@ -680,9 +680,6 @@ public class ventana_principal extends JFrame {
 				final ImageIcon icono = new ImageIcon(
 						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
 				lbl_logo_empresa_principal.setIcon(icono);
-				JOptionPane.showMessageDialog(null,
-						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
-						+ "Empresa: " + nombre);
 			}else {
 				JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
 						+ "         Antes de comensar\n"

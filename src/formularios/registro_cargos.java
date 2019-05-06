@@ -110,6 +110,7 @@ public class registro_cargos extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 

@@ -62,6 +62,15 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
+					
+					|| formularioAsigaciones.txtSueldoAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtHoraExtraAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtFuncionesAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtDiasAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtHorasAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtTipoContratoAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtTiempoContratoAsignacion.getText().isEmpty()
+					|| formularioAsigaciones.txtDireccionFotoContratoAsignacion.getText().isEmpty()
 
 					// validaciones para datos con mascara y pista.
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()

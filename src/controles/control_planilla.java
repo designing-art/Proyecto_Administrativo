@@ -25,6 +25,7 @@ public class control_planilla implements ActionListener {
 	public planilla clase;
 	public consultas_planilla consulta;
 	public registro_planillas formulario;
+	public reg formulario;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 	public static String identidad = null;
 

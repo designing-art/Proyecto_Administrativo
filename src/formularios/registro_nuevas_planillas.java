@@ -73,19 +73,18 @@ import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
 
-public class historial_planillas extends JFrame {
+public class registro_nuevas_planillas extends JFrame {
 
 	public JPanel contentPane;
 	public JPanel panel_2;
 	public JLabel label_8;
 	public JTextField txtBusquedaPlanilla;
-	public JTextField txtTotalPlanilla;
 	public JButton button;
 	public PlaceHolder pista;
 
 	public JButton btnBorrarPlanilla;
+	public JButton btnVerPlanilla;
 	public JButton btnActualizarDatosPlanilla;
-	public JLabel lblTotalDeducciones;
 	public JTextFieldDateEditor editor;
 
 	public JScrollPane barraTablaPlanilla;
@@ -99,7 +98,6 @@ public class historial_planillas extends JFrame {
 
 	public static String bonificaciones = null;
 	public static String deducciones = null;
-	public JLabel label;
 	public JLabel lblPlanillaCanal;
 	public JPanel panel_3;
 	public JLabel lbl_hora;
@@ -107,10 +105,9 @@ public class historial_planillas extends JFrame {
 	public JLabel label_17;
 	public static String hora_fecha_reporte;
 
-	public historial_planillas() {
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 610, 646);
+	public registro_nuevas_planillas() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 900, 671);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,13 +119,13 @@ public class historial_planillas extends JFrame {
 		final ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 
 		panel_2 = new JPanel();
-		panel_2.setBounds(10, 33, 584, 575);
+		panel_2.setBounds(444, 46, 430, 575);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
-		JLabel lblBuscarDeduccion = new JLabel("Buscar planilla :");
+		JLabel lblBuscarDeduccion = new JLabel("Buscar :");
 		lblBuscarDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblBuscarDeduccion.setBounds(37, 104, 136, 22);
+		lblBuscarDeduccion.setBounds(28, 112, 136, 22);
 		panel_2.add(lblBuscarDeduccion);
 
 		txtBusquedaPlanilla = new JTextField();
@@ -137,7 +134,7 @@ public class historial_planillas extends JFrame {
 		map41.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaPlanilla.setColumns(10);
-		txtBusquedaPlanilla.setBounds(145, 104, 260, 23);
+		txtBusquedaPlanilla.setBounds(86, 114, 315, 18);
 		panel_2.add(txtBusquedaPlanilla);
 		txtBusquedaPlanilla.addKeyListener(new KeyListener() {
 			@Override
@@ -160,109 +157,90 @@ public class historial_planillas extends JFrame {
 			}
 		});
 
-		JLabel label_10 = new JLabel();
-		label_10.setBounds(494, 61, 49, 44);
-		panel_2.add(label_10);
-		final ImageIcon logo2 = new ImageIcon(
-				icono2.getImage().getScaledInstance(label_10.getWidth(), label_10.getHeight(), Image.SCALE_DEFAULT));
-		label_10.setIcon(logo2);
-
-		JLabel lblDeduccionesRegistradas = new JLabel("Empleados agregados a la planilla.");
-		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDeduccionesRegistradas.setBounds(37, 75, 283, 29);
-		panel_2.add(lblDeduccionesRegistradas);
-
 		btnBorrarPlanilla = new JButton("Borrar");
 		btnBorrarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarPlanilla.setBackground(new Color(220, 20, 60));
-		btnBorrarPlanilla.setBounds(37, 513, 99, 23);
+		btnBorrarPlanilla.setBounds(28, 513, 99, 23);
 		panel_2.add(btnBorrarPlanilla);
 
-		btnActualizarDatosPlanilla = new JButton("Actualizar");
+		btnVerPlanilla = new JButton("Ver detalles");
+		btnVerPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnVerPlanilla.setBackground(new Color(0, 206, 209));
+		btnVerPlanilla.setBounds(147, 513, 108, 23);
+		panel_2.add(btnVerPlanilla);
+
+		btnActualizarDatosPlanilla = new JButton("Actualizar Datos");
 		btnActualizarDatosPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosPlanilla.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosPlanilla.setBounds(444, 513, 99, 23);
+		btnActualizarDatosPlanilla.setBounds(265, 514, 137, 23);
 		panel_2.add(btnActualizarDatosPlanilla);
 
 		barraTablaPlanilla = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		barraTablaPlanilla.setBounds(38, 137, 505, 334);
+		barraTablaPlanilla.setBounds(28, 137, 376, 365);
 		panel_2.add(barraTablaPlanilla);
 
-		lblTotalDeducciones = new JLabel("Total Pago :");
-		lblTotalDeducciones.setBounds(37, 480, 87, 22);
-		panel_2.add(lblTotalDeducciones);
-		lblTotalDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-		txtTotalPlanilla = new JTextField();
-		txtTotalPlanilla.setBounds(156, 480, 164, 20);
-		panel_2.add(txtTotalPlanilla);
-		txtTotalPlanilla.setEditable(false);
-		txtTotalPlanilla.setColumns(10);
-		txtTotalPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
-
-		JButton btnCalcularPlanilla = new JButton("Calcular");
-		btnCalcularPlanilla.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				totalizar();
-			}
-		});
-		btnCalcularPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		btnCalcularPlanilla.setBounds(330, 480, 82, 21);
-		panel_2.add(btnCalcularPlanilla);
-		btnCalcularPlanilla.setBackground(new Color(60, 179, 113));
-
-		label = new JLabel("L.");
-		label.setBounds(134, 482, 28, 18);
-		panel_2.add(label);
-		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-		lblPlanillaCanal = new JLabel("Historial de planillas");
+		lblPlanillaCanal = new JLabel("Historial Planillas");
+		lblPlanillaCanal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlanillaCanal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lblPlanillaCanal.setBounds(39, 54, 188, 19);
+		lblPlanillaCanal.setBounds(28, 50, 227, 22);
 		panel_2.add(lblPlanillaCanal);
 
 		panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(355, 83, 129, 18);
+		panel_3.setBounds(283, 79, 116, 22);
 		panel_2.add(panel_3);
+
+		lbl_hora = new JLabel();
+		lbl_hora.setBounds(0, 0, 116, 22);
+		panel_3.add(lbl_hora);
+		lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_hora.setBackground(SystemColor.menu);
 
 		panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_4.setBackground(Color.WHITE);
-		panel_4.setBounds(224, 49, 260, 24);
+		panel_4.setBounds(28, 79, 253, 22);
 		panel_2.add(panel_4);
 
 		label_17 = new JLabel();
-		label_17.setBounds(10, 0, 253, 35);
+		label_17.setBounds(0, 0, 238, 22);
 		panel_4.add(label_17);
 		label_17.setText("Dia jueves 25 de abril del 2019");
 		label_17.setHorizontalAlignment(SwingConstants.CENTER);
 		label_17.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_17.setBackground(Color.WHITE);
 
+		button_3 = new JButton("Imprimir Reporte");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
+				utilJTablePrint(tablaPlanilla, "Canal 40 (COFFEE TV CHANNEL)",
+						"Reporte de la Planilla.____. " + hora_fecha_reporte, true);
+			}
+		});
+		button_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button_3.setBackground(new Color(60, 179, 113));
+		button_3.setBounds(265, 52, 137, 21);
+		panel_2.add(button_3);
+
 		label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setBounds(0, 0, 584, 575);
+		label_8.setBounds(0, 0, 430, 575);
 		panel_2.add(label_8);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
 		label_8.setIcon(logo);
 
-		lbl_hora = new JLabel();
-		lbl_hora.setBounds(372, 49, 123, 22);
-		panel_2.add(lbl_hora);
-		lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lbl_hora.setBackground(SystemColor.menu);
-
-		JLabel lblRegistroYMantenimiento = new JLabel("HISTORIAL DE PLANILLAS REGISTRADAS");
+		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE HISTORIAL DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistroYMantenimiento.setBounds(10, 1, 551, 39);
+		lblRegistroYMantenimiento.setBounds(10, 1, 698, 39);
 		contentPane.add(lblRegistroYMantenimiento);
 
 		MaskFormatter formato = null;
@@ -271,7 +249,7 @@ public class historial_planillas extends JFrame {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		
+		map42.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		editor.setEditable(false);
 		editor.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -285,12 +263,36 @@ public class historial_planillas extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(255, 127, 80));
-		button.setBounds(492, 1, 102, 26);
+		button.setBounds(772, 12, 102, 23);
 		contentPane.add(button);
+				
+						JPanel panel_1 = new JPanel();
+						panel_1.setBounds(10, 46, 424, 575);
+						contentPane.add(panel_1);
+						panel_1.setLayout(null);
+																																																																																																								
+																																																																																																										JLabel label_7 = new JLabel("");
+																																																																																																										label_7.setBounds(0, 0, 424, 575);
+																																																																																																										panel_1.add(label_7);
+																																																																																																										final ImageIcon logo21 = new ImageIcon(
+																																																																																																												icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
+																																																																																																										label_7.setIcon(logo21);
+	}
+
+	public void establecerFechaRegistro() {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			Date date = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			dateFechaPlanilla.setDate(date);
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	public void construirTabla() {
@@ -321,17 +323,67 @@ public class historial_planillas extends JFrame {
 		trsfiltro.setRowFilter(RowFilter.regexFilter(txtBusquedaPlanilla.getText(), 0, 1, 2, 3, 4));
 	}
 
-	public void totalizar() {
-		double t = 0;
-		double p = 0;
-		if (tablaPlanilla.getRowCount() > 0) {
-			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
-				p = Double.parseDouble(tablaPlanilla.getValueAt(i, 11).toString());
-				t += p;
+	public void pistas() {
+		pista = new PlaceHolder(txtBusquedaPlanilla, "Escriba para buscar.");
+		pista = new PlaceHolder(txtNombresPlanilla, "Nombres del empleado.");
+		pista = new PlaceHolder(txtApellidosPlanilla, "Apellidos del empleado.");
+		pista = new PlaceHolder(txtIdentidadEmpleadoPlanilla, "Escriba la identidad.");
+		pista = new PlaceHolder(txtIdentidadPlanilla, "Identidad del empleado");
+	}
+
+	public void obtenerUltimoId() {
+		String ultimoValor = null;
+		int valor;
+		String id = null;
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM planillas ORDER BY id_planilla DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				ultimoValor = rsr.getString("id_planilla");
+				valor = Integer.parseInt(ultimoValor);
+				valor = valor + 1;
+				id = String.valueOf(valor);
 			}
-			txtTotalPlanilla.setText(String.valueOf(t));
+			txtCodigo.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void busquedaDatosEmpleado() {
+		consultas_planilla consulta = new consultas_planilla();
+		empleado clase = new empleado();
+		clase.setIdentidad_empleado(txtIdentidadEmpleadoPlanilla.getText());
+		if (consulta.buscar(clase)) {
+			txtCodigoPlanilla.setText(String.valueOf(clase.getId_empleado()));
+			txtNombresPlanilla.setText(String.valueOf(clase.getNombres_empleado()));
+			txtApellidosPlanilla.setText(String.valueOf(clase.getApellidos_empleado()));
+			txtIdentidadPlanilla.setText(String.valueOf(clase.getIdentidad_empleado()));
+			txtDireccionFoto.setText(String.valueOf(clase.getDireccion_foto_empleado()));
+			txtCargoPlanilla.setText(String.valueOf(clase.getNombre_cargo_empleado()));
+			txtCantidadPlanilla.setText(String.valueOf(clase.getSueldo_cargo_empleado()));
+
+			String ruta = txtDireccionFoto.getText().toString();
+			final ImageIcon foto = new ImageIcon(ruta);
+			final ImageIcon logo = new ImageIcon(foto.getImage().getScaledInstance(lblFotoPlanilla.getWidth(),
+					lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
+			lblFotoPlanilla.setIcon(logo);
+
+			txtCodigoPlanilla.setForeground(Color.BLACK);
+			txtNombresPlanilla.setForeground(Color.BLACK);
+			txtApellidosPlanilla.setForeground(Color.BLACK);
+			txtIdentidadPlanilla.setForeground(Color.BLACK);
+			txtCargoPlanilla.setForeground(Color.BLACK);
+
 		} else {
-			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
+			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
+
 		}
 	}
 
@@ -367,6 +419,7 @@ public class historial_planillas extends JFrame {
 			lbl_hora.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
+	private JButton button_3;
 
 	public static String getFecha() {
 		Date date = new Date();
@@ -380,14 +433,18 @@ public class historial_planillas extends JFrame {
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
+		// We define the print mode (Definimos el modo de impresión)
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
+			// Print the table (Imprimo la tabla)
 			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
+				// Mostramos el mensaje de impresión existosa
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
 						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
 			} else {
+				// Mostramos un mensaje indicando que la impresión fue cancelada
 				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
 						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
 			}

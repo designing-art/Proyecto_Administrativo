@@ -586,6 +586,7 @@ public class registro_deducciones extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

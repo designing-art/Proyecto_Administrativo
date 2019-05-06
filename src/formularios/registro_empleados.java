@@ -670,7 +670,7 @@ public class registro_empleados extends JFrame {
 		});
 		btnAsgnaciones.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnAsgnaciones.setBackground(new Color(218, 165, 32));
-		btnAsgnaciones.setBounds(352, 387, 191, 23);
+		btnAsgnaciones.setBounds(352, 515, 191, 23);
 		panel.add(btnAsgnaciones);
 
 		panel_2 = new JPanel();
@@ -862,13 +862,35 @@ public class registro_empleados extends JFrame {
 		btnGuardarEmpleado.setBackground(new Color(60, 179, 113));
 		btnGuardarEmpleado.setBounds(444, 572, 99, 23);
 		panel.add(btnGuardarEmpleado);
-		
-				JLabel label = new JLabel();
-				label.setBounds(0, 0, 579, 635);
-				panel.add(label);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-				label.setIcon(logo);
+				
+				JLabel lblAsignaciones = new JLabel("17. Asignaciones :");
+				lblAsignaciones.setBackground(Color.WHITE);
+				lblAsignaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+				lblAsignaciones.setBounds(354, 392, 130, 14);
+				panel.add(lblAsignaciones);
+						
+						JLabel lblNota = new JLabel("Nota :");
+						lblNota.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+						lblNota.setBackground(Color.WHITE);
+						lblNota.setBounds(354, 411, 130, 14);
+						panel.add(lblNota);
+								
+								JTextArea txtrAntesDeGuardar = new JTextArea();
+								txtrAntesDeGuardar.setBackground(new Color(192, 192, 192));
+								txtrAntesDeGuardar.setForeground(new Color(0, 128, 0));
+								txtrAntesDeGuardar.setFont(new Font("Dialog", Font.BOLD, 12));
+								txtrAntesDeGuardar.setText("Antes de registrar el empleado\r\nusted debe asignar \r\nlos siguientes datos :\r\ncargo, horario y contrato.\r\nhaga click en \"Asignaciones\".");
+								txtrAntesDeGuardar.setEditable(false);
+								txtrAntesDeGuardar.setBounds(354, 428, 189, 84);
+								panel.add(txtrAntesDeGuardar);
+								
+										JLabel label = new JLabel();
+										label.setBackground(new Color(60, 179, 113));
+										label.setBounds(0, 0, 579, 635);
+										panel.add(label);
+										final ImageIcon logo = new ImageIcon(
+												icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+										label.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -995,6 +1017,7 @@ public class registro_empleados extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 
@@ -1191,5 +1214,4 @@ public class registro_empleados extends JFrame {
 		}
 
 	}
-
 }

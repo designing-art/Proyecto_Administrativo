@@ -7,9 +7,40 @@ import java.sql.SQLException;
 
 import clases.empleado;
 import clases.planilla;
+import clases.historial_planilla;
+
 import conexion.conexion;
 
 public class consultas_planilla extends conexion {
+	
+	public boolean registrarNuevaPlanilla(historial_planilla historial_planilla) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO historial_planillas (tipo_planilla_final, fecha_crecion_planilla_final, fecha_pago_planilla_final, total_deducciones_planilla_final, total_bonificaciones_planilla_final, total_pago_planilla_final) VALUES(?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, historial_planilla.getTipo_planilla_final());
+			ps.setString(2, historial_planilla.getFecha_crecion_planilla_final());
+			ps.setString(3, historial_planilla.getFecha_pago_planilla_final());
+			ps.setString(4, historial_planilla.getTotal_deducciones_planilla_final());
+			ps.setString(5, historial_planilla.getTotal_bonificaciones_planilla_final());
+			ps.setString(6, historial_planilla.getTotal_pago_planilla_final());
+			ps.execute();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	public boolean registrar(planilla planilla) {
 		PreparedStatement ps = null;

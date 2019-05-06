@@ -66,14 +66,9 @@ public class registro_nueva_planilla extends JFrame {
 	public static String ruta;
 	public static ImageIcon imagen;
 	public static String identidad = null;
-	private JTextField txtCodigoNuevaPlanila;
-	private JTextField txtNombreNuevaPlanilla;
 	
 	public JTextFieldDateEditor editor1;
 	public JTextFieldDateEditor editor2;
-	
-	public JDateChooser dateFechaCreacionNuevaPlanilla;
-	public JDateChooser dateFechaPagoNuevaPlanilla;
 
 	/**
 	 * Launch the application.
@@ -129,65 +124,10 @@ public class registro_nueva_planilla extends JFrame {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(22, 162, 99, 20);
 		panel.add(btnCancelar);
-
-		JLabel label = new JLabel("Codigo :");
-		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label.setBounds(22, 48, 63, 18);
-		panel.add(label);
-
-		txtCodigoNuevaPlanila = new JTextField();
-		txtCodigoNuevaPlanila.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCodigoNuevaPlanila.setEditable(false);
-		txtCodigoNuevaPlanila.setColumns(10);
-		txtCodigoNuevaPlanila.setBounds(95, 46, 28, 20);
-		panel.add(txtCodigoNuevaPlanila);
-
-		JLabel lblDatosDeLa = new JLabel("Datos generales de la planilla.");
-		lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDatosDeLa.setBounds(22, 21, 253, 26);
-		panel.add(lblDatosDeLa);
-
-		JLabel label_2 = new JLabel("Tipo :");
-		label_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_2.setBounds(22, 77, 63, 18);
-		panel.add(label_2);
-
-		JComboBox cbxTipoNuevaPlanilla = new JComboBox();
-		cbxTipoNuevaPlanilla.setModel(new DefaultComboBoxModel(new String[] { "Mensual", "Eventual", "Quincenal" }));
-		cbxTipoNuevaPlanilla.setBounds(95, 75, 116, 20);
-		panel.add(cbxTipoNuevaPlanilla);
-
-		JLabel lblNombre_1 = new JLabel("Nombre :");
-		lblNombre_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblNombre_1.setBounds(22, 106, 63, 18);
-		panel.add(lblNombre_1);
-
-		txtNombreNuevaPlanilla = new JTextField();
-		txtNombreNuevaPlanilla.setBounds(95, 106, 217, 18);
-		panel.add(txtNombreNuevaPlanilla);
-		txtNombreNuevaPlanilla.setColumns(10);
-
-		dateFechaCreacionNuevaPlanilla = new JDateChooser();
-		dateFechaCreacionNuevaPlanilla.setBounds(213, 75, 99, 20);
-		panel.add(dateFechaCreacionNuevaPlanilla);
-		editor2 = (JTextFieldDateEditor) dateFechaCreacionNuevaPlanilla.getDateEditor();
 		editor2.setEditable(false);
 		editor2.setHorizontalAlignment(SwingConstants.CENTER);
-		dateFechaCreacionNuevaPlanilla.setVisible(false);
-
-
-		JLabel lblFechaEnQue = new JLabel("Fecha de pago :");
-		lblFechaEnQue.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaEnQue.setBounds(22, 135, 116, 18);
-		panel.add(lblFechaEnQue);
-
-		dateFechaPagoNuevaPlanilla = new JDateChooser();
-		dateFechaPagoNuevaPlanilla.setBounds(128, 135, 116, 20);
-		panel.add(dateFechaPagoNuevaPlanilla);
-		editor1 = (JTextFieldDateEditor) dateFechaPagoNuevaPlanilla.getDateEditor();
 		editor1.setEditable(false);
 		editor1.setHorizontalAlignment(SwingConstants.CENTER);
-		dateFechaPagoNuevaPlanilla.setVisible(false);
 
 		JButton btnGuardarNuevaPlanilla = new JButton("Guardar");
 		btnGuardarNuevaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

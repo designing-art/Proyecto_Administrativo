@@ -338,6 +338,13 @@ public class registro_planillas extends JFrame {
 		panel_2.add(btnGuardarPlanilla);
 
 		btnNuevaPlanilla = new JButton("Nueva");
+		btnNuevaPlanilla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				registro_nueva_planilla planilla = new registro_nueva_planilla();
+				planilla.setLocationRelativeTo(null);
+				planilla.setVisible(true);
+			}
+		});
 		btnNuevaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevaPlanilla.setBackground(Color.WHITE);
 		btnNuevaPlanilla.setBounds(28, 145, 93, 22);
@@ -790,6 +797,7 @@ public class registro_planillas extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
