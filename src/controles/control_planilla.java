@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_planilla;
+import formularios.registro_nuevas_planillas;
 import formularios.registro_planillas;
 
 public class control_planilla implements ActionListener {
@@ -25,7 +26,7 @@ public class control_planilla implements ActionListener {
 	public planilla clase;
 	public consultas_planilla consulta;
 	public registro_planillas formulario;
-	public reg formulario;
+	public registro_nuevas_planillas formulario2;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 	public static String identidad = null;
 

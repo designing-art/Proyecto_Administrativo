@@ -51,6 +51,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
@@ -593,7 +594,7 @@ public class registro_empleados extends JFrame {
 		btnActualizarEmpleado = new JButton("Actualizar");
 		btnActualizarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarEmpleado.setBackground(new Color(60, 179, 113));
-		btnActualizarEmpleado.setBounds(233, 571, 99, 23);
+		btnActualizarEmpleado.setBounds(444, 548, 99, 23);
 		panel.add(btnActualizarEmpleado);
 
 		btnNuevoEmpleado = new JButton("Nuevo");
@@ -984,11 +985,11 @@ public class registro_empleados extends JFrame {
 		btnImprimirReporteEmpleados = new JButton("Imprimir Reporte");
 		btnImprimirReporteEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date date = new Date();
-				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
-				utilJTablePrint(tablaEmpleados, "Canal 40 (COFFEE TV CHANNEL)",
-						"Reporte de Empleados.____. " + hora_fecha_reporte, true);
+				String fecha = getFechaYHora();
+				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
+				String encabezado = "Reporte de empleados de " + nombreEmpresa;
+				utilJTablePrint(tablaEmpleados, encabezado, "Pagina {0}"
+						+ "                                                  " + fecha, true);
 			}
 		});
 		btnImprimirReporteEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -1171,18 +1172,17 @@ public class registro_empleados extends JFrame {
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
-		// We define the print mode (Definimos el modo de impresión)
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			// Print the table (Imprimo la tabla)
-			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
+			boolean complete = jTable.print(mode,
+					new MessageFormat(header),
+					new MessageFormat(footer),
+					showPrintDialog,
 					null, interactive);
 			if (complete) {
-				// Mostramos el mensaje de impresión existosa
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
 						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				// Mostramos un mensaje indicando que la impresión fue cancelada
 				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
 						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
 			}
@@ -1190,6 +1190,15 @@ public class registro_empleados extends JFrame {
 			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public static String getFechaYHora() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		date = cal.getTime();
+		return df.format(date);
 	}
 
 	public void validarIdentidad() {
