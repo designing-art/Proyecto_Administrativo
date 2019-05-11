@@ -185,19 +185,19 @@ public class registro_nuevas_planillas extends JFrame {
 		btnBorrarPlanilla = new JButton("Borrar");
 		btnBorrarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarPlanilla.setBackground(new Color(220, 20, 60));
-		btnBorrarPlanilla.setBounds(28, 446, 99, 23);
+		btnBorrarPlanilla.setBounds(28, 440, 99, 23);
 		panel_2.add(btnBorrarPlanilla);
 
 		btnVerPlanilla = new JButton("Ver detalles");
 		btnVerPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnVerPlanilla.setBackground(new Color(0, 206, 209));
-		btnVerPlanilla.setBounds(147, 446, 108, 23);
+		btnVerPlanilla.setBounds(147, 440, 108, 23);
 		panel_2.add(btnVerPlanilla);
 
 		btnActualizarDatosPlanilla = new JButton("Actualizar Datos");
 		btnActualizarDatosPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosPlanilla.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosPlanilla.setBounds(265, 447, 137, 23);
+		btnActualizarDatosPlanilla.setBounds(265, 441, 137, 23);
 		panel_2.add(btnActualizarDatosPlanilla);
 
 		barraTablaPlanilla = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -241,6 +241,10 @@ public class registro_nuevas_planillas extends JFrame {
 		label_17.setBackground(Color.WHITE);
 
 		btnImprimir = new JButton("Imprimir Reporte");
+		btnImprimir.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnImprimir.setBackground(new Color(60, 179, 113));
+		btnImprimir.setBounds(265, 52, 137, 21);
+		panel_2.add(btnImprimir);
 		btnImprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date date = new Date();
@@ -250,10 +254,6 @@ public class registro_nuevas_planillas extends JFrame {
 						"Reporte de la Planilla.____. " + hora_fecha_reporte, true);
 			}
 		});
-		btnImprimir.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnImprimir.setBackground(new Color(60, 179, 113));
-		btnImprimir.setBounds(265, 52, 137, 21);
-		panel_2.add(btnImprimir);
 
 		label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -265,12 +265,12 @@ public class registro_nuevas_planillas extends JFrame {
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE HISTORIAL DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistroYMantenimiento.setBounds(10, 11, 698, 29);
+		lblRegistroYMantenimiento.setBounds(10, 0, 698, 40);
 		contentPane.add(lblRegistroYMantenimiento);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(10, 36, 296, 496);
+		panel_1.setBounds(10, 36, 286, 496);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -283,7 +283,7 @@ public class registro_nuevas_planillas extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel.setBounds(22, 74, 239, 327);
+		panel.setBounds(22, 74, 242, 327);
 		panel_1.add(panel);
 		panel.setLayout(null);
 
@@ -406,29 +406,29 @@ public class registro_nuevas_planillas extends JFrame {
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAceptar.setBackground(Color.WHITE);
-		btnAceptar.setBounds(22, 404, 99, 23);
+		btnAceptar.setBounds(22, 415, 99, 23);
 		panel_1.add(btnAceptar);
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevo.setBackground(Color.WHITE);
-		btnNuevo.setBounds(22, 429, 99, 23);
+		btnNuevo.setBounds(22, 440, 99, 23);
 		panel_1.add(btnNuevo);
 
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(60, 179, 113));
-		btnActualizar.setBounds(162, 404, 99, 23);
+		btnActualizar.setBounds(162, 415, 99, 23);
 		panel_1.add(btnActualizar);
 
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(60, 179, 113));
-		btnGuardar.setBounds(162, 429, 99, 23);
+		btnGuardar.setBounds(162, 440, 99, 23);
 		panel_1.add(btnGuardar);
 
 		JLabel label_7 = new JLabel("");
-		label_7.setBounds(0, 0, 297, 496);
+		label_7.setBounds(0, 0, 286, 496);
 		panel_1.add(label_7);
 		final ImageIcon logo21 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));

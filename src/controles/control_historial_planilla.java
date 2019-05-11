@@ -15,82 +15,64 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import clases.historial_planilla;
 import clases.planilla;
 import conexion.conexion;
+import consultas.consultas_historial_planilla;
 import consultas.consultas_planilla;
 import formularios.registro_nuevas_planillas;
 import formularios.registro_planillas;
 
-public class control_planilla implements ActionListener {
+public class control_historial_planilla implements ActionListener {
 
-	public planilla clase_planilla;
-	public consultas_planilla consulta_planilla;
-	public registro_planillas formulario_planilla;
+	public historial_planilla clase_historial_planilla;
+	public consultas_historial_planilla consulta_historial_planilla;
+	public registro_nuevas_planillas formulario_historial_planilla;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
 	public static String identidad = null;
 
-	public control_planilla(planilla clase, consultas_planilla consulta, registro_planillas formulario) {
-		this.clase_planilla = clase;
-		this.consulta_planilla = consulta;
-		this.formulario_planilla = formulario;
-		this.formulario_planilla.btnGuardar.addActionListener(this);
-		this.formulario_planilla.btnNuevo.addActionListener(this);
-		this.formulario_planilla.btnActualizar.addActionListener(this);
-		this.formulario_planilla.btnActualizarDatosPlanilla.addActionListener(this);
-		this.formulario_planilla.btnBorrarPlanilla.addActionListener(this);
-		this.formulario_planilla.btnVerPlanilla.addActionListener(this);
-		this.formulario_planilla.btnAceptar.addActionListener(this);
+	public control_historial_planilla(historial_planilla clase, consultas_historial_planilla consulta, registro_nuevas_planillas formulario) {
+		this.clase_historial_planilla = clase;
+		this.consulta_historial_planilla = consulta;
+		this.formulario_historial_planilla = formulario;
+		this.formulario_historial_planilla.btnGuardar.addActionListener(this);
+		this.formulario_historial_planilla.btnNuevo.addActionListener(this);
+		this.formulario_historial_planilla.btnActualizar.addActionListener(this);
+		this.formulario_historial_planilla.btnActualizarDatosPlanilla.addActionListener(this);
+		this.formulario_historial_planilla.btnBorrarPlanilla.addActionListener(this);
+		this.formulario_historial_planilla.btnVerPlanilla.addActionListener(this);
+		this.formulario_historial_planilla.btnAceptar.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == formulario_planilla.btnGuardar) {
-			validarIdentidad();
-
-			if (formulario_planilla.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
-					|| formulario_planilla.txtIdentidadPlanilla.getText().isEmpty()
-					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()
-					|| registro_planillas.txtTotalBonificacionesPlanilla.getText().isEmpty()
-					|| registro_planillas.txtTotalDeduccionesPlanilla.getText().isEmpty()
-					|| registro_planillas.txtTotalPagoEmpleado.getText().isEmpty()
-					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
+		if (e.getSource() == formulario_historial_planilla.btnGuardar) {
+			if (formulario_historial_planilla.txtNombrePlanilla.getText().isEmpty()
+					|| formulario_historial_planilla.editor.getText().isEmpty()
+					|| formulario_historial_planilla.editor2.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la planilla!");
 			} else {
-				if (formulario_planilla.txtIdentidadPlanilla.getText().toString().equals(identidad)) {
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
-							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					clase_planilla.setTipo_planilla(formulario_planilla.cbxTipoPlanilla.getSelectedItem().toString());
-					clase_planilla.setFecha_planilla(formulario_planilla.editor.getText());
-					clase_planilla.setNombres_planilla(formulario_planilla.txtNombresPlanilla.getText());
-					clase_planilla.setApellidos_planilla(formulario_planilla.txtApellidosPlanilla.getText());
-					clase_planilla.setIdentidad_planilla(formulario_planilla.txtIdentidadPlanilla.getText());
-					clase_planilla.setCargo_planilla(formulario_planilla.txtCargoPlanilla.getText());
-					clase_planilla.setSueldo_bruto_planilla(
-							Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
-					clase_planilla.setTotal_deducciones_planilla(
-							Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
-					clase_planilla.setTotal_bonificaciones_planilla(
-							Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
-					clase_planilla.setSueldo_neto_planilla(
-							Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
-					clase_planilla.setTotal_apagar_planilla(
-							Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
+					clase_planilla.setTipo_planilla(formulario_historial_planilla.cbxTipoPlanilla.getSelectedItem().toString());
+					clase_planilla.setFecha_planilla(formulario_historial_planilla.editor.getText());
+					clase_planilla.setNombres_planilla(formulario_historial_planilla.txtNombresPlanilla.getText());
+					clase_planilla.setApellidos_planilla(formulario_historial_planilla.txtApellidosPlanilla.getText());
+					clase_planilla.setIdentidad_planilla(formulario_historial_planilla.txtIdentidadPlanilla.getText());
+					clase_planilla.setCargo_planilla(formulario_historial_planilla.txtCargoPlanilla.getText());
 
 					if (consulta_planilla.registrar(clase_planilla)) {
 						JOptionPane.showMessageDialog(null, "Exito! Empleado agregado a la panilla!");
 						limpiar();
-						formulario_planilla.construirTabla();
-						formulario_planilla.obtenerUltimoId();
-						formulario_planilla.establecerFechaRegistro();
+						formulario_historial_planilla.construirTabla();
+						formulario_historial_planilla.obtenerUltimoId();
+						formulario_historial_planilla.establecerFechaRegistro();
 
 						final ImageIcon logo = new ImageIcon(
-								usuario.getImage().getScaledInstance(formulario_planilla.lblFotoPlanilla.getWidth(),
-										formulario_planilla.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
-						formulario_planilla.lblFotoPlanilla.setIcon(logo);
-						formulario_planilla.txtDireccionFoto.setText(null);
-						formulario_planilla.lblFotoPlanilla.setText(null);
-						formulario_planilla.lblFotoPlanilla.requestFocusInWindow();
+								usuario.getImage().getScaledInstance(formulario_historial_planilla.lblFotoPlanilla.getWidth(),
+										formulario_historial_planilla.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
+						formulario_historial_planilla.lblFotoPlanilla.setIcon(logo);
+						formulario_historial_planilla.txtDireccionFoto.setText(null);
+						formulario_historial_planilla.lblFotoPlanilla.setText(null);
+						formulario_historial_planilla.lblFotoPlanilla.requestFocusInWindow();
 
 					} else {
 						JOptionPane.showMessageDialog(null, "Error!  no Registrado");
@@ -100,57 +82,57 @@ public class control_planilla implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == formulario_planilla.btnActualizarDatosPlanilla) {
+		if (e.getSource() == formulario_historial_planilla.btnActualizarDatosPlanilla) {
 			int filaseleccionada;
 			try {
-				filaseleccionada = formulario_planilla.tablaPlanilla.getSelectedRow();
+				filaseleccionada = formulario_historial_planilla.tablaPlanilla.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
+					formulario_historial_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
 				} else {
-					String codigo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
-					String fecha = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
-					String nombres = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
-					String apellidos = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
-					String identidad = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
-					String cargo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
-					String sueldob = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String deduc = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-					String bonif = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
-					String sueldon = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
-					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
+					String codigo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
+					String tipo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
+					String fecha = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
+					String nombres = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
+					String apellidos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
+					String identidad = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
+					String cargo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
+					String sueldob = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
+					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
+					String bonif = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
+					String sueldon = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
+					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
 
-					formulario_planilla.txtCodigo.setText(codigo);
-					formulario_planilla.cbxTipoPlanilla.setSelectedItem(tipo);
-					formulario_planilla.editor.setText(fecha);
-					formulario_planilla.txtNombresPlanilla.setText(nombres);
-					formulario_planilla.txtApellidosPlanilla.setText(apellidos);
-					formulario_planilla.txtIdentidadPlanilla.setText(identidad);
-					formulario_planilla.txtCargoPlanilla.setText(cargo);
+					formulario_historial_planilla.txtCodigo.setText(codigo);
+					formulario_historial_planilla.cbxTipoPlanilla.setSelectedItem(tipo);
+					formulario_historial_planilla.editor.setText(fecha);
+					formulario_historial_planilla.txtNombresPlanilla.setText(nombres);
+					formulario_historial_planilla.txtApellidosPlanilla.setText(apellidos);
+					formulario_historial_planilla.txtIdentidadPlanilla.setText(identidad);
+					formulario_historial_planilla.txtCargoPlanilla.setText(cargo);
 					registro_planillas.txtCantidadPlanilla.setText(sueldob);
 					registro_planillas.txtTotalDeduccionesPlanilla.setText(deduc);
 					registro_planillas.txtTotalBonificacionesPlanilla.setText(bonif);
 					registro_planillas.txtSueldoNetoPlanilla.setText(sueldon);
 					registro_planillas.txtTotalPagoEmpleado.setText(total);
 
-					formulario_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.cbxTipoPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.txtNombresPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.txtApellidosPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.txtIdentidadPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.editor.setForeground(Color.BLACK);
+					formulario_historial_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
+					formulario_historial_planilla.cbxTipoPlanilla.setForeground(Color.BLACK);
+					formulario_historial_planilla.txtNombresPlanilla.setForeground(Color.BLACK);
+					formulario_historial_planilla.txtApellidosPlanilla.setForeground(Color.BLACK);
+					formulario_historial_planilla.txtIdentidadPlanilla.setForeground(Color.BLACK);
+					formulario_historial_planilla.editor.setForeground(Color.BLACK);
 
-					formulario_planilla.btnBorrarPlanilla.setVisible(true);
-					formulario_planilla.btnGuardar.setVisible(false);
-					formulario_planilla.btnNuevo.setVisible(false);
-					formulario_planilla.btnActualizar.setVisible(true);
-					formulario_planilla.btnActualizarDatosPlanilla.setVisible(true);
-					formulario_planilla.btnVerPlanilla.setVisible(false);
-					formulario_planilla.btnAceptar.setText("Cancelar");
-					formulario_planilla.btnAceptar.setVisible(true);
+					formulario_historial_planilla.btnBorrarPlanilla.setVisible(true);
+					formulario_historial_planilla.btnGuardar.setVisible(false);
+					formulario_historial_planilla.btnNuevo.setVisible(false);
+					formulario_historial_planilla.btnActualizar.setVisible(true);
+					formulario_historial_planilla.btnActualizarDatosPlanilla.setVisible(true);
+					formulario_historial_planilla.btnVerPlanilla.setVisible(false);
+					formulario_historial_planilla.btnAceptar.setText("Cancelar");
+					formulario_historial_planilla.btnAceptar.setVisible(true);
 
-					formulario_planilla.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+					formulario_historial_planilla.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
 
 				}
 
@@ -160,31 +142,31 @@ public class control_planilla implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == formulario_planilla.btnVerPlanilla) {
+		if (e.getSource() == formulario_historial_planilla.btnVerPlanilla) {
 			int filaseleccionada;
 			try {
-				filaseleccionada = formulario_planilla.tablaPlanilla.getSelectedRow();
+				filaseleccionada = formulario_historial_planilla.tablaPlanilla.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
+					formulario_historial_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
 				} else {
-					String codigo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
-					String fecha = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
-					String nombres = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
-					String apellidos = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
-					String identidad = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
-					String cargo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
-					String sueldob = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String deduc = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-					String bonif = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
-					String sueldon = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
-					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
+					String codigo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
+					String tipo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
+					String fecha = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
+					String nombres = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
+					String apellidos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
+					String identidad = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
+					String cargo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
+					String sueldob = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
+					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
+					String bonif = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
+					String sueldon = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
+					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
 
-					formulario_planilla.txtCodigo.setText(codigo);
-					formulario_planilla.cbxTipoPlanilla.setSelectedItem(tipo);
-					formulario_planilla.editor.setText(fecha);
-					formulario_planilla.txtNombresPlanilla.setText(nombres);
+					formulario_historial_planilla.txtCodigo.setText(codigo);
+					formulario_historial_planilla.cbxTipoPlanilla.setSelectedItem(tipo);
+					formulario_historial_planilla.editor.setText(fecha);
+					formulario_historial_planilla.txtNombresPlanilla.setText(nombres);
 					formulario_planilla.txtApellidosPlanilla.setText(apellidos);
 					formulario_planilla.txtIdentidadPlanilla.setText(identidad);
 					formulario_planilla.txtCargoPlanilla.setText(cargo);
@@ -355,7 +337,7 @@ public class control_planilla implements ActionListener {
 	}
 
 	public void limpiar() {
-		formulario_planilla.txtCodigo.setText(null);
+		formulario_historial_planilla.txtCodigo.setText(null);
 		formulario_planilla.txtCodigoPlanilla.setText(null);
 		formulario_planilla.txtNombresPlanilla.setText(null);
 		formulario_planilla.txtApellidosPlanilla.setText(null);
@@ -435,7 +417,7 @@ public class control_planilla implements ActionListener {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery("SELECT identidad_planilla FROM planillas where identidad_planilla = '"
-					+ formulario_planilla.txtIdentidadPlanilla.getText().toString() + "'");
+					+ formulario_historial_planilla.txtIdentidadPlanilla.getText().toString() + "'");
 
 			if (rs.next()) {
 				identidad = (rs.getString("identidad_planilla"));

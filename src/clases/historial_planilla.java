@@ -3,12 +3,15 @@ package clases;
 public class historial_planilla {
 	
 	int id_planilla_final;
+	int codigo_planilla;
+	String estado_planila;
 	String tipo_planilla_final;
 	String fecha_crecion_planilla_final;
 	String fecha_pago_planilla_final;
 	String total_deducciones_planilla_final;
 	String total_bonificaciones_planilla_final;
 	String total_pago_planilla_final;
+	
 	public int getId_planilla_final() {
 		return id_planilla_final;
 	}
@@ -51,7 +54,17 @@ public class historial_planilla {
 	public void setTotal_pago_planilla_final(String total_pago_planilla_final) {
 		this.total_pago_planilla_final = total_pago_planilla_final;
 	}
+	public int getCodigo_planilla() {
+		return codigo_planilla;
+	}
+	public void setCodigo_planilla(int codigo_planilla) {
+		this.codigo_planilla = codigo_planilla;
+	}
+	public String getEstado_planila() {
+		return estado_planila;
+	}
+	public void setEstado_planila(String estado_planila) {
+		this.estado_planila = estado_planila;
+	}
 	
-	
-
 }

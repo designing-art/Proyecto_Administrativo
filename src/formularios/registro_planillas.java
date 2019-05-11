@@ -323,7 +323,7 @@ public class registro_planillas extends JFrame {
 		txtNumeroPlanilla.setColumns(10);
 
 		JButton btnHistorialPlanillas = new JButton("Historial Planillas");
-		btnHistorialPlanillas.setBounds(160, 145, 137, 22);
+		btnHistorialPlanillas.setBounds(147, 145, 136, 22);
 		panel_2.add(btnHistorialPlanillas);
 		btnHistorialPlanillas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -342,14 +342,14 @@ public class registro_planillas extends JFrame {
 		});
 		btnNuevaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevaPlanilla.setBackground(new Color(0, 250, 154));
-		btnNuevaPlanilla.setBounds(28, 145, 125, 22);
+		btnNuevaPlanilla.setBounds(28, 145, 116, 22);
 		panel_2.add(btnNuevaPlanilla);
 		
-		button_1 = new JButton("Guardar");
-		button_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		button_1.setBackground(new Color(60, 179, 113));
-		button_1.setBounds(304, 146, 99, 21);
-		panel_2.add(button_1);
+		btnCerrarPlanilla = new JButton("Cerrar Planilla");
+		btnCerrarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnCerrarPlanilla.setBackground(new Color(178, 34, 34));
+		btnCerrarPlanilla.setBounds(287, 145, 116, 22);
+		panel_2.add(btnCerrarPlanilla);
 		
 				label_8 = new JLabel("");
 				label_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -955,7 +955,7 @@ public class registro_planillas extends JFrame {
 	private JButton button_3;
 	private JTextField txtNumeroPlanilla;
 	private JButton btnNuevaPlanilla;
-	private JButton button_1;
+	private JButton btnCerrarPlanilla;
 
 	public static String getFecha() {
 		Date date = new Date();
