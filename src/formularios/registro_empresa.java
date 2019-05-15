@@ -78,13 +78,13 @@ public class registro_empresa extends JFrame {
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
 
-	public ImageIcon logoCanal = new ImageIcon(getClass().getResource("/material/logo.png"));
-	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/material/logoEmpresa.jpg"));
-	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libro.png"));
-	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/material/logof.jpg"));
-	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/material/logoy.jpg"));
-	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/material/logow.jpg"));
+	public ImageIcon fotoEmpresa = new ImageIcon(getClass().getResource("/iconos/icono_foto_empresa.png"));
+	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/iconos/icono_logo_empresa.jpg"));
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libro.png"));
+	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/iconos/icono_facebook.jpg"));
+	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/iconos/icono_youtube.jpg"));
+	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/iconos/icono_whatsapp.jpg"));
 	public JTextField txtCodigoEmpresa;
 	public static JTextField txtNombreEmpresa;
 	public static JTextField txtDireccionLogoEmpresa;
@@ -105,7 +105,7 @@ public class registro_empresa extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_designing_art.png")));
 
 		JButton btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -237,7 +237,7 @@ public class registro_empresa extends JFrame {
 		lblLogoEmpresa = new JLabel();
 		lblLogoEmpresa.setBounds(27, 55, 164, 129);
 		panel.add(lblLogoEmpresa);
-		final ImageIcon logo5 = new ImageIcon(logoCanal.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
+		final ImageIcon logo5 = new ImageIcon(fotoEmpresa.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
 				lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblLogoEmpresa.setIcon(logo5);
 

@@ -76,7 +76,7 @@ public class ventana_principal extends JFrame {
 	public static JLabel lbl_nombre_empresa_principal;
 	public static String nombre = null;
 	public static String ruta_logo = null;
-	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
+	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/iconos/logo_designing_art.png"));
 
 	public empresa clase;
 	public consultas_empresa consulta;
@@ -92,7 +92,7 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_designing_art.png")));
 
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
@@ -106,7 +106,7 @@ public class ventana_principal extends JFrame {
 		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_logo_empresa_principal.setBounds(420, 240, 252, 177);
 		contentPane.add(lbl_logo_empresa_principal);
-		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo_estandar.png"));
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
 		final ImageIcon icono = new ImageIcon(
 				logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
 		lbl_logo_empresa_principal.setIcon(icono);
@@ -134,8 +134,8 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.BLACK);
