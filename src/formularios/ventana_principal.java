@@ -92,7 +92,7 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_designing_art.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_corchetes.png")));
 
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
@@ -261,6 +261,7 @@ public class ventana_principal extends JFrame {
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarCargo.setVisible(false);
 				formulario.btnGuardarCargo.setVisible(true);
 				formulario.btnNuevoCargo.setVisible(true);

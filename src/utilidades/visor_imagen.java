@@ -47,7 +47,7 @@ public class visor_imagen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setTitle("Visor by Designing Art.");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_corchetes.png")));
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
