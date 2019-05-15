@@ -79,12 +79,12 @@ public class registro_empresa extends JFrame {
 	String filtroCodigo;
 
 	public ImageIcon fotoEmpresa = new ImageIcon(getClass().getResource("/iconos/icono_foto_empresa.png"));
-	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/iconos/icono_logo_empresa.jpg"));
+	public ImageIcon logoEmpresa = new ImageIcon(getClass().getResource("/iconos/icono_logo_empresa.png"));
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libro.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
-	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/iconos/icono_facebook.jpg"));
-	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/iconos/icono_youtube.jpg"));
-	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/iconos/icono_whatsapp.jpg"));
+	public ImageIcon logofacebook = new ImageIcon(getClass().getResource("/iconos/icono_facebook.png"));
+	public ImageIcon logoyoutube = new ImageIcon(getClass().getResource("/iconos/icono_youtube.png"));
+	public ImageIcon logowhatsapp = new ImageIcon(getClass().getResource("/iconos/icono_whatsapp.png"));
 	public JTextField txtCodigoEmpresa;
 	public static JTextField txtNombreEmpresa;
 	public static JTextField txtDireccionLogoEmpresa;
@@ -195,7 +195,7 @@ public class registro_empresa extends JFrame {
 		lblFotoEmpresa = new JLabel();
 		lblFotoEmpresa.setBounds(27, 236, 164, 129);
 		panel.add(lblFotoEmpresa);
-		final ImageIcon logo00 = new ImageIcon(logoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+		final ImageIcon logo00 = new ImageIcon(fotoEmpresa.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
 				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpresa.setIcon(logo00);
 
@@ -237,7 +237,7 @@ public class registro_empresa extends JFrame {
 		lblLogoEmpresa = new JLabel();
 		lblLogoEmpresa.setBounds(27, 55, 164, 129);
 		panel.add(lblLogoEmpresa);
-		final ImageIcon logo5 = new ImageIcon(fotoEmpresa.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
+		final ImageIcon logo5 = new ImageIcon(logoEmpresa.getImage().getScaledInstance(lblLogoEmpresa.getWidth(),
 				lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblLogoEmpresa.setIcon(logo5);
 
