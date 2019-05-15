@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/bridj-0.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/mysql-connector-java-8.0.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/PlaceHolder.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-simple-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/webcam-capture-0.3.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/appframework-1.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/commons-digester-1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/commons-javaflow-20060411.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/groovy-all-1.5.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/hsqldb.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/iText-2.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/jasperreports-3.7.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/substance.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hp/Documents/GitHub/Proyecto_Administrativo/librerias/Librerias Reportes/swing-worker-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/bridj-0.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/PlaceHolder.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/webcam-capture-0.3.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
