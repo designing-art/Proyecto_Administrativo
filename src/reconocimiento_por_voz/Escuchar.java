@@ -43,7 +43,7 @@ public class Escuchar extends ResultAdapter {
 			recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
 			recognizer.allocate();
 
-			FileReader grammar1 = new FileReader("/librerias/diccionario.txt");
+			FileReader grammar1 = new FileReader("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\librerias\\diccionario.txt");
 
 			RuleGrammar rg = recognizer.loadJSGF(grammar1);
 			rg.setEnabled(true);
