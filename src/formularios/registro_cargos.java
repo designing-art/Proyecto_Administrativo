@@ -99,7 +99,6 @@ public class registro_cargos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_corchetes.png")));
-		
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 

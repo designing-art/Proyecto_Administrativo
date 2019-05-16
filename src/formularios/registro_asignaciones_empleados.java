@@ -109,7 +109,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);

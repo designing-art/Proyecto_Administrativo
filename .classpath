@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-api-1.7.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/slf4j-simple-1.6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/webcam-capture-0.3.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Emmanuel Diaz/Documents/GitHub/Proyecto_Administrativo/librerias/jl1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

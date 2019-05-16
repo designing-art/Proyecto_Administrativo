@@ -16,6 +16,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+import javax.print.attribute.standard.Media;
 import javax.swing.ImageIcon;
 
 import clases.bonificacion;
@@ -43,8 +44,13 @@ import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
 import controles.control_planilla;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -230,6 +236,7 @@ public class ventana_principal extends JFrame {
 				formulario.txtNombresEmpleado.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.establecerFechaRegistro();
 				formulario.construirTablaEmpleados();
 				formulario.btnNuevoEmpleado.setVisible(true);
@@ -699,7 +706,15 @@ public class ventana_principal extends JFrame {
 			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
+		
+	}
+	
+	public void vozBienvenido() throws FileNotFoundException, JavaLayerException {
+		      Player apl = new Player(new FileInputStream(
+		            "C:\\Users\\Emmanuel Diaz\\Documents\\GitHub\\Proyecto_Administrativo\\src\\audios\\bienvenido.mp3"));
 
+		      apl.play();
+	
 	}
 
 }
