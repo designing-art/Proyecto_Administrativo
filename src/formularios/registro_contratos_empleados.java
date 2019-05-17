@@ -32,6 +32,8 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -81,6 +83,11 @@ public class registro_contratos_empleados extends JFrame {
 	public JScrollPane barraContratos;
 	public JTable tablaContratosEmpleados;
 	public JTextField txtCodigoContratoEmpleado;
+	
+
+	public static String ruta_logo;
+	public static JLabel label;
+	public static JLabel label_2;
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
@@ -89,10 +96,9 @@ public class registro_contratos_empleados extends JFrame {
 	public JButton btnVerFotoContrato;
 	public JLabel lbl_foto_contrato;
 
-	public ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
-	public ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
 	public JLabel lblNumeroDe;
 	public JFormattedTextField txtIdentidadContratoEmpleado;
 	public JButton btnRegresarALas;
@@ -108,7 +114,7 @@ public class registro_contratos_empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 
 		btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -140,13 +146,10 @@ public class registro_contratos_empleados extends JFrame {
 		contentPane.add(panelRegistro);
 		panelRegistro.setLayout(null);
 
-		JLabel label = new JLabel();
+		label = new JLabel();
 		label.setBounds(265, 48, 49, 44);
 		panelRegistro.add(label);
-		final ImageIcon iconopeq = new ImageIcon(
-				logopeq.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-		label.setIcon(iconopeq);
-
+		
 		btnNuevoContrato = new JButton("Nuevo");
 		btnNuevoContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevoContrato.setBounds(27, 393, 99, 23);
@@ -351,12 +354,9 @@ public class registro_contratos_empleados extends JFrame {
 		tablaContratosEmpleados = new JTable();
 		barraContratos.setViewportView(tablaContratosEmpleados);
 
-		JLabel label_2 = new JLabel();
+		label_2 = new JLabel();
 		label_2.setBounds(355, 41, 49, 44);
 		panelTablaCargos.add(label_2);
-		final ImageIcon logo2 = new ImageIcon(
-				iconopeq.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
-		label_2.setIcon(logo2);
 
 		btnActualizarDatosContrato = new JButton("Actualizar Datos");
 		btnActualizarDatosContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -530,5 +530,38 @@ public class registro_contratos_empleados extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
 		date = cal.getTime();
 		return df.format(date);
+	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+				label.setIcon(icono);
+				
+				final ImageIcon icono2 = new ImageIcon(
+						logo.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+				label_2.setIcon(icono2);
+			}else {
+				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
+						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 }

@@ -151,6 +151,9 @@ public class registro_planillas extends JFrame {
 	public JButton btnActualizar_Bonificaciones;
 	public JButton btnActualizar_Deducciones;
 	public static String hora_fecha_reporte;
+	
+	public static String ruta_logo;
+	public static JLabel label_22;
 
 	public registro_planillas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,10 +163,9 @@ public class registro_planillas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(444, 46, 430, 575);

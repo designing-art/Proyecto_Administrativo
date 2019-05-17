@@ -25,7 +25,7 @@ public class control_bonificacion implements ActionListener {
 	public bonificacion clase;
 	public consultas_bonificacion consulta;
 	public registro_bonificaciones formulario;
-	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+	public ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 	public control_bonificacion(bonificacion clase, consultas_bonificacion consulta,
 			registro_bonificaciones formulario) {

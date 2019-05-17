@@ -67,7 +67,7 @@ public class control_contrato_empleado implements ActionListener {
 						limpiar();
 						formulario.construirTabla();
 						formulario.obtenerUltimoId();
-						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
 						final ImageIcon iconofoto = new ImageIcon(
 								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));

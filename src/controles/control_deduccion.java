@@ -25,7 +25,7 @@ public class control_deduccion implements ActionListener {
 	public deduccion clase;
 	public consultas_deduccion consulta;
 	public registro_deducciones formulario;
-	public ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+	public ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 	public static String identidad = null;
 
 	public control_deduccion(deduccion clase, consultas_deduccion consulta, registro_deducciones formulario) {

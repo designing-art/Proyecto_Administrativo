@@ -82,7 +82,6 @@ public class ventana_principal extends JFrame {
 	public static JLabel lbl_nombre_empresa_principal;
 	public static String nombre = null;
 	public static String ruta_logo = null;
-	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/iconos/logo_designing_art.png"));
 
 	public empresa clase;
 	public consultas_empresa consulta;
@@ -98,7 +97,7 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_corchetes.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
@@ -202,6 +201,7 @@ public class ventana_principal extends JFrame {
 				formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.construirTabla();
 				formulario.btnGuardarContrato.setVisible(true);
 				formulario.btnNuevoContrato.setVisible(true);
@@ -295,6 +295,7 @@ public class ventana_principal extends JFrame {
 				formulario.obtenerUltimoId();
 				formulario.establecerFechaRegistro();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarBonificacion.setVisible(false);
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevo.setVisible(true);
@@ -326,6 +327,7 @@ public class ventana_principal extends JFrame {
 				formulario.obtenerUltimoId();
 				formulario.establecerFechaRegistro();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarDeduccion.setVisible(false);
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevo.setVisible(true);
@@ -361,6 +363,7 @@ public class ventana_principal extends JFrame {
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarHorario.setVisible(false);
 				formulario.btnGuardarHorario.setVisible(true);
 				formulario.btnNuevoHorario.setVisible(true);

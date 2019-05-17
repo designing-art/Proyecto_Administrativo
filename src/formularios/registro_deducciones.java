@@ -41,6 +41,8 @@ import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -90,6 +92,9 @@ public class registro_deducciones extends JFrame {
 	public PlaceHolder pista;
 	public JDateChooser dateFechaDeduccion;
 	public static String hora_fecha_reporte;
+	
+	public static String ruta_logo;
+	public static JLabel label_22;
 
 	public JButton btnBorrarDeduccion;
 	public JButton btnVerDeduccion;
@@ -133,10 +138,9 @@ public class registro_deducciones extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(444, 46, 430, 467);
@@ -177,12 +181,9 @@ public class registro_deducciones extends JFrame {
 			}
 		});
 
-		JLabel label_10 = new JLabel();
-		label_10.setBounds(353, 41, 49, 44);
-		panel_2.add(label_10);
-		final ImageIcon logo2 = new ImageIcon(
-				icono2.getImage().getScaledInstance(label_10.getWidth(), label_10.getHeight(), Image.SCALE_DEFAULT));
-		label_10.setIcon(logo2);
+		label_22 = new JLabel();
+		label_22.setBounds(353, 41, 49, 44);
+		panel_2.add(label_22);
 
 		JLabel lblDeduccionesRegistradas = new JLabel("Deducciones registradas");
 		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -737,5 +738,35 @@ public class registro_deducciones extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
 		date = cal.getTime();
 		return df.format(date);
+	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(label_22.getWidth(), label_22.getHeight(), Image.SCALE_DEFAULT));
+				label_22.setIcon(icono);
+
+			}else {
+				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
+						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 }
