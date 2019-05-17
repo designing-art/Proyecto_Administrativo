@@ -711,7 +711,7 @@ public class ventana_principal extends JFrame {
 	
 	public void vozBienvenido() throws FileNotFoundException, JavaLayerException {
 		      Player apl = new Player(new FileInputStream(
-		            "C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\src\\audios\\bienvenido.mp3"));
+		            "src/audios/bienvenido.mp3"));
 		      apl.play();
 	
 	}
