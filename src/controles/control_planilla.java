@@ -60,7 +60,6 @@ public class control_planilla implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					clase_planilla.setTipo_planilla(formulario_planilla.cbxTipoPlanilla.getSelectedItem().toString());
 					clase_planilla.setFecha_planilla(formulario_planilla.editor.getText());
 					clase_planilla.setNombres_planilla(formulario_planilla.txtNombresPlanilla.getText());
 					clase_planilla.setApellidos_planilla(formulario_planilla.txtApellidosPlanilla.getText());
@@ -122,7 +121,6 @@ public class control_planilla implements ActionListener {
 					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
 
 					formulario_planilla.txtCodigo.setText(codigo);
-					formulario_planilla.cbxTipoPlanilla.setSelectedItem(tipo);
 					formulario_planilla.editor.setText(fecha);
 					formulario_planilla.txtNombresPlanilla.setText(nombres);
 					formulario_planilla.txtApellidosPlanilla.setText(apellidos);
@@ -135,7 +133,6 @@ public class control_planilla implements ActionListener {
 					registro_planillas.txtTotalPagoEmpleado.setText(total);
 
 					formulario_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.cbxTipoPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtNombresPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtApellidosPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtIdentidadPlanilla.setForeground(Color.BLACK);
@@ -182,7 +179,6 @@ public class control_planilla implements ActionListener {
 					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
 
 					formulario_planilla.txtCodigo.setText(codigo);
-					formulario_planilla.cbxTipoPlanilla.setSelectedItem(tipo);
 					formulario_planilla.editor.setText(fecha);
 					formulario_planilla.txtNombresPlanilla.setText(nombres);
 					formulario_planilla.txtApellidosPlanilla.setText(apellidos);
@@ -195,7 +191,6 @@ public class control_planilla implements ActionListener {
 					registro_planillas.txtTotalPagoEmpleado.setText(total);
 
 					formulario_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
-					formulario_planilla.cbxTipoPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtNombresPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtApellidosPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtIdentidadPlanilla.setForeground(Color.BLACK);
@@ -232,7 +227,6 @@ public class control_planilla implements ActionListener {
 
 			} else {
 					clase_planilla.setId_planilla(Integer.parseInt(formulario_planilla.txtCodigo.getText()));
-					clase_planilla.setTipo_planilla(formulario_planilla.cbxTipoPlanilla.getSelectedItem().toString());
 					clase_planilla.setFecha_planilla(formulario_planilla.editor.getText());
 					clase_planilla.setNombres_planilla(formulario_planilla.txtNombresPlanilla.getText());
 					clase_planilla.setApellidos_planilla(formulario_planilla.txtApellidosPlanilla.getText());
@@ -383,7 +377,6 @@ public class control_planilla implements ActionListener {
 			while (rs.next()) {
 				planilla = new planilla();
 				planilla.setId_planilla(Integer.parseInt(rs.getString("id_planilla")));
-				planilla.setTipo_planilla(rs.getString("tipo_planilla"));
 				planilla.setFecha_planilla(rs.getString("fecha_planilla"));
 				planilla.setNombres_planilla(rs.getString("nombres_planilla"));
 				planilla.setApellidos_planilla(rs.getString("apellidos_planilla"));
@@ -411,20 +404,19 @@ public class control_planilla implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<planilla> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][12];
+		String matrizInfo[][] = new String[miLista.size()][11];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_planilla() + "";
-			matrizInfo[i][1] = miLista.get(i).getTipo_planilla() + "";
-			matrizInfo[i][2] = miLista.get(i).getFecha_planilla() + "";
-			matrizInfo[i][3] = miLista.get(i).getNombres_planilla() + "";
-			matrizInfo[i][4] = miLista.get(i).getApellidos_planilla() + "";
-			matrizInfo[i][5] = miLista.get(i).getIdentidad_planilla() + "";
-			matrizInfo[i][6] = miLista.get(i).getCargo_planilla() + "";
-			matrizInfo[i][7] = miLista.get(i).getSueldo_bruto_planilla() + "";
-			matrizInfo[i][8] = miLista.get(i).getTotal_deducciones_planilla() + "";
-			matrizInfo[i][9] = miLista.get(i).getTotal_bonificaciones_planilla() + "";
-			matrizInfo[i][10] = miLista.get(i).getSueldo_neto_planilla() + "";
-			matrizInfo[i][11] = miLista.get(i).getTotal_apagar_planilla() + "";
+			matrizInfo[i][1] = miLista.get(i).getFecha_planilla() + "";
+			matrizInfo[i][2] = miLista.get(i).getNombres_planilla() + "";
+			matrizInfo[i][3] = miLista.get(i).getApellidos_planilla() + "";
+			matrizInfo[i][4] = miLista.get(i).getIdentidad_planilla() + "";
+			matrizInfo[i][5] = miLista.get(i).getCargo_planilla() + "";
+			matrizInfo[i][6] = miLista.get(i).getSueldo_bruto_planilla() + "";
+			matrizInfo[i][7] = miLista.get(i).getTotal_deducciones_planilla() + "";
+			matrizInfo[i][8] = miLista.get(i).getTotal_bonificaciones_planilla() + "";
+			matrizInfo[i][9] = miLista.get(i).getSueldo_neto_planilla() + "";
+			matrizInfo[i][10] = miLista.get(i).getTotal_apagar_planilla() + "";
 		}
 
 		return matrizInfo;

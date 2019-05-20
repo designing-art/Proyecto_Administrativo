@@ -17,21 +17,20 @@ public class consultas_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO planillas (tipo_planilla, fecha_planilla, nombres_planilla, apellidos_planilla, identidad_planilla, cargo_planilla, sueldo_bruto_planilla, total_deducciones_planilla, total_bonificaciones_planilla, sueldo_neto_planilla, total_apagar_planilla) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO planillas (fecha_planilla, nombres_planilla, apellidos_planilla, identidad_planilla, cargo_planilla, sueldo_bruto_planilla, total_deducciones_planilla, total_bonificaciones_planilla, sueldo_neto_planilla, total_apagar_planilla) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, planilla.getTipo_planilla());
-			ps.setString(2, planilla.getFecha_planilla());
-			ps.setString(3, planilla.getNombres_planilla());
-			ps.setString(4, planilla.getApellidos_planilla());
-			ps.setString(5, planilla.getIdentidad_planilla());
-			ps.setString(6, planilla.getCargo_planilla());
-			ps.setDouble(7, planilla.getSueldo_bruto_planilla());
-			ps.setDouble(8, planilla.getTotal_deducciones_planilla());
-			ps.setDouble(9, planilla.getTotal_bonificaciones_planilla());
-			ps.setDouble(10, planilla.getSueldo_neto_planilla());
-			ps.setDouble(11, planilla.getTotal_apagar_planilla());
+			ps.setString(1, planilla.getFecha_planilla());
+			ps.setString(2, planilla.getNombres_planilla());
+			ps.setString(3, planilla.getApellidos_planilla());
+			ps.setString(4, planilla.getIdentidad_planilla());
+			ps.setString(5, planilla.getCargo_planilla());
+			ps.setDouble(6, planilla.getSueldo_bruto_planilla());
+			ps.setDouble(7, planilla.getTotal_deducciones_planilla());
+			ps.setDouble(8, planilla.getTotal_bonificaciones_planilla());
+			ps.setDouble(9, planilla.getSueldo_neto_planilla());
+			ps.setDouble(10, planilla.getTotal_apagar_planilla());
 			ps.execute();
 
 			return true;
@@ -51,23 +50,22 @@ public class consultas_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE planillas SET id_planilla=?, tipo_planilla=?, fecha_planilla=?, nombres_planilla=?, apellidos_planilla=?, identidad_planilla=?, cargo_planilla=?, sueldo_bruto_planilla=?, total_deducciones_planilla=?, total_bonificaciones_planilla=?, sueldo_neto_planilla=?, total_apagar_planilla=? WHERE id_planilla=? ";
+		String sql = "UPDATE planillas SET id_planilla=?, fecha_planilla=?, nombres_planilla=?, apellidos_planilla=?, identidad_planilla=?, cargo_planilla=?, sueldo_bruto_planilla=?, total_deducciones_planilla=?, total_bonificaciones_planilla=?, sueldo_neto_planilla=?, total_apagar_planilla=? WHERE id_planilla=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, planilla.getId_planilla());
-			ps.setString(2, planilla.getTipo_planilla());
-			ps.setString(3, planilla.getFecha_planilla());
-			ps.setString(4, planilla.getNombres_planilla());
-			ps.setString(5, planilla.getApellidos_planilla());
-			ps.setString(6, planilla.getIdentidad_planilla());
-			ps.setString(7, planilla.getCargo_planilla());
-			ps.setDouble(8, planilla.getSueldo_bruto_planilla());
-			ps.setDouble(9, planilla.getTotal_deducciones_planilla());
-			ps.setDouble(10, planilla.getTotal_bonificaciones_planilla());
-			ps.setDouble(11, planilla.getSueldo_neto_planilla());
-			ps.setDouble(12, planilla.getTotal_apagar_planilla());
-			ps.setInt(13, planilla.getId_planilla());
+			ps.setString(2, planilla.getFecha_planilla());
+			ps.setString(3, planilla.getNombres_planilla());
+			ps.setString(4, planilla.getApellidos_planilla());
+			ps.setString(5, planilla.getIdentidad_planilla());
+			ps.setString(6, planilla.getCargo_planilla());
+			ps.setDouble(7, planilla.getSueldo_bruto_planilla());
+			ps.setDouble(8, planilla.getTotal_deducciones_planilla());
+			ps.setDouble(9, planilla.getTotal_bonificaciones_planilla());
+			ps.setDouble(10, planilla.getSueldo_neto_planilla());
+			ps.setDouble(11, planilla.getTotal_apagar_planilla());
+			ps.setInt(12, planilla.getId_planilla());
 			ps.execute();
 
 			return true;

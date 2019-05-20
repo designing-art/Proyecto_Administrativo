@@ -12,12 +12,16 @@ import com.placeholder.PlaceHolder;
 import clases.bonificacion;
 import clases.deduccion;
 import clases.empleado;
+import clases.historial_planilla;
+import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_deduccion;
+import consultas.consultas_historial_planilla;
 import consultas.consultas_planilla;
 import controles.control_bonificacion;
 import controles.control_deduccion;
+import controles.control_historial_planilla;
 import controles.control_planilla;
 import utilidades.visor_imagen;
 
@@ -88,7 +92,6 @@ public class registro_planillas extends JFrame {
 	public static JFormattedTextField txtIdentidadEmpleadoPlanilla;
 	public JPanel panel;
 	public JLabel label_6;
-	public JLabel lblTipo;
 	public JLabel lblCantidad;
 	public static JTextField txtCantidadPlanilla;
 	public JLabel lblAgregarDeduccion;
@@ -123,8 +126,6 @@ public class registro_planillas extends JFrame {
 
 	public static String bonificaciones = null;
 	public static String deducciones = null;
-
-	public JComboBox<?> cbxTipoPlanilla;
 	public JTextField txtDireccionFoto;
 	public JButton btnVer;
 	public JLabel lblL;
@@ -337,9 +338,27 @@ public class registro_planillas extends JFrame {
 		btnNuevaPlanilla = new JButton("Nueva Planilla");
 		btnNuevaPlanilla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				registro_nuevas_planillas planilla = new registro_nuevas_planillas();
-				planilla.setLocationRelativeTo(null);
-				planilla.setVisible(true);
+				historial_planilla clase = new historial_planilla();
+				consultas_historial_planilla consulta = new consultas_historial_planilla();
+				registro_nuevas_planillas formulario = new registro_nuevas_planillas();
+				control_historial_planilla control = new control_historial_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombrePlanilla.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				formulario.iniciarEncero();
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
 			}
 		});
 		btnNuevaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -483,19 +502,9 @@ public class registro_planillas extends JFrame {
 		lblFotoPlanilla.setIcon(logo22);
 
 		lblAgregarDeduccion = new JLabel("Datos monetarios del empleado :");
-		lblAgregarDeduccion.setBounds(35, 225, 253, 26);
+		lblAgregarDeduccion.setBounds(35, 249, 253, 26);
 		panel_1.add(lblAgregarDeduccion);
 		lblAgregarDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-		lblTipo = new JLabel("Tipo :");
-		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipo.setBounds(35, 282, 63, 14);
-		panel_1.add(lblTipo);
-
-		cbxTipoPlanilla = new JComboBox();
-		cbxTipoPlanilla.setModel(new DefaultComboBoxModel(new String[] { "Mensual", "Eventual", "Quincenal" }));
-		cbxTipoPlanilla.setBounds(153, 280, 116, 20);
-		panel_1.add(cbxTipoPlanilla);
 
 		lblCantidad = new JLabel("Sueldo");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -583,14 +592,14 @@ public class registro_planillas extends JFrame {
 
 		JLabel label_1 = new JLabel("Codigo :");
 		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_1.setBounds(35, 255, 63, 14);
+		label_1.setBounds(35, 286, 63, 14);
 		panel_1.add(label_1);
 
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(153, 251, 28, 20);
+		txtCodigo.setBounds(153, 282, 28, 20);
 		panel_1.add(txtCodigo);
 
 		lblFecha = new JLabel("Fecha :");
@@ -817,7 +826,7 @@ public class registro_planillas extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Tipo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo",
+		String titulos[] = { "Codigo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo",
 				"Deducciones", "Bonificaciones", "Sueldo Neto", "Total" };
 		String informacion[][] = control_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
@@ -831,11 +840,11 @@ public class registro_planillas extends JFrame {
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaPlanilla.getColumnModel().getColumn(11).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(10).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(8).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 		}
 	}
 

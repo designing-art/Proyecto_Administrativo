@@ -90,6 +90,7 @@ public class registro_nuevas_planillas extends JFrame {
 	
 	public PlaceHolder pista;
 	public JComboBox cbxEstadoPlanilla;
+	public JComboBox cbxTipoPlanillaFinal;
 	 
 	public JButton btnBorrarPlanilla;
 	public JButton btnVerPlanilla;
@@ -138,10 +139,9 @@ public class registro_nuevas_planillas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(316, 36, 430, 496);
@@ -159,7 +159,7 @@ public class registro_nuevas_planillas extends JFrame {
 		map41.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaPlanilla.setColumns(10);
-		txtBusquedaPlanilla.setBounds(86, 114, 315, 18);
+		txtBusquedaPlanilla.setBounds(86, 114, 195, 18);
 		panel_2.add(txtBusquedaPlanilla);
 		txtBusquedaPlanilla.addKeyListener(new KeyListener() {
 			@Override
@@ -319,17 +319,11 @@ public class registro_nuevas_planillas extends JFrame {
 		editor = (JTextFieldDateEditor) datePago.getDateEditor();
 		editor.setEditable(false);
 		editor.setHorizontalAlignment(SwingConstants.CENTER);
-		datePago.setVisible(false);
-
-		JLabel lblEstado = new JLabel("Estado :");
-		lblEstado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblEstado.setBounds(10, 296, 91, 20);
-		panel.add(lblEstado);
 
 		cbxEstadoPlanilla = new JComboBox();
 		cbxEstadoPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxEstadoPlanilla.setModel(new DefaultComboBoxModel(new String[] { "Planilla Vigente", "Planilla Cerrada" }));
-		cbxEstadoPlanilla.setBounds(66, 296, 125, 20);
+		cbxEstadoPlanilla.setModel(new DefaultComboBoxModel(new String[] {"Vigente", "Cerrada"}));
+		cbxEstadoPlanilla.setBounds(163, 307, 79, 20);
 		panel.add(cbxEstadoPlanilla);
 
 		JLabel lblTotalSueldosPlanilla = new JLabel("Total Sueldos Planilla");
@@ -343,6 +337,7 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(label_1);
 
 		txtTotalSueldos = new JTextField();
+		txtTotalSueldos.setText("0.0");
 		txtTotalSueldos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalSueldos.setEditable(false);
 		txtTotalSueldos.setColumns(10);
@@ -355,6 +350,7 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(label_3);
 
 		txtTotalBonos = new JTextField();
+		txtTotalBonos.setText("0.0");
 		txtTotalBonos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalBonos.setEditable(false);
 		txtTotalBonos.setColumns(10);
@@ -367,6 +363,7 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(label_5);
 
 		txtTotalDeducciones = new JTextField();
+		txtTotalDeducciones.setText("0.0");
 		txtTotalDeducciones.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalDeducciones.setEditable(false);
 		txtTotalDeducciones.setColumns(10);
@@ -389,6 +386,7 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(lblTotalPlanilla);
 
 		txtTotalPlanilla = new JTextField();
+		txtTotalPlanilla.setText("0.0");
 		txtTotalPlanilla.setEditable(false);
 		txtTotalPlanilla.setColumns(10);
 		txtTotalPlanilla.setBounds(113, 265, 116, 20);
@@ -397,6 +395,18 @@ public class registro_nuevas_planillas extends JFrame {
 		dateRegistro = new JDateChooser();
 		dateRegistro.setBounds(139, 11, 90, 20);
 		panel.add(dateRegistro);
+		
+		JLabel label = new JLabel("Tipo :");
+		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label.setBounds(10, 298, 63, 14);
+		panel.add(label);
+		
+		cbxTipoPlanillaFinal = new JComboBox();
+		cbxTipoPlanillaFinal.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxTipoPlanillaFinal.setModel(new DefaultComboBoxModel(new String[] {"Mensual", "Quincenal", "Eventual"}));
+		cbxTipoPlanillaFinal.setBounds(47, 296, 100, 20);
+		panel.add(cbxTipoPlanillaFinal);
+		
 		editor2 = (JTextFieldDateEditor) dateRegistro.getDateEditor();
 		dateRegistro.setVisible(false);
 		editor2.setEditable(false);
@@ -447,8 +457,8 @@ public class registro_nuevas_planillas extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Tipo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo",
-				"Deducciones", "Bonificaciones", "Sueldo Neto", "Total" };
+		String titulos[] = { "Codigo", "Estado", "Tipo", "Nombre", "Fecha creada", "Fecha a Pagar",
+				"Deducciones", "Bonificaciones", "Total Planilla" };
 		String informacion[][] = control_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
@@ -461,10 +471,8 @@ public class registro_nuevas_planillas extends JFrame {
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaPlanilla.getColumnModel().getColumn(11).setCellRenderer(tcr);
-			tablaPlanilla.getColumnModel().getColumn(10).setCellRenderer(tcr);
-			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
-			tablaPlanilla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(7).setCellRenderer(tcr);
 		}
 	}
@@ -565,5 +573,13 @@ public class registro_nuevas_planillas extends JFrame {
 			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public void iniciarEncero() {
+		double cero = 0.0;
+		String numero = String.valueOf(cero);
+		txtTotalDeducciones.setText(numero);
+		txtTotalBonos.setText(numero);
+		txtTotalPlanilla.setText(numero);
 	}
 }

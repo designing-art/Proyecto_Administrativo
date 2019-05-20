@@ -2,7 +2,6 @@ package clases;
 
 public class planilla {
 	int id_planilla;
-	String tipo_planilla;
 	String fecha_planilla;
 	String nombres_planilla;
 	String apellidos_planilla;
@@ -20,14 +19,6 @@ public class planilla {
 
 	public void setId_planilla(int id_planilla) {
 		this.id_planilla = id_planilla;
-	}
-
-	public String getTipo_planilla() {
-		return tipo_planilla;
-	}
-
-	public void setTipo_planilla(String tipo_planilla) {
-		this.tipo_planilla = tipo_planilla;
 	}
 
 	public String getFecha_planilla() {
