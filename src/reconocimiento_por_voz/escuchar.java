@@ -5,7 +5,7 @@ import javax.speech.recognition.*;
 import java.io.FileReader;
 import java.util.Locale;
 
-public class Escuchar extends ResultAdapter {
+public class escuchar extends ResultAdapter {
 
 	static Recognizer recognizer;
 	String gst;
@@ -48,7 +48,7 @@ public class Escuchar extends ResultAdapter {
 			RuleGrammar rg = recognizer.loadJSGF(grammar1);
 			rg.setEnabled(true);
 
-			recognizer.addResultListener(new Escuchar());
+			recognizer.addResultListener(new escuchar());
 
 			System.out.println("Empieze Dictado");
 			recognizer.commitChanges();
