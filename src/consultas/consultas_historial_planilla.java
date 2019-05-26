@@ -13,7 +13,7 @@ public class consultas_historial_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO historial_planillas (tipo_planilla_final, fecha_crecion_planilla_final, fecha_pago_planilla_final, nombre_planilla_final, total_deducciones_planilla_final, total_bonificaciones_planilla_final, total_pago_planilla_final) VALUES(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO historial_planillas (tipo_planilla_final, fecha_crecion_planilla_final, fecha_pago_planilla_final, nombre_planilla_final, total_deducciones_planilla_final, total_bonificaciones_planilla_final, total_pago_planilla_final, estado_planilla) VALUES(?,?,?,?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class consultas_historial_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE historial_planillas SET id_planilla_final=?, tipo_planilla_final=?, fecha_crecion_planilla_final=?, fecha_pago_planilla_final=?, nombre_planilla_final=?, total_deducciones_planilla_final=?, total_bonificaciones_planilla_final=?, total_pago_planilla_final=?, estado_planilla=?, codigo_planilla=?, WHERE id_planilla_final=? ";
+		String sql = "UPDATE historial_planillas SET id_planilla_final=?, tipo_planilla_final=?, fecha_crecion_planilla_final=?, fecha_pago_planilla_final=?, nombre_planilla_final=?, total_deducciones_planilla_final=?, total_bonificaciones_planilla_final=?, total_pago_planilla_final=?, estado_planilla=? WHERE id_planilla_final=? ";
 
 		try {
 			ps = con.prepareStatement(sql);

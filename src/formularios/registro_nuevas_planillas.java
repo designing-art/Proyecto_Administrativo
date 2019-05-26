@@ -18,6 +18,7 @@ import consultas.consultas_deduccion;
 import consultas.consultas_planilla;
 import controles.control_bonificacion;
 import controles.control_deduccion;
+import controles.control_historial_planilla;
 import controles.control_planilla;
 import utilidades.visor_imagen;
 
@@ -337,7 +338,6 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(label_1);
 
 		txtTotalSueldos = new JTextField();
-		txtTotalSueldos.setText("0.0");
 		txtTotalSueldos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalSueldos.setEditable(false);
 		txtTotalSueldos.setColumns(10);
@@ -350,7 +350,6 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(label_3);
 
 		txtTotalBonos = new JTextField();
-		txtTotalBonos.setText("0.0");
 		txtTotalBonos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalBonos.setEditable(false);
 		txtTotalBonos.setColumns(10);
@@ -363,7 +362,6 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(label_5);
 
 		txtTotalDeducciones = new JTextField();
-		txtTotalDeducciones.setText("0.0");
 		txtTotalDeducciones.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalDeducciones.setEditable(false);
 		txtTotalDeducciones.setColumns(10);
@@ -386,7 +384,6 @@ public class registro_nuevas_planillas extends JFrame {
 		panel.add(lblTotalPlanilla);
 
 		txtTotalPlanilla = new JTextField();
-		txtTotalPlanilla.setText("0.0");
 		txtTotalPlanilla.setEditable(false);
 		txtTotalPlanilla.setColumns(10);
 		txtTotalPlanilla.setBounds(113, 265, 116, 20);
@@ -457,9 +454,9 @@ public class registro_nuevas_planillas extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Estado", "Tipo", "Nombre", "Fecha creada", "Fecha a Pagar",
+		String titulos[] = { "Código", "Estado", "Tipo", "Nombre", "Fecha de creación", "Fecha de pago",
 				"Deducciones", "Bonificaciones", "Total Planilla" };
-		String informacion[][] = control_planilla.obtenerMatriz();
+		String informacion[][] = control_historial_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
 		for (int c = 0; c < tablaPlanilla.getColumnCount(); c++) {
@@ -494,10 +491,10 @@ public class registro_nuevas_planillas extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM planillas ORDER BY id_planilla DESC");
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM historial_planillas ORDER BY id_planilla_final DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
-				ultimoValor = rsr.getString("id_planilla");
+				ultimoValor = rsr.getString("id_planilla_final");
 				valor = Integer.parseInt(ultimoValor);
 				valor = valor + 1;
 				id = String.valueOf(valor);
@@ -578,6 +575,7 @@ public class registro_nuevas_planillas extends JFrame {
 	public void iniciarEncero() {
 		double cero = 0.0;
 		String numero = String.valueOf(cero);
+		txtTotalSueldos.setText(numero);
 		txtTotalDeducciones.setText(numero);
 		txtTotalBonos.setText(numero);
 		txtTotalPlanilla.setText(numero);
