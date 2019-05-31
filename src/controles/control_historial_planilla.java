@@ -58,6 +58,9 @@ public class control_historial_planilla implements ActionListener {
 							Double.parseDouble(formulario_historial_planilla.txtTotalDeducciones.getText().toString()));
 					clase_historial_planilla.setTotal_bonificaciones_planilla_final(
 							Double.parseDouble(formulario_historial_planilla.txtTotalBonos.getText().toString()));
+					clase_historial_planilla.setTotal_sueldos_planilla_final(
+							Double.parseDouble(formulario_historial_planilla.txtTotalSueldos.getText().toString()));
+					
 					clase_historial_planilla.setTotal_pago_planilla_final(
 							Double.parseDouble(formulario_historial_planilla.txtTotalPlanilla.getText().toString()));
 
@@ -92,7 +95,8 @@ public class control_historial_planilla implements ActionListener {
 					String vencimiento = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
 					String bonos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
 					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
+					String sueldos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
+					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
 	
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
@@ -103,6 +107,7 @@ public class control_historial_planilla implements ActionListener {
 					formulario_historial_planilla.editor.setText(vencimiento);
 					formulario_historial_planilla.txtTotalDeducciones.setText(deduc);
 					formulario_historial_planilla.txtTotalDeducciones.setText(bonos);
+					formulario_historial_planilla.txtTotalSueldos.setText(sueldos);
 					formulario_historial_planilla.txtTotalPlanilla.setText(total);
 
 					formulario_historial_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
@@ -111,6 +116,7 @@ public class control_historial_planilla implements ActionListener {
 					formulario_historial_planilla.txtNombrePlanilla.setForeground(Color.BLACK);
 					formulario_historial_planilla.txtTotalDeducciones.setForeground(Color.BLACK);
 					formulario_historial_planilla.txtTotalBonos.setForeground(Color.BLACK);
+					formulario_historial_planilla.txtTotalSueldos.setForeground(Color.BLACK);
 					formulario_historial_planilla.txtTotalPlanilla.setForeground(Color.BLACK);
 
 					formulario_historial_planilla.btnBorrarPlanilla.setVisible(true);
@@ -149,6 +155,7 @@ public class control_historial_planilla implements ActionListener {
 					String vencimiento = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
 					String bonos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
 					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
+					String sueldos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
 					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
 	
 
@@ -160,6 +167,7 @@ public class control_historial_planilla implements ActionListener {
 					formulario_historial_planilla.editor.setText(vencimiento);
 					formulario_historial_planilla.txtTotalDeducciones.setText(deduc);
 					formulario_historial_planilla.txtTotalDeducciones.setText(bonos);
+					formulario_historial_planilla.txtTotalSueldos.setText(sueldos);
 					formulario_historial_planilla.txtTotalPlanilla.setText(total);
 
 					formulario_historial_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
@@ -169,6 +177,7 @@ public class control_historial_planilla implements ActionListener {
 					formulario_historial_planilla.txtTotalDeducciones.setForeground(Color.BLACK);
 					formulario_historial_planilla.txtTotalBonos.setForeground(Color.BLACK);
 					formulario_historial_planilla.txtTotalPlanilla.setForeground(Color.BLACK);
+					formulario_historial_planilla.txtTotalSueldos.setForeground(Color.BLACK);
 
 					formulario_historial_planilla.btnBorrarPlanilla.setVisible(false);
 					formulario_historial_planilla.btnGuardar.setVisible(false);
@@ -204,6 +213,9 @@ public class control_historial_planilla implements ActionListener {
 							Double.parseDouble(formulario_historial_planilla.txtTotalDeducciones.getText()));
 					clase_historial_planilla.setTotal_bonificaciones_planilla_final(
 							Double.parseDouble(formulario_historial_planilla.txtTotalBonos.getText()));
+					clase_historial_planilla.setTotal_sueldos_planilla_final(
+							Double.parseDouble(formulario_historial_planilla.txtTotalSueldos.getText().toString()));
+					
 					clase_historial_planilla.setTotal_pago_planilla_final(
 							Double.parseDouble(formulario_historial_planilla.txtTotalPlanilla.getText()));
 
@@ -279,6 +291,7 @@ public class control_historial_planilla implements ActionListener {
 			formulario_historial_planilla.btnActualizar.setVisible(false);
 			formulario_historial_planilla.btnActualizarDatosPlanilla.setVisible(true);
 			formulario_historial_planilla.pistas();
+			formulario_historial_planilla.iniciarEncero();
 			formulario_historial_planilla.construirTabla();
 			formulario_historial_planilla.establecerFechaRegistro();
 			formulario_historial_planilla.txtNombrePlanilla.requestFocusInWindow();
@@ -316,6 +329,7 @@ public class control_historial_planilla implements ActionListener {
 				planilla.setFecha_pago_planilla_final(rs.getString("fecha_pago_planilla_final"));
 				planilla.setTotal_deducciones_planilla_final(Double.parseDouble(rs.getString("total_deducciones_planilla_final")));
 				planilla.setTotal_bonificaciones_planilla_final(Double.parseDouble(rs.getString("total_bonificaciones_planilla_final")));
+				planilla.setTotal_sueldos_planilla_final(Double.parseDouble(rs.getString("total_sueldos_planilla_final")));
 				planilla.setTotal_pago_planilla_final(Double.parseDouble(rs.getString("total_pago_planilla_final")));
 				miLista.add(planilla);
 			}
@@ -333,7 +347,7 @@ public class control_historial_planilla implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<historial_planilla> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][9];
+		String matrizInfo[][] = new String[miLista.size()][10];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_planilla_final() + "";
 			matrizInfo[i][1] = miLista.get(i).getEstado_planila() + "";
@@ -343,7 +357,8 @@ public class control_historial_planilla implements ActionListener {
 			matrizInfo[i][5] = miLista.get(i).getFecha_pago_planilla_final() + "";
 			matrizInfo[i][6] = miLista.get(i).getTotal_deducciones_planilla_final() + "";
 			matrizInfo[i][7] = miLista.get(i).getTotal_bonificaciones_planilla_final() + "";
-			matrizInfo[i][8] = miLista.get(i).getTotal_pago_planilla_final() + "";
+			matrizInfo[i][8] = miLista.get(i).getTotal_sueldos_planilla_final() + "";
+			matrizInfo[i][9] = miLista.get(i).getTotal_pago_planilla_final() + "";
 		
 		}
 

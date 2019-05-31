@@ -10,6 +10,7 @@ public class historial_planilla {
 	String fecha_pago_planilla_final;
 	Double total_deducciones_planilla_final;
 	Double total_bonificaciones_planilla_final;
+	Double total_sueldos_planilla_final;
 	Double total_pago_planilla_final;
 	
 	public int getId_planilla_final() {
@@ -53,6 +54,12 @@ public class historial_planilla {
 	}
 	public void setTotal_bonificaciones_planilla_final(Double total_bonificaciones_planilla_final) {
 		this.total_bonificaciones_planilla_final = total_bonificaciones_planilla_final;
+	}
+	public Double getTotal_sueldos_planilla_final() {
+		return total_sueldos_planilla_final;
+	}
+	public void setTotal_sueldos_planilla_final(Double total_sueldos_planilla_final) {
+		this.total_sueldos_planilla_final = total_sueldos_planilla_final;
 	}
 	public Double getTotal_pago_planilla_final() {
 		return total_pago_planilla_final;

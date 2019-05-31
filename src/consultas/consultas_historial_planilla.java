@@ -13,7 +13,7 @@ public class consultas_historial_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO historial_planillas (tipo_planilla_final, fecha_crecion_planilla_final, fecha_pago_planilla_final, nombre_planilla_final, total_deducciones_planilla_final, total_bonificaciones_planilla_final, total_pago_planilla_final, estado_planilla) VALUES(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO historial_planillas (tipo_planilla_final, fecha_crecion_planilla_final, fecha_pago_planilla_final, nombre_planilla_final, total_deducciones_planilla_final, total_bonificaciones_planilla_final, total_sueldos_planilla_final, total_pago_planilla_final, estado_planilla) VALUES(?,?,?,?,?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -23,8 +23,9 @@ public class consultas_historial_planilla extends conexion {
 			ps.setString(4, historial_planilla.getNombre_planilla_final());
 			ps.setDouble(5, historial_planilla.getTotal_deducciones_planilla_final());
 			ps.setDouble(6, historial_planilla.getTotal_bonificaciones_planilla_final());
-			ps.setDouble(7, historial_planilla.getTotal_pago_planilla_final());
-			ps.setString(8, historial_planilla.getEstado_planila());
+			ps.setDouble(7, historial_planilla.getTotal_sueldos_planilla_final());
+			ps.setDouble(8, historial_planilla.getTotal_pago_planilla_final());
+			ps.setString(9, historial_planilla.getEstado_planila());
 			ps.execute();
 
 			return true;
@@ -44,7 +45,7 @@ public class consultas_historial_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE historial_planillas SET id_planilla_final=?, tipo_planilla_final=?, fecha_crecion_planilla_final=?, fecha_pago_planilla_final=?, nombre_planilla_final=?, total_deducciones_planilla_final=?, total_bonificaciones_planilla_final=?, total_pago_planilla_final=?, estado_planilla=? WHERE id_planilla_final=? ";
+		String sql = "UPDATE historial_planillas SET id_planilla_final=?, tipo_planilla_final=?, fecha_crecion_planilla_final=?, fecha_pago_planilla_final=?, nombre_planilla_final=?, total_deducciones_planilla_final=?, total_bonificaciones_planilla_final=?, total_sueldos_planilla_final=?, total_pago_planilla_final=?, estado_planilla=? WHERE id_planilla_final=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -55,9 +56,10 @@ public class consultas_historial_planilla extends conexion {
 			ps.setString(5, historial_planilla.getNombre_planilla_final());
 			ps.setDouble(6, historial_planilla.getTotal_deducciones_planilla_final());
 			ps.setDouble(7, historial_planilla.getTotal_bonificaciones_planilla_final());
-			ps.setDouble(8, historial_planilla.getTotal_pago_planilla_final());
-			ps.setString(9, historial_planilla.getEstado_planila());
-			ps.setInt(10, historial_planilla.getId_planilla_final());
+			ps.setDouble(8, historial_planilla.getTotal_sueldos_planilla_final());
+			ps.setDouble(9, historial_planilla.getTotal_pago_planilla_final());
+			ps.setString(10, historial_planilla.getEstado_planila());
+			ps.setInt(11, historial_planilla.getId_planilla_final());
 			ps.execute();
 
 			return true;

@@ -455,7 +455,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 	public void construirTabla() {
 		String titulos[] = { "Código", "Estado", "Tipo", "Nombre", "Fecha de creación", "Fecha de pago",
-				"Deducciones", "Bonificaciones", "Total Planilla" };
+				"Deducciones", "Bonificaciones", "Sueldos", "Total Planilla" };
 		String informacion[][] = control_historial_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
@@ -468,9 +468,10 @@ public class registro_nuevas_planillas extends JFrame {
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaPlanilla.getColumnModel().getColumn(5).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
 		}
 	}
 
