@@ -91,7 +91,7 @@ public class registro_productos extends JFrame {
 	String filtroCodigo;
 	public JTextField txtDireccionFotoProducto;
 	public JButton btnSubirFotoContrato;
-	public JButton btnVerFotoContrato;
+	public JButton btnVerFotoProducto;
 	public JLabel lbl_foto_contrato;
 
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
@@ -230,16 +230,16 @@ public class registro_productos extends JFrame {
 		txtDireccionFotoProducto.setBounds(27, 320, 145, 20);
 		panelRegistro.add(txtDireccionFotoProducto);
 
-		btnVerFotoContrato = new JButton("Ver");
-		btnVerFotoContrato.addActionListener(new ActionListener() {
+		btnVerFotoProducto = new JButton("Ver");
+		btnVerFotoProducto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				verFotoContratoEmpleado();
 			}
 		});
-		btnVerFotoContrato.setBackground(Color.WHITE);
-		btnVerFotoContrato.setBounds(102, 286, 70, 23);
-		panelRegistro.add(btnVerFotoContrato);
+		btnVerFotoProducto.setBackground(Color.WHITE);
+		btnVerFotoProducto.setBounds(102, 286, 70, 23);
+		panelRegistro.add(btnVerFotoProducto);
 
 		MaskFormatter formato = null;
 		try {

@@ -27,6 +27,7 @@ import clases.empleado;
 import clases.empresa;
 import clases.horario;
 import clases.planilla;
+import clases.producto;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
@@ -36,6 +37,7 @@ import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_horario;
 import consultas.consultas_planilla;
+import consultas.consultas_producto;
 import controles.control_bonificacion;
 import controles.control_cargo;
 import controles.control_contrato_empleado;
@@ -44,6 +46,7 @@ import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
 import controles.control_planilla;
+import controles.control_producto;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -413,25 +416,23 @@ public class ventana_principal extends JFrame {
 		btnRegistroProductos = new JButton("Productos");
 		btnRegistroProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*cargo clase = new cargo();
-				consultas_cargo consulta = new consultas_cargo();
-				registro_cargos formulario = new registro_cargos();
-				control_cargo control = new control_cargo(clase, consulta, formulario);
+				producto clase = new producto();
+				consultas_producto consulta = new consultas_producto();
+				registro_productos formulario = new registro_productos();
+				control_producto control = new control_producto(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.txtNombreCargo.requestFocusInWindow();
-				formulario.construirTabla();
+				formulario.txtDispositivo.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
 				formulario.consultarEmpresa();
-				formulario.btnBorrarCargo.setVisible(false);
-				formulario.btnGuardarCargo.setVisible(true);
-				formulario.btnNuevoCargo.setVisible(true);
-				formulario.btnActualizarCargo.setVisible(false);
-				formulario.btnActualizarDatosCargo.setVisible(true);
-				formulario.btnMostrar.setVisible(true);
+				formulario.construirTabla();
+				formulario.btnGuardarProducto.setVisible(true);
+				formulario.btnNuevoProducto.setVisible(true);
+				formulario.btnActualizarProducto.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
-				dispose();*/
+				formulario.btnBorrarProducto.setVisible(false);
+				dispose();
 
 			}
 		});

@@ -16,91 +16,121 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import clases.contrato_empleado;
+import clases.producto;
 import conexion.conexion;
 import consultas.consultas_contrato_empleado;
+import consultas.consultas_producto;
 import formularios.registro_contratos_empleados;
+import formularios.registro_productos;
 
 public class control_producto implements ActionListener {
 
-	public contrato_empleado clase;
-	public consultas_contrato_empleado consulta;
-	public registro_contratos_empleados formulario;
+	public producto clase;
+	public consultas_producto consulta;
+	public registro_productos formulario;
 	public static String identidad = null;
 
-	public control_producto(contrato_empleado clase, consultas_contrato_empleado consulta,
-			registro_contratos_empleados formulario) {
+	public control_producto(producto clase, consultas_producto consulta, registro_productos formulario) {
 		this.clase = clase;
 		this.consulta = consulta;
 		this.formulario = formulario;
-		this.formulario.btnGuardarContrato.addActionListener(this);
-		this.formulario.btnNuevoContrato.addActionListener(this);
-		this.formulario.btnActualizarContrato.addActionListener(this);
-		this.formulario.btnActualizarDatosContrato.addActionListener(this);
-		this.formulario.btnBorrarContrato.addActionListener(this);
-		this.formulario.btnMostrarContrato.addActionListener(this);
+		this.formulario.btnGuardarProducto.addActionListener(this);
+		this.formulario.btnNuevoProducto.addActionListener(this);
+		this.formulario.btnActualizarProducto.addActionListener(this);
+		this.formulario.btnActualizarDatosProducto.addActionListener(this);
+		this.formulario.btnBorrarProducto.addActionListener(this);
+		this.formulario.btnVerProducto.addActionListener(this);
 		this.formulario.btnAceptar.addActionListener(this);
-		this.formulario.btnVerFotoContrato.addActionListener(this);
+		this.formulario.btnVerFotoProducto.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		validarIdentidad();
-		/* Insertar */
-		if (e.getSource() == formulario.btnGuardarContrato) {
-
-			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
-					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el contrato!");
+		
+		if (e.getSource() == formulario.btnGuardarProducto) {
+			if (formulario.txtDireccionFotoProducto.getText().isEmpty() || formulario.txtDispositivo.getText().isEmpty()
+					|| formulario.txtCapasidad.getText().isEmpty() || formulario.txtColor.getText().isEmpty()
+					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty())
+			{
+			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el producto!");
+		} else {
+			clase.setDispositivo_de_entrega_producto(formulario.txtDispositivo.getText().toString());
+			clase.setCapacidad_produto(formulario.txtCapasidad.getText().toString());
+			clase.setColor_producto(formulario.txtColor.getText().toString());
+			clase.setMarca_producto(formulario.txtMarca.getText().toString());
+			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
+			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+			if (consulta.insertar(clase)) {
+				JOptionPane.showMessageDialog(null, "Producto registrado!");
+				limpiar();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
+				final ImageIcon iconofoto = new ImageIcon(
+						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+				formulario.lbl_foto_contrato.setIcon(iconofoto);
 			} else {
-				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) 
-				{
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
-							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
-					clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
-					clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
-					clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
-
-					if (consulta.insertar(clase)) {
-						JOptionPane.showMessageDialog(null, "Contrato registrado!");
-						limpiar();
-						formulario.construirTabla();
-						formulario.obtenerUltimoId();
-						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
-						final ImageIcon iconofoto = new ImageIcon(
-								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-						formulario.lbl_foto_contrato.setIcon(iconofoto);
-					} else {
-						JOptionPane.showMessageDialog(null, "Error! contrato no registrado");
-						limpiar();
-					}
-				}
+				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
+				limpiar();
 			}
-
 		}
-
-		/* Pasar datos de la tabla al formulario para actualizar */
-		if (e.getSource() == formulario.btnActualizarDatosContrato) {
-
+	}
+		
+		/* Actualizar */
+		if (e.getSource() == formulario.btnActualizarProducto) {
+			if (formulario.txtDireccionFotoProducto.getText().isEmpty() || formulario.txtDispositivo.getText().isEmpty()
+					|| formulario.txtCapasidad.getText().isEmpty() || formulario.txtColor.getText().isEmpty()
+					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty())
+			{
+			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el producto!");
+		} else {
+			clase.setId_producto(Integer.parseInt(formulario.txtCodigoProducto.getText().toString()));
+			clase.setDispositivo_de_entrega_producto(formulario.txtDispositivo.getText().toString());
+			clase.setCapacidad_produto(formulario.txtCapasidad.getText().toString());
+			clase.setColor_producto(formulario.txtColor.getText().toString());
+			clase.setMarca_producto(formulario.txtMarca.getText().toString());
+			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
+			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+			if (consulta.actualizar(clase)) {
+				JOptionPane.showMessageDialog(null, "Producto actualizado!");
+				limpiar();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
+				final ImageIcon iconofoto = new ImageIcon(
+						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+				formulario.lbl_foto_contrato.setIcon(iconofoto);
+			} else {
+				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
+				limpiar();
+			}
+		}
+	}
+	
+		if (e.getSource() == formulario.btnActualizarDatosProducto) {
 			int filaseleccionada;
 			try {
-				filaseleccionada = formulario.tablaContratosEmpleados.getSelectedRow();
+				filaseleccionada = formulario.tablaProductos.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					String codigo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 0).toString();
-					String identidad = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 1).toString();
-					String tipo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 2).toString();
-					String tiempo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 3).toString();
-					String foto = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 4).toString();
+					String codigo = formulario.tablaProductos.getValueAt(filaseleccionada, 0).toString();
+					String dispo = formulario.tablaProductos.getValueAt(filaseleccionada, 1).toString();
+					String marca = formulario.tablaProductos.getValueAt(filaseleccionada, 2).toString();
+					String capasidad = formulario.tablaProductos.getValueAt(filaseleccionada, 3).toString();
+					String color = formulario.tablaProductos.getValueAt(filaseleccionada, 4).toString();
+					String precio = formulario.tablaProductos.getValueAt(filaseleccionada, 5).toString();
+					String foto = formulario.tablaProductos.getValueAt(filaseleccionada, 6).toString();
 
-					formulario.txtCodigoContratoEmpleado.setText(codigo);
-					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
-					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
-					formulario.txtDireccionFotoContrato.setText(foto);
-					formulario.txtIdentidadContratoEmpleado.setText(identidad);
+					formulario.txtCodigoProducto.setText(codigo);
+					formulario.txtDispositivo.setText(dispo);
+					formulario.txtMarca.setText(marca);
+					formulario.txtCapasidad.setText(capasidad);
+					formulario.txtColor.setText(color);
+					formulario.txtPrecio.setText(precio);
+					formulario.txtDireccionFotoProducto.setText(foto);
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -108,19 +138,20 @@ public class control_producto implements ActionListener {
 									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lbl_foto_contrato.setIcon(logo);
 
-					formulario.txtCodigoContratoEmpleado.setForeground(Color.BLACK);
-					formulario.cbxTipoContratoEmpleado.setForeground(Color.BLACK);
-					formulario.cbxTiempoContratoEmpleado.setForeground(Color.BLACK);
-					formulario.txtDireccionFotoContrato.setForeground(Color.BLACK);
-					formulario.txtIdentidadContratoEmpleado.setForeground(Color.BLACK);
+					formulario.txtCodigoProducto.setForeground(Color.BLACK);
+					formulario.txtDispositivo.setForeground(Color.BLACK);
+					formulario.txtCapasidad.setForeground(Color.BLACK);
+					formulario.txtColor.setForeground(Color.BLACK);
+					formulario.txtMarca.setForeground(Color.BLACK);
+					formulario.txtPrecio.setForeground(Color.BLACK);
+					formulario.txtDireccionFotoProducto.setForeground(Color.BLACK);
 
-					formulario.txtIdentidadContratoEmpleado.setEditable(true);
-					formulario.btnBorrarContrato.setVisible(true);
-					formulario.btnGuardarContrato.setVisible(false);
-					formulario.btnNuevoContrato.setVisible(false);
-					formulario.btnActualizarContrato.setVisible(true);
-					formulario.btnActualizarDatosContrato.setVisible(true);
-					formulario.btnMostrarContrato.setVisible(false);
+					formulario.btnBorrarProducto.setVisible(true);
+					formulario.btnGuardarProducto.setVisible(false);
+					formulario.btnNuevoProducto.setVisible(false);
+					formulario.btnActualizarProducto.setVisible(true);
+					formulario.btnActualizarDatosProducto.setVisible(true);
+					formulario.btnVerProducto.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
 
@@ -135,24 +166,28 @@ public class control_producto implements ActionListener {
 		}
 
 		/* Pasar datos de la tabla al formulario para ver los datos */
-		if (e.getSource() == formulario.btnMostrarContrato) {
-			int fila;
+		if (e.getSource() == formulario.btnVerProducto) {
+			int filaseleccionada;
 			try {
-				fila = formulario.tablaContratosEmpleados.getSelectedRow();
-				if (fila == -1) {
+				filaseleccionada = formulario.tablaProductos.getSelectedRow();
+				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					String codigo = formulario.tablaContratosEmpleados.getValueAt(fila, 0).toString();
-					String identidad = formulario.tablaContratosEmpleados.getValueAt(fila, 1).toString();
-					String tipo = formulario.tablaContratosEmpleados.getValueAt(fila, 2).toString();
-					String tiempo = formulario.tablaContratosEmpleados.getValueAt(fila, 3).toString();
-					String foto = formulario.tablaContratosEmpleados.getValueAt(fila, 4).toString();
+					String codigo = formulario.tablaProductos.getValueAt(filaseleccionada, 0).toString();
+					String dispo = formulario.tablaProductos.getValueAt(filaseleccionada, 1).toString();
+					String marca = formulario.tablaProductos.getValueAt(filaseleccionada, 2).toString();
+					String capasidad = formulario.tablaProductos.getValueAt(filaseleccionada, 3).toString();
+					String color = formulario.tablaProductos.getValueAt(filaseleccionada, 4).toString();
+					String precio = formulario.tablaProductos.getValueAt(filaseleccionada, 5).toString();
+					String foto = formulario.tablaProductos.getValueAt(filaseleccionada, 6).toString();
 
-					formulario.txtCodigoContratoEmpleado.setText(codigo);
-					formulario.cbxTipoContratoEmpleado.setSelectedItem(tipo);
-					formulario.cbxTiempoContratoEmpleado.setSelectedItem(tiempo);
-					formulario.txtDireccionFotoContrato.setText(foto);
-					formulario.txtIdentidadContratoEmpleado.setText(identidad);
+					formulario.txtCodigoProducto.setText(codigo);
+					formulario.txtDispositivo.setText(dispo);
+					formulario.txtMarca.setText(marca);
+					formulario.txtCapasidad.setText(capasidad);
+					formulario.txtColor.setText(color);
+					formulario.txtPrecio.setText(precio);
+					formulario.txtDireccionFotoProducto.setText(foto);
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -160,18 +195,19 @@ public class control_producto implements ActionListener {
 									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lbl_foto_contrato.setIcon(logo);
 
-					formulario.txtCodigoContratoEmpleado.setForeground(Color.BLACK);
-					formulario.cbxTipoContratoEmpleado.setForeground(Color.BLACK);
-					formulario.cbxTiempoContratoEmpleado.setForeground(Color.BLACK);
-					formulario.txtDireccionFotoContrato.setForeground(Color.BLACK);
-					formulario.txtIdentidadContratoEmpleado.setForeground(Color.BLACK);
+					formulario.txtCodigoProducto.setForeground(Color.BLACK);
+					formulario.txtDispositivo.setForeground(Color.BLACK);
+					formulario.txtCapasidad.setForeground(Color.BLACK);
+					formulario.txtColor.setForeground(Color.BLACK);
+					formulario.txtMarca.setForeground(Color.BLACK);
+					formulario.txtPrecio.setForeground(Color.BLACK);
+					formulario.txtDireccionFotoProducto.setForeground(Color.BLACK);
 
-					formulario.txtIdentidadContratoEmpleado.setEditable(false);
-					formulario.btnBorrarContrato.setVisible(false);
-					formulario.btnGuardarContrato.setVisible(false);
-					formulario.btnNuevoContrato.setVisible(false);
-					formulario.btnActualizarContrato.setVisible(false);
-					formulario.btnActualizarDatosContrato.setVisible(false);
+					formulario.btnBorrarProducto.setVisible(false);
+					formulario.btnGuardarProducto.setVisible(false);
+					formulario.btnNuevoProducto.setVisible(false);
+					formulario.btnActualizarProducto.setVisible(false);
+					formulario.btnActualizarDatosProducto.setVisible(false);
 					formulario.btnAceptar.setText("Aceptar");
 					formulario.btnAceptar.setVisible(true);
 
@@ -183,77 +219,34 @@ public class control_producto implements ActionListener {
 			}
 		}
 
-		/* Actualizar */
-		if (e.getSource() == formulario.btnActualizarContrato) {
-			validarIdentidad();
-			if (formulario.txtDireccionFotoContrato.getText().isEmpty()
-					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el contrato!");
-			} else {
-				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) 
-				{
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
-							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-				clase.setId_contrato_empleado(
-						Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
-				clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
-				clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
-				clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
-				clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
-				clase.setId_contrato_empleado(
-						Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
-
-				if (consulta.actualizar(clase)) {
-					JOptionPane.showMessageDialog(null, "Contrato Actualizado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					formulario.btnActualizarContrato.setVisible(false);
-					formulario.btnSubirFotoContrato.setVisible(false);
-					formulario.txtCodigoContratoEmpleado.setEnabled(false);
-					formulario.txtCodigoContratoEmpleado.setText(null);
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lbl_foto_contrato.setIcon(iconofoto);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Error! contrato no Actualizado");
-					limpiar();
-				}
-
-			}
-			}
-		}
+		
 
 		/* Borrar */
-		if (e.getSource() == formulario.btnBorrarContrato) {
+		if (e.getSource() == formulario.btnBorrarProducto) {
 			PreparedStatement ps = null;
 			int filaseleccionada;
 			try {
-				filaseleccionada = formulario.tablaContratosEmpleados.getSelectedRow();
+				filaseleccionada = formulario.tablaProductos.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
 					conexion objCon = new conexion();
 					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaContratosEmpleados.getSelectedRow();
-					String codigo = formulario.tablaContratosEmpleados.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM contrato_empleado WHERE id_contrato_empleado=?");
+					int Fila = formulario.tablaProductos.getSelectedRow();
+					String codigo = formulario.tablaProductos.getValueAt(Fila, 0).toString();
+					ps = conn.prepareStatement("DELETE FROM productos WHERE id_producto=?");
 					ps.setString(1, codigo);
 					ps.execute();
-					JOptionPane.showMessageDialog(null, "Contrato Eliminado!");
+					JOptionPane.showMessageDialog(null, "Producto Eliminado!");
 					limpiar();
 					formulario.construirTabla();
-					formulario.txtCodigoContratoEmpleado.setText(null);
+					formulario.txtCodigoProducto.setText(null);
 					formulario.btnSubirFotoContrato.setEnabled(false);
 					formulario.lbl_foto_contrato.setEnabled(false);
 					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizarContrato.setVisible(false);
-					formulario.btnGuardarContrato.setVisible(false);
-					formulario.btnNuevoContrato.setVisible(false);
+					formulario.btnActualizarProducto.setVisible(false);
+					formulario.btnGuardarProducto.setVisible(false);
+					formulario.btnNuevoProducto.setVisible(false);
 
 				}
 			} catch (SQLException ex) {
@@ -263,50 +256,44 @@ public class control_producto implements ActionListener {
 		}
 
 		/* Nuevo */
-		if (e.getSource() == formulario.btnNuevoContrato) {
+		if (e.getSource() == formulario.btnNuevoProducto) {
 			limpiar();
 			limpiar();
 			formulario.obtenerUltimoId();
-			formulario.btnBorrarContrato.setVisible(false);
-			formulario.btnGuardarContrato.setVisible(true);
-			formulario.btnNuevoContrato.setVisible(true);
-			formulario.btnActualizarContrato.setVisible(false);
-			formulario.btnActualizarDatosContrato.setVisible(true);
-			formulario.txtDireccionFotoContrato.setEditable(false);
-			formulario.btnMostrarContrato.setVisible(true);
+			formulario.btnBorrarProducto.setVisible(false);
+			formulario.btnGuardarProducto.setVisible(true);
+			formulario.btnNuevoProducto.setVisible(true);
+			formulario.btnActualizarProducto.setVisible(false);
+			formulario.btnActualizarDatosProducto.setVisible(true);
+			formulario.txtDireccionFotoProducto.setEditable(false);
+			formulario.btnVerProducto.setVisible(true);
 			formulario.btnAceptar.setVisible(false);
-			formulario.txtIdentidadContratoEmpleado.setEditable(true);
 			formulario.pistas();
 			formulario.construirTabla();
-			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
 			final ImageIcon iconofoto = new ImageIcon(
 					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
 		}
-		/* Ver Contrato */
-		if (e.getSource() == formulario.btnNuevoContrato) {
-
-		}
 
 		/* Aceptar */
 		if (e.getSource() == formulario.btnAceptar) {
 			limpiar();
-			formulario.btnBorrarContrato.setVisible(false);
-			formulario.btnGuardarContrato.setVisible(true);
-			formulario.btnNuevoContrato.setVisible(true);
-			formulario.btnActualizarContrato.setVisible(false);
-			formulario.btnActualizarDatosContrato.setVisible(true);
-			formulario.txtDireccionFotoContrato.setEditable(false);
-			formulario.btnMostrarContrato.setVisible(true);
+			formulario.btnBorrarProducto.setVisible(false);
+			formulario.btnGuardarProducto.setVisible(true);
+			formulario.btnNuevoProducto.setVisible(true);
+			formulario.btnActualizarProducto.setVisible(false);
+			formulario.btnActualizarDatosProducto.setVisible(true);
+			formulario.txtDireccionFotoProducto.setEditable(false);
+			formulario.btnVerProducto.setVisible(true);
 			formulario.btnAceptar.setVisible(false);
-			formulario.txtCodigoContratoEmpleado.setEnabled(true);
-			formulario.txtCodigoContratoEmpleado.setEditable(false);
-			formulario.txtIdentidadContratoEmpleado.setEditable(true);
+			formulario.txtCodigoProducto.setEnabled(true);
+			formulario.txtCodigoProducto.setEditable(false);
 			formulario.obtenerUltimoId();
 			formulario.pistas();
 			formulario.construirTabla();
-			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
 			final ImageIcon iconofoto = new ImageIcon(
 					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
@@ -321,27 +308,34 @@ public class control_producto implements ActionListener {
 	/* Metodo para el boton nuevo que limpia los datos de los txtFields */
 	public void limpiar() {
 		formulario.txtBusquedaContratosEmpleados.setText(null);
-		formulario.txtDireccionFotoContrato.setText(null);
-		formulario.txtIdentidadContratoEmpleado.setText(null);
+		formulario.txtDispositivo.setText(null);
+		formulario.txtCapasidad.setText(null);
+		formulario.txtColor.setText(null);
+		formulario.txtMarca.setText(null);
+		formulario.txtPrecio.setText(null);
+		formulario.txtDireccionFotoProducto.setText(null);
+		formulario.txtCodigoProducto.setText(null);
 	}
 
 	/* Metodos para mostrar datos en tabla Contratos de los empleados */
-	public static ArrayList<contrato_empleado> buscarUsuariosConMatriz() {
+	public static ArrayList<producto> buscarUsuariosConMatriz() {
 		conexion conex = new conexion();
-		ArrayList<contrato_empleado> miLista = new ArrayList<contrato_empleado>();
-		contrato_empleado contrato;
+		ArrayList<producto> miLista = new ArrayList<producto>();
+		producto producto;
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT * FROM contrato_empleado ");
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM productos ");
 
 			while (rs.next()) {
-				contrato = new contrato_empleado();
-				contrato.setId_contrato_empleado(Integer.parseInt(rs.getString("id_contrato_empleado")));
-				contrato.setIdentidad_contrato_empleado(rs.getString("identidad_contrato_empleado"));
-				contrato.setTipo_contrato_empleado(rs.getString("tipo_contrato_empleado"));
-				contrato.setTiempo_contrato_empleado(rs.getString("tiempo_contrato_empleado"));
-				contrato.setDireccion_foto_contrato_empleado(rs.getString("direccion_foto_contrato_empleado"));
-				miLista.add(contrato);
+				producto = new producto();
+				producto.setId_producto(Integer.parseInt(rs.getString("id_producto")));
+				producto.setDispositivo_de_entrega_producto(rs.getString("dispositivo_de_entrega_producto"));
+				producto.setMarca_producto(rs.getString("marca_producto"));
+				producto.setCapacidad_produto(rs.getString("capacidad_produto"));
+				producto.setColor_producto(rs.getString("color_producto"));
+				producto.setPrecio_producto(Double.parseDouble(rs.getString("precio_producto")));
+				producto.setDireccion_foto_producto(rs.getString("direccion_foto_producto"));
+				miLista.add(producto);
 			}
 			rs.close();
 			estatuto.close();
@@ -356,14 +350,16 @@ public class control_producto implements ActionListener {
 	}
 
 	public static String[][] obtenerMatriz() {
-		ArrayList<contrato_empleado> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][5];
+		ArrayList<producto> miLista = buscarUsuariosConMatriz();
+		String matrizInfo[][] = new String[miLista.size()][7];
 		for (int i = 0; i < miLista.size(); i++) {
-			matrizInfo[i][0] = miLista.get(i).getId_contrato_empleado() + "";
-			matrizInfo[i][1] = miLista.get(i).getIdentidad_contrato_empleado() + "";
-			matrizInfo[i][2] = miLista.get(i).getTipo_contrato_empleado() + "";
-			matrizInfo[i][3] = miLista.get(i).getTiempo_contrato_empleado() + "";
-			matrizInfo[i][4] = miLista.get(i).getDireccion_foto_contrato_empleado() + "";
+			matrizInfo[i][0] = miLista.get(i).getId_producto() + "";
+			matrizInfo[i][1] = miLista.get(i).getDispositivo_de_entrega_producto() + "";
+			matrizInfo[i][2] = miLista.get(i).getMarca_producto() + "";
+			matrizInfo[i][3] = miLista.get(i).getCapacidad_produto() + "";
+			matrizInfo[i][4] = miLista.get(i).getColor_producto() + "";
+			matrizInfo[i][5] = miLista.get(i).getPrecio_producto() + "";
+			matrizInfo[i][6] = miLista.get(i).getDireccion_foto_producto() + "";
 
 		}
 
@@ -376,7 +372,7 @@ public class control_producto implements ActionListener {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery(
 					"SELECT identidad_contrato_empleado FROM contrato_empleado where identidad_contrato_empleado = '"
-							+ formulario.txtIdentidadContratoEmpleado.getText().toString() + "'");
+							+ formulario.txtBusquedaContratosEmpleados.getText().toString() + "'");
 
 			if (rs.next()) {
 				identidad = (rs.getString("identidad_contrato_empleado"));
