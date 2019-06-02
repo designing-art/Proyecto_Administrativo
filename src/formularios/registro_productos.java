@@ -11,6 +11,8 @@ import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,65 +36,73 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
+
 import com.placeholder.PlaceHolder;
 
 import clases.empleado;
 import conexion.conexion;
 import consultas.consultas_empleado;
-import controles.control_cargo;
+import controles.control_contrato_empleado;
 import controles.control_empleado;
+import utilidades.visor_imagen;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class registro_productos extends JFrame {
-	public JTextField txtMarcaProducto;
-	public JTextField txtPrecioProducto;
-	public JTextField txtCapasidadProducto;
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
-	public JButton btnAtras;
 
-	public JButton btnGuardarCargo;
-	public JButton btnNuevoCargo;
-	public JButton btnActualizarDatosCargo;
-	public JButton btnBorrarCargo;
-	public JButton btnActualizarCargo;
-	public JButton btnMostrar;
+	public JButton btnGuardarProducto;
+	public JButton btnNuevoProducto;
+	public JButton btnActualizarDatosProducto;
+	public JButton btnBorrarProducto;
+	public JButton btnActualizarProducto;
+	public JButton btnVerProducto;
 	public JButton btnAceptar;
+	public static String hora_fecha_reporte;
 
-	public int pagina = 0;
+	public static String ruta;
+	public static ImageIcon imagen;
 
 	public JPanel contentPane;
-	public JTextField txtBusquedaProductos;
+	public JTextField txtBusquedaContratosEmpleados;
 	public JScrollPane barraProductos;
-	public JTable tablaProductos;
-	
+	public JTable tablaContratosEmpleados;
 	public JTextField txtCodigoProducto;
 
-	public TableRowSorter trsfiltroCodigo;
-	String filtroCodigo;
-	public static String hora_fecha_reporte;
 	public static String ruta_logo;
-
 	public static JLabel label;
 	public static JLabel label_2;
-	public JTextField txtDispositivoProducto;
-	public JTextField txtColorProducto;
-	public JLabel lblImagenDel;
-	public JButton btnSubir;
-	public JButton btnVer;
+
+	public TableRowSorter<TableModel> trsfiltroCodigo;
+	String filtroCodigo;
 	public JTextField txtDireccionFotoProducto;
-	public JLabel lblFotoProducto;
+	public JButton btnSubirFotoContrato;
+	public JButton btnVerFotoContrato;
+	public JLabel lbl_foto_contrato;
+
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon iconoProducto = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
+	public JButton btnAtras;
+	public JButton button;
+	public JTextField txtDispositivo;
+	public JTextField txtMarca;
+	public JTextField txtCapasidad;
+	public JTextField txtColor;
+	public JTextField txtPrecio;
 
 	public registro_productos() {
 		setResizable(false);
@@ -103,13 +114,11 @@ public class registro_productos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
 		btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
-		btnAtras.setBounds(717, 20, 102, 23);
+		btnAtras.setBounds(717, 25, 102, 23);
 		contentPane.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			@Override
@@ -126,7 +135,7 @@ public class registro_productos extends JFrame {
 
 		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DE PRODUCTOS");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistrarCargo.setBounds(28, 10, 466, 39);
+		lblRegistrarCargo.setBounds(28, 20, 693, 29);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
@@ -140,205 +149,155 @@ public class registro_productos extends JFrame {
 		label.setBounds(265, 48, 49, 44);
 		panelRegistro.add(label);
 
-		btnNuevoCargo = new JButton("Nuevo");
-		btnNuevoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnNuevoCargo.setBounds(26, 399, 99, 23);
-		panelRegistro.add(btnNuevoCargo);
-		btnNuevoCargo.setBackground(new Color(255, 255, 255));
+		btnNuevoProducto = new JButton("Nuevo");
+		btnNuevoProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnNuevoProducto.setBounds(27, 393, 99, 23);
+		panelRegistro.add(btnNuevoProducto);
+		btnNuevoProducto.setBackground(new Color(255, 255, 255));
 
-		btnGuardarCargo = new JButton("Guardar");
-		btnGuardarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarCargo.setBounds(217, 399, 99, 23);
-		panelRegistro.add(btnGuardarCargo);
-		btnGuardarCargo.setBackground(new Color(60, 179, 113));
-
-		JLabel lblHoraExtraCargo = new JLabel("5. Color :");
-		lblHoraExtraCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblHoraExtraCargo.setBounds(27, 200, 136, 21);
-		panelRegistro.add(lblHoraExtraCargo);
-
-		txtCapasidadProducto = new JTextField();
-		txtCapasidadProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtCapasidadProducto.setBounds(142, 169, 174, 20);
-		txtCapasidadProducto.setColumns(10);
-		txtCapasidadProducto.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelRegistro.add(txtCapasidadProducto);
-		InputMap map2 = txtCapasidadProducto.getInputMap(JComponent.WHEN_FOCUSED);
-		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtCapasidadProducto.addKeyListener(new KeyListener() {
-			@Override
-			// Metodo que valida el ingreso de solo numeros
-			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if ((c < '0' || c > '9'))
-					ke.consume();
-			}
-
-			@Override
-			public void keyPressed(KeyEvent ke) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent ke) {
-			}
-		});
-
-		txtPrecioProducto = new JTextField();
-		txtPrecioProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtPrecioProducto.setBounds(142, 230, 172, 20);
-		panelRegistro.add(txtPrecioProducto);
-		InputMap map = txtPrecioProducto.getInputMap(JComponent.WHEN_FOCUSED);
-		map.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtPrecioProducto.setColumns(10);
-		txtPrecioProducto.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtPrecioProducto.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if ((c < '0' || c > '9'))
-					ke.consume();
-			}
-
-			@Override
-			public void keyPressed(KeyEvent ke) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent ke) {
-			}
-		});
-
-		JLabel lblSueldoCargo = new JLabel("4. Capasidad :");
-		lblSueldoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblSueldoCargo.setBounds(27, 168, 100, 23);
-		panelRegistro.add(lblSueldoCargo);
+		btnGuardarProducto = new JButton("Guardar");
+		btnGuardarProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarProducto.setBounds(218, 393, 99, 23);
+		panelRegistro.add(btnGuardarProducto);
+		btnGuardarProducto.setBackground(new Color(60, 179, 113));
 
 		JLabel lblNombreCargo = new JLabel("3. Marca :");
 		lblNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblNombreCargo.setBounds(27, 143, 121, 14);
+		lblNombreCargo.setBounds(27, 143, 136, 14);
 		panelRegistro.add(lblNombreCargo);
 
-		JLabel lblTipoDeCargo = new JLabel("2. Dispositivo :");
-		lblTipoDeCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipoDeCargo.setBounds(27, 109, 105, 23);
-		panelRegistro.add(lblTipoDeCargo);
+		JLabel lblTipo = new JLabel("2. Dispositivo :");
+		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipo.setBounds(27, 109, 158, 23);
+		panelRegistro.add(lblTipo);
 
-		JLabel lblCodigoCargo = new JLabel("1. C\u00F3digo :");
-		lblCodigoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCodigoCargo.setBounds(27, 84, 63, 14);
-		panelRegistro.add(lblCodigoCargo);
+		JLabel lblCodigo = new JLabel("1. Codigo :");
+		lblCodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblCodigo.setBounds(27, 84, 63, 14);
+		panelRegistro.add(lblCodigo);
 
 		JLabel lblRegistroCargos = new JLabel("Datos del registro :");
 		lblRegistroCargos.setBounds(27, 48, 136, 23);
 		panelRegistro.add(lblRegistroCargos);
 		lblRegistroCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JLabel lblFuncionesCargo = new JLabel("6. Precio :");
-		lblFuncionesCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFuncionesCargo.setBounds(27, 232, 99, 17);
-		panelRegistro.add(lblFuncionesCargo);
-
-		JLabel label_1 = new JLabel("L.");
-		label_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_1.setBounds(120, 235, 17, 14);
-		panelRegistro.add(label_1);
-
-		txtMarcaProducto = new JTextField();
-		txtMarcaProducto.setHorizontalAlignment(SwingConstants.LEFT);
-		txtMarcaProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtMarcaProducto.setColumns(10);
-		txtMarcaProducto.setBounds(142, 141, 174, 20);
-		panelRegistro.add(txtMarcaProducto);
-		InputMap map3 = txtMarcaProducto.getInputMap(JComponent.WHEN_FOCUSED);
-		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-
-		txtMarcaProducto.addKeyListener(new KeyListener() {
-			@Override
-			// metodo de solo letras y simbolos
-			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
-					ke.consume();
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent ke) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent ke) {
-			}
-		});
-
 		txtCodigoProducto = new JTextField();
+		txtCodigoProducto.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigoProducto.setEditable(false);
-		txtCodigoProducto.setBounds(142, 81, 43, 23);
+		txtCodigoProducto.setBounds(173, 81, 43, 23);
 		panelRegistro.add(txtCodigoProducto);
 		txtCodigoProducto.setColumns(10);
 
-		btnActualizarCargo = new JButton("Actualizar");
-		btnActualizarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarCargo.setBackground(new Color(60, 179, 113));
-		btnActualizarCargo.setBounds(217, 372, 99, 23);
-		panelRegistro.add(btnActualizarCargo);
+		btnActualizarProducto = new JButton("Actualizar");
+		btnActualizarProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarProducto.setBackground(new Color(60, 179, 113));
+		btnActualizarProducto.setBounds(218, 359, 99, 23);
+		panelRegistro.add(btnActualizarProducto);
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAceptar.setBackground(new Color(255, 255, 255));
-		btnAceptar.setBounds(26, 372, 99, 23);
+		btnAceptar.setBounds(27, 359, 99, 23);
 		panelRegistro.add(btnAceptar);
 
-		txtDispositivoProducto = new JTextField();
-		txtDispositivoProducto.setHorizontalAlignment(SwingConstants.LEFT);
-		txtDispositivoProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtDispositivoProducto.setColumns(10);
-		txtDispositivoProducto.setBounds(142, 112, 174, 20);
-		panelRegistro.add(txtDispositivoProducto);
+		lbl_foto_contrato = new JLabel();
+		lbl_foto_contrato.setBounds(183, 254, 131, 102);
+		panelRegistro.add(lbl_foto_contrato);
+		final ImageIcon iconofoto = new ImageIcon(iconoProducto.getImage()
+				.getScaledInstance(lbl_foto_contrato.getWidth(), lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+		lbl_foto_contrato.setIcon(iconofoto);
 
-		txtColorProducto = new JTextField();
-		txtColorProducto.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtColorProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtColorProducto.setColumns(10);
-		txtColorProducto.setBounds(142, 200, 174, 20);
-		panelRegistro.add(txtColorProducto);
+		JLabel lblFoto = new JLabel("4. Foto del producto :");
+		lblFoto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblFoto.setBounds(27, 258, 136, 17);
+		panelRegistro.add(lblFoto);
 
-		lblImagenDel = new JLabel("6. Imagen del producto :");
-		lblImagenDel.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblImagenDel.setBounds(27, 260, 158, 14);
-		panelRegistro.add(lblImagenDel);
-
-		btnSubir = new JButton("Subir");
-		btnSubir.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnSubir.setBackground(new Color(60, 179, 113));
-		btnSubir.setBounds(47, 285, 78, 23);
-		panelRegistro.add(btnSubir);
-
-		btnVer = new JButton("Ver");
-		btnVer.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnVer.setBackground(new Color(60, 179, 113));
-		btnVer.setBounds(47, 310, 78, 23);
-		panelRegistro.add(btnVer);
+		btnSubirFotoContrato = new JButton("Subir");
+		btnSubirFotoContrato.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				selecionarFoto();
+			}
+		});
+		btnSubirFotoContrato.setBackground(new Color(250, 128, 114));
+		btnSubirFotoContrato.setBounds(27, 286, 70, 23);
+		panelRegistro.add(btnSubirFotoContrato);
 
 		txtDireccionFotoProducto = new JTextField();
 		txtDireccionFotoProducto.setEditable(false);
-		txtDireccionFotoProducto.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtDireccionFotoProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtDireccionFotoProducto.setColumns(10);
-		txtDireccionFotoProducto.setBounds(26, 341, 121, 20);
+		txtDireccionFotoProducto.setBounds(27, 320, 145, 20);
 		panelRegistro.add(txtDireccionFotoProducto);
 
-		lblFotoProducto = new JLabel();
-		lblFotoProducto.setBounds(176, 261, 138, 100);
-		panelRegistro.add(lblFotoProducto);
+		btnVerFotoContrato = new JButton("Ver");
+		btnVerFotoContrato.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				verFotoContratoEmpleado();
+			}
+		});
+		btnVerFotoContrato.setBackground(Color.WHITE);
+		btnVerFotoContrato.setBounds(102, 286, 70, 23);
+		panelRegistro.add(btnVerFotoContrato);
 
-		JLabel lblImagenLibreta = new JLabel();
-		lblImagenLibreta.setBounds(0, 0, 341, 450);
-		panelRegistro.add(lblImagenLibreta);
-		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-		lblImagenLibreta.setIcon(logo);
+		MaskFormatter formato = null;
+		try {
+			formato = new MaskFormatter("####-####-#####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+		txtDispositivo = new JTextField();
+		txtDispositivo.setHorizontalAlignment(SwingConstants.CENTER);
+		txtDispositivo.setColumns(10);
+		txtDispositivo.setBounds(173, 111, 141, 23);
+		panelRegistro.add(txtDispositivo);
+
+		txtMarca = new JTextField();
+		txtMarca.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMarca.setColumns(10);
+		txtMarca.setBounds(173, 140, 141, 23);
+		panelRegistro.add(txtMarca);
+
+		txtCapasidad = new JTextField();
+		txtCapasidad.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCapasidad.setColumns(10);
+		txtCapasidad.setBounds(173, 167, 141, 23);
+		panelRegistro.add(txtCapasidad);
+
+		JLabel lblCapasidad = new JLabel("4. Capasidad :");
+		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblCapasidad.setBounds(27, 168, 136, 22);
+		panelRegistro.add(lblCapasidad);
+
+		JLabel lblColor = new JLabel("5. Color :");
+		lblColor.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblColor.setBounds(27, 195, 136, 22);
+		panelRegistro.add(lblColor);
+
+		txtColor = new JTextField();
+		txtColor.setHorizontalAlignment(SwingConstants.CENTER);
+		txtColor.setColumns(10);
+		txtColor.setBounds(173, 194, 141, 23);
+		panelRegistro.add(txtColor);
+
+		JLabel lblPrecio = new JLabel("6. Precio :");
+		lblPrecio.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblPrecio.setBounds(27, 225, 136, 22);
+		panelRegistro.add(lblPrecio);
+
+		txtPrecio = new JTextField();
+		txtPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtPrecio.setColumns(10);
+		txtPrecio.setBounds(173, 224, 141, 23);
+		panelRegistro.add(txtPrecio);
+
+		JLabel lblLibreta = new JLabel();
+		lblLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblLibreta);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -352,24 +311,23 @@ public class registro_productos extends JFrame {
 		lblCargosRegistrados.setBounds(30, 41, 166, 19);
 		panelTablaCargos.add(lblCargosRegistrados);
 
-		JLabel lblBuscarProducto = new JLabel("Buscar producto :");
-		lblBuscarProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblBuscarProducto.setBounds(30, 63, 115, 22);
-		panelTablaCargos.add(lblBuscarProducto);
+		JLabel lblBuscarContrato = new JLabel("Buscar Producto :");
+		lblBuscarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblBuscarContrato.setBounds(30, 63, 119, 22);
+		panelTablaCargos.add(lblBuscarContrato);
 
-		txtBusquedaProductos = new JTextField();
-		txtBusquedaProductos.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBusquedaProductos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtBusquedaProductos.setColumns(10);
-		txtBusquedaProductos.setBounds(155, 64, 192, 21);
-		panelTablaCargos.add(txtBusquedaProductos);
-		InputMap map4 = txtBusquedaProductos.getInputMap(JComponent.WHEN_FOCUSED);
-		txtBusquedaProductos.addKeyListener(new KeyListener() {
+		txtBusquedaContratosEmpleados = new JTextField();
+		txtBusquedaContratosEmpleados.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBusquedaContratosEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtBusquedaContratosEmpleados.setColumns(10);
+		txtBusquedaContratosEmpleados.setBounds(138, 64, 209, 21);
+		panelTablaCargos.add(txtBusquedaContratosEmpleados);
+		InputMap map4 = txtBusquedaContratosEmpleados.getInputMap(JComponent.WHEN_FOCUSED);
+		txtBusquedaContratosEmpleados.addKeyListener(new KeyListener() {
 			@Override
-			// metodo para buscar en la tabla
 			public void keyTyped(KeyEvent ke) {
-				trsfiltroCodigo = new TableRowSorter(tablaProductos.getModel());
-				tablaProductos.setRowSorter(trsfiltroCodigo);
+				trsfiltroCodigo = new TableRowSorter(tablaContratosEmpleados.getModel());
+				tablaContratosEmpleados.setRowSorter(trsfiltroCodigo);
 			}
 
 			@Override
@@ -379,57 +337,57 @@ public class registro_productos extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
-				String cadena = (txtBusquedaProductos.getText());
-				txtBusquedaProductos.setText(cadena);
+				String cadena = (txtBusquedaContratosEmpleados.getText());
+				txtBusquedaContratosEmpleados.setText(cadena);
 				repaint();
 				filtro();
 			}
 		});
 
-		btnBorrarCargo = new JButton("Borrar");
-		btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnBorrarCargo.setBackground(new Color(220, 20, 60));
-		btnBorrarCargo.setBounds(30, 395, 99, 23);
-		panelTablaCargos.add(btnBorrarCargo);
+		btnBorrarProducto = new JButton("Borrar");
+		btnBorrarProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBorrarProducto.setBackground(new Color(220, 20, 60));
+		btnBorrarProducto.setBounds(30, 395, 99, 23);
+		panelTablaCargos.add(btnBorrarProducto);
 
-		barraProductos = new JScrollPane(tablaProductos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+		barraProductos = new JScrollPane(tablaContratosEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraProductos);
 		barraProductos.setBounds(28, 90, 376, 294);
 
-		tablaProductos = new JTable();
-		barraProductos.setViewportView(tablaProductos);
+		tablaContratosEmpleados = new JTable();
+		barraProductos.setViewportView(tablaContratosEmpleados);
 
 		label_2 = new JLabel();
 		label_2.setBounds(355, 41, 49, 44);
 		panelTablaCargos.add(label_2);
 
-		btnActualizarDatosCargo = new JButton("Actualizar Datos");
-		btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizarDatosCargo.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosCargo.setBounds(267, 396, 137, 23);
-		panelTablaCargos.add(btnActualizarDatosCargo);
+		btnActualizarDatosProducto = new JButton("Actualizar Datos");
+		btnActualizarDatosProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarDatosProducto.setBackground(new Color(60, 179, 113));
+		btnActualizarDatosProducto.setBounds(267, 396, 137, 23);
+		panelTablaCargos.add(btnActualizarDatosProducto);
 
-		btnMostrar = new JButton("Ver detalles");
-		btnMostrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnMostrar.setBackground(new Color(0, 206, 209));
-		btnMostrar.setBounds(149, 395, 108, 23);
-		panelTablaCargos.add(btnMostrar);
+		btnVerProducto = new JButton("Ver detalles");
+		btnVerProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnVerProducto.setBackground(new Color(0, 206, 209));
+		btnVerProducto.setBounds(149, 395, 108, 23);
+		panelTablaCargos.add(btnVerProducto);
 
-		JButton btnImprimirReporte = new JButton("Imprimir Reporte");
-		btnImprimirReporte.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		button = new JButton("Imprimir Reporte");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de cargos de " + nombreEmpresa;
-				utilJTablePrint(tablaProductos, encabezado,
+				String encabezado = "Reporte de contratos de " + nombreEmpresa;
+				utilJTablePrint(tablaContratosEmpleados, encabezado,
 						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
-		btnImprimirReporte.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnImprimirReporte.setBackground(new Color(60, 179, 113));
-		btnImprimirReporte.setBounds(210, 40, 137, 19);
-		panelTablaCargos.add(btnImprimirReporte);
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(60, 179, 113));
+		button.setBounds(210, 40, 137, 19);
+		panelTablaCargos.add(button);
 
 		JLabel label_5 = new JLabel();
 		label_5.setBounds(0, 0, 431, 449);
@@ -437,53 +395,51 @@ public class registro_productos extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
-
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funciones" };
-		String informacion[][] = control_cargo.obtenerMatriz();
-		tablaProductos = new JTable(informacion, titulos);
-		barraProductos.setViewportView(tablaProductos);
-		for (int c = 0; c < tablaProductos.getColumnCount(); c++) {
-			Class<?> col_class = tablaProductos.getColumnClass(c);
-			tablaProductos.setDefaultEditor(col_class, null);
-			tablaProductos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			tablaProductos.getTableHeader().setReorderingAllowed(false);
+		String titulos[] = { "Codigo", "Identidad", "Tipo", "Tiempo", "Foto" };
+		String informacion[][] = control_contrato_empleado.obtenerMatriz();
+		tablaContratosEmpleados = new JTable(informacion, titulos);
+		barraProductos.setViewportView(tablaContratosEmpleados);
+		for (int c = 0; c < tablaContratosEmpleados.getColumnCount(); c++) {
+			Class<?> col_class = tablaContratosEmpleados.getColumnClass(c);
+			tablaContratosEmpleados.setDefaultEditor(col_class, null);
+			tablaContratosEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaContratosEmpleados.getTableHeader().setReorderingAllowed(false);
 
-			tablaProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
-			tablaProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-			tablaProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
-			tablaProductos.getColumnModel().getColumn(3).setPreferredWidth(80);
-			tablaProductos.getColumnModel().getColumn(4).setPreferredWidth(80);
-			tablaProductos.getColumnModel().getColumn(5).setPreferredWidth(200);
-
-			// alinear datos de sueldo y horaextra a la derecha en la tabla
-			DefaultTableCellRenderer tcr;
-			tcr = new DefaultTableCellRenderer();
-			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaProductos.getColumnModel().getColumn(3).setCellRenderer(tcr);
-			tablaProductos.getColumnModel().getColumn(4).setCellRenderer(tcr);
-
-			DefaultTableCellRenderer tcr1;
-			tcr1 = new DefaultTableCellRenderer();
-			tcr1.setHorizontalAlignment(SwingConstants.CENTER);
-			tablaProductos.getColumnModel().getColumn(0).setCellRenderer(tcr1);
 		}
 	}
 
 	public void filtro() {
-		filtroCodigo = txtBusquedaProductos.getText();
-		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaProductos.getText(), 0, 1, 2, 3, 4, 5));
+		filtroCodigo = txtBusquedaContratosEmpleados.getText();
+		trsfiltroCodigo
+				.setRowFilter(RowFilter.regexFilter(txtBusquedaContratosEmpleados.getText(), 0, 1, 2, 3, 4, 5, 6));
 	}
 
 	public void pistas() {
-		pista = new PlaceHolder(txtBusquedaProductos, "Escriba para buscar.");
-		pista = new PlaceHolder(txtMarcaProducto, "Ingrese la marca del producto.");
-		pista = new PlaceHolder(txtCapasidadProducto, "Digite la capasidad del producto.");
-		pista = new PlaceHolder(txtPrecioProducto, "Digite precio del producto.");
+		pista = new PlaceHolder(txtBusquedaContratosEmpleados, "Escriba para buscar.");
+	}
+
+	public void selecionarFoto() {
+		JFileChooser archivo = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
+				"jpeg");
+		archivo.addChoosableFileFilter(filtro);
+		archivo.setDialogTitle("Abrir Archivo");
+		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		archivo.setCurrentDirectory(ruta);
+		int ventana = archivo.showOpenDialog(null);
+		if (ventana == JFileChooser.APPROVE_OPTION) {
+			File file = archivo.getSelectedFile();
+			txtDireccionFotoProducto.setText(String.valueOf(file));
+			Image foto = getToolkit().getImage(txtDireccionFotoProducto.getText());
+			foto = foto.getScaledInstance(lbl_foto_contrato.getHeight(), lbl_foto_contrato.getWidth(),
+					Image.SCALE_DEFAULT);
+			lbl_foto_contrato.setIcon(new ImageIcon(foto));
+		}
 	}
 
 	public void obtenerUltimoId() {
@@ -493,10 +449,11 @@ public class registro_productos extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM cargos ORDER BY id_cargo DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM contrato_empleado ORDER BY id_contrato_empleado DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
-				ultimoValor = rsr.getString("id_cargo");
+				ultimoValor = rsr.getString("id_contrato_empleado");
 				valor = Integer.parseInt(ultimoValor);
 				valor = valor + 1;
 				id = String.valueOf(valor);
@@ -508,6 +465,20 @@ public class registro_productos extends JFrame {
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void verFotoContratoEmpleado() {
+		if (txtDireccionFotoProducto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtDireccionFotoProducto.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
 		}
 	}
 
