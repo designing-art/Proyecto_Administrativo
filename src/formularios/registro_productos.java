@@ -55,6 +55,7 @@ import conexion.conexion;
 import consultas.consultas_empleado;
 import controles.control_contrato_empleado;
 import controles.control_empleado;
+import controles.control_producto;
 import utilidades.visor_imagen;
 
 import javax.swing.DefaultComboBoxModel;
@@ -79,7 +80,7 @@ public class registro_productos extends JFrame {
 	public JPanel contentPane;
 	public JTextField txtBusquedaContratosEmpleados;
 	public JScrollPane barraProductos;
-	public JTable tablaContratosEmpleados;
+	public JTable tablaProductos;
 	public JTextField txtCodigoProducto;
 
 	public static String ruta_logo;
@@ -95,7 +96,7 @@ public class registro_productos extends JFrame {
 
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
-	public ImageIcon iconoProducto = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
+	public ImageIcon iconoProducto = new ImageIcon(getClass().getResource("/iconos/usb.png"));
 	public JButton btnAtras;
 	public JButton button;
 	public JTextField txtDispositivo;
@@ -201,7 +202,7 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(btnAceptar);
 
 		lbl_foto_contrato = new JLabel();
-		lbl_foto_contrato.setBounds(183, 254, 131, 102);
+		lbl_foto_contrato.setBounds(199, 254, 99, 98);
 		panelRegistro.add(lbl_foto_contrato);
 		final ImageIcon iconofoto = new ImageIcon(iconoProducto.getImage()
 				.getScaledInstance(lbl_foto_contrato.getWidth(), lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
@@ -326,8 +327,8 @@ public class registro_productos extends JFrame {
 		txtBusquedaContratosEmpleados.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				trsfiltroCodigo = new TableRowSorter(tablaContratosEmpleados.getModel());
-				tablaContratosEmpleados.setRowSorter(trsfiltroCodigo);
+				trsfiltroCodigo = new TableRowSorter(tablaProductos.getModel());
+				tablaProductos.setRowSorter(trsfiltroCodigo);
 			}
 
 			@Override
@@ -350,13 +351,13 @@ public class registro_productos extends JFrame {
 		btnBorrarProducto.setBounds(30, 395, 99, 23);
 		panelTablaCargos.add(btnBorrarProducto);
 
-		barraProductos = new JScrollPane(tablaContratosEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+		barraProductos = new JScrollPane(tablaProductos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraProductos);
 		barraProductos.setBounds(28, 90, 376, 294);
 
-		tablaContratosEmpleados = new JTable();
-		barraProductos.setViewportView(tablaContratosEmpleados);
+		tablaProductos = new JTable();
+		barraProductos.setViewportView(tablaProductos);
 
 		label_2 = new JLabel();
 		label_2.setBounds(355, 41, 49, 44);
@@ -379,8 +380,8 @@ public class registro_productos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de contratos de " + nombreEmpresa;
-				utilJTablePrint(tablaContratosEmpleados, encabezado,
+				String encabezado = "Reporte de productos de " + nombreEmpresa;
+				utilJTablePrint(tablaProductos, encabezado,
 						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
@@ -400,15 +401,15 @@ public class registro_productos extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Identidad", "Tipo", "Tiempo", "Foto" };
-		String informacion[][] = control_contrato_empleado.obtenerMatriz();
-		tablaContratosEmpleados = new JTable(informacion, titulos);
-		barraProductos.setViewportView(tablaContratosEmpleados);
-		for (int c = 0; c < tablaContratosEmpleados.getColumnCount(); c++) {
-			Class<?> col_class = tablaContratosEmpleados.getColumnClass(c);
-			tablaContratosEmpleados.setDefaultEditor(col_class, null);
-			tablaContratosEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			tablaContratosEmpleados.getTableHeader().setReorderingAllowed(false);
+		String titulos[] = { "Codigo", "Dispositivo", "Marca", "Capasidad", "Color", "Precio", "Foto" };
+		String informacion[][] = control_producto.obtenerMatriz();
+		tablaProductos = new JTable(informacion, titulos);
+		barraProductos.setViewportView(tablaProductos);
+		for (int c = 0; c < tablaProductos.getColumnCount(); c++) {
+			Class<?> col_class = tablaProductos.getColumnClass(c);
+			tablaProductos.setDefaultEditor(col_class, null);
+			tablaProductos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaProductos.getTableHeader().setReorderingAllowed(false);
 
 		}
 	}
@@ -450,10 +451,10 @@ public class registro_productos extends JFrame {
 		Connection conn = objCon.getConexion();
 		try {
 			PreparedStatement stmtr = conn
-					.prepareStatement("SELECT * FROM contrato_empleado ORDER BY id_contrato_empleado DESC");
+					.prepareStatement("SELECT * FROM productos ORDER BY id_producto DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
-				ultimoValor = rsr.getString("id_contrato_empleado");
+				ultimoValor = rsr.getString("id_producto");
 				valor = Integer.parseInt(ultimoValor);
 				valor = valor + 1;
 				id = String.valueOf(valor);
