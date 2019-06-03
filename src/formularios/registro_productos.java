@@ -208,7 +208,7 @@ public class registro_productos extends JFrame {
 				.getScaledInstance(lbl_foto_contrato.getWidth(), lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 		lbl_foto_contrato.setIcon(iconofoto);
 
-		JLabel lblFoto = new JLabel("4. Foto del producto :");
+		JLabel lblFoto = new JLabel("7. Foto del producto :");
 		lblFoto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblFoto.setBounds(27, 258, 136, 17);
 		panelRegistro.add(lblFoto);

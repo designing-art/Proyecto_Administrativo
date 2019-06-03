@@ -28,6 +28,7 @@ import clases.empresa;
 import clases.horario;
 import clases.planilla;
 import clases.producto;
+import clases.proveedor;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
@@ -38,6 +39,7 @@ import consultas.consultas_empresa;
 import consultas.consultas_horario;
 import consultas.consultas_planilla;
 import consultas.consultas_producto;
+import consultas.consultas_proveedor;
 import controles.control_bonificacion;
 import controles.control_cargo;
 import controles.control_contrato_empleado;
@@ -47,6 +49,7 @@ import controles.control_empresa;
 import controles.control_horario;
 import controles.control_planilla;
 import controles.control_producto;
+import controles.control_proveedor;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -497,6 +500,27 @@ public class ventana_principal extends JFrame {
 		panel_3.add(button_15);
 
 		JButton button_16 = new JButton("Proveedores");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				proveedor clase = new proveedor();
+				consultas_proveedor consulta = new consultas_proveedor();
+				registro_proveedores formulario = new registro_proveedores();
+				control_proveedor control = new control_proveedor(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombresProveedor.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
+			}
+		});
 		button_16.setForeground(Color.BLACK);
 		button_16.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		button_16.setBackground(Color.PINK);
