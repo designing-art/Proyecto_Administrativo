@@ -44,6 +44,7 @@ import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
@@ -410,6 +411,11 @@ public class registro_productos extends JFrame {
 			tablaProductos.setDefaultEditor(col_class, null);
 			tablaProductos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			tablaProductos.getTableHeader().setReorderingAllowed(false);
+			
+			DefaultTableCellRenderer tcr;
+			tcr = new DefaultTableCellRenderer();
+			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+			tablaProductos.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
 		}
 	}

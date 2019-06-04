@@ -291,13 +291,13 @@ public class registro_proveedores extends JFrame {
 		panelRegistro.add(lblPrecio);
 
 		txtTelefonoProveedor = new JTextField();
-		txtTelefonoProveedor.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtTelefonoProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTelefonoProveedor.setColumns(10);
 		txtTelefonoProveedor.setBounds(125, 224, 189, 23);
 		panelRegistro.add(txtTelefonoProveedor);
 
 		txtCorreoProveedor = new JTextField();
-		txtCorreoProveedor.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtCorreoProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCorreoProveedor.setColumns(10);
 		txtCorreoProveedor.setBounds(125, 257, 189, 23);
 		panelRegistro.add(txtCorreoProveedor);
