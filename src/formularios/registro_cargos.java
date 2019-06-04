@@ -36,6 +36,7 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
@@ -72,7 +73,7 @@ public class registro_cargos extends JFrame {
 	public JButton btnActualizarCargo;
 	public JButton btnMostrar;
 	public JButton btnAceptar;
-	
+
 	public int pagina = 0;
 
 	public JPanel contentPane;
@@ -85,7 +86,7 @@ public class registro_cargos extends JFrame {
 	String filtroCodigo;
 	public static String hora_fecha_reporte;
 	public static String ruta_logo;
-	
+
 	public static JLabel label;
 	public static JLabel label_2;
 
@@ -135,7 +136,6 @@ public class registro_cargos extends JFrame {
 		label = new JLabel();
 		label.setBounds(265, 48, 49, 44);
 		panelRegistro.add(label);
-		
 
 		btnNuevoCargo = new JButton("Nuevo");
 		btnNuevoCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -393,11 +393,22 @@ public class registro_cargos extends JFrame {
 		JButton btnImprimirReporte = new JButton("Imprimir Reporte");
 		btnImprimirReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String fecha = getFechaYHora();
+				String ampm;
+				String horas;
+				Calendar cal = new GregorianCalendar();
+				ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+				if (ampm.equals("PM")) {
+					int h = cal.get(Calendar.HOUR_OF_DAY) - 12;
+					horas = h > 9 ? "" + h : "0" + h;
+				} else {
+					horas = cal.get(Calendar.HOUR_OF_DAY) > 9 ? "" + cal.get(Calendar.HOUR_OF_DAY)
+							: "0" + cal.get(Calendar.HOUR_OF_DAY);
+				}
+				String fecha = getFechaYHora() + ampm;
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
 				String encabezado = "Reporte de cargos de " + nombreEmpresa;
-				utilJTablePrint(tablaCargos, encabezado, "Pagina {0}"
-						+ "                                                  " + fecha, true);
+				utilJTablePrint(tablaCargos, encabezado,
+						"Pagina {0}" + "                                             " + fecha, true);
 			}
 		});
 		btnImprimirReporte.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -433,7 +444,7 @@ public class registro_cargos extends JFrame {
 			}
 		});
 		btnRegresarALas.setVisible(false);
-		
+
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}
@@ -448,7 +459,7 @@ public class registro_cargos extends JFrame {
 			tablaCargos.setDefaultEditor(col_class, null);
 			tablaCargos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			tablaCargos.getTableHeader().setReorderingAllowed(false);
-			
+
 			tablaCargos.getColumnModel().getColumn(0).setPreferredWidth(50);
 			tablaCargos.getColumnModel().getColumn(1).setPreferredWidth(100);
 			tablaCargos.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -462,7 +473,7 @@ public class registro_cargos extends JFrame {
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
 			tablaCargos.getColumnModel().getColumn(3).setCellRenderer(tcr);
 			tablaCargos.getColumnModel().getColumn(4).setCellRenderer(tcr);
-			
+
 			DefaultTableCellRenderer tcr1;
 			tcr1 = new DefaultTableCellRenderer();
 			tcr1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -513,10 +524,7 @@ public class registro_cargos extends JFrame {
 		boolean interactive = true;
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			boolean complete = jTable.print(mode,
-					new MessageFormat(header),
-					new MessageFormat(footer),
-					showPrintDialog,
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
@@ -530,16 +538,16 @@ public class registro_cargos extends JFrame {
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public static String getFechaYHora() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
+
 	public void consultarEmpresa() {
 		conexion conex = new conexion();
 		try {
@@ -549,17 +557,17 @@ public class registro_cargos extends JFrame {
 			if (rs.next()) {
 				ruta_logo = (rs.getString("direccion_logo_empresa"));
 				final ImageIcon logo = new ImageIcon(ruta_logo);
-				
+
 				final ImageIcon icono = new ImageIcon(
 						logo.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 				label.setIcon(icono);
-				
-				final ImageIcon icono2 = new ImageIcon(
-						logo.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+
+				final ImageIcon icono2 = new ImageIcon(logo.getImage().getScaledInstance(label_2.getWidth(),
+						label_2.getHeight(), Image.SCALE_DEFAULT));
 				label_2.setIcon(icono2);
-			}else {
-				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
-						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
 			}
 			rs.close();
 			estatuto.close();
