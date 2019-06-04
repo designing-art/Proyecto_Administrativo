@@ -269,7 +269,6 @@ public class registro_cargos extends JFrame {
 		panelRegistro.add(txtNombreCargo);
 		InputMap map3 = txtNombreCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
 			// metodo de solo letras y simbolos

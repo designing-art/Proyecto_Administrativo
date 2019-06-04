@@ -256,18 +256,60 @@ public class registro_proveedores extends JFrame {
 		txtNombresProveedor.setColumns(10);
 		txtNombresProveedor.setBounds(125, 111, 189, 23);
 		panelRegistro.add(txtNombresProveedor);
+		InputMap map3 = txtNombresProveedor.getInputMap(JComponent.WHEN_FOCUSED);
+		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtNombresProveedor.addKeyListener(new KeyListener() {
+			@Override
+			// metodo de solo letras y simbolos
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtCuentaProveedor = new JTextField();
 		txtCuentaProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCuentaProveedor.setColumns(10);
 		txtCuentaProveedor.setBounds(125, 140, 189, 23);
 		panelRegistro.add(txtCuentaProveedor);
+		InputMap map5 = txtCuentaProveedor.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCuentaProveedor.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtDireccionProveedor = new JTextField();
 		txtDireccionProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDireccionProveedor.setColumns(10);
 		txtDireccionProveedor.setBounds(125, 167, 189, 23);
 		panelRegistro.add(txtDireccionProveedor);
+		InputMap map51 = txtDireccionProveedor.getInputMap(JComponent.WHEN_FOCUSED);
+		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblCapasidad = new JLabel("4. Direcci\u00F3n :");
 		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -284,6 +326,25 @@ public class registro_proveedores extends JFrame {
 		txtRtnProveedor.setColumns(10);
 		txtRtnProveedor.setBounds(125, 194, 189, 23);
 		panelRegistro.add(txtRtnProveedor);
+		InputMap map2 = txtRtnProveedor.getInputMap(JComponent.WHEN_FOCUSED);
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtRtnProveedor.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblPrecio = new JLabel("6. Telefono :");
 		lblPrecio.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -295,12 +356,33 @@ public class registro_proveedores extends JFrame {
 		txtTelefonoProveedor.setColumns(10);
 		txtTelefonoProveedor.setBounds(125, 224, 189, 23);
 		panelRegistro.add(txtTelefonoProveedor);
+		InputMap map21 = txtTelefonoProveedor.getInputMap(JComponent.WHEN_FOCUSED);
+		map21.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtTelefonoProveedor.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtCorreoProveedor = new JTextField();
 		txtCorreoProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCorreoProveedor.setColumns(10);
 		txtCorreoProveedor.setBounds(125, 257, 189, 23);
 		panelRegistro.add(txtCorreoProveedor);
+		InputMap map22 = txtCorreoProveedor.getInputMap(JComponent.WHEN_FOCUSED);
+		map22.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		JLabel lblFotografiaDel = new JLabel("8. Fotografia del proveedor :");
 		lblFotografiaDel.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
