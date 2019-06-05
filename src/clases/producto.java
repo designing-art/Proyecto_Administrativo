@@ -9,6 +9,7 @@ public class producto {
 	String color_producto;
 	Double precio_producto;
 	String direccion_foto_producto;
+	int cantidad_producto;
 
 	public int getId_producto() {
 		return id_producto;
@@ -66,4 +67,12 @@ public class producto {
 		this.direccion_foto_producto = direccion_foto_producto;
 	}
 
+	public int getCantidad_producto() {
+		return cantidad_producto;
+	}
+
+	public void setCantidad_producto(int cantidad_producto) {
+		this.cantidad_producto = cantidad_producto;
+	}
+	
 }

@@ -105,6 +105,8 @@ public class registro_productos extends JFrame {
 	public JTextField txtCapasidad;
 	public JTextField txtColor;
 	public JTextField txtPrecio;
+	public JTextField txtCantidad;
+	private JLabel lblL;
 
 	public registro_productos() {
 		setResizable(false);
@@ -168,7 +170,7 @@ public class registro_productos extends JFrame {
 		lblNombreCargo.setBounds(27, 143, 136, 14);
 		panelRegistro.add(lblNombreCargo);
 
-		JLabel lblTipo = new JLabel("2. Dispositivo :");
+		JLabel lblTipo = new JLabel("2. Producto :");
 		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblTipo.setBounds(27, 109, 158, 23);
 		panelRegistro.add(lblTipo);
@@ -193,25 +195,25 @@ public class registro_productos extends JFrame {
 		btnActualizarProducto = new JButton("Actualizar");
 		btnActualizarProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarProducto.setBackground(new Color(60, 179, 113));
-		btnActualizarProducto.setBounds(218, 359, 99, 23);
+		btnActualizarProducto.setBounds(218, 370, 99, 23);
 		panelRegistro.add(btnActualizarProducto);
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAceptar.setBackground(new Color(255, 255, 255));
-		btnAceptar.setBounds(27, 359, 99, 23);
+		btnAceptar.setBounds(27, 370, 99, 23);
 		panelRegistro.add(btnAceptar);
 
 		lbl_foto_contrato = new JLabel();
-		lbl_foto_contrato.setBounds(199, 254, 99, 98);
+		lbl_foto_contrato.setBounds(218, 286, 96, 73);
 		panelRegistro.add(lbl_foto_contrato);
 		final ImageIcon iconofoto = new ImageIcon(iconoProducto.getImage()
 				.getScaledInstance(lbl_foto_contrato.getWidth(), lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 		lbl_foto_contrato.setIcon(iconofoto);
 
-		JLabel lblFoto = new JLabel("7. Foto del producto :");
+		JLabel lblFoto = new JLabel("8. Foto del producto :");
 		lblFoto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFoto.setBounds(27, 258, 136, 17);
+		lblFoto.setBounds(27, 287, 136, 17);
 		panelRegistro.add(lblFoto);
 
 		btnSubirFotoContrato = new JButton("Subir");
@@ -222,13 +224,13 @@ public class registro_productos extends JFrame {
 			}
 		});
 		btnSubirFotoContrato.setBackground(new Color(250, 128, 114));
-		btnSubirFotoContrato.setBounds(27, 286, 70, 23);
+		btnSubirFotoContrato.setBounds(27, 305, 70, 23);
 		panelRegistro.add(btnSubirFotoContrato);
 
 		txtDireccionFotoProducto = new JTextField();
 		txtDireccionFotoProducto.setEditable(false);
 		txtDireccionFotoProducto.setColumns(10);
-		txtDireccionFotoProducto.setBounds(27, 320, 145, 20);
+		txtDireccionFotoProducto.setBounds(27, 339, 145, 20);
 		panelRegistro.add(txtDireccionFotoProducto);
 
 		btnVerFotoProducto = new JButton("Ver");
@@ -239,7 +241,7 @@ public class registro_productos extends JFrame {
 			}
 		});
 		btnVerFotoProducto.setBackground(Color.WHITE);
-		btnVerFotoProducto.setBounds(102, 286, 70, 23);
+		btnVerFotoProducto.setBounds(102, 305, 70, 23);
 		panelRegistro.add(btnVerFotoProducto);
 
 		MaskFormatter formato = null;
@@ -250,7 +252,6 @@ public class registro_productos extends JFrame {
 		}
 
 		txtDispositivo = new JTextField();
-		txtDispositivo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDispositivo.setColumns(10);
 		txtDispositivo.setBounds(173, 111, 141, 23);
 		panelRegistro.add(txtDispositivo);
@@ -258,7 +259,6 @@ public class registro_productos extends JFrame {
 		map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtMarca = new JTextField();
-		txtMarca.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMarca.setColumns(10);
 		txtMarca.setBounds(173, 140, 141, 23);
 		panelRegistro.add(txtMarca);
@@ -266,7 +266,6 @@ public class registro_productos extends JFrame {
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		txtCapasidad = new JTextField();
-		txtCapasidad.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCapasidad.setColumns(10);
 		txtCapasidad.setBounds(173, 167, 141, 23);
 		panelRegistro.add(txtCapasidad);
@@ -274,7 +273,7 @@ public class registro_productos extends JFrame {
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 
-		JLabel lblCapasidad = new JLabel("4. Capasidad :");
+		JLabel lblCapasidad = new JLabel("4. Capacidad :");
 		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblCapasidad.setBounds(27, 168, 136, 22);
 		panelRegistro.add(lblCapasidad);
@@ -285,7 +284,6 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(lblColor);
 
 		txtColor = new JTextField();
-		txtColor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtColor.setColumns(10);
 		txtColor.setBounds(173, 194, 141, 23);
 		panelRegistro.add(txtColor);
@@ -340,14 +338,29 @@ public class registro_productos extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
-
-
-		JLabel lblLibreta = new JLabel();
-		lblLibreta.setBounds(0, 0, 341, 450);
-		panelRegistro.add(lblLibreta);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-		lblLibreta.setIcon(logo);
+		
+		JLabel lblCantidad = new JLabel("7. Cantidad :");
+		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblCantidad.setBounds(27, 253, 136, 22);
+		panelRegistro.add(lblCantidad);
+		
+		txtCantidad = new JTextField();
+		txtCantidad.setColumns(10);
+		txtCantidad.setBounds(173, 252, 141, 23);
+		panelRegistro.add(txtCantidad);
+				
+				lblL = new JLabel("L.");
+				lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+				lblL.setBounds(155, 230, 17, 14);
+				panelRegistro.add(lblL);
+				
+				
+						JLabel lblLibreta = new JLabel();
+						lblLibreta.setBounds(0, 0, 341, 450);
+						panelRegistro.add(lblLibreta);
+						final ImageIcon logo = new ImageIcon(
+								icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+						lblLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -451,7 +464,7 @@ public class registro_productos extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Dispositivo", "Marca", "Capasidad", "Color", "Precio", "Foto" };
+		String titulos[] = { "Codigo", "Producto", "Marca", "Capacidad", "Color", "Precio", "Foto", "Existencia"};
 		String informacion[][] = control_producto.obtenerMatriz();
 		tablaProductos = new JTable(informacion, titulos);
 		barraProductos.setViewportView(tablaProductos);
@@ -465,6 +478,11 @@ public class registro_productos extends JFrame {
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
 			tablaProductos.getColumnModel().getColumn(5).setCellRenderer(tcr);
+			
+			DefaultTableCellRenderer tcr2;
+			tcr2 = new DefaultTableCellRenderer();
+			tcr2.setHorizontalAlignment(SwingConstants.CENTER);
+			tablaProductos.getColumnModel().getColumn(7).setCellRenderer(tcr2);
 
 		}
 	}

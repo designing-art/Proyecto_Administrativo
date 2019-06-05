@@ -104,8 +104,8 @@ public class registro_proveedores extends JFrame {
 	public JTextField txtNombresProveedor;
 	public JTextField txtCuentaProveedor;
 	public JTextField txtDireccionProveedor;
-	public JTextField txtRtnProveedor;
-	public JTextField txtTelefonoProveedor;
+	public JFormattedTextField txtRtnProveedor;
+	public JFormattedTextField txtTelefonoProveedor;
 	public JTextField txtCorreoProveedor;
 
 	public registro_proveedores() {
@@ -252,7 +252,6 @@ public class registro_proveedores extends JFrame {
 		}
 
 		txtNombresProveedor = new JTextField();
-		txtNombresProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNombresProveedor.setColumns(10);
 		txtNombresProveedor.setBounds(125, 111, 189, 23);
 		panelRegistro.add(txtNombresProveedor);
@@ -279,7 +278,6 @@ public class registro_proveedores extends JFrame {
 		});
 
 		txtCuentaProveedor = new JTextField();
-		txtCuentaProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCuentaProveedor.setColumns(10);
 		txtCuentaProveedor.setBounds(125, 140, 189, 23);
 		panelRegistro.add(txtCuentaProveedor);
@@ -304,7 +302,6 @@ public class registro_proveedores extends JFrame {
 		});
 
 		txtDireccionProveedor = new JTextField();
-		txtDireccionProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDireccionProveedor.setColumns(10);
 		txtDireccionProveedor.setBounds(125, 167, 189, 23);
 		panelRegistro.add(txtDireccionProveedor);
@@ -321,7 +318,13 @@ public class registro_proveedores extends JFrame {
 		lblColor.setBounds(27, 195, 136, 22);
 		panelRegistro.add(lblColor);
 
-		txtRtnProveedor = new JTextField();
+		MaskFormatter formato1 = null;
+		try {
+			formato1 = new MaskFormatter("##############");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtRtnProveedor = new JFormattedTextField(formato1);
 		txtRtnProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRtnProveedor.setColumns(10);
 		txtRtnProveedor.setBounds(125, 194, 189, 23);
@@ -351,7 +354,13 @@ public class registro_proveedores extends JFrame {
 		lblPrecio.setBounds(27, 225, 136, 22);
 		panelRegistro.add(lblPrecio);
 
-		txtTelefonoProveedor = new JTextField();
+		MaskFormatter formato2 = null;
+		try {
+			formato2 = new MaskFormatter("####-####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtTelefonoProveedor = new JFormattedTextField(formato2);
 		txtTelefonoProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTelefonoProveedor.setColumns(10);
 		txtTelefonoProveedor.setBounds(125, 224, 189, 23);
@@ -377,7 +386,6 @@ public class registro_proveedores extends JFrame {
 		});
 
 		txtCorreoProveedor = new JTextField();
-		txtCorreoProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCorreoProveedor.setColumns(10);
 		txtCorreoProveedor.setBounds(125, 257, 189, 23);
 		panelRegistro.add(txtCorreoProveedor);

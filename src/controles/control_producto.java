@@ -60,6 +60,7 @@ public class control_producto implements ActionListener {
 			clase.setMarca_producto(formulario.txtMarca.getText().toString());
 			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
 			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+			clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Producto registrado!");
 				limpiar();
@@ -92,6 +93,7 @@ public class control_producto implements ActionListener {
 			clase.setMarca_producto(formulario.txtMarca.getText().toString());
 			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
 			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+			clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Producto actualizado!");
 				limpiar();
@@ -123,6 +125,7 @@ public class control_producto implements ActionListener {
 					String color = formulario.tablaProductos.getValueAt(filaseleccionada, 4).toString();
 					String precio = formulario.tablaProductos.getValueAt(filaseleccionada, 5).toString();
 					String foto = formulario.tablaProductos.getValueAt(filaseleccionada, 6).toString();
+					String cantidad = formulario.tablaProductos.getValueAt(filaseleccionada, 7).toString();
 
 					formulario.txtCodigoProducto.setText(codigo);
 					formulario.txtDispositivo.setText(dispo);
@@ -131,6 +134,7 @@ public class control_producto implements ActionListener {
 					formulario.txtColor.setText(color);
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDireccionFotoProducto.setText(foto);
+					formulario.txtCantidad.setText(cantidad);
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -144,6 +148,7 @@ public class control_producto implements ActionListener {
 					formulario.txtColor.setForeground(Color.BLACK);
 					formulario.txtMarca.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
+					formulario.txtCantidad.setForeground(Color.BLACK);
 					formulario.txtDireccionFotoProducto.setForeground(Color.BLACK);
 
 					formulario.btnBorrarProducto.setVisible(true);
@@ -180,6 +185,8 @@ public class control_producto implements ActionListener {
 					String color = formulario.tablaProductos.getValueAt(filaseleccionada, 4).toString();
 					String precio = formulario.tablaProductos.getValueAt(filaseleccionada, 5).toString();
 					String foto = formulario.tablaProductos.getValueAt(filaseleccionada, 6).toString();
+					String cantidad = formulario.tablaProductos.getValueAt(filaseleccionada, 7).toString();
+
 
 					formulario.txtCodigoProducto.setText(codigo);
 					formulario.txtDispositivo.setText(dispo);
@@ -188,6 +195,8 @@ public class control_producto implements ActionListener {
 					formulario.txtColor.setText(color);
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDireccionFotoProducto.setText(foto);
+					formulario.txtCantidad.setText(cantidad);
+
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -201,6 +210,7 @@ public class control_producto implements ActionListener {
 					formulario.txtColor.setForeground(Color.BLACK);
 					formulario.txtMarca.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
+					formulario.txtCantidad.setForeground(Color.BLACK);
 					formulario.txtDireccionFotoProducto.setForeground(Color.BLACK);
 
 					formulario.btnBorrarProducto.setVisible(false);
@@ -313,6 +323,7 @@ public class control_producto implements ActionListener {
 		formulario.txtColor.setText(null);
 		formulario.txtMarca.setText(null);
 		formulario.txtPrecio.setText(null);
+		formulario.txtCantidad.setText(null);
 		formulario.txtDireccionFotoProducto.setText(null);
 		formulario.txtCodigoProducto.setText(null);
 	}
@@ -335,6 +346,7 @@ public class control_producto implements ActionListener {
 				producto.setColor_producto(rs.getString("color_producto"));
 				producto.setPrecio_producto(Double.parseDouble(rs.getString("precio_producto")));
 				producto.setDireccion_foto_producto(rs.getString("direccion_foto_producto"));
+				producto.setCantidad_producto(Integer.parseInt(rs.getString("cantidad_producto")));
 				miLista.add(producto);
 			}
 			rs.close();
@@ -351,7 +363,7 @@ public class control_producto implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<producto> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][7];
+		String matrizInfo[][] = new String[miLista.size()][8];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_producto() + "";
 			matrizInfo[i][1] = miLista.get(i).getDispositivo_de_entrega_producto() + "";
@@ -360,6 +372,7 @@ public class control_producto implements ActionListener {
 			matrizInfo[i][4] = miLista.get(i).getColor_producto() + "";
 			matrizInfo[i][5] = miLista.get(i).getPrecio_producto() + "";
 			matrizInfo[i][6] = miLista.get(i).getDireccion_foto_producto() + "";
+			matrizInfo[i][7] = miLista.get(i).getCantidad_producto() + "";
 
 		}
 
