@@ -63,6 +63,8 @@ import utilidades.visor_imagen;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class registro_servicios extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -76,6 +78,7 @@ public class registro_servicios extends JFrame {
 	public JButton btnVer;
 	public JButton btnAceptar;
 	public static String hora_fecha_reporte;
+	public int contador = 0;
 
 	public static String ruta;
 	public static ImageIcon imagen;
@@ -103,10 +106,10 @@ public class registro_servicios extends JFrame {
 	public JTextField txtPrecio;
 	public JTextArea txtDescripcion;
 	private JLabel lblL;
-	public static JComboBox<?> cbxProductos;
+	public static JComboBox<String> cbxProductos;
 	public static JTextField txtDispositivo;
 	public static JTextField txtCapasidad;
-	public static JTextField txtColor;
+	public static JTextField txtPrecioProducto;
 	public static JTextField txtMarca;
 
 	public registro_servicios() {
@@ -278,50 +281,68 @@ public class registro_servicios extends JFrame {
 		txtDescripcion = new JTextArea();
 		txtDescripcion.setFont(new Font("Dialog", Font.PLAIN, 12));
 		scrollPane.setViewportView(txtDescripcion);
-		
-		cbxProductos = new JComboBox();
-		cbxProductos.setModel(new DefaultComboBoxModel(new String[] {"Ninguno"}));
+
+		cbxProductos = new JComboBox<String>();
+		cbxProductos.setModel(new DefaultComboBoxModel<String>(new String[] { "Ninguno" }));
 		cbxProductos.setBounds(173, 287, 141, 20);
 		panelRegistro.add(cbxProductos);
+		cbxProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(cbxProductos.getSelectedItem().equals("Ninguno")) {
+					txtDispositivo.setText("");
+					txtMarca.setText("");
+					txtCapasidad.setText("");
+					txtPrecioProducto.setText("");
+				}else {
+					cargarDatosProducto();
+				}
+			}
+		});
+		
 
 		txtDispositivo = new JTextField();
-		txtDispositivo.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtDispositivo.setEditable(false);
+		txtDispositivo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDispositivo.setColumns(10);
 		txtDispositivo.setBounds(27, 310, 141, 23);
 		panelRegistro.add(txtDispositivo);
 
 		txtCapasidad = new JTextField();
-		txtCapasidad.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtCapasidad.setEditable(false);
+		txtCapasidad.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCapasidad.setColumns(10);
 		txtCapasidad.setBounds(27, 336, 141, 23);
 		panelRegistro.add(txtCapasidad);
 
-		txtColor = new JTextField();
-		txtColor.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtColor.setColumns(10);
-		txtColor.setBounds(173, 310, 141, 23);
-		panelRegistro.add(txtColor);
+		txtPrecioProducto = new JTextField();
+		txtPrecioProducto.setEditable(false);
+		txtPrecioProducto.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPrecioProducto.setColumns(10);
+		txtPrecioProducto.setBounds(173, 310, 141, 23);
+		panelRegistro.add(txtPrecioProducto);
 
 		txtMarca = new JTextField();
-		txtMarca.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtMarca.setEditable(false);
+		txtMarca.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMarca.setColumns(10);
 		txtMarca.setBounds(173, 336, 141, 23);
 		panelRegistro.add(txtMarca);
-						
-						JTextArea txtrNotaSiEs = new JTextArea();
-						txtrNotaSiEs.setBackground(new Color(192, 192, 192));
-						txtrNotaSiEs.setText("Nota: Si es necesario, y el cliente lo necesita, la empresa\r\nle ofrece los siguientes productos.");
-						txtrNotaSiEs.setFont(new Font("Dialog", Font.BOLD, 10));
-						txtrNotaSiEs.setEditable(false);
-						txtrNotaSiEs.setBounds(27, 248, 287, 38);
-						panelRegistro.add(txtrNotaSiEs);
-						
-								JLabel lblLibreta = new JLabel();
-								lblLibreta.setBounds(0, 0, 341, 450);
-								panelRegistro.add(lblLibreta);
-								final ImageIcon logo = new ImageIcon(
-										icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-								lblLibreta.setIcon(logo);
+
+		JTextArea txtrNotaSiEs = new JTextArea();
+		txtrNotaSiEs.setBackground(new Color(192, 192, 192));
+		txtrNotaSiEs.setText(
+				"Nota: Si es necesario, y el cliente lo necesita, la empresa\r\nle ofrece los siguientes productos.");
+		txtrNotaSiEs.setFont(new Font("Dialog", Font.BOLD, 10));
+		txtrNotaSiEs.setEditable(false);
+		txtrNotaSiEs.setBounds(27, 248, 287, 38);
+		panelRegistro.add(txtrNotaSiEs);
+
+		JLabel lblLibreta = new JLabel();
+		lblLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblLibreta);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblLibreta.setIcon(logo);
 
 		JPanel panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -424,7 +445,7 @@ public class registro_servicios extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Servicio", "Tiempo", "Precio", "Descripcion", "Producto"};
+		String titulos[] = { "Codigo", "Servicio", "Tiempo", "Precio", "Descripcion", "Producto" };
 		String informacion[][] = control_servicio.obtenerMatriz();
 		tablaServicios = new JTable(informacion, titulos);
 		barraServicios.setViewportView(tablaServicios);
@@ -444,8 +465,7 @@ public class registro_servicios extends JFrame {
 
 	public void filtro() {
 		filtroCodigo = txtBusqueda.getText();
-		trsfiltroCodigo
-				.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText(), 0, 1, 2, 3, 4, 5, 6));
+		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText(), 0, 1, 2, 3, 4, 5, 6));
 	}
 
 	public void pistas() {
@@ -538,4 +558,66 @@ public class registro_servicios extends JFrame {
 		}
 
 	}
+	
+	public void cargarDatosProducto() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			if (contador > 0) {
+				PreparedStatement stmtr = conn.prepareStatement(
+						"SELECT dispositivo_de_entrega_producto, marca_producto, capacidad_produto, precio_producto FROM productos where dispositivo_de_entrega_producto = '"
+								+ cbxProductos.getSelectedItem() + "'");
+				ResultSet rsr = stmtr.executeQuery();
+				rsr.next();
+				txtDispositivo.setText(rsr.getString("dispositivo_de_entrega_producto"));
+				txtMarca.setText(rsr.getString("marca_producto"));
+				txtCapasidad.setText(rsr.getString("capacidad_produto"));
+				txtPrecioProducto.setText(rsr.getString("precio_producto"));
+				;
+				stmtr.close();
+				rsr.close();
+			}
+			conn.close();
+		} catch (Exception e21) {
+			e21.printStackTrace();
+		}
+	}
+	
+	public void restarVentaProducto() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			if (contador > 0) {
+				PreparedStatement stmtr = conn.prepareStatement(
+						"SELECT cantidad_producto FROM productos where dispositivo_de_entrega_producto = '"
+								+ cbxProductos.getSelectedItem() + "'");
+				ResultSet rsr = stmtr.executeQuery();
+				rsr.next();
+				String cantidad = null;
+				int existecia = 0;
+				int venta = 1;
+				int resultado;
+				cantidad = rsr.getString("cantidad_producto");
+				existecia = Integer.parseInt(cantidad);
+				resultado = existecia-venta;
+				
+				PreparedStatement stmtr2 = conn.prepareStatement(
+						"UPDATE productos SET cantidad_producto=? WHERE dispositivo_de_entrega_producto = '"
+								+ cbxProductos.getSelectedItem() + "'");
+				ResultSet rsr2 = stmtr2.executeQuery();
+				rsr.next();
+
+			
+				
+				;
+				stmtr.close();
+				rsr.close();
+			}
+			conn.close();
+		} catch (Exception e21) {
+			e21.printStackTrace();
+		}
+	}
+
+	
 }

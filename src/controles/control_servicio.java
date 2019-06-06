@@ -32,6 +32,7 @@ public class control_servicio implements ActionListener {
 	public consultas_servicio consulta;
 	public registro_servicios formulario;
 	public static String identidad = null;
+	public static int contador = 0;
 
 	public control_servicio(servicio clase, consultas_servicio consulta, registro_servicios formulario) {
 		this.clase = clase;
@@ -68,6 +69,7 @@ public class control_servicio implements ActionListener {
 				limpiar();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! servicio no registrado");
 				limpiar();
@@ -273,7 +275,7 @@ public class control_servicio implements ActionListener {
 		formulario.txtServicio.setText(null);
 		formulario.txtTiempo.setText(null);
 		formulario.txtCapasidad.setText(null);
-		formulario.txtColor.setText(null);
+		formulario.txtPrecioProducto.setText(null);
 		formulario.txtDispositivo.setText(null);
 		formulario.txtMarca.setText(null);
 	}
@@ -323,6 +325,29 @@ public class control_servicio implements ActionListener {
 		}
 
 		return matrizInfo;
+	}
+	
+	
+	public void consultarProductos() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT dispositivo_de_entrega_producto FROM productos");
+
+			while (rs.next()) {
+			registro_servicios.cbxProductos.addItem(rs.getString("dispositivo_de_entrega_producto"));
+			}
+			formulario.contador++;
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 }

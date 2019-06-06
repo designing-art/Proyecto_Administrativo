@@ -466,6 +466,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				control.consultarProductos();
 				dispose();
 			}
 		});
@@ -683,6 +684,13 @@ public class ventana_principal extends JFrame {
 		lblOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JButton btnConfiguracionDelSistema = new JButton("Configuracion del sistema");
+		btnConfiguracionDelSistema.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				configuracion configuracion = new configuracion();
+				configuracion.setLocationRelativeTo(null);
+				configuracion.setVisible(true);
+			}
+		});
 		btnConfiguracionDelSistema.setBounds(135, 413, 174, 21);
 		contentPane.add(btnConfiguracionDelSistema);
 		btnConfiguracionDelSistema.setForeground(Color.BLACK);
