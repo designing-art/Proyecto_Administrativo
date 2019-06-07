@@ -3,6 +3,7 @@ package principal;
 
 import java.io.FileNotFoundException;
 import java.util.Timer;
+
 import javax.swing.JFrame;
 import formularios.*;
 import javazoom.jl.decoder.JavaLayerException;
@@ -17,6 +18,7 @@ public class television extends JFrame {
 		Timer time = new Timer();
 		time.schedule(principal.tarea, 0, 1000);
 		principal.consultarEmpresa();
+
 		principal.vozBienvenido();
 	}
 }

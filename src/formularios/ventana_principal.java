@@ -28,9 +28,11 @@ import clases.empleado;
 import clases.empresa;
 import clases.horario;
 import clases.planilla;
+
 import clases.producto;
 import clases.proveedor;
 import clases.servicio;
+
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
@@ -60,9 +62,11 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -90,16 +94,20 @@ public class ventana_principal extends JFrame {
 	public JButton registroHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
+
 	public JButton btnRegistroProductos;
+
 	public static JLabel lbl_logo_empresa_principal;
 	public static JLabel lbl_nombre_empresa_principal;
 	public static String nombre = null;
 	public static String ruta_logo = null;
 
+	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
+
 	public empresa clase;
 	public consultas_empresa consulta;
 	public registro_empresa formulario;
-
+	
 	public ventana_principal() {
 		setType(Type.POPUP);
 		setResizable(false);
@@ -110,23 +118,38 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
 		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+
 		lbl_nombre_empresa_principal.setBounds(440, 219, 204, 19);
+
+		lbl_nombre_empresa_principal.setBounds(420, 219, 252, 19);
+
 		lbl_nombre_empresa_principal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
 		contentPane.add(lbl_nombre_empresa_principal);
 		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
 
 		lbl_logo_empresa_principal = new JLabel();
 		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+
 		lbl_logo_empresa_principal.setBounds(440, 240, 204, 177);
 		contentPane.add(lbl_logo_empresa_principal);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
 		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
 				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+
+		lbl_logo_empresa_principal.setBounds(420, 240, 252, 177);
+		contentPane.add(lbl_logo_empresa_principal);
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo_estandar.png"));
+		final ImageIcon icono = new ImageIcon(
+				logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+
 		lbl_logo_empresa_principal.setIcon(icono);
 
 		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
@@ -146,7 +169,11 @@ public class ventana_principal extends JFrame {
 				formulario.setLocationRelativeTo(null);
 				formulario.mostrarEmpresa();
 				formulario.pistas();
+
 				nombre = lbl_nombre_empresa_principal.getText().toString();
+
+				nombre = lbl_nombre_empresa_principal.getText().toString(); 
+
 				formulario.txtNombre_Empresa.setText(nombre);
 				dispose();
 			}
@@ -780,6 +807,44 @@ public class ventana_principal extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
 		date = cal.getTime();
 		return df.format(date);
+	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT nombre_empresa, direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				nombre = (rs.getString("nombre_empresa"));
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				lbl_nombre_empresa_principal.setText(nombre);
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				lbl_logo_empresa_principal.setIcon(icono);
+				JOptionPane.showMessageDialog(null,
+						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
+						+ "Empresa: " + nombre);
+			}else {
+				JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
+						+ "         Antes de comensar\n"
+						+ "         podria hacer algunos ajustes.\n"
+						+ "         Ingrese a:\n"
+						+ "   ¿MAS INFORMACION DE LA EMPRESA?\n"
+						+ "          y personalice su empresa!\n"
+						+ "            ******* Buen Dia! *******");		
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 	public void consultarEmpresa() {
