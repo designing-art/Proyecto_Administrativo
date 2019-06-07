@@ -101,9 +101,6 @@ public class ventana_principal extends JFrame {
 	public static JLabel lbl_nombre_empresa_principal;
 	public static String nombre = null;
 	public static String ruta_logo = null;
-
-	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
-
 	public empresa clase;
 	public consultas_empresa consulta;
 	public registro_empresa formulario;
@@ -120,8 +117,6 @@ public class ventana_principal extends JFrame {
 		contentPane.setLayout(null);
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
-
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
@@ -143,12 +138,6 @@ public class ventana_principal extends JFrame {
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
 		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
 				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-
-		lbl_logo_empresa_principal.setBounds(420, 240, 252, 177);
-		contentPane.add(lbl_logo_empresa_principal);
-		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo_estandar.png"));
-		final ImageIcon icono = new ImageIcon(
-				logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
 
 		lbl_logo_empresa_principal.setIcon(icono);
 
@@ -808,44 +797,7 @@ public class ventana_principal extends JFrame {
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
-	public void consultarEmpresa() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT nombre_empresa, direccion_logo_empresa FROM empresa where id_empresa = 1");
 
-			if (rs.next()) {
-				nombre = (rs.getString("nombre_empresa"));
-				ruta_logo = (rs.getString("direccion_logo_empresa"));
-				lbl_nombre_empresa_principal.setText(nombre);
-				final ImageIcon logo = new ImageIcon(ruta_logo);
-				final ImageIcon icono = new ImageIcon(
-						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-				lbl_logo_empresa_principal.setIcon(icono);
-				JOptionPane.showMessageDialog(null,
-						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
-						+ "Empresa: " + nombre);
-			}else {
-				JOptionPane.showMessageDialog(null, "BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
-						+ "         Antes de comensar\n"
-						+ "         podria hacer algunos ajustes.\n"
-						+ "         Ingrese a:\n"
-						+ "   ¿MAS INFORMACION DE LA EMPRESA?\n"
-						+ "          y personalice su empresa!\n"
-						+ "            ******* Buen Dia! *******");		
-			}
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-
-	}
 
 	public void consultarEmpresa() {
 		conexion conex = new conexion();
