@@ -228,6 +228,7 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(btnSubirFotoContrato);
 
 		txtDireccionFotoProducto = new JTextField();
+		txtDireccionFotoProducto.setText("Sin fotografia.");
 		txtDireccionFotoProducto.setEditable(false);
 		txtDireccionFotoProducto.setColumns(10);
 		txtDireccionFotoProducto.setBounds(27, 339, 145, 20);
@@ -348,6 +349,25 @@ public class registro_productos extends JFrame {
 		txtCantidad.setColumns(10);
 		txtCantidad.setBounds(173, 252, 141, 23);
 		panelRegistro.add(txtCantidad);
+		InputMap map51 = txtPrecio.getInputMap(JComponent.WHEN_FOCUSED);
+		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCantidad.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 				
 				lblL = new JLabel("L.");
 				lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));

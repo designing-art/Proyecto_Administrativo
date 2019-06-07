@@ -3,7 +3,6 @@ package principal;
 
 import java.io.FileNotFoundException;
 import java.util.Timer;
-
 import javax.swing.JFrame;
 import formularios.*;
 import javazoom.jl.decoder.JavaLayerException;

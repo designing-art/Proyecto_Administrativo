@@ -237,6 +237,7 @@ public class registro_contratos_empleados extends JFrame {
 		panelRegistro.add(btnSubirFotoContrato);
 
 		txtDireccionFotoContrato = new JTextField();
+		txtDireccionFotoContrato.setText("Sin Fotografia.");
 		txtDireccionFotoContrato.setEditable(false);
 		txtDireccionFotoContrato.setColumns(10);
 		txtDireccionFotoContrato.setBounds(27, 190, 136, 20);

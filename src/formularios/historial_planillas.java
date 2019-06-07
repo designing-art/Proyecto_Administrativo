@@ -237,7 +237,7 @@ public class historial_planillas extends JFrame {
 		try {
 			conexion objCon = new conexion();
 			Connection conn = objCon.getConexion();
-			if (contador1 > 0) {
+			if (contador3 > 0) {
 				PreparedStatement stmtr = conn.prepareStatement(
 						"SELECT nombre_planilla_final, fecha_crecion_planilla_final, fecha_pago_planilla_final, total_pago_planilla_final FROM historial_planillas where nombre_planilla_final = '"
 								+ cbxPlanillasCreadas.getSelectedItem().toString() + "'");

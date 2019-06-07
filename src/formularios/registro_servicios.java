@@ -583,41 +583,4 @@ public class registro_servicios extends JFrame {
 		}
 	}
 	
-	public void restarVentaProducto() {
-		conexion objCon = new conexion();
-		Connection conn = objCon.getConexion();
-		try {
-			if (contador > 0) {
-				PreparedStatement stmtr = conn.prepareStatement(
-						"SELECT cantidad_producto FROM productos where dispositivo_de_entrega_producto = '"
-								+ cbxProductos.getSelectedItem() + "'");
-				ResultSet rsr = stmtr.executeQuery();
-				rsr.next();
-				String cantidad = null;
-				int existecia = 0;
-				int venta = 1;
-				int resultado;
-				cantidad = rsr.getString("cantidad_producto");
-				existecia = Integer.parseInt(cantidad);
-				resultado = existecia-venta;
-				
-				PreparedStatement stmtr2 = conn.prepareStatement(
-						"UPDATE productos SET cantidad_producto=? WHERE dispositivo_de_entrega_producto = '"
-								+ cbxProductos.getSelectedItem() + "'");
-				ResultSet rsr2 = stmtr2.executeQuery();
-				rsr.next();
-
-			
-				
-				;
-				stmtr.close();
-				rsr.close();
-			}
-			conn.close();
-		} catch (Exception e21) {
-			e21.printStackTrace();
-		}
-	}
-
-	
 }

@@ -228,6 +228,7 @@ public class registro_proveedores extends JFrame {
 		panelRegistro.add(btnSubirFotoContrato);
 
 		txtDireccionFotoProveedor = new JTextField();
+		txtDireccionFotoProveedor.setText("Sin Fotografia.");
 		txtDireccionFotoProveedor.setEditable(false);
 		txtDireccionFotoProveedor.setColumns(10);
 		txtDireccionFotoProveedor.setBounds(24, 347, 145, 20);

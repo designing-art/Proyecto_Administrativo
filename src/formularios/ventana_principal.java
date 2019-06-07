@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 
 import clases.bonificacion;
 import clases.cargo;
+import clases.configuracion;
 import clases.contrato_empleado;
 import clases.deduccion;
 import clases.empleado;
@@ -33,6 +34,7 @@ import clases.servicio;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
+import consultas.consultas_configuracion;
 import consultas.consultas_contrato_empleado;
 import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
@@ -44,6 +46,7 @@ import consultas.consultas_proveedor;
 import consultas.consultas_servicio;
 import controles.control_bonificacion;
 import controles.control_cargo;
+import controles.control_configuracion;
 import controles.control_contrato_empleado;
 import controles.control_deduccion;
 import controles.control_empleado;
@@ -686,9 +689,13 @@ public class ventana_principal extends JFrame {
 		JButton btnConfiguracionDelSistema = new JButton("Configuracion del sistema");
 		btnConfiguracionDelSistema.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				configuracion configuracion = new configuracion();
-				configuracion.setLocationRelativeTo(null);
-				configuracion.setVisible(true);
+				configuracion clase = new configuracion();
+				consultas_configuracion consulta = new consultas_configuracion();
+				registro_configuracion formulario = new registro_configuracion();
+				control_configuracion control = new control_configuracion(clase, consulta, formulario);
+				formulario.mostrarConfiguracion();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
 			}
 		});
 		btnConfiguracionDelSistema.setBounds(135, 413, 174, 21);

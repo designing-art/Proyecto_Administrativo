@@ -74,6 +74,7 @@ public class control_producto implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
 				limpiar();
+				formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
 			}
 		}
 	}
@@ -107,6 +108,7 @@ public class control_producto implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
 				limpiar();
+				formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
 			}
 		}
 	}
@@ -285,6 +287,7 @@ public class control_producto implements ActionListener {
 					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
+			formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
 		}
 
 		/* Aceptar */
@@ -308,6 +311,7 @@ public class control_producto implements ActionListener {
 					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
+			formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
 
 		}
 

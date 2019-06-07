@@ -33,6 +33,10 @@ public class control_servicio implements ActionListener {
 	public registro_servicios formulario;
 	public static String identidad = null;
 	public static int contador = 0;
+	public static String cantidad = null;
+	public static int total = 0;
+	public static int existencia = 0;
+	public static String resultado = null;
 
 	public control_servicio(servicio clase, consultas_servicio consulta, registro_servicios formulario) {
 		this.clase = clase;
@@ -66,6 +70,7 @@ public class control_servicio implements ActionListener {
 			clase.setProducto_servicio(formulario.cbxProductos.getSelectedItem().toString());
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Servicio registrado!");
+				restarVentaProducto();
 				limpiar();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
@@ -211,7 +216,7 @@ public class control_servicio implements ActionListener {
 					Connection conn = objCon.getConexion();
 					int Fila = formulario.tablaServicios.getSelectedRow();
 					String codigo = formulario.tablaServicios.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM servicios WHERE id_servicios=?");
+					ps = conn.prepareStatement("DELETE FROM servicios WHERE id_servicio=?");
 					ps.setString(1, codigo);
 					ps.execute();
 					JOptionPane.showMessageDialog(null, "Servicio Eliminado!");
@@ -349,5 +354,35 @@ public class control_servicio implements ActionListener {
 		}
 
 	}
+	
+	public void restarVentaProducto() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT cantidad_producto FROM productos where dispositivo_de_entrega_producto = '"
+					+ formulario.cbxProductos.getSelectedItem() + "'");
+			while (rs.next()) {
+			cantidad = (rs.getString("cantidad_producto"));
+			total = Integer.parseInt(cantidad);
+			existencia = total-1;
+			resultado = String.valueOf(existencia); 
+			
+			Statement estatuto2 = conex.getConexion().createStatement();
+			ResultSet rs2 = estatuto2.executeQuery("UPDATE productos SET cantidad_producto='"+resultado+"' WHERE dispositivo_de_entrega_producto = '"
+					+ formulario.cbxProductos.getSelectedItem() + "'");
+			JOptionPane.showMessageDialog(null, "Producto Vendido!");
+			rs2.close();
+			estatuto.close();
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 
+		}
+	}
+	
 }
