@@ -16,35 +16,57 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+import javax.print.attribute.standard.Media;
 import javax.swing.ImageIcon;
 
 import clases.bonificacion;
 import clases.cargo;
+import clases.configuracion;
 import clases.contrato_empleado;
 import clases.deduccion;
 import clases.empleado;
 import clases.empresa;
 import clases.horario;
 import clases.planilla;
+
+import clases.producto;
+import clases.proveedor;
+import clases.servicio;
+
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
+import consultas.consultas_configuracion;
 import consultas.consultas_contrato_empleado;
 import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_horario;
 import consultas.consultas_planilla;
+import consultas.consultas_producto;
+import consultas.consultas_proveedor;
+import consultas.consultas_servicio;
 import controles.control_bonificacion;
 import controles.control_cargo;
+import controles.control_configuracion;
 import controles.control_contrato_empleado;
 import controles.control_deduccion;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
 import controles.control_planilla;
+import controles.control_producto;
+import controles.control_proveedor;
+import controles.control_servicio;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import java.awt.event.ActionListener;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -72,10 +94,14 @@ public class ventana_principal extends JFrame {
 	public JButton registroHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
+
+	public JButton btnRegistroProductos;
+
 	public static JLabel lbl_logo_empresa_principal;
 	public static JLabel lbl_nombre_empresa_principal;
 	public static String nombre = null;
 	public static String ruta_logo = null;
+
 	final ImageIcon logopeq = new ImageIcon(getClass().getResource("/material/logo.png"));
 
 	public empresa clase;
@@ -92,23 +118,38 @@ public class ventana_principal extends JFrame {
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
 
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
 		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+
+		lbl_nombre_empresa_principal.setBounds(440, 219, 204, 19);
+
 		lbl_nombre_empresa_principal.setBounds(420, 219, 252, 19);
+
 		lbl_nombre_empresa_principal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
 		contentPane.add(lbl_nombre_empresa_principal);
 		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
 
 		lbl_logo_empresa_principal = new JLabel();
 		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+
+		lbl_logo_empresa_principal.setBounds(440, 240, 204, 177);
+		contentPane.add(lbl_logo_empresa_principal);
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
+		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
+				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+
 		lbl_logo_empresa_principal.setBounds(420, 240, 252, 177);
 		contentPane.add(lbl_logo_empresa_principal);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/logo_estandar.png"));
 		final ImageIcon icono = new ImageIcon(
 				logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(), lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+
 		lbl_logo_empresa_principal.setIcon(icono);
 
 		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
@@ -128,14 +169,18 @@ public class ventana_principal extends JFrame {
 				formulario.setLocationRelativeTo(null);
 				formulario.mostrarEmpresa();
 				formulario.pistas();
+
+				nombre = lbl_nombre_empresa_principal.getText().toString();
+
 				nombre = lbl_nombre_empresa_principal.getText().toString(); 
+
 				formulario.txtNombre_Empresa.setText(nombre);
 				dispose();
 			}
 		});
 
-		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.BLACK);
@@ -146,7 +191,7 @@ public class ventana_principal extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(46, 99, 327, 92);
+		panel.setBounds(46, 99, 327, 86);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -180,7 +225,7 @@ public class ventana_principal extends JFrame {
 		registroPlanilla.setForeground(Color.BLACK);
 		registroPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		registroPlanilla.setBackground(new Color(102, 205, 170));
-		registroPlanilla.setBounds(117, 66, 97, 21);
+		registroPlanilla.setBounds(10, 64, 97, 21);
 		panel.add(registroPlanilla);
 
 		registroContrato = new JButton("Contratos");
@@ -196,6 +241,7 @@ public class ventana_principal extends JFrame {
 				formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.construirTabla();
 				formulario.btnGuardarContrato.setVisible(true);
 				formulario.btnNuevoContrato.setVisible(true);
@@ -230,6 +276,7 @@ public class ventana_principal extends JFrame {
 				formulario.txtNombresEmpleado.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.establecerFechaRegistro();
 				formulario.construirTablaEmpleados();
 				formulario.btnNuevoEmpleado.setVisible(true);
@@ -261,6 +308,7 @@ public class ventana_principal extends JFrame {
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarCargo.setVisible(false);
 				formulario.btnGuardarCargo.setVisible(true);
 				formulario.btnNuevoCargo.setVisible(true);
@@ -287,6 +335,7 @@ public class ventana_principal extends JFrame {
 				formulario.obtenerUltimoId();
 				formulario.establecerFechaRegistro();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarBonificacion.setVisible(false);
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevo.setVisible(true);
@@ -318,6 +367,7 @@ public class ventana_principal extends JFrame {
 				formulario.obtenerUltimoId();
 				formulario.establecerFechaRegistro();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarDeduccion.setVisible(false);
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevo.setVisible(true);
@@ -353,6 +403,7 @@ public class ventana_principal extends JFrame {
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
+				formulario.consultarEmpresa();
 				formulario.btnBorrarHorario.setVisible(false);
 				formulario.btnGuardarHorario.setVisible(true);
 				formulario.btnNuevoHorario.setVisible(true);
@@ -371,8 +422,9 @@ public class ventana_principal extends JFrame {
 		panel.add(label_2);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(UIManager.getColor("Button.background"));
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_1.setBounds(46, 192, 327, 72);
+		panel_1.setBounds(46, 186, 327, 73);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -385,35 +437,114 @@ public class ventana_principal extends JFrame {
 		JButton button_7 = new JButton("Clientes");
 		button_7.setForeground(Color.BLACK);
 		button_7.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_7.setBackground(new Color(60, 179, 113));
+		button_7.setBackground(new Color(95, 158, 160));
 		button_7.setBounds(10, 19, 97, 21);
 		panel_1.add(button_7);
 
 		JButton button_8 = new JButton("Contratos");
 		button_8.setForeground(Color.BLACK);
 		button_8.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_8.setBackground(new Color(60, 179, 113));
-		button_8.setBounds(117, 19, 97, 21);
+		button_8.setBackground(new Color(95, 158, 160));
+		button_8.setBounds(10, 41, 97, 21);
 		panel_1.add(button_8);
 
+		btnRegistroProductos = new JButton("Productos");
+		btnRegistroProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				producto clase = new producto();
+				consultas_producto consulta = new consultas_producto();
+				registro_productos formulario = new registro_productos();
+				control_producto control = new control_producto(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtDispositivo.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardarProducto.setVisible(true);
+				formulario.btnNuevoProducto.setVisible(true);
+				formulario.btnActualizarProducto.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrarProducto.setVisible(false);
+				dispose();
+
+			}
+		});
+		btnRegistroProductos.setForeground(Color.BLACK);
+		btnRegistroProductos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnRegistroProductos.setBackground(new Color(95, 158, 160));
+		btnRegistroProductos.setBounds(224, 19, 97, 21);
+		panel_1.add(btnRegistroProductos);
+
 		JButton button_9 = new JButton("Servicios");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				servicio clase = new servicio();
+				consultas_servicio consulta = new consultas_servicio();
+				registro_servicios formulario = new registro_servicios();
+				control_servicio control = new control_servicio(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtServicio.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				control.consultarProductos();
+				dispose();
+			}
+		});
+		button_9.setBounds(117, 19, 97, 21);
+		panel_1.add(button_9);
 		button_9.setForeground(Color.BLACK);
 		button_9.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_9.setBackground(new Color(60, 179, 113));
-		button_9.setBounds(117, 46, 97, 21);
-		panel_1.add(button_9);
-
-		JButton button_10 = new JButton("Productos");
-		button_10.setForeground(Color.BLACK);
-		button_10.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_10.setBackground(new Color(60, 179, 113));
-		button_10.setBounds(224, 19, 97, 21);
-		panel_1.add(button_10);
+		button_9.setBackground(new Color(95, 158, 160));
+		
+				JButton button_16 = new JButton("Proveedores");
+				button_16.setBounds(117, 41, 97, 21);
+				panel_1.add(button_16);
+				button_16.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						proveedor clase = new proveedor();
+						consultas_proveedor consulta = new consultas_proveedor();
+						registro_proveedores formulario = new registro_proveedores();
+						control_proveedor control = new control_proveedor(clase, consulta, formulario);
+						formulario.setVisible(true);
+						formulario.setLocationRelativeTo(null);
+						formulario.txtNombresProveedor.requestFocusInWindow();
+						formulario.obtenerUltimoId();
+						formulario.pistas();
+						formulario.consultarEmpresa();
+						formulario.construirTabla();
+						formulario.btnGuardar.setVisible(true);
+						formulario.btnNuevo.setVisible(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnAceptar.setVisible(false);
+						formulario.btnBorrar.setVisible(false);
+						dispose();
+					}
+				});
+				button_16.setForeground(Color.BLACK);
+				button_16.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+				button_16.setBackground(new Color(95, 158, 160));
+				
+				JButton btnPublicidad = new JButton("Publicidad");
+				btnPublicidad.setForeground(Color.BLACK);
+				btnPublicidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+				btnPublicidad.setBackground(new Color(95, 158, 160));
+				btnPublicidad.setBounds(224, 41, 97, 21);
+				panel_1.add(btnPublicidad);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
+		panel_2.setBackground(UIManager.getColor("Button.background"));
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2.setBounds(46, 263, 327, 92);
+		panel_2.setBounds(46, 300, 327, 46);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -437,29 +568,10 @@ public class ventana_principal extends JFrame {
 		button_12.setBounds(117, 19, 97, 21);
 		panel_2.add(button_12);
 
-		JLabel label_5 = new JLabel("Facturas :");
-		label_5.setForeground(Color.BLACK);
-		label_5.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_5.setBounds(10, 40, 97, 21);
-		panel_2.add(label_5);
-
-		JButton button_13 = new JButton("Facturas Clientes");
-		button_13.setForeground(Color.BLACK);
-		button_13.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_13.setBackground(new Color(255, 215, 0));
-		button_13.setBounds(10, 59, 145, 21);
-		panel_2.add(button_13);
-
-		JButton button_14 = new JButton("Facturas Empresa");
-		button_14.setForeground(Color.BLACK);
-		button_14.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_14.setBackground(new Color(255, 215, 0));
-		button_14.setBounds(176, 59, 145, 21);
-		panel_2.add(button_14);
-
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_3.setBounds(46, 354, 327, 83);
+		panel_3.setBounds(46, 256, 327, 46);
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 
@@ -476,39 +588,12 @@ public class ventana_principal extends JFrame {
 		button_15.setBounds(10, 19, 97, 21);
 		panel_3.add(button_15);
 
-		JButton button_16 = new JButton("Proveedores");
-		button_16.setForeground(Color.BLACK);
-		button_16.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_16.setBackground(Color.PINK);
-		button_16.setBounds(117, 19, 97, 21);
-		panel_3.add(button_16);
-
 		JButton button_17 = new JButton("Compras");
 		button_17.setForeground(Color.BLACK);
 		button_17.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		button_17.setBackground(Color.PINK);
-		button_17.setBounds(224, 19, 97, 21);
+		button_17.setBounds(117, 19, 97, 21);
 		panel_3.add(button_17);
-
-		JLabel label_7 = new JLabel("Reportes :");
-		label_7.setForeground(Color.BLACK);
-		label_7.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_7.setBounds(132, 39, 87, 21);
-		panel_3.add(label_7);
-
-		JButton button_18 = new JButton("Generar Reportes");
-		button_18.setForeground(Color.BLACK);
-		button_18.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_18.setBackground(new Color(255, 165, 0));
-		button_18.setBounds(96, 57, 143, 21);
-		panel_3.add(button_18);
-
-		JLabel lblMenuOpciones = new JLabel();
-		lblMenuOpciones.setBounds(21, 43, 379, 417);
-		contentPane.add(lblMenuOpciones);
-		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
-				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
-		lblMenuOpciones.setIcon(icono2);
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
@@ -622,6 +707,64 @@ public class ventana_principal extends JFrame {
 		lblBienvenidoAlSistema.setForeground(Color.BLACK);
 		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 
+		JLabel lblOpciones = new JLabel("Opciones :");
+		lblOpciones.setBounds(180, 394, 87, 15);
+		contentPane.add(lblOpciones);
+		lblOpciones.setForeground(Color.BLACK);
+		lblOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
+		JButton btnConfiguracionDelSistema = new JButton("Configuracion del sistema");
+		btnConfiguracionDelSistema.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				configuracion clase = new configuracion();
+				consultas_configuracion consulta = new consultas_configuracion();
+				registro_configuracion formulario = new registro_configuracion();
+				control_configuracion control = new control_configuracion(clase, consulta, formulario);
+				formulario.mostrarConfiguracion();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+			}
+		});
+		btnConfiguracionDelSistema.setBounds(135, 413, 174, 21);
+		contentPane.add(btnConfiguracionDelSistema);
+		btnConfiguracionDelSistema.setForeground(Color.BLACK);
+		btnConfiguracionDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnConfiguracionDelSistema.setBackground(new Color(219, 112, 147));
+
+		JPanel panel_9 = new JPanel();
+		panel_9.setLayout(null);
+		panel_9.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_9.setBackground(Color.WHITE);
+		panel_9.setBounds(46, 344, 327, 46);
+		contentPane.add(panel_9);
+
+		JLabel label = new JLabel("Facturas :");
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		label.setBounds(10, 0, 97, 21);
+		panel_9.add(label);
+
+		JButton button = new JButton("Facturas Clientes");
+		button.setForeground(Color.BLACK);
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		button.setBackground(new Color(255, 215, 0));
+		button.setBounds(10, 19, 145, 21);
+		panel_9.add(button);
+
+		JButton button_1 = new JButton("Facturas Empresa");
+		button_1.setForeground(Color.BLACK);
+		button_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		button_1.setBackground(new Color(255, 215, 0));
+		button_1.setBounds(176, 19, 145, 21);
+		panel_9.add(button_1);
+
+		JLabel lblMenuOpciones = new JLabel();
+		lblMenuOpciones.setBounds(21, 43, 379, 417);
+		contentPane.add(lblMenuOpciones);
+		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
+				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
+		lblMenuOpciones.setIcon(icono2);
+
 	}
 
 	Timer time = new Timer();
@@ -704,4 +847,44 @@ public class ventana_principal extends JFrame {
 
 	}
 
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto
+					.executeQuery("SELECT nombre_empresa, direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				nombre = (rs.getString("nombre_empresa"));
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				lbl_nombre_empresa_principal.setText(nombre);
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
+								lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				lbl_logo_empresa_principal.setIcon(icono);
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+								+ "         podria hacer algunos ajustes.\n" + "         Ingrese a:\n"
+								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
+								+ "            ******* Buen Dia! *******");
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+	public void vozBienvenido() throws FileNotFoundException, JavaLayerException {
+		Player apl = new Player(new FileInputStream("src/audios/bienvenido.mp3"));
+		apl.play();
+
+	}
 }

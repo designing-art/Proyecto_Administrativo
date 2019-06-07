@@ -41,12 +41,15 @@ import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
@@ -93,6 +96,10 @@ public class registro_bonificaciones extends JFrame {
 	public JButton btnVerBonificacion;
 	public JButton btnActualizarDatosBonificacion;
 
+	public static String ruta_logo;
+	public static JLabel label_21;
+	public static JLabel label_22;
+
 	public JScrollPane scrollPane_1;
 	public JTextArea txtObservacionBonificacion;
 	public JButton btnAceptar;
@@ -134,10 +141,9 @@ public class registro_bonificaciones extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(444, 46, 430, 467);
@@ -178,12 +184,9 @@ public class registro_bonificaciones extends JFrame {
 			}
 		});
 
-		JLabel label_10 = new JLabel();
-		label_10.setBounds(353, 41, 49, 44);
-		panel_2.add(label_10);
-		final ImageIcon logo2 = new ImageIcon(
-				icono2.getImage().getScaledInstance(label_10.getWidth(), label_10.getHeight(), Image.SCALE_DEFAULT));
-		label_10.setIcon(logo2);
+		label_21 = new JLabel();
+		label_21.setBounds(353, 41, 49, 44);
+		panel_2.add(label_21);
 
 		JLabel lblDeduccionesRegistradas = new JLabel("Bonificaciones");
 		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -268,28 +271,28 @@ public class registro_bonificaciones extends JFrame {
 		btnPlanilla.setBounds(303, 378, 99, 23);
 		panel_2.add(btnPlanilla);
 		btnPlanilla.setVisible(false);
-		
+
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date date = new Date();
-				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
-				utilJTablePrint(tablaBonificaciones, "Canal 40 (COFFEE TV CHANNEL)",
-						"Reporte de Bonificaciones.____. " + hora_fecha_reporte, true);
+				String fecha = getFechaYHora();
+				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
+				String encabezado = "Reporte de bonos de " + nombreEmpresa;
+				utilJTablePrint(tablaBonificaciones, encabezado,
+						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(206, 41, 137, 19);
 		panel_2.add(button);
-		
-				label_8 = new JLabel("");
-				label_8.setBounds(0, 0, 430, 456);
-				panel_2.add(label_8);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-				label_8.setIcon(logo);
+
+		label_8 = new JLabel("");
+		label_8.setBounds(0, 0, 430, 456);
+		panel_2.add(label_8);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+		label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE BONIFICACIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -423,7 +426,9 @@ public class registro_bonificaciones extends JFrame {
 		panel_1.add(lblTipo);
 
 		cbxTipoBonificacion = new JComboBox();
-		cbxTipoBonificacion.setModel(new DefaultComboBoxModel(new String[] {"Bono navide\u00F1o.", "Bono por antiguedad.", "Bono por  publicidad.", "Pago por editar.", "Pago por filmar evento.", "Pago por tomas.", "Pago por venta de publicidad.", "Bono por trabajos terminados."}));
+		cbxTipoBonificacion.setModel(new DefaultComboBoxModel(new String[] { "Bono navide\u00F1o.",
+				"Bono por antiguedad.", "Bono por  publicidad.", "Pago por editar.", "Pago por filmar evento.",
+				"Pago por tomas.", "Pago por venta de publicidad.", "Bono por trabajos terminados." }));
 		cbxTipoBonificacion.setBounds(137, 255, 132, 20);
 		panel_1.add(cbxTipoBonificacion);
 
@@ -586,6 +591,7 @@ public class registro_bonificaciones extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -705,22 +711,18 @@ public class registro_bonificaciones extends JFrame {
 
 		}
 	}
-	
+
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
-		// We define the print mode (Definimos el modo de impresión)
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			// Print the table (Imprimo la tabla)
 			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
-				// Mostramos el mensaje de impresión existosa
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
 						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				// Mostramos un mensaje indicando que la impresión fue cancelada
 				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
 						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
 			}
@@ -730,4 +732,42 @@ public class registro_bonificaciones extends JFrame {
 		}
 	}
 
+	public static String getFechaYHora() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		date = cal.getTime();
+		return df.format(date);
+	}
+
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(label_21.getWidth(), label_21.getHeight(), Image.SCALE_DEFAULT));
+				label_21.setIcon(icono);
+
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
 }

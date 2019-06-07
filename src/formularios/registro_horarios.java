@@ -29,9 +29,12 @@ import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
@@ -82,6 +85,11 @@ public class registro_horarios extends JFrame {
 	String filtroCodigo;
 	private JButton button;
 	public static String hora_fecha_reporte;
+	
+	public static String ruta_logo;
+	public static JLabel label;
+	public static JLabel label_2;
+
 
 	/**
 	 * Create the frame.
@@ -94,7 +102,7 @@ public class registro_horarios extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 
 		JTextField txtidhorario = new JTextField();
 		contentPane.setLayout(null);
@@ -113,6 +121,7 @@ public class registro_horarios extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 
@@ -203,13 +212,9 @@ public class registro_horarios extends JFrame {
 		cbxDiasHorario.setBounds(202, 128, 111, 20);
 		panel.add(cbxDiasHorario);
 
-		JLabel label_1 = new JLabel();
-		label_1.setBounds(264, 41, 49, 44);
-		panel.add(label_1);
-		final ImageIcon icono1 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon logo1 = new ImageIcon(
-				icono1.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
-		label_1.setIcon(logo1);
+		label = new JLabel();
+		label.setBounds(264, 41, 49, 44);
+		panel.add(label);
 
 		btnGuardarHorario = new JButton("Guardar");
 		btnGuardarHorario.setBackground(new Color(60, 179, 113));
@@ -221,7 +226,7 @@ public class registro_horarios extends JFrame {
 		});
 		btnGuardarHorario.setBounds(214, 349, 99, 23);
 		panel.add(btnGuardarHorario);
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(178, 182, 135, 44);
@@ -305,13 +310,9 @@ public class registro_horarios extends JFrame {
 		tablaHorario = new JTable();
 		barraHorarios.setViewportView(tablaHorario);
 
-		JLabel label_4 = new JLabel();
-		label_4.setBounds(358, 40, 49, 44);
-		panelTablaHorario.add(label_4);
-		final ImageIcon icono21 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon logo21 = new ImageIcon(
-				icono21.getImage().getScaledInstance(label_4.getWidth(), label_4.getHeight(), Image.SCALE_DEFAULT));
-		label_4.setIcon(logo21);
+		label_2 = new JLabel();
+		label_2.setBounds(358, 40, 49, 44);
+		panelTablaHorario.add(label_2);
 
 		btnActualizarDatosHorario = new JButton("Actualizar Datos");
 		btnActualizarDatosHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -324,16 +325,16 @@ public class registro_horarios extends JFrame {
 		btnMostrarHorario.setBackground(new Color(0, 206, 209));
 		btnMostrarHorario.setBounds(152, 347, 108, 23);
 		panelTablaHorario.add(btnMostrarHorario);
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/libreta.png"));
+		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date date = new Date();
-				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
-				utilJTablePrint(tablaHorario, "Canal 40 (COFFEE TV CHANNEL)",
-						"Reporte de Horarios.____. " + hora_fecha_reporte, true);
+				String fecha = getFechaYHora();
+				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
+				String encabezado = "Reporte de horarios de " + nombreEmpresa;
+				utilJTablePrint(tablaHorario, encabezado, "Pagina {0}"
+						+ "                                                  " + fecha, true);
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -429,18 +430,17 @@ public class registro_horarios extends JFrame {
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
-		// We define the print mode (Definimos el modo de impresión)
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			// Print the table (Imprimo la tabla)
-			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
+			boolean complete = jTable.print(mode,
+					new MessageFormat(header),
+					new MessageFormat(footer),
+					showPrintDialog,
 					null, interactive);
 			if (complete) {
-				// Mostramos el mensaje de impresión existosa
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
 						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				// Mostramos un mensaje indicando que la impresión fue cancelada
 				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
 						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
 			}
@@ -448,5 +448,47 @@ public class registro_horarios extends JFrame {
 			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public static String getFechaYHora() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		date = cal.getTime();
+		return df.format(date);
+	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+				label.setIcon(icono);
+				
+				final ImageIcon icono2 = new ImageIcon(
+						logo.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+				label_2.setIcon(icono2);
+			}else {
+				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
+						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 }

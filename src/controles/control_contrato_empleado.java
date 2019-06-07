@@ -65,9 +65,10 @@ public class control_contrato_empleado implements ActionListener {
 					if (consulta.insertar(clase)) {
 						JOptionPane.showMessageDialog(null, "Contrato registrado!");
 						limpiar();
+						formulario.txtDireccionFotoContrato.setText("Sin Fotografia.");
 						formulario.construirTabla();
 						formulario.obtenerUltimoId();
-						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/contrato.png"));
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
 						final ImageIcon iconofoto = new ImageIcon(
 								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
@@ -207,6 +208,7 @@ public class control_contrato_empleado implements ActionListener {
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Contrato Actualizado!");
 					limpiar();
+					formulario.txtDireccionFotoContrato.setText("Sin Fotografia.");
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.btnActualizarContrato.setVisible(false);
@@ -265,7 +267,7 @@ public class control_contrato_empleado implements ActionListener {
 		/* Nuevo */
 		if (e.getSource() == formulario.btnNuevoContrato) {
 			limpiar();
-			limpiar();
+			formulario.txtDireccionFotoContrato.setText("Sin Fotografia.");
 			formulario.obtenerUltimoId();
 			formulario.btnBorrarContrato.setVisible(false);
 			formulario.btnGuardarContrato.setVisible(true);
@@ -284,14 +286,11 @@ public class control_contrato_empleado implements ActionListener {
 							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
 		}
-		/* Ver Contrato */
-		if (e.getSource() == formulario.btnNuevoContrato) {
-
-		}
 
 		/* Aceptar */
 		if (e.getSource() == formulario.btnAceptar) {
 			limpiar();
+			formulario.txtDireccionFotoContrato.setText("Sin Fotografia.");
 			formulario.btnBorrarContrato.setVisible(false);
 			formulario.btnGuardarContrato.setVisible(true);
 			formulario.btnNuevoContrato.setVisible(true);

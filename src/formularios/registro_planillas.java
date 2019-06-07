@@ -12,12 +12,16 @@ import com.placeholder.PlaceHolder;
 import clases.bonificacion;
 import clases.deduccion;
 import clases.empleado;
+import clases.historial_planilla;
+import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_deduccion;
+import consultas.consultas_historial_planilla;
 import consultas.consultas_planilla;
 import controles.control_bonificacion;
 import controles.control_deduccion;
+import controles.control_historial_planilla;
 import controles.control_planilla;
 import utilidades.visor_imagen;
 
@@ -88,7 +92,6 @@ public class registro_planillas extends JFrame {
 	public static JFormattedTextField txtIdentidadEmpleadoPlanilla;
 	public JPanel panel;
 	public JLabel label_6;
-	public JLabel lblTipo;
 	public JLabel lblCantidad;
 	public static JTextField txtCantidadPlanilla;
 	public JLabel lblAgregarDeduccion;
@@ -123,8 +126,6 @@ public class registro_planillas extends JFrame {
 
 	public static String bonificaciones = null;
 	public static String deducciones = null;
-
-	public JComboBox<?> cbxTipoPlanilla;
 	public JTextField txtDireccionFoto;
 	public JButton btnVer;
 	public JLabel lblL;
@@ -152,6 +153,9 @@ public class registro_planillas extends JFrame {
 	public JButton btnActualizar_Deducciones;
 	public static String hora_fecha_reporte;
 
+	public static String ruta_logo;
+	public static JLabel label_22;
+
 	public registro_planillas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 671);
@@ -160,10 +164,9 @@ public class registro_planillas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/material/logo.png")));
-		final ImageIcon icono = new ImageIcon(getClass().getResource("/material/libreta.png"));
-		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/material/logo.png"));
-		final ImageIcon usuario = new ImageIcon(getClass().getResource("/material/usuario.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
+		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(444, 46, 430, 575);
@@ -181,7 +184,11 @@ public class registro_planillas extends JFrame {
 		map41.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaPlanilla.setColumns(10);
+
+		txtBusquedaPlanilla.setBounds(87, 124, 271, 18);
+
 		txtBusquedaPlanilla.setBounds(87, 124, 312, 18);
+
 		panel_2.add(txtBusquedaPlanilla);
 		txtBusquedaPlanilla.addKeyListener(new KeyListener() {
 			@Override
@@ -204,9 +211,16 @@ public class registro_planillas extends JFrame {
 			}
 		});
 
+
+		JLabel lblDeduccionesRegistradas = new JLabel("Nombre de la planilla.");
+		lblDeduccionesRegistradas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblDeduccionesRegistradas.setBounds(28, 101, 374, 22);
+
 		JLabel lblDeduccionesRegistradas = new JLabel("Empleados agregados a la planilla.");
 		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblDeduccionesRegistradas.setBounds(28, 101, 283, 22);
+
 		panel_2.add(lblDeduccionesRegistradas);
 
 		btnBorrarPlanilla = new JButton("Borrar");
@@ -261,15 +275,31 @@ public class registro_planillas extends JFrame {
 		panel_2.add(label);
 		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		lblPlanillaCanal = new JLabel("Planilla Canal 40.");
+		lblPlanillaCanal = new JLabel("Registros Planilla.");
+		lblPlanillaCanal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlanillaCanal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+
+		lblPlanillaCanal.setBounds(73, 52, 194, 22);
+
 		lblPlanillaCanal.setBounds(82, 52, 173, 22);
+
 		panel_2.add(lblPlanillaCanal);
 
 		panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_3.setBackground(Color.WHITE);
+
+		panel_3.setBounds(283, 79, 116, 22);
+		panel_2.add(panel_3);
+
+		lbl_hora = new JLabel();
+		lbl_hora.setBounds(0, 0, 116, 22);
+		panel_3.add(lbl_hora);
+		lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_hora.setBackground(SystemColor.menu);
+
 		panel_3.setBounds(291, 79, 108, 22);
 		panel_2.add(panel_3);
 		
@@ -279,6 +309,7 @@ public class registro_planillas extends JFrame {
 				lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 				lbl_hora.setBackground(SystemColor.menu);
+
 
 		panel_4 = new JPanel();
 		panel_4.setLayout(null);
@@ -298,15 +329,25 @@ public class registro_planillas extends JFrame {
 		button_3 = new JButton("Imprimir Reporte");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date date = new Date();
-				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
-				utilJTablePrint(tablaPlanilla, "Canal 40 (COFFEE TV CHANNEL)",
-						"Reporte de la Planilla.____. " + hora_fecha_reporte, true);
+				String fecha = getFechaYHora();
+				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
+				String encabezado = "Reporte de planilla de " + nombreEmpresa;
+				utilJTablePrint(tablaPlanilla, encabezado,
+						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
 		button_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button_3.setBackground(new Color(60, 179, 113));
+
+		button_3.setBounds(265, 52, 137, 21);
+		panel_2.add(button_3);
+
+		txtNumeroPlanilla = new JTextField();
+		txtNumeroPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		txtNumeroPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNumeroPlanilla.setText("1");
+		txtNumeroPlanilla.setBackground(new Color(244, 164, 96));
+
 		button_3.setBounds(256, 52, 146, 21);
 		panel_2.add(button_3);
 
@@ -315,10 +356,67 @@ public class registro_planillas extends JFrame {
 		txtNumeroPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNumeroPlanilla.setText("1");
 		txtNumeroPlanilla.setBackground(new Color(60, 179, 113));
+
 		txtNumeroPlanilla.setEditable(false);
 		txtNumeroPlanilla.setBounds(28, 54, 44, 18);
 		panel_2.add(txtNumeroPlanilla);
 		txtNumeroPlanilla.setColumns(10);
+
+
+		JButton btnHistorialPlanillas = new JButton("Historial Planillas");
+		btnHistorialPlanillas.setBounds(222, 145, 136, 22);
+		panel_2.add(btnHistorialPlanillas);
+		btnHistorialPlanillas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				historial_planillas formulario = new historial_planillas();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.consultarPlanillas();
+				formulario.cargarPlanillasCreadas();
+			}
+		});
+		btnHistorialPlanillas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnHistorialPlanillas.setBackground(new Color(64, 224, 208));
+
+		btnNuevaPlanilla = new JButton("Nueva Planilla");
+		btnNuevaPlanilla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				historial_planilla clase = new historial_planilla();
+				consultas_historial_planilla consulta = new consultas_historial_planilla();
+				registro_nuevas_planillas formulario = new registro_nuevas_planillas();
+				control_historial_planilla control = new control_historial_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombrePlanilla.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				formulario.iniciarEncero();
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+			}
+		});
+		btnNuevaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnNuevaPlanilla.setBackground(new Color(0, 250, 154));
+		btnNuevaPlanilla.setBounds(87, 145, 125, 22);
+		panel_2.add(btnNuevaPlanilla);
+
+		label_8 = new JLabel("");
+		label_8.setHorizontalAlignment(SwingConstants.CENTER);
+		label_8.setBounds(0, 0, 430, 575);
+		panel_2.add(label_8);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+		label_8.setIcon(logo);
+
 		
 				JButton btnHistorialPlanillas = new JButton("Historial Planillas");
 				btnHistorialPlanillas.setBounds(28, 145, 146, 22);
@@ -343,6 +441,7 @@ public class registro_planillas extends JFrame {
 														final ImageIcon logo = new ImageIcon(
 																icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
 														label_8.setIcon(logo);
+
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -466,9 +565,10 @@ public class registro_planillas extends JFrame {
 		lblFotoPlanilla.setIcon(logo22);
 
 		lblAgregarDeduccion = new JLabel("Datos monetarios del empleado :");
-		lblAgregarDeduccion.setBounds(35, 225, 253, 26);
+		lblAgregarDeduccion.setBounds(35, 249, 253, 26);
 		panel_1.add(lblAgregarDeduccion);
 		lblAgregarDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+
 
 		lblTipo = new JLabel("Tipo :");
 		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -479,6 +579,7 @@ public class registro_planillas extends JFrame {
 		cbxTipoPlanilla.setModel(new DefaultComboBoxModel(new String[] {"Mensual", "Eventual", "Quincenal"}));
 		cbxTipoPlanilla.setBounds(153, 280, 116, 20);
 		panel_1.add(cbxTipoPlanilla);
+
 
 		lblCantidad = new JLabel("Sueldo");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -570,14 +671,14 @@ public class registro_planillas extends JFrame {
 
 		JLabel label_1 = new JLabel("Codigo :");
 		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_1.setBounds(35, 255, 63, 14);
+		label_1.setBounds(35, 286, 63, 14);
 		panel_1.add(label_1);
 
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(153, 251, 28, 20);
+		txtCodigo.setBounds(153, 282, 28, 20);
 		panel_1.add(txtCodigo);
 
 		lblFecha = new JLabel("Fecha :");
@@ -783,6 +884,7 @@ public class registro_planillas extends JFrame {
 				dispose();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -803,8 +905,8 @@ public class registro_planillas extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Tipo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo",
-				"Deducciones", "Bonificaciones", "Sueldo Neto", "Total" };
+		String titulos[] = { "Codigo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo", "Deducciones",
+				"Bonificaciones", "Sueldo Neto", "Total" };
 		String informacion[][] = control_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
@@ -817,11 +919,11 @@ public class registro_planillas extends JFrame {
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaPlanilla.getColumnModel().getColumn(11).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(10).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(8).setCellRenderer(tcr);
 			tablaPlanilla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 		}
 	}
 
@@ -942,7 +1044,11 @@ public class registro_planillas extends JFrame {
 	};
 	private JButton button_3;
 	private JTextField txtNumeroPlanilla;
+
+	private JButton btnNuevaPlanilla;
+
 	private JButton btnGuardarPlanilla;
+
 
 	public static String getFecha() {
 		Date date = new Date();
@@ -956,18 +1062,14 @@ public class registro_planillas extends JFrame {
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
-		// We define the print mode (Definimos el modo de impresión)
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			// Print the table (Imprimo la tabla)
 			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
-				// Mostramos el mensaje de impresión existosa
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
 						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				// Mostramos un mensaje indicando que la impresión fue cancelada
 				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
 						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
 			}
@@ -975,5 +1077,14 @@ public class registro_planillas extends JFrame {
 			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	public static String getFechaYHora() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		date = cal.getTime();
+		return df.format(date);
 	}
 }
