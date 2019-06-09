@@ -211,16 +211,10 @@ public class registro_planillas extends JFrame {
 			}
 		});
 
-
 		JLabel lblDeduccionesRegistradas = new JLabel("Nombre de la planilla.");
 		lblDeduccionesRegistradas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblDeduccionesRegistradas.setBounds(28, 101, 374, 22);
-
-		JLabel lblDeduccionesRegistradas = new JLabel("Empleados agregados a la planilla.");
-		lblDeduccionesRegistradas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDeduccionesRegistradas.setBounds(28, 101, 283, 22);
-
 		panel_2.add(lblDeduccionesRegistradas);
 
 		btnBorrarPlanilla = new JButton("Borrar");
@@ -302,14 +296,13 @@ public class registro_planillas extends JFrame {
 
 		panel_3.setBounds(291, 79, 108, 22);
 		panel_2.add(panel_3);
-		
-				lbl_hora = new JLabel();
-				lbl_hora.setBounds(0, 11, 137, 11);
-				panel_3.add(lbl_hora);
-				lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-				lbl_hora.setBackground(SystemColor.menu);
 
+		lbl_hora = new JLabel();
+		lbl_hora.setBounds(0, 11, 137, 11);
+		panel_3.add(lbl_hora);
+		lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_hora.setBackground(SystemColor.menu);
 
 		panel_4 = new JPanel();
 		panel_4.setLayout(null);
@@ -361,7 +354,6 @@ public class registro_planillas extends JFrame {
 		txtNumeroPlanilla.setBounds(28, 54, 44, 18);
 		panel_2.add(txtNumeroPlanilla);
 		txtNumeroPlanilla.setColumns(10);
-
 
 		JButton btnHistorialPlanillas = new JButton("Historial Planillas");
 		btnHistorialPlanillas.setBounds(222, 145, 136, 22);
@@ -417,31 +409,11 @@ public class registro_planillas extends JFrame {
 				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
 		label_8.setIcon(logo);
 
-		
-				JButton btnHistorialPlanillas = new JButton("Historial Planillas");
-				btnHistorialPlanillas.setBounds(28, 145, 146, 22);
-				panel_2.add(btnHistorialPlanillas);
-				btnHistorialPlanillas.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-					}
-				});
-				btnHistorialPlanillas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-				btnHistorialPlanillas.setBackground(new Color(60, 179, 113));
-						
-						btnGuardarPlanilla = new JButton("Guardar Planilla");
-						btnGuardarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-						btnGuardarPlanilla.setBackground(new Color(60, 179, 113));
-						btnGuardarPlanilla.setBounds(243, 145, 159, 22);
-						panel_2.add(btnGuardarPlanilla);
-												
-														label_8 = new JLabel("");
-														label_8.setHorizontalAlignment(SwingConstants.CENTER);
-														label_8.setBounds(0, 0, 430, 575);
-														panel_2.add(label_8);
-														final ImageIcon logo = new ImageIcon(
-																icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-														label_8.setIcon(logo);
-
+		btnGuardarPlanilla = new JButton("Guardar Planilla");
+		btnGuardarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarPlanilla.setBackground(new Color(60, 179, 113));
+		btnGuardarPlanilla.setBounds(243, 145, 159, 22);
+		panel_2.add(btnGuardarPlanilla);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -452,11 +424,6 @@ public class registro_planillas extends JFrame {
 		panel_1.setBounds(10, 46, 424, 575);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-
-		JLabel lblRegistrarDeducciones = new JLabel("Registrar Planilla.");
-		lblRegistrarDeducciones.setBounds(35, 44, 207, 28);
-		panel_1.add(lblRegistrarDeducciones);
-		lblRegistrarDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		lblBuscarEmpleadoPor = new JLabel("Ingrese la Identidad :");
 		lblBuscarEmpleadoPor.setForeground(new Color(0, 128, 0));
@@ -568,18 +535,6 @@ public class registro_planillas extends JFrame {
 		lblAgregarDeduccion.setBounds(35, 249, 253, 26);
 		panel_1.add(lblAgregarDeduccion);
 		lblAgregarDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-
-
-		lblTipo = new JLabel("Tipo :");
-		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipo.setBounds(35, 282, 63, 14);
-		panel_1.add(lblTipo);
-
-		cbxTipoPlanilla = new JComboBox();
-		cbxTipoPlanilla.setModel(new DefaultComboBoxModel(new String[] {"Mensual", "Eventual", "Quincenal"}));
-		cbxTipoPlanilla.setBounds(153, 280, 116, 20);
-		panel_1.add(cbxTipoPlanilla);
-
 
 		lblCantidad = new JLabel("Sueldo");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -1048,7 +1003,6 @@ public class registro_planillas extends JFrame {
 	private JButton btnNuevaPlanilla;
 
 	private JButton btnGuardarPlanilla;
-
 
 	public static String getFecha() {
 		Date date = new Date();
