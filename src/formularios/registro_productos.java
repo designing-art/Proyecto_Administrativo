@@ -66,7 +66,7 @@ public class registro_productos extends JFrame {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
 
-	public JButton btnGuardarProducto;
+	public JButton btnGuardar;
 	public JButton btnNuevoProducto;
 	public JButton btnActualizarDatosProducto;
 	public JButton btnBorrarProducto;
@@ -159,11 +159,11 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(btnNuevoProducto);
 		btnNuevoProducto.setBackground(new Color(255, 255, 255));
 
-		btnGuardarProducto = new JButton("Guardar");
-		btnGuardarProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarProducto.setBounds(218, 393, 99, 23);
-		panelRegistro.add(btnGuardarProducto);
-		btnGuardarProducto.setBackground(new Color(60, 179, 113));
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardar.setBounds(218, 393, 99, 23);
+		panelRegistro.add(btnGuardar);
+		btnGuardar.setBackground(new Color(60, 179, 113));
 
 		JLabel lblNombreCargo = new JLabel("3. Marca :");
 		lblNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

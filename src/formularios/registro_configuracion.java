@@ -24,6 +24,8 @@ import controles.control_cargo;
 import controles.control_contrato_empleado;
 import controles.control_historial_planilla;
 import controles.control_horario;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import utilidades.visor_imagen;
 
 import java.awt.Color;
@@ -62,6 +64,9 @@ import javax.swing.JTextArea;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
 
@@ -73,7 +78,7 @@ public class registro_configuracion extends JFrame {
 	public int contador3 = 0;
 	public static String ruta;
 	public static ImageIcon imagen;
-	public static String identidad = null;	
+	public static String identidad = null;
 	public JButton btnGuardar;
 	public JButton btnActualizar;
 	public JTextField txtCodigo;
@@ -85,6 +90,10 @@ public class registro_configuracion extends JFrame {
 	public JRadioButton rdbtnVerdoso;
 	public ButtonGroup grupo1;
 	public ButtonGroup grupo2;
+
+	public static String sonido = null;
+	public static String tema = null;
+	ventana_principal principal = new ventana_principal();
 
 	public registro_configuracion() {
 		setType(Type.UTILITY);
@@ -119,46 +128,46 @@ public class registro_configuracion extends JFrame {
 		btnGuardar.setBackground(new Color(50, 205, 50));
 		btnGuardar.setBounds(111, 176, 104, 23);
 		panel.add(btnGuardar);
-		
+
 		rdbtnDesactvar = new JRadioButton("Desactivar");
 		rdbtnDesactvar.setBounds(20, 73, 89, 23);
 		panel.add(rdbtnDesactvar);
-		
+
 		rdbtnActivar = new JRadioButton("Activar");
 		rdbtnActivar.setBounds(126, 73, 89, 23);
 		panel.add(rdbtnActivar);
-		
+
 		grupo1 = new ButtonGroup();
 		grupo1.add(rdbtnDesactvar);
 		grupo1.add(rdbtnActivar);
-		
+
 		JLabel lblConfiguracionDeDiseo = new JLabel("Configuracion de dise\u00F1o :");
 		lblConfiguracionDeDiseo.setFont(new Font("Arial Black", Font.BOLD, 12));
 		lblConfiguracionDeDiseo.setBounds(20, 93, 220, 25);
 		panel.add(lblConfiguracionDeDiseo);
-		
+
 		rdbtnClaro = new JRadioButton("Claro");
 		rdbtnClaro.setBounds(20, 115, 89, 23);
 		panel.add(rdbtnClaro);
-		
+
 		rdbtnObscuro = new JRadioButton("Obscuro");
 		rdbtnObscuro.setBounds(131, 115, 84, 23);
 		panel.add(rdbtnObscuro);
-		
+
 		rdbtnAzul = new JRadioButton("Azulado");
 		rdbtnAzul.setBounds(20, 141, 89, 23);
 		panel.add(rdbtnAzul);
-		
+
 		rdbtnVerdoso = new JRadioButton("Verdoso");
 		rdbtnVerdoso.setBounds(131, 141, 84, 23);
 		panel.add(rdbtnVerdoso);
-		
+
 		grupo2 = new ButtonGroup();
 		grupo2.add(rdbtnClaro);
 		grupo2.add(rdbtnObscuro);
 		grupo2.add(rdbtnAzul);
 		grupo2.add(rdbtnVerdoso);
-		
+
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
@@ -166,13 +175,12 @@ public class registro_configuracion extends JFrame {
 		panel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		txtCodigo.setVisible(false);
-		
+
 		btnActualizar = new JButton("Guardar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(50, 205, 50));
 		btnActualizar.setBounds(20, 176, 104, 23);
 		panel.add(btnActualizar);
-		
 
 		JLabel label_12 = new JLabel("");
 		label_12.setHorizontalAlignment(SwingConstants.CENTER);
@@ -189,7 +197,7 @@ public class registro_configuracion extends JFrame {
 		contentPane.add(lblRegistroYMantenimiento);
 
 	}
-	
+
 	public void mostrarConfiguracion() {
 		consultas_configuracion consulta = new consultas_configuracion();
 		configuracion clase = new configuracion();
@@ -202,4 +210,88 @@ public class registro_configuracion extends JFrame {
 			btnGuardar.setVisible(true);
 		}
 	}
+
+	public void vozBienvenido() throws FileNotFoundException, JavaLayerException {
+		Player apl = new Player(new FileInputStream("src/audios/bienvenido.mp3"));
+		apl.play();
 	}
+
+	public void configuracionSonido() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT sonido_configuracion, tema_configuracion FROM configuraciones WHERE id_configuracion = 1");
+
+			if (rs.next()) {
+				sonido = (rs.getString("sonido_configuracion"));
+				tema = (rs.getString("tema_configuracion"));
+				if (sonido.equals("Activar")) {
+					try {
+						vozBienvenido();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (JavaLayerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void consultarConfiguracion() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT sonido_configuracion, tema_configuracion FROM configuraciones WHERE id_configuracion = 1");
+
+			if (rs.next()) {
+				sonido = (rs.getString("sonido_configuracion"));
+				tema = (rs.getString("tema_configuracion"));
+
+				if (sonido.equals("Activar")) {
+					rdbtnActivar.setSelected(true);
+					repaint();
+				} else {
+					rdbtnDesactvar.setSelected(true);
+					repaint();
+				}
+
+				if (tema.equals("Claro")) {
+					rdbtnClaro.setSelected(true);
+					repaint();
+				} else {
+					if (tema.equals("Obscuro")) {
+						rdbtnObscuro.setSelected(true);
+						repaint();
+					} else {
+						if (tema.equals("Verdoso")) {
+							rdbtnVerdoso.setSelected(true);
+							repaint();
+						} else {
+							rdbtnAzul.setSelected(true);
+							repaint();
+						}
+					}
+				}
+			}
+
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+}

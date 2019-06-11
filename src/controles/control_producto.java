@@ -34,7 +34,7 @@ public class control_producto implements ActionListener {
 		this.clase = clase;
 		this.consulta = consulta;
 		this.formulario = formulario;
-		this.formulario.btnGuardarProducto.addActionListener(this);
+		this.formulario.btnGuardar.addActionListener(this);
 		this.formulario.btnNuevoProducto.addActionListener(this);
 		this.formulario.btnActualizarProducto.addActionListener(this);
 		this.formulario.btnActualizarDatosProducto.addActionListener(this);
@@ -47,7 +47,7 @@ public class control_producto implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource() == formulario.btnGuardarProducto) {
+		if (e.getSource() == formulario.btnGuardar) {
 			if (formulario.txtDireccionFotoProducto.getText().isEmpty() || formulario.txtDispositivo.getText().isEmpty()
 					|| formulario.txtCapasidad.getText().isEmpty() || formulario.txtColor.getText().isEmpty()
 					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty())
@@ -154,7 +154,7 @@ public class control_producto implements ActionListener {
 					formulario.txtDireccionFotoProducto.setForeground(Color.BLACK);
 
 					formulario.btnBorrarProducto.setVisible(true);
-					formulario.btnGuardarProducto.setVisible(false);
+					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevoProducto.setVisible(false);
 					formulario.btnActualizarProducto.setVisible(true);
 					formulario.btnActualizarDatosProducto.setVisible(true);
@@ -216,7 +216,7 @@ public class control_producto implements ActionListener {
 					formulario.txtDireccionFotoProducto.setForeground(Color.BLACK);
 
 					formulario.btnBorrarProducto.setVisible(false);
-					formulario.btnGuardarProducto.setVisible(false);
+					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevoProducto.setVisible(false);
 					formulario.btnActualizarProducto.setVisible(false);
 					formulario.btnActualizarDatosProducto.setVisible(false);
@@ -257,7 +257,7 @@ public class control_producto implements ActionListener {
 					formulario.lbl_foto_contrato.setEnabled(false);
 					formulario.btnAceptar.setEnabled(true);
 					formulario.btnActualizarProducto.setVisible(false);
-					formulario.btnGuardarProducto.setVisible(false);
+					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevoProducto.setVisible(false);
 
 				}
@@ -273,7 +273,7 @@ public class control_producto implements ActionListener {
 			limpiar();
 			formulario.obtenerUltimoId();
 			formulario.btnBorrarProducto.setVisible(false);
-			formulario.btnGuardarProducto.setVisible(true);
+			formulario.btnGuardar.setVisible(true);
 			formulario.btnNuevoProducto.setVisible(true);
 			formulario.btnActualizarProducto.setVisible(false);
 			formulario.btnActualizarDatosProducto.setVisible(true);
@@ -294,7 +294,7 @@ public class control_producto implements ActionListener {
 		if (e.getSource() == formulario.btnAceptar) {
 			limpiar();
 			formulario.btnBorrarProducto.setVisible(false);
-			formulario.btnGuardarProducto.setVisible(true);
+			formulario.btnGuardar.setVisible(true);
 			formulario.btnNuevoProducto.setVisible(true);
 			formulario.btnActualizarProducto.setVisible(false);
 			formulario.btnActualizarDatosProducto.setVisible(true);

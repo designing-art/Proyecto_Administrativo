@@ -127,13 +127,7 @@ public class registro_empresa extends JFrame {
 				principal.setLocationRelativeTo(null);
 				dispose();
 				Timer time = new Timer();
-
 				time.schedule(principal.tarea, 0, 1000);	
-
-				time.schedule(principal.tarea, 0, 1000);
-				
-				
-
 			}
 		});
 

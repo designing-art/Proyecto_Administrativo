@@ -27,6 +27,7 @@ import clases.deduccion;
 import clases.empleado;
 import clases.empresa;
 import clases.horario;
+import clases.inventario;
 import clases.planilla;
 
 import clases.producto;
@@ -42,6 +43,7 @@ import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_horario;
+import consultas.consultas_inventario;
 import consultas.consultas_planilla;
 import consultas.consultas_producto;
 import consultas.consultas_proveedor;
@@ -54,6 +56,7 @@ import controles.control_deduccion;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_horario;
+import controles.control_inventario;
 import controles.control_planilla;
 import controles.control_producto;
 import controles.control_proveedor;
@@ -451,7 +454,7 @@ public class ventana_principal extends JFrame {
 				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.construirTabla();
-				formulario.btnGuardarProducto.setVisible(true);
+				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevoProducto.setVisible(true);
 				formulario.btnActualizarProducto.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
@@ -571,6 +574,28 @@ public class ventana_principal extends JFrame {
 		panel_3.add(label_6);
 
 		JButton button_15 = new JButton("Inventario");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				inventario clase = new inventario();
+				consultas_inventario consulta = new consultas_inventario();
+				registro_inventario formulario = new registro_inventario();
+				control_inventario control = new control_inventario(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombre.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				formulario.txtExistencia.setText("0");
+				dispose();
+			}
+		});
 		button_15.setForeground(Color.BLACK);
 		button_15.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		button_15.setBackground(Color.PINK);
@@ -709,9 +734,11 @@ public class ventana_principal extends JFrame {
 				consultas_configuracion consulta = new consultas_configuracion();
 				registro_configuracion formulario = new registro_configuracion();
 				control_configuracion control = new control_configuracion(clase, consulta, formulario);
+				formulario.consultarConfiguracion();
 				formulario.mostrarConfiguracion();
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
+				
 			}
 		});
 		btnConfiguracionDelSistema.setBounds(135, 413, 174, 21);
@@ -834,9 +861,4 @@ public class ventana_principal extends JFrame {
 
 	}
 
-	public void vozBienvenido() throws FileNotFoundException, JavaLayerException {
-		Player apl = new Player(new FileInputStream("src/audios/bienvenido.mp3"));
-		apl.play();
-
-	}
 }
