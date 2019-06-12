@@ -33,6 +33,8 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -50,6 +52,8 @@ import controles.control_inventario;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 public class registro_inventario extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -77,6 +81,8 @@ public class registro_inventario extends JFrame {
 	public static JLabel label;
 	public static JLabel label_2;
 
+	public JDateChooser dateRegistro;
+
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
 
@@ -96,6 +102,7 @@ public class registro_inventario extends JFrame {
 	public JTextArea txtDescripcion;
 	public JLabel lblCantidad_1;
 	public JTextField txtCantidad;
+	public JTextFieldDateEditor editor;
 
 	public registro_inventario() {
 		setResizable(false);
@@ -279,7 +286,6 @@ public class registro_inventario extends JFrame {
 		panelRegistro.add(txtColor);
 		InputMap map5 = txtColor.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		
 
 		JLabel lblCantidad = new JLabel("7. Marca :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -330,12 +336,12 @@ public class registro_inventario extends JFrame {
 		scrollPane.setViewportView(txtDescripcion);
 		InputMap map52 = txtDescripcion.getInputMap(JComponent.WHEN_FOCUSED);
 		map52.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		
+
 		lblCantidad_1 = new JLabel("9. Cantidad :");
 		lblCantidad_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblCantidad_1.setBounds(27, 313, 136, 22);
 		panelRegistro.add(lblCantidad_1);
-		
+
 		txtCantidad = new JTextField();
 		txtCantidad.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCantidad.setColumns(10);
@@ -360,13 +366,22 @@ public class registro_inventario extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
-		
-				JLabel lblLibreta = new JLabel();
-				lblLibreta.setBounds(0, 0, 341, 450);
-				panelRegistro.add(lblLibreta);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-				lblLibreta.setIcon(logo);
+
+		dateRegistro = new JDateChooser();
+		dateRegistro.setBounds(219, 72, 95, 20);
+		dateRegistro.setDateFormatString("dd-MMMMM-yyyy");
+		panelRegistro.add(dateRegistro);
+		editor = (JTextFieldDateEditor) dateRegistro.getDateEditor();
+		editor.setEditable(false);
+		editor.setHorizontalAlignment(SwingConstants.CENTER);
+		dateRegistro.setVisible(false);
+
+		JLabel lblLibreta = new JLabel();
+		lblLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblLibreta);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -470,7 +485,8 @@ public class registro_inventario extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Nombre", "Precio", "Descripcion", "Peso", "Color", "Marca", "Modelo", "Cantidad", "Existencia" };
+		String titulos[] = { "Codigo", "Nombre", "Precio", "Descripcion", "Peso", "Color", "Marca", "Modelo",
+				"Cantidad", "Existencia", "Registro" };
 		String informacion[][] = control_inventario.obtenerMatriz();
 		tabla = new JTable(informacion, titulos);
 		barra.setViewportView(tabla);
@@ -580,6 +596,17 @@ public class registro_inventario extends JFrame {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+	public void establecerFechaRegistro() {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			Date date = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			dateRegistro.setDate(date);
+		} catch (Exception e) {
 
 		}
 

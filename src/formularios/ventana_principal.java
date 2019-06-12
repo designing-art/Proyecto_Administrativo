@@ -581,6 +581,7 @@ public class ventana_principal extends JFrame {
 				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.construirTabla();
+				formulario.establecerFechaRegistro();
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevo.setVisible(true);
 				formulario.btnActualizar.setVisible(false);

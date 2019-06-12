@@ -14,7 +14,6 @@ public class television extends JFrame {
 		time.schedule(principal.tarea, 0, 1000);
 		registro_configuracion configuracion = new registro_configuracion();
 		configuracion.consultarConfiguracion();
-		configuracion.mostrarConfiguracion();
 		configuracion.configuracionSonido();
 	}
 	

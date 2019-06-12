@@ -11,6 +11,7 @@ public class inventario {
 	String modelo_objeto_inventario;
 	int cantidad_objeto_inventario;
 	int existencias_objeto_inventario;
+	String fecha_registro_inventario;
 
 	public int getId_inventario() {
 		return id_inventario;
@@ -90,6 +91,14 @@ public class inventario {
 
 	public void setExistencias_objeto_inventario(int existencias_objeto_inventario) {
 		this.existencias_objeto_inventario = existencias_objeto_inventario;
+	}
+
+	public String getFecha_registro_inventario() {
+		return fecha_registro_inventario;
+	}
+
+	public void setFecha_registro_inventario(String fecha_registro_inventario) {
+		this.fecha_registro_inventario = fecha_registro_inventario;
 	}
 
 }

@@ -58,6 +58,7 @@ public class control_inventario implements ActionListener {
 			clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
 			clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
 			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+			clase.setFecha_registro_inventario(formulario.editor.getText().toString());
 			
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Objeto registrado!");
@@ -89,6 +90,7 @@ public class control_inventario implements ActionListener {
 			clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
 			clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
 			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+			clase.setFecha_registro_inventario(formulario.editor.getText().toString());
 			
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Objeto actualizado!");
@@ -119,6 +121,7 @@ public class control_inventario implements ActionListener {
 					String modelo = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
 					String cantidad = formulario.tabla.getValueAt(filaseleccionada, 8).toString();
 					String existencia = formulario.tabla.getValueAt(filaseleccionada, 9).toString();
+					String fecha = formulario.tabla.getValueAt(filaseleccionada, 10).toString();
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtNombre.setText(nombre);
@@ -130,6 +133,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtModelo.setText(modelo);
 					formulario.txtCantidad.setText(cantidad);
 					formulario.txtExistencia.setText(existencia);
+					formulario.editor.setText(fecha);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNombre.setForeground(Color.BLACK);
@@ -182,6 +186,7 @@ public class control_inventario implements ActionListener {
 					String modelo = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
 					String cantidad = formulario.tabla.getValueAt(filaseleccionada, 8).toString();
 					String existencia = formulario.tabla.getValueAt(filaseleccionada, 9).toString();
+					String fecha = formulario.tabla.getValueAt(filaseleccionada, 10).toString();
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtNombre.setText(nombre);
@@ -193,6 +198,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtModelo.setText(modelo);
 					formulario.txtCantidad.setText(cantidad);
 					formulario.txtExistencia.setText(existencia);
+					formulario.editor.setText(fecha);
 					
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNombre.setForeground(Color.BLACK);
@@ -297,6 +303,7 @@ public class control_inventario implements ActionListener {
 			formulario.obtenerUltimoId();
 			formulario.pistas();
 			formulario.construirTabla();
+			formulario.establecerFechaRegistro();
 			formulario.txtNombre.setEditable(true);
 			formulario.txtPrecio.setEditable(true);
 			formulario.txtDescripcion.setEditable(true);
@@ -349,6 +356,7 @@ public class control_inventario implements ActionListener {
 				inventario.setModelo_objeto_inventario(rs.getString("modelo_objeto_inventario"));
 				inventario.setCantidad_objeto_inventario(Integer.parseInt(rs.getString("cantidad_objeto_inventario")));
 				inventario.setExistencias_objeto_inventario(Integer.parseInt(rs.getString("existencias_objeto_inventario")));
+				inventario.setFecha_registro_inventario(rs.getString("fecha_registro_inventario"));
 				miLista.add(inventario);
 			}
 			rs.close();
@@ -365,7 +373,7 @@ public class control_inventario implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<inventario> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][10];
+		String matrizInfo[][] = new String[miLista.size()][11];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_inventario() + "";
 			matrizInfo[i][1] = miLista.get(i).getNombre_objeto_inventario() + "";
@@ -377,14 +385,11 @@ public class control_inventario implements ActionListener {
 			matrizInfo[i][7] = miLista.get(i).getModelo_objeto_inventario() + "";
 			matrizInfo[i][8] = miLista.get(i).getCantidad_objeto_inventario() + "";
 			matrizInfo[i][9] = miLista.get(i).getExistencias_objeto_inventario() + "";
+			matrizInfo[i][10] = miLista.get(i).getFecha_registro_inventario() + "";
 
 		}
 
 		return matrizInfo;
 	}
 	
-	public void SumarInventario() {
-	
-	}
-
 }

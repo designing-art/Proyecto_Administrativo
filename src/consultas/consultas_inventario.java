@@ -12,7 +12,7 @@ public class consultas_inventario extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO inventario (nombre_objeto_inventario, precio_objeto_inventario, descripcion_objeto_inventario, peso_objeto_inventario, color_objeto_inventario, marca_objeto_inventario, modelo_objeto_inventario, cantidad_objeto_inventario, existencias_objeto_inventario ) VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO inventario (nombre_objeto_inventario, precio_objeto_inventario, descripcion_objeto_inventario, peso_objeto_inventario, color_objeto_inventario, marca_objeto_inventario, modelo_objeto_inventario, cantidad_objeto_inventario, existencias_objeto_inventario, fecha_registro_inventario ) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -25,6 +25,7 @@ public class consultas_inventario extends conexion {
 			ps.setString(7, inventario.getModelo_objeto_inventario());
 			ps.setInt(8, inventario.getCantidad_objeto_inventario());
 			ps.setInt(9, inventario.getExistencias_objeto_inventario());
+			ps.setString(10, inventario.getFecha_registro_inventario());
 			ps.execute();
 			return true;
 		} catch (SQLException e) {
@@ -44,7 +45,7 @@ public class consultas_inventario extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE inventario SET id_inventario=?, nombre_objeto_inventario=?, precio_objeto_inventario=?, descripcion_objeto_inventario=?, peso_objeto_inventario=?, color_objeto_inventario=?, marca_objeto_inventario=?, modelo_objeto_inventario=?, cantidad_objeto_inventario=?, existencias_objeto_inventario=? WHERE id_inventario=? ";
+		String sql = "UPDATE inventario SET id_inventario=?, nombre_objeto_inventario=?, precio_objeto_inventario=?, descripcion_objeto_inventario=?, peso_objeto_inventario=?, color_objeto_inventario=?, marca_objeto_inventario=?, modelo_objeto_inventario=?, cantidad_objeto_inventario=?, existencias_objeto_inventario=?, fecha_registro_inventario=? WHERE id_inventario=? ";
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -58,7 +59,8 @@ public class consultas_inventario extends conexion {
 			ps.setString(8, inventario.getModelo_objeto_inventario());
 			ps.setInt(9, inventario.getCantidad_objeto_inventario());
 			ps.setInt(10, inventario.getExistencias_objeto_inventario());
-			ps.setInt(11, inventario.getId_inventario());
+			ps.setString(11, inventario.getFecha_registro_inventario());
+			ps.setInt(12, inventario.getId_inventario());
 			ps.execute();
 
 			return true;
