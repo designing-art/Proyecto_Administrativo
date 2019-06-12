@@ -76,7 +76,7 @@ import javax.swing.border.BevelBorder;
 
 public class ventana_principal extends JFrame {
 
-	private JPanel contentPane;
+	public static JPanel contentPane;
 	public JButton registroPlanilla;
 	public JButton registroContrato;
 	public JButton registroEmpleado;
