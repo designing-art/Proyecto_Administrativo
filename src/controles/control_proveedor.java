@@ -15,15 +15,9 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import clases.contrato_empleado;
-import clases.producto;
 import clases.proveedor;
 import conexion.conexion;
-import consultas.consultas_contrato_empleado;
-import consultas.consultas_producto;
 import consultas.consultas_proveedor;
-import formularios.registro_contratos_empleados;
-import formularios.registro_productos;
 import formularios.registro_proveedores;
 
 public class control_proveedor implements ActionListener {

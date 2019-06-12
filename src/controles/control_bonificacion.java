@@ -51,7 +51,7 @@ public class control_bonificacion implements ActionListener {
 					|| formulario.txtCantidadBonificacion.getText().isEmpty()
 					|| formulario.txtObservacionBonificacion.getText().toString()
 							.equalsIgnoreCase("Ingrese el nombre del cargo.")
-					|| formulario.txtIdentidadEmpleadoBonificacion.getText().toString()
+					|| registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText().toString()
 							.equalsIgnoreCase("Escriba una observacion.")
 					|| formulario.txtCantidadBonificacion.getText().toString()
 							.equalsIgnoreCase("Digite la cantidad.")) {
@@ -61,7 +61,7 @@ public class control_bonificacion implements ActionListener {
 				clase.setTipo_bonificacion(formulario.cbxTipoBonificacion.getSelectedItem().toString());
 				clase.setObservacion_bonificacion(formulario.txtObservacionBonificacion.getText());
 				clase.setCantidad_bonificacion(Double.parseDouble(formulario.txtCantidadBonificacion.getText()));
-				clase.setIdentidad_empleado_bonificacion(formulario.txtIdentidadEmpleadoBonificacion.getText());
+				clase.setIdentidad_empleado_bonificacion(registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText());
 				clase.setFecha_bonificacion(formulario.editor.getText());
 
 				if (consulta.registrar(clase)) {
@@ -75,8 +75,8 @@ public class control_bonificacion implements ActionListener {
 									formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoBonificacion.setIcon(logo);
 					formulario.txtDireccionFoto.setText(null);
-					formulario.txtIdentidadEmpleadoBonificacion.setText(null);
-					formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setText(null);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Bonificacion no Registrado");
@@ -91,7 +91,7 @@ public class control_bonificacion implements ActionListener {
 				filaseleccionada = formulario.tablaBonificaciones.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario.txtIdentidadEmpleadoBonificacion.setText(null);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setText(null);
 				} else {
 					String codigo = formulario.tablaBonificaciones.getValueAt(filaseleccionada, 0).toString();
 					String tipo = formulario.tablaBonificaciones.getValueAt(filaseleccionada, 1).toString();
@@ -103,14 +103,14 @@ public class control_bonificacion implements ActionListener {
 					formulario.txtCodigo.setText(codigo);
 					formulario.cbxTipoBonificacion.setSelectedItem(tipo);
 					formulario.txtObservacionBonificacion.setText(observacion);
-					formulario.txtIdentidadEmpleadoBonificacion.setText(identidad);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setText(identidad);
 					formulario.txtCantidadBonificacion.setText(cantidad);
 					formulario.editor.setText(fecha);
 
 					formulario.txtCodigoBonificacion.setForeground(Color.BLACK);
 					formulario.cbxTipoBonificacion.setForeground(Color.BLACK);
 					formulario.txtObservacionBonificacion.setForeground(Color.BLACK);
-					formulario.txtIdentidadEmpleadoBonificacion.setForeground(Color.BLACK);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setForeground(Color.BLACK);
 					formulario.txtCantidadBonificacion.setForeground(Color.BLACK);
 					formulario.editor.setForeground(Color.BLACK);
 
@@ -139,7 +139,7 @@ public class control_bonificacion implements ActionListener {
 				filaseleccionada = formulario.tablaBonificaciones.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario.txtIdentidadEmpleadoBonificacion.setText(null);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setText(null);
 				} else {
 					String codigo = formulario.tablaBonificaciones.getValueAt(filaseleccionada, 0).toString();
 					String tipo = formulario.tablaBonificaciones.getValueAt(filaseleccionada, 1).toString();
@@ -151,14 +151,14 @@ public class control_bonificacion implements ActionListener {
 					formulario.txtCodigo.setText(codigo);
 					formulario.cbxTipoBonificacion.setSelectedItem(tipo);
 					formulario.txtObservacionBonificacion.setText(observacion);
-					formulario.txtIdentidadEmpleadoBonificacion.setText(identidad);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setText(identidad);
 					formulario.txtCantidadBonificacion.setText(cantidad);
 					formulario.editor.setText(fecha);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.cbxTipoBonificacion.setForeground(Color.BLACK);
 					formulario.txtObservacionBonificacion.setForeground(Color.BLACK);
-					formulario.txtIdentidadEmpleadoBonificacion.setForeground(Color.BLACK);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setForeground(Color.BLACK);
 					formulario.txtCantidadBonificacion.setForeground(Color.BLACK);
 					formulario.editor.setForeground(Color.BLACK);
 
@@ -172,7 +172,7 @@ public class control_bonificacion implements ActionListener {
 
 					formulario.cbxTipoBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setEditable(false);
-					formulario.txtIdentidadEmpleadoBonificacion.setEditable(false);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setEditable(false);
 					formulario.txtCantidadBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
@@ -192,7 +192,7 @@ public class control_bonificacion implements ActionListener {
 					|| formulario.txtCantidadBonificacion.getText().isEmpty()
 					|| formulario.txtObservacionBonificacion.getText().toString()
 							.equalsIgnoreCase("Ingrese el nombre del cargo.")
-					|| formulario.txtIdentidadEmpleadoBonificacion.getText().toString()
+					|| registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText().toString()
 							.equalsIgnoreCase("Escriba una observacion.")
 					|| formulario.txtCantidadBonificacion.getText().toString()
 							.equalsIgnoreCase("Digite la cantidad.")) {
@@ -203,7 +203,7 @@ public class control_bonificacion implements ActionListener {
 				clase.setTipo_bonificacion(formulario.cbxTipoBonificacion.getSelectedItem().toString());
 				clase.setObservacion_bonificacion(formulario.txtObservacionBonificacion.getText());
 				clase.setCantidad_bonificacion(Double.parseDouble(formulario.txtCantidadBonificacion.getText()));
-				clase.setIdentidad_empleado_bonificacion(formulario.txtIdentidadEmpleadoBonificacion.getText());
+				clase.setIdentidad_empleado_bonificacion(registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText());
 				clase.setFecha_bonificacion(formulario.editor.getText());
 				clase.setId_bonificacion(Integer.parseInt(formulario.txtCodigo.getText()));
 
@@ -214,7 +214,7 @@ public class control_bonificacion implements ActionListener {
 					formulario.obtenerUltimoId();
 					formulario.cbxTipoBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setEditable(false);
-					formulario.txtIdentidadEmpleadoBonificacion.setEditable(false);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setEditable(false);
 					formulario.txtCantidadBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
@@ -222,7 +222,7 @@ public class control_bonificacion implements ActionListener {
 							usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
 									formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoBonificacion.setIcon(logo);
-					formulario.txtBusquedaBonificacion.requestFocusInWindow();
+					registro_bonificaciones.txtBusquedaBonificacion.requestFocusInWindow();
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Bonificacion no Actualizado");
@@ -253,7 +253,7 @@ public class control_bonificacion implements ActionListener {
 
 					formulario.cbxTipoBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setEditable(false);
-					formulario.txtIdentidadEmpleadoBonificacion.setEditable(false);
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setEditable(false);
 					formulario.txtCantidadBonificacion.setEditable(false);
 					formulario.txtObservacionBonificacion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
@@ -286,7 +286,7 @@ public class control_bonificacion implements ActionListener {
 			formulario.construirTabla();
 			formulario.establecerFechaRegistro();
 			formulario.txtObservacionBonificacion.setBackground(Color.WHITE);
-			formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
+			registro_bonificaciones.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
 
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
@@ -313,8 +313,8 @@ public class control_bonificacion implements ActionListener {
 			formulario.construirTabla();
 			formulario.establecerFechaRegistro();
 			formulario.txtObservacionBonificacion.setBackground(Color.WHITE);
-			formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
-			formulario.txtIdentidadEmpleadoBonificacion.setEditable(true);
+			registro_bonificaciones.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
+			registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setEditable(true);
 
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
@@ -329,10 +329,10 @@ public class control_bonificacion implements ActionListener {
 	public void limpiar() {
 		formulario.txtCodigo.setText(null);
 		formulario.txtCodigoBonificacion.setText(null);
-		formulario.txtBusquedaBonificacion.setText(null);
+		registro_bonificaciones.txtBusquedaBonificacion.setText(null);
 		formulario.txtObservacionBonificacion.setText(null);
 		formulario.txtCantidadBonificacion.setText(null);
-		formulario.txtIdentidadEmpleadoBonificacion.setText(null);
+		registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setText(null);
 		registro_bonificaciones.txtTotalBonificacion.setText(null);
 		formulario.txtNombresBonificacion.setText(null);
 		formulario.txtApellidosBonificacion.setText(null);

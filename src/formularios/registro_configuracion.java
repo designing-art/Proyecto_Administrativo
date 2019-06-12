@@ -1,73 +1,30 @@
 package formularios;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
-import clases.cargo;
 import clases.configuracion;
-import clases.contrato_empleado;
-import clases.empresa;
-import clases.historial_planilla;
-import clases.horario;
 import conexion.conexion;
-import consultas.consultas_cargo;
 import consultas.consultas_configuracion;
-import consultas.consultas_contrato_empleado;
-import consultas.consultas_empresa;
-import consultas.consultas_historial_planilla;
-import consultas.consultas_horario;
-import controles.control_cargo;
-import controles.control_contrato_empleado;
-import controles.control_historial_planilla;
-import controles.control_horario;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-import utilidades.visor_imagen;
-
 import java.awt.Color;
-import java.awt.Event;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Image;
-
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
-import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.InputMap;
 import javax.swing.JButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.util.Timer;
-
-import javax.swing.JTextArea;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
 
 public class registro_configuracion extends JFrame {
@@ -90,7 +47,6 @@ public class registro_configuracion extends JFrame {
 	public JRadioButton rdbtnVerdoso;
 	public ButtonGroup grupo1;
 	public ButtonGroup grupo2;
-
 	public static String sonido = null;
 	public static String tema = null;
 	ventana_principal principal = new ventana_principal();

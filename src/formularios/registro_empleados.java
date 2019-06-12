@@ -27,12 +27,9 @@ import javax.swing.JFormattedTextField;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.JobAttributes;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -44,7 +41,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,19 +60,10 @@ import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
-import clases.cargo;
-import clases.contrato_empleado;
 import clases.empleado;
-import clases.horario;
 import conexion.conexion;
-import consultas.consultas_cargo;
-import consultas.consultas_contrato_empleado;
 import consultas.consultas_empleado;
-import consultas.consultas_horario;
-import controles.control_cargo;
-import controles.control_contrato_empleado;
 import controles.control_empleado;
-import controles.control_horario;
 import utilidades.visor_imagen;
 
 import javax.swing.JScrollPane;
@@ -647,6 +634,7 @@ public class registro_empleados extends JFrame {
 
 		btnAsgnaciones = new JButton("Asignaciones");
 		btnAsgnaciones.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				validarIdentidad();
 				if (txtIdentidadEmpleado.getText().toString().equals(identidad)) {
@@ -839,6 +827,7 @@ public class registro_empleados extends JFrame {
 
 		btnvercontrato = new JButton("ver");
 		btnvercontrato.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (lbl_foto_empleado_asignacion.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -985,6 +974,7 @@ public class registro_empleados extends JFrame {
 
 		btnImprimirReporteEmpleados = new JButton("Imprimir Reporte");
 		btnImprimirReporteEmpleados.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();

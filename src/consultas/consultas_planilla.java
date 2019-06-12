@@ -7,8 +7,6 @@ import java.sql.SQLException;
 
 import clases.empleado;
 import clases.planilla;
-import clases.historial_planilla;
-
 import conexion.conexion;
 
 public class consultas_planilla extends conexion {

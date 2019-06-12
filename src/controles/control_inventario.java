@@ -2,7 +2,6 @@ package controles;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -13,18 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import clases.contrato_empleado;
 import clases.inventario;
-import clases.producto;
 import conexion.conexion;
-import consultas.consultas_contrato_empleado;
 import consultas.consultas_inventario;
-import consultas.consultas_producto;
-import formularios.registro_contratos_empleados;
 import formularios.registro_inventario;
-import formularios.registro_productos;
 
 public class control_inventario implements ActionListener {
 

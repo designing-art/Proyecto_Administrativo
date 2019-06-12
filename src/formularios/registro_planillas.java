@@ -13,7 +13,6 @@ import clases.bonificacion;
 import clases.deduccion;
 import clases.empleado;
 import clases.historial_planilla;
-import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_deduccion;
@@ -38,7 +37,6 @@ import javax.swing.WindowConstants;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
@@ -52,7 +50,6 @@ import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,13 +66,11 @@ import java.awt.Component;
 import java.awt.Event;
 
 import javax.swing.ScrollPaneConstants;
-import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
-import java.awt.event.KeyAdapter;
 
 public class registro_planillas extends JFrame {
 
@@ -321,6 +316,7 @@ public class registro_planillas extends JFrame {
 
 		button_3 = new JButton("Imprimir Reporte");
 		button_3.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
@@ -359,6 +355,7 @@ public class registro_planillas extends JFrame {
 		btnHistorialPlanillas.setBounds(222, 145, 136, 22);
 		panel_2.add(btnHistorialPlanillas);
 		btnHistorialPlanillas.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				historial_planillas formulario = new historial_planillas();
 				formulario.setVisible(true);
@@ -372,6 +369,7 @@ public class registro_planillas extends JFrame {
 
 		btnNuevaPlanilla = new JButton("Nueva Planilla");
 		btnNuevaPlanilla.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				historial_planilla clase = new historial_planilla();
 				consultas_historial_planilla consulta = new consultas_historial_planilla();
@@ -568,6 +566,7 @@ public class registro_planillas extends JFrame {
 
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
@@ -752,7 +751,7 @@ public class registro_planillas extends JFrame {
 					control_bonificacion control = new control_bonificacion(clase, consulta, formulario);
 					formulario.setVisible(true);
 					formulario.setLocationRelativeTo(null);
-					formulario.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
+					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.requestFocusInWindow();
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();
@@ -794,7 +793,7 @@ public class registro_planillas extends JFrame {
 					control_deduccion control = new control_deduccion(clase, consulta, formulario);
 					formulario.setVisible(true);
 					formulario.setLocationRelativeTo(null);
-					formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.establecerFechaRegistro();

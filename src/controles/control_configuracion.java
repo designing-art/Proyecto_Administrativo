@@ -1,21 +1,14 @@
 package controles;
 
-import java.awt.Color;
-
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import clases.configuracion;
-import clases.empresa;
 import consultas.consultas_configuracion;
-import consultas.consultas_empresa;
 import formularios.registro_configuracion;
-import formularios.registro_empresa;
 
 public class control_configuracion implements ActionListener {
 

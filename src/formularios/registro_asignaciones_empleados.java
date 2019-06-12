@@ -49,7 +49,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 
 import javax.swing.JTextArea;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -142,6 +141,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		cbxCargoAsignacion.setBounds(109, 60, 128, 23);
 		panel.add(cbxCargoAsignacion);
 		cbxCargoAsignacion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				cargarDatosCargoAsignado();
 			}
@@ -178,6 +178,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		cbxHorarioAsignacion.setBounds(107, 143, 128, 23);
 		panel.add(cbxHorarioAsignacion);
 		cbxHorarioAsignacion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				cargarDatosHorarioAsignado();
 			}
@@ -223,6 +224,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		cbxContratoAsignacion.setBounds(109, 194, 128, 23);
 		panel.add(cbxContratoAsignacion);
 		cbxContratoAsignacion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				cargarDatosContratoAsignado();
 			}
@@ -334,6 +336,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		btnAgregarHorario.setBounds(238, 143, 46, 23);
 		panel.add(btnAgregarHorario);
 		btnAgregarHorario.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				horario clase = new horario();
 				consultas_horario consulta = new consultas_horario();
@@ -364,6 +367,7 @@ public class registro_asignaciones_empleados extends JFrame {
 		btnAgregarContrato.setBounds(240, 194, 46, 23);
 		panel.add(btnAgregarContrato);
 		btnAgregarContrato.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				contrato_empleado clase = new contrato_empleado();
 				consultas_contrato_empleado consulta = new consultas_contrato_empleado();
@@ -423,6 +427,7 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				buscarContratoPorIdentidad();
 			}
@@ -434,6 +439,7 @@ public class registro_asignaciones_empleados extends JFrame {
 
 		JButton btnGuardarAsignaciones = new JButton("Guardar Asignaciones");
 		btnGuardarAsignaciones.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (txtSueldoAsignacion.getText().isEmpty()
 						|| txtHoraExtraAsignacion.getText().isEmpty()

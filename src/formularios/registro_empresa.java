@@ -26,9 +26,6 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.util.Timer;
 import java.util.logging.Level;
@@ -43,7 +40,6 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import clases.empresa;
-import conexion.conexion;
 import consultas.consultas_empresa;
 import utilidades.visor_imagen;
 
@@ -119,10 +115,10 @@ public class registro_empresa extends JFrame {
 				ruta = txtDireccionLogoEmpresa.getText().toString();
 				nombre = txtNombreEmpresa.getText().toString(); 
 				imagen = new ImageIcon(ruta);
-				imagenLogo_aplicado = new ImageIcon(imagen.getImage().getScaledInstance(principal.lbl_logo_empresa_principal.getWidth(),
-						principal.lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-				principal.lbl_logo_empresa_principal.setIcon(imagenLogo_aplicado);
-				principal.lbl_nombre_empresa_principal.setText(nombre);
+				imagenLogo_aplicado = new ImageIcon(imagen.getImage().getScaledInstance(ventana_principal.lbl_logo_empresa_principal.getWidth(),
+						ventana_principal.lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				ventana_principal.lbl_logo_empresa_principal.setIcon(imagenLogo_aplicado);
+				ventana_principal.lbl_nombre_empresa_principal.setText(nombre);
 				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
 				dispose();

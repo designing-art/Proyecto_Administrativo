@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import clases.configuracion;
-import clases.empresa;
 import conexion.conexion;
 
 public class consultas_configuracion extends conexion {

@@ -2,7 +2,6 @@ package controles;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -12,16 +11,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import clases.historial_planilla;
-import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_historial_planilla;
-import consultas.consultas_planilla;
 import formularios.registro_nuevas_planillas;
-import formularios.registro_planillas;
 
 public class control_historial_planilla implements ActionListener {
 

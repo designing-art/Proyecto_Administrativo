@@ -1,52 +1,17 @@
 package formularios;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
-import clases.cargo;
-import clases.contrato_empleado;
 import clases.historial_planilla;
-import clases.horario;
 import conexion.conexion;
-import consultas.consultas_cargo;
-import consultas.consultas_contrato_empleado;
 import consultas.consultas_historial_planilla;
-import consultas.consultas_horario;
-import controles.control_cargo;
-import controles.control_contrato_empleado;
 import controles.control_historial_planilla;
-import controles.control_horario;
-import utilidades.visor_imagen;
-
 import java.awt.Color;
-import java.awt.Event;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.MaskFormatter;
-
 import com.placeholder.PlaceHolder;
-
-import clases.bonificacion;
-import clases.deduccion;
-import clases.empleado;
-import conexion.conexion;
-import consultas.consultas_bonificacion;
-import consultas.consultas_deduccion;
-import consultas.consultas_planilla;
-import controles.control_bonificacion;
-import controles.control_deduccion;
-import controles.control_planilla;
-import utilidades.visor_imagen;
-
-import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -55,15 +20,10 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
-import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,56 +35,9 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.Timer;
 
-import javax.swing.JTextArea;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import java.awt.Toolkit;
-
-import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.RowFilter;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
-import javax.swing.ImageIcon;
-import javax.swing.InputMap;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.print.PrinterException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import java.awt.Component;
-import java.awt.Event;
-
-import javax.swing.ScrollPaneConstants;
-import javax.swing.DefaultComboBoxModel;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
-import java.awt.event.KeyAdapter;
 
 public class historial_planillas extends JFrame {
 	public JPanel contentPane;
@@ -153,8 +66,8 @@ public class historial_planillas extends JFrame {
 
 	public historial_planillas() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 486, 356);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 486, 305);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -163,7 +76,7 @@ public class historial_planillas extends JFrame {
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
 		panel_2 = new JPanel();
-		panel_2.setBounds(10, 33, 460, 278);
+		panel_2.setBounds(10, 33, 460, 232);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -174,22 +87,24 @@ public class historial_planillas extends JFrame {
 		lbl_hora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		lbl_hora.setBackground(SystemColor.menu);
 		JPanel panel = new JPanel();
-		panel.setBounds(22, 27, 413, 222);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(23, 21, 413, 201);
 		panel_2.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblPlanillas = new JLabel("PLANILLAS CREADAS :");
 		lblPlanillas.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblPlanillas.setBounds(38, 28, 166, 17);
+		lblPlanillas.setBounds(38, 14, 166, 17);
 		panel.add(lblPlanillas);
 
 		cbxPlanillasCreadas = new JComboBox<String>();
 		cbxPlanillasCreadas.setForeground(new Color(0, 0, 0));
 		cbxPlanillasCreadas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxPlanillasCreadas.setBackground(new Color(255, 255, 255));
-		cbxPlanillasCreadas.setBounds(209, 25, 157, 23);
+		cbxPlanillasCreadas.setBounds(209, 11, 157, 23);
 		panel.add(cbxPlanillasCreadas);
 		cbxPlanillasCreadas.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				cargarPlanillasCreadas();
 			}
@@ -197,37 +112,38 @@ public class historial_planillas extends JFrame {
 
 		JLabel lblFuncionesDelEmpleado = new JLabel("Datos de la planilla.");
 		lblFuncionesDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblFuncionesDelEmpleado.setBounds(38, 49, 166, 25);
+		lblFuncionesDelEmpleado.setBounds(38, 35, 166, 25);
 		panel.add(lblFuncionesDelEmpleado);
 
 		JButton btnTrabajar = new JButton("Trabajar");
 		btnTrabajar.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnTrabajar.setBackground(new Color(255, 165, 0));
-		btnTrabajar.setBounds(38, 179, 128, 23);
+		btnTrabajar.setBounds(38, 165, 128, 23);
 		panel.add(btnTrabajar);
 
 		JLabel lblNombreDeLa = new JLabel("Nombre de la planilla :");
 		lblNombreDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblNombreDeLa.setBounds(38, 75, 166, 25);
+		lblNombreDeLa.setBounds(38, 61, 166, 25);
 		panel.add(lblNombreDeLa);
 
 		JLabel lblFechaDeCreacion = new JLabel("Fecha de creaci\u00F3n :");
 		lblFechaDeCreacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaDeCreacion.setBounds(38, 98, 166, 25);
+		lblFechaDeCreacion.setBounds(38, 84, 166, 25);
 		panel.add(lblFechaDeCreacion);
 
 		JLabel lblFechaDePago = new JLabel("Fecha de pago :");
 		lblFechaDePago.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaDePago.setBounds(38, 121, 166, 25);
+		lblFechaDePago.setBounds(38, 107, 166, 25);
 		panel.add(lblFechaDePago);
 
 		JLabel lblTotalPagoDe = new JLabel("Total pago de la planilla :");
 		lblTotalPagoDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalPagoDe.setBounds(38, 143, 166, 25);
+		lblTotalPagoDe.setBounds(38, 129, 166, 25);
 		panel.add(lblTotalPagoDe);
 
 		JButton btnNueva = new JButton("Nueva");
 		btnNueva.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				historial_planilla clase = new historial_planilla();
 				consultas_historial_planilla consulta = new consultas_historial_planilla();
@@ -255,32 +171,32 @@ public class historial_planillas extends JFrame {
 		});
 		btnNueva.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnNueva.setBackground(new Color(50, 205, 50));
-		btnNueva.setBounds(238, 179, 128, 23);
+		btnNueva.setBounds(238, 165, 128, 23);
 		panel.add(btnNueva);
 
 		txtFechaPagoHistorialPlanilla = new JTextField();
-		txtFechaPagoHistorialPlanilla.setBounds(209, 124, 157, 20);
+		txtFechaPagoHistorialPlanilla.setBounds(209, 110, 157, 20);
 		panel.add(txtFechaPagoHistorialPlanilla);
 		txtFechaPagoHistorialPlanilla.setColumns(10);
 
 		txtNombreHistorialPlanilla = new JTextField();
 		txtNombreHistorialPlanilla.setColumns(10);
-		txtNombreHistorialPlanilla.setBounds(209, 78, 157, 20);
+		txtNombreHistorialPlanilla.setBounds(209, 64, 157, 20);
 		panel.add(txtNombreHistorialPlanilla);
 
 		txtFechaCreacionHistorialPlanilla = new JTextField();
 		txtFechaCreacionHistorialPlanilla.setColumns(10);
-		txtFechaCreacionHistorialPlanilla.setBounds(209, 101, 157, 20);
+		txtFechaCreacionHistorialPlanilla.setBounds(209, 87, 157, 20);
 		panel.add(txtFechaCreacionHistorialPlanilla);
 
 		txtTotalPagoHistorialPlanilla = new JTextField();
 		txtTotalPagoHistorialPlanilla.setColumns(10);
-		txtTotalPagoHistorialPlanilla.setBounds(209, 146, 157, 20);
+		txtTotalPagoHistorialPlanilla.setBounds(209, 132, 157, 20);
 		panel.add(txtTotalPagoHistorialPlanilla);
 
 		label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setBounds(0, 0, 458, 278);
+		label_8.setBounds(0, 0, 458, 232);
 		panel_2.add(label_8);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));

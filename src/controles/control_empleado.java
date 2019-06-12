@@ -63,14 +63,14 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
 					
-					|| formularioAsigaciones.txtSueldoAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtHoraExtraAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtFuncionesAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtDiasAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtHorasAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtTipoContratoAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtTiempoContratoAsignacion.getText().isEmpty()
-					|| formularioAsigaciones.txtDireccionFotoContratoAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtSueldoAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtHoraExtraAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtFuncionesAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtDiasAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtHorasAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtTipoContratoAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtTiempoContratoAsignacion.getText().isEmpty()
+					|| registro_asignaciones_empleados.txtDireccionFotoContratoAsignacion.getText().isEmpty()
 
 					// validaciones para datos con mascara y pista.
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
@@ -109,17 +109,17 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
 				//Datos de la asignacion
-				claseEmpleado.setNombre_cargo_empleado(formularioEmpleado.lbl_nombre_cargo_asignacion.getText().toString());
-				claseEmpleado.setSueldo_cargo_empleado(formularioEmpleado.lbl_sueldo_cargo_asignacion.getText().toString());
-				claseEmpleado.setHora_extra_cargo_empleado(formularioEmpleado.lbl_horaextra_cargo_asignacion.getText().toString());
-				claseEmpleado.setObligaciones_cargo_empleado(formularioEmpleado.lbl_funciones_cargo_asignacion.getText().toString());
-				claseEmpleado.setTipo_horario_empleado(formularioEmpleado.lbl_tipo_horario_asignacion.getText().toString());
-				claseEmpleado.setDias_horario_empleado(formularioEmpleado.lbl_dias_horario_asignacion.getText().toString());
-				claseEmpleado.setHoras_horario_empleado(formularioEmpleado.lbl_horas_horario_asignacion.getText().toString());
-				claseEmpleado.setIdentidad_contrato_empleado_asignado(formularioEmpleado.lbl_contrato_empleado_asignacion.getText().toString());
-				claseEmpleado.setTipo_contrato_empleado_asignado(formularioEmpleado.lbl_tipo_empleado_asignacion.getText().toString());
-				claseEmpleado.setTiempo_contrato_empleado_asignado(formularioEmpleado.lbl_tiempo_empleado_asignacion.getText().toString());
-				claseEmpleado.setFoto_contrato_empleado_asignado(formularioEmpleado.lbl_foto_empleado_asignacion.getText().toString());
+				claseEmpleado.setNombre_cargo_empleado(registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
+				claseEmpleado.setSueldo_cargo_empleado(registro_empleados.lbl_sueldo_cargo_asignacion.getText().toString());
+				claseEmpleado.setHora_extra_cargo_empleado(registro_empleados.lbl_horaextra_cargo_asignacion.getText().toString());
+				claseEmpleado.setObligaciones_cargo_empleado(registro_empleados.lbl_funciones_cargo_asignacion.getText().toString());
+				claseEmpleado.setTipo_horario_empleado(registro_empleados.lbl_tipo_horario_asignacion.getText().toString());
+				claseEmpleado.setDias_horario_empleado(registro_empleados.lbl_dias_horario_asignacion.getText().toString());
+				claseEmpleado.setHoras_horario_empleado(registro_empleados.lbl_horas_horario_asignacion.getText().toString());
+				claseEmpleado.setIdentidad_contrato_empleado_asignado(registro_empleados.lbl_contrato_empleado_asignacion.getText().toString());
+				claseEmpleado.setTipo_contrato_empleado_asignado(registro_empleados.lbl_tipo_empleado_asignacion.getText().toString());
+				claseEmpleado.setTiempo_contrato_empleado_asignado(registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
+				claseEmpleado.setFoto_contrato_empleado_asignado(registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
 
 				if (consultaEmpleado.registrar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
@@ -207,17 +207,17 @@ public class control_empleado implements ActionListener {
 				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
 				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
 				//Datos de la asignacion
-				claseEmpleado.setNombre_cargo_empleado(formularioEmpleado.lbl_nombre_cargo_asignacion.getText().toString());
-				claseEmpleado.setSueldo_cargo_empleado(formularioEmpleado.lbl_sueldo_cargo_asignacion.getText().toString());
-				claseEmpleado.setHora_extra_cargo_empleado(formularioEmpleado.lbl_horaextra_cargo_asignacion.getText().toString());
-				claseEmpleado.setObligaciones_cargo_empleado(formularioEmpleado.lbl_funciones_cargo_asignacion.getText().toString());
-				claseEmpleado.setTipo_horario_empleado(formularioEmpleado.lbl_tipo_horario_asignacion.getText().toString());
-				claseEmpleado.setDias_horario_empleado(formularioEmpleado.lbl_dias_horario_asignacion.getText().toString());
-				claseEmpleado.setHoras_horario_empleado(formularioEmpleado.lbl_horas_horario_asignacion.getText().toString());
-				claseEmpleado.setIdentidad_contrato_empleado_asignado(formularioEmpleado.lbl_contrato_empleado_asignacion.getText().toString());
-				claseEmpleado.setTipo_contrato_empleado_asignado(formularioEmpleado.lbl_tipo_empleado_asignacion.getText().toString());
-				claseEmpleado.setTiempo_contrato_empleado_asignado(formularioEmpleado.lbl_tiempo_empleado_asignacion.getText().toString());
-				claseEmpleado.setFoto_contrato_empleado_asignado(formularioEmpleado.lbl_foto_empleado_asignacion.getText().toString());
+				claseEmpleado.setNombre_cargo_empleado(registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
+				claseEmpleado.setSueldo_cargo_empleado(registro_empleados.lbl_sueldo_cargo_asignacion.getText().toString());
+				claseEmpleado.setHora_extra_cargo_empleado(registro_empleados.lbl_horaextra_cargo_asignacion.getText().toString());
+				claseEmpleado.setObligaciones_cargo_empleado(registro_empleados.lbl_funciones_cargo_asignacion.getText().toString());
+				claseEmpleado.setTipo_horario_empleado(registro_empleados.lbl_tipo_horario_asignacion.getText().toString());
+				claseEmpleado.setDias_horario_empleado(registro_empleados.lbl_dias_horario_asignacion.getText().toString());
+				claseEmpleado.setHoras_horario_empleado(registro_empleados.lbl_horas_horario_asignacion.getText().toString());
+				claseEmpleado.setIdentidad_contrato_empleado_asignado(registro_empleados.lbl_contrato_empleado_asignacion.getText().toString());
+				claseEmpleado.setTipo_contrato_empleado_asignado(registro_empleados.lbl_tipo_empleado_asignacion.getText().toString());
+				claseEmpleado.setTiempo_contrato_empleado_asignado(registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
+				claseEmpleado.setFoto_contrato_empleado_asignado(registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
 
 				if (consultaEmpleado.modificar(claseEmpleado)) {
 					JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
@@ -472,17 +472,17 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 		
 
-					formularioEmpleado.lbl_nombre_cargo_asignacion.setText(cargo);
-					formularioEmpleado.lbl_sueldo_cargo_asignacion.setText(sueldo);
-					formularioEmpleado.lbl_horaextra_cargo_asignacion.setText(horaex);
-					formularioEmpleado.lbl_funciones_cargo_asignacion.setText(oblig);
-					formularioEmpleado.lbl_tipo_horario_asignacion.setText(horario);
-					formularioEmpleado.lbl_dias_horario_asignacion.setText(dias);
-					formularioEmpleado.lbl_horas_horario_asignacion.setText(horas);
-					formularioEmpleado.lbl_contrato_empleado_asignacion.setText(ident);
-					formularioEmpleado.lbl_tipo_empleado_asignacion.setText(tipo);
-					formularioEmpleado.lbl_tiempo_empleado_asignacion.setText(tiempo);
-					formularioEmpleado.lbl_foto_empleado_asignacion.setText(foto);
+					registro_empleados.lbl_nombre_cargo_asignacion.setText(cargo);
+					registro_empleados.lbl_sueldo_cargo_asignacion.setText(sueldo);
+					registro_empleados.lbl_horaextra_cargo_asignacion.setText(horaex);
+					registro_empleados.lbl_funciones_cargo_asignacion.setText(oblig);
+					registro_empleados.lbl_tipo_horario_asignacion.setText(horario);
+					registro_empleados.lbl_dias_horario_asignacion.setText(dias);
+					registro_empleados.lbl_horas_horario_asignacion.setText(horas);
+					registro_empleados.lbl_contrato_empleado_asignacion.setText(ident);
+					registro_empleados.lbl_tipo_empleado_asignacion.setText(tipo);
+					registro_empleados.lbl_tiempo_empleado_asignacion.setText(tiempo);
+					registro_empleados.lbl_foto_empleado_asignacion.setText(foto);
 
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
@@ -576,17 +576,17 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor.setText(fecha_lab);
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 
-					formularioEmpleado.lbl_nombre_cargo_asignacion.setText(cargo);
-					formularioEmpleado.lbl_sueldo_cargo_asignacion.setText(sueldo);
-					formularioEmpleado.lbl_horaextra_cargo_asignacion.setText(horaex);
-					formularioEmpleado.lbl_funciones_cargo_asignacion.setText(oblig);
-					formularioEmpleado.lbl_tipo_horario_asignacion.setText(horario);
-					formularioEmpleado.lbl_dias_horario_asignacion.setText(dias);
-					formularioEmpleado.lbl_horas_horario_asignacion.setText(horas);
-					formularioEmpleado.lbl_contrato_empleado_asignacion.setText(ident);
-					formularioEmpleado.lbl_tipo_empleado_asignacion.setText(tipo);
-					formularioEmpleado.lbl_tiempo_empleado_asignacion.setText(tiempo);
-					formularioEmpleado.lbl_foto_empleado_asignacion.setText(foto);
+					registro_empleados.lbl_nombre_cargo_asignacion.setText(cargo);
+					registro_empleados.lbl_sueldo_cargo_asignacion.setText(sueldo);
+					registro_empleados.lbl_horaextra_cargo_asignacion.setText(horaex);
+					registro_empleados.lbl_funciones_cargo_asignacion.setText(oblig);
+					registro_empleados.lbl_tipo_horario_asignacion.setText(horario);
+					registro_empleados.lbl_dias_horario_asignacion.setText(dias);
+					registro_empleados.lbl_horas_horario_asignacion.setText(horas);
+					registro_empleados.lbl_contrato_empleado_asignacion.setText(ident);
+					registro_empleados.lbl_tipo_empleado_asignacion.setText(tipo);
+					registro_empleados.lbl_tiempo_empleado_asignacion.setText(tiempo);
+					registro_empleados.lbl_foto_empleado_asignacion.setText(foto);
 
 					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
@@ -654,17 +654,17 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.editor2.setText("");
 		formularioEmpleado.editor3.setText("");
 		formularioEmpleado.cbxEstadoEmpleado.setToolTipText(null);
-		formularioEmpleado.lbl_nombre_cargo_asignacion.setText(null);
-		formularioEmpleado.lbl_sueldo_cargo_asignacion.setText(null);
-		formularioEmpleado.lbl_horaextra_cargo_asignacion.setText(null);
-		formularioEmpleado.lbl_funciones_cargo_asignacion.setText(null);
-		formularioEmpleado.lbl_tipo_horario_asignacion.setText(null);
-		formularioEmpleado.lbl_dias_horario_asignacion.setText(null);
-		formularioEmpleado.lbl_horas_horario_asignacion.setText(null);
-		formularioEmpleado.lbl_contrato_empleado_asignacion.setText(null);
-		formularioEmpleado.lbl_tipo_empleado_asignacion.setText(null);
-		formularioEmpleado.lbl_tiempo_empleado_asignacion.setText(null);
-		formularioEmpleado.lbl_foto_empleado_asignacion.setText(null);
+		registro_empleados.lbl_nombre_cargo_asignacion.setText(null);
+		registro_empleados.lbl_sueldo_cargo_asignacion.setText(null);
+		registro_empleados.lbl_horaextra_cargo_asignacion.setText(null);
+		registro_empleados.lbl_funciones_cargo_asignacion.setText(null);
+		registro_empleados.lbl_tipo_horario_asignacion.setText(null);
+		registro_empleados.lbl_dias_horario_asignacion.setText(null);
+		registro_empleados.lbl_horas_horario_asignacion.setText(null);
+		registro_empleados.lbl_contrato_empleado_asignacion.setText(null);
+		registro_empleados.lbl_tipo_empleado_asignacion.setText(null);
+		registro_empleados.lbl_tiempo_empleado_asignacion.setText(null);
+		registro_empleados.lbl_foto_empleado_asignacion.setText(null);
 
 	}
 
@@ -764,7 +764,7 @@ public class control_empleado implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT nombre_cargo FROM cargos");
 
 			while (rs.next()) {
-				formularioAsigaciones.cbxCargoAsignacion.addItem(rs.getString("nombre_cargo"));
+				registro_asignaciones_empleados.cbxCargoAsignacion.addItem(rs.getString("nombre_cargo"));
 			}
 			formularioAsigaciones.contador1++;
 			rs.close();
@@ -785,7 +785,7 @@ public class control_empleado implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT tipo_horario FROM horarios");
 
 			while (rs.next()) {
-				formularioAsigaciones.cbxHorarioAsignacion.addItem(rs.getString("tipo_horario"));
+				registro_asignaciones_empleados.cbxHorarioAsignacion.addItem(rs.getString("tipo_horario"));
 			}
 			formularioAsigaciones.contador2++;
 			rs.close();
@@ -806,7 +806,7 @@ public class control_empleado implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT identidad_contrato_empleado FROM contrato_empleado");
 
 			while (rs.next()) {
-			formularioAsigaciones.cbxContratoAsignacion.addItem(rs.getString("identidad_contrato_empleado"));
+			registro_asignaciones_empleados.cbxContratoAsignacion.addItem(rs.getString("identidad_contrato_empleado"));
 			}
 			formularioAsigaciones.contador3++;
 			rs.close();

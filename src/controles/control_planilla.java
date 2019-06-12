@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
 import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_planilla;
-import formularios.registro_nuevas_planillas;
 import formularios.registro_planillas;
 
 public class control_planilla implements ActionListener {
@@ -47,7 +46,7 @@ public class control_planilla implements ActionListener {
 		if (e.getSource() == formulario_planilla.btnGuardar) {
 			validarIdentidad();
 
-			if (formulario_planilla.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
+			if (registro_planillas.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
 					|| formulario_planilla.txtIdentidadPlanilla.getText().isEmpty()
 					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()
 					|| registro_planillas.txtTotalBonificacionesPlanilla.getText().isEmpty()
@@ -105,7 +104,7 @@ public class control_planilla implements ActionListener {
 				filaseleccionada = formulario_planilla.tablaPlanilla.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
+					registro_planillas.txtIdentidadEmpleadoPlanilla.setText(null);
 				} else {
 					String codigo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
 					String tipo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
@@ -147,7 +146,7 @@ public class control_planilla implements ActionListener {
 					formulario_planilla.btnAceptar.setText("Cancelar");
 					formulario_planilla.btnAceptar.setVisible(true);
 
-					formulario_planilla.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+					registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
 
 				}
 
@@ -163,7 +162,7 @@ public class control_planilla implements ActionListener {
 				filaseleccionada = formulario_planilla.tablaPlanilla.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
+					registro_planillas.txtIdentidadEmpleadoPlanilla.setText(null);
 				} else {
 					String codigo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
 					String tipo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
@@ -216,7 +215,7 @@ public class control_planilla implements ActionListener {
 		if (e.getSource() == formulario_planilla.btnActualizar) {
 			validarIdentidad();
 
-			if (formulario_planilla.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
+			if (registro_planillas.txtIdentidadEmpleadoPlanilla.getText().isEmpty()
 					|| formulario_planilla.txtIdentidadPlanilla.getText().isEmpty()
 					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()
 					|| registro_planillas.txtTotalBonificacionesPlanilla.getText().isEmpty()
@@ -309,7 +308,7 @@ public class control_planilla implements ActionListener {
 			formulario_planilla.pistas();
 			formulario_planilla.construirTabla();
 			formulario_planilla.establecerFechaRegistro();
-			formulario_planilla.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+			registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
 
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario_planilla.lblFotoPlanilla.getWidth(),
@@ -333,8 +332,8 @@ public class control_planilla implements ActionListener {
 			formulario_planilla.pistas();
 			formulario_planilla.construirTabla();
 			formulario_planilla.establecerFechaRegistro();
-			formulario_planilla.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
-			formulario_planilla.txtIdentidadEmpleadoPlanilla.setEditable(true);
+			registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+			registro_planillas.txtIdentidadEmpleadoPlanilla.setEditable(true);
 
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario_planilla.lblFotoPlanilla.getWidth(),
@@ -363,7 +362,7 @@ public class control_planilla implements ActionListener {
 		registro_planillas.txtTotalDeduccionesPlanilla.setText(null);
 		registro_planillas.txtCantidadPlanilla.setText(null);
 		registro_planillas.txtSueldoNetoPlanilla.setText(null);
-		formulario_planilla.txtIdentidadEmpleadoPlanilla.setText(null);
+		registro_planillas.txtIdentidadEmpleadoPlanilla.setText(null);
 	}
 
 	public static ArrayList<planilla> buscarUsuariosConMatriz() {

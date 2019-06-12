@@ -2,7 +2,6 @@ package controles;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -13,17 +12,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import clases.contrato_empleado;
-import clases.producto;
 import clases.servicio;
 import conexion.conexion;
-import consultas.consultas_contrato_empleado;
-import consultas.consultas_producto;
 import consultas.consultas_servicio;
-import formularios.registro_contratos_empleados;
-import formularios.registro_productos;
 import formularios.registro_servicios;
 
 public class control_servicio implements ActionListener {
@@ -67,7 +59,7 @@ public class control_servicio implements ActionListener {
 			clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
 			clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
 			clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
-			clase.setProducto_servicio(formulario.cbxProductos.getSelectedItem().toString());
+			clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Servicio registrado!");
 				restarVentaProducto();
@@ -97,7 +89,7 @@ public class control_servicio implements ActionListener {
 			clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
 			clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
 			clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
-			clase.setProducto_servicio(formulario.cbxProductos.getSelectedItem().toString());
+			clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Servicio actualizado!");
 				limpiar();
@@ -128,14 +120,14 @@ public class control_servicio implements ActionListener {
 					formulario.txtTiempo.setText(tiempo);
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDescripcion.setText(descripcion);
-					formulario.cbxProductos.setSelectedItem(producto);
+					registro_servicios.cbxProductos.setSelectedItem(producto);
 				
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtServicio.setForeground(Color.BLACK);
 					formulario.txtTiempo.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
 					formulario.txtDescripcion.setForeground(Color.BLACK);
-					formulario.cbxProductos.setForeground(Color.BLACK);
+					registro_servicios.cbxProductos.setForeground(Color.BLACK);
 
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
@@ -176,14 +168,14 @@ public class control_servicio implements ActionListener {
 					formulario.txtTiempo.setText(tiempo);
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDescripcion.setText(descripcion);
-					formulario.cbxProductos.setSelectedItem(producto);
+					registro_servicios.cbxProductos.setSelectedItem(producto);
 				
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtServicio.setForeground(Color.BLACK);
 					formulario.txtTiempo.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
 					formulario.txtDescripcion.setForeground(Color.BLACK);
-					formulario.cbxProductos.setForeground(Color.BLACK);
+					registro_servicios.cbxProductos.setForeground(Color.BLACK);
 
 					formulario.btnBorrar.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
@@ -279,10 +271,10 @@ public class control_servicio implements ActionListener {
 		formulario.txtPrecio.setText(null);
 		formulario.txtServicio.setText(null);
 		formulario.txtTiempo.setText(null);
-		formulario.txtCapasidad.setText(null);
-		formulario.txtPrecioProducto.setText(null);
-		formulario.txtDispositivo.setText(null);
-		formulario.txtMarca.setText(null);
+		registro_servicios.txtCapasidad.setText(null);
+		registro_servicios.txtPrecioProducto.setText(null);
+		registro_servicios.txtDispositivo.setText(null);
+		registro_servicios.txtMarca.setText(null);
 	}
 
 	/* Metodos para mostrar datos en tabla Contratos de los empleados */
@@ -360,7 +352,7 @@ public class control_servicio implements ActionListener {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery("SELECT cantidad_producto FROM productos where dispositivo_de_entrega_producto = '"
-					+ formulario.cbxProductos.getSelectedItem() + "'");
+					+ registro_servicios.cbxProductos.getSelectedItem() + "'");
 			while (rs.next()) {
 			cantidad = (rs.getString("cantidad_producto"));
 			total = Integer.parseInt(cantidad);
@@ -369,7 +361,7 @@ public class control_servicio implements ActionListener {
 			
 			Statement estatuto2 = conex.getConexion().createStatement();
 			ResultSet rs2 = estatuto2.executeQuery("UPDATE productos SET cantidad_producto='"+resultado+"' WHERE dispositivo_de_entrega_producto = '"
-					+ formulario.cbxProductos.getSelectedItem() + "'");
+					+ registro_servicios.cbxProductos.getSelectedItem() + "'");
 			JOptionPane.showMessageDialog(null, "Producto Vendido!");
 			rs2.close();
 			estatuto.close();

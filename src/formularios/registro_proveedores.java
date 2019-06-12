@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
@@ -34,7 +33,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,18 +48,12 @@ import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_empleado;
-import consultas.consultas_proveedor;
-import controles.control_contrato_empleado;
-import controles.control_empleado;
-import controles.control_producto;
 import controles.control_proveedor;
 import utilidades.visor_imagen;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class registro_proveedores extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -110,7 +102,7 @@ public class registro_proveedores extends JFrame {
 
 	public registro_proveedores() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -482,6 +474,7 @@ public class registro_proveedores extends JFrame {
 
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();

@@ -1,13 +1,15 @@
 package reconocimiento_por_voz;
  
 import javax.speech.Central;
+import javax.speech.Engine;
 import javax.speech.recognition.*;
 import java.io.FileReader;
 import java.util.Locale;
  
 public class reconocimiento extends ResultAdapter {
   static Recognizer recognizer;
-  public void resultAccepted(ResultEvent resultEvent) {
+  @Override
+public void resultAccepted(ResultEvent resultEvent) {
     Result result = (Result)(resultEvent.getSource());
     ResultToken resultToken[] = result.getBestTokens();
     for (int nIndex = 0; nIndex < resultToken.length; nIndex++){
@@ -48,7 +50,7 @@ public class reconocimiento extends ResultAdapter {
          recognizer.resume();
          recognizer.waitEngineState(Recognizer.FOCUS_ON);
          recognizer.forceFinalize(true);               
-         recognizer.waitEngineState(Recognizer.DEALLOCATED);
+         recognizer.waitEngineState(Engine.DEALLOCATED);
         } catch (Exception e) {
           e.printStackTrace();
           System.exit(0);

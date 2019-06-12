@@ -31,7 +31,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,6 +52,7 @@ import controles.control_empleado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class registro_cargos extends JFrame {
 	public JComboBox<?> cbxTipoCargo;
@@ -92,7 +92,7 @@ public class registro_cargos extends JFrame {
 
 	public registro_cargos() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -392,6 +392,7 @@ public class registro_cargos extends JFrame {
 
 		JButton btnImprimirReporte = new JButton("Imprimir Reporte");
 		btnImprimirReporte.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String ampm;
 				String horas;
@@ -429,6 +430,7 @@ public class registro_cargos extends JFrame {
 		btnRegresarALas.setBounds(585, 20, 234, 23);
 		contentPane.add(btnRegresarALas);
 		btnRegresarALas.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();

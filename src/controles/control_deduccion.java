@@ -51,7 +51,7 @@ public class control_deduccion implements ActionListener {
 					|| formulario.txtCantidadDeduccion.getText().isEmpty()
 					|| formulario.txtObservacionDeduccion.getText().toString()
 							.equalsIgnoreCase("Ingrese el nombre del cargo.")
-					|| formulario.txtIdentidadEmpleadoDeduccion.getText().toString()
+					|| registro_deducciones.txtIdentidadEmpleadoDeduccion.getText().toString()
 							.equalsIgnoreCase("Escriba una observacion.")
 					|| formulario.txtCantidadDeduccion.getText().toString().equalsIgnoreCase("Digite la cantidad.")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la deduccion!");
@@ -64,7 +64,7 @@ public class control_deduccion implements ActionListener {
 				clase.setTipo_deduccion(formulario.cbxTipoDeduccion.getSelectedItem().toString());
 				clase.setObservacion_deduccion(formulario.txtObservacionDeduccion.getText());
 				clase.setCantidad_deduccion(Double.parseDouble(formulario.txtCantidadDeduccion.getText()));
-				clase.setIdentidad_empleado_deduccion(formulario.txtIdentidadEmpleadoDeduccion.getText());
+				clase.setIdentidad_empleado_deduccion(registro_deducciones.txtIdentidadEmpleadoDeduccion.getText());
 				clase.setFecha_deduccion(formulario.editor.getText());
 
 				if (consulta.registrar(clase)) {
@@ -78,8 +78,8 @@ public class control_deduccion implements ActionListener {
 									formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoDeduccion.setIcon(logo);
 					formulario.txtDireccionFoto.setText(null);
-					formulario.txtIdentidadEmpleadoDeduccion.setText(null);
-					formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(null);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Deduccion no Registrado");
@@ -95,7 +95,7 @@ public class control_deduccion implements ActionListener {
 				filaseleccionada = formulario.tablaDeducciones.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario.txtIdentidadEmpleadoDeduccion.setText(null);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(null);
 				} else {
 					String codigo = formulario.tablaDeducciones.getValueAt(filaseleccionada, 0).toString();
 					String tipo = formulario.tablaDeducciones.getValueAt(filaseleccionada, 1).toString();
@@ -107,14 +107,14 @@ public class control_deduccion implements ActionListener {
 					formulario.txtCodigo.setText(codigo);
 					formulario.cbxTipoDeduccion.setSelectedItem(tipo);
 					formulario.txtObservacionDeduccion.setText(observacion);
-					formulario.txtIdentidadEmpleadoDeduccion.setText(identidad);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(identidad);
 					formulario.txtCantidadDeduccion.setText(cantidad);
 					formulario.editor.setText(fecha);
 
 					formulario.txtCodigoDeduccion.setForeground(Color.BLACK);
 					formulario.cbxTipoDeduccion.setForeground(Color.BLACK);
 					formulario.txtObservacionDeduccion.setForeground(Color.BLACK);
-					formulario.txtIdentidadEmpleadoDeduccion.setForeground(Color.BLACK);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setForeground(Color.BLACK);
 					formulario.txtCantidadDeduccion.setForeground(Color.BLACK);
 					formulario.editor.setForeground(Color.BLACK);
 
@@ -143,7 +143,7 @@ public class control_deduccion implements ActionListener {
 				filaseleccionada = formulario.tablaDeducciones.getSelectedRow();
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-					formulario.txtIdentidadEmpleadoDeduccion.setText(null);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(null);
 				} else {
 					String codigo = formulario.tablaDeducciones.getValueAt(filaseleccionada, 0).toString();
 					String tipo = formulario.tablaDeducciones.getValueAt(filaseleccionada, 1).toString();
@@ -155,14 +155,14 @@ public class control_deduccion implements ActionListener {
 					formulario.txtCodigo.setText(codigo);
 					formulario.cbxTipoDeduccion.setSelectedItem(tipo);
 					formulario.txtObservacionDeduccion.setText(observacion);
-					formulario.txtIdentidadEmpleadoDeduccion.setText(identidad);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(identidad);
 					formulario.txtCantidadDeduccion.setText(cantidad);
 					formulario.editor.setText(fecha);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.cbxTipoDeduccion.setForeground(Color.BLACK);
 					formulario.txtObservacionDeduccion.setForeground(Color.BLACK);
-					formulario.txtIdentidadEmpleadoDeduccion.setForeground(Color.BLACK);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setForeground(Color.BLACK);
 					formulario.txtCantidadDeduccion.setForeground(Color.BLACK);
 					formulario.editor.setForeground(Color.BLACK);
 
@@ -176,7 +176,7 @@ public class control_deduccion implements ActionListener {
 
 					formulario.cbxTipoDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setEditable(false);
-					formulario.txtIdentidadEmpleadoDeduccion.setEditable(false);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setEditable(false);
 					formulario.txtCantidadDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
@@ -196,7 +196,7 @@ public class control_deduccion implements ActionListener {
 					|| formulario.txtCantidadDeduccion.getText().isEmpty()
 					|| formulario.txtObservacionDeduccion.getText().toString()
 							.equalsIgnoreCase("Ingrese el nombre del cargo.")
-					|| formulario.txtIdentidadEmpleadoDeduccion.getText().toString()
+					|| registro_deducciones.txtIdentidadEmpleadoDeduccion.getText().toString()
 							.equalsIgnoreCase("Escriba una observacion.")
 					|| formulario.txtCantidadDeduccion.getText().toString().equalsIgnoreCase("Digite la cantidad.")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la deduccion!");
@@ -206,7 +206,7 @@ public class control_deduccion implements ActionListener {
 				clase.setTipo_deduccion(formulario.cbxTipoDeduccion.getSelectedItem().toString());
 				clase.setObservacion_deduccion(formulario.txtObservacionDeduccion.getText());
 				clase.setCantidad_deduccion(Double.parseDouble(formulario.txtCantidadDeduccion.getText()));
-				clase.setIdentidad_empleado_deduccion(formulario.txtIdentidadEmpleadoDeduccion.getText());
+				clase.setIdentidad_empleado_deduccion(registro_deducciones.txtIdentidadEmpleadoDeduccion.getText());
 				clase.setFecha_deduccion(formulario.editor.getText());
 				clase.setId_deduccion(Integer.parseInt(formulario.txtCodigo.getText()));
 
@@ -217,7 +217,7 @@ public class control_deduccion implements ActionListener {
 					formulario.obtenerUltimoId();
 					formulario.cbxTipoDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setEditable(false);
-					formulario.txtIdentidadEmpleadoDeduccion.setEditable(false);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setEditable(false);
 					formulario.txtCantidadDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
@@ -225,7 +225,7 @@ public class control_deduccion implements ActionListener {
 							usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
 									formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoDeduccion.setIcon(logo);
-					formulario.txtBusquedaDeduccion.requestFocusInWindow();
+					registro_deducciones.txtBusquedaDeduccion.requestFocusInWindow();
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Deduccion no Actualizado");
@@ -256,7 +256,7 @@ public class control_deduccion implements ActionListener {
 
 					formulario.cbxTipoDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setEditable(false);
-					formulario.txtIdentidadEmpleadoDeduccion.setEditable(false);
+					registro_deducciones.txtIdentidadEmpleadoDeduccion.setEditable(false);
 					formulario.txtCantidadDeduccion.setEditable(false);
 					formulario.txtObservacionDeduccion.setBackground(Color.LIGHT_GRAY);
 					formulario.btnActualizar.setVisible(false);
@@ -289,7 +289,7 @@ public class control_deduccion implements ActionListener {
 			formulario.construirTabla();
 			formulario.establecerFechaRegistro();
 			formulario.txtObservacionDeduccion.setBackground(Color.WHITE);
-			formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
+			registro_deducciones.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
 
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
@@ -316,8 +316,8 @@ public class control_deduccion implements ActionListener {
 			formulario.construirTabla();
 			formulario.establecerFechaRegistro();
 			formulario.txtObservacionDeduccion.setBackground(Color.WHITE);
-			formulario.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
-			formulario.txtIdentidadEmpleadoDeduccion.setEditable(true);
+			registro_deducciones.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
+			registro_deducciones.txtIdentidadEmpleadoDeduccion.setEditable(true);
 
 			final ImageIcon logo = new ImageIcon(
 					usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
@@ -332,10 +332,10 @@ public class control_deduccion implements ActionListener {
 	public void limpiar() {
 		formulario.txtCodigo.setText(null);
 		formulario.txtCodigoDeduccion.setText(null);
-		formulario.txtBusquedaDeduccion.setText(null);
+		registro_deducciones.txtBusquedaDeduccion.setText(null);
 		formulario.txtObservacionDeduccion.setText(null);
 		formulario.txtCantidadDeduccion.setText(null);
-		formulario.txtIdentidadEmpleadoDeduccion.setText(null);
+		registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(null);
 		formulario.txtTotalDeducciones.setText(null);
 		formulario.txtNombresDeduccion.setText(null);
 		formulario.txtApellidosDeduccion.setText(null);

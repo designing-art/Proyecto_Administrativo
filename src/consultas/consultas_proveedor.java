@@ -3,7 +3,6 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import clases.cargo;
 import clases.proveedor;
 import conexion.conexion;
 

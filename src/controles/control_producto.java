@@ -15,12 +15,9 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import clases.contrato_empleado;
 import clases.producto;
 import conexion.conexion;
-import consultas.consultas_contrato_empleado;
 import consultas.consultas_producto;
-import formularios.registro_contratos_empleados;
 import formularios.registro_productos;
 
 public class control_producto implements ActionListener {

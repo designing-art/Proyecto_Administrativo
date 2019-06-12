@@ -31,7 +31,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -52,6 +51,7 @@ import controles.control_horario;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class registro_horarios extends JFrame {
 	public JTextField txtIdHorario;
@@ -96,7 +96,7 @@ public class registro_horarios extends JFrame {
 	 */
 	public registro_horarios() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 865, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -329,6 +329,7 @@ public class registro_horarios extends JFrame {
 		
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
@@ -356,6 +357,7 @@ public class registro_horarios extends JFrame {
 		
 		btnRegresarALas = new JButton("Regresar a las Asignaciones");
 		btnRegresarALas.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();

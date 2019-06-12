@@ -5,23 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.MaskFormatter;
-
 import com.placeholder.PlaceHolder;
 
-import clases.bonificacion;
-import clases.deduccion;
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_bonificacion;
-import consultas.consultas_deduccion;
-import consultas.consultas_planilla;
-import controles.control_bonificacion;
-import controles.control_deduccion;
 import controles.control_historial_planilla;
-import controles.control_planilla;
-import utilidades.visor_imagen;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,7 +24,6 @@ import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
@@ -51,7 +37,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -72,9 +57,6 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
-import java.awt.event.KeyAdapter;
-import javax.swing.JToggleButton;
-import java.awt.Dialog.ModalExclusionType;
 import javax.swing.border.MatteBorder;
 
 public class registro_nuevas_planillas extends JFrame {
@@ -133,7 +115,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 	public registro_nuevas_planillas() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 761, 575);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -247,6 +229,7 @@ public class registro_nuevas_planillas extends JFrame {
 		btnImprimir.setBounds(265, 52, 137, 21);
 		panel_2.add(btnImprimir);
 		btnImprimir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Date date = new Date();
 				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
@@ -283,7 +266,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panel.setBounds(22, 74, 242, 327);
 		panel_1.add(panel);
 		panel.setLayout(null);
