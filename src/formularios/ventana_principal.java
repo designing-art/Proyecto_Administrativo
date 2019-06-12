@@ -540,6 +540,13 @@ public class ventana_principal extends JFrame {
 		button_12.setBackground(new Color(70, 130, 180));
 		button_12.setBounds(117, 19, 97, 21);
 		panel_2.add(button_12);
+		
+		JButton btnIntercambios = new JButton("Intercambio");
+		btnIntercambios.setForeground(Color.BLACK);
+		btnIntercambios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnIntercambios.setBackground(new Color(70, 130, 180));
+		btnIntercambios.setBounds(224, 18, 97, 21);
+		panel_2.add(btnIntercambios);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
@@ -590,6 +597,13 @@ public class ventana_principal extends JFrame {
 		button_17.setBackground(Color.PINK);
 		button_17.setBounds(117, 19, 97, 21);
 		panel_3.add(button_17);
+		
+		JButton btnVentas = new JButton("Ventas");
+		btnVentas.setForeground(Color.BLACK);
+		btnVentas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnVentas.setBackground(Color.PINK);
+		btnVentas.setBounds(224, 18, 97, 21);
+		panel_3.add(btnVentas);
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
@@ -704,13 +718,13 @@ public class ventana_principal extends JFrame {
 		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 
 		JLabel lblOpciones = new JLabel("Opciones :");
-		lblOpciones.setBounds(180, 394, 87, 15);
+		lblOpciones.setBounds(56, 387, 87, 19);
 		contentPane.add(lblOpciones);
 		lblOpciones.setForeground(Color.BLACK);
 		lblOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JButton btnConfiguracionDelSistema = new JButton("Configuracion del sistema");
-		btnConfiguracionDelSistema.setBounds(135, 413, 174, 21);
+		JButton btnConfiguracionDelSistema = new JButton("Configuracion Sistema");
+		btnConfiguracionDelSistema.setBounds(56, 407, 159, 21);
 		contentPane.add(btnConfiguracionDelSistema);
 		btnConfiguracionDelSistema.setForeground(Color.BLACK);
 		btnConfiguracionDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
@@ -756,13 +770,20 @@ public class ventana_principal extends JFrame {
 		button_1.setBackground(new Color(255, 215, 0));
 		button_1.setBounds(176, 19, 145, 21);
 		panel_9.add(button_1);
-
-		JLabel lblMenuOpciones = new JLabel();
-		lblMenuOpciones.setBounds(21, 43, 379, 417);
-		contentPane.add(lblMenuOpciones);
-		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
-				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
-		lblMenuOpciones.setIcon(icono2);
+		
+		JButton btnAcercaDe = new JButton("Acerca de.");
+		btnAcercaDe.setForeground(Color.BLACK);
+		btnAcercaDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnAcercaDe.setBackground(new Color(219, 112, 147));
+		btnAcercaDe.setBounds(235, 407, 123, 21);
+		contentPane.add(btnAcercaDe);
+		
+				JLabel lblMenuOpciones = new JLabel();
+				lblMenuOpciones.setBounds(21, 43, 379, 417);
+				contentPane.add(lblMenuOpciones);
+				final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
+						lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
+				lblMenuOpciones.setIcon(icono2);
 
 	}
 

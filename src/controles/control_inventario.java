@@ -57,7 +57,7 @@ public class control_inventario implements ActionListener {
 			clase.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
 			clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
 			clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtExistencia.getText().toString()));
+			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
 			
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Objeto registrado!");
@@ -88,13 +88,13 @@ public class control_inventario implements ActionListener {
 			clase.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
 			clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
 			clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtExistencia.getText().toString()));
+			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
 			
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Objeto actualizado!");
 				limpiar();
 				formulario.construirTabla();
-				formulario.obtenerUltimoId();
+				formulario.txtCodigo.setText("");
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! objeto no actualizado");
 				limpiar();
@@ -140,19 +140,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtMarca.setForeground(Color.BLACK);
 					formulario.txtModelo.setForeground(Color.BLACK);
 					formulario.txtCantidad.setForeground(Color.BLACK);
-					formulario.txtExistencia.setForeground(Color.BLACK);
-					
-					formulario.txtCodigo.setEditable(true);
-					formulario.txtNombre.setEditable(true);
-					formulario.txtPrecio.setEditable(true);
-					formulario.txtDescripcion.setEditable(true);
-					formulario.txtPeso.setEditable(true);
-					formulario.txtColor.setEditable(true);
-					formulario.txtMarca.setEditable(true);
-					formulario.txtModelo.setEditable(true);
-					formulario.txtCantidad.setEditable(true);
-					formulario.txtExistencia.setEditable(true);
-					
+					formulario.txtExistencia.setForeground(Color.BLACK);					
 
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
@@ -162,6 +150,9 @@ public class control_inventario implements ActionListener {
 					formulario.btnVer.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
+					
+					formulario.txtCantidad.setEditable(false);
+					formulario.txtExistencia.setEditable(false);
 
 					formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
 
@@ -202,7 +193,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtModelo.setText(modelo);
 					formulario.txtCantidad.setText(cantidad);
 					formulario.txtExistencia.setText(existencia);
-
+					
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNombre.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
@@ -306,7 +297,16 @@ public class control_inventario implements ActionListener {
 			formulario.obtenerUltimoId();
 			formulario.pistas();
 			formulario.construirTabla();
-
+			formulario.txtNombre.setEditable(true);
+			formulario.txtPrecio.setEditable(true);
+			formulario.txtDescripcion.setEditable(true);
+			formulario.txtPeso.setEditable(true);
+			formulario.txtColor.setEditable(true);
+			formulario.txtMarca.setEditable(true);
+			formulario.txtModelo.setEditable(true);
+			formulario.txtCantidad.setEditable(true);
+			formulario.txtExistencia.setText("0");
+			formulario.txtNombre.requestFocusInWindow();
 		}
 
 	}
@@ -325,6 +325,7 @@ public class control_inventario implements ActionListener {
 		formulario.txtMarca.setText(null);
 		formulario.txtModelo.setText(null);
 		formulario.txtExistencia.setText(null);
+		formulario.txtCantidad.setText(null);
 	}
 
 	/* Metodos para mostrar datos en tabla Contratos de los empleados */

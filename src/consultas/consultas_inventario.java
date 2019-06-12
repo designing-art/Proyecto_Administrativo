@@ -44,7 +44,7 @@ public class consultas_inventario extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE productos SET id_inventario=?, nombre_objeto_inventario=?, precio_objeto_inventario=?, descripcion_objeto_inventario=?, peso_objeto_inventario=?, color_objeto_inventario=?, marca_objeto_inventario=?, modelo_objeto_inventario=?, cantidad_objeto_inventario=?, existencias_objeto_inventario=? WHERE id_inventario=? ";
+		String sql = "UPDATE inventario SET id_inventario=?, nombre_objeto_inventario=?, precio_objeto_inventario=?, descripcion_objeto_inventario=?, peso_objeto_inventario=?, color_objeto_inventario=?, marca_objeto_inventario=?, modelo_objeto_inventario=?, cantidad_objeto_inventario=?, existencias_objeto_inventario=? WHERE id_inventario=? ";
 		
 		try {
 			ps = con.prepareStatement(sql);
