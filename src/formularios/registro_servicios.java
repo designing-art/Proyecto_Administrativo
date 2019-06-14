@@ -68,6 +68,7 @@ public class registro_servicios extends JFrame {
 	public int contador = 0;
 
 	public static String ruta;
+	public static String cantidad;
 	public static ImageIcon imagen;
 
 	public JPanel contentPane;
@@ -276,17 +277,16 @@ public class registro_servicios extends JFrame {
 		cbxProductos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(cbxProductos.getSelectedItem().equals("Ninguno")) {
+				if (cbxProductos.getSelectedItem().equals("Ninguno")) {
 					txtDispositivo.setText("");
 					txtMarca.setText("");
 					txtCapasidad.setText("");
 					txtPrecioProducto.setText("");
-				}else {
+				} else {
 					cargarDatosProducto();
 				}
 			}
 		});
-		
 
 		txtDispositivo = new JTextField();
 		txtDispositivo.setEditable(false);
@@ -547,7 +547,7 @@ public class registro_servicios extends JFrame {
 		}
 
 	}
-	
+
 	public void cargarDatosProducto() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
@@ -567,6 +567,28 @@ public class registro_servicios extends JFrame {
 				rsr.close();
 			}
 			conn.close();
+		} catch (Exception e21) {
+			e21.printStackTrace();
+		}
+	}
+
+	public void restar() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			int total = Integer.parseInt(cantidad);
+			int existencia = total - 1;
+			String resultado = String.valueOf(existencia);
+			PreparedStatement stmtr2 = conn.prepareStatement("UPDATE productos SET existencia_producto='"
+					+resultado+"' WHERE dispositivo_de_entrega_producto='"
+					+txtDispositivo.getText().toString()+"'");
+			ResultSet rsr2 = stmtr2.executeQuery();
+			rsr2.next();
+			;
+			stmtr2.close();
+			rsr2.close();
+			conn.close();
+
 		} catch (Exception e21) {
 			e21.printStackTrace();
 		}

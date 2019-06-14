@@ -45,62 +45,61 @@ public class control_servicio implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtServicio.getText().isEmpty()
-					|| formulario.txtTiempo.getText().isEmpty()
-					|| formulario.txtDescripcion.getText().isEmpty()
-					|| formulario.txtPrecio.getText().isEmpty() 
-					|| formulario.txtPrecio.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el servicio!");
-		} else {
-			clase.setTipo_servicio(formulario.txtServicio.getText().toString());
-			clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
-			clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
-			clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
-			if (consulta.insertar(clase)) {
-				JOptionPane.showMessageDialog(null, "Servicio registrado!");
-				restarVentaProducto();
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
-				
+			if (formulario.txtServicio.getText().isEmpty() || formulario.txtTiempo.getText().isEmpty()
+					|| formulario.txtDescripcion.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
+					|| formulario.txtPrecio.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el servicio!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! servicio no registrado");
-				limpiar();
+				clase.setTipo_servicio(formulario.txtServicio.getText().toString());
+				clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
+				clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
+				clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
+				consultarExistencia();
+				if (cantidad.equals(0)) {
+					JOptionPane.showMessageDialog(null, "No hay productos disponibles para la venta!");
+				} else {
+					if (consulta.insertar(clase)) {
+						JOptionPane.showMessageDialog(null, "Producto Vendido!");
+						JOptionPane.showMessageDialog(null, "Servicio registrado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! servicio no registrado");
+						limpiar();
+					}
+				}
 			}
 		}
-	}
-		
+
 		/* Actualizar */
 		if (e.getSource() == formulario.btnActualizar) {
-			if (formulario.txtServicio.getText().isEmpty()
-					|| formulario.txtTiempo.getText().isEmpty()
-					|| formulario.txtDescripcion.getText().isEmpty()
-					|| formulario.txtPrecio.getText().isEmpty() 
-					|| formulario.txtPrecio.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el servicio!");
-		} else {
-			clase.setId_servicio(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-			clase.setTipo_servicio(formulario.txtServicio.getText().toString());
-			clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
-			clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
-			clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
-			if (consulta.actualizar(clase)) {
-				JOptionPane.showMessageDialog(null, "Servicio actualizado!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
+			if (formulario.txtServicio.getText().isEmpty() || formulario.txtTiempo.getText().isEmpty()
+					|| formulario.txtDescripcion.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
+					|| formulario.txtPrecio.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el servicio!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! servicio no actualizado");
-				limpiar();
+				clase.setId_servicio(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+				clase.setTipo_servicio(formulario.txtServicio.getText().toString());
+				clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
+				clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
+				clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
+				if (consulta.actualizar(clase)) {
+					JOptionPane.showMessageDialog(null, "Servicio actualizado!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! servicio no actualizado");
+					limpiar();
+				}
 			}
 		}
-	}	
 		if (e.getSource() == formulario.btnActualizarDatos) {
 			int filaseleccionada;
 			try {
@@ -121,7 +120,7 @@ public class control_servicio implements ActionListener {
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDescripcion.setText(descripcion);
 					registro_servicios.cbxProductos.setSelectedItem(producto);
-				
+
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtServicio.setForeground(Color.BLACK);
 					formulario.txtTiempo.setForeground(Color.BLACK);
@@ -169,7 +168,7 @@ public class control_servicio implements ActionListener {
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDescripcion.setText(descripcion);
 					registro_servicios.cbxProductos.setSelectedItem(producto);
-				
+
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtServicio.setForeground(Color.BLACK);
 					formulario.txtTiempo.setForeground(Color.BLACK);
@@ -192,8 +191,6 @@ public class control_servicio implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
-		
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {
@@ -323,8 +320,7 @@ public class control_servicio implements ActionListener {
 
 		return matrizInfo;
 	}
-	
-	
+
 	public void consultarProductos() {
 		conexion conex = new conexion();
 		try {
@@ -332,7 +328,7 @@ public class control_servicio implements ActionListener {
 			ResultSet rs = estatuto.executeQuery("SELECT dispositivo_de_entrega_producto FROM productos");
 
 			while (rs.next()) {
-			registro_servicios.cbxProductos.addItem(rs.getString("dispositivo_de_entrega_producto"));
+				registro_servicios.cbxProductos.addItem(rs.getString("dispositivo_de_entrega_producto"));
 			}
 			formulario.contador++;
 			rs.close();
@@ -346,35 +342,24 @@ public class control_servicio implements ActionListener {
 		}
 
 	}
-	
-	public void restarVentaProducto() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT cantidad_producto FROM productos where dispositivo_de_entrega_producto = '"
-					+ registro_servicios.cbxProductos.getSelectedItem() + "'");
-			while (rs.next()) {
-			cantidad = (rs.getString("cantidad_producto"));
-			total = Integer.parseInt(cantidad);
-			existencia = total-1;
-			resultado = String.valueOf(existencia); 
-			
-			Statement estatuto2 = conex.getConexion().createStatement();
-			ResultSet rs2 = estatuto2.executeQuery("UPDATE productos SET cantidad_producto='"+resultado+"' WHERE dispositivo_de_entrega_producto = '"
-					+ registro_servicios.cbxProductos.getSelectedItem() + "'");
-			JOptionPane.showMessageDialog(null, "Producto Vendido!");
-			rs2.close();
-			estatuto.close();
-			}
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-			
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 
+	public void consultarExistencia() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement(
+					"SELECT existencia_producto FROM productos WHERE dispositivo_de_entrega_producto ='"
+							+ formulario.txtDispositivo.getText().toString() + "'");
+			ResultSet rsr = stmtr.executeQuery();
+			rsr.next();
+			cantidad = (rsr.getString("existencia_producto"));
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+
+		} catch (Exception e21) {
+			e21.printStackTrace();
 		}
 	}
-	
 }

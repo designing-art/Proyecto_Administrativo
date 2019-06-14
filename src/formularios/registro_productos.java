@@ -35,6 +35,8 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -54,6 +56,8 @@ import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 public class registro_productos extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -80,6 +84,9 @@ public class registro_productos extends JFrame {
 	public static String ruta_logo;
 	public static JLabel label;
 	public static JLabel label_2;
+	
+	public JDateChooser dateRegistro;
+	public JTextFieldDateEditor editor;
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
@@ -100,6 +107,9 @@ public class registro_productos extends JFrame {
 	public JTextField txtPrecio;
 	public JTextField txtCantidad;
 	private JLabel lblL;
+	private JLabel label_1;
+	public JTextField txtTotalExistenciaProductos;
+	private JButton button_1;
 
 	public registro_productos() {
 		setResizable(false);
@@ -266,7 +276,6 @@ public class registro_productos extends JFrame {
 		InputMap map4 = txtCapasidad.getInputMap(JComponent.WHEN_FOCUSED);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
-
 		JLabel lblCapasidad = new JLabel("4. Capacidad :");
 		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblCapasidad.setBounds(27, 168, 136, 22);
@@ -332,12 +341,12 @@ public class registro_productos extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
-		
+
 		JLabel lblCantidad = new JLabel("7. Cantidad :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblCantidad.setBounds(27, 253, 136, 22);
 		panelRegistro.add(lblCantidad);
-		
+
 		txtCantidad = new JTextField();
 		txtCantidad.setColumns(10);
 		txtCantidad.setBounds(173, 252, 141, 23);
@@ -361,19 +370,28 @@ public class registro_productos extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 			}
 		});
-				
-				lblL = new JLabel("L.");
-				lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-				lblL.setBounds(155, 230, 17, 14);
-				panelRegistro.add(lblL);
-				
-				
-						JLabel lblLibreta = new JLabel();
-						lblLibreta.setBounds(0, 0, 341, 450);
-						panelRegistro.add(lblLibreta);
-						final ImageIcon logo = new ImageIcon(
-								icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
-						lblLibreta.setIcon(logo);
+
+		lblL = new JLabel("L.");
+		lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblL.setBounds(155, 230, 17, 14);
+		panelRegistro.add(lblL);
+
+		
+		dateRegistro = new JDateChooser();
+		dateRegistro.setBounds(219, 84, 95, 20);
+		dateRegistro.setDateFormatString("dd-MMMMM-yyyy");
+		panelRegistro.add(dateRegistro);
+		editor = (JTextFieldDateEditor) dateRegistro.getDateEditor();
+		editor.setEditable(false);
+		editor.setHorizontalAlignment(SwingConstants.CENTER);
+		dateRegistro.setVisible(false);
+
+		JLabel lblLibreta = new JLabel();
+		lblLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblLibreta);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -430,7 +448,7 @@ public class registro_productos extends JFrame {
 		barraProductos = new JScrollPane(tablaProductos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraProductos);
-		barraProductos.setBounds(28, 90, 376, 294);
+		barraProductos.setBounds(28, 90, 376, 262);
 
 		tablaProductos = new JTable();
 		barraProductos.setViewportView(tablaProductos);
@@ -467,6 +485,33 @@ public class registro_productos extends JFrame {
 		button.setBounds(210, 40, 137, 19);
 		panelTablaCargos.add(button);
 
+		label_1 = new JLabel("Total Existencia :");
+		label_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		label_1.setBounds(30, 365, 150, 14);
+		panelTablaCargos.add(label_1);
+
+		txtTotalExistenciaProductos = new JTextField();
+		txtTotalExistenciaProductos.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTotalExistenciaProductos.setEditable(false);
+		txtTotalExistenciaProductos.setColumns(10);
+		txtTotalExistenciaProductos.setBounds(162, 363, 132, 20);
+		panelTablaCargos.add(txtTotalExistenciaProductos);
+
+		button_1 = new JButton("Obtener");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(txtBusquedaContratosEmpleados.equals("")) { 
+					JOptionPane.showMessageDialog(null, "Debe buscar el producto para conocer su existencia total.");
+				}else {
+					totalizarExistencia();	
+				}
+			}
+		});
+		button_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		button_1.setBackground(new Color(60, 179, 113));
+		button_1.setBounds(305, 363, 99, 21);
+		panelTablaCargos.add(button_1);
+
 		JLabel label_5 = new JLabel();
 		label_5.setBounds(0, 0, 431, 449);
 		panelTablaCargos.add(label_5);
@@ -478,7 +523,8 @@ public class registro_productos extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Producto", "Marca", "Capacidad", "Color", "Precio", "Foto", "Existencia"};
+		String titulos[] = { "Codigo", "Producto", "Marca", "Capacidad", "Color", "Precio", "Foto", "Cantidad",
+				"Existencia", "Registrado" };
 		String informacion[][] = control_producto.obtenerMatriz();
 		tablaProductos = new JTable(informacion, titulos);
 		barraProductos.setViewportView(tablaProductos);
@@ -487,16 +533,21 @@ public class registro_productos extends JFrame {
 			tablaProductos.setDefaultEditor(col_class, null);
 			tablaProductos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			tablaProductos.getTableHeader().setReorderingAllowed(false);
-			
+
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
 			tablaProductos.getColumnModel().getColumn(5).setCellRenderer(tcr);
-			
+
 			DefaultTableCellRenderer tcr2;
 			tcr2 = new DefaultTableCellRenderer();
 			tcr2.setHorizontalAlignment(SwingConstants.CENTER);
 			tablaProductos.getColumnModel().getColumn(7).setCellRenderer(tcr2);
+			
+			DefaultTableCellRenderer tcr3;
+			tcr3 = new DefaultTableCellRenderer();
+			tcr3.setHorizontalAlignment(SwingConstants.CENTER);
+			tablaProductos.getColumnModel().getColumn(8).setCellRenderer(tcr2);
 
 		}
 	}
@@ -537,8 +588,7 @@ public class registro_productos extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn
-					.prepareStatement("SELECT * FROM productos ORDER BY id_producto DESC");
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM productos ORDER BY id_producto DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				ultimoValor = rsr.getString("id_producto");
@@ -627,6 +677,31 @@ public class registro_productos extends JFrame {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+	public void totalizarExistencia() {
+		int t = 0;
+		int p = 0;
+		if (tablaProductos.getRowCount() > 0) {
+			for (int i = 0; i < tablaProductos.getRowCount(); i++) {
+				p = Integer.parseInt(tablaProductos.getValueAt(i, 8).toString());
+				t += p;
+			}
+			txtTotalExistenciaProductos.setText(String.valueOf(t));
+		} else {
+			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
+		}
+	}
+	
+	public void establecerFechaRegistro() {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			Date date = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			dateRegistro.setDate(date);
+		} catch (Exception e) {
 
 		}
 

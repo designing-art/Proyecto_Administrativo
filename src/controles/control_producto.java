@@ -58,6 +58,9 @@ public class control_producto implements ActionListener {
 			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
 			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
 			clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+			clase.setExistencia_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+			clase.setFecha_registro_producto(formulario.editor.getText().toString());
+			
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Producto registrado!");
 				limpiar();
@@ -68,6 +71,7 @@ public class control_producto implements ActionListener {
 						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 				formulario.lbl_foto_contrato.setIcon(iconofoto);
+				formulario.txtDireccionFotoProducto.setText("Sin Fotografia");
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
 				limpiar();
@@ -92,6 +96,8 @@ public class control_producto implements ActionListener {
 			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
 			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
 			clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+			clase.setExistencia_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+			clase.setFecha_registro_producto(formulario.editor.getText().toString());
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Producto actualizado!");
 				limpiar();
@@ -102,6 +108,7 @@ public class control_producto implements ActionListener {
 						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 				formulario.lbl_foto_contrato.setIcon(iconofoto);
+				formulario.txtDireccionFotoProducto.setText("Sin Fotografia");
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
 				limpiar();
@@ -348,6 +355,8 @@ public class control_producto implements ActionListener {
 				producto.setPrecio_producto(Double.parseDouble(rs.getString("precio_producto")));
 				producto.setDireccion_foto_producto(rs.getString("direccion_foto_producto"));
 				producto.setCantidad_producto(Integer.parseInt(rs.getString("cantidad_producto")));
+				producto.setExistencia_producto(Integer.parseInt(rs.getString("existencia_producto")));
+				producto.setFecha_registro_producto(rs.getString("fecha_registro_producto"));
 				miLista.add(producto);
 			}
 			rs.close();
@@ -364,7 +373,7 @@ public class control_producto implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<producto> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][8];
+		String matrizInfo[][] = new String[miLista.size()][10];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_producto() + "";
 			matrizInfo[i][1] = miLista.get(i).getDispositivo_de_entrega_producto() + "";
@@ -374,6 +383,8 @@ public class control_producto implements ActionListener {
 			matrizInfo[i][5] = miLista.get(i).getPrecio_producto() + "";
 			matrizInfo[i][6] = miLista.get(i).getDireccion_foto_producto() + "";
 			matrizInfo[i][7] = miLista.get(i).getCantidad_producto() + "";
+			matrizInfo[i][8] = miLista.get(i).getExistencia_producto() + "";
+			matrizInfo[i][9] = miLista.get(i).getFecha_registro_producto() + "";
 
 		}
 

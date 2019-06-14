@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 
 import clases.bonificacion;
 import clases.cargo;
+import clases.compra;
 import clases.configuracion;
 import clases.contrato_empleado;
 import clases.deduccion;
@@ -34,6 +35,7 @@ import clases.servicio;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
+import consultas.consultas_compra;
 import consultas.consultas_configuracion;
 import consultas.consultas_contrato_empleado;
 import consultas.consultas_deduccion;
@@ -47,6 +49,7 @@ import consultas.consultas_proveedor;
 import consultas.consultas_servicio;
 import controles.control_bonificacion;
 import controles.control_cargo;
+import controles.control_compra;
 import controles.control_configuracion;
 import controles.control_contrato_empleado;
 import controles.control_deduccion;
@@ -438,6 +441,7 @@ public class ventana_principal extends JFrame {
 				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.construirTabla();
+				formulario.establecerFechaRegistro();
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevoProducto.setVisible(true);
 				formulario.btnActualizarProducto.setVisible(false);
@@ -598,6 +602,33 @@ public class ventana_principal extends JFrame {
 		button_17.setBackground(Color.PINK);
 		button_17.setBounds(117, 19, 97, 21);
 		panel_3.add(button_17);
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				compra clase = new compra();
+				consultas_compra consulta = new consultas_compra();
+				registro_compras formulario = new registro_compras();
+				
+				inventario clase2 = new inventario();
+				consultas_inventario consulta2 = new consultas_inventario();
+				registro_inventario formulario2 = new registro_inventario();
+
+				control_compra control = new control_compra(clase, clase2, consulta, consulta2, formulario, formulario2);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombre.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.establecerFechaRegistro();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
+			}
+		});
 		
 		JButton btnVentas = new JButton("Ventas");
 		btnVentas.setForeground(Color.BLACK);

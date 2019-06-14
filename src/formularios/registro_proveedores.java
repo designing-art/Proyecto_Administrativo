@@ -94,7 +94,7 @@ public class registro_proveedores extends JFrame {
 	public JButton btnAtras;
 	public JButton button;
 	public JTextField txtNombresProveedor;
-	public JTextField txtCuentaProveedor;
+	public JFormattedTextField txtCuentaProveedor;
 	public JTextField txtDireccionProveedor;
 	public JFormattedTextField txtRtnProveedor;
 	public JFormattedTextField txtTelefonoProveedor;
@@ -237,13 +237,7 @@ public class registro_proveedores extends JFrame {
 		btnVerFotoProducto.setBounds(99, 313, 70, 23);
 		panelRegistro.add(btnVerFotoProducto);
 
-		MaskFormatter formato = null;
-		try {
-			formato = new MaskFormatter("####-####-#####");
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-
+		
 		txtNombresProveedor = new JTextField();
 		txtNombresProveedor.setColumns(10);
 		txtNombresProveedor.setBounds(125, 111, 189, 23);
@@ -270,9 +264,16 @@ public class registro_proveedores extends JFrame {
 			}
 		});
 
-		txtCuentaProveedor = new JTextField();
+		MaskFormatter formato4 = null;
+		try {
+			formato4 = new MaskFormatter("############");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtCuentaProveedor = new JFormattedTextField(formato4);
 		txtCuentaProveedor.setColumns(10);
 		txtCuentaProveedor.setBounds(125, 140, 189, 23);
+		txtCuentaProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		panelRegistro.add(txtCuentaProveedor);
 		InputMap map5 = txtCuentaProveedor.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");

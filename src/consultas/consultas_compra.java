@@ -46,7 +46,7 @@ public class consultas_compra extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE inventario SET id_compra=?, nombre_objeto_compra=?, precio_objeto_compra=?, descripcion_objeto_compra=?, peso_objeto_compra=?, color_objeto_compra=?, marca_objeto_compra=?, modelo_objeto_compra=?, cantidad_objeto_compra=?, existencias_objeto_compra=?, fecha_registro_compra=? WHERE id_compra=? ";
+		String sql = "UPDATE compras SET id_compra=?, nombre_objeto_compra=?, precio_objeto_compra=?, descripcion_objeto_compra=?, peso_objeto_compra=?, color_objeto_compra=?, marca_objeto_compra=?, modelo_objeto_compra=?, cantidad_objeto_compra=?, fecha_registro_compra=? WHERE nombre_objeto_compra=? ";
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class consultas_compra extends conexion {
 			ps.setString(8, compra.getModelo_objeto_compra());
 			ps.setInt(9, compra.getCantidad_objeto_compra());
 			ps.setString(10, compra.getFecha_registro_compra());
-			ps.setInt(11, compra.getId_compra());
+			ps.setString(11, compra.getNombre_objeto_compra());
 			ps.execute();
 
 			return true;
@@ -76,5 +76,6 @@ public class consultas_compra extends conexion {
 		}
 
 	}
+	
 
 }

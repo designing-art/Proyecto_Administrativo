@@ -27,7 +27,7 @@ import java.io.FileNotFoundException;
 
 import javax.swing.JRadioButton;
 
-public class registro_configuracion extends JFrame {
+public class acerca_de extends JFrame {
 
 	public JPanel contentPane;
 	public int contador1 = 0;
@@ -36,27 +36,18 @@ public class registro_configuracion extends JFrame {
 	public static String ruta;
 	public static ImageIcon imagen;
 	public static String identidad = null;
-	public JButton btnGuardar;
-	public JButton btnActualizar;
-	public JTextField txtCodigo;
-	public JRadioButton rdbtnDesactvar;
-	public JRadioButton rdbtnActivar;
-	public JRadioButton rdbtnClaro;
-	public JRadioButton rdbtnObscuro;
-	public JRadioButton rdbtnAzul;
-	public JRadioButton rdbtnVerdoso;
 	public ButtonGroup grupo1;
 	public ButtonGroup grupo2;
 	public static String sonido = null;
 	public static String tema = null;
 	ventana_principal principal = new ventana_principal();
 
-	public registro_configuracion() {
+	public acerca_de() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 256, 303);
+		setBounds(100, 100, 525, 335);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,90 +57,25 @@ public class registro_configuracion extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(10, 41, 230, 222);
+		panel.setBounds(10, 23, 499, 240);
 		contentPane.add(panel);
 
-		JLabel lblFuncionesDelEmpleado = new JLabel("Configuracion de audio.");
-		lblFuncionesDelEmpleado.setFont(new Font("Arial Black", Font.BOLD, 12));
-		lblFuncionesDelEmpleado.setBounds(20, 23, 220, 25);
-		panel.add(lblFuncionesDelEmpleado);
-
-		JLabel lblNombreDeLa = new JLabel("Sonidos del sistema :");
-		lblNombreDeLa.setFont(new Font("Arial Black", Font.BOLD, 12));
-		lblNombreDeLa.setBounds(20, 48, 166, 25);
-		panel.add(lblNombreDeLa);
-
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardar.setBackground(new Color(50, 205, 50));
-		btnGuardar.setBounds(111, 176, 104, 23);
-		panel.add(btnGuardar);
-
-		rdbtnDesactvar = new JRadioButton("Desactivar");
-		rdbtnDesactvar.setBounds(20, 73, 89, 23);
-		panel.add(rdbtnDesactvar);
-
-		rdbtnActivar = new JRadioButton("Activar");
-		rdbtnActivar.setBounds(126, 73, 89, 23);
-		panel.add(rdbtnActivar);
-
 		grupo1 = new ButtonGroup();
-		grupo1.add(rdbtnDesactvar);
-		grupo1.add(rdbtnActivar);
-
-		JLabel lblConfiguracionDeDiseo = new JLabel("Configuracion de dise\u00F1o :");
-		lblConfiguracionDeDiseo.setFont(new Font("Arial Black", Font.BOLD, 12));
-		lblConfiguracionDeDiseo.setBounds(20, 93, 220, 25);
-		panel.add(lblConfiguracionDeDiseo);
-
-		rdbtnClaro = new JRadioButton("Claro");
-		rdbtnClaro.setBounds(20, 115, 89, 23);
-		panel.add(rdbtnClaro);
-
-		rdbtnObscuro = new JRadioButton("Obscuro");
-		rdbtnObscuro.setBounds(131, 115, 84, 23);
-		panel.add(rdbtnObscuro);
-
-		rdbtnAzul = new JRadioButton("Azulado");
-		rdbtnAzul.setBounds(20, 141, 89, 23);
-		panel.add(rdbtnAzul);
-
-		rdbtnVerdoso = new JRadioButton("Verdoso");
-		rdbtnVerdoso.setBounds(131, 141, 84, 23);
-		panel.add(rdbtnVerdoso);
 
 		grupo2 = new ButtonGroup();
-		grupo2.add(rdbtnClaro);
-		grupo2.add(rdbtnObscuro);
-		grupo2.add(rdbtnAzul);
-		grupo2.add(rdbtnVerdoso);
-
-		txtCodigo = new JTextField();
-		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(20, 178, 23, 20);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
-		txtCodigo.setVisible(false);
-
-		btnActualizar = new JButton("Guardar");
-		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnActualizar.setBackground(new Color(50, 205, 50));
-		btnActualizar.setBounds(20, 176, 104, 23);
-		panel.add(btnActualizar);
 
 		JLabel label_12 = new JLabel("");
 		label_12.setHorizontalAlignment(SwingConstants.CENTER);
-		label_12.setBounds(0, 0, 230, 221);
+		label_12.setBounds(0, 0, 499, 240);
 		panel.add(label_12);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(label_12.getWidth(), label_12.getHeight(), Image.SCALE_DEFAULT));
 		label_12.setIcon(logo);
 
-		JLabel lblRegistroYMantenimiento = new JLabel("CONFIGURACIONES");
+		JLabel lblRegistroYMantenimiento = new JLabel("Acerca de.");
 		lblRegistroYMantenimiento.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistroYMantenimiento.setBounds(10, 0, 230, 45);
+		lblRegistroYMantenimiento.setBounds(10, 0, 499, 21);
 		contentPane.add(lblRegistroYMantenimiento);
 
 	}

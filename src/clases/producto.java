@@ -10,6 +10,8 @@ public class producto {
 	Double precio_producto;
 	String direccion_foto_producto;
 	int cantidad_producto;
+	int existencia_producto;
+	String fecha_registro_producto;
 
 	public int getId_producto() {
 		return id_producto;
@@ -74,5 +76,21 @@ public class producto {
 	public void setCantidad_producto(int cantidad_producto) {
 		this.cantidad_producto = cantidad_producto;
 	}
-	
+
+	public int getExistencia_producto() {
+		return existencia_producto;
+	}
+
+	public void setExistencia_producto(int existencia_producto) {
+		this.existencia_producto = existencia_producto;
+	}
+
+	public String getFecha_registro_producto() {
+		return fecha_registro_producto;
+	}
+
+	public void setFecha_registro_producto(String fecha_registro_producto) {
+		this.fecha_registro_producto = fecha_registro_producto;
+	}
+
 }

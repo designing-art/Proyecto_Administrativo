@@ -103,6 +103,7 @@ public class registro_inventario extends JFrame {
 	public JLabel lblCantidad_1;
 	public JTextField txtCantidad;
 	public JTextFieldDateEditor editor;
+	public JTextField txtTotalExistencia;
 
 	public registro_inventario() {
 		setResizable(false);
@@ -438,7 +439,7 @@ public class registro_inventario extends JFrame {
 		barra = new JScrollPane(tabla, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barra);
-		barra.setBounds(28, 90, 376, 294);
+		barra.setBounds(28, 90, 376, 266);
 
 		tabla = new JTable();
 		barra.setViewportView(tabla);
@@ -474,13 +475,36 @@ public class registro_inventario extends JFrame {
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(210, 40, 137, 19);
 		panelTablaCargos.add(button);
-
-		JLabel label_5 = new JLabel();
-		label_5.setBounds(0, 0, 431, 449);
-		panelTablaCargos.add(label_5);
-		final ImageIcon logo1 = new ImageIcon(
-				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-		label_5.setIcon(logo1);
+		
+		JLabel lblExistenciaDelProducto = new JLabel("Total Existencia :");
+		lblExistenciaDelProducto.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblExistenciaDelProducto.setBounds(30, 365, 150, 14);
+		panelTablaCargos.add(lblExistenciaDelProducto);
+		
+		txtTotalExistencia = new JTextField();
+		txtTotalExistencia.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTotalExistencia.setEditable(false);
+		txtTotalExistencia.setColumns(10);
+		txtTotalExistencia.setBounds(162, 363, 132, 20);
+		panelTablaCargos.add(txtTotalExistencia);
+		
+		JButton btnCalcularExistencia = new JButton("Obtener");
+		btnCalcularExistencia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				totalizarExistencia();
+			}
+		});
+		btnCalcularExistencia.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		btnCalcularExistencia.setBackground(new Color(60, 179, 113));
+		btnCalcularExistencia.setBounds(305, 363, 99, 21);
+		panelTablaCargos.add(btnCalcularExistencia);
+		
+				JLabel label_5 = new JLabel();
+				label_5.setBounds(0, 0, 431, 449);
+				panelTablaCargos.add(label_5);
+				final ImageIcon logo1 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+				label_5.setIcon(logo1);
 
 	}
 
@@ -610,5 +634,19 @@ public class registro_inventario extends JFrame {
 
 		}
 
+	}
+	
+	public void totalizarExistencia() {
+		int t = 0;
+		int p = 0;
+		if (tabla.getRowCount() > 0) {
+			for (int i = 0; i < tabla.getRowCount(); i++) {
+				p = Integer.parseInt(tabla.getValueAt(i, 9).toString());
+				t += p;
+			}
+			txtTotalExistencia.setText(String.valueOf(t));
+		} else {
+			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
+		}
 	}
 }
