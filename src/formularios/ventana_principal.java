@@ -544,7 +544,7 @@ public class ventana_principal extends JFrame {
 		button_12.setBackground(new Color(70, 130, 180));
 		button_12.setBounds(117, 19, 97, 21);
 		panel_2.add(button_12);
-		
+
 		JButton btnIntercambios = new JButton("Intercambio");
 		btnIntercambios.setForeground(Color.BLACK);
 		btnIntercambios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
@@ -607,12 +607,13 @@ public class ventana_principal extends JFrame {
 				compra clase = new compra();
 				consultas_compra consulta = new consultas_compra();
 				registro_compras formulario = new registro_compras();
-				
+
 				inventario clase2 = new inventario();
 				consultas_inventario consulta2 = new consultas_inventario();
 				registro_inventario formulario2 = new registro_inventario();
 
-				control_compra control = new control_compra(clase, clase2, consulta, consulta2, formulario, formulario2);
+				control_compra control = new control_compra(clase, clase2, consulta, consulta2, formulario,
+						formulario2);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.txtNombre.requestFocusInWindow();
@@ -629,7 +630,7 @@ public class ventana_principal extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JButton btnVentas = new JButton("Ventas");
 		btnVentas.setForeground(Color.BLACK);
 		btnVentas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
@@ -802,20 +803,27 @@ public class ventana_principal extends JFrame {
 		button_1.setBackground(new Color(255, 215, 0));
 		button_1.setBounds(176, 19, 145, 21);
 		panel_9.add(button_1);
-		
+
 		JButton btnAcercaDe = new JButton("Acerca de.");
 		btnAcercaDe.setForeground(Color.BLACK);
 		btnAcercaDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnAcercaDe.setBackground(new Color(219, 112, 147));
-		btnAcercaDe.setBounds(235, 407, 123, 21);
+		btnAcercaDe.setBounds(267, 407, 101, 21);
 		contentPane.add(btnAcercaDe);
-		
-				JLabel lblMenuOpciones = new JLabel();
-				lblMenuOpciones.setBounds(21, 43, 379, 417);
-				contentPane.add(lblMenuOpciones);
-				final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
-						lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
-				lblMenuOpciones.setIcon(icono2);
+		btnAcercaDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				acerca_de info = new acerca_de();
+				info.setLocationRelativeTo(null);
+				info.setVisible(true);
+			}
+		});
+
+		JLabel lblMenuOpciones = new JLabel();
+		lblMenuOpciones.setBounds(21, 43, 379, 417);
+		contentPane.add(lblMenuOpciones);
+		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
+				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
+		lblMenuOpciones.setIcon(icono2);
 
 	}
 
