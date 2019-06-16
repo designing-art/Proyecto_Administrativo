@@ -5,16 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.RepaintManager;
 
 import clases.configuracion;
 import consultas.consultas_configuracion;
 import formularios.registro_configuracion;
+import formularios.ventana_principal;
 
 public class control_configuracion implements ActionListener {
 
 	public configuracion clase;
 	public consultas_configuracion consulta;
 	public registro_configuracion formulario;
+	public ventana_principal formulario2 = new ventana_principal();
 
 	public control_configuracion(configuracion clase, consultas_configuracion consulta,
 			registro_configuracion formulario) {
@@ -50,6 +53,13 @@ public class control_configuracion implements ActionListener {
 					}
 				}
 			}
+			
+			if(formulario.txtFrase.equals("")) {
+				formulario2.txtFrase.setText("");	
+			}else {
+				formulario2.txtFrase.equals(formulario.txtFrase);
+				formulario2.repaint();
+			}
 
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito! Configuracion guardada!");
@@ -82,6 +92,13 @@ public class control_configuracion implements ActionListener {
 					clase.setTema_configuracion(formulario.rdbtnVerdoso.getText().toString());
 				}
 			}
+		}
+		
+		if(formulario.txtFrase.equals("")) {
+			formulario2.txtFrase.setText("");	
+		}else {
+			formulario2.txtFrase.equals(formulario.txtFrase);
+			formulario2.repaint();
 		}
 
 		if (consulta.actualizar(clase)) {

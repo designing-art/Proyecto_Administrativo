@@ -50,13 +50,17 @@ public class registro_configuracion extends JFrame {
 	public static String sonido = null;
 	public static String tema = null;
 	ventana_principal principal = new ventana_principal();
+	private JLabel lblTemasDelSistema;
+	private JLabel lblFraseMotivadora;
+	private JLabel lblEscribaUnaFrase;
+	public static JTextField txtFrase;
 
 	public registro_configuracion() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 256, 303);
+		setBounds(100, 100, 262, 377);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,56 +70,62 @@ public class registro_configuracion extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(10, 41, 230, 222);
+		panel.setBounds(10, 41, 236, 296);
 		contentPane.add(panel);
 
 		JLabel lblFuncionesDelEmpleado = new JLabel("Configuracion de audio.");
-		lblFuncionesDelEmpleado.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblFuncionesDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblFuncionesDelEmpleado.setBounds(20, 23, 220, 25);
 		panel.add(lblFuncionesDelEmpleado);
 
 		JLabel lblNombreDeLa = new JLabel("Sonidos del sistema :");
-		lblNombreDeLa.setFont(new Font("Arial Black", Font.BOLD, 12));
-		lblNombreDeLa.setBounds(20, 48, 166, 25);
+		lblNombreDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblNombreDeLa.setBounds(20, 41, 166, 25);
 		panel.add(lblNombreDeLa);
 
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(50, 205, 50));
-		btnGuardar.setBounds(111, 176, 104, 23);
+		btnGuardar.setBounds(111, 251, 104, 23);
 		panel.add(btnGuardar);
 
 		rdbtnDesactvar = new JRadioButton("Desactivar");
-		rdbtnDesactvar.setBounds(20, 73, 89, 23);
+		rdbtnDesactvar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnDesactvar.setBounds(20, 63, 89, 23);
 		panel.add(rdbtnDesactvar);
 
 		rdbtnActivar = new JRadioButton("Activar");
-		rdbtnActivar.setBounds(126, 73, 89, 23);
+		rdbtnActivar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnActivar.setBounds(126, 63, 89, 23);
 		panel.add(rdbtnActivar);
 
 		grupo1 = new ButtonGroup();
 		grupo1.add(rdbtnDesactvar);
 		grupo1.add(rdbtnActivar);
 
-		JLabel lblConfiguracionDeDiseo = new JLabel("Configuracion de dise\u00F1o :");
-		lblConfiguracionDeDiseo.setFont(new Font("Arial Black", Font.BOLD, 12));
-		lblConfiguracionDeDiseo.setBounds(20, 93, 220, 25);
+		JLabel lblConfiguracionDeDiseo = new JLabel("Configuracion de dise\u00F1o.");
+		lblConfiguracionDeDiseo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblConfiguracionDeDiseo.setBounds(20, 88, 220, 25);
 		panel.add(lblConfiguracionDeDiseo);
 
 		rdbtnClaro = new JRadioButton("Claro");
-		rdbtnClaro.setBounds(20, 115, 89, 23);
+		rdbtnClaro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnClaro.setBounds(20, 128, 89, 23);
 		panel.add(rdbtnClaro);
 
 		rdbtnObscuro = new JRadioButton("Obscuro");
-		rdbtnObscuro.setBounds(131, 115, 84, 23);
+		rdbtnObscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnObscuro.setBounds(131, 128, 84, 23);
 		panel.add(rdbtnObscuro);
 
 		rdbtnAzul = new JRadioButton("Azulado");
-		rdbtnAzul.setBounds(20, 141, 89, 23);
+		rdbtnAzul.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnAzul.setBounds(20, 154, 89, 23);
 		panel.add(rdbtnAzul);
 
 		rdbtnVerdoso = new JRadioButton("Verdoso");
-		rdbtnVerdoso.setBounds(131, 141, 84, 23);
+		rdbtnVerdoso.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnVerdoso.setBounds(131, 154, 84, 23);
 		panel.add(rdbtnVerdoso);
 
 		grupo2 = new ButtonGroup();
@@ -127,7 +137,7 @@ public class registro_configuracion extends JFrame {
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(20, 178, 23, 20);
+		txtCodigo.setBounds(192, 26, 23, 20);
 		panel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		txtCodigo.setVisible(false);
@@ -135,12 +145,32 @@ public class registro_configuracion extends JFrame {
 		btnActualizar = new JButton("Guardar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(50, 205, 50));
-		btnActualizar.setBounds(20, 176, 104, 23);
+		btnActualizar.setBounds(20, 251, 104, 23);
 		panel.add(btnActualizar);
+
+		lblTemasDelSistema = new JLabel("Temas del sistema :");
+		lblTemasDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblTemasDelSistema.setBounds(20, 106, 166, 25);
+		panel.add(lblTemasDelSistema);
+
+		lblFraseMotivadora = new JLabel("Frase Motivadora.");
+		lblFraseMotivadora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblFraseMotivadora.setBounds(20, 180, 220, 25);
+		panel.add(lblFraseMotivadora);
+
+		lblEscribaUnaFrase = new JLabel("Escriba una frase motivadora.");
+		lblEscribaUnaFrase.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
+		lblEscribaUnaFrase.setBounds(20, 198, 210, 25);
+		panel.add(lblEscribaUnaFrase);
+
+		txtFrase = new JTextField();
+		txtFrase.setBounds(20, 220, 195, 20);
+		panel.add(txtFrase);
+		txtFrase.setColumns(10);
 
 		JLabel label_12 = new JLabel("");
 		label_12.setHorizontalAlignment(SwingConstants.CENTER);
-		label_12.setBounds(0, 0, 230, 221);
+		label_12.setBounds(0, 0, 236, 296);
 		panel.add(label_12);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(label_12.getWidth(), label_12.getHeight(), Image.SCALE_DEFAULT));

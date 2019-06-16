@@ -79,6 +79,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.SystemColor;
+import javax.swing.JTextField;
 
 public class ventana_principal extends JFrame {
 
@@ -93,6 +95,7 @@ public class ventana_principal extends JFrame {
 	public JButton registroHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
+	public static JTextField txtFrase;
 
 	public JButton btnRegistroProductos;
 
@@ -108,7 +111,7 @@ public class ventana_principal extends JFrame {
 		setType(Type.POPUP);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 500);
+		setBounds(100, 100, 700, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -117,46 +120,7 @@ public class ventana_principal extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-
-		lbl_nombre_empresa_principal = new JLabel();
-		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
-		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_nombre_empresa_principal.setBounds(440, 219, 204, 19);
-		lbl_nombre_empresa_principal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
-		contentPane.add(lbl_nombre_empresa_principal);
-
-		lbl_logo_empresa_principal = new JLabel();
-		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_logo_empresa_principal.setBounds(440, 240, 204, 177);
-		contentPane.add(lbl_logo_empresa_principal);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
-		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
-				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-		lbl_logo_empresa_principal.setIcon(icono);
-
-		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
-		btnInformacionEmpresa.setBackground(Color.WHITE);
-		btnInformacionEmpresa.setBounds(420, 428, 252, 23);
-		btnInformacionEmpresa.setForeground(Color.BLACK);
-		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		contentPane.add(btnInformacionEmpresa);
-		btnInformacionEmpresa.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				empresa clase = new empresa();
-				consultas_empresa consulta = new consultas_empresa();
-				registro_empresa formulario = new registro_empresa();
-				control_empresa control = new control_empresa(clase, consulta, formulario);
-				formulario.setVisible(true);
-				formulario.setLocationRelativeTo(null);
-				formulario.mostrarEmpresa();
-				formulario.pistas();
-				nombre = lbl_nombre_empresa_principal.getText().toString();
-				registro_empresa.txtNombre_Empresa.setText(nombre);
-				dispose();
-			}
-		});
 
 		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setForeground(Color.BLACK);
@@ -545,8 +509,8 @@ public class ventana_principal extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(UIManager.getColor("Button.background"));
-		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2.setBounds(46, 300, 327, 46);
+		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_2.setBounds(46, 300, 327, 53);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -680,66 +644,74 @@ public class ventana_principal extends JFrame {
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(410, 73, 274, 135);
+		panel_5.setBounds(410, 73, 274, 175);
 		contentPane.add(panel_5);
 		panel_5.setLayout(null);
 
 		JLabel lblSuperUsuario = new JLabel("Super usuario");
-		lblSuperUsuario.setBounds(10, 110, 119, 14);
+		lblSuperUsuario.setBounds(10, 148, 119, 14);
 		panel_5.add(lblSuperUsuario);
 		lblSuperUsuario.setForeground(Color.BLACK);
-		lblSuperUsuario.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblSuperUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblUsuario_1 = new JLabel("Usuario :");
-		lblUsuario_1.setBounds(10, 96, 75, 14);
+		lblUsuario_1.setBounds(10, 134, 75, 14);
 		panel_5.add(lblUsuario_1);
 		lblUsuario_1.setForeground(Color.BLACK);
-		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel lblDeveloper = new JLabel("Developer");
-		lblDeveloper.setBounds(10, 79, 119, 20);
+		lblDeveloper.setBounds(10, 116, 119, 20);
 		panel_5.add(lblDeveloper);
 		lblDeveloper.setForeground(Color.BLACK);
-		lblDeveloper.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblDeveloper.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setBounds(10, 68, 75, 14);
+		lblCargo.setBounds(10, 105, 75, 14);
 		panel_5.add(lblCargo);
 		lblCargo.setForeground(Color.BLACK);
-		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel lblDiazRodriguez = new JLabel("Diaz Rodriguez");
-		lblDiazRodriguez.setBounds(10, 54, 131, 14);
+		lblDiazRodriguez.setBounds(10, 90, 131, 14);
 		panel_5.add(lblDiazRodriguez);
 		lblDiazRodriguez.setForeground(Color.BLACK);
-		lblDiazRodriguez.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblDiazRodriguez.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblCristianDiaz = new JLabel("Cristian Emmanuel");
-		lblCristianDiaz.setBounds(10, 40, 131, 14);
+		lblCristianDiaz.setBounds(10, 76, 131, 14);
 		panel_5.add(lblCristianDiaz);
 		lblCristianDiaz.setForeground(Color.BLACK);
-		lblCristianDiaz.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblCristianDiaz.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblUsuario = new JLabel("Nombre completo :");
-		lblUsuario.setBounds(10, 23, 131, 20);
+		lblUsuario.setBounds(10, 60, 131, 20);
 		panel_5.add(lblUsuario);
 		lblUsuario.setForeground(Color.BLACK);
-		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-
-		JLabel lblDatosDeUsuario = new JLabel("DATOS DEL USUARIO");
-		lblDatosDeUsuario.setForeground(Color.BLACK);
-		lblDatosDeUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		lblDatosDeUsuario.setBounds(10, 0, 144, 28);
-		panel_5.add(lblDatosDeUsuario);
+		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setBounds(151, 12, 113, 112);
+		labelfotousuario.setBounds(151, 45, 113, 117);
 		panel_5.add(labelfotousuario);
 		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
 		labelfotousuario.setForeground(Color.LIGHT_GRAY);
 		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
 				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
 		labelfotousuario.setIcon(iconousuario);
+
+		JLabel lblInformacionDelUsuario = new JLabel();
+		lblInformacionDelUsuario.setText("Administraci\u00F3n del Usuario\r\n. ");
+		lblInformacionDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInformacionDelUsuario.setForeground(Color.BLACK);
+		lblInformacionDelUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		lblInformacionDelUsuario.setBounds(10, 8, 254, 28);
+		panel_5.add(lblInformacionDelUsuario);
+
+		JLabel lblDatos = new JLabel("Datos del usuario.");
+		lblDatos.setForeground(Color.BLACK);
+		lblDatos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblDatos.setBounds(10, 36, 131, 20);
+		panel_5.add(lblDatos);
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -759,9 +731,48 @@ public class ventana_principal extends JFrame {
 		JPanel panel_7 = new JPanel();
 		panel_7.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_7.setBackground(Color.WHITE);
-		panel_7.setBounds(410, 219, 274, 241);
+		panel_7.setBounds(410, 250, 274, 260);
 		contentPane.add(panel_7);
 		panel_7.setLayout(null);
+
+		lbl_logo_empresa_principal = new JLabel();
+		lbl_logo_empresa_principal.setBounds(22, 22, 224, 193);
+		panel_7.add(lbl_logo_empresa_principal);
+		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
+				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+		lbl_logo_empresa_principal.setIcon(icono);
+
+		lbl_nombre_empresa_principal = new JLabel();
+		lbl_nombre_empresa_principal.setBounds(0, 0, 274, 19);
+		panel_7.add(lbl_nombre_empresa_principal);
+		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
+		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_nombre_empresa_principal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
+
+		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
+		btnInformacionEmpresa.setBounds(10, 226, 252, 23);
+		panel_7.add(btnInformacionEmpresa);
+		btnInformacionEmpresa.setBackground(Color.WHITE);
+		btnInformacionEmpresa.setForeground(Color.BLACK);
+		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		btnInformacionEmpresa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				empresa clase = new empresa();
+				consultas_empresa consulta = new consultas_empresa();
+				registro_empresa formulario = new registro_empresa();
+				control_empresa control = new control_empresa(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.mostrarEmpresa();
+				formulario.pistas();
+				nombre = lbl_nombre_empresa_principal.getText().toString();
+				registro_empresa.txtNombre_Empresa.setText(nombre);
+				dispose();
+			}
+		});
 
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -775,18 +786,99 @@ public class ventana_principal extends JFrame {
 		lblBienvenidoAlSistema.setForeground(Color.BLACK);
 		lblBienvenidoAlSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 
+		JPanel panel_9 = new JPanel();
+		panel_9.setLayout(null);
+		panel_9.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_9.setBackground(Color.WHITE);
+		panel_9.setBounds(46, 351, 327, 65);
+		contentPane.add(panel_9);
+
+		JLabel label = new JLabel("Facturas :");
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		label.setBounds(10, 0, 97, 15);
+		panel_9.add(label);
+
+		JButton btnFacturasDeLos = new JButton("Facturas de los clientes");
+		btnFacturasDeLos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnFacturasDeLos.setForeground(Color.BLACK);
+		btnFacturasDeLos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnFacturasDeLos.setBackground(new Color(255, 215, 0));
+		btnFacturasDeLos.setBounds(10, 37, 204, 21);
+		panel_9.add(btnFacturasDeLos);
+
+		JButton btnFacturasDeLa = new JButton("Facturas de la empresa");
+		btnFacturasDeLa.setForeground(Color.BLACK);
+		btnFacturasDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnFacturasDeLa.setBackground(new Color(255, 215, 0));
+		btnFacturasDeLa.setBounds(10, 15, 204, 21);
+		panel_9.add(btnFacturasDeLa);
+
+		JButton btnSar = new JButton("Sar");
+		btnSar.setForeground(Color.BLACK);
+		btnSar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnSar.setBackground(new Color(255, 215, 0));
+		btnSar.setBounds(224, 15, 97, 21);
+		panel_9.add(btnSar);
+
+		JPanel panel_10 = new JPanel();
+		panel_10.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_10.setBackground(SystemColor.menu);
+		panel_10.setBounds(46, 415, 327, 46);
+		contentPane.add(panel_10);
+		panel_10.setLayout(null);
+
 		JLabel lblOpciones = new JLabel("Opciones :");
-		lblOpciones.setBounds(56, 387, 87, 19);
-		contentPane.add(lblOpciones);
+		lblOpciones.setBounds(10, 0, 87, 19);
+		panel_10.add(lblOpciones);
 		lblOpciones.setForeground(Color.BLACK);
 		lblOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JButton btnConfiguracionDelSistema = new JButton("Configuracion Sistema");
-		btnConfiguracionDelSistema.setBounds(56, 407, 159, 21);
-		contentPane.add(btnConfiguracionDelSistema);
+		JButton btnConfiguracionDelSistema = new JButton("Configuraci\u00F3n");
+		btnConfiguracionDelSistema.setBounds(10, 20, 103, 21);
+		panel_10.add(btnConfiguracionDelSistema);
 		btnConfiguracionDelSistema.setForeground(Color.BLACK);
 		btnConfiguracionDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnConfiguracionDelSistema.setBackground(new Color(219, 112, 147));
+
+		JButton btnAcercaDe = new JButton("Acerca de.");
+		btnAcercaDe.setBounds(225, 20, 94, 21);
+		panel_10.add(btnAcercaDe);
+		btnAcercaDe.setForeground(Color.BLACK);
+		btnAcercaDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnAcercaDe.setBackground(new Color(219, 112, 147));
+
+		JButton btnUsers = new JButton("Usuarios");
+		btnUsers.setBounds(123, 20, 92, 21);
+		panel_10.add(btnUsers);
+		btnUsers.setForeground(Color.BLACK);
+		btnUsers.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnUsers.setBackground(new Color(219, 112, 147));
+
+		txtFrase = new JTextField();
+		txtFrase.setBackground(Color.WHITE);
+		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFrase.setEditable(false);
+		txtFrase.setBounds(46, 460, 327, 20);
+		contentPane.add(txtFrase);
+		txtFrase.setColumns(10);
+
+		JLabel lblMenuOpciones = new JLabel();
+		lblMenuOpciones.setBounds(21, 43, 379, 467);
+		contentPane.add(lblMenuOpciones);
+		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
+				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
+		lblMenuOpciones.setIcon(icono2);
+		btnAcercaDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				acerca_de info = new acerca_de();
+				info.setLocationRelativeTo(null);
+				info.setVisible(true);
+			}
+		});
 		btnConfiguracionDelSistema.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -801,54 +893,6 @@ public class ventana_principal extends JFrame {
 
 			}
 		});
-
-		JPanel panel_9 = new JPanel();
-		panel_9.setLayout(null);
-		panel_9.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_9.setBackground(Color.WHITE);
-		panel_9.setBounds(46, 344, 327, 46);
-		contentPane.add(panel_9);
-
-		JLabel label = new JLabel("Facturas :");
-		label.setForeground(Color.BLACK);
-		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label.setBounds(10, 0, 97, 21);
-		panel_9.add(label);
-
-		JButton button = new JButton("Facturas Clientes");
-		button.setForeground(Color.BLACK);
-		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button.setBackground(new Color(255, 215, 0));
-		button.setBounds(10, 19, 145, 21);
-		panel_9.add(button);
-
-		JButton button_1 = new JButton("Facturas Empresa");
-		button_1.setForeground(Color.BLACK);
-		button_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_1.setBackground(new Color(255, 215, 0));
-		button_1.setBounds(176, 19, 145, 21);
-		panel_9.add(button_1);
-
-		JButton btnAcercaDe = new JButton("Acerca de.");
-		btnAcercaDe.setForeground(Color.BLACK);
-		btnAcercaDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnAcercaDe.setBackground(new Color(219, 112, 147));
-		btnAcercaDe.setBounds(267, 407, 101, 21);
-		contentPane.add(btnAcercaDe);
-		btnAcercaDe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				acerca_de info = new acerca_de();
-				info.setLocationRelativeTo(null);
-				info.setVisible(true);
-			}
-		});
-
-		JLabel lblMenuOpciones = new JLabel();
-		lblMenuOpciones.setBounds(21, 43, 379, 417);
-		contentPane.add(lblMenuOpciones);
-		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
-				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
-		lblMenuOpciones.setIcon(icono2);
 
 	}
 
