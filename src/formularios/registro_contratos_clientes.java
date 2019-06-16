@@ -1,120 +1,547 @@
 package formularios;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Event;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.KeyStroke;
+import javax.swing.RowFilter;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.print.PrinterException;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.awt.event.ActionEvent;
+import javax.swing.border.MatteBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
+
+import com.placeholder.PlaceHolder;
+
+import clases.empleado;
+import conexion.conexion;
+import consultas.consultas_empleado;
+import controles.control_contrato_cliente;
+import controles.control_contrato_empleado;
+import controles.control_empleado;
+import utilidades.visor_imagen;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class registro_contratos_clientes extends JFrame {
+	public JComboBox<?> cbxTiempo;
+	public JComboBox<?> cbxTipo;
+	public JScrollPane scrollFunciones;
+	public PlaceHolder pista;
 
-	private JPanel contentPane;
-	private JTextField txtcodigocontrato;
-	private JTextField txttipodecontrato;
-	private JLabel lblTiempoDeContrato;
-	private JTextField txttiempocontrato;
+	public JButton btnGuardarContrato;
+	public JButton btnNuevoContrato;
+	public JButton btnActualizarDatosContrato;
+	public JButton btnBorrarContrato;
+	public JButton btnActualizarContrato;
+	public JButton btnMostrarContrato;
+	public JButton btnAceptar;
+	public static String hora_fecha_reporte;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					registro_contratos_clientes frame = new registro_contratos_clientes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public static String ruta;
+	public static ImageIcon imagen;
 
-	/**
-	 * Create the frame.
-	 */
+	public JPanel contentPane;
+	public JTextField txtBusquedaContratosEmpleados;
+	public JScrollPane barraContratos;
+	public JTable tablaContratos;
+	public JTextField txtCodigo;
+	
+
+	public static String ruta_logo;
+	public static JLabel label;
+	public static JLabel label_2;
+
+	public TableRowSorter<TableModel> trsfiltroCodigo;
+	String filtroCodigo;
+	public JTextField txtFotoContrato;
+	public JButton btnSubirFotoContrato;
+	public JButton btnVerFotoContrato;
+	public JLabel lbl_foto_contrato;
+
+	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
+	public ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
+	public JLabel lblNumeroDe;
+	public JFormattedTextField txtIdentidadContrato;
+	public JButton btnAtras;
+	private JButton button;
+
 	public registro_contratos_clientes() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 500);
+		setResizable(false);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 
-		JLabel lblRegistroContratoClientes = new JLabel("REGISTRO DE CONTRATOS DE LOS CLIENTES");
-		lblRegistroContratoClientes.setBounds(210, 27, 263, 28);
-		lblRegistroContratoClientes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistroContratoClientes.setFont(new Font("Tahoma", Font.BOLD, 11));
-		contentPane.add(lblRegistroContratoClientes);
+		btnAtras = new JButton("Regresar");
+		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAtras.setBackground(new Color(255, 127, 80));
+		btnAtras.setBounds(717, 20, 102, 23);
+		contentPane.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ventana_principal principal = new ventana_principal();
+				principal.setVisible(true);
+				principal.setLocationRelativeTo(null);
+				dispose();
+				Timer time = new Timer();
+				time.schedule(principal.tarea, 0, 1000);
+				principal.consultarEmpresa();
+			}
+		});
 
-		JLabel lblCodigoDeContrato = new JLabel("Codigo de Contrato :");
-		lblCodigoDeContrato.setBounds(100, 119, 122, 14);
-		contentPane.add(lblCodigoDeContrato);
+		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DE CONTRATOS DE LOS CLIENTES");
+		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
+		lblRegistrarCargo.setBounds(28, 20, 693, 29);
+		contentPane.add(lblRegistrarCargo);
+		scrollFunciones = new JScrollPane();
 
-		JLabel lblFotocontratocliente = new JLabel("Fotografia :");
-		lblFotocontratocliente.setBounds(376, 107, 206, 14);
-		contentPane.add(lblFotocontratocliente);
+		JPanel panelRegistro = new JPanel();
+		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
+		panelRegistro.setBounds(28, 60, 341, 450);
+		contentPane.add(panelRegistro);
+		panelRegistro.setLayout(null);
 
-		txtcodigocontrato = new JTextField();
-		txtcodigocontrato.setBounds(232, 116, 44, 20);
-		txtcodigocontrato.setEditable(false);
+		label = new JLabel();
+		label.setBounds(265, 48, 49, 44);
+		panelRegistro.add(label);
+		
+		btnNuevoContrato = new JButton("Nuevo");
+		btnNuevoContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnNuevoContrato.setBounds(27, 393, 99, 23);
+		panelRegistro.add(btnNuevoContrato);
+		btnNuevoContrato.setBackground(new Color(255, 255, 255));
 
-		contentPane.add(txtcodigocontrato);
-		txtcodigocontrato.setColumns(10);
+		btnGuardarContrato = new JButton("Guardar");
+		btnGuardarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardarContrato.setBounds(218, 393, 99, 23);
+		panelRegistro.add(btnGuardarContrato);
+		btnGuardarContrato.setBackground(new Color(60, 179, 113));
 
-		JLabel lblTipodecontrato = new JLabel("Tipo de Contrato :");
-		lblTipodecontrato.setBounds(100, 169, 128, 14);
-		contentPane.add(lblTipodecontrato);
+		JLabel lblNombreCargo = new JLabel("3. Tiempo de contrato :");
+		lblNombreCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblNombreCargo.setBounds(27, 143, 136, 14);
+		panelRegistro.add(lblNombreCargo);
 
-		txttipodecontrato = new JTextField();
-		txttipodecontrato.setBounds(232, 166, 86, 20);
-		contentPane.add(txttipodecontrato);
-		txttipodecontrato.setColumns(10);
+		JLabel lblTipo = new JLabel("2. Tipo de contrato :");
+		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipo.setBounds(27, 109, 158, 23);
+		panelRegistro.add(lblTipo);
 
-		lblTiempoDeContrato = new JLabel("Tiempo de Contrato :");
-		lblTiempoDeContrato.setBounds(100, 221, 128, 14);
-		contentPane.add(lblTiempoDeContrato);
+		JLabel lblCodigo = new JLabel("1. Codigo :");
+		lblCodigo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblCodigo.setBounds(27, 84, 63, 14);
+		panelRegistro.add(lblCodigo);
 
-		txttiempocontrato = new JTextField();
-		txttiempocontrato.setBounds(232, 218, 86, 20);
-		contentPane.add(txttiempocontrato);
-		txttiempocontrato.setColumns(10);
+		JLabel lblRegistroCargos = new JLabel("Datos del registro :");
+		lblRegistroCargos.setBounds(27, 48, 136, 23);
+		panelRegistro.add(lblRegistroCargos);
+		lblRegistroCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JPanel panel = new JPanel();
-		panel.setBounds(456, 103, 128, 132);
-		contentPane.add(panel);
+		cbxTiempo = new JComboBox();
+		cbxTiempo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxTiempo.setModel(new DefaultComboBoxModel(
+				new String[] { "Indefinido", "6 meses", "1 a\u00F1o", "2 a\u00F1os", "Permanente" }));
+		cbxTiempo.setBounds(173, 139, 141, 22);
+		panelRegistro.add(cbxTiempo);
 
-		JButton btnTomar = new JButton("Tomar");
-		btnTomar.setBounds(363, 132, 89, 23);
-		contentPane.add(btnTomar);
+		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
+		txtCodigo.setBounds(173, 81, 43, 23);
+		panelRegistro.add(txtCodigo);
+		txtCodigo.setColumns(10);
 
-		JButton btnSubir = new JButton("Subir");
-		btnSubir.setBounds(363, 165, 89, 23);
-		contentPane.add(btnSubir);
+		btnActualizarContrato = new JButton("Actualizar");
+		btnActualizarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarContrato.setBackground(new Color(60, 179, 113));
+		btnActualizarContrato.setBounds(218, 359, 99, 23);
+		panelRegistro.add(btnActualizarContrato);
 
-		JButton btnGuardar = new JButton("GUARDAR");
-		btnGuardar.setBounds(232, 292, 106, 23);
-		contentPane.add(btnGuardar);
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAceptar.setBackground(new Color(255, 255, 255));
+		btnAceptar.setBounds(27, 359, 99, 23);
+		panelRegistro.add(btnAceptar);
 
-		JButton btnNuevo = new JButton("NUEVO");
-		btnNuevo.setBounds(368, 292, 107, 23);
-		contentPane.add(btnNuevo);
+		cbxTipo = new JComboBox();
+		cbxTipo.setModel(new DefaultComboBoxModel(new String[] { "Temporal", "Permanente" }));
+		cbxTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxTipo.setBounds(172, 109, 142, 22);
+		panelRegistro.add(cbxTipo);
 
-		JButton btnActualizar = new JButton("ACTUALIZAR");
-		btnActualizar.setBounds(232, 335, 106, 23);
-		contentPane.add(btnActualizar);
+		lbl_foto_contrato = new JLabel();
+		lbl_foto_contrato.setBounds(173, 201, 141, 147);
+		panelRegistro.add(lbl_foto_contrato);
+		final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage()
+				.getScaledInstance(lbl_foto_contrato.getWidth(), lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+		lbl_foto_contrato.setIcon(iconofoto);
 
-		JButton btnBorrar = new JButton("SALIR");
-		btnBorrar.setBounds(368, 335, 107, 23);
-		contentPane.add(btnBorrar);
+		JLabel lblFoto = new JLabel("4. Foto del contrato :");
+		lblFoto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblFoto.setBounds(27, 170, 136, 17);
+		panelRegistro.add(lblFoto);
+
+		btnSubirFotoContrato = new JButton("Subir");
+		btnSubirFotoContrato.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				selecionarFoto();
+			}
+		});
+		btnSubirFotoContrato.setBackground(new Color(250, 128, 114));
+		btnSubirFotoContrato.setBounds(202, 172, 83, 23);
+		panelRegistro.add(btnSubirFotoContrato);
+
+		txtFotoContrato = new JTextField();
+		txtFotoContrato.setText("Sin Fotografia.");
+		txtFotoContrato.setEditable(false);
+		txtFotoContrato.setColumns(10);
+		txtFotoContrato.setBounds(27, 190, 136, 20);
+		panelRegistro.add(txtFotoContrato);
+
+		btnVerFotoContrato = new JButton("Ver");
+		btnVerFotoContrato.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				verFotoContratoEmpleado();
+			}
+		});
+		btnVerFotoContrato.setBackground(Color.WHITE);
+		btnVerFotoContrato.setBounds(51, 222, 83, 23);
+		panelRegistro.add(btnVerFotoContrato);
+
+		lblNumeroDe = new JLabel("5. N\u00BA de Identidad :");
+		lblNumeroDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblNumeroDe.setBounds(27, 256, 158, 17);
+		panelRegistro.add(lblNumeroDe);
+
+		MaskFormatter formato = null;
+		try {
+			formato = new MaskFormatter("####-####-#####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtIdentidadContrato = new JFormattedTextField(formato);
+		txtIdentidadContrato.setColumns(10);
+		txtIdentidadContrato.setBounds(27, 276, 136, 20);
+		txtIdentidadContrato.setHorizontalAlignment(SwingConstants.CENTER);
+		panelRegistro.add(txtIdentidadContrato);
+		InputMap map2 = txtIdentidadContrato.getInputMap(JComponent.WHEN_FOCUSED);
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtIdentidadContrato.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
+
+		JLabel lblLibreta = new JLabel();
+		lblLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblLibreta);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblLibreta.setIcon(logo);
+
+		JPanel panelTablaCargos = new JPanel();
+		panelTablaCargos.setLayout(null);
+		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
+		panelTablaCargos.setBackground(Color.WHITE);
+		panelTablaCargos.setBounds(388, 61, 431, 449);
+		contentPane.add(panelTablaCargos);
+
+		JLabel lblCargosRegistrados = new JLabel("Contratos registrados :");
+		lblCargosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblCargosRegistrados.setBounds(30, 41, 166, 19);
+		panelTablaCargos.add(lblCargosRegistrados);
+
+		JLabel lblBuscarContrato = new JLabel("Buscar Contrato :");
+		lblBuscarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblBuscarContrato.setBounds(30, 63, 119, 22);
+		panelTablaCargos.add(lblBuscarContrato);
+
+		txtBusquedaContratosEmpleados = new JTextField();
+		txtBusquedaContratosEmpleados.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBusquedaContratosEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtBusquedaContratosEmpleados.setColumns(10);
+		txtBusquedaContratosEmpleados.setBounds(138, 64, 209, 21);
+		panelTablaCargos.add(txtBusquedaContratosEmpleados);
+		InputMap map4 = txtBusquedaContratosEmpleados.getInputMap(JComponent.WHEN_FOCUSED);
+		txtBusquedaContratosEmpleados.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				trsfiltroCodigo = new TableRowSorter(tablaContratos.getModel());
+				tablaContratos.setRowSorter(trsfiltroCodigo);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				String cadena = (txtBusquedaContratosEmpleados.getText());
+				txtBusquedaContratosEmpleados.setText(cadena);
+				repaint();
+				filtro();
+			}
+		});
+
+		btnBorrarContrato = new JButton("Borrar");
+		btnBorrarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBorrarContrato.setBackground(new Color(220, 20, 60));
+		btnBorrarContrato.setBounds(30, 395, 99, 23);
+		panelTablaCargos.add(btnBorrarContrato);
+
+		barraContratos = new JScrollPane(tablaContratos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panelTablaCargos.add(barraContratos);
+		barraContratos.setBounds(28, 90, 376, 294);
+
+		tablaContratos = new JTable();
+		barraContratos.setViewportView(tablaContratos);
+
+		label_2 = new JLabel();
+		label_2.setBounds(355, 41, 49, 44);
+		panelTablaCargos.add(label_2);
+
+		btnActualizarDatosContrato = new JButton("Actualizar Datos");
+		btnActualizarDatosContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarDatosContrato.setBackground(new Color(60, 179, 113));
+		btnActualizarDatosContrato.setBounds(267, 396, 137, 23);
+		panelTablaCargos.add(btnActualizarDatosContrato);
+
+		btnMostrarContrato = new JButton("Ver detalles");
+		btnMostrarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnMostrarContrato.setBackground(new Color(0, 206, 209));
+		btnMostrarContrato.setBounds(149, 395, 108, 23);
+		panelTablaCargos.add(btnMostrarContrato);
+		
+		button = new JButton("Imprimir Reporte");
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String fecha = getFechaYHora();
+				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
+				String encabezado = "Reporte de contratos de " + nombreEmpresa;
+				utilJTablePrint(tablaContratos, encabezado, "Pagina {0}"
+						+ "                                                  " + fecha, true);
+			}
+		});
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(60, 179, 113));
+		button.setBounds(210, 40, 137, 19);
+		panelTablaCargos.add(button);
+		
+				JLabel label_5 = new JLabel();
+				label_5.setBounds(0, 0, 431, 449);
+				panelTablaCargos.add(label_5);
+				final ImageIcon logo1 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+				label_5.setIcon(logo1);
+		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+
+	}
+
+	public void construirTabla() {
+		String titulos[] = { "Codigo", "Tipo", "Tiempo", "Foto", "Identidad"};
+		String informacion[][] = control_contrato_cliente.obtenerMatriz();
+		tablaContratos = new JTable(informacion, titulos);
+		barraContratos.setViewportView(tablaContratos);
+		for (int c = 0; c < tablaContratos.getColumnCount(); c++) {
+			Class<?> col_class = tablaContratos.getColumnClass(c);
+			tablaContratos.setDefaultEditor(col_class, null);
+			tablaContratos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaContratos.getTableHeader().setReorderingAllowed(false);
+
+		}
+	}
+
+	public void filtro() {
+		filtroCodigo = txtBusquedaContratosEmpleados.getText();
+		trsfiltroCodigo
+				.setRowFilter(RowFilter.regexFilter(txtBusquedaContratosEmpleados.getText(), 0, 1, 2, 3, 4, 5, 6));
+	}
+
+	public void pistas() {
+		pista = new PlaceHolder(txtBusquedaContratosEmpleados, "Escriba para buscar.");
+	}
+
+	public void selecionarFoto() {
+		JFileChooser archivo = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
+				"jpeg");
+		archivo.addChoosableFileFilter(filtro);
+		archivo.setDialogTitle("Abrir Archivo");
+		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		archivo.setCurrentDirectory(ruta);
+		int ventana = archivo.showOpenDialog(null);
+		if (ventana == JFileChooser.APPROVE_OPTION) {
+			File file = archivo.getSelectedFile();
+			txtFotoContrato.setText(String.valueOf(file));
+			Image foto = getToolkit().getImage(txtFotoContrato.getText());
+			foto = foto.getScaledInstance(lbl_foto_contrato.getHeight(), lbl_foto_contrato.getWidth(),
+					Image.SCALE_DEFAULT);
+			lbl_foto_contrato.setIcon(new ImageIcon(foto));
+		}
+	}
+
+	public void obtenerUltimoId() {
+		String ultimoValor = null;
+		int valor;
+		String id = null;
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM contrato_cliente ORDER BY id_contrato_cliente DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				ultimoValor = rsr.getString("id_contrato_cliente");
+				valor = Integer.parseInt(ultimoValor);
+				valor = valor + 1;
+				id = String.valueOf(valor);
+			}
+			txtCodigo.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verFotoContratoEmpleado() {
+		if (txtFotoContrato.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtFotoContrato.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
+		}
+	}
+	
+	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
+		boolean fitWidth = true;
+		boolean interactive = true;
+		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+		try {
+			boolean complete = jTable.print(mode,
+					new MessageFormat(header),
+					new MessageFormat(footer),
+					showPrintDialog,
+					null, interactive);
+			if (complete) {
+				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
+						"Print result (Resultado de la impresión)", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(jTable, "Print canceled (Impresión cancelada)",
+						"Print result (Resultado de la impresión)", JOptionPane.WARNING_MESSAGE);
+			}
+		} catch (PrinterException pe) {
+			JOptionPane.showMessageDialog(jTable, "Print fail (Fallo de impresión): " + pe.getMessage(),
+					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public static String getFechaYHora() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		date = cal.getTime();
+		return df.format(date);
+	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT direccion_logo_empresa FROM empresa where id_empresa = 1");
+
+			if (rs.next()) {
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+				label.setIcon(icono);
+				
+				final ImageIcon icono2 = new ImageIcon(
+						logo.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+				label_2.setIcon(icono2);
+			}else {
+				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
+						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
 
 	}
 }

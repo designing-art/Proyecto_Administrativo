@@ -20,6 +20,7 @@ import clases.bonificacion;
 import clases.cargo;
 import clases.compra;
 import clases.configuracion;
+import clases.contrato_cliente;
 import clases.contrato_empleado;
 import clases.deduccion;
 import clases.empleado;
@@ -37,6 +38,7 @@ import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
 import consultas.consultas_compra;
 import consultas.consultas_configuracion;
+import consultas.consultas_contrato_cliente;
 import consultas.consultas_contrato_empleado;
 import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
@@ -51,6 +53,7 @@ import controles.control_bonificacion;
 import controles.control_cargo;
 import controles.control_compra;
 import controles.control_configuracion;
+import controles.control_contrato_cliente;
 import controles.control_contrato_empleado;
 import controles.control_deduccion;
 import controles.control_empleado;
@@ -420,6 +423,28 @@ public class ventana_principal extends JFrame {
 		button_8.setBackground(new Color(95, 158, 160));
 		button_8.setBounds(10, 41, 97, 21);
 		panel_1.add(button_8);
+		button_8.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				contrato_cliente clase = new contrato_cliente();
+				consultas_contrato_cliente consulta = new consultas_contrato_cliente();
+				registro_contratos_clientes formulario = new registro_contratos_clientes();
+				control_contrato_cliente control = new control_contrato_cliente(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardarContrato.setVisible(true);
+				formulario.btnNuevoContrato.setVisible(true);
+				formulario.btnActualizarContrato.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrarContrato.setVisible(false);
+				dispose();
+			}
+		});
 
 		btnRegistroProductos = new JButton("Productos");
 		btnRegistroProductos.setForeground(Color.BLACK);

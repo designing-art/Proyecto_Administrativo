@@ -62,7 +62,7 @@ public class acerca_de extends JFrame {
 		contentPane.add(lblSistemaAdministrativoBy);
 		
 		JTextArea txtrTodosLosDerechos = new JTextArea();
-		txtrTodosLosDerechos.setText("Todos los derechos reservados a. Designing_Art\r\n                  Programador y Dise\u00F1ador:\r\n           Lic. en Inform\u00E1tica Administrativa.\r\n          Cristian Emmanuel D\u00EDaz Rodr\u00EDguez\r\n       Contacto: krizemandiaz11@gmail.com\r\n  UNAH-Tec El Para\u00EDso, Danl\u00ED. Honduras 2019\r\n");
+		txtrTodosLosDerechos.setText("Todos los derechos reservados a. Designing_Art\r\n                  Programador y Dise\u00F1ador:\r\n           Lic. en Inform\u00E1tica Administrativa.\r\n          Cristian Emmanuel D\u00EDaz Rodr\u00EDguez\r\n       Contacto: krizemandiaz11@gmail.com\r\n  UNAH-Tec Danl\u00ED, El Para\u00EDso Honduras 2019\r\n");
 		txtrTodosLosDerechos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtrTodosLosDerechos.setBounds(41, 207, 303, 94);
 		txtrTodosLosDerechos.setEditable(false);
