@@ -17,12 +17,13 @@ public class consultas_configuracion extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO configuraciones (sonido_configuracion, tema_configuracion) VALUES(?,?)";
+		String sql = "INSERT INTO configuraciones (sonido_configuracion, tema_configuracion, frase_configuracion) VALUES(?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, configuracion.getSonido_configuracion());
 			ps.setString(2, configuracion.getTema_configuracion());
+			ps.setString(3, configuracion.getFrase_configuracion());
 			ps.execute();
 
 			return true;
@@ -43,14 +44,15 @@ public class consultas_configuracion extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE configuraciones SET id_configuracion=?, sonido_configuracion=?, tema_configuracion=? WHERE id_configuracion=? ";
+		String sql = "UPDATE configuraciones SET id_configuracion=?, sonido_configuracion=?, tema_configuracion=?, frase_configuracion=? WHERE id_configuracion=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, configuracion.getId_configuracion());
 			ps.setString(2, configuracion.getSonido_configuracion());
 			ps.setString(3, configuracion.getTema_configuracion());
-			ps.setInt(4, configuracion.getId_configuracion());
+			ps.setString(4, configuracion.getFrase_configuracion());
+			ps.setInt(5, configuracion.getId_configuracion());
 			ps.execute();
 
 			return true;
@@ -80,6 +82,7 @@ public class consultas_configuracion extends conexion {
 				configuracion.setId_configuracion(Integer.parseInt(rs.getString("id_configuracion")));
 				configuracion.setSonido_configuracion(rs.getString("sonido_configuracion"));
 				configuracion.setTema_configuracion(rs.getString("tema_configuracion"));
+				configuracion.setFrase_configuracion(rs.getString("frase_configuracion"));
 				return true;
 			}
 			return false;

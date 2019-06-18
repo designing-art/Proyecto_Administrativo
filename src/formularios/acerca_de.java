@@ -42,7 +42,7 @@ public class acerca_de extends JFrame {
 	public acerca_de() {
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 387, 351);
+		setBounds(100, 100, 387, 365);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

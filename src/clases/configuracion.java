@@ -5,6 +5,7 @@ public class configuracion {
 	int id_configuracion;
 	String sonido_configuracion;
 	String tema_configuracion;
+	String frase_configuracion;
 
 	public int getId_configuracion() {
 		return id_configuracion;
@@ -28,6 +29,14 @@ public class configuracion {
 
 	public void setTema_configuracion(String tema_configuracion) {
 		this.tema_configuracion = tema_configuracion;
+	}
+
+	public String getFrase_configuracion() {
+		return frase_configuracion;
+	}
+
+	public void setFrase_configuracion(String frase_configuracion) {
+		this.frase_configuracion = frase_configuracion;
 	}
 
 }

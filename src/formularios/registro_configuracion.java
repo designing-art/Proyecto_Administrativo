@@ -49,6 +49,7 @@ public class registro_configuracion extends JFrame {
 	public ButtonGroup grupo2;
 	public static String sonido = null;
 	public static String tema = null;
+	public static String frase = null;
 	ventana_principal principal = new ventana_principal();
 	private JLabel lblTemasDelSistema;
 	private JLabel lblFraseMotivadora;
@@ -164,6 +165,7 @@ public class registro_configuracion extends JFrame {
 		panel.add(lblEscribaUnaFrase);
 
 		txtFrase = new JTextField();
+		txtFrase.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 10));
 		txtFrase.setBounds(20, 220, 195, 20);
 		panel.add(txtFrase);
 		txtFrase.setColumns(10);
@@ -239,11 +241,12 @@ public class registro_configuracion extends JFrame {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery(
-					"SELECT sonido_configuracion, tema_configuracion FROM configuraciones WHERE id_configuracion = 1");
+					"SELECT sonido_configuracion, tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
 
 			if (rs.next()) {
 				sonido = (rs.getString("sonido_configuracion"));
 				tema = (rs.getString("tema_configuracion"));
+				frase = (rs.getString("frase_configuracion"));
 
 				if (sonido.equals("Activar")) {
 					rdbtnActivar.setSelected(true);
@@ -269,6 +272,12 @@ public class registro_configuracion extends JFrame {
 							repaint();
 						}
 					}
+				}
+				
+				if(frase.equals(null)) {
+					txtFrase.setText("La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
+				}else {
+					txtFrase.setText(frase);	
 				}
 			}
 

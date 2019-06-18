@@ -54,12 +54,7 @@ public class control_configuracion implements ActionListener {
 				}
 			}
 			
-			if(formulario.txtFrase.equals("")) {
-				formulario2.txtFrase.setText("");	
-			}else {
-				formulario2.txtFrase.equals(formulario.txtFrase);
-				formulario2.repaint();
-			}
+			clase.setFrase_configuracion(formulario.txtFrase.getText().toString());
 
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito! Configuracion guardada!");
@@ -94,13 +89,8 @@ public class control_configuracion implements ActionListener {
 			}
 		}
 		
-		if(formulario.txtFrase.equals("")) {
-			formulario2.txtFrase.setText("");	
-		}else {
-			formulario2.txtFrase.equals(formulario.txtFrase);
-			formulario2.repaint();
-		}
-
+		clase.setFrase_configuracion(formulario.txtFrase.getText().toString());
+		
 		if (consulta.actualizar(clase)) {
 			JOptionPane.showMessageDialog(null, "Exito Configuracion guardada!");
 			formulario.dispose();
