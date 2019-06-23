@@ -154,8 +154,8 @@ public class control_venta implements ActionListener {
 					String color = formulario.tablaVentas.getValueAt(filaseleccionada, 4).toString();
 					String marca = formulario.tablaVentas.getValueAt(filaseleccionada, 5).toString();
 					String modelo = formulario.tablaVentas.getValueAt(filaseleccionada, 6).toString();
-					String existencia = formulario.tablaVentas.getValueAt(filaseleccionada, 7).toString();
-					String cantidad = formulario.tablaVentas.getValueAt(filaseleccionada, 8).toString();
+					String existencia = formulario.tablaVentas.getValueAt(filaseleccionada, 8).toString();
+					String cantidad = formulario.tablaVentas.getValueAt(filaseleccionada, 7).toString();
 					String compra = formulario.tablaVentas.getValueAt(filaseleccionada, 9).toString();
 					String venta = formulario.tablaVentas.getValueAt(filaseleccionada, 10).toString();
 					String registro = formulario.tablaVentas.getValueAt(filaseleccionada, 11).toString();
@@ -272,8 +272,8 @@ public class control_venta implements ActionListener {
 					String color = formulario.tablaVentas.getValueAt(filaseleccionada, 4).toString();
 					String marca = formulario.tablaVentas.getValueAt(filaseleccionada, 5).toString();
 					String modelo = formulario.tablaVentas.getValueAt(filaseleccionada, 6).toString();
-					String existencia = formulario.tablaVentas.getValueAt(filaseleccionada, 7).toString();
-					String cantidad = formulario.tablaVentas.getValueAt(filaseleccionada, 8).toString();
+					String existencia = formulario.tablaVentas.getValueAt(filaseleccionada, 8).toString();
+					String cantidad = formulario.tablaVentas.getValueAt(filaseleccionada, 7).toString();
 					String compra = formulario.tablaVentas.getValueAt(filaseleccionada, 9).toString();
 					String venta = formulario.tablaVentas.getValueAt(filaseleccionada, 10).toString();
 					String registro = formulario.tablaVentas.getValueAt(filaseleccionada, 11).toString();
@@ -434,8 +434,8 @@ public class control_venta implements ActionListener {
 				venta.setColor_objeto_venta(rs.getString("color_objeto_venta"));
 				venta.setMarca_objeto_venta(rs.getString("marca_objeto_venta"));
 				venta.setModelo_objeto_venta(rs.getString("modelo_objeto_venta"));
-				venta.setExistencia_objeto_venta(Integer.parseInt(rs.getString("existencia_objeto_venta")));
 				venta.setCantidad_objeto_venta(Integer.parseInt(rs.getString("cantidad_objeto_venta")));
+				venta.setExistencia_objeto_venta(Integer.parseInt(rs.getString("existencia_objeto_venta")));
 				venta.setPrecio_compra_venta(rs.getDouble("precio_compra_venta"));
 				venta.setPrecio_venta(rs.getDouble("precio_venta"));
 				venta.setFecha_registro_venta(rs.getString("fecha_registro_venta"));
@@ -464,8 +464,8 @@ public class control_venta implements ActionListener {
 			matrizInfo[i][4] = miLista.get(i).getColor_objeto_venta() + "";
 			matrizInfo[i][5] = miLista.get(i).getMarca_objeto_venta() + "";
 			matrizInfo[i][6] = miLista.get(i).getModelo_objeto_venta() + "";
-			matrizInfo[i][7] = miLista.get(i).getExistencia_objeto_venta() + "";
-			matrizInfo[i][8] = miLista.get(i).getCantidad_objeto_venta() + "";
+			matrizInfo[i][7] = miLista.get(i).getCantidad_objeto_venta() + "";
+			matrizInfo[i][8] = miLista.get(i).getExistencia_objeto_venta() + "";
 			matrizInfo[i][9] = miLista.get(i).getPrecio_compra_venta() + "";
 			matrizInfo[i][10] = miLista.get(i).getPrecio_venta() + "";
 			matrizInfo[i][11] = miLista.get(i).getFecha_registro_venta() + "";

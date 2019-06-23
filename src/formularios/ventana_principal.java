@@ -31,6 +31,7 @@ import clases.planilla;
 
 import clases.producto;
 import clases.proveedor;
+import clases.sar;
 import clases.servicio;
 import clases.venta;
 import conexion.conexion;
@@ -48,6 +49,7 @@ import consultas.consultas_inventario;
 import consultas.consultas_planilla;
 import consultas.consultas_producto;
 import consultas.consultas_proveedor;
+import consultas.consultas_sar;
 import consultas.consultas_servicio;
 import consultas.consultas_venta;
 import controles.control_bonificacion;
@@ -64,6 +66,7 @@ import controles.control_inventario;
 import controles.control_planilla;
 import controles.control_producto;
 import controles.control_proveedor;
+import controles.control_sar;
 import controles.control_servicio;
 import controles.control_venta;
 
@@ -540,7 +543,7 @@ public class ventana_principal extends JFrame {
 		button_12.setBounds(117, 19, 97, 21);
 		panel_2.add(button_12);
 
-		JButton btnIntercambios = new JButton("Intercambio");
+		JButton btnIntercambios = new JButton("Intercambios");
 		btnIntercambios.setForeground(Color.BLACK);
 		btnIntercambios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnIntercambios.setBackground(new Color(70, 130, 180));
@@ -854,6 +857,28 @@ public class ventana_principal extends JFrame {
 		btnSar.setBackground(new Color(255, 215, 0));
 		btnSar.setBounds(224, 15, 97, 21);
 		panel_9.add(btnSar);
+		btnSar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sar clase = new sar();
+				consultas_sar consulta = new consultas_sar();
+				registro_sar formulario = new registro_sar();
+				control_sar control = new control_sar(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtCaiSar.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.ObtenerUltimosDatosSar();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
+				
+			}
+		});
 
 		JPanel panel_10 = new JPanel();
 		panel_10.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));

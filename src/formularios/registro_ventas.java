@@ -632,8 +632,8 @@ public class registro_ventas extends JFrame {
 	}
 
 	public void construirTablaVenta() {
-		String titulos[] = { "Codigo", "Nombre", "Descripcion", "Peso", "Color", "Marca", "Modelo", "Existencia",
-				"Cantidad", "Precio de compra", "Precio de venta", "Registro" };
+		String titulos[] = { "Codigo", "Nombre", "Descripcion", "Peso", "Color", "Marca", "Modelo",
+				"Cantidad",  "Existencia", "Precio de compra", "Precio de venta", "Registro" };
 		String informacion[][] = control_venta.obtenerMatriz();
 		tablaVentas = new JTable(informacion, titulos);
 		barraVentas.setViewportView(tablaVentas);
