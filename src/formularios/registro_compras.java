@@ -163,12 +163,12 @@ public class registro_compras extends JFrame {
 
 		JLabel txt = new JLabel("3. Precio :");
 		txt.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txt.setBounds(27, 149, 136, 22);
+		txt.setBounds(27, 149, 99, 22);
 		panelRegistro.add(txt);
 
 		JLabel lblTipo = new JLabel("2. Nombre :");
 		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipo.setBounds(27, 120, 120, 23);
+		lblTipo.setBounds(27, 120, 99, 23);
 		panelRegistro.add(lblTipo);
 
 		JLabel lblCodigo = new JLabel("1. Codigo :");
@@ -301,7 +301,7 @@ public class registro_compras extends JFrame {
 
 		lblL = new JLabel("L.");
 		lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblL.setBounds(117, 128, 17, 20);
+		lblL.setBounds(122, 150, 19, 20);
 		panelRegistro.add(lblL);
 
 		JLabel lblModelo = new JLabel("8. Modelo :");

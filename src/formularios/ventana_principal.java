@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 
 import clases.bonificacion;
 import clases.cargo;
+import clases.cliente;
 import clases.compra;
 import clases.configuracion;
 import clases.contrato_cliente;
@@ -37,6 +38,7 @@ import clases.venta;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_cargo;
+import consultas.consultas_cliente;
 import consultas.consultas_compra;
 import consultas.consultas_configuracion;
 import consultas.consultas_contrato_cliente;
@@ -54,6 +56,7 @@ import consultas.consultas_servicio;
 import consultas.consultas_venta;
 import controles.control_bonificacion;
 import controles.control_cargo;
+import controles.control_cliente;
 import controles.control_compra;
 import controles.control_configuracion;
 import controles.control_contrato_cliente;
@@ -389,6 +392,26 @@ public class ventana_principal extends JFrame {
 		button_7.setBackground(new Color(95, 158, 160));
 		button_7.setBounds(10, 19, 97, 21);
 		panel_1.add(button_7);
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cliente clase = new cliente();
+				consultas_cliente consulta = new consultas_cliente();
+				registro_clientes formulario = new registro_clientes();
+				control_cliente control = new control_cliente(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombresCliente.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
+			}
+		});
 
 		JButton button_8 = new JButton("Contratos");
 		button_8.setForeground(Color.BLACK);
@@ -509,17 +532,10 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton btnPublicidad = new JButton("Publicidad");
-		btnPublicidad.setForeground(Color.BLACK);
-		btnPublicidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnPublicidad.setBackground(new Color(95, 158, 160));
-		btnPublicidad.setBounds(224, 41, 97, 21);
-		panel_1.add(btnPublicidad);
-
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(UIManager.getColor("Button.background"));
 		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_2.setBounds(46, 312, 327, 53);
+		panel_2.setBounds(46, 312, 327, 46);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -543,13 +559,6 @@ public class ventana_principal extends JFrame {
 		button_12.setBounds(117, 19, 97, 21);
 		panel_2.add(button_12);
 
-		JButton btnIntercambios = new JButton("Intercambios");
-		btnIntercambios.setForeground(Color.BLACK);
-		btnIntercambios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnIntercambios.setBackground(new Color(70, 130, 180));
-		btnIntercambios.setBounds(224, 18, 97, 21);
-		panel_2.add(btnIntercambios);
-
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -567,7 +576,7 @@ public class ventana_principal extends JFrame {
 		button_15.setForeground(Color.BLACK);
 		button_15.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		button_15.setBackground(Color.PINK);
-		button_15.setBounds(10, 19, 97, 21);
+		button_15.setBounds(117, 19, 97, 21);
 		panel_3.add(button_15);
 		button_15.addActionListener(new ActionListener() {
 			@Override
@@ -598,7 +607,7 @@ public class ventana_principal extends JFrame {
 		button_17.setForeground(Color.BLACK);
 		button_17.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		button_17.setBackground(Color.PINK);
-		button_17.setBounds(117, 19, 97, 21);
+		button_17.setBounds(10, 19, 97, 21);
 		panel_3.add(button_17);
 		button_17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -824,7 +833,7 @@ public class ventana_principal extends JFrame {
 		panel_9.setLayout(null);
 		panel_9.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_9.setBackground(Color.WHITE);
-		panel_9.setBounds(46, 363, 327, 66);
+		panel_9.setBounds(46, 363, 327, 46);
 		contentPane.add(panel_9);
 
 		JLabel label = new JLabel("Facturas :");
@@ -833,7 +842,7 @@ public class ventana_principal extends JFrame {
 		label.setBounds(10, 0, 97, 15);
 		panel_9.add(label);
 
-		JButton btnFacturasDeLos = new JButton("Facturas de los clientes");
+		JButton btnFacturasDeLos = new JButton("Clientes");
 		btnFacturasDeLos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -841,14 +850,14 @@ public class ventana_principal extends JFrame {
 		btnFacturasDeLos.setForeground(Color.BLACK);
 		btnFacturasDeLos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnFacturasDeLos.setBackground(new Color(255, 215, 0));
-		btnFacturasDeLos.setBounds(10, 37, 204, 21);
+		btnFacturasDeLos.setBounds(117, 15, 97, 21);
 		panel_9.add(btnFacturasDeLos);
 
-		JButton btnFacturasDeLa = new JButton("Facturas de la empresa");
+		JButton btnFacturasDeLa = new JButton("Empresa");
 		btnFacturasDeLa.setForeground(Color.BLACK);
 		btnFacturasDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnFacturasDeLa.setBackground(new Color(255, 215, 0));
-		btnFacturasDeLa.setBounds(10, 15, 204, 21);
+		btnFacturasDeLa.setBounds(10, 15, 97, 21);
 		panel_9.add(btnFacturasDeLa);
 
 		JButton btnSar = new JButton("Sar");
@@ -883,7 +892,7 @@ public class ventana_principal extends JFrame {
 		JPanel panel_10 = new JPanel();
 		panel_10.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_10.setBackground(SystemColor.menu);
-		panel_10.setBounds(46, 427, 327, 53);
+		panel_10.setBounds(46, 407, 327, 53);
 		contentPane.add(panel_10);
 		panel_10.setLayout(null);
 
@@ -916,7 +925,7 @@ public class ventana_principal extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(46, 479, 327, 34);
+		scrollPane.setBounds(46, 471, 327, 34);
 		contentPane.add(scrollPane);
 		scrollPane.setViewportBorder(UIManager.getBorder("ComboBox.editorBorder"));
 

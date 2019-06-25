@@ -376,7 +376,7 @@ public class registro_empleados extends JFrame {
 
 		MaskFormatter formatter1 = null;
 		try {
-			formatter1 = new MaskFormatter("+504 ####-####");
+			formatter1 = new MaskFormatter("####-####");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
