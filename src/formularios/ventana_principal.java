@@ -843,15 +843,22 @@ public class ventana_principal extends JFrame {
 		panel_9.add(label);
 
 		JButton btnFacturasDeLos = new JButton("Clientes");
-		btnFacturasDeLos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnFacturasDeLos.setForeground(Color.BLACK);
 		btnFacturasDeLos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnFacturasDeLos.setBackground(new Color(255, 215, 0));
 		btnFacturasDeLos.setBounds(117, 15, 97, 21);
 		panel_9.add(btnFacturasDeLos);
+		btnFacturasDeLos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				registro_facturas_clientes formulario = new registro_facturas_clientes();
+				formulario.establecerDatosEmpresa();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				
+				
+			}
+		});
 
 		JButton btnFacturasDeLa = new JButton("Empresa");
 		btnFacturasDeLa.setForeground(Color.BLACK);
