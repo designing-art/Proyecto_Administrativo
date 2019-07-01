@@ -853,6 +853,7 @@ public class ventana_principal extends JFrame {
 
 				registro_facturas_clientes formulario = new registro_facturas_clientes();
 				formulario.establecerDatosEmpresa();
+				formulario.ObtenerUltimosDatosSar();
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				

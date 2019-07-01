@@ -108,8 +108,8 @@ public class registro_facturas_clientes extends JFrame {
 	public JTextFieldDateEditor editor;
 	public JLabel lblNDeFactura;
 	public JLabel lblFecha;
-	public JTextField txtFactura;
-	public JTextField txtFecha;
+	public JTextField txtNumeroFactura;
+	public JTextField txtFechaHoraFactura;
 	public JLabel lblCai;
 	public JLabel lblCliente;
 	public JTextField txtCliente;
@@ -118,16 +118,17 @@ public class registro_facturas_clientes extends JFrame {
 	public JLabel lblRtn;
 	public JLabel lblDireccion_1;
 	public JTextField txtCodigo;
-	public JTextField textField;
+	public JTextField txtEmpleado;
 	public JLabel lblFacturasPermitidas;
-	public JTextField textField_1;
+	public JTextField txtRI;
 	public JLabel lblHasta;
-	public JTextField textField_2;
+	public JTextField txtRF;
 	public JLabel lblPorConceptoDe;
-	public JTextField textField_3;
-	public JTextField textField_4;
+	public JTextField txtCantidadLetras;
+	public JTextField txtCantidadNumeros;
 	public JLabel lblLaFacturaEs;
 	public JLabel lblDe;
+	public JTextArea txtPorConceptoDe;
 	public static JLabel lblNombreEmpresa;
 	public static JLabel lblDireccion;
 	public static JLabel lblCorreo;
@@ -245,58 +246,58 @@ public class registro_facturas_clientes extends JFrame {
 		lblFecha.setBounds(232, 127, 207, 23);
 		panelRegistro.add(lblFecha);
 
-		txtFactura = new JTextField();
-		txtFactura.setEditable(false);
-		txtFactura.setHorizontalAlignment(SwingConstants.CENTER);
-		txtFactura.setColumns(10);
-		txtFactura.setBounds(27, 148, 207, 15);
-		panelRegistro.add(txtFactura);
+		txtNumeroFactura = new JTextField();
+		txtNumeroFactura.setEditable(false);
+		txtNumeroFactura.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNumeroFactura.setColumns(10);
+		txtNumeroFactura.setBounds(27, 148, 207, 15);
+		panelRegistro.add(txtNumeroFactura);
 
-		txtFecha = new JTextField();
-		txtFecha.setEditable(false);
-		txtFecha.setHorizontalAlignment(SwingConstants.CENTER);
-		txtFecha.setColumns(10);
-		txtFecha.setBounds(232, 148, 207, 15);
-		panelRegistro.add(txtFecha);
-		txtFecha.setText(getFechaYHora());
+		txtFechaHoraFactura = new JTextField();
+		txtFechaHoraFactura.setEditable(false);
+		txtFechaHoraFactura.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFechaHoraFactura.setColumns(10);
+		txtFechaHoraFactura.setBounds(232, 148, 207, 15);
+		panelRegistro.add(txtFechaHoraFactura);
+		txtFechaHoraFactura.setText(getFechaYHora());
 
 		lblCai = new JLabel("cai");
 		lblCai.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCai.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblCai.setBounds(27, 166, 412, 15);
+		lblCai.setBounds(27, 169, 412, 23);
 		panelRegistro.add(lblCai);
 
 		lblCliente = new JLabel("Cliente :");
 		lblCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCliente.setBounds(27, 181, 99, 15);
+		lblCliente.setBounds(27, 203, 99, 15);
 		panelRegistro.add(lblCliente);
 
 		txtCliente = new JTextField();
 		txtCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCliente.setColumns(10);
-		txtCliente.setBounds(111, 180, 328, 15);
+		txtCliente.setBounds(111, 202, 328, 15);
 		panelRegistro.add(txtCliente);
 
 		txtRTN = new JTextField();
 		txtRTN.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRTN.setColumns(10);
-		txtRTN.setBounds(111, 200, 328, 15);
+		txtRTN.setBounds(111, 222, 328, 15);
 		panelRegistro.add(txtRTN);
 
 		txtDireccion = new JTextField();
 		txtDireccion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDireccion.setColumns(10);
-		txtDireccion.setBounds(111, 220, 328, 15);
+		txtDireccion.setBounds(111, 242, 328, 15);
 		panelRegistro.add(txtDireccion);
 
 		lblRtn = new JLabel("RTN :");
 		lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblRtn.setBounds(27, 201, 99, 15);
+		lblRtn.setBounds(27, 223, 99, 15);
 		panelRegistro.add(lblRtn);
 
 		lblDireccion_1 = new JLabel("Direccion :");
 		lblDireccion_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDireccion_1.setBounds(27, 221, 99, 15);
+		lblDireccion_1.setBounds(27, 243, 99, 15);
 		panelRegistro.add(lblDireccion_1);
 
 		txtCodigo = new JTextField();
@@ -310,73 +311,75 @@ public class registro_facturas_clientes extends JFrame {
 		lblEmpleado.setBounds(27, 441, 99, 15);
 		panelRegistro.add(lblEmpleado);
 
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setColumns(10);
-		textField.setBounds(111, 440, 328, 15);
-		panelRegistro.add(textField);
+		txtEmpleado = new JTextField();
+		txtEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEmpleado.setColumns(10);
+		txtEmpleado.setBounds(111, 440, 328, 15);
+		panelRegistro.add(txtEmpleado);
 
-		lblFacturasPermitidas = new JLabel("Facturas permitidas :");
+		lblFacturasPermitidas = new JLabel("Rango permitido :");
 		lblFacturasPermitidas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFacturasPermitidas.setBounds(27, 417, 148, 15);
+		lblFacturasPermitidas.setBounds(27, 417, 114, 15);
 		panelRegistro.add(lblFacturasPermitidas);
 
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setColumns(10);
-		textField_1.setBounds(197, 417, 86, 15);
-		panelRegistro.add(textField_1);
+		txtRI = new JTextField();
+		txtRI.setEditable(false);
+		txtRI.setHorizontalAlignment(SwingConstants.CENTER);
+		txtRI.setColumns(10);
+		txtRI.setBounds(158, 417, 114, 15);
+		panelRegistro.add(txtRI);
 
 		lblHasta = new JLabel("Hasta");
 		lblHasta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblHasta.setBounds(301, 417, 69, 15);
+		lblHasta.setBounds(282, 417, 65, 15);
 		panelRegistro.add(lblHasta);
 
-		textField_2 = new JTextField();
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setColumns(10);
-		textField_2.setBounds(353, 417, 86, 15);
-		panelRegistro.add(textField_2);
+		txtRF = new JTextField();
+		txtRF.setEditable(false);
+		txtRF.setHorizontalAlignment(SwingConstants.CENTER);
+		txtRF.setColumns(10);
+		txtRF.setBounds(325, 417, 114, 15);
+		panelRegistro.add(txtRF);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(27, 241, 412, 164);
+		panel.setBounds(27, 269, 412, 137);
 		panelRegistro.add(panel);
 		panel.setLayout(null);
 
 		lblPorConceptoDe = new JLabel("Por Concepto de :");
 		lblPorConceptoDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblPorConceptoDe.setBounds(10, 11, 134, 15);
+		lblPorConceptoDe.setBounds(10, 8, 134, 15);
 		panel.add(lblPorConceptoDe);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 34, 392, 69);
+		scrollPane.setBounds(10, 26, 392, 55);
 		panel.add(scrollPane);
 
-		JTextArea textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		JTextArea txtPorConceptoDe = new JTextArea();
+		scrollPane.setViewportView(txtPorConceptoDe);
 
 		JLabel lblCantidad = new JLabel("Cantidad en letras :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCantidad.setBounds(10, 115, 149, 15);
+		lblCantidad.setBounds(10, 92, 149, 15);
 		panel.add(lblCantidad);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(160, 114, 242, 15);
-		panel.add(textField_3);
+		txtCantidadLetras = new JTextField();
+		txtCantidadLetras.setColumns(10);
+		txtCantidadLetras.setBounds(160, 91, 242, 15);
+		panel.add(txtCantidadLetras);
 
 		JLabel lblCantidadEnNumeros = new JLabel("Cantidad en numeros :");
 		lblCantidadEnNumeros.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCantidadEnNumeros.setBounds(10, 134, 149, 15);
+		lblCantidadEnNumeros.setBounds(10, 111, 149, 15);
 		panel.add(lblCantidadEnNumeros);
 
-		textField_4 = new JTextField();
-		textField_4.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_4.setColumns(10);
-		textField_4.setBounds(160, 133, 86, 15);
-		panel.add(textField_4);
+		txtCantidadNumeros = new JTextField();
+		txtCantidadNumeros.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtCantidadNumeros.setColumns(10);
+		txtCantidadNumeros.setBounds(160, 110, 86, 15);
+		panel.add(txtCantidadNumeros);
 
 		lblLaFacturaEs = new JLabel("La factura es derecho de todos, EXIJALA!");
 		lblLaFacturaEs.setHorizontalAlignment(SwingConstants.CENTER);
@@ -386,7 +389,7 @@ public class registro_facturas_clientes extends JFrame {
 
 		lblDe = new JLabel("De");
 		lblDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDe.setBounds(167, 418, 58, 15);
+		lblDe.setBounds(135, 417, 34, 15);
 		panelRegistro.add(lblDe);
 
 		JLabel lblLibreta = new JLabel();
@@ -653,6 +656,40 @@ public class registro_facturas_clientes extends JFrame {
 		}
 
 	}
+	
+	public void ObtenerUltimosDatosSar() {
+		String  cai = null;
+		String  formato = null;
+		String  factura = null;
+		String  ri = null;
+		String  rf = null;
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM sar ORDER BY id_sar DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				
+				cai = rsr.getString("cai_sar");
+				formato = rsr.getString("formato_sar");
+				factura = rsr.getString("rango_inicial_sar");
+				ri = rsr.getString("rango_inicial_sar");
+				rf = rsr.getString("rango_final_sar");
+			}
+			lblCai.setText(cai);
+			txtNumeroFactura.setText(formato+"-"+factura);
+			txtRI.setText(formato+"-"+ri);
+			txtRF.setText(formato+"-"+rf);
+
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 
 }

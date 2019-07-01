@@ -517,6 +517,8 @@ public class registro_sar extends JFrame {
 		panel.add(lblNota);
 
 		txtNota = new JTextField();
+		txtNota.setFont(new Font("Dialog", Font.BOLD, 10));
+		txtNota.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNota.setEditable(false);
 		txtNota.setColumns(10);
 		txtNota.setBounds(69, 138, 247, 23);
@@ -644,6 +646,7 @@ public class registro_sar extends JFrame {
 		String f_a = null;
 		int a = 0;
 		int b = 0;
+		int d = 0;
 		String c = null;
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
@@ -657,13 +660,43 @@ public class registro_sar extends JFrame {
 				a = Integer.parseInt(r_i);
 				b = Integer.parseInt(r_f);
 				c = String.valueOf(b - a);
+				d = b - a;
 			}
 			txtTotalFacturas.setText(c);
+			txtFacturasUtilizadas.setText("0");
+			txtFacturasNoUtilizadas.setText(c);
+
+			if (txtTotalFacturas.getText().isEmpty()) {
+				txtNota.setText("Agrege un nuevo rango SAR de facturas.");
+				txtNota.setForeground(Color.BLUE);
+			} else {
+				double existencia = 0;
+				existencia = 0.50 * d;
+				if (existencia <= d) {
+					txtNota.setText("Hay suficientes Facturas");
+					txtNota.setForeground(Color.BLUE);
+				} else {
+					if (existencia >= d) {
+						txtNota.setText("Hay mas de la mitad de facturas.");
+						txtNota.setForeground(Color.yellow);
+					} else {
+						double existencia2 = 0;
+						existencia2 = 0.10 * d;
+						if (existencia2 <= d) {
+							txtNota.setText("Las Facturas se agotan!");
+							txtNota.setForeground(Color.RED);
+						}
+					}
+				}
+			}
+
 			;
 			stmtr.close();
 			rsr.close();
 			conn.close();
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
