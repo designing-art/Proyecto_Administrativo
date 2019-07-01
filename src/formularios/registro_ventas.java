@@ -48,6 +48,7 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
+import consultas.consultas_inventario;
 import controles.control_inventario;
 import controles.control_venta;
 
@@ -56,6 +57,9 @@ import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
+
+import clases.inventario;
+
 import java.awt.Component;
 import java.awt.SystemColor;
 
@@ -576,20 +580,49 @@ public class registro_ventas extends JFrame {
 		btnVerder = new JButton("Vender");
 		btnVerder.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnVerder.setBackground(new Color(60, 179, 113));
-		btnVerder.setBounds(144, 397, 119, 23);
+		btnVerder.setBounds(259, 398, 119, 23);
 		panel.add(btnVerder);
 
 		JLabel lblInventarioDeLa = new JLabel("Inventario de la empresa.");
 		lblInventarioDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblInventarioDeLa.setBounds(28, 41, 195, 23);
 		panel.add(lblInventarioDeLa);
-
-		label_7 = new JLabel();
-		label_7.setBounds(0, 0, 404, 449);
-		panel.add(label_7);
-		final ImageIcon logo2 = new ImageIcon(
-				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
-		label_7.setIcon(logo2);
+		
+		JButton btnInventario = new JButton("Inventario");
+		btnInventario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnInventario.setBackground(new Color(100, 149, 237));
+		btnInventario.setBounds(28, 399, 119, 23);
+		panel.add(btnInventario);
+		btnInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				inventario clase = new inventario();
+				consultas_inventario consulta = new consultas_inventario();
+				registro_inventario formulario = new registro_inventario();
+				control_inventario control = new control_inventario(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombre.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.establecerFechaRegistro();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				formulario.txtExistencia.setText("0");
+				dispose();
+			}
+		});
+		
+				label_7 = new JLabel();
+				label_7.setBounds(0, 0, 404, 449);
+				panel.add(label_7);
+				final ImageIcon logo2 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
+				label_7.setIcon(logo2);
 		
 		lblInventarioDeLa_1 = new JLabel("1. Inventario de la empresa.");
 		lblInventarioDeLa_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -773,5 +806,4 @@ public class registro_ventas extends JFrame {
 		nuevaExstencia = String.valueOf(existencia - cantidad);
 		txtExistencia.setText(nuevaExstencia);
 	}
-
 }

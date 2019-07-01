@@ -55,6 +55,7 @@ import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
 import controles.control_cliente;
+import controles.control_factura_cliente;
 import controles.control_inventario;
 import utilidades.visor_imagen;
 
@@ -78,7 +79,7 @@ public class registro_facturas_clientes extends JFrame {
 	public JButton btnVer;
 	public JButton btnAceptar;
 	public static String hora_fecha_reporte;
-	
+
 	public static String nombre;
 	public static String direccion;
 	public static String correo;
@@ -109,7 +110,7 @@ public class registro_facturas_clientes extends JFrame {
 	public JLabel lblNDeFactura;
 	public JLabel lblFecha;
 	public JTextField txtNumeroFactura;
-	public JTextField txtFechaHoraFactura;
+	public static JTextField txtFechaHoraFactura;
 	public JLabel lblCai;
 	public JLabel lblCliente;
 	public JTextField txtCliente;
@@ -134,6 +135,15 @@ public class registro_facturas_clientes extends JFrame {
 	public static JLabel lblCorreo;
 	public static JLabel lblTelefono_1;
 	public static JLabel lblRtnEmpresa;
+
+	public static String factura = null;
+	public static String nuevaFactura = null;
+	public static int cantidad = 0;
+	public static int nuevaCantidad = 0;
+	public JTextField txtNuevaFactura;
+	public JTextField txtCodigoSAR;
+	
+	public static String codSAR = null;
 
 	public registro_facturas_clientes() {
 		setResizable(false);
@@ -301,10 +311,12 @@ public class registro_facturas_clientes extends JFrame {
 		panelRegistro.add(lblDireccion_1);
 
 		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(27, 48, 49, 15);
 		panelRegistro.add(txtCodigo);
+		txtCodigo.setVisible(false);
 
 		JLabel lblEmpleado = new JLabel("Empleado :");
 		lblEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -357,7 +369,7 @@ public class registro_facturas_clientes extends JFrame {
 		scrollPane.setBounds(10, 26, 392, 55);
 		panel.add(scrollPane);
 
-		JTextArea txtPorConceptoDe = new JTextArea();
+		txtPorConceptoDe = new JTextArea();
 		scrollPane.setViewportView(txtPorConceptoDe);
 
 		JLabel lblCantidad = new JLabel("Cantidad en letras :");
@@ -391,6 +403,21 @@ public class registro_facturas_clientes extends JFrame {
 		lblDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblDe.setBounds(135, 417, 34, 15);
 		panelRegistro.add(lblDe);
+
+		txtNuevaFactura = new JTextField();
+		txtNuevaFactura.setEditable(false);
+		txtNuevaFactura.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNuevaFactura.setColumns(10);
+		txtNuevaFactura.setBounds(27, 77, 49, 15);
+		panelRegistro.add(txtNuevaFactura);
+		txtNuevaFactura.setVisible(false);
+
+		txtCodigoSAR = new JTextField();
+		txtCodigoSAR.setEditable(false);
+		txtCodigoSAR.setBounds(27, 109, 49, 20);
+		panelRegistro.add(txtCodigoSAR);
+		txtCodigoSAR.setColumns(10);
+		txtCodigoSAR.setVisible(false);
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 465, 550);
@@ -505,10 +532,8 @@ public class registro_facturas_clientes extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Genero", "Identidad",
-				"Foto", "Empresa", "Descripcion Empresa", "Direccion Empresa", "RTN", "Telefono Empresa",
-				"Correo Empresa" };
-		String informacion[][] = control_cliente.obtenerMatriz();
+		String titulos[] = { "Codigo", "Factura", "Fecha", "Cliente", "RTN", "Direccion", "Concepto", "Cantidad en Letras", "Cantidad en Numeros", "Atendido por" };
+		String informacion[][] = control_factura_cliente.obtenerMatriz();
 		tabla = new JTable(informacion, titulos);
 		barra.setViewportView(tabla);
 		for (int c = 0; c < tabla.getColumnCount(); c++) {
@@ -536,10 +561,10 @@ public class registro_facturas_clientes extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM clientes ORDER BY id_cliente DESC");
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM facturas_clientes ORDER BY id_facturas_cliente DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
-				ultimoValor = rsr.getString("id_cliente");
+				ultimoValor = rsr.getString("id_facturas_cliente");
 				valor = Integer.parseInt(ultimoValor);
 				valor = valor + 1;
 				id = String.valueOf(valor);
@@ -574,14 +599,13 @@ public class registro_facturas_clientes extends JFrame {
 		}
 	}
 
-
 	public static String getFechaYHora() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		String ampm;
 		ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-		SimpleDateFormat df = new SimpleDateFormat("dd '/' MMMMM '/' yyyy 'a las' HH:mm:ss '"+ampm+"'");
+		SimpleDateFormat df = new SimpleDateFormat("dd '/' MMMMM '/' yyyy 'a las' HH:mm:ss '" + ampm + "'");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -618,29 +642,27 @@ public class registro_facturas_clientes extends JFrame {
 		}
 
 	}
-	
+
 	public void establecerDatosEmpresa() {
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT nombre_empresa, direccion_empresa, telefono_empresa, rtn_empresa, correo_empresa FROM empresa where id_empresa = 1");
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT nombre_empresa, direccion_empresa, telefono_empresa, rtn_empresa, correo_empresa FROM empresa where id_empresa = 1");
 
-			
 			if (rs.next()) {
 				nombre = (rs.getString("nombre_empresa"));
 				direccion = (rs.getString("direccion_empresa"));
 				correo = (rs.getString("correo_empresa"));
 				telefono = (rs.getString("telefono_empresa"));
 				rtn = (rs.getString("rtn_empresa"));
-				
+
 				lblNombreEmpresa.setText(nombre);
 				lblDireccion.setText(direccion);
-				lblCorreo.setText("Correo : "+correo);
-				lblTelefono_1.setText("Telefono : "+telefono);
-				lblRtnEmpresa.setText("RTN : "+rtn);
-				
-				
-				
+				lblCorreo.setText("Correo : " + correo);
+				lblTelefono_1.setText("Telefono : " + telefono);
+				lblRtnEmpresa.setText("RTN : " + rtn);
+
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
@@ -656,30 +678,30 @@ public class registro_facturas_clientes extends JFrame {
 		}
 
 	}
-	
+
 	public void ObtenerUltimosDatosSar() {
-		String  cai = null;
-		String  formato = null;
-		String  factura = null;
-		String  ri = null;
-		String  rf = null;
+		String cai = null;
+		String formato = null;
+		String factura = null;
+		String ri = null;
+		String rf = null;
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
 			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM sar ORDER BY id_sar DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
-				
+
 				cai = rsr.getString("cai_sar");
 				formato = rsr.getString("formato_sar");
-				factura = rsr.getString("rango_inicial_sar");
+				factura = rsr.getString("factura_actual_sar");
 				ri = rsr.getString("rango_inicial_sar");
 				rf = rsr.getString("rango_final_sar");
 			}
-			lblCai.setText(cai);
-			txtNumeroFactura.setText(formato+"-"+factura);
-			txtRI.setText(formato+"-"+ri);
-			txtRF.setText(formato+"-"+rf);
+			lblCai.setText("CAI: " + cai);
+			txtNumeroFactura.setText(formato + "-" + factura);
+			txtRI.setText(formato + "-" + ri);
+			txtRF.setText(formato + "-" + rf);
 
 			;
 			stmtr.close();
@@ -690,6 +712,28 @@ public class registro_facturas_clientes extends JFrame {
 		}
 	}
 
-	
-
+	public void sumarFactura() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM sar ORDER BY id_sar DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				codSAR = rsr.getString("id_sar");
+				factura = rsr.getString("factura_actual_sar");
+				cantidad = Integer.parseInt(factura);
+				nuevaCantidad = cantidad + 1;
+				nuevaFactura = String.valueOf(nuevaCantidad);
+			}
+			txtCodigoSAR.setText(codSAR);
+			txtNuevaFactura.setText(nuevaFactura);
+			
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

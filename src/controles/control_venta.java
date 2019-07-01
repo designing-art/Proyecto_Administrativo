@@ -13,11 +13,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import clases.factura_cliente;
 import clases.inventario;
+import clases.sar;
 import clases.venta;
 import conexion.conexion;
+import consultas.consultas_factura_cliente;
 import consultas.consultas_inventario;
 import consultas.consultas_venta;
+import formularios.registro_facturas_clientes;
 import formularios.registro_inventario;
 import formularios.registro_ventas;
 
@@ -98,6 +103,28 @@ public class control_venta implements ActionListener {
 							formulario.obtenerUltimoId();
 							formulario.construirTablaVenta();
 							formulario.construirTablaInventario();
+							
+							factura_cliente clase = new factura_cliente();
+							consultas_factura_cliente consulta = new consultas_factura_cliente();
+							registro_facturas_clientes formulario2 = new registro_facturas_clientes();
+							sar clase2 = new sar();
+							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2, clase2);
+							formulario2.setVisible(true);
+							formulario2.setLocationRelativeTo(null);
+							formulario2.txtCliente.requestFocusInWindow();
+							formulario2.obtenerUltimoId();
+							formulario2.pistas();
+							formulario2.consultarEmpresa();
+							formulario2.construirTabla();
+							formulario2.establecerDatosEmpresa();
+							formulario2.ObtenerUltimosDatosSar();
+							formulario2.btnGuardar.setVisible(true);
+							formulario2.btnNuevo.setVisible(true);
+							formulario2.btnActualizar.setVisible(false);
+							formulario2.btnAceptar.setVisible(false);
+							formulario2.btnBorrar.setVisible(false);
+							formulario.dispose();
+							
 						} else {
 							JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
 							limpiar();

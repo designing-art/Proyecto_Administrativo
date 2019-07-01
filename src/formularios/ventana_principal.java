@@ -26,6 +26,7 @@ import clases.contrato_empleado;
 import clases.deduccion;
 import clases.empleado;
 import clases.empresa;
+import clases.factura_cliente;
 import clases.horario;
 import clases.inventario;
 import clases.planilla;
@@ -46,6 +47,7 @@ import consultas.consultas_contrato_empleado;
 import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
+import consultas.consultas_factura_cliente;
 import consultas.consultas_horario;
 import consultas.consultas_inventario;
 import consultas.consultas_planilla;
@@ -64,6 +66,7 @@ import controles.control_contrato_empleado;
 import controles.control_deduccion;
 import controles.control_empleado;
 import controles.control_empresa;
+import controles.control_factura_cliente;
 import controles.control_horario;
 import controles.control_inventario;
 import controles.control_planilla;
@@ -850,14 +853,26 @@ public class ventana_principal extends JFrame {
 		panel_9.add(btnFacturasDeLos);
 		btnFacturasDeLos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				factura_cliente clase = new factura_cliente();
+				consultas_factura_cliente consulta = new consultas_factura_cliente();
 				registro_facturas_clientes formulario = new registro_facturas_clientes();
-				formulario.establecerDatosEmpresa();
-				formulario.ObtenerUltimosDatosSar();
+				sar clase2 = new sar();
+				control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario, clase2);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				
-				
+				formulario.txtCliente.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.establecerDatosEmpresa();
+				formulario.ObtenerUltimosDatosSar();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
 			}
 		});
 
