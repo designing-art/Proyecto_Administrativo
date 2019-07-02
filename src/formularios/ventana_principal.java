@@ -902,6 +902,7 @@ public class ventana_principal extends JFrame {
 				formulario.consultarEmpresa();
 				formulario.construirTabla();
 				formulario.ObtenerUltimosDatosSar();
+				formulario.calcularDatosFacturas();
 				formulario.btnGuardar.setVisible(true);
 				formulario.btnNuevo.setVisible(true);
 				formulario.btnActualizar.setVisible(false);

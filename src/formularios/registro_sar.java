@@ -103,6 +103,19 @@ public class registro_sar extends JFrame {
 	public JTextFieldDateEditor editor;
 	public JDateChooser dateFechaLimite;
 
+	public String r_i = null;
+	public String r_f = null;
+	public String f_a = null;
+	public int a = 0;
+	public int b = 0;
+	public int total = 0;
+	public int no_util = 0;
+	public int util = 0;
+	public String c = null;
+	public int fa = 0;
+	public String utilizadas = null;
+	public String no_utilizadas = null;
+
 	public registro_sar() {
 		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -641,13 +654,6 @@ public class registro_sar extends JFrame {
 	}
 
 	public void ObtenerUltimosDatosSar() {
-		String r_i = null;
-		String r_f = null;
-		String f_a = null;
-		int a = 0;
-		int b = 0;
-		int d = 0;
-		String c = null;
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
@@ -659,37 +665,17 @@ public class registro_sar extends JFrame {
 				f_a = rsr.getString("factura_actual_sar");
 				a = Integer.parseInt(r_i);
 				b = Integer.parseInt(r_f);
-				c = String.valueOf(b - a);
-				d = b - a;
+				total = b - a;
+				c = String.valueOf(total);
+				fa = Integer.parseInt(f_a);
+				no_util = b - fa;
+				no_utilizadas = String.valueOf(no_util);
+				util = total - no_util;
+				utilizadas = String.valueOf(util);
 			}
 			txtTotalFacturas.setText(c);
-			txtFacturasUtilizadas.setText("0");
-			txtFacturasNoUtilizadas.setText(c);
-
-			if (txtTotalFacturas.getText().isEmpty()) {
-				txtNota.setText("Agrege un nuevo rango SAR de facturas.");
-				txtNota.setForeground(Color.BLUE);
-			} else {
-				double existencia = 0;
-				existencia = 0.50 * d;
-				if (existencia <= d) {
-					txtNota.setText("Hay suficientes Facturas");
-					txtNota.setForeground(Color.BLUE);
-				} else {
-					if (existencia >= d) {
-						txtNota.setText("Hay mas de la mitad de facturas.");
-						txtNota.setForeground(Color.yellow);
-					} else {
-						double existencia2 = 0;
-						existencia2 = 0.10 * d;
-						if (existencia2 <= d) {
-							txtNota.setText("Las Facturas se agotan!");
-							txtNota.setForeground(Color.RED);
-						}
-					}
-				}
-			}
-
+			txtFacturasNoUtilizadas.setText(no_utilizadas);
+			txtFacturasUtilizadas.setText(utilizadas);
 			;
 			stmtr.close();
 			rsr.close();
@@ -698,6 +684,42 @@ public class registro_sar extends JFrame {
 
 		Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void calcularDatosFacturas() {
+		double existencia = 0.50 * total;
+		double existencia2 = 0.10 * total;
+		
+		if (txtTotalFacturas.getText().isEmpty()) {
+			txtNota.setText("Agrege un nuevo rango SAR de facturas.");
+			txtNota.setForeground(Color.BLUE);
+			repaint();
+		} else {
+			if (no_util <= existencia) {
+				txtNota.setText("Hay menos de la mitad de facturas.");
+				txtNota.setForeground(Color.ORANGE);
+				repaint();
+			} else {
+				if (no_util >= existencia) {
+					txtNota.setText("Hay suficientes Facturas");
+					txtNota.setForeground(Color.BLUE);
+					repaint();
+				} else {
+					if (no_util <= existencia2) {
+						txtNota.setText("Las Facturas se agotan!");
+						txtNota.setForeground(Color.RED);
+						repaint();
+					} else {
+						if (txtFacturasNoUtilizadas.getText().equals("0")) {
+							txtNota.setText("No hay facturas!");
+							txtNota.setForeground(Color.RED);
+							repaint();
+						}
+					}
+				}
+			}
+
 		}
 	}
 

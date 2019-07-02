@@ -84,6 +84,7 @@ public class control_sar implements ActionListener {
 								formulario.construirTabla();
 								formulario.obtenerUltimoId();
 								formulario.ObtenerUltimosDatosSar();
+								formulario.calcularDatosFacturas();
 							} else {
 								JOptionPane.showMessageDialog(null, "Error! SAR no registrado");
 								limpiar();
@@ -113,6 +114,7 @@ public class control_sar implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.ObtenerUltimosDatosSar();
+					formulario.calcularDatosFacturas();
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! SAR no actualizado");
 					limpiar();
@@ -237,6 +239,7 @@ public class control_sar implements ActionListener {
 					JOptionPane.showMessageDialog(null, "SAR Eliminado!");
 					limpiar();
 					formulario.ObtenerUltimosDatosSar();
+					formulario.calcularDatosFacturas();
 					formulario.construirTabla();
 					formulario.txtCodigoSar.setText(null);
 					formulario.btnAceptar.setEnabled(true);
@@ -264,6 +267,7 @@ public class control_sar implements ActionListener {
 			formulario.btnAceptar.setVisible(false);
 			formulario.construirTabla();
 			formulario.ObtenerUltimosDatosSar();
+			formulario.calcularDatosFacturas();
 		}
 
 		/* Aceptar */
@@ -281,6 +285,7 @@ public class control_sar implements ActionListener {
 			formulario.txtCodigoSar.setEditable(false);
 			formulario.obtenerUltimoId();
 			formulario.construirTabla();
+			formulario.calcularDatosFacturas();
 			formulario.txtCodigoSar.setEditable(true);
 			formulario.txtCaiSar.setEditable(true);
 			formulario.txtRangoInicial.setEditable(true);
