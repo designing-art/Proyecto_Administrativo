@@ -28,6 +28,7 @@ import clases.empleado;
 import clases.empresa;
 import clases.factura_cliente;
 import clases.horario;
+import clases.ingreso;
 import clases.inventario;
 import clases.planilla;
 
@@ -35,6 +36,7 @@ import clases.producto;
 import clases.proveedor;
 import clases.sar;
 import clases.servicio;
+import clases.usuario;
 import clases.venta;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
@@ -55,6 +57,7 @@ import consultas.consultas_producto;
 import consultas.consultas_proveedor;
 import consultas.consultas_sar;
 import consultas.consultas_servicio;
+import consultas.consultas_usuario;
 import consultas.consultas_venta;
 import controles.control_bonificacion;
 import controles.control_cargo;
@@ -74,6 +77,7 @@ import controles.control_producto;
 import controles.control_proveedor;
 import controles.control_sar;
 import controles.control_servicio;
+import controles.control_usuario;
 import controles.control_venta;
 
 import java.awt.event.ActionListener;
@@ -554,6 +558,23 @@ public class ventana_principal extends JFrame {
 		button_11.setBackground(new Color(70, 130, 180));
 		button_11.setBounds(10, 19, 97, 21);
 		panel_2.add(button_11);
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				venta clase = new venta();
+				inventario clase2 = new inventario();
+				ingreso clase3 = new ingreso();
+				consultas_venta consulta = new consultas_venta();
+				registro_ventas formulario = new registro_ventas();
+				registro_ingresos formulario2 = new registro_ingresos();
+				control_venta control = new control_venta(clase, clase2, clase3, consulta, formulario, formulario2);
+				formulario2.setVisible(true);
+				formulario2.setLocationRelativeTo(null);
+				formulario2.txtBusquedaCargos.requestFocusInWindow();
+				formulario2.consultarEmpresa();
+				formulario2.construirTabla();
+				dispose();
+			}
+		});
 
 		JButton button_12 = new JButton("Egresos");
 		button_12.setForeground(Color.BLACK);
@@ -651,9 +672,11 @@ public class ventana_principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				venta clase = new venta();
 				inventario clase2 = new inventario();
+				ingreso clase3 = new ingreso();
 				consultas_venta consulta = new consultas_venta();
 				registro_ventas formulario = new registro_ventas();
-				control_venta control = new control_venta(clase, clase2, consulta, formulario);
+				registro_ingresos formulario2 = new registro_ingresos();
+				control_venta control = new control_venta(clase, clase2, clase3, consulta, formulario, formulario2);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.txtBusquedaInventario.requestFocusInWindow();
@@ -946,6 +969,28 @@ public class ventana_principal extends JFrame {
 		btnUsers.setForeground(Color.BLACK);
 		btnUsers.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnUsers.setBackground(new Color(219, 112, 147));
+		btnUsers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				usuario clase = new usuario();
+				consultas_usuario consulta = new consultas_usuario();
+				registro_usuarios formulario = new registro_usuarios();
+				control_usuario control = new control_usuario(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtBusqueda.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnVer.setVisible(true);
+				formulario.btnActualizarDatos.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
+			}
+		});
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);

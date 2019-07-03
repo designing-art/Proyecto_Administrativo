@@ -90,7 +90,7 @@ public class login_usuario extends JFrame {
 		JButton btnLogo = new JButton("Logo");
 		btnLogo.setBounds(263, 11, 169, 137);
 		contentPane.add(btnLogo);
-		final ImageIcon logo = new ImageIcon(getClass().getResource("/material/television/logo.png"));
+		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 		final ImageIcon icono = new ImageIcon(
 				logo.getImage().getScaledInstance(btnLogo.getWidth(), btnLogo.getHeight(), Image.SCALE_DEFAULT));
 		btnLogo.setIcon(icono);

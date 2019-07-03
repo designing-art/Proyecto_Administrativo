@@ -138,7 +138,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.btnGuardarEmpleado.setVisible(true);
 					formularioEmpleado.btnCalcularEdad.setBackground(Color.RED);
 					formularioEmpleado.txtDireccionFoto.setText("");
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/usuario.png"));
+					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 					final ImageIcon iconofoto = new ImageIcon(
 							iconoContrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
 									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
@@ -247,7 +247,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor2.setEditable(false);
 					formularioEmpleado.editor.setEditable(false);
 					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
-					final ImageIcon icono = new ImageIcon(getClass().getResource("/material/usuario.png"));
+					final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 					final ImageIcon iconofoto = new ImageIcon(
 							icono.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
 									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));

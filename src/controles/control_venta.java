@@ -11,18 +11,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Locale.Category;
 
 import javax.swing.JOptionPane;
 
 import clases.factura_cliente;
+import clases.ingreso;
 import clases.inventario;
 import clases.sar;
 import clases.venta;
 import conexion.conexion;
 import consultas.consultas_factura_cliente;
+import consultas.consultas_ingreso;
 import consultas.consultas_inventario;
 import consultas.consultas_venta;
 import formularios.registro_facturas_clientes;
+import formularios.registro_ingresos;
 import formularios.registro_inventario;
 import formularios.registro_ventas;
 
@@ -34,18 +38,24 @@ public class control_venta implements ActionListener {
 	
 	public inventario clase2;
 	public consultas_inventario consulta2;
-	public registro_inventario formulario2;
+	public registro_ingresos formulario2;
+	
+	public ingreso clase3;
+	public consultas_ingreso consulta3;
+	public registro_ingresos formulario3;
 	
 	public static String identidad = null;
 
 	public static int cantidad = 0;
 	public static int existencia = 0;
 
-	public control_venta(venta clase, inventario clase2, consultas_venta consulta, registro_ventas formulario) {
+	public control_venta(venta clase, inventario clase2, ingreso clase3, consultas_venta consulta, registro_ventas formulario, registro_ingresos formulario2) {
 		this.clase = clase;
+		this.clase2 = clase2;
+		this.clase3 = clase3;
 		this.consulta = consulta;
 		this.formulario = formulario;
-		this.clase2 = clase2;
+		this.formulario2 = formulario2;
 		this.formulario.btnGuardar.addActionListener(this);
 		this.formulario.btnNuevo.addActionListener(this);
 		this.formulario.btnActualizar.addActionListener(this);
@@ -54,6 +64,8 @@ public class control_venta implements ActionListener {
 		this.formulario.btnVer.addActionListener(this);
 		this.formulario.btnAceptar.addActionListener(this);
 		this.formulario.btnVerder.addActionListener(this);
+		this.formulario2.btnMostrar.addActionListener(this);
+		this.formulario2.btnAceptar.addActionListener(this);
 	}
 
 	@Override
@@ -97,7 +109,12 @@ public class control_venta implements ActionListener {
 						clase2.setExistencias_objeto_inventario(
 								Integer.parseInt(formulario.txtExistencia.getText().toString()));
 						
-						if (consulta.insertar(clase)&& consulta.actualizarInventario(clase2)) {
+						clase3.setTipo_ingreso("Venta de : "+formulario.txtNombre.getText().toString());
+						clase3.setCantidad_ingreso(Double.parseDouble(formulario.txtPrecioVenta.getText().toString()));
+						clase3.setDescripcion_ingreso("Caracteristicas de la venta : "+formulario.txtDescripcion.getText().toString());
+						clase3.setFecha_ingreso(formulario.editor.getText().toString());
+						
+						if (consulta.insertar(clase) && consulta.actualizarInventario(clase2)&& consulta.insertarIngreso(clase3)) {
 							JOptionPane.showMessageDialog(null, "Venta registrada!");
 							limpiar();
 							formulario.obtenerUltimoId();
@@ -348,6 +365,42 @@ public class control_venta implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		if (e.getSource() == formulario2.btnMostrar) {
+			int filaseleccionada;
+			try {
+				filaseleccionada = formulario2.tabla.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String codigo = formulario2.tabla.getValueAt(filaseleccionada, 0).toString();
+					String ingreso = formulario2.tabla.getValueAt(filaseleccionada, 1).toString();
+					String cantidad = formulario2.tabla.getValueAt(filaseleccionada, 2).toString();
+					String descripcion = formulario2.tabla.getValueAt(filaseleccionada, 3).toString();
+					String fecha = formulario2.tabla.getValueAt(filaseleccionada, 4).toString();
+
+					formulario2.txtCodigo.setText(codigo);
+					formulario2.txtIngreso.setText(ingreso);
+					formulario2.txtCantidad.setText(cantidad);
+					formulario2.txtDescripcion.setText(descripcion);
+					formulario2.editor.setText(fecha);
+
+					formulario2.txtCodigo.setForeground(Color.BLACK);
+					formulario2.txtIngreso.setForeground(Color.BLACK);
+					formulario2.txtCantidad.setForeground(Color.BLACK);
+					formulario2.txtDescripcion.setForeground(Color.BLACK);
+					formulario2.editor.setForeground(Color.BLACK);
+
+					formulario2.txtBusquedaCargos.requestFocusInWindow();
+
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {
@@ -421,6 +474,13 @@ public class control_venta implements ActionListener {
 			formulario.txtExistencia.setText("0");
 			formulario.txtNombre.requestFocusInWindow();
 		}
+		
+		/* Aceptar */
+		if (e.getSource() == formulario2.btnAceptar) {
+			limpiar2();
+			formulario2.construirTabla();
+			formulario2.txtBusquedaCargos.requestFocusInWindow();
+		}
 
 	}
 
@@ -441,6 +501,16 @@ public class control_venta implements ActionListener {
 		formulario.txtModelo.setText(null);
 		formulario.txtExistencia.setText(null);
 		formulario.txtCantidadVenta.setText(null);
+	}
+	
+	public void limpiar2() {
+		formulario2.txtBusquedaCargos.setText(null);
+		formulario2.txtCodigo.setText(null);
+		formulario2.txtIngreso.setText(null);
+		formulario2.txtCantidad.setText(null);
+		formulario2.txtDescripcion.setText(null);
+		formulario2.editor.setText(null);
+
 	}
 
 	/* Metodos para mostrar datos en tabla Contratos de los empleados */
@@ -496,6 +566,51 @@ public class control_venta implements ActionListener {
 			matrizInfo[i][9] = miLista.get(i).getPrecio_compra_venta() + "";
 			matrizInfo[i][10] = miLista.get(i).getPrecio_venta() + "";
 			matrizInfo[i][11] = miLista.get(i).getFecha_registro_venta() + "";
+
+		}
+
+		return matrizInfo;
+	}
+	
+	/* Metodos para mostrar datos en tabla Contratos de los empleados */
+	public static ArrayList<ingreso> buscarUsuariosConMatriz2() {
+		conexion conex = new conexion();
+		ArrayList<ingreso> miLista = new ArrayList<ingreso>();
+		ingreso ingreso;
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM ingresos");
+
+			while (rs.next()) {
+				ingreso = new ingreso();
+				ingreso.setId_ingreso(Integer.parseInt(rs.getString("id_ingreso")));
+				ingreso.setTipo_ingreso(rs.getString("tipo_ingreso"));
+				ingreso.setCantidad_ingreso(rs.getDouble("cantidad_ingreso"));
+				ingreso.setDescripcion_ingreso(rs.getString("descripcion_ingreso"));
+				ingreso.setFecha_ingreso(rs.getString("fecha_ingreso"));
+				miLista.add(ingreso);
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+		return miLista;
+	}
+
+	public static String[][] obtenerMatriz2() {
+		ArrayList<ingreso> miLista = buscarUsuariosConMatriz2();
+		String matrizInfo[][] = new String[miLista.size()][5];
+		for (int i = 0; i < miLista.size(); i++) {
+			matrizInfo[i][0] = miLista.get(i).getId_ingreso() + "";
+			matrizInfo[i][1] = miLista.get(i).getTipo_ingreso() + "";
+			matrizInfo[i][2] = miLista.get(i).getCantidad_ingreso() + "";
+			matrizInfo[i][3] = miLista.get(i).getDescripcion_ingreso() + "";
+			matrizInfo[i][4] = miLista.get(i).getFecha_ingreso() + "";
 
 		}
 

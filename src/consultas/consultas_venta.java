@@ -3,6 +3,8 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import clases.ingreso;
 import clases.inventario;
 import clases.venta;
 import conexion.conexion;
@@ -101,6 +103,31 @@ public class consultas_venta extends conexion {
 				}
 			}
 
+		}
+		
+		public boolean insertarIngreso(ingreso ingreso) {
+			PreparedStatement ps = null;
+			Connection con = getConexion();
+			String sql = "INSERT INTO ingresos (tipo_ingreso, cantidad_ingreso, descripcion_ingreso, fecha_ingreso) VALUES(?,?,?,?)";
+			
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(1, ingreso.getTipo_ingreso());
+				ps.setDouble(2, ingreso.getCantidad_ingreso());
+				ps.setString(3, ingreso.getDescripcion_ingreso());
+				ps.setString(4, ingreso.getFecha_ingreso());
+				ps.execute();
+				return true;
+			} catch (SQLException e) {
+				System.err.println(e);
+				return false;
+			} finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.err.println(e);
+				}
+			}
 		}
 
 	}
