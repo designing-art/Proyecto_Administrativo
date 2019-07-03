@@ -53,6 +53,7 @@ import clases.empleado;
 import conexion.conexion;
 import consultas.consultas_empleado;
 import controles.control_cargo;
+import controles.control_egresos;
 import controles.control_empleado;
 import controles.control_sar;
 import controles.control_venta;
@@ -64,12 +65,17 @@ import javax.swing.WindowConstants;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
-public class registro_ingresos extends JFrame {
+public class registro_egresos extends JFrame {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
 	public JButton btnAtras;
 	public JButton btnMostrar;
 	public JButton btnAceptar;
+	public JButton btnNuevo;
+	public JButton btnGuardar;
+	public JButton btnActualizar;
+	public JButton btnBorrar;
+	public JButton btnActualizarDatos;
 
 	public int pagina = 0;
 
@@ -88,12 +94,12 @@ public class registro_ingresos extends JFrame {
 	public static JLabel label_2;
 	public JTextFieldDateEditor editor;
 	public JDateChooser dateFechaLimite;
-	public JTextField txtIngreso;
+	public JTextField txtEgreso;
 	public JTextField txtCantidad;
 	public JTextArea txtDescripcion;
 	public JTextField txtTotalIngresos;
 
-	public registro_ingresos() {
+	public registro_egresos() {
 		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 581);
@@ -124,7 +130,7 @@ public class registro_ingresos extends JFrame {
 			}
 		});
 
-		JLabel lblRegistrarCargo = new JLabel("INFORMACION DE LOS INGRESOS DE LA EMPRESA.");
+		JLabel lblRegistrarCargo = new JLabel("INFORMACION DE LOS EGRESOS DE LA EMPRESA.");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblRegistrarCargo.setBounds(37, 0, 639, 39);
 		contentPane.add(lblRegistrarCargo);
@@ -137,12 +143,12 @@ public class registro_ingresos extends JFrame {
 		panelTablaCargos.setBounds(388, 44, 431, 497);
 		contentPane.add(panelTablaCargos);
 
-		JLabel lblCargosRegistrados = new JLabel("Registros de ingresos :");
+		JLabel lblCargosRegistrados = new JLabel("Registros de egresos :");
 		lblCargosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblCargosRegistrados.setBounds(30, 41, 166, 19);
 		panelTablaCargos.add(lblCargosRegistrados);
 
-		JLabel lblBuscarRegistroDe = new JLabel("Buscar  ingresos :");
+		JLabel lblBuscarRegistroDe = new JLabel("Buscar  egresos :");
 		lblBuscarRegistroDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblBuscarRegistroDe.setBounds(30, 63, 166, 22);
 		panelTablaCargos.add(lblBuscarRegistroDe);
@@ -191,7 +197,7 @@ public class registro_ingresos extends JFrame {
 		btnMostrar = new JButton("Ver detalles");
 		btnMostrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnMostrar.setBackground(new Color(0, 206, 209));
-		btnMostrar.setBounds(159, 445, 108, 23);
+		btnMostrar.setBounds(152, 445, 108, 23);
 		panelTablaCargos.add(btnMostrar);
 
 		JButton btnImprimirReporte = new JButton("Imprimir Reporte");
@@ -221,9 +227,9 @@ public class registro_ingresos extends JFrame {
 		btnImprimirReporte.setBounds(204, 44, 143, 15);
 		panelTablaCargos.add(btnImprimirReporte);
 
-		JLabel lblTotalIngresos = new JLabel("Total  ingresos :");
+		JLabel lblTotalIngresos = new JLabel("Total  egresos :");
 		lblTotalIngresos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalIngresos.setBounds(30, 422, 166, 19);
+		lblTotalIngresos.setBounds(30, 419, 166, 15);
 		panelTablaCargos.add(lblTotalIngresos);
 
 		txtTotalIngresos = new JTextField();
@@ -231,7 +237,7 @@ public class registro_ingresos extends JFrame {
 		txtTotalIngresos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalIngresos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtTotalIngresos.setColumns(10);
-		txtTotalIngresos.setBounds(152, 418, 134, 21);
+		txtTotalIngresos.setBounds(152, 415, 108, 21);
 		panelTablaCargos.add(txtTotalIngresos);
 
 		JButton btnObtener = new JButton("Obtener");
@@ -242,24 +248,36 @@ public class registro_ingresos extends JFrame {
 		});
 		btnObtener.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnObtener.setBackground(new Color(60, 179, 113));
-		btnObtener.setBounds(296, 418, 108, 19);
+		btnObtener.setBounds(270, 415, 108, 22);
 		panelTablaCargos.add(btnObtener);
-		
-		JLabel label_3 = new JLabel("L.");
-		label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_3.setBounds(133, 423, 63, 18);
-		panelTablaCargos.add(label_3);
-		
-				JLabel label_5 = new JLabel();
-				label_5.setBounds(0, 0, 431, 497);
-				panelTablaCargos.add(label_5);
-				final ImageIcon logo1 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-				label_5.setIcon(logo1);
+
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBorrar.setBackground(new Color(220, 20, 60));
+		btnBorrar.setBounds(30, 445, 99, 23);
+		panelTablaCargos.add(btnBorrar);
+
+		btnActualizarDatos = new JButton("Actualizar Datos");
+		btnActualizarDatos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizarDatos.setBackground(new Color(60, 179, 113));
+		btnActualizarDatos.setBounds(270, 446, 134, 23);
+		panelTablaCargos.add(btnActualizarDatos);
+
+		JLabel label_1 = new JLabel("L.");
+		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label_1.setBounds(134, 415, 63, 24);
+		panelTablaCargos.add(label_1);
+
+		JLabel label_5 = new JLabel();
+		label_5.setBounds(0, 0, 431, 497);
+		panelTablaCargos.add(label_5);
+		final ImageIcon logo1 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+		label_5.setIcon(logo1);
 
 		JPanel panelRegistro = new JPanel();
 		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-		panelRegistro.setBounds(37, 130, 341, 279);
+		panelRegistro.setBounds(37, 130, 341, 325);
 		contentPane.add(panelRegistro);
 		panelRegistro.setLayout(null);
 
@@ -272,7 +290,7 @@ public class registro_ingresos extends JFrame {
 		lblHoraExtraCargo.setBounds(24, 200, 196, 20);
 		panelRegistro.add(lblHoraExtraCargo);
 
-		JLabel lblTipoDeCargo = new JLabel("2. Ingreso por :");
+		JLabel lblTipoDeCargo = new JLabel("2. Egreso por :");
 		lblTipoDeCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblTipoDeCargo.setBounds(24, 84, 105, 18);
 		panelRegistro.add(lblTipoDeCargo);
@@ -282,7 +300,7 @@ public class registro_ingresos extends JFrame {
 		lblCodigoCargo.setBounds(24, 59, 63, 14);
 		panelRegistro.add(lblCodigoCargo);
 
-		JLabel lblRegistroCargos = new JLabel("Datos del registro del ingreso :");
+		JLabel lblRegistroCargos = new JLabel("Datos del registro del egresos :");
 		lblRegistroCargos.setBounds(24, 23, 254, 32);
 		panelRegistro.add(lblRegistroCargos);
 		lblRegistroCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -296,7 +314,7 @@ public class registro_ingresos extends JFrame {
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAceptar.setBackground(new Color(255, 255, 255));
-		btnAceptar.setBounds(24, 231, 99, 23);
+		btnAceptar.setBounds(24, 247, 99, 23);
 		panelRegistro.add(btnAceptar);
 
 		MaskFormatter formato = null;
@@ -349,12 +367,11 @@ public class registro_ingresos extends JFrame {
 			e1.printStackTrace();
 		}
 
-		txtIngreso = new JTextField();
-		txtIngreso.setEditable(false);
-		txtIngreso.setHorizontalAlignment(SwingConstants.CENTER);
-		txtIngreso.setColumns(10);
-		txtIngreso.setBounds(137, 84, 177, 19);
-		panelRegistro.add(txtIngreso);
+		txtEgreso = new JTextField();
+		txtEgreso.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEgreso.setColumns(10);
+		txtEgreso.setBounds(137, 84, 177, 19);
+		panelRegistro.add(txtEgreso);
 
 		JLabel lblCantidad = new JLabel("3. Cantidad :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -362,10 +379,9 @@ public class registro_ingresos extends JFrame {
 		panelRegistro.add(lblCantidad);
 
 		txtCantidad = new JTextField();
-		txtCantidad.setEditable(false);
 		txtCantidad.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCantidad.setColumns(10);
-		txtCantidad.setBounds(209, 113, 105, 19);
+		txtCantidad.setBounds(215, 113, 99, 19);
 		panelRegistro.add(txtCantidad);
 
 		JLabel lblDescripcion = new JLabel("4. Descripcion :");
@@ -378,28 +394,45 @@ public class registro_ingresos extends JFrame {
 		panelRegistro.add(scrollPane);
 
 		txtDescripcion = new JTextArea();
-		txtDescripcion.setEditable(false);
 		scrollPane.setViewportView(txtDescripcion);
-		
-		JLabel label_1 = new JLabel("L.");
-		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_1.setBounds(191, 114, 63, 18);
-		panelRegistro.add(label_1);
-		
-				JLabel lblImagenLibreta = new JLabel();
-				lblImagenLibreta.setBounds(0, 0, 341, 279);
-				panelRegistro.add(lblImagenLibreta);
-				final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-						lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-				lblImagenLibreta.setIcon(logo);
+
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnNuevo.setBackground(Color.WHITE);
+		btnNuevo.setBounds(24, 274, 99, 23);
+		panelRegistro.add(btnNuevo);
+
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnActualizar.setBackground(new Color(60, 179, 113));
+		btnActualizar.setBounds(215, 247, 99, 23);
+		panelRegistro.add(btnActualizar);
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnGuardar.setBackground(new Color(60, 179, 113));
+		btnGuardar.setBounds(215, 274, 99, 23);
+		panelRegistro.add(btnGuardar);
+
+		JLabel lblL = new JLabel("L.");
+		lblL.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblL.setBounds(189, 114, 63, 18);
+		panelRegistro.add(lblL);
+
+		JLabel lblImagenLibreta = new JLabel();
+		lblImagenLibreta.setBounds(0, 0, 341, 325);
+		panelRegistro.add(lblImagenLibreta);
+		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblImagenLibreta.setIcon(logo);
 
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Ingreso por", "Cantidad", "Descripcion", "Fecha" };
-		String informacion[][] = control_venta.obtenerMatriz2();
+		String titulos[] = { "Codigo", "Egreso por", "Cantidad", "Descripcion", "Fecha" };
+		String informacion[][] = control_egresos.obtenerMatriz2();
 		tabla = new JTable(informacion, titulos);
 		barraSar.setViewportView(tabla);
 		for (int c = 0; c < tabla.getColumnCount(); c++) {
@@ -475,6 +508,31 @@ public class registro_ingresos extends JFrame {
 
 		}
 
+	}
+
+	public void obtenerUltimoId() {
+		String ultimoValor = null;
+		int valor;
+		String id = null;
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM egresos ORDER BY id_egreso DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				ultimoValor = rsr.getString("id_egreso");
+				valor = Integer.parseInt(ultimoValor);
+				valor = valor + 1;
+				id = String.valueOf(valor);
+			}
+			txtCodigo.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void totalizar() {

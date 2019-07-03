@@ -24,6 +24,7 @@ import clases.configuracion;
 import clases.contrato_cliente;
 import clases.contrato_empleado;
 import clases.deduccion;
+import clases.egreso;
 import clases.empleado;
 import clases.empresa;
 import clases.factura_cliente;
@@ -47,6 +48,7 @@ import consultas.consultas_configuracion;
 import consultas.consultas_contrato_cliente;
 import consultas.consultas_contrato_empleado;
 import consultas.consultas_deduccion;
+import consultas.consultas_egreso;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_factura_cliente;
@@ -67,6 +69,7 @@ import controles.control_configuracion;
 import controles.control_contrato_cliente;
 import controles.control_contrato_empleado;
 import controles.control_deduccion;
+import controles.control_egresos;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_factura_cliente;
@@ -582,6 +585,28 @@ public class ventana_principal extends JFrame {
 		button_12.setBackground(new Color(70, 130, 180));
 		button_12.setBounds(117, 19, 97, 21);
 		panel_2.add(button_12);
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				egreso clase = new egreso();
+				consultas_egreso consulta = new consultas_egreso();
+				registro_egresos formulario = new registro_egresos();
+				control_egresos control = new control_egresos(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtEgreso.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.consultarEmpresa();
+				formulario.btnBorrar.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatos.setVisible(true);
+				formulario.btnMostrar.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				dispose();
+			}
+		});
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
