@@ -109,11 +109,12 @@ public class consultas_usuario extends conexion {
 		ResultSet rs = null;
 		Connection con = getConexion();
 
-		String sql = "SELECT * FROM usuario WHERE usuario=? ";
+		String sql = "SELECT * FROM usuario WHERE usuario=? and contraseña =?";
 
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, usuario.getUsuario());
+			ps.setString(2, usuario.getContraseña());
 			rs = ps.executeQuery();
 
 			if (rs.next()) {

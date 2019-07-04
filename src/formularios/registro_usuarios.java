@@ -546,10 +546,6 @@ public class registro_usuarios extends JFrame {
 		panelTablaCargos.add(label_2);
 
 		btnActualizarDatos = new JButton("Actualizar Datos");
-		btnActualizarDatos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnActualizarDatos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatos.setBackground(new Color(60, 179, 113));
 		btnActualizarDatos.setBounds(317, 490, 137, 23);
@@ -706,7 +702,6 @@ public class registro_usuarios extends JFrame {
 			txtApellidos.setForeground(Color.BLACK);
 			txtIdentidad.setForeground(Color.BLACK);
 			txtCargo.setForeground(Color.BLACK);
-
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 

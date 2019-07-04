@@ -22,11 +22,43 @@ public class television extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				consultas_usuario consulta = new consultas_usuario();
 				usuario clase = new usuario();
-				clase.setUsuario(login.txtUsuario.getText());
+				clase.setUsuario(login.txtUsuario.getText().toString());
+				clase.setContraseña(login.txtContraseña.getText().toString());
 				if (consulta.buscarUsuario(clase)) {
 					ventana_principal principal = new ventana_principal();
 					principal.setLocationRelativeTo(null);
 					principal.setVisible(true);
+					String permiso = null;
+					permiso = String.valueOf(clase.getPermisos().toString());
+					if (permiso.equals("Nivel 1 (Dueño)")) {
+						ventana_principal.panelClientes.setVisible(true);
+						ventana_principal.panelEmpleados.setVisible(true);
+						ventana_principal.panelFacturas.setVisible(true);
+						ventana_principal.panelFinanzas.setVisible(true);
+						ventana_principal.panelInventario.setVisible(true);
+						ventana_principal.panelOpciones.setVisible(true);
+					} else {
+						if (permiso.equals("Nivel 2 (Administrador)")) {
+							ventana_principal.panelClientes.setVisible(true);
+							ventana_principal.panelEmpleados.setVisible(true);
+							ventana_principal.panelFacturas.setVisible(true);
+							ventana_principal.panelFinanzas.setVisible(true);
+							ventana_principal.panelInventario.setVisible(true);
+							ventana_principal.panelOpciones.setVisible(true);
+						} else {
+							if (permiso.equals("Nivel 3 (Empleado)")) {
+								ventana_principal.panelClientes.setVisible(true);
+								ventana_principal.panelEmpleados.setVisible(false);
+								ventana_principal.panelFacturas.setVisible(true);
+								ventana_principal.panelFinanzas.setVisible(false);
+								ventana_principal.panelInventario.setVisible(true);
+								ventana_principal.panelOpciones.setVisible(false);
+								ventana_principal.btnInformacionEmpresa.setVisible(false);
+								
+							}
+						}
+
+					}
 					ventana_principal.lblNombreUsuario.setText(String.valueOf(clase.getNombre().toString()));
 					ventana_principal.lblCargoUsuario.setText(String.valueOf(clase.getCargo().toString()));
 					ventana_principal.lblTipoUsuario.setText(String.valueOf(clase.getTipo_usuario().toString()));
