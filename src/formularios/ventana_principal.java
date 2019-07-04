@@ -757,25 +757,25 @@ public class ventana_principal extends JFrame {
 		panel_5.setLayout(null);
 
 		lblTipoUsuario = new JLabel("Super usuario");
-		lblTipoUsuario.setBounds(20, 103, 119, 14);
+		lblTipoUsuario.setBounds(20, 80, 119, 14);
 		panel_5.add(lblTipoUsuario);
 		lblTipoUsuario.setForeground(Color.BLACK);
 		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblUsuario_1 = new JLabel("Usuario :");
-		lblUsuario_1.setBounds(20, 89, 75, 14);
+		JLabel lblUsuario_1 = new JLabel("Nivel :");
+		lblUsuario_1.setBounds(20, 66, 75, 14);
 		panel_5.add(lblUsuario_1);
 		lblUsuario_1.setForeground(Color.BLACK);
 		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		lblCargoUsuario = new JLabel("Developer");
-		lblCargoUsuario.setBounds(20, 58, 119, 20);
+		lblCargoUsuario.setBounds(20, 49, 119, 20);
 		panel_5.add(lblCargoUsuario);
 		lblCargoUsuario.setForeground(Color.BLACK);
 		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setBounds(20, 47, 75, 14);
+		lblCargo.setBounds(20, 38, 75, 14);
 		panel_5.add(lblCargo);
 		lblCargo.setForeground(Color.BLACK);
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -788,7 +788,7 @@ public class ventana_principal extends JFrame {
 		lblNombreUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setBounds(134, 47, 113, 117);
+		labelfotousuario.setBounds(135, 47, 100, 105);
 		panel_5.add(labelfotousuario);
 		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
 		labelfotousuario.setForeground(Color.LIGHT_GRAY);
@@ -804,17 +804,35 @@ public class ventana_principal extends JFrame {
 		lblInformacionDelUsuario.setBounds(10, 0, 254, 25);
 		panel_5.add(lblInformacionDelUsuario);
 
-		JLabel lblPermiso = new JLabel("Permiso :");
-		lblPermiso.setForeground(Color.BLACK);
-		lblPermiso.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblPermiso.setBounds(20, 128, 75, 14);
-		panel_5.add(lblPermiso);
-
 		lblPermisoUsuario = new JLabel("Super usuario");
 		lblPermisoUsuario.setForeground(Color.BLACK);
 		lblPermisoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblPermisoUsuario.setBounds(20, 142, 119, 14);
+		lblPermisoUsuario.setBounds(20, 150, 225, 25);
 		panel_5.add(lblPermisoUsuario);
+		
+		JLabel label_1 = new JLabel("Super usuario");
+		label_1.setForeground(Color.BLACK);
+		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label_1.setBounds(20, 138, 119, 14);
+		panel_5.add(label_1);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
+		lblContrasea.setForeground(Color.BLACK);
+		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblContrasea.setBounds(20, 124, 119, 14);
+		panel_5.add(lblContrasea);
+		
+		JLabel label_7 = new JLabel("Developer");
+		label_7.setForeground(Color.BLACK);
+		label_7.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label_7.setBounds(20, 105, 109, 20);
+		panel_5.add(label_7);
+		
+		JLabel lblUsuario = new JLabel("Usuario :");
+		lblUsuario.setForeground(Color.BLACK);
+		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblUsuario.setBounds(20, 94, 75, 14);
+		panel_5.add(lblUsuario);
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -1147,4 +1165,38 @@ public class ventana_principal extends JFrame {
 
 	}
 	
+	public void consultarDatosUsuario() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto
+					.executeQuery("SELECT * FROM usuario WHERE usuario=? and contraseña =?");
+			if (rs.next()) {
+				nombre = (rs.getString("nombre_empresa"));
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+
+				lbl_nombre_empresa_principal.setText(nombre);
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
+								lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				lbl_logo_empresa_principal.setIcon(icono);
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+								+ "         podria hacer algunos ajustes.\n" + "         Ingrese a:\n"
+								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
+								+ "            ******* Buen Dia! *******");
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
 }
