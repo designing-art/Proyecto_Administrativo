@@ -15,6 +15,7 @@ import clases.cargo;
 import conexion.conexion;
 import consultas.consultas_cargo;
 import formularios.registro_cargos;
+import formularios.registro_empleados;
 
 public class control_cargo implements ActionListener {
 
@@ -33,6 +34,7 @@ public class control_cargo implements ActionListener {
 		this.formularioCargo.btnBorrarCargo.addActionListener(this);
 		this.formularioCargo.btnMostrar.addActionListener(this);
 		this.formularioCargo.btnAceptar.addActionListener(this);
+		this.formularioCargo.btnAsignar.addActionListener(this);
 
 	}
 
@@ -111,6 +113,39 @@ public class control_cargo implements ActionListener {
 					formularioCargo.btnAceptar.setVisible(true);
 
 					formularioCargo.txtNombreCargo.requestFocusInWindow();
+
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+		if (e.getSource() == formularioCargo.btnAsignar) {
+
+			int filaseleccionada;
+			try {
+				filaseleccionada = formularioCargo.tablaCargos.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String nombre = formularioCargo.tablaCargos.getValueAt(filaseleccionada, 2).toString();
+					String sueldo = formularioCargo.tablaCargos.getValueAt(filaseleccionada, 3).toString();
+					String horaex = formularioCargo.tablaCargos.getValueAt(filaseleccionada, 4).toString();
+					String funcion = formularioCargo.tablaCargos.getValueAt(filaseleccionada, 5).toString();
+
+					registro_empleados.lbl_nombre_cargo_asignacion.setText(nombre);
+					registro_empleados.lbl_sueldo_cargo_asignacion.setText(sueldo);
+					registro_empleados.lbl_horaextra_cargo_asignacion.setText(horaex);
+					registro_empleados.lbl_funciones_cargo_asignacion.setText(funcion);
+
+					registro_empleados.lbl_nombre_cargo_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_sueldo_cargo_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_horaextra_cargo_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_funciones_cargo_asignacion.setForeground(Color.BLACK);
+					
+					formularioCargo.dispose();
 
 				}
 

@@ -2,8 +2,10 @@ package consultas;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import clases.cargo;
+import clases.empleado;
 import clases.sar;
 import clases.usuario;
 import conexion.conexion;
@@ -68,6 +70,70 @@ public class consultas_usuario extends conexion {
 			}
 		}
 
+	}
+	
+	public boolean buscar(empleado empleado) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = getConexion();
+
+		String sql = "SELECT nombres_empleado, apellidos_empleado, identidad_empleado, nombre_cargo_empleado FROM empleados WHERE identidad_empleado = ? ";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, empleado.getIdentidad_empleado());
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				empleado.setNombres_empleado(rs.getString("nombres_empleado"));
+				empleado.setApellidos_empleado(rs.getString("apellidos_empleado"));
+				empleado.setIdentidad_empleado(rs.getString("identidad_empleado"));
+				empleado.setNombre_cargo_empleado(rs.getString("nombre_cargo_empleado"));
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+	
+	public boolean buscarUsuario(usuario usuario) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = getConexion();
+
+		String sql = "SELECT * FROM usuario WHERE usuario=? ";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, usuario.getUsuario());
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setCargo(rs.getString("cargo"));
+				usuario.setTipo_usuario(rs.getString("tipo_usuario"));
+				usuario.setPermisos(rs.getString("permisos"));
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
 	}
 
 }

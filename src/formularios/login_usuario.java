@@ -18,114 +18,90 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 
 public class login_usuario extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField txtUsuario;
-	private JPasswordField txtContraseña;
+	public JPanel contentPane;
+	public static JTextField txtUsuario;
+	public static JPasswordField txtContraseña;
+	public JLabel lblAlerta;
+	public JButton btnIngresar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					login_usuario frame = new login_usuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public login_usuario() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 500);
+		setBounds(100, 100, 574, 375);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JPanel panel = new JPanel();
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(129, 159, 435, 223);
-		contentPane.add(panel);
-		panel.setLayout(null);
-
-		JLabel lblUsuario = new JLabel("Usuario :");
-		lblUsuario.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 15));
-		lblUsuario.setBounds(61, 64, 113, 14);
-		panel.add(lblUsuario);
-
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
-		lblContrasea.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 15));
-		lblContrasea.setBounds(61, 95, 113, 14);
-		panel.add(lblContrasea);
-
-		JLabel lblNewLabel = new JLabel("Olvido su contrase\u00F1a?");
-		lblNewLabel.setBounds(164, 126, 162, 14);
-		panel.add(lblNewLabel);
-
-		txtUsuario = new JTextField();
-		txtUsuario.setBounds(164, 64, 220, 20);
-		panel.add(txtUsuario);
-		txtUsuario.setColumns(10);
-
-		JLabel lblLogin = new JLabel("Ingresar");
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblLogin.setBounds(10, 11, 162, 32);
-		panel.add(lblLogin);
-
-		JButton btnLogo = new JButton("Logo");
-		btnLogo.setBounds(263, 11, 169, 137);
-		contentPane.add(btnLogo);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-		final ImageIcon icono = new ImageIcon(
-				logo.getImage().getScaledInstance(btnLogo.getWidth(), btnLogo.getHeight(), Image.SCALE_DEFAULT));
-		btnLogo.setIcon(icono);
-
-		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setBounds(164, 151, 127, 32);
-		panel.add(btnIngresar);
-
-		txtContraseña = new JPasswordField();
-		txtContraseña.setBounds(164, 95, 220, 20);
-		panel.add(txtContraseña);
-		btnIngresar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ingresar();
-			}
-		});
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(586, 426, 98, 34);
 		contentPane.add(btnSalir);
-		btnSalir.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				salir();
-			}
-		});
 
-	}
+		JPanel panel = new JPanel();
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(63, 66, 435, 223);
+		contentPane.add(panel);
+		panel.setLayout(null);
 
-	protected void ingresar() {
+		JLabel lblUsuario = new JLabel("Usuario :");
+		lblUsuario.setForeground(new Color(0, 0, 0));
+		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		lblUsuario.setBounds(58, 85, 113, 14);
+		panel.add(lblUsuario);
 
-	}
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
+		lblContrasea.setForeground(new Color(0, 0, 0));
+		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		lblContrasea.setBounds(58, 116, 113, 14);
+		panel.add(lblContrasea);
 
-	protected void salir() {
-		System.exit(0);
+		txtUsuario = new JTextField();
+		txtUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txtUsuario.setBounds(161, 79, 220, 20);
+		panel.add(txtUsuario);
+		txtUsuario.setColumns(10);
+
+		JLabel lblLogin = new JLabel("Bienvenido por favor inicie sesi\u00F3n.");
+		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogin.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		lblLogin.setBounds(58, 36, 323, 32);
+		panel.add(lblLogin);
+
+		btnIngresar = new JButton("Ingresar");
+		btnIngresar.setForeground(new Color(0, 0, 0));
+		btnIngresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnIngresar.setBackground(new Color(60, 179, 113));
+		btnIngresar.setBounds(161, 141, 113, 23);
+		panel.add(btnIngresar);
+
+		txtContraseña = new JPasswordField();
+		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
+		txtContraseña.setBounds(161, 110, 220, 20);
+		panel.add(txtContraseña);
+
+		lblAlerta = new JLabel("");
+		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblAlerta.setBounds(58, 178, 323, 14);
+		panel.add(lblAlerta);
+
+		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
+		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
+		lblLoginSistemaAdministrativo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLoginSistemaAdministrativo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lblLoginSistemaAdministrativo.setBounds(63, 35, 435, 32);
+		contentPane.add(lblLoginSistemaAdministrativo);
+		
+
 	}
 }

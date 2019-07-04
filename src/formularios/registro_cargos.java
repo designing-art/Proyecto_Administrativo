@@ -64,7 +64,6 @@ public class registro_cargos extends JFrame {
 	public PlaceHolder pista;
 	public JScrollPane scrollPane;
 	public JButton btnAtras;
-	public JButton btnRegresarALas;
 
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
@@ -89,6 +88,7 @@ public class registro_cargos extends JFrame {
 
 	public static JLabel label;
 	public static JLabel label_2;
+	public JButton btnAsignar;
 
 	public registro_cargos() {
 		setResizable(false);
@@ -363,13 +363,13 @@ public class registro_cargos extends JFrame {
 		btnBorrarCargo = new JButton("Borrar");
 		btnBorrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarCargo.setBackground(new Color(220, 20, 60));
-		btnBorrarCargo.setBounds(30, 395, 99, 23);
+		btnBorrarCargo.setBounds(30, 392, 99, 23);
 		panelTablaCargos.add(btnBorrarCargo);
 
 		barraCargos = new JScrollPane(tablaCargos, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barraCargos);
-		barraCargos.setBounds(28, 90, 376, 294);
+		barraCargos.setBounds(28, 91, 376, 294);
 
 		tablaCargos = new JTable();
 		barraCargos.setViewportView(tablaCargos);
@@ -381,13 +381,13 @@ public class registro_cargos extends JFrame {
 		btnActualizarDatosCargo = new JButton("Actualizar Datos");
 		btnActualizarDatosCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatosCargo.setBackground(new Color(60, 179, 113));
-		btnActualizarDatosCargo.setBounds(267, 396, 137, 23);
+		btnActualizarDatosCargo.setBounds(267, 393, 137, 23);
 		panelTablaCargos.add(btnActualizarDatosCargo);
 
 		btnMostrar = new JButton("Ver detalles");
 		btnMostrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnMostrar.setBackground(new Color(0, 206, 209));
-		btnMostrar.setBounds(149, 395, 108, 23);
+		btnMostrar.setBounds(149, 392, 108, 23);
 		panelTablaCargos.add(btnMostrar);
 
 		JButton btnImprimirReporte = new JButton("Imprimir Reporte");
@@ -416,36 +416,19 @@ public class registro_cargos extends JFrame {
 		btnImprimirReporte.setBackground(new Color(60, 179, 113));
 		btnImprimirReporte.setBounds(210, 40, 137, 19);
 		panelTablaCargos.add(btnImprimirReporte);
-
-		JLabel label_5 = new JLabel();
-		label_5.setBounds(0, 0, 431, 449);
-		panelTablaCargos.add(label_5);
-		final ImageIcon logo1 = new ImageIcon(
-				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-		label_5.setIcon(logo1);
-
-		btnRegresarALas = new JButton("Regresar a las Asignaciones");
-		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnRegresarALas.setBackground(new Color(255, 165, 0));
-		btnRegresarALas.setBounds(585, 20, 234, 23);
-		contentPane.add(btnRegresarALas);
-		btnRegresarALas.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				empleado clase = new empleado();
-				consultas_empleado consulta = new consultas_empleado();
-				registro_empleados formulario = new registro_empleados();
-				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
-				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
-				formulario2.setVisible(true);
-				formulario2.setLocationRelativeTo(null);
-				control.consultarContratos();
-				control.consultarCargos();
-				control.consultarHorarios();
-				dispose();
-			}
-		});
-		btnRegresarALas.setVisible(false);
+		
+		btnAsignar = new JButton("Asignar");
+		btnAsignar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAsignar.setBackground(new Color(34, 139, 34));
+		btnAsignar.setBounds(30, 392, 99, 23);
+		panelTablaCargos.add(btnAsignar);
+		
+				JLabel label_5 = new JLabel();
+				label_5.setBounds(0, 0, 431, 449);
+				panelTablaCargos.add(label_5);
+				final ImageIcon logo1 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+				label_5.setIcon(logo1);
 
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 

@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import clases.horario;
 import conexion.conexion;
 import consultas.consultas_horario;
+import formularios.registro_empleados;
 import formularios.registro_horarios;
 
 public class control_horario implements ActionListener {
@@ -39,6 +40,7 @@ public class control_horario implements ActionListener {
 		this.formularioHorario.btnBorrarHorario.addActionListener(this);
 		this.formularioHorario.btnAtras.addActionListener(this);
 		this.formularioHorario.btnMostrarHorario.addActionListener(this);
+		this.formularioHorario.btnAsignar.addActionListener(this);
 
 	}
 
@@ -120,6 +122,36 @@ public class control_horario implements ActionListener {
 					formularioHorario.btnMostrarHorario.setVisible(false);
 					formularioHorario.btnAceptarHorario.setText("Cancelar");
 					formularioHorario.btnAceptarHorario.setVisible(true);
+
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+		if (e.getSource() == formularioHorario.btnAsignar) {
+
+			int filaseleccionada;
+			try {
+				filaseleccionada = formularioHorario.tablaHorario.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String tipo = formularioHorario.tablaHorario.getValueAt(filaseleccionada, 1).toString();
+					String dias = formularioHorario.tablaHorario.getValueAt(filaseleccionada, 2).toString();
+					String horas = formularioHorario.tablaHorario.getValueAt(filaseleccionada, 3).toString();
+
+					registro_empleados.lbl_tipo_horario_asignacion.setText(tipo);
+					registro_empleados.lbl_dias_horario_asignacion.setText(dias);
+					registro_empleados.lbl_horas_horario_asignacion.setText(horas);
+
+					registro_empleados.lbl_tipo_horario_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_dias_horario_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_horas_horario_asignacion.setForeground(Color.BLACK);
+					
+					formularioHorario.dispose();
 
 				}
 

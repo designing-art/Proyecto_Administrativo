@@ -76,7 +76,6 @@ public class registro_horarios extends JFrame {
 	public JComboBox<?> cbxTipoHorario;
 	public JComboBox<?> cbxHorasDia;
 	public JComboBox<?> cbxDiasHorario;
-	public JButton btnRegresarALas;
 
 	public JTextField txtCodigoHorario;
 	public JTextField txtBusquedaHorario;
@@ -85,11 +84,11 @@ public class registro_horarios extends JFrame {
 	String filtroCodigo;
 	private JButton button;
 	public static String hora_fecha_reporte;
-	
+
 	public static String ruta_logo;
 	public static JLabel label;
 	public static JLabel label_2;
-
+	public JButton btnAsignar;
 
 	/**
 	 * Create the frame.
@@ -326,7 +325,7 @@ public class registro_horarios extends JFrame {
 		btnMostrarHorario.setBounds(152, 347, 108, 23);
 		panelTablaHorario.add(btnMostrarHorario);
 		final ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
-		
+
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
 			@Override
@@ -334,49 +333,32 @@ public class registro_horarios extends JFrame {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
 				String encabezado = "Reporte de horarios de " + nombreEmpresa;
-				utilJTablePrint(tablaHorario, encabezado, "Pagina {0}"
-						+ "                                                  " + fecha, true);
+				utilJTablePrint(tablaHorario, encabezado,
+						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(210, 39, 137, 19);
 		panelTablaHorario.add(button);
-		
-				JLabel label_2 = new JLabel();
-				label_2.setBounds(0, 0, 440, 401);
-				panelTablaHorario.add(label_2);
-				final ImageIcon logo2 = new ImageIcon(
-						icono2.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
-				label_2.setIcon(logo2);
+
+		JLabel label_2 = new JLabel();
+		label_2.setBounds(0, 0, 440, 401);
+		panelTablaHorario.add(label_2);
+		final ImageIcon logo2 = new ImageIcon(
+				icono2.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+		label_2.setIcon(logo2);
+
+		btnAsignar = new JButton("Asignar");
+		btnAsignar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAsignar.setBackground(new Color(34, 139, 34));
+		btnAsignar.setBounds(30, 347, 99, 23);
+		panelTablaHorario.add(btnAsignar);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE HORARIOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblRegistroYMantenimiento.setBounds(24, 11, 466, 39);
 		contentPane.add(lblRegistroYMantenimiento);
-		
-		btnRegresarALas = new JButton("Regresar a las Asignaciones");
-		btnRegresarALas.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				empleado clase = new empleado();
-				consultas_empleado consulta = new consultas_empleado();
-				registro_empleados formulario = new registro_empleados();
-				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
-				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
-				formulario2.setVisible(true);
-				formulario2.setLocationRelativeTo(null);
-				control.consultarContratos();
-				control.consultarCargos();
-				control.consultarHorarios();
-				dispose();
-			}
-		});
-		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnRegresarALas.setBackground(new Color(255, 127, 80));
-		btnRegresarALas.setBounds(596, 11, 230, 23);
-		contentPane.add(btnRegresarALas);
-		btnRegresarALas.setVisible(false);
 
 	}
 
@@ -428,16 +410,13 @@ public class registro_horarios extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			boolean complete = jTable.print(mode,
-					new MessageFormat(header),
-					new MessageFormat(footer),
-					showPrintDialog,
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
@@ -451,7 +430,7 @@ public class registro_horarios extends JFrame {
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public static String getFechaYHora() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -460,7 +439,7 @@ public class registro_horarios extends JFrame {
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
+
 	public void consultarEmpresa() {
 		conexion conex = new conexion();
 		try {
@@ -470,17 +449,17 @@ public class registro_horarios extends JFrame {
 			if (rs.next()) {
 				ruta_logo = (rs.getString("direccion_logo_empresa"));
 				final ImageIcon logo = new ImageIcon(ruta_logo);
-				
+
 				final ImageIcon icono = new ImageIcon(
 						logo.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 				label.setIcon(icono);
-				
-				final ImageIcon icono2 = new ImageIcon(
-						logo.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+
+				final ImageIcon icono2 = new ImageIcon(logo.getImage().getScaledInstance(label_2.getWidth(),
+						label_2.getHeight(), Image.SCALE_DEFAULT));
 				label_2.setIcon(icono2);
-			}else {
-				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
-						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
 			}
 			rs.close();
 			estatuto.close();

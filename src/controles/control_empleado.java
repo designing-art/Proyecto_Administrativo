@@ -1,6 +1,7 @@
 package controles;
 
 import java.awt.Color;
+
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -16,7 +17,6 @@ import javax.swing.JOptionPane;
 import clases.empleado;
 import conexion.conexion;
 import consultas.consultas_empleado;
-import formularios.registro_asignaciones_empleados;
 import formularios.registro_empleados;
 
 public class control_empleado implements ActionListener {
@@ -24,18 +24,16 @@ public class control_empleado implements ActionListener {
 	public empleado claseEmpleado;
 	public consultas_empleado consultaEmpleado;
 	public registro_empleados formularioEmpleado;
-	public registro_asignaciones_empleados formularioAsigaciones;
 	public String fechaNacimiento;
 	public String fechaRegistro;
 	public String fechaLabores;
 	public static String identidad = null;
 
 	public control_empleado(empleado claseEmpleado, consultas_empleado consultaEmpleado,
-			registro_empleados formularioEmpleado, registro_asignaciones_empleados formularioAsigaciones) {
+			registro_empleados formularioEmpleado) {
 		this.claseEmpleado = claseEmpleado;
 		this.consultaEmpleado = consultaEmpleado;
 		this.formularioEmpleado = formularioEmpleado;
-		this.formularioAsigaciones = formularioAsigaciones;
 		this.formularioEmpleado.btnActualizarEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnNuevoEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnCancelarEmpleado.addActionListener(this);
@@ -62,15 +60,6 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
-					
-					|| registro_asignaciones_empleados.txtSueldoAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtHoraExtraAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtFuncionesAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtDiasAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtHorasAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtTipoContratoAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtTiempoContratoAsignacion.getText().isEmpty()
-					|| registro_asignaciones_empleados.txtDireccionFotoContratoAsignacion.getText().isEmpty()
 
 					// validaciones para datos con mascara y pista.
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
@@ -516,6 +505,8 @@ public class control_empleado implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		
 
 		/* Pasar datos de la tabla al formulario para visualizar */
 		if (e.getSource() == formularioEmpleado.btnMostrarEmpleado) {
@@ -756,70 +747,6 @@ public class control_empleado implements ActionListener {
 		return matrizInfo;
 	}
 	
-	
-	public void consultarCargos() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT nombre_cargo FROM cargos");
-
-			while (rs.next()) {
-				registro_asignaciones_empleados.cbxCargoAsignacion.addItem(rs.getString("nombre_cargo"));
-			}
-			formularioAsigaciones.contador1++;
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-	}
-
-	public void consultarHorarios() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT tipo_horario FROM horarios");
-
-			while (rs.next()) {
-				registro_asignaciones_empleados.cbxHorarioAsignacion.addItem(rs.getString("tipo_horario"));
-			}
-			formularioAsigaciones.contador2++;
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-	}
-
-	public void consultarContratos() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT identidad_contrato_empleado FROM contrato_empleado");
-
-			while (rs.next()) {
-			registro_asignaciones_empleados.cbxContratoAsignacion.addItem(rs.getString("identidad_contrato_empleado"));
-			}
-			formularioAsigaciones.contador3++;
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-
-	}
 	
 	public void validarIdentidad() {
 		conexion conex = new conexion();

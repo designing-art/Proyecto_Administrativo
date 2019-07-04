@@ -103,7 +103,8 @@ public class registro_contratos_empleados extends JFrame {
 	public JFormattedTextField txtIdentidadContratoEmpleado;
 	public JButton btnRegresarALas;
 	public JButton btnAtras;
-	private JButton button;
+	public JButton button;
+	public JButton btnAsignar;
 
 	public registro_contratos_empleados() {
 		setResizable(false);
@@ -386,36 +387,19 @@ public class registro_contratos_empleados extends JFrame {
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(210, 40, 137, 19);
 		panelTablaCargos.add(button);
-		
-				JLabel label_5 = new JLabel();
-				label_5.setBounds(0, 0, 431, 449);
-				panelTablaCargos.add(label_5);
-				final ImageIcon logo1 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-				label_5.setIcon(logo1);
-		
-		btnRegresarALas = new JButton("Regresar a las Asignaciones");
-		btnRegresarALas.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				empleado clase = new empleado();
-				consultas_empleado consulta = new consultas_empleado();
-				registro_empleados formulario = new registro_empleados();
-				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
-				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
-				formulario2.setVisible(true);
-				formulario2.setLocationRelativeTo(null);
-				control.consultarContratos();
-				control.consultarCargos();
-				control.consultarHorarios();
-				dispose();
-			}
-		});
-		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnRegresarALas.setBackground(new Color(255, 127, 80));
-		btnRegresarALas.setBounds(574, 0, 245, 23);
-		contentPane.add(btnRegresarALas);
-		btnRegresarALas.setVisible(false);
+				
+				btnAsignar = new JButton("Asignar");
+				btnAsignar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+				btnAsignar.setBackground(new Color(34, 139, 34));
+				btnAsignar.setBounds(30, 395, 99, 23);
+				panelTablaCargos.add(btnAsignar);
+				
+						JLabel label_5 = new JLabel();
+						label_5.setBounds(0, 0, 431, 449);
+						panelTablaCargos.add(label_5);
+						final ImageIcon logo1 = new ImageIcon(
+								icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+						label_5.setIcon(logo1);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}

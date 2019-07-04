@@ -1,6 +1,7 @@
 package formularios;
 
 import java.awt.Color;
+
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
@@ -54,6 +55,8 @@ import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
 import consultas.consultas_bonificacion;
+import consultas.consultas_planilla;
+import consultas.consultas_usuario;
 import controles.control_cliente;
 import controles.control_inventario;
 import controles.control_usuario;
@@ -88,7 +91,7 @@ public class registro_usuarios extends JFrame {
 	public static ImageIcon imagen;
 
 	public JPanel contentPane;
-	public JTextField txtBusqueda;
+	public JTextField txtBusquedaDato;
 	public JScrollPane barra;
 	public JTable tabla;
 
@@ -96,6 +99,7 @@ public class registro_usuarios extends JFrame {
 	public static JLabel label_2;
 
 	public JComboBox<?> cbxTipoUsuario;
+	public JComboBox<?> cbxPermiso;
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
@@ -112,28 +116,17 @@ public class registro_usuarios extends JFrame {
 	public JFormattedTextField txtIdentidad;
 	public JTextField txtCargo;
 	public JLabel lblPermisos;
-	public JRadioButton rdbtnContratos;
-	public JRadioButton rdbtnClientes;
-	public JRadioButton rdbtnServicios;
-	public JRadioButton rdbtnCompras;
-	public JRadioButton rdbtnProductos;
-	public JRadioButton rdbtnInventario;
-	public JRadioButton rdbtnContratos_1;
-	public JRadioButton rdbtnVentas;
-	public JRadioButton rdbtnProveedores;
-	public JRadioButton rdbtnIngresos;
-	public JRadioButton rdbtnEgresos;
-	public JRadioButton rdbtnEmpresa;
-	public JRadioButton rdbtnClientes_1;
-	public JRadioButton rdbtnSar;
-	public JRadioButton rdbtnUsuarios;
 	public JLabel lblCargo;
 	public JTextField txtUsuario;
 	public JLabel lblContrasea;
 	public JTextField txtContraseña;
-	public JLabel lblBuscarEmpleado;
+	private JTextArea txtrNivel;
+	private JTextArea txtrNivel_1;
+	private JTextArea txtrNivel_2;
 	public JTextField txtCodigo;
-	public JTextField txtPermisos;
+	public JFormattedTextField txtBusqueda;
+	public JLabel label;
+	public JButton btnBuscar;
 
 	public registro_usuarios() {
 		setResizable(false);
@@ -190,16 +183,16 @@ public class registro_usuarios extends JFrame {
 
 		JLabel txt = new JLabel("2. Apellidos :");
 		txt.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txt.setBounds(37, 149, 99, 20);
+		txt.setBounds(37, 135, 99, 20);
 		panelRegistro.add(txt);
 
 		JLabel lblTipo = new JLabel("1. Nombres :");
 		lblTipo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTipo.setBounds(37, 124, 120, 23);
+		lblTipo.setBounds(37, 110, 120, 23);
 		panelRegistro.add(lblTipo);
 
 		JLabel lblRegistroCargos = new JLabel("Datos del usuario :");
-		lblRegistroCargos.setBounds(39, 93, 136, 32);
+		lblRegistroCargos.setBounds(37, 81, 136, 32);
 		panelRegistro.add(lblRegistroCargos);
 		lblRegistroCargos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
@@ -226,7 +219,7 @@ public class registro_usuarios extends JFrame {
 		txtNombres.setEditable(false);
 		txtNombres.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNombres.setColumns(10);
-		txtNombres.setBounds(129, 122, 295, 23);
+		txtNombres.setBounds(129, 108, 295, 23);
 		panelRegistro.add(txtNombres);
 		InputMap map1 = txtNombres.getInputMap(JComponent.WHEN_FOCUSED);
 		map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -254,7 +247,7 @@ public class registro_usuarios extends JFrame {
 		txtApellidos.setEditable(false);
 		txtApellidos.setHorizontalAlignment(SwingConstants.CENTER);
 		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(129, 148, 295, 23);
+		txtApellidos.setBounds(129, 134, 295, 23);
 		panelRegistro.add(txtApellidos);
 		InputMap map2 = txtApellidos.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -286,20 +279,20 @@ public class registro_usuarios extends JFrame {
 		}
 		JLabel lblCantidad = new JLabel("5. Tipo :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCantidad.setBounds(37, 249, 136, 22);
+		lblCantidad.setBounds(37, 242, 136, 22);
 		panelRegistro.add(lblCantidad);
 		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		cbxTipoUsuario = new JComboBox();
-		cbxTipoUsuario.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 15));
+		cbxTipoUsuario.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 15));
 		cbxTipoUsuario.setModel(new DefaultComboBoxModel(
 				new String[] { "Usuario Normal", "Usuario Administrador", "Usuario Avanzado" }));
-		cbxTipoUsuario.setBounds(129, 251, 147, 20);
+		cbxTipoUsuario.setBounds(129, 244, 147, 20);
 		panelRegistro.add(cbxTipoUsuario);
 
 		lblDatosDeLa = new JLabel("Registro de permisos y acceso del usuario :");
 		lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDatosDeLa.setBounds(37, 219, 387, 32);
+		lblDatosDeLa.setBounds(37, 214, 387, 32);
 		panelRegistro.add(lblDatosDeLa);
 
 		MaskFormatter formatter11 = null;
@@ -318,7 +311,7 @@ public class registro_usuarios extends JFrame {
 
 		JLabel lblIdentidad = new JLabel("3. Identidad :");
 		lblIdentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblIdentidad.setBounds(38, 174, 99, 22);
+		lblIdentidad.setBounds(38, 160, 99, 22);
 		panelRegistro.add(lblIdentidad);
 
 		MaskFormatter formato1 = null;
@@ -331,7 +324,7 @@ public class registro_usuarios extends JFrame {
 		txtIdentidad.setEditable(false);
 		txtIdentidad.setHorizontalAlignment(SwingConstants.CENTER);
 		txtIdentidad.setColumns(10);
-		txtIdentidad.setBounds(129, 174, 295, 23);
+		txtIdentidad.setBounds(129, 160, 295, 23);
 		panelRegistro.add(txtIdentidad);
 		InputMap map22 = txtIdentidad.getInputMap(JComponent.WHEN_FOCUSED);
 		map22.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -354,184 +347,131 @@ public class registro_usuarios extends JFrame {
 
 		JLabel lblApellidos = new JLabel("4. Cargo :");
 		lblApellidos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblApellidos.setBounds(37, 199, 99, 22);
+		lblApellidos.setBounds(37, 185, 99, 22);
 		panelRegistro.add(lblApellidos);
 
 		txtCargo = new JTextField();
 		txtCargo.setEditable(false);
 		txtCargo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCargo.setColumns(10);
-		txtCargo.setBounds(129, 200, 295, 23);
+		txtCargo.setBounds(129, 186, 295, 23);
 		panelRegistro.add(txtCargo);
-
-		JRadioButton rdbtnEmpleados = new JRadioButton("Empleados");
-		rdbtnEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnEmpleados.setBounds(57, 298, 89, 23);
-		panelRegistro.add(rdbtnEmpleados);
-
-		JRadioButton rdbtnBonificaciones = new JRadioButton("Bonificaciones");
-		rdbtnBonificaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnBonificaciones.setBounds(57, 324, 89, 23);
-		panelRegistro.add(rdbtnBonificaciones);
-
-		JRadioButton rdbtnCargos = new JRadioButton("Cargos");
-		rdbtnCargos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnCargos.setBounds(148, 298, 84, 23);
-		panelRegistro.add(rdbtnCargos);
-
-		JRadioButton rdbtnDeducciones = new JRadioButton("Deducciones");
-		rdbtnDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnDeducciones.setBounds(148, 324, 84, 23);
-		panelRegistro.add(rdbtnDeducciones);
-
-		JRadioButton rdbtnHorarios = new JRadioButton("Horarios");
-		rdbtnHorarios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnHorarios.setBounds(234, 298, 84, 23);
-		panelRegistro.add(rdbtnHorarios);
-
-		JRadioButton rdbtnPlanillas = new JRadioButton("Planillas");
-		rdbtnPlanillas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnPlanillas.setBounds(234, 324, 84, 23);
-		panelRegistro.add(rdbtnPlanillas);
 
 		lblPermisos = new JLabel("6. Permisos :");
 		lblPermisos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblPermisos.setBounds(37, 276, 136, 22);
+		lblPermisos.setBounds(37, 269, 136, 22);
 		panelRegistro.add(lblPermisos);
-
-		rdbtnContratos = new JRadioButton("Contratos");
-		rdbtnContratos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnContratos.setBounds(320, 298, 84, 23);
-		panelRegistro.add(rdbtnContratos);
-
-		rdbtnClientes = new JRadioButton("Clientes");
-		rdbtnClientes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnClientes.setBounds(320, 324, 84, 23);
-		panelRegistro.add(rdbtnClientes);
-
-		rdbtnServicios = new JRadioButton("Servicios");
-		rdbtnServicios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnServicios.setBounds(57, 350, 89, 23);
-		panelRegistro.add(rdbtnServicios);
-
-		rdbtnCompras = new JRadioButton("Compras");
-		rdbtnCompras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnCompras.setBounds(57, 376, 89, 23);
-		panelRegistro.add(rdbtnCompras);
-
-		rdbtnProductos = new JRadioButton("Productos");
-		rdbtnProductos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnProductos.setBounds(148, 350, 84, 23);
-		panelRegistro.add(rdbtnProductos);
-
-		rdbtnInventario = new JRadioButton("Inventario");
-		rdbtnInventario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnInventario.setBounds(148, 376, 84, 23);
-		panelRegistro.add(rdbtnInventario);
-
-		rdbtnContratos_1 = new JRadioButton("Contratos");
-		rdbtnContratos_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnContratos_1.setBounds(234, 350, 84, 23);
-		panelRegistro.add(rdbtnContratos_1);
-
-		rdbtnVentas = new JRadioButton("Ventas");
-		rdbtnVentas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnVentas.setBounds(234, 376, 84, 23);
-		panelRegistro.add(rdbtnVentas);
-
-		rdbtnProveedores = new JRadioButton("Proveedores");
-		rdbtnProveedores.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnProveedores.setBounds(320, 350, 84, 23);
-		panelRegistro.add(rdbtnProveedores);
-
-		rdbtnIngresos = new JRadioButton("Ingresos");
-		rdbtnIngresos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnIngresos.setBounds(320, 376, 84, 23);
-		panelRegistro.add(rdbtnIngresos);
-
-		rdbtnEgresos = new JRadioButton("Egresos");
-		rdbtnEgresos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnEgresos.setBounds(57, 402, 89, 23);
-		panelRegistro.add(rdbtnEgresos);
-
-		rdbtnEmpresa = new JRadioButton("Empresa");
-		rdbtnEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnEmpresa.setBounds(148, 402, 84, 23);
-		panelRegistro.add(rdbtnEmpresa);
-
-		rdbtnClientes_1 = new JRadioButton("Clientes");
-		rdbtnClientes_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnClientes_1.setBounds(234, 402, 84, 23);
-		panelRegistro.add(rdbtnClientes_1);
-
-		rdbtnSar = new JRadioButton("SAR");
-		rdbtnSar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnSar.setBounds(320, 402, 84, 23);
-		panelRegistro.add(rdbtnSar);
-
-		rdbtnUsuarios = new JRadioButton("Usuarios");
-		rdbtnUsuarios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnUsuarios.setBounds(320, 428, 84, 23);
-		panelRegistro.add(rdbtnUsuarios);
 
 		lblCargo = new JLabel("7. Usuario :");
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCargo.setBounds(37, 458, 99, 22);
+		lblCargo.setBounds(37, 406, 99, 22);
 		panelRegistro.add(lblCargo);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setColumns(10);
-		txtUsuario.setBounds(113, 459, 105, 23);
+		txtUsuario.setBounds(129, 407, 147, 23);
 		panelRegistro.add(txtUsuario);
 
 		lblContrasea = new JLabel("8. Contrase\u00F1a :");
 		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblContrasea.setBounds(228, 458, 99, 22);
+		lblContrasea.setBounds(37, 434, 99, 22);
 		panelRegistro.add(lblContrasea);
 
 		txtContraseña = new JTextField();
 		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContraseña.setColumns(10);
-		txtContraseña.setBounds(327, 459, 105, 23);
+		txtContraseña.setBounds(129, 435, 147, 23);
 		panelRegistro.add(txtContraseña);
+		
+		cbxPermiso = new JComboBox();
+		cbxPermiso.setModel(new DefaultComboBoxModel(new String[] {"Nivel 3 (Empleado)", "Nivel 2 (Administrador)", "Nivel 1 (Due\u00F1o)"}));
+		cbxPermiso.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 15));
+		cbxPermiso.setBounds(129, 270, 147, 20);
+		panelRegistro.add(cbxPermiso);
+		
+		txtrNivel = new JTextArea();
+		txtrNivel.setFont(new Font("Franklin Gothic Medium Cond", Font.PLAIN, 12));
+		txtrNivel.setText("Nivel 3 : Acceso a : Compras, Inventario, Ventas, Productos, Servicios, Ingresos.");
+		txtrNivel.setBackground(new Color(192, 192, 192));
+		txtrNivel.setEditable(false);
+		txtrNivel.setBounds(37, 296, 397, 32);
+		panelRegistro.add(txtrNivel);
+		
+		txtrNivel_1 = new JTextArea();
+		txtrNivel_1.setText("Nivel 2 : Acceso a : Empleados, Cargos, Horarios, Contratos, Bonificaciones\r\nDeducciones, Planillas, Clientes, Contratos, Facturas, Ingresos, Egresos.");
+		txtrNivel_1.setFont(new Font("Franklin Gothic Medium Cond", Font.PLAIN, 12));
+		txtrNivel_1.setEditable(false);
+		txtrNivel_1.setBackground(Color.LIGHT_GRAY);
+		txtrNivel_1.setBounds(37, 334, 397, 32);
+		panelRegistro.add(txtrNivel_1);
+		
+		txtrNivel_2 = new JTextArea();
+		txtrNivel_2.setText("Nivel 1 : Acceso a : Todo.");
+		txtrNivel_2.setFont(new Font("Franklin Gothic Medium Cond", Font.PLAIN, 12));
+		txtrNivel_2.setEditable(false);
+		txtrNivel_2.setBackground(Color.LIGHT_GRAY);
+		txtrNivel_2.setBounds(37, 371, 397, 32);
+		panelRegistro.add(txtrNivel_2);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCodigo.setEditable(false);
+		txtCodigo.setColumns(10);
+		txtCodigo.setBounds(347, 242, 58, 23);
+		panelRegistro.add(txtCodigo);
+		txtCodigo.setVisible(false);
+		
+		MaskFormatter formatooo = null;
+		try {
+			formatooo = new MaskFormatter("####-####-#####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtBusqueda = new JFormattedTextField(formatooo);
+		txtBusqueda.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBusqueda.setColumns(10);
+		txtBusqueda.setBounds(170, 60, 167, 20);
+		panelRegistro.add(txtBusqueda);
+		InputMap map42 = txtBusqueda.getInputMap(JComponent.WHEN_FOCUSED);
+		map42.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtBusqueda.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
 
-		lblBuscarEmpleado = new JLabel("Buscar Empleado :");
-		lblBuscarEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblBuscarEmpleado.setBounds(39, 61, 136, 32);
-		panelRegistro.add(lblBuscarEmpleado);
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
 
-		JFormattedTextField txtBusquedaEmpleado = new JFormattedTextField(formato1);
-		txtBusquedaEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBusquedaEmpleado.setColumns(10);
-		txtBusquedaEmpleado.setBounds(185, 68, 152, 23);
-		panelRegistro.add(txtBusquedaEmpleado);
-
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnBuscar.setBackground(new Color(60, 179, 113));
-		btnBuscar.setBounds(340, 67, 84, 26);
-		panelRegistro.add(btnBuscar);
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				busquedaDatosEmpleado();
+			@Override
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
-		txtCodigo = new JTextField();
-		txtCodigo.setEditable(false);
-		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(320, 251, 84, 23);
-		panelRegistro.add(txtCodigo);
-
-		txtPermisos = new JTextField();
-		txtPermisos.setHorizontalAlignment(SwingConstants.CENTER);
-		txtPermisos.setEditable(false);
-		txtPermisos.setColumns(10);
-		txtPermisos.setBounds(57, 430, 261, 23);
-		panelRegistro.add(txtPermisos);
-		txtPermisos.setVisible(false);
+		
+		label = new JLabel("Ingrese la Identidad :");
+		label.setForeground(new Color(0, 128, 0));
+		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label.setBounds(37, 56, 168, 27);
+		panelRegistro.add(label);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(new Color(60, 179, 113));
+		btnBuscar.setBounds(342, 59, 82, 23);
+		panelRegistro.add(btnBuscar);
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtBusqueda.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese la identidad antes buscar");
+				} else {
+					busquedaDatosEmpleado();
+				}
+			}
+		});
 		
 
 		JLabel lblLibreta = new JLabel();
@@ -558,15 +498,15 @@ public class registro_usuarios extends JFrame {
 		lblBuscar.setBounds(30, 72, 119, 22);
 		panelTablaCargos.add(lblBuscar);
 
-		txtBusqueda = new JTextField();
-		txtBusqueda.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBusqueda.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtBusqueda.setColumns(10);
-		txtBusqueda.setBounds(138, 73, 257, 21);
-		panelTablaCargos.add(txtBusqueda);
-		InputMap map6 = txtBusqueda.getInputMap(JComponent.WHEN_FOCUSED);
+		txtBusquedaDato = new JTextField();
+		txtBusquedaDato.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBusquedaDato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtBusquedaDato.setColumns(10);
+		txtBusquedaDato.setBounds(138, 73, 257, 21);
+		panelTablaCargos.add(txtBusquedaDato);
+		InputMap map6 = txtBusquedaDato.getInputMap(JComponent.WHEN_FOCUSED);
 		map6.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtBusqueda.addKeyListener(new KeyListener() {
+		txtBusquedaDato.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigo = new TableRowSorter(tabla.getModel());
@@ -580,8 +520,8 @@ public class registro_usuarios extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
-				String cadena = (txtBusqueda.getText());
-				txtBusqueda.setText(cadena);
+				String cadena = (txtBusquedaDato.getText());
+				txtBusquedaDato.setText(cadena);
 				repaint();
 				filtro();
 			}
@@ -661,12 +601,12 @@ public class registro_usuarios extends JFrame {
 	}
 
 	public void filtro() {
-		filtroCodigo = txtBusqueda.getText();
-		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText(), 0, 1, 2, 3, 4, 5, 6));
+		filtroCodigo = txtBusquedaDato.getText();
+		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaDato.getText(), 0, 1, 2, 3, 4, 5, 6));
 	}
 
 	public void pistas() {
-		pista = new PlaceHolder(txtBusqueda, "Escriba para buscar.");
+		pista = new PlaceHolder(txtBusquedaDato, "Escriba para buscar.");
 	}
 
 	public void obtenerUltimoId() {
@@ -753,21 +693,24 @@ public class registro_usuarios extends JFrame {
 	}
 	
 	public void busquedaDatosEmpleado() {
-		consultas_bonificacion consulta = new consultas_bonificacion();
+		consultas_usuario consulta = new consultas_usuario();
 		empleado clase = new empleado();
-		clase.setIdentidad_empleado(txtBusqueda.getText().toString());
+		clase.setIdentidad_empleado(txtBusqueda.getText());
 		if (consulta.buscar(clase)) {
 			txtNombres.setText(String.valueOf(clase.getNombres_empleado()));
 			txtApellidos.setText(String.valueOf(clase.getApellidos_empleado()));
 			txtIdentidad.setText(String.valueOf(clase.getIdentidad_empleado()));
+			txtCargo.setText(String.valueOf(clase.getNombre_cargo_empleado()));
 
 			txtNombres.setForeground(Color.BLACK);
 			txtApellidos.setForeground(Color.BLACK);
 			txtIdentidad.setForeground(Color.BLACK);
+			txtCargo.setForeground(Color.BLACK);
 
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 
 		}
 	}
+
 }

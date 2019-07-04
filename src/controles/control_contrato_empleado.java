@@ -19,6 +19,7 @@ import clases.contrato_empleado;
 import conexion.conexion;
 import consultas.consultas_contrato_empleado;
 import formularios.registro_contratos_empleados;
+import formularios.registro_empleados;
 
 public class control_contrato_empleado implements ActionListener {
 
@@ -40,6 +41,7 @@ public class control_contrato_empleado implements ActionListener {
 		this.formulario.btnMostrarContrato.addActionListener(this);
 		this.formulario.btnAceptar.addActionListener(this);
 		this.formulario.btnVerFotoContrato.addActionListener(this);
+		this.formulario.btnAsignar.addActionListener(this);
 	}
 
 	@Override
@@ -126,6 +128,40 @@ public class control_contrato_empleado implements ActionListener {
 					formulario.btnAceptar.setVisible(true);
 
 					formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
+
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+		
+		if (e.getSource() == formulario.btnAsignar) {
+
+			int filaseleccionada;
+			try {
+				filaseleccionada = formulario.tablaContratosEmpleados.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String identidad = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 1).toString();
+					String tipo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 2).toString();
+					String tiempo = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String contrato = formulario.tablaContratosEmpleados.getValueAt(filaseleccionada, 4).toString();
+
+					registro_empleados.lbl_contrato_empleado_asignacion.setText(identidad);
+					registro_empleados.lbl_tipo_empleado_asignacion.setText(tipo);
+					registro_empleados.lbl_tiempo_empleado_asignacion.setText(tiempo);
+					registro_empleados.lbl_foto_empleado_asignacion.setText(contrato);
+
+					registro_empleados.lbl_contrato_empleado_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_tipo_empleado_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_tiempo_empleado_asignacion.setForeground(Color.BLACK);
+					registro_empleados.lbl_foto_empleado_asignacion.setForeground(Color.BLACK);
+					
+					formulario.dispose();
 
 				}
 

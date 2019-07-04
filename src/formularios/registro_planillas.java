@@ -924,7 +924,7 @@ public class registro_planillas extends JFrame {
 		double p = 0;
 		if (tablaPlanilla.getRowCount() > 0) {
 			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
-				p = Double.parseDouble(tablaPlanilla.getValueAt(i, 11).toString());
+				p = Double.parseDouble(tablaPlanilla.getValueAt(i, 10).toString());
 				t += p;
 			}
 			txtTotalPlanilla.setText(String.valueOf(t));

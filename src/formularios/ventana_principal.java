@@ -128,6 +128,11 @@ public class ventana_principal extends JFrame {
 	public consultas_empresa consulta;
 	public registro_empresa formulario;
 
+	public static JLabel lblTipoUsuario;
+	public static JLabel lblCargoUsuario;
+	public static JLabel lblNombreUsuario;
+	public static JLabel lblPermisoUsuario;
+
 	public ventana_principal() {
 		setType(Type.POPUP);
 		setResizable(false);
@@ -215,6 +220,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarContrato.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
+				formulario.btnAsignar.setVisible(false);
 				dispose();
 			}
 		});
@@ -231,8 +237,7 @@ public class ventana_principal extends JFrame {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();
 				registro_empleados formulario = new registro_empleados();
-				registro_asignaciones_empleados formulario2 = new registro_asignaciones_empleados();
-				control_empleado control = new control_empleado(clase, consulta, formulario, formulario2);
+				control_empleado control = new control_empleado(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.txtNombresEmpleado.requestFocusInWindow();
@@ -278,6 +283,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosCargo.setVisible(true);
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
+				formulario.btnAsignar.setVisible(false);
 				dispose();
 			}
 		});
@@ -373,6 +379,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosHorario.setVisible(true);
 				formulario.btnMostrarHorario.setVisible(true);
 				formulario.btnAceptarHorario.setVisible(false);
+				formulario.btnAsignar.setVisible(false);
 				dispose();
 			}
 		});
@@ -742,50 +749,39 @@ public class ventana_principal extends JFrame {
 		contentPane.add(panel_5);
 		panel_5.setLayout(null);
 
-		JLabel lblSuperUsuario = new JLabel("Super usuario");
-		lblSuperUsuario.setBounds(10, 148, 119, 14);
-		panel_5.add(lblSuperUsuario);
-		lblSuperUsuario.setForeground(Color.BLACK);
-		lblSuperUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipoUsuario = new JLabel("Super usuario");
+		lblTipoUsuario.setBounds(20, 103, 119, 14);
+		panel_5.add(lblTipoUsuario);
+		lblTipoUsuario.setForeground(Color.BLACK);
+		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblUsuario_1 = new JLabel("Usuario :");
-		lblUsuario_1.setBounds(10, 134, 75, 14);
+		lblUsuario_1.setBounds(20, 89, 75, 14);
 		panel_5.add(lblUsuario_1);
 		lblUsuario_1.setForeground(Color.BLACK);
 		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JLabel lblDeveloper = new JLabel("Developer");
-		lblDeveloper.setBounds(10, 116, 119, 20);
-		panel_5.add(lblDeveloper);
-		lblDeveloper.setForeground(Color.BLACK);
-		lblDeveloper.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblCargoUsuario = new JLabel("Developer");
+		lblCargoUsuario.setBounds(20, 58, 119, 20);
+		panel_5.add(lblCargoUsuario);
+		lblCargoUsuario.setForeground(Color.BLACK);
+		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setBounds(10, 105, 75, 14);
+		lblCargo.setBounds(20, 47, 75, 14);
 		panel_5.add(lblCargo);
 		lblCargo.setForeground(Color.BLACK);
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JLabel lblDiazRodriguez = new JLabel("Diaz Rodriguez");
-		lblDiazRodriguez.setBounds(10, 90, 131, 14);
-		panel_5.add(lblDiazRodriguez);
-		lblDiazRodriguez.setForeground(Color.BLACK);
-		lblDiazRodriguez.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		JLabel lblCristianDiaz = new JLabel("Cristian Emmanuel");
-		lblCristianDiaz.setBounds(10, 76, 131, 14);
-		panel_5.add(lblCristianDiaz);
-		lblCristianDiaz.setForeground(Color.BLACK);
-		lblCristianDiaz.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
-		JLabel lblUsuario = new JLabel("Nombre completo :");
-		lblUsuario.setBounds(10, 60, 131, 20);
-		panel_5.add(lblUsuario);
-		lblUsuario.setForeground(Color.BLACK);
-		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblNombreUsuario = new JLabel("Cristian Emmanuel");
+		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreUsuario.setBounds(10, 22, 254, 14);
+		panel_5.add(lblNombreUsuario);
+		lblNombreUsuario.setForeground(Color.BLACK);
+		lblNombreUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setBounds(151, 45, 113, 117);
+		labelfotousuario.setBounds(134, 47, 113, 117);
 		panel_5.add(labelfotousuario);
 		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
 		labelfotousuario.setForeground(Color.LIGHT_GRAY);
@@ -798,14 +794,20 @@ public class ventana_principal extends JFrame {
 		lblInformacionDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInformacionDelUsuario.setForeground(Color.BLACK);
 		lblInformacionDelUsuario.setFont(new Font("Cooper Black", Font.PLAIN, 15));
-		lblInformacionDelUsuario.setBounds(10, 0, 254, 36);
+		lblInformacionDelUsuario.setBounds(10, 0, 254, 25);
 		panel_5.add(lblInformacionDelUsuario);
 
-		JLabel lblDatos = new JLabel("Datos del usuario.");
-		lblDatos.setForeground(Color.BLACK);
-		lblDatos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDatos.setBounds(10, 36, 131, 20);
-		panel_5.add(lblDatos);
+		JLabel lblPermiso = new JLabel("Permiso :");
+		lblPermiso.setForeground(Color.BLACK);
+		lblPermiso.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblPermiso.setBounds(20, 128, 75, 14);
+		panel_5.add(lblPermiso);
+
+		lblPermisoUsuario = new JLabel("Super usuario");
+		lblPermisoUsuario.setForeground(Color.BLACK);
+		lblPermisoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblPermisoUsuario.setBounds(20, 142, 119, 14);
+		panel_5.add(lblPermisoUsuario);
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -957,7 +959,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				dispose();
-				
+
 			}
 		});
 
@@ -1136,5 +1138,35 @@ public class ventana_principal extends JFrame {
 
 		}
 
+	}
+
+	public void cargarUsuario() {
+		consultas_usuario consulta = new consultas_usuario();
+		usuario clase = new usuario();
+		clase.setUsuario(login_usuario.txtUsuario.getText());
+		if (consulta.buscarUsuario(clase)) {
+			ventana_principal principal = new ventana_principal();
+			principal.setLocationRelativeTo(null);
+			principal.setVisible(true);
+			ventana_principal.lblNombreUsuario.setText(String.valueOf(clase.getNombre().toString()));
+			ventana_principal.lblCargoUsuario.setText(String.valueOf(clase.getCargo().toString()));
+			ventana_principal.lblTipoUsuario.setText(String.valueOf(clase.getTipo_usuario().toString()));
+			ventana_principal.lblPermisoUsuario.setText(String.valueOf(clase.getPermisos().toString()));
+		}
+
+	}
+	
+	public void iniciarSistema() {
+		ventana_principal principal = new ventana_principal();
+		principal.setLocationRelativeTo(null);
+		principal.setVisible(true);
+		principal.consultarEmpresa();
+		Timer time = new Timer();
+		time.schedule(principal.tarea, 0, 1000);
+		registro_configuracion configuracion = new registro_configuracion();
+		configuracion.consultarConfiguracion();
+		configuracion.configuracionSonido();
+		login_usuario login = new login_usuario();
+		login.dispose();
 	}
 }

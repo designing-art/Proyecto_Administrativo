@@ -66,7 +66,7 @@ public class control_usuario implements ActionListener {
 				clase.setNombre(formulario.txtNombres.getText().toString()+" "+formulario.txtApellidos.getText().toString());
 				clase.setCargo(formulario.txtCargo.getText().toString());
 				clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
-				clase.setPermisos(formulario.txtPermisos.getText().toString());
+				clase.setPermisos(formulario.cbxPermiso.getSelectedItem().toString());
 
 				if (consulta.insertar(clase)) {
 					JOptionPane.showMessageDialog(null, "Usuario registrado!");
@@ -98,7 +98,7 @@ public class control_usuario implements ActionListener {
 				clase.setNombre(formulario.txtNombres.getText().toString()+" "+formulario.txtApellidos.getText().toString());
 				clase.setCargo(formulario.txtCargo.getText().toString());
 				clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
-				clase.setPermisos(formulario.txtPermisos.getText().toString());
+				clase.setPermisos(formulario.cbxPermiso.getSelectedItem().toString());
 
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Usuario actualizado!");
@@ -135,7 +135,7 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setText(nombre);
 					formulario.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
-					formulario.txtPermisos.setText(permisos);
+					formulario.cbxPermiso.setSelectedItem(permisos);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
@@ -144,7 +144,7 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setForeground(Color.BLACK);
 					formulario.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
-					formulario.txtPermisos.setForeground(Color.BLACK);
+					formulario.cbxPermiso.setForeground(Color.BLACK);
 
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
@@ -189,7 +189,7 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setText(nombre);
 					formulario.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
-					formulario.txtPermisos.setText(permisos);
+					formulario.cbxPermiso.setSelectedItem(permisos);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
@@ -198,7 +198,7 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setForeground(Color.BLACK);
 					formulario.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
-					formulario.txtPermisos.setForeground(Color.BLACK);
+					formulario.cbxPermiso.setForeground(Color.BLACK);
 
 					formulario.txtCodigo.setEditable(false);
 					formulario.txtUsuario.setEditable(false);
@@ -207,7 +207,7 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setEditable(false);
 					formulario.txtCargo.setEditable(false);
 					formulario.cbxTipoUsuario.setEditable(false);
-					formulario.txtPermisos.setEditable(false);
+					formulario.cbxPermiso.setEditable(false);
 
 					formulario.btnBorrar.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
@@ -295,8 +295,6 @@ public class control_usuario implements ActionListener {
 			formulario.txtIdentidad.setEditable(true);
 			formulario.txtNombres.setEditable(true);
 			formulario.txtCargo.setEditable(true);
-			formulario.cbxTipoUsuario.setEditable(true);
-			formulario.txtPermisos.setEditable(true);
 			formulario.txtBusqueda.requestFocusInWindow();
 		}
 
@@ -313,7 +311,6 @@ public class control_usuario implements ActionListener {
 		formulario.txtIdentidad.setText(null);
 		formulario.txtNombres.setText(null);
 		formulario.txtCargo.setText(null);
-		formulario.txtPermisos.setText(null);
 		formulario.txtBusqueda.requestFocusInWindow();
 	}
 
