@@ -26,6 +26,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -427,7 +428,6 @@ public class registro_empleados extends JFrame {
 		lblFechaDeRegistro = new JLabel("14. Fecha de registro :");
 		lblFechaDeRegistro.setBounds(39, 504, 157, 20);
 		panel.add(lblFechaDeRegistro);
-		lblFechaDeRegistro.setVisible(false);
 		lblFechaDeRegistro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		JLabel lblFechaDeComienso = new JLabel("13. Fecha inicio labores :");
@@ -449,8 +449,8 @@ public class registro_empleados extends JFrame {
 		panel.add(dateFechaRegistro);
 		editor2 = (JTextFieldDateEditor) dateFechaRegistro.getDateEditor();
 		editor2.setEditable(false);
-		dateFechaRegistro.setVisible(false);
 		editor2.setHorizontalAlignment(SwingConstants.CENTER);
+		dateFechaRegistro.setEnabled(false);
 
 		dateFechaNacimiento = new JDateChooser();
 		dateFechaNacimiento.setBounds(199, 331, 132, 20);
@@ -503,12 +503,12 @@ public class registro_empleados extends JFrame {
 
 		MaskFormatter formatter3 = null;
 		try {
-			formatter3 = new MaskFormatter("+504 ####-####");
+			formatter3 = new MaskFormatter("####-####");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
 		txtTelefonoReferencia = new JFormattedTextField(formatter3);
-		txtTelefonoReferencia.setBounds(39, 447, 293, 20);
+		txtTelefonoReferencia.setBounds(39, 447, 133, 20);
 		panel.add(txtTelefonoReferencia);
 		txtTelefonoReferencia.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTelefonoReferencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -853,6 +853,7 @@ public class registro_empleados extends JFrame {
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnAtras.setVisible(false);
+				formulario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			}
 		});
 		
@@ -868,20 +869,21 @@ public class registro_empleados extends JFrame {
 				control_horario control = new control_horario(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.txtBusquedaHorario.requestFocusInWindow();
+				formulario.txtDescripcionHorario.requestFocusInWindow();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
 				formulario.consultarEmpresa();
-				formulario.btnAtras.setVisible(false);
 				formulario.btnBorrarHorario.setVisible(false);
 				formulario.btnGuardarHorario.setVisible(true);
 				formulario.btnNuevoHorario.setVisible(true);
 				formulario.btnActualizarHorario.setVisible(false);
 				formulario.btnActualizarDatosHorario.setVisible(true);
-				formulario.btnMostrar.setVisible(true);
-				formulario.btnAceptar.setVisible(false);
-				formulario.btnAsignar.setVisible(true);
+				formulario.btnMostrarHorario.setVisible(true);
+				formulario.btnAceptarHorario.setVisible(false);
+				formulario.btnAtras.setVisible(false);
+				formulario.btnAsignar.setVisible(true);	
+				formulario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			}
 		});
 		
@@ -910,6 +912,7 @@ public class registro_empleados extends JFrame {
 				formulario.btnMostrarContrato.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnAtras.setVisible(false);
+				formulario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			}
 		});
 

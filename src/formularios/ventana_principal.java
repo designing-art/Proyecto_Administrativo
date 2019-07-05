@@ -28,6 +28,7 @@ import clases.egreso;
 import clases.empleado;
 import clases.empresa;
 import clases.factura_cliente;
+import clases.factura_empresa;
 import clases.horario;
 import clases.ingreso;
 import clases.inventario;
@@ -52,6 +53,7 @@ import consultas.consultas_egreso;
 import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_factura_cliente;
+import consultas.consultas_factura_empresa;
 import consultas.consultas_horario;
 import consultas.consultas_inventario;
 import consultas.consultas_planilla;
@@ -73,6 +75,7 @@ import controles.control_egresos;
 import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_factura_cliente;
+import controles.control_factura_empresa;
 import controles.control_horario;
 import controles.control_inventario;
 import controles.control_planilla;
@@ -957,6 +960,27 @@ public class ventana_principal extends JFrame {
 		btnFacturasDeLa.setBackground(new Color(255, 215, 0));
 		btnFacturasDeLa.setBounds(10, 15, 97, 21);
 		panelFacturas.add(btnFacturasDeLa);
+		btnFacturasDeLa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				factura_empresa clase = new factura_empresa();
+				consultas_factura_empresa consulta = new consultas_factura_empresa();
+				registro_facturas_empresa formulario = new registro_facturas_empresa();
+				control_factura_empresa control = new control_factura_empresa(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtCompra.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				dispose();
+			}
+		});
 
 		JButton btnSar = new JButton("Sar");
 		btnSar.setForeground(Color.BLACK);
