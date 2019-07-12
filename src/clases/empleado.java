@@ -17,7 +17,7 @@ public class empleado {
 	String fecha_nacimiento_empleado;
 	String fecha_registro_empleado;
 	String fecha_inicio_labores_empleado;
-	String estado_empleado;
+	String usuario_empleado;
 	String nombre_cargo_empleado;
 	String sueldo_cargo_empleado;
 	String hora_extra_cargo_empleado;
@@ -150,12 +150,12 @@ public class empleado {
 		this.fecha_inicio_labores_empleado = fecha_inicio_labores_empleado;
 	}
 
-	public String getEstado_empleado() {
-		return estado_empleado;
+	public String getUsuario_empleado() {
+		return usuario_empleado;
 	}
 
-	public void setEstado_empleado(String estado_empleado) {
-		this.estado_empleado = estado_empleado;
+	public void setUsuario_empleado(String usuario_empleado) {
+		this.usuario_empleado = usuario_empleado;
 	}
 
 	public String getNombre_cargo_empleado() {

@@ -345,7 +345,7 @@ public class registro_contratos_empleados extends JFrame {
 		btnBorrarContrato = new JButton("Borrar");
 		btnBorrarContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarContrato.setBackground(new Color(220, 20, 60));
-		btnBorrarContrato.setBounds(30, 395, 99, 23);
+		btnBorrarContrato.setBounds(30, 396, 99, 23);
 		panelTablaCargos.add(btnBorrarContrato);
 
 		barraContratos = new JScrollPane(tablaContratosEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,

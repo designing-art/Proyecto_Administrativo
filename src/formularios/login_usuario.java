@@ -6,16 +6,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Event;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
+
+import conexion.conexion;
 
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
@@ -27,12 +40,42 @@ public class login_usuario extends JFrame {
 	public static JPasswordField txtContraseña;
 	public JLabel lblAlerta;
 	public JButton btnIngresar;
+	public static JLabel lblNombreEmpresa;
+	public static JLabel lblFotoEmpresa;
+	public static String nombre = null;
+	public static String ruta_logo = null;
+	
+	public static String todo;
+	public static String empleado;
+	public static String cargoe;
+	public static String horario;
+	public static String contrato_e;
+	public static String cliente;
+	public static String contrato_c;
+	public static String compra;
+	public static String proveedor;
+	public static String inventario;
+	public static String factura_c;
+	public static String factura_e;
+	public static String sar;
+	public static String ingreso;
+	public static String producto;
+	public static String servicio;
+	public static String venta;
+	public static String egreso;
+	public static String bonificacion;
+	public static String deduccion;
+	public static String planilla;
+	public static String empresa;
+	public static String opciones;
+	public static String usuarios;
+	public static String acercade;
 
 	public login_usuario() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 574, 375);
+		setBounds(100, 100, 574, 386);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,61 +90,159 @@ public class login_usuario extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(63, 66, 435, 223);
+		panel.setBounds(63, 23, 445, 302);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblUsuario = new JLabel("Usuario :");
 		lblUsuario.setForeground(new Color(0, 0, 0));
-		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
-		lblUsuario.setBounds(58, 85, 113, 14);
+		lblUsuario.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		lblUsuario.setBounds(194, 160, 108, 20);
 		panel.add(lblUsuario);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
 		lblContrasea.setForeground(new Color(0, 0, 0));
-		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
-		lblContrasea.setBounds(58, 116, 113, 14);
+		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		lblContrasea.setBounds(180, 201, 98, 20);
 		panel.add(lblContrasea);
 
 		txtUsuario = new JTextField();
-		txtUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		txtUsuario.setBounds(161, 79, 220, 20);
+		txtUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtUsuario.setBounds(132, 180, 181, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
-
-		JLabel lblLogin = new JLabel("Bienvenido por favor inicie sesi\u00F3n.");
-		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
-		lblLogin.setBounds(58, 36, 323, 32);
-		panel.add(lblLogin);
+		InputMap map4 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
+		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		btnIngresar = new JButton("Ingresar");
 		btnIngresar.setForeground(new Color(0, 0, 0));
-		btnIngresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnIngresar.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		btnIngresar.setBackground(new Color(60, 179, 113));
-		btnIngresar.setBounds(161, 141, 113, 23);
+		btnIngresar.setBounds(165, 251, 113, 23);
 		panel.add(btnIngresar);
 
 		txtContraseña = new JPasswordField();
-		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
-		txtContraseña.setBounds(161, 110, 220, 20);
+		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtContraseña.setBounds(132, 220, 181, 20);
 		panel.add(txtContraseña);
+		InputMap map5 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+
+		
 
 		lblAlerta = new JLabel("");
 		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblAlerta.setBounds(58, 178, 323, 14);
+		lblAlerta.setBounds(68, 277, 323, 20);
 		panel.add(lblAlerta);
+		
+		lblFotoEmpresa = new JLabel("");
+		lblFotoEmpresa.setBounds(150, 30, 147, 128);
+		panel.add(lblFotoEmpresa);
+		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
+		final ImageIcon icono2 = new ImageIcon(
+				logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+						lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoEmpresa.setIcon(icono2);
+		
+		lblNombreEmpresa = new JLabel("Empresa");
+		lblNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreEmpresa.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
+		lblNombreEmpresa.setBounds(10, 0, 425, 33);
+		panel.add(lblNombreEmpresa);
 
 		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
 		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
 		lblLoginSistemaAdministrativo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLoginSistemaAdministrativo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-		lblLoginSistemaAdministrativo.setBounds(63, 35, 435, 32);
+		lblLoginSistemaAdministrativo.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
+		lblLoginSistemaAdministrativo.setBounds(63, 0, 435, 19);
 		contentPane.add(lblLoginSistemaAdministrativo);
 		
 
 	}
+	
+	public void consultarEmpresa() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto
+					.executeQuery("SELECT nombre_empresa, direccion_logo_empresa FROM empresa where id_empresa = 1");
+			if (rs.next()) {
+				nombre = (rs.getString("nombre_empresa"));
+				ruta_logo = (rs.getString("direccion_logo_empresa"));
+
+				lblNombreEmpresa.setText(nombre);
+				final ImageIcon logo = new ImageIcon(ruta_logo);
+				final ImageIcon icono = new ImageIcon(
+						logo.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+								lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+				lblFotoEmpresa.setIcon(icono);
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"             BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" 
+				      + "                                 Ingreso permitido a :\n"
+					  + "                        Solo administrador del sistema. \n"
+					  + "Para mas información, Contacteme: krizemandiaz11@gmail.com");
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+	
+	public void permisos() {
+		
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM usuario WHERE usuario='"+login_usuario.txtUsuario.getText().toString()+"'");
+			if (rs.next()) {
+				todo = (rs.getString("permiso_todo"));
+				empleado = (rs.getString("permiso_empleado"));
+				cargoe = (rs.getString("permiso_cargo"));
+				horario = (rs.getString("permiso_horario"));
+				contrato_e = (rs.getString("permiso_contrato_e"));
+				cliente = (rs.getString("permiso_cliente"));
+				contrato_c = (rs.getString("permiso_contrato_c"));
+				compra = (rs.getString("permiso_compra"));
+				proveedor = (rs.getString("permiso_proveedor"));
+				inventario = (rs.getString("permiso_inventario"));
+				factura_c = (rs.getString("permiso_factura_c"));
+				factura_e = (rs.getString("permiso_factura_e"));
+				sar = (rs.getString("permiso_sar"));
+				ingreso = (rs.getString("permiso_ingreso"));
+				producto = (rs.getString("permiso_producto"));
+				servicio = (rs.getString("permiso_servicio"));
+				venta = (rs.getString("permiso_venta"));
+				egreso = (rs.getString("permiso_egreso"));
+				bonificacion = (rs.getString("permiso_bonificacion"));
+				deduccion = (rs.getString("permiso_deduccion"));
+				planilla = (rs.getString("permiso_planilla"));
+				empresa = (rs.getString("permiso_empresa"));
+				opciones = (rs.getString("permiso_opciones"));
+				usuarios = (rs.getString("permiso_usuarios"));
+				acercade = (rs.getString("permiso_acercade"));
+				
+			} 
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+
 }

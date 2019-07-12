@@ -43,10 +43,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
+import clases.contrato_empleado;
 import clases.empleado;
 import conexion.conexion;
+import consultas.consultas_contrato_empleado;
 import consultas.consultas_empleado;
 import controles.control_cargo;
+import controles.control_contrato_empleado;
 import controles.control_empleado;
 
 import javax.swing.DefaultComboBoxModel;

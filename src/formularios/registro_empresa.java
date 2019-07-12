@@ -58,6 +58,7 @@ public class registro_empresa extends JFrame {
 	public JButton btnVerFotoEmpresa;
 	public JButton btnActualizarDatos;
 	public JButton btnVerLogoEmpresa;
+	public JButton btnAtras;
 	public JButton btnCancelar;
 	public JLabel lblFotoEmpresa;
 	public JLabel lblLogoEmpresa;
@@ -103,7 +104,7 @@ public class registro_empresa extends JFrame {
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_corchetes.png")));
 
-		JButton btnAtras = new JButton("Regresar");
+		btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
 		btnAtras.setBounds(666, 25, 102, 27);
@@ -594,8 +595,6 @@ public class registro_empresa extends JFrame {
 					lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 			lblLogoEmpresa.setIcon(logo2);
 		} else {
-			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
-			JOptionPane.showMessageDialog(null, "Por favor ingrese los datos de la empresa.");
 			txtNombreEmpresa.requestFocusInWindow();
 			btnGuardarEmpresa.setVisible(true);
 			btnActualizarEmpresa.setVisible(false);

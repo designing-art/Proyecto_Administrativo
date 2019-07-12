@@ -15,9 +15,12 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import clases.empleado;
+import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_empleado;
+import consultas.consultas_usuario;
 import formularios.registro_empleados;
+import formularios.registro_usuarios;
 
 public class control_empleado implements ActionListener {
 
@@ -28,6 +31,7 @@ public class control_empleado implements ActionListener {
 	public String fechaRegistro;
 	public String fechaLabores;
 	public static String identidad = null;
+	public registro_usuarios usuario = new registro_usuarios();
 
 	public control_empleado(empleado claseEmpleado, consultas_empleado consultaEmpleado,
 			registro_empleados formularioEmpleado) {
@@ -49,7 +53,7 @@ public class control_empleado implements ActionListener {
 
 		if (e.getSource() == formularioEmpleado.btnGuardarEmpleado) {
 
-			// validaciones para datos vacios
+			validarIdentidad();
 			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
@@ -60,8 +64,6 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionFoto.getText().isEmpty()
 					|| formularioEmpleado.txtNombreReferencia.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoReferencia.getText().isEmpty()
-
-					// validaciones para datos con mascara y pista.
 					|| formularioEmpleado.txtNombresEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese nombres del empleado.")
 					|| formularioEmpleado.txtApellidosEmpleado.getText().toString()
@@ -82,60 +84,100 @@ public class control_empleado implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar los datos del empleado!");
 
 			} else {
-				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
-				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
-				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-				claseEmpleado.setFecha_nacimiento_empleado(formularioEmpleado.editor3.getText().toString());
-				claseEmpleado.setFecha_registro_empleado(formularioEmpleado.editor2.getText().toString());
-				claseEmpleado.setFecha_inicio_labores_empleado(formularioEmpleado.editor.getText().toString());
-				claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-				claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
-				claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
-				claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
-				claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
-				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
-				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
-				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-				//Datos de la asignacion
-				claseEmpleado.setNombre_cargo_empleado(registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
-				claseEmpleado.setSueldo_cargo_empleado(registro_empleados.lbl_sueldo_cargo_asignacion.getText().toString());
-				claseEmpleado.setHora_extra_cargo_empleado(registro_empleados.lbl_horaextra_cargo_asignacion.getText().toString());
-				claseEmpleado.setObligaciones_cargo_empleado(registro_empleados.lbl_funciones_cargo_asignacion.getText().toString());
-				claseEmpleado.setTipo_horario_empleado(registro_empleados.lbl_tipo_horario_asignacion.getText().toString());
-				claseEmpleado.setDias_horario_empleado(registro_empleados.lbl_dias_horario_asignacion.getText().toString());
-				claseEmpleado.setHoras_horario_empleado(registro_empleados.lbl_horas_horario_asignacion.getText().toString());
-				claseEmpleado.setIdentidad_contrato_empleado_asignado(registro_empleados.lbl_contrato_empleado_asignacion.getText().toString());
-				claseEmpleado.setTipo_contrato_empleado_asignado(registro_empleados.lbl_tipo_empleado_asignacion.getText().toString());
-				claseEmpleado.setTiempo_contrato_empleado_asignado(registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
-				claseEmpleado.setFoto_contrato_empleado_asignado(registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
-
-				if (consultaEmpleado.registrar(claseEmpleado)) {
-					JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
-					limpiar();
-					formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
-					formularioEmpleado.obtenerUltimoId();
-					formularioEmpleado.pistas();
-					formularioEmpleado.establecerFechaRegistro();
-					formularioEmpleado.construirTablaEmpleados();
-					formularioEmpleado.btnNuevoEmpleado.setVisible(true);
-					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
-					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
-					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
-					formularioEmpleado.btnCancelarEmpleado.setVisible(false);
-					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
-					formularioEmpleado.btnGuardarEmpleado.setVisible(true);
-					formularioEmpleado.btnCalcularEdad.setBackground(Color.RED);
-					formularioEmpleado.txtDireccionFoto.setText("");
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
-									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
-					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
-
+				if (formularioEmpleado.txtIdentidadEmpleado.getText().toString().equals(identidad)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Alerta!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Error al Guardar");
-					limpiar();
+					claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+					claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+					claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
+					claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+					claseEmpleado.setFecha_nacimiento_empleado(formularioEmpleado.editor3.getText().toString());
+					claseEmpleado.setFecha_registro_empleado(formularioEmpleado.editor2.getText().toString());
+					claseEmpleado.setFecha_inicio_labores_empleado(formularioEmpleado.editor.getText().toString());
+					claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
+					claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+					claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
+					claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
+					claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
+					claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
+					claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
+					claseEmpleado
+							.setUsuario_empleado(formularioEmpleado.cbxUsuarioEmpleado.getSelectedItem().toString());
+					// Datos de la asignacion
+					claseEmpleado.setNombre_cargo_empleado(
+							registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
+					claseEmpleado.setSueldo_cargo_empleado(
+							registro_empleados.lbl_sueldo_cargo_asignacion.getText().toString());
+					claseEmpleado.setHora_extra_cargo_empleado(
+							registro_empleados.lbl_horaextra_cargo_asignacion.getText().toString());
+					claseEmpleado.setObligaciones_cargo_empleado(
+							registro_empleados.lbl_funciones_cargo_asignacion.getText().toString());
+					claseEmpleado.setTipo_horario_empleado(
+							registro_empleados.lbl_tipo_horario_asignacion.getText().toString());
+					claseEmpleado.setDias_horario_empleado(
+							registro_empleados.lbl_dias_horario_asignacion.getText().toString());
+					claseEmpleado.setHoras_horario_empleado(
+							registro_empleados.lbl_horas_horario_asignacion.getText().toString());
+					claseEmpleado.setIdentidad_contrato_empleado_asignado(
+							registro_empleados.lbl_contrato_empleado_asignacion.getText().toString());
+					claseEmpleado.setTipo_contrato_empleado_asignado(
+							registro_empleados.lbl_tipo_empleado_asignacion.getText().toString());
+					claseEmpleado.setTiempo_contrato_empleado_asignado(
+							registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
+					claseEmpleado.setFoto_contrato_empleado_asignado(
+							registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
+
+					if (consultaEmpleado.registrar(claseEmpleado)) {
+						JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
+						limpiar();
+						formularioEmpleado.txtNombresEmpleado.requestFocusInWindow();
+						formularioEmpleado.obtenerUltimoId();
+						formularioEmpleado.pistas();
+						formularioEmpleado.establecerFechaRegistro();
+						formularioEmpleado.construirTablaEmpleados();
+						formularioEmpleado.btnNuevoEmpleado.setVisible(true);
+						formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+						formularioEmpleado.btnActualizarDatosEmpleado.setVisible(true);
+						formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+						formularioEmpleado.btnCancelarEmpleado.setVisible(false);
+						formularioEmpleado.btnBorrarEmpleado.setVisible(false);
+						formularioEmpleado.btnGuardarEmpleado.setVisible(true);
+						formularioEmpleado.btnCalcularEdad.setBackground(Color.RED);
+						formularioEmpleado.txtDireccionFoto.setText("");
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+						final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+								formularioEmpleado.lblFotoEmpleado.getWidth(),
+								formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+						formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+
+						if (formularioEmpleado.cbxUsuarioEmpleado.getSelectedItem().toString().equals("Si")) {
+							usuario clase = new usuario();
+							consultas_usuario consulta = new consultas_usuario();
+							registro_usuarios formulario = new registro_usuarios();
+							control_usuario control = new control_usuario(clase, consulta, formulario);
+							formulario.setVisible(true);
+							formulario.setLocationRelativeTo(null);
+							formulario.txtBusqueda.requestFocusInWindow();
+							formulario.obtenerUltimoId();
+							formulario.pistas();
+							formulario.consultarEmpresa();
+							formulario.construirTabla();
+							formulario.btnNuevo.setVisible(true);
+							formulario.btnVer.setVisible(true);
+							formulario.btnActualizarDatos.setVisible(true);
+							formulario.btnActualizar.setVisible(false);
+							formulario.btnAceptar.setVisible(false);
+							formulario.btnBorrar.setVisible(false);
+							formulario.txtBusquedaDato
+									.setText(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
+							formularioEmpleado.dispose();
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al Guardar");
+						limpiar();
+					}
 				}
 			}
 		}
@@ -178,76 +220,91 @@ public class control_empleado implements ActionListener {
 				JOptionPane.showMessageDialog(null,
 						"Porfavor llene los campos para actualizar los datos del empleado!");
 			} else {
-				claseEmpleado
-						.setId_empleado(Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
-				claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
-				claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
-				claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
-				claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
-				claseEmpleado.setFecha_nacimiento_empleado(formularioEmpleado.editor3.getText().toString());
-				claseEmpleado.setFecha_registro_empleado(formularioEmpleado.editor2.getText().toString());
-				claseEmpleado.setFecha_inicio_labores_empleado(formularioEmpleado.editor.getText().toString());
-				claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-				claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
-				claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
-				claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
-				claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
-				claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
-				claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
-				claseEmpleado.setEstado_empleado(formularioEmpleado.cbxEstadoEmpleado.getSelectedItem().toString());
-				//Datos de la asignacion
-				claseEmpleado.setNombre_cargo_empleado(registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
-				claseEmpleado.setSueldo_cargo_empleado(registro_empleados.lbl_sueldo_cargo_asignacion.getText().toString());
-				claseEmpleado.setHora_extra_cargo_empleado(registro_empleados.lbl_horaextra_cargo_asignacion.getText().toString());
-				claseEmpleado.setObligaciones_cargo_empleado(registro_empleados.lbl_funciones_cargo_asignacion.getText().toString());
-				claseEmpleado.setTipo_horario_empleado(registro_empleados.lbl_tipo_horario_asignacion.getText().toString());
-				claseEmpleado.setDias_horario_empleado(registro_empleados.lbl_dias_horario_asignacion.getText().toString());
-				claseEmpleado.setHoras_horario_empleado(registro_empleados.lbl_horas_horario_asignacion.getText().toString());
-				claseEmpleado.setIdentidad_contrato_empleado_asignado(registro_empleados.lbl_contrato_empleado_asignacion.getText().toString());
-				claseEmpleado.setTipo_contrato_empleado_asignado(registro_empleados.lbl_tipo_empleado_asignacion.getText().toString());
-				claseEmpleado.setTiempo_contrato_empleado_asignado(registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
-				claseEmpleado.setFoto_contrato_empleado_asignado(registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
-
-				if (consultaEmpleado.modificar(claseEmpleado)) {
-					JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
-					limpiar();
-					formularioEmpleado.construirTablaEmpleados();
-					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
-					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
-					formularioEmpleado.btnActualizarDatosEmpleado.setVisible(false);
-					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
-					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
-					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
-					formularioEmpleado.lblFechaDeRegistro.setVisible(true);
-					formularioEmpleado.dateFechaRegistro.setVisible(true);
-
-					formularioEmpleado.txtNombresEmpleado.setEditable(false);
-					formularioEmpleado.txtApellidosEmpleado.setEditable(false);
-					formularioEmpleado.txtIdentidadEmpleado.setEditable(false);
-					formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
-					formularioEmpleado.txtEdadEmpleado.setEditable(false);
-					formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
-					formularioEmpleado.txtCorreoEmpleado.setEditable(false);
-					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
-					formularioEmpleado.txtDireccionFoto.setText("");
-					formularioEmpleado.txtNombreReferencia.setEditable(false);
-					formularioEmpleado.txtTelefonoReferencia.setEditable(false);
-					formularioEmpleado.editor3.setEditable(false);
-					formularioEmpleado.editor2.setEditable(false);
-					formularioEmpleado.editor.setEditable(false);
-					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
-					final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							icono.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
-									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
-					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
-
+				if (formularioEmpleado.txtIdentidadEmpleado.getText().toString().equals(identidad)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Alerta!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Error al Modificar");
-					limpiar();
-				}
-				
+					claseEmpleado.setId_empleado(
+							Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
+					claseEmpleado.setNombres_empleado(formularioEmpleado.txtNombresEmpleado.getText());
+					claseEmpleado.setApellidos_empleado(formularioEmpleado.txtApellidosEmpleado.getText());
+					claseEmpleado.setIdentidad_empleado(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
+					claseEmpleado.setGenero_empleado(formularioEmpleado.cbxGeneroEmpleado.getSelectedItem().toString());
+					claseEmpleado.setFecha_nacimiento_empleado(formularioEmpleado.editor3.getText().toString());
+					claseEmpleado.setFecha_registro_empleado(formularioEmpleado.editor2.getText().toString());
+					claseEmpleado.setFecha_inicio_labores_empleado(formularioEmpleado.editor.getText().toString());
+					claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
+					claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+					claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
+					claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
+					claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
+					claseEmpleado.setReferencia_empleado(formularioEmpleado.txtNombreReferencia.getText().toString());
+					claseEmpleado.setTelefono_referencia(formularioEmpleado.txtTelefonoReferencia.getText().toString());
+					claseEmpleado
+							.setUsuario_empleado(formularioEmpleado.cbxUsuarioEmpleado.getSelectedItem().toString());
+					// Datos de la asignacion
+					claseEmpleado.setNombre_cargo_empleado(
+							registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
+					claseEmpleado.setSueldo_cargo_empleado(
+							registro_empleados.lbl_sueldo_cargo_asignacion.getText().toString());
+					claseEmpleado.setHora_extra_cargo_empleado(
+							registro_empleados.lbl_horaextra_cargo_asignacion.getText().toString());
+					claseEmpleado.setObligaciones_cargo_empleado(
+							registro_empleados.lbl_funciones_cargo_asignacion.getText().toString());
+					claseEmpleado.setTipo_horario_empleado(
+							registro_empleados.lbl_tipo_horario_asignacion.getText().toString());
+					claseEmpleado.setDias_horario_empleado(
+							registro_empleados.lbl_dias_horario_asignacion.getText().toString());
+					claseEmpleado.setHoras_horario_empleado(
+							registro_empleados.lbl_horas_horario_asignacion.getText().toString());
+					claseEmpleado.setIdentidad_contrato_empleado_asignado(
+							registro_empleados.lbl_contrato_empleado_asignacion.getText().toString());
+					claseEmpleado.setTipo_contrato_empleado_asignado(
+							registro_empleados.lbl_tipo_empleado_asignacion.getText().toString());
+					claseEmpleado.setTiempo_contrato_empleado_asignado(
+							registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
+					claseEmpleado.setFoto_contrato_empleado_asignado(
+							registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
 
+					if (consultaEmpleado.modificar(claseEmpleado)) {
+						JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
+						limpiar();
+						formularioEmpleado.construirTablaEmpleados();
+						formularioEmpleado.btnNuevoEmpleado.setVisible(false);
+						formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+						formularioEmpleado.btnActualizarDatosEmpleado.setVisible(false);
+						formularioEmpleado.btnCancelarEmpleado.setVisible(true);
+						formularioEmpleado.btnBorrarEmpleado.setVisible(false);
+						formularioEmpleado.btnMostrarEmpleado.setVisible(true);
+						formularioEmpleado.dateFechaRegistro.setVisible(true);
+
+						formularioEmpleado.txtNombresEmpleado.setEditable(false);
+						formularioEmpleado.txtApellidosEmpleado.setEditable(false);
+						formularioEmpleado.txtIdentidadEmpleado.setEditable(false);
+						formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
+						formularioEmpleado.txtEdadEmpleado.setEditable(false);
+						formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
+						formularioEmpleado.txtCorreoEmpleado.setEditable(false);
+						formularioEmpleado.txtDireccionEmpleado.setEditable(false);
+						formularioEmpleado.txtDireccionFoto.setText("");
+						formularioEmpleado.txtNombreReferencia.setEditable(false);
+						formularioEmpleado.txtTelefonoReferencia.setEditable(false);
+						formularioEmpleado.editor3.setEditable(false);
+						formularioEmpleado.editor2.setEditable(false);
+						formularioEmpleado.editor.setEditable(false);
+						formularioEmpleado.cbxUsuarioEmpleado.setEditable(false);
+						final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+						final ImageIcon iconofoto = new ImageIcon(
+								icono.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
+										formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+						formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al Modificar");
+						limpiar();
+					}
+
+				}
 			}
 		}
 
@@ -290,7 +347,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.dateFechaNacimiento.setEnabled(false);
 					formularioEmpleado.dateFechaRegistro.setEnabled(false);
 					formularioEmpleado.dateFechaLabores.setEnabled(false);
-					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
+					formularioEmpleado.cbxUsuarioEmpleado.setEditable(false);
 					formularioEmpleado.btnTomarFoto.setEnabled(false);
 					formularioEmpleado.btnSubirFoto.setEnabled(false);
 					formularioEmpleado.btnVerFotoEmpleado.setEnabled(false);
@@ -339,10 +396,9 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.txtTelefonoReferencia.setEditable(true);
 			formularioEmpleado.txtTelefonoReferencia.setText(null);
 			formularioEmpleado.dateFechaRegistro.setVisible(false);
-			formularioEmpleado.cbxEstadoEmpleado.setEditable(true);
+			formularioEmpleado.cbxUsuarioEmpleado.setEditable(true);
 			formularioEmpleado.btnTomarFoto.setEnabled(true);
 			formularioEmpleado.btnSubirFoto.setEnabled(true);
-			formularioEmpleado.lblFechaDeRegistro.setVisible(false);
 			formularioEmpleado.txtDireccionEmpleado.setBackground(Color.WHITE);
 			formularioEmpleado.txtIdentidadEmpleado.setEditable(true);
 			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
@@ -385,10 +441,9 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.txtTelefonoReferencia.setEditable(true);
 			formularioEmpleado.txtTelefonoReferencia.setText(null);
 			formularioEmpleado.dateFechaRegistro.setVisible(false);
-			formularioEmpleado.cbxEstadoEmpleado.setEditable(true);
+			formularioEmpleado.cbxUsuarioEmpleado.setEditable(true);
 			formularioEmpleado.btnTomarFoto.setEnabled(true);
 			formularioEmpleado.btnSubirFoto.setEnabled(true);
-			formularioEmpleado.lblFechaDeRegistro.setVisible(false);
 			formularioEmpleado.txtDireccionEmpleado.setBackground(Color.WHITE);
 			formularioEmpleado.txtIdentidadEmpleado.setEditable(true);
 			formularioEmpleado.btnGuardarEmpleado.setVisible(true);
@@ -458,8 +513,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor3.setText(fecha_nac);
 					formularioEmpleado.editor2.setText(fecha_reg);
 					formularioEmpleado.editor.setText(fecha_lab);
-					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
-		
+					formularioEmpleado.cbxUsuarioEmpleado.setSelectedItem(estado);
 
 					registro_empleados.lbl_nombre_cargo_asignacion.setText(cargo);
 					registro_empleados.lbl_sueldo_cargo_asignacion.setText(sueldo);
@@ -473,7 +527,7 @@ public class control_empleado implements ActionListener {
 					registro_empleados.lbl_tiempo_empleado_asignacion.setText(tiempo);
 					registro_empleados.lbl_foto_empleado_asignacion.setText(foto);
 
-					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
+					formularioEmpleado.cbxUsuarioEmpleado.setSelectedItem(estado);
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
@@ -495,7 +549,6 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
 					formularioEmpleado.btnBorrarEmpleado.setVisible(true);
 					formularioEmpleado.btnMostrarEmpleado.setVisible(false);
-					formularioEmpleado.lblFechaDeRegistro.setVisible(true);
 					formularioEmpleado.dateFechaRegistro.setVisible(true);
 					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 				}
@@ -505,8 +558,6 @@ public class control_empleado implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
-		
 
 		/* Pasar datos de la tabla al formulario para visualizar */
 		if (e.getSource() == formularioEmpleado.btnMostrarEmpleado) {
@@ -565,7 +616,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor3.setText(fecha_nac);
 					formularioEmpleado.editor2.setText(fecha_reg);
 					formularioEmpleado.editor.setText(fecha_lab);
-					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
+					formularioEmpleado.cbxUsuarioEmpleado.setSelectedItem(estado);
 
 					registro_empleados.lbl_nombre_cargo_asignacion.setText(cargo);
 					registro_empleados.lbl_sueldo_cargo_asignacion.setText(sueldo);
@@ -579,7 +630,7 @@ public class control_empleado implements ActionListener {
 					registro_empleados.lbl_tiempo_empleado_asignacion.setText(tiempo);
 					registro_empleados.lbl_foto_empleado_asignacion.setText(foto);
 
-					formularioEmpleado.cbxEstadoEmpleado.setSelectedItem(estado);
+					formularioEmpleado.cbxUsuarioEmpleado.setSelectedItem(estado);
 					formularioEmpleado.txtCodigoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtNombresEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
@@ -595,7 +646,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor3.setForeground(Color.BLACK);
 					formularioEmpleado.editor2.setForeground(Color.BLACK);
 					formularioEmpleado.editor.setForeground(Color.BLACK);
-					formularioEmpleado.cbxEstadoEmpleado.setForeground(Color.BLACK);
+					formularioEmpleado.cbxUsuarioEmpleado.setForeground(Color.BLACK);
 
 					formularioEmpleado.btnNuevoEmpleado.setVisible(false);
 					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
@@ -603,7 +654,6 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.btnCancelarEmpleado.setVisible(true);
 					formularioEmpleado.btnBorrarEmpleado.setVisible(false);
 					formularioEmpleado.btnMostrarEmpleado.setVisible(true);
-					formularioEmpleado.lblFechaDeRegistro.setVisible(true);
 					formularioEmpleado.dateFechaRegistro.setVisible(true);
 
 					formularioEmpleado.txtNombresEmpleado.setEditable(false);
@@ -620,7 +670,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.editor3.setEditable(false);
 					formularioEmpleado.editor2.setEditable(false);
 					formularioEmpleado.editor.setEditable(false);
-					formularioEmpleado.cbxEstadoEmpleado.setEditable(false);
+					formularioEmpleado.cbxUsuarioEmpleado.setEditable(false);
 					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 				}
 
@@ -644,7 +694,7 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.editor.setText("");
 		formularioEmpleado.editor2.setText("");
 		formularioEmpleado.editor3.setText("");
-		formularioEmpleado.cbxEstadoEmpleado.setToolTipText(null);
+		formularioEmpleado.cbxUsuarioEmpleado.setToolTipText(null);
 		registro_empleados.lbl_nombre_cargo_asignacion.setText(null);
 		registro_empleados.lbl_sueldo_cargo_asignacion.setText(null);
 		registro_empleados.lbl_horaextra_cargo_asignacion.setText(null);
@@ -685,7 +735,7 @@ public class control_empleado implements ActionListener {
 				empleado.setFecha_nacimiento_empleado(rs.getString("fecha_nacimiento_empleado"));
 				empleado.setFecha_registro_empleado(rs.getString("fecha_registro_empleado"));
 				empleado.setFecha_inicio_labores_empleado(rs.getString("fecha_inicio_labores_empleado"));
-				empleado.setEstado_empleado(rs.getString("estado_empleado"));
+				empleado.setUsuario_empleado(rs.getString("usuario_empleado"));
 				empleado.setNombre_cargo_empleado(rs.getString("nombre_cargo_empleado"));
 				empleado.setSueldo_cargo_empleado(rs.getString("sueldo_cargo_empleado"));
 				empleado.setHora_extra_cargo_empleado(rs.getString("hora_extra_cargo_empleado"));
@@ -730,7 +780,7 @@ public class control_empleado implements ActionListener {
 			matrizInfo[i][12] = miLista.get(i).getFecha_nacimiento_empleado() + "";
 			matrizInfo[i][13] = miLista.get(i).getFecha_registro_empleado() + "";
 			matrizInfo[i][14] = miLista.get(i).getFecha_inicio_labores_empleado() + "";
-			matrizInfo[i][15] = miLista.get(i).getEstado_empleado() + "";
+			matrizInfo[i][15] = miLista.get(i).getUsuario_empleado() + "";
 			matrizInfo[i][16] = miLista.get(i).getNombre_cargo_empleado() + "";
 			matrizInfo[i][17] = miLista.get(i).getSueldo_cargo_empleado() + "";
 			matrizInfo[i][18] = miLista.get(i).getHora_extra_cargo_empleado() + "";
@@ -746,8 +796,7 @@ public class control_empleado implements ActionListener {
 
 		return matrizInfo;
 	}
-	
-	
+
 	public void validarIdentidad() {
 		conexion conex = new conexion();
 		try {

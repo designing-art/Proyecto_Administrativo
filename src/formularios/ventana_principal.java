@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -85,6 +87,7 @@ import controles.control_sar;
 import controles.control_servicio;
 import controles.control_usuario;
 import controles.control_venta;
+import principal.television;
 
 import java.awt.event.ActionListener;
 
@@ -109,19 +112,19 @@ import javax.swing.ScrollPaneConstants;
 public class ventana_principal extends JFrame {
 
 	public static JPanel contentPane;
-	public JButton registroPlanilla;
-	public JButton registroContrato;
-	public JButton registroEmpleado;
-	public JButton registroCargo;
-	public JButton registroDeduccion;
-	public JButton registroBonificacion;
+	public static JButton btnPlanilla;
+	public static JButton btnContratoEmpleado;
+	public static JButton btnEmpleado;
+	public static JButton btnCargo;
+	public static JButton btnDeducciones;
+	public static JButton btnBonificaciones;
 	public static JButton btnInformacionEmpresa;
-	public JButton registroHorario;
+	public static JButton btnHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
 	public static JTextField txtFrase;
 
-	public JButton btnRegistroProductos;
+	public static JButton btnProducto;
 
 	public static JLabel lbl_logo_empresa_principal;
 	public static JLabel lbl_nombre_empresa_principal;
@@ -130,18 +133,34 @@ public class ventana_principal extends JFrame {
 	public empresa clase;
 	public consultas_empresa consulta;
 	public registro_empresa formulario;
+	public static JButton btnProveedores;
+	public static JButton btnContratoCliente;
+	public static JButton btnServicio;
+	public static JButton btnCliente;
+	public static JButton btnCompras;
+	public static JButton btnInventario;
+	public static JButton btnVentas;
+	public static JButton btnIngreso;
+	public static JButton btnEgreso;
+	public static JButton btnSar;
+	public static JButton btnFacturasClientes;
+	public static JButton btnFacturasEmpresa;
+	public static JButton btnAcercaDe;
+	public static JButton btnOpciones;
+	public static JButton btnUsuarios;
 
 	public static JLabel lblTipoUsuario;
 	public static JLabel lblCargoUsuario;
 	public static JLabel lblNombreUsuario;
-	public static JLabel lblPermisoUsuario;
-	
+
 	public static JPanel panelEmpleados;
 	public static JPanel panelClientes;
 	public static JPanel panelFacturas;
 	public static JPanel panelFinanzas;
 	public static JPanel panelOpciones;
 	public static JPanel panelInventario;
+
+	
 
 	public ventana_principal() {
 		setType(Type.POPUP);
@@ -172,13 +191,13 @@ public class ventana_principal extends JFrame {
 		contentPane.add(panelEmpleados);
 		panelEmpleados.setLayout(null);
 
-		registroPlanilla = new JButton("Planillas");
-		registroPlanilla.setForeground(Color.BLACK);
-		registroPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroPlanilla.setBackground(new Color(102, 205, 170));
-		registroPlanilla.setBounds(10, 64, 97, 21);
-		panelEmpleados.add(registroPlanilla);
-		registroPlanilla.addActionListener(new ActionListener() {
+		btnPlanilla = new JButton("Planillas");
+		btnPlanilla.setForeground(Color.BLACK);
+		btnPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnPlanilla.setBackground(new Color(102, 205, 170));
+		btnPlanilla.setBounds(10, 64, 97, 21);
+		panelEmpleados.add(btnPlanilla);
+		btnPlanilla.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				planilla clase = new planilla();
@@ -205,13 +224,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		registroContrato = new JButton("Contratos");
-		registroContrato.setForeground(Color.BLACK);
-		registroContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroContrato.setBackground(new Color(102, 205, 170));
-		registroContrato.setBounds(10, 41, 97, 21);
-		panelEmpleados.add(registroContrato);
-		registroContrato.addActionListener(new ActionListener() {
+		btnContratoEmpleado = new JButton("Contratos");
+		btnContratoEmpleado.setForeground(Color.BLACK);
+		btnContratoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnContratoEmpleado.setBackground(new Color(102, 205, 170));
+		btnContratoEmpleado.setBounds(10, 41, 97, 21);
+		panelEmpleados.add(btnContratoEmpleado);
+		btnContratoEmpleado.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				contrato_empleado clase = new contrato_empleado();
@@ -235,13 +254,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		registroEmpleado = new JButton("Empleados");
-		registroEmpleado.setForeground(Color.BLACK);
-		registroEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroEmpleado.setBackground(new Color(102, 205, 170));
-		registroEmpleado.setBounds(10, 19, 97, 21);
-		panelEmpleados.add(registroEmpleado);
-		registroEmpleado.addActionListener(new ActionListener() {
+		btnEmpleado = new JButton("Empleados");
+		btnEmpleado.setForeground(Color.BLACK);
+		btnEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnEmpleado.setBackground(new Color(102, 205, 170));
+		btnEmpleado.setBounds(10, 19, 97, 21);
+		panelEmpleados.add(btnEmpleado);
+		btnEmpleado.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				empleado clase = new empleado();
@@ -266,13 +285,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		registroCargo = new JButton("Cargos");
-		registroCargo.setForeground(Color.BLACK);
-		registroCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroCargo.setBackground(new Color(102, 205, 170));
-		registroCargo.setBounds(117, 19, 97, 21);
-		panelEmpleados.add(registroCargo);
-		registroCargo.addActionListener(new ActionListener() {
+		btnCargo = new JButton("Cargos");
+		btnCargo.setForeground(Color.BLACK);
+		btnCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnCargo.setBackground(new Color(102, 205, 170));
+		btnCargo.setBounds(117, 19, 97, 21);
+		panelEmpleados.add(btnCargo);
+		btnCargo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cargo clase = new cargo();
@@ -298,13 +317,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		registroBonificacion = new JButton("Bonificaciones");
-		registroBonificacion.setForeground(Color.BLACK);
-		registroBonificacion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroBonificacion.setBackground(new Color(102, 205, 170));
-		registroBonificacion.setBounds(117, 41, 97, 21);
-		panelEmpleados.add(registroBonificacion);
-		registroBonificacion.addActionListener(new ActionListener() {
+		btnBonificaciones = new JButton("Bonificaciones");
+		btnBonificaciones.setForeground(Color.BLACK);
+		btnBonificaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnBonificaciones.setBackground(new Color(102, 205, 170));
+		btnBonificaciones.setBounds(117, 41, 97, 21);
+		panelEmpleados.add(btnBonificaciones);
+		btnBonificaciones.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				bonificacion clase = new bonificacion();
@@ -330,13 +349,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		registroDeduccion = new JButton("Deducciones");
-		registroDeduccion.setForeground(Color.BLACK);
-		registroDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroDeduccion.setBackground(new Color(102, 205, 170));
-		registroDeduccion.setBounds(224, 41, 97, 21);
-		panelEmpleados.add(registroDeduccion);
-		registroDeduccion.addActionListener(new ActionListener() {
+		btnDeducciones = new JButton("Deducciones");
+		btnDeducciones.setForeground(Color.BLACK);
+		btnDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnDeducciones.setBackground(new Color(102, 205, 170));
+		btnDeducciones.setBounds(224, 41, 97, 21);
+		panelEmpleados.add(btnDeducciones);
+		btnDeducciones.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				deduccion clase = new deduccion();
@@ -362,13 +381,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		registroHorario = new JButton("Horarios");
-		registroHorario.setForeground(Color.BLACK);
-		registroHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		registroHorario.setBackground(new Color(102, 205, 170));
-		registroHorario.setBounds(224, 19, 97, 21);
-		panelEmpleados.add(registroHorario);
-		registroHorario.addActionListener(new ActionListener() {
+		btnHorario = new JButton("Horarios");
+		btnHorario.setForeground(Color.BLACK);
+		btnHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnHorario.setBackground(new Color(102, 205, 170));
+		btnHorario.setBounds(224, 19, 97, 21);
+		panelEmpleados.add(btnHorario);
+		btnHorario.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				horario clase = new horario();
@@ -377,7 +396,7 @@ public class ventana_principal extends JFrame {
 				control_horario control = new control_horario(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.txtDescripcionHorario.requestFocusInWindow();
+				formulario.txtObservacionHorario.requestFocusInWindow();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
@@ -413,13 +432,13 @@ public class ventana_principal extends JFrame {
 		label_3.setBounds(10, 0, 97, 21);
 		panelClientes.add(label_3);
 
-		JButton button_7 = new JButton("Clientes");
-		button_7.setForeground(Color.BLACK);
-		button_7.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_7.setBackground(new Color(95, 158, 160));
-		button_7.setBounds(10, 19, 97, 21);
-		panelClientes.add(button_7);
-		button_7.addActionListener(new ActionListener() {
+		btnCliente = new JButton("Clientes");
+		btnCliente.setForeground(Color.BLACK);
+		btnCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnCliente.setBackground(new Color(95, 158, 160));
+		btnCliente.setBounds(10, 19, 97, 21);
+		panelClientes.add(btnCliente);
+		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cliente clase = new cliente();
 				consultas_cliente consulta = new consultas_cliente();
@@ -440,13 +459,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton button_8 = new JButton("Contratos");
-		button_8.setForeground(Color.BLACK);
-		button_8.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_8.setBackground(new Color(95, 158, 160));
-		button_8.setBounds(10, 41, 97, 21);
-		panelClientes.add(button_8);
-		button_8.addActionListener(new ActionListener() {
+		btnContratoCliente = new JButton("Contratos");
+		btnContratoCliente.setForeground(Color.BLACK);
+		btnContratoCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnContratoCliente.setBackground(new Color(95, 158, 160));
+		btnContratoCliente.setBounds(10, 41, 97, 21);
+		panelClientes.add(btnContratoCliente);
+		btnContratoCliente.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				contrato_cliente clase = new contrato_cliente();
@@ -469,13 +488,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		btnRegistroProductos = new JButton("Productos");
-		btnRegistroProductos.setForeground(Color.BLACK);
-		btnRegistroProductos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnRegistroProductos.setBackground(new Color(95, 158, 160));
-		btnRegistroProductos.setBounds(224, 19, 97, 21);
-		panelClientes.add(btnRegistroProductos);
-		btnRegistroProductos.addActionListener(new ActionListener() {
+		btnProducto = new JButton("Productos");
+		btnProducto.setForeground(Color.BLACK);
+		btnProducto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnProducto.setBackground(new Color(95, 158, 160));
+		btnProducto.setBounds(224, 19, 97, 21);
+		panelClientes.add(btnProducto);
+		btnProducto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				producto clase = new producto();
@@ -500,13 +519,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton button_9 = new JButton("Servicios");
-		button_9.setBounds(117, 19, 97, 21);
-		panelClientes.add(button_9);
-		button_9.setForeground(Color.BLACK);
-		button_9.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_9.setBackground(new Color(95, 158, 160));
-		button_9.addActionListener(new ActionListener() {
+		btnServicio = new JButton("Servicios");
+		btnServicio.setBounds(117, 19, 97, 21);
+		panelClientes.add(btnServicio);
+		btnServicio.setForeground(Color.BLACK);
+		btnServicio.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnServicio.setBackground(new Color(95, 158, 160));
+		btnServicio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				servicio clase = new servicio();
@@ -530,13 +549,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton button_16 = new JButton("Proveedores");
-		button_16.setBounds(117, 41, 97, 21);
-		button_16.setForeground(Color.BLACK);
-		button_16.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_16.setBackground(new Color(95, 158, 160));
-		panelClientes.add(button_16);
-		button_16.addActionListener(new ActionListener() {
+		btnProveedores = new JButton("Proveedores");
+		btnProveedores.setBounds(117, 41, 97, 21);
+		btnProveedores.setForeground(Color.BLACK);
+		btnProveedores.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnProveedores.setBackground(new Color(95, 158, 160));
+		panelClientes.add(btnProveedores);
+		btnProveedores.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				proveedor clase = new proveedor();
@@ -572,13 +591,13 @@ public class ventana_principal extends JFrame {
 		label_4.setBounds(10, 0, 174, 21);
 		panelFinanzas.add(label_4);
 
-		JButton button_11 = new JButton("Ingresos");
-		button_11.setForeground(Color.BLACK);
-		button_11.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_11.setBackground(new Color(70, 130, 180));
-		button_11.setBounds(10, 19, 97, 21);
-		panelFinanzas.add(button_11);
-		button_11.addActionListener(new ActionListener() {
+		btnIngreso = new JButton("Ingresos");
+		btnIngreso.setForeground(Color.BLACK);
+		btnIngreso.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnIngreso.setBackground(new Color(70, 130, 180));
+		btnIngreso.setBounds(10, 19, 97, 21);
+		panelFinanzas.add(btnIngreso);
+		btnIngreso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				venta clase = new venta();
 				inventario clase2 = new inventario();
@@ -596,13 +615,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton button_12 = new JButton("Egresos");
-		button_12.setForeground(Color.BLACK);
-		button_12.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_12.setBackground(new Color(70, 130, 180));
-		button_12.setBounds(117, 19, 97, 21);
-		panelFinanzas.add(button_12);
-		button_12.addActionListener(new ActionListener() {
+		btnEgreso = new JButton("Egresos");
+		btnEgreso.setForeground(Color.BLACK);
+		btnEgreso.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnEgreso.setBackground(new Color(70, 130, 180));
+		btnEgreso.setBounds(117, 19, 97, 21);
+		panelFinanzas.add(btnEgreso);
+		btnEgreso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				egreso clase = new egreso();
 				consultas_egreso consulta = new consultas_egreso();
@@ -638,13 +657,13 @@ public class ventana_principal extends JFrame {
 		label_6.setBounds(10, 0, 174, 21);
 		panelInventario.add(label_6);
 
-		JButton button_15 = new JButton("Inventario");
-		button_15.setForeground(Color.BLACK);
-		button_15.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_15.setBackground(Color.PINK);
-		button_15.setBounds(117, 19, 97, 21);
-		panelInventario.add(button_15);
-		button_15.addActionListener(new ActionListener() {
+		btnInventario = new JButton("Inventario");
+		btnInventario.setForeground(Color.BLACK);
+		btnInventario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnInventario.setBackground(Color.PINK);
+		btnInventario.setBounds(117, 19, 97, 21);
+		panelInventario.add(btnInventario);
+		btnInventario.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				inventario clase = new inventario();
@@ -669,13 +688,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton button_17 = new JButton("Compras");
-		button_17.setForeground(Color.BLACK);
-		button_17.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		button_17.setBackground(Color.PINK);
-		button_17.setBounds(10, 19, 97, 21);
-		panelInventario.add(button_17);
-		button_17.addActionListener(new ActionListener() {
+		btnCompras = new JButton("Compras");
+		btnCompras.setForeground(Color.BLACK);
+		btnCompras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnCompras.setBackground(Color.PINK);
+		btnCompras.setBounds(10, 19, 97, 21);
+		panelInventario.add(btnCompras);
+		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				compra clase = new compra();
 				consultas_compra consulta = new consultas_compra();
@@ -704,7 +723,7 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton btnVentas = new JButton("Ventas");
+		btnVentas = new JButton("Ventas");
 		btnVentas.setForeground(Color.BLACK);
 		btnVentas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnVentas.setBackground(Color.PINK);
@@ -759,39 +778,39 @@ public class ventana_principal extends JFrame {
 		contentPane.add(panel_5);
 		panel_5.setLayout(null);
 
-		lblTipoUsuario = new JLabel("Super usuario");
-		lblTipoUsuario.setBounds(20, 80, 119, 14);
+		lblTipoUsuario = new JLabel("tipo");
+		lblTipoUsuario.setBounds(16, 94, 119, 14);
 		panel_5.add(lblTipoUsuario);
 		lblTipoUsuario.setForeground(Color.BLACK);
 		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblUsuario_1 = new JLabel("Nivel :");
-		lblUsuario_1.setBounds(20, 66, 75, 14);
+		JLabel lblUsuario_1 = new JLabel("Tipo.");
+		lblUsuario_1.setBounds(16, 80, 75, 14);
 		panel_5.add(lblUsuario_1);
 		lblUsuario_1.setForeground(Color.BLACK);
 		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		lblCargoUsuario = new JLabel("Developer");
-		lblCargoUsuario.setBounds(20, 49, 119, 20);
+		lblCargoUsuario = new JLabel("cargo");
+		lblCargoUsuario.setBounds(16, 61, 119, 20);
 		panel_5.add(lblCargoUsuario);
 		lblCargoUsuario.setForeground(Color.BLACK);
 		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblCargo = new JLabel("Cargo :");
-		lblCargo.setBounds(20, 38, 75, 14);
+		JLabel lblCargo = new JLabel("Cargo.");
+		lblCargo.setBounds(16, 49, 75, 14);
 		panel_5.add(lblCargo);
 		lblCargo.setForeground(Color.BLACK);
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		lblNombreUsuario = new JLabel("Cristian Emmanuel");
+		lblNombreUsuario = new JLabel("Nombre completo del empleado.");
 		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreUsuario.setBounds(10, 22, 254, 14);
+		lblNombreUsuario.setBounds(10, 150, 254, 14);
 		panel_5.add(lblNombreUsuario);
 		lblNombreUsuario.setForeground(Color.BLACK);
 		lblNombreUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setBounds(135, 47, 100, 105);
+		labelfotousuario.setBounds(145, 36, 100, 105);
 		panel_5.add(labelfotousuario);
 		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
 		labelfotousuario.setForeground(Color.LIGHT_GRAY);
@@ -807,35 +826,23 @@ public class ventana_principal extends JFrame {
 		lblInformacionDelUsuario.setBounds(10, 0, 254, 25);
 		panel_5.add(lblInformacionDelUsuario);
 
-		lblPermisoUsuario = new JLabel("Super usuario");
+		JLabel lblDatos = new JLabel("Datos :");
+		lblDatos.setForeground(Color.BLACK);
+		lblDatos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblDatos.setBounds(16, 31, 157, 14);
+		panel_5.add(lblDatos);
+
+		JLabel lblPermiso = new JLabel("Permiso.");
+		lblPermiso.setForeground(Color.BLACK);
+		lblPermiso.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblPermiso.setBounds(16, 111, 75, 14);
+		panel_5.add(lblPermiso);
+
+		JLabel lblPermisoUsuario = new JLabel("permiso");
 		lblPermisoUsuario.setForeground(Color.BLACK);
 		lblPermisoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblPermisoUsuario.setBounds(20, 150, 225, 25);
+		lblPermisoUsuario.setBounds(16, 125, 119, 14);
 		panel_5.add(lblPermisoUsuario);
-		
-		JLabel label_1 = new JLabel("Super usuario");
-		label_1.setForeground(Color.BLACK);
-		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_1.setBounds(20, 138, 119, 14);
-		panel_5.add(label_1);
-		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
-		lblContrasea.setForeground(Color.BLACK);
-		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblContrasea.setBounds(20, 124, 119, 14);
-		panel_5.add(lblContrasea);
-		
-		JLabel label_7 = new JLabel("Developer");
-		label_7.setForeground(Color.BLACK);
-		label_7.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_7.setBounds(20, 105, 109, 20);
-		panel_5.add(label_7);
-		
-		JLabel lblUsuario = new JLabel("Usuario :");
-		lblUsuario.setForeground(Color.BLACK);
-		lblUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblUsuario.setBounds(20, 94, 75, 14);
-		panel_5.add(lblUsuario);
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -923,13 +930,13 @@ public class ventana_principal extends JFrame {
 		label.setBounds(10, 0, 97, 15);
 		panelFacturas.add(label);
 
-		JButton btnFacturasDeLos = new JButton("Clientes");
-		btnFacturasDeLos.setForeground(Color.BLACK);
-		btnFacturasDeLos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnFacturasDeLos.setBackground(new Color(255, 215, 0));
-		btnFacturasDeLos.setBounds(117, 15, 97, 21);
-		panelFacturas.add(btnFacturasDeLos);
-		btnFacturasDeLos.addActionListener(new ActionListener() {
+		btnFacturasClientes = new JButton("Clientes");
+		btnFacturasClientes.setForeground(Color.BLACK);
+		btnFacturasClientes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnFacturasClientes.setBackground(new Color(255, 215, 0));
+		btnFacturasClientes.setBounds(117, 15, 97, 21);
+		panelFacturas.add(btnFacturasClientes);
+		btnFacturasClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factura_cliente clase = new factura_cliente();
 				consultas_factura_cliente consulta = new consultas_factura_cliente();
@@ -954,13 +961,13 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton btnFacturasDeLa = new JButton("Empresa");
-		btnFacturasDeLa.setForeground(Color.BLACK);
-		btnFacturasDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnFacturasDeLa.setBackground(new Color(255, 215, 0));
-		btnFacturasDeLa.setBounds(10, 15, 97, 21);
-		panelFacturas.add(btnFacturasDeLa);
-		btnFacturasDeLa.addActionListener(new ActionListener() {
+		btnFacturasEmpresa = new JButton("Empresa");
+		btnFacturasEmpresa.setForeground(Color.BLACK);
+		btnFacturasEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnFacturasEmpresa.setBackground(new Color(255, 215, 0));
+		btnFacturasEmpresa.setBounds(10, 15, 97, 21);
+		panelFacturas.add(btnFacturasEmpresa);
+		btnFacturasEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factura_empresa clase = new factura_empresa();
 				consultas_factura_empresa consulta = new consultas_factura_empresa();
@@ -982,7 +989,7 @@ public class ventana_principal extends JFrame {
 			}
 		});
 
-		JButton btnSar = new JButton("Sar");
+		btnSar = new JButton("Sar");
 		btnSar.setForeground(Color.BLACK);
 		btnSar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnSar.setBackground(new Color(255, 215, 0));
@@ -1025,27 +1032,27 @@ public class ventana_principal extends JFrame {
 		lblOpciones.setForeground(Color.BLACK);
 		lblOpciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JButton btnConfiguracionDelSistema = new JButton("Configuraci\u00F3n");
-		btnConfiguracionDelSistema.setBounds(10, 20, 103, 21);
-		panelOpciones.add(btnConfiguracionDelSistema);
-		btnConfiguracionDelSistema.setForeground(Color.BLACK);
-		btnConfiguracionDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnConfiguracionDelSistema.setBackground(new Color(219, 112, 147));
+		btnOpciones = new JButton("Configuraci\u00F3n");
+		btnOpciones.setBounds(10, 20, 103, 21);
+		panelOpciones.add(btnOpciones);
+		btnOpciones.setForeground(Color.BLACK);
+		btnOpciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnOpciones.setBackground(new Color(219, 112, 147));
 
-		JButton btnAcercaDe = new JButton("Acerca de.");
+		btnAcercaDe = new JButton("Acerca de.");
 		btnAcercaDe.setBounds(225, 20, 94, 21);
 		panelOpciones.add(btnAcercaDe);
 		btnAcercaDe.setForeground(Color.BLACK);
 		btnAcercaDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnAcercaDe.setBackground(new Color(219, 112, 147));
 
-		JButton btnUsers = new JButton("Usuarios");
-		btnUsers.setBounds(123, 20, 92, 21);
-		panelOpciones.add(btnUsers);
-		btnUsers.setForeground(Color.BLACK);
-		btnUsers.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		btnUsers.setBackground(new Color(219, 112, 147));
-		btnUsers.addActionListener(new ActionListener() {
+		btnUsuarios = new JButton("Usuarios");
+		btnUsuarios.setBounds(123, 20, 92, 21);
+		panelOpciones.add(btnUsuarios);
+		btnUsuarios.setForeground(Color.BLACK);
+		btnUsuarios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
+		btnUsuarios.setBackground(new Color(219, 112, 147));
+		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				usuario clase = new usuario();
 				consultas_usuario consulta = new consultas_usuario();
@@ -1095,7 +1102,7 @@ public class ventana_principal extends JFrame {
 				info.setVisible(true);
 			}
 		});
-		btnConfiguracionDelSistema.addActionListener(new ActionListener() {
+		btnOpciones.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				configuracion clase = new configuracion();
@@ -1188,39 +1195,5 @@ public class ventana_principal extends JFrame {
 		}
 
 	}
-	
-	public void consultarDatosUsuario() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto
-					.executeQuery("SELECT * FROM usuario WHERE usuario=? and contraseña =?");
-			if (rs.next()) {
-				nombre = (rs.getString("nombre_empresa"));
-				ruta_logo = (rs.getString("direccion_logo_empresa"));
 
-				lbl_nombre_empresa_principal.setText(nombre);
-				final ImageIcon logo = new ImageIcon(ruta_logo);
-				final ImageIcon icono = new ImageIcon(
-						logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
-								lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-				lbl_logo_empresa_principal.setIcon(icono);
-			} else {
-				JOptionPane.showMessageDialog(null,
-						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
-								+ "         podria hacer algunos ajustes.\n" + "         Ingrese a:\n"
-								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
-								+ "            ******* Buen Dia! *******");
-			}
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-
-	}
 }

@@ -95,7 +95,7 @@ public class registro_empleados extends JFrame {
 	public JTextField txtEdadEmpleado;
 	public JFormattedTextField txtTelefonoEmpleado;
 	public JComboBox<?> cbxGeneroEmpleado;
-	public JComboBox<?> cbxEstadoEmpleado;
+	public JComboBox<?> cbxUsuarioEmpleado;
 	public JLabel lblFotoEmpleado;
 	public JScrollPane scrollPane;
 	public JTextArea txtDireccionEmpleado;
@@ -107,7 +107,6 @@ public class registro_empleados extends JFrame {
 	public static String identidad = null;
 	public static String ruta;
 	public static ImageIcon imagen;
-	public JLabel lblFechaDeRegistro;
 	public static String hora_fecha_reporte;
 	public static String ruta_logo;
 
@@ -146,6 +145,7 @@ public class registro_empleados extends JFrame {
 	public JTextField txtDireccionFoto;
 	public JTextField textField;
 	public JLabel lblAsignacionesYLista;
+	public JButton btnRegresar;
 
 	public int contador1 = 0;
 	public int contador2 = 0;
@@ -184,23 +184,6 @@ public class registro_empleados extends JFrame {
 	public JButton btnAsignar_1;
 	public JButton btnAsignar_2;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					registro_empleados frame = new registro_empleados();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public registro_empleados() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -425,11 +408,6 @@ public class registro_empleados extends JFrame {
 		panel.add(lblFechaDeNacimiento);
 		lblFechaDeNacimiento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		lblFechaDeRegistro = new JLabel("14. Fecha de registro :");
-		lblFechaDeRegistro.setBounds(39, 504, 157, 20);
-		panel.add(lblFechaDeRegistro);
-		lblFechaDeRegistro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-
 		JLabel lblFechaDeComienso = new JLabel("13. Fecha inicio labores :");
 		lblFechaDeComienso.setBounds(39, 478, 167, 20);
 		panel.add(lblFechaDeComienso);
@@ -444,13 +422,13 @@ public class registro_empleados extends JFrame {
 		editor.setHorizontalAlignment(SwingConstants.CENTER);
 
 		dateFechaRegistro = new JDateChooser();
-		dateFechaRegistro.setBounds(199, 504, 133, 20);
+		dateFechaRegistro.setBounds(199, 536, 133, 20);
 		dateFechaRegistro.setDateFormatString("dd-MMMMM-yyyy");
 		panel.add(dateFechaRegistro);
 		editor2 = (JTextFieldDateEditor) dateFechaRegistro.getDateEditor();
 		editor2.setEditable(false);
 		editor2.setHorizontalAlignment(SwingConstants.CENTER);
-		dateFechaRegistro.setEnabled(false);
+		dateFechaRegistro.setVisible(false);
 
 		dateFechaNacimiento = new JDateChooser();
 		dateFechaNacimiento.setBounds(199, 331, 132, 20);
@@ -532,16 +510,16 @@ public class registro_empleados extends JFrame {
 			}
 		});
 
-		JLabel lblEstado = new JLabel("15. Estado :");
-		lblEstado.setBounds(39, 532, 83, 14);
+		JLabel lblEstado = new JLabel("14. Usuario del sistema :");
+		lblEstado.setBounds(39, 508, 167, 14);
 		panel.add(lblEstado);
 		lblEstado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		cbxEstadoEmpleado = new JComboBox();
-		cbxEstadoEmpleado.setBounds(199, 529, 133, 20);
-		panel.add(cbxEstadoEmpleado);
-		cbxEstadoEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxEstadoEmpleado.setModel(new DefaultComboBoxModel(new String[] { "Activo", "Inactivo" }));
+		cbxUsuarioEmpleado = new JComboBox();
+		cbxUsuarioEmpleado.setBounds(199, 505, 133, 20);
+		panel.add(cbxUsuarioEmpleado);
+		cbxUsuarioEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		cbxUsuarioEmpleado.setModel(new DefaultComboBoxModel(new String[] { "Si", "No" }));
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(122, 271, 210, 55);
@@ -643,7 +621,7 @@ public class registro_empleados extends JFrame {
 
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.LIGHT_GRAY);
-		panel_2.setBounds(352, 269, 191, 280);
+		panel_2.setBounds(352, 269, 191, 269);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -736,21 +714,24 @@ public class registro_empleados extends JFrame {
 		panel_2.add(lbl_foto_empleado_asignacion);
 
 		lblCargo = new JLabel("CARGO");
+		lblCargo.setForeground(new Color(0, 100, 0));
 		lblCargo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		lblCargo.setBounds(111, 13, 70, 14);
+		lblCargo.setBounds(0, 14, 70, 14);
 		panel_2.add(lblCargo);
 
 		lblHorario = new JLabel("HORARIO");
+		lblHorario.setForeground(new Color(0, 100, 0));
 		lblHorario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHorario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		lblHorario.setBounds(111, 99, 70, 21);
+		lblHorario.setBounds(0, 100, 70, 21);
 		panel_2.add(lblHorario);
 
 		lblContrato = new JLabel("CONTRATO");
+		lblContrato.setForeground(new Color(0, 100, 0));
 		lblContrato.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContrato.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		lblContrato.setBounds(111, 173, 70, 21);
+		lblContrato.setBounds(0, 175, 70, 21);
 		panel_2.add(lblContrato);
 
 		lblNombre = new JLabel("Nombre.");
@@ -827,10 +808,10 @@ public class registro_empleados extends JFrame {
 		});
 		btnvercontrato.setBounds(129, 244, 52, 14);
 		panel_2.add(btnvercontrato);
-		
+
 		btnAsignar = new JButton("Asignar");
 		btnAsignar.setBackground(Color.WHITE);
-		btnAsignar.setBounds(10, 11, 83, 18);
+		btnAsignar.setBounds(76, 12, 83, 18);
 		panel_2.add(btnAsignar);
 		btnAsignar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -853,13 +834,13 @@ public class registro_empleados extends JFrame {
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnAtras.setVisible(false);
-				formulario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+				formulario.btnAsignar.setVisible(true);
 			}
 		});
-		
+
 		btnAsignar_1 = new JButton("Asignar");
 		btnAsignar_1.setBackground(Color.WHITE);
-		btnAsignar_1.setBounds(10, 99, 83, 18);
+		btnAsignar_1.setBounds(76, 100, 83, 18);
 		panel_2.add(btnAsignar_1);
 		btnAsignar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -882,14 +863,13 @@ public class registro_empleados extends JFrame {
 				formulario.btnMostrarHorario.setVisible(true);
 				formulario.btnAceptarHorario.setVisible(false);
 				formulario.btnAtras.setVisible(false);
-				formulario.btnAsignar.setVisible(true);	
-				formulario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+				formulario.btnAsignar.setVisible(true);
 			}
 		});
-		
+
 		btnAsignar_2 = new JButton("Asignar");
 		btnAsignar_2.setBackground(Color.WHITE);
-		btnAsignar_2.setBounds(10, 173, 83, 18);
+		btnAsignar_2.setBounds(76, 175, 83, 18);
 		panel_2.add(btnAsignar_2);
 		btnAsignar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -912,7 +892,7 @@ public class registro_empleados extends JFrame {
 				formulario.btnMostrarContrato.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnAtras.setVisible(false);
-				formulario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+				formulario.btnAsignar.setVisible(true);
 			}
 		});
 
@@ -922,30 +902,30 @@ public class registro_empleados extends JFrame {
 		btnGuardarEmpleado.setBounds(444, 572, 99, 23);
 		panel.add(btnGuardarEmpleado);
 
-		JLabel lblAsignaciones = new JLabel("17. Asignaciones :");
+		JLabel lblAsignaciones = new JLabel("16. Asignaciones :");
 		lblAsignaciones.setBackground(Color.WHITE);
 		lblAsignaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblAsignaciones.setBounds(354, 244, 130, 14);
 		panel.add(lblAsignaciones);
-				
-						JLabel label = new JLabel();
-						label.setBackground(new Color(60, 179, 113));
-						label.setBounds(0, 0, 579, 635);
-						panel.add(label);
-						final ImageIcon logo = new ImageIcon(
-								icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-						label.setIcon(logo);
+
+		JLabel label = new JLabel();
+		label.setBackground(new Color(60, 179, 113));
+		label.setBounds(0, 0, 579, 635);
+		panel.add(label);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+		label.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE EMPLEADOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblRegistroYMantenimiento.setBounds(10, 11, 466, 23);
 		contentPane.add(lblRegistroYMantenimiento);
 
-		JButton btnRegresar_1 = new JButton("Regresar");
-		btnRegresar_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnRegresar_1.setBackground(new Color(255, 165, 0));
-		btnRegresar_1.setBounds(1093, 11, 99, 23);
-		contentPane.add(btnRegresar_1);
+		btnRegresar = new JButton("Regresar");
+		btnRegresar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresar.setBackground(new Color(255, 165, 0));
+		btnRegresar.setBounds(1093, 11, 99, 23);
+		contentPane.add(btnRegresar);
 		final ImageIcon iconoo = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
 		JPanel panel_1 = new JPanel();
@@ -1049,7 +1029,7 @@ public class registro_empleados extends JFrame {
 		lblAsignacionesYLista.setBounds(599, 11, 466, 23);
 		contentPane.add(lblAsignacionesYLista);
 
-		btnRegresar_1.addActionListener(new ActionListener() {
+		btnRegresar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
@@ -1144,7 +1124,7 @@ public class registro_empleados extends JFrame {
 	public void construirTablaEmpleados() {
 		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero", "Edad", "Telefono", "Correo",
 				"Direccion", "Foto", "Nombre_Referencia", "Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro",
-				"Fecha_Labores", "Estado", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario", "Dias", "Horas",
+				"Fecha_Labores", "Usuario", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario", "Dias", "Horas",
 				"Identidad_Contrato", "Tipo", "Tiempo", "Foto" };
 		String informacion[][] = control_empleado.obtenerMatriz();
 		tablaEmpleados = new JTable(informacion, titulos);
@@ -1271,12 +1251,12 @@ public class registro_empleados extends JFrame {
 				ruta_logo = (rs.getString("direccion_logo_empresa"));
 				final ImageIcon logo = new ImageIcon(ruta_logo);
 
-				final ImageIcon icono = new ImageIcon(
-						logo.getImage().getScaledInstance(label_1.getWidth(),label_1.getHeight(), Image.SCALE_DEFAULT));
+				final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(label_1.getWidth(),
+						label_1.getHeight(), Image.SCALE_DEFAULT));
 				label_1.setIcon(icono);
 
-				final ImageIcon icono2 = new ImageIcon(
-						logo.getImage().getScaledInstance(label_6.getWidth(),label_6.getHeight(), Image.SCALE_DEFAULT));
+				final ImageIcon icono2 = new ImageIcon(logo.getImage().getScaledInstance(label_6.getWidth(),
+						label_6.getHeight(), Image.SCALE_DEFAULT));
 				label_6.setIcon(icono2);
 
 			} else {

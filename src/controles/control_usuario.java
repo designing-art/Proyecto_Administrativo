@@ -33,6 +33,33 @@ public class control_usuario implements ActionListener {
 	public consultas_usuario consulta;
 	public registro_usuarios formulario;
 	public static String identidad = null;
+	public static String usuario = null;
+
+	public static String todo;
+	public static String empleado;
+	public static String cargoe;
+	public static String horario;
+	public static String contrato_e;
+	public static String cliente;
+	public static String contrato_c;
+	public static String compra;
+	public static String proveedor;
+	public static String inventario;
+	public static String factura_c;
+	public static String factura_e;
+	public static String sar;
+	public static String ingreso;
+	public static String producto;
+	public static String servicio;
+	public static String venta;
+	public static String egreso;
+	public static String bonificacion;
+	public static String deduccion;
+	public static String planilla;
+	public static String empresa;
+	public static String opciones;
+	public static String usuarios;
+	public static String acercade;
 
 	public control_usuario(usuario clase, consultas_usuario consulta, registro_usuarios formulario) {
 		this.clase = clase;
@@ -49,56 +76,111 @@ public class control_usuario implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtNombres.getText().isEmpty()
-					|| formulario.txtApellidos.getText().isEmpty()
-					|| formulario.txtCargo.getText().isEmpty()
-					|| formulario.txtIdentidad.getText().isEmpty()
-					|| formulario.txtUsuario.getText().isEmpty()
-					|| formulario.txtContraseña.getText().isEmpty()) 
-			{
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
-			} else {
-				clase.setUsuario(formulario.txtUsuario.getText().toString());
-				clase.setContraseña(formulario.txtContraseña.getText().toString());
-				clase.setIdentidad(formulario.txtIdentidad.getText().toString());
-				clase.setNombre(formulario.txtNombres.getText().toString()+" "+formulario.txtApellidos.getText().toString());
-				clase.setCargo(formulario.txtCargo.getText().toString());
-				clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
-				clase.setPermisos(formulario.cbxPermiso.getSelectedItem().toString());
-
-				if (consulta.insertar(clase)) {
-					JOptionPane.showMessageDialog(null, "Usuario registrado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-				} else {
-					JOptionPane.showMessageDialog(null, "Error! Usuario no registrado");
-					limpiar();
-				}
-			}
-
-		}
-
-		if (e.getSource() == formulario.btnActualizar)
-		{
-			if (formulario.txtNombres.getText().isEmpty()
-					|| formulario.txtApellidos.getText().isEmpty()
-					|| formulario.txtCargo.getText().isEmpty()
-					|| formulario.txtIdentidad.getText().isEmpty()
-					|| formulario.txtUsuario.getText().isEmpty()
+			validarUsuarioPorIdentidad();
+			if (formulario.txtNombres.getText().isEmpty() || formulario.txtCargo.getText().isEmpty()
+					|| formulario.txtIdentidad.getText().isEmpty() || formulario.txtUsuario.getText().isEmpty()
 					|| formulario.txtContraseña.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
 			} else {
+				if (formulario.txtIdentidad.getText().toString().equals(identidad)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+							"Alerta!", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					if (formulario.txtUsuario.getText().toString().equals(usuario)) {
+						JOptionPane.showMessageDialog(null,
+								"Se encontrado un usuario que ya pertenece a : " + identidad, "Alerta!",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						definirPermisos();
+						clase.setUsuario(formulario.txtUsuario.getText().toString());
+						clase.setContraseña(formulario.txtContraseña.getText().toString());
+						clase.setIdentidad(formulario.txtIdentidad.getText().toString());
+						clase.setNombre(formulario.txtNombres.getText().toString());
+						clase.setCargo(formulario.txtCargo.getText().toString());
+						clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
+						clase.setPermiso_todo(todo);
+						clase.setPermiso_empleado(empleado);
+						clase.setPermiso_cargo(cargoe);
+						clase.setPermiso_horario(horario);
+						clase.setPermiso_contrato_e(contrato_e);
+						clase.setPermiso_cliente(cliente);
+						clase.setPermiso_contrato_c(contrato_c);
+						clase.setPermiso_compra(compra);
+						clase.setPermiso_proveedor(proveedor);
+						clase.setPermiso_inventario(inventario);
+						clase.setPermiso_factura_c(factura_c);
+						clase.setPermiso_factura_e(factura_e);
+						clase.setPermiso_sar(sar);
+						clase.setPermiso_ingreso(ingreso);
+						clase.setPermiso_producto(producto);
+						clase.setPermiso_servicio(servicio);
+						clase.setPermiso_venta(venta);
+						clase.setPermiso_egreso(egreso);
+						clase.setPermiso_bonificacion(bonificacion);
+						clase.setPermiso_deduccion(deduccion);
+						clase.setPermiso_planilla(planilla);
+						clase.setPermiso_empresa(empresa);
+						clase.setPermiso_opciones(opciones);
+						clase.setPermiso_usuarios(usuarios);
+						clase.setPermiso_acercade(acercade);
+
+						if (consulta.insertar(clase)) {
+							JOptionPane.showMessageDialog(null, "Usuario registrado!");
+							limpiar();
+							formulario.construirTabla();
+							formulario.obtenerUltimoId();
+						} else {
+							JOptionPane.showMessageDialog(null, "Error! Usuario no registrado");
+							limpiar();
+						}
+					}
+
+				}
+			}
+		}
+
+		if (e.getSource() == formulario.btnActualizar) {
+			if (formulario.txtNombres.getText().isEmpty()
+
+					|| formulario.txtCargo.getText().isEmpty() || formulario.txtIdentidad.getText().isEmpty()
+					|| formulario.txtUsuario.getText().isEmpty() || formulario.txtContraseña.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
+			} else {
+				definirPermisos();
 				clase.setId_usuario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
 				clase.setUsuario(formulario.txtUsuario.getText().toString());
 				clase.setContraseña(formulario.txtContraseña.getText().toString());
 				clase.setIdentidad(formulario.txtIdentidad.getText().toString());
-				clase.setNombre(formulario.txtNombres.getText().toString()+" "+formulario.txtApellidos.getText().toString());
+				clase.setNombre(formulario.txtNombres.getText().toString());
 				clase.setCargo(formulario.txtCargo.getText().toString());
 				clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
-				clase.setPermisos(formulario.cbxPermiso.getSelectedItem().toString());
+				clase.setPermiso_todo(todo);
+				clase.setPermiso_empleado(empleado);
+				clase.setPermiso_cargo(cargoe);
+				clase.setPermiso_horario(horario);
+				clase.setPermiso_contrato_e(contrato_e);
+				clase.setPermiso_cliente(cliente);
+				clase.setPermiso_contrato_c(contrato_c);
+				clase.setPermiso_compra(compra);
+				clase.setPermiso_proveedor(proveedor);
+				clase.setPermiso_inventario(inventario);
+				clase.setPermiso_factura_c(factura_c);
+				clase.setPermiso_factura_e(factura_e);
+				clase.setPermiso_sar(sar);
+				clase.setPermiso_ingreso(ingreso);
+				clase.setPermiso_producto(producto);
+				clase.setPermiso_servicio(servicio);
+				clase.setPermiso_venta(venta);
+				clase.setPermiso_egreso(egreso);
+				clase.setPermiso_bonificacion(bonificacion);
+				clase.setPermiso_deduccion(deduccion);
+				clase.setPermiso_planilla(planilla);
+				clase.setPermiso_empresa(empresa);
+				clase.setPermiso_opciones(opciones);
+				clase.setPermiso_usuarios(usuarios);
+				clase.setPermiso_acercade(acercade);
 
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Usuario actualizado!");
@@ -126,7 +208,203 @@ public class control_usuario implements ActionListener {
 					String nombre = formulario.tabla.getValueAt(filaseleccionada, 4).toString();
 					String cargo = formulario.tabla.getValueAt(filaseleccionada, 5).toString();
 					String tipo = formulario.tabla.getValueAt(filaseleccionada, 6).toString();
-					String permisos = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
+					String todo = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
+					String empleado = formulario.tabla.getValueAt(filaseleccionada, 8).toString();
+					String cargoe = formulario.tabla.getValueAt(filaseleccionada, 9).toString();
+					String horario = formulario.tabla.getValueAt(filaseleccionada, 10).toString();
+					String contrato_e = formulario.tabla.getValueAt(filaseleccionada, 11).toString();
+					String cliente = formulario.tabla.getValueAt(filaseleccionada, 12).toString();
+					String contrato_c = formulario.tabla.getValueAt(filaseleccionada, 13).toString();
+					String compra = formulario.tabla.getValueAt(filaseleccionada, 14).toString();
+					String proveedor = formulario.tabla.getValueAt(filaseleccionada, 15).toString();
+					String inventario = formulario.tabla.getValueAt(filaseleccionada, 16).toString();
+					String factura_c = formulario.tabla.getValueAt(filaseleccionada, 17).toString();
+					String factura_e = formulario.tabla.getValueAt(filaseleccionada, 18).toString();
+					String sar = formulario.tabla.getValueAt(filaseleccionada, 19).toString();
+					String ingreso = formulario.tabla.getValueAt(filaseleccionada, 20).toString();
+					String producto = formulario.tabla.getValueAt(filaseleccionada, 21).toString();
+					String servicio = formulario.tabla.getValueAt(filaseleccionada, 22).toString();
+					String venta = formulario.tabla.getValueAt(filaseleccionada, 23).toString();
+					String egreso = formulario.tabla.getValueAt(filaseleccionada, 24).toString();
+					String bonificacion = formulario.tabla.getValueAt(filaseleccionada, 25).toString();
+					String deduccion = formulario.tabla.getValueAt(filaseleccionada, 26).toString();
+					String planilla = formulario.tabla.getValueAt(filaseleccionada, 27).toString();
+					String empresa = formulario.tabla.getValueAt(filaseleccionada, 28).toString();
+					String opciones = formulario.tabla.getValueAt(filaseleccionada, 29).toString();
+					String usuarios = formulario.tabla.getValueAt(filaseleccionada, 30).toString();
+					String acercade = formulario.tabla.getValueAt(filaseleccionada, 31).toString();
+
+					if (todo.equals("SI")) {
+						registro_usuarios.rbdTodos.setSelected(true);
+					} else {
+						registro_usuarios.rbdTodos.setSelected(false);
+					}
+					if (empleado.equals("SI")) {
+						registro_usuarios.rdbtnEmpleados.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnEmpleados.setSelected(false);
+					}
+					if (cargoe.equals("SI")) {
+						registro_usuarios.rdbtnCargos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnCargos.setSelected(false);
+					}
+					if (horario.equals("SI")) {
+						registro_usuarios.rdbtnHorarios.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnHorarios.setSelected(false);
+					}
+
+					if (contrato_e.equals("SI")) {
+						registro_usuarios.rdbtnContratos_e.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnContratos_e.setSelected(false);
+					}
+
+					if (cliente.equals("SI")) {
+						registro_usuarios.rdbtnClientes.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnClientes.setSelected(false);
+					}
+					if (contrato_c.equals("SI")) {
+						registro_usuarios.rdbtnContratos_c.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnContratos_c.setSelected(false);
+					}
+
+					if (compra.equals("SI")) {
+						registro_usuarios.rdbtnCompras.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnCompras.setSelected(false);
+					}
+
+					if (proveedor.equals("SI")) {
+						registro_usuarios.rdbtnProveedores.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnProveedores.setSelected(false);
+
+					}
+					if (inventario.equals("SI")) {
+						registro_usuarios.rdbtnInventario.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnInventario.setSelected(false);
+					}
+
+					if (factura_c.equals("SI")) {
+						registro_usuarios.rdbtnFactCliente.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnFactCliente.setSelected(false);
+					}
+
+					if (factura_e.equals("SI")) {
+						registro_usuarios.rdbtnFactEmpresa.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnFactEmpresa.setSelected(false);
+					}
+
+					if (sar.equals("SI")) {
+						registro_usuarios.rdbtnSar.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnSar.setSelected(false);
+					}
+
+					if (ingreso.equals("SI")) {
+						registro_usuarios.rdbtnIngresos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnIngresos.setSelected(false);
+					}
+
+					if (producto.equals("SI")) {
+						registro_usuarios.rdbtnProductos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnProductos.setSelected(false);
+					}
+
+					if (servicio.equals("SI")) {
+						registro_usuarios.rdbtnServicios.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnServicios.setSelected(false);
+					}
+
+					if (venta.equals("SI")) {
+						registro_usuarios.rdbtnVentas.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnVentas.setSelected(false);
+					}
+
+					if (egreso.equals("SI")) {
+						registro_usuarios.rdbtnEgresos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnEgresos.setSelected(false);
+
+					}
+					if (bonificacion.equals("SI")) {
+						registro_usuarios.rdbtnBonificaciones.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnBonificaciones.setSelected(false);
+					}
+
+					if (deduccion.equals("SI")) {
+						registro_usuarios.rdbtnDeducc.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnDeducc.setSelected(false);
+					}
+
+					if (planilla.equals("SI")) {
+						registro_usuarios.rdbtnPlanillas.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnPlanillas.setSelected(false);
+					}
+
+					if (empresa.equals("SI")) {
+						registro_usuarios.rdbtnEmpresa.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnEmpresa.setSelected(false);
+					}
+
+					if (opciones.equals("SI")) {
+						registro_usuarios.rdbtnConfiguracion.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnConfiguracion.setSelected(false);
+					}
+
+					if (usuarios.equals("SI")) {
+						registro_usuarios.rdbtnUsuarios.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnUsuarios.setSelected(false);
+					}
+
+					if (acercade.equals("SI")) {
+						registro_usuarios.rdbtnAcercaDe.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnAcercaDe.setSelected(false);
+					}
+
+					todo = "Todos";
+					empleado = "Empleados";
+					cargoe = "Cargos";
+					horario = "Horarios";
+					contrato_e = "Contratos E.";
+					cliente = "Planillas";
+					contrato_c = "Proveedores";
+					compra = "Compras";
+					proveedor = "Proveedores";
+					inventario = "Invetario";
+					factura_c = "Fact. Cliente";
+					factura_e = "Fact. Empre";
+					sar = "SAR";
+					ingreso = "Ingresos";
+					producto = "Productos";
+					servicio = "Servicios";
+					venta = "Ventas";
+					egreso = "Egresos";
+					bonificacion = "Bonific.";
+					deduccion = "Deducc.";
+					planilla = "Planillas";
+					empresa = "Empresa";
+					opciones = "Opciones";
+					usuarios = "Usuarios";
+					acercade = "Acerca de.";
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtUsuario.setText(usuario);
@@ -135,7 +413,31 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setText(nombre);
 					formulario.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
-					formulario.cbxPermiso.setSelectedItem(permisos);
+					formulario.rbdTodos.setText(todo);
+					formulario.rdbtnEmpleados.setText(empleado);
+					formulario.rdbtnCargos.setText(cargoe);
+					formulario.rdbtnHorarios.setText(horario);
+					formulario.rdbtnContratos_e.setText(contrato_e);
+					formulario.rdbtnClientes.setText(cliente);
+					formulario.rdbtnContratos_c.setText(contrato_c);
+					formulario.rdbtnCompras.setText(compra);
+					formulario.rdbtnProveedores.setText(proveedor);
+					formulario.rdbtnInventario.setText(inventario);
+					formulario.rdbtnFactCliente.setText(factura_c);
+					formulario.rdbtnFactEmpresa.setText(factura_e);
+					formulario.rdbtnSar.setText(sar);
+					formulario.rdbtnIngresos.setText(ingreso);
+					formulario.rdbtnProductos.setText(producto);
+					formulario.rdbtnServicios.setText(servicio);
+					formulario.rdbtnVentas.setText(venta);
+					formulario.rdbtnEgresos.setText(egreso);
+					formulario.rdbtnBonificaciones.setText(bonificacion);
+					formulario.rdbtnDeducc.setText(deduccion);
+					formulario.rdbtnPlanillas.setText(planilla);
+					formulario.rdbtnEmpresa.setText(empresa);
+					formulario.rdbtnConfiguracion.setText(opciones);
+					formulario.rdbtnUsuarios.setText(usuarios);
+					formulario.rdbtnAcercaDe.setText(acercade);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
@@ -144,8 +446,35 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setForeground(Color.BLACK);
 					formulario.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
-					formulario.cbxPermiso.setForeground(Color.BLACK);
+					formulario.rbdTodos.setForeground(Color.BLACK);
+					formulario.rdbtnEmpleados.setForeground(Color.BLACK);
+					formulario.rdbtnCargos.setForeground(Color.BLACK);
+					formulario.rdbtnHorarios.setForeground(Color.BLACK);
+					formulario.rdbtnContratos_e.setForeground(Color.BLACK);
+					formulario.rdbtnClientes.setForeground(Color.BLACK);
+					formulario.rdbtnContratos_c.setForeground(Color.BLACK);
+					formulario.rdbtnCompras.setForeground(Color.BLACK);
+					formulario.rdbtnProveedores.setForeground(Color.BLACK);
+					formulario.rdbtnInventario.setForeground(Color.BLACK);
+					formulario.rdbtnFactCliente.setForeground(Color.BLACK);
+					formulario.rdbtnFactEmpresa.setForeground(Color.BLACK);
+					formulario.rdbtnSar.setForeground(Color.BLACK);
+					formulario.rdbtnIngresos.setForeground(Color.BLACK);
+					formulario.rdbtnProductos.setForeground(Color.BLACK);
+					formulario.rdbtnServicios.setForeground(Color.BLACK);
+					formulario.rdbtnVentas.setForeground(Color.BLACK);
+					formulario.rdbtnEgresos.setForeground(Color.BLACK);
+					formulario.rdbtnBonificaciones.setForeground(Color.BLACK);
+					formulario.rdbtnDeducc.setForeground(Color.BLACK);
+					formulario.rdbtnPlanillas.setForeground(Color.BLACK);
+					formulario.rdbtnEmpresa.setForeground(Color.BLACK);
+					formulario.rdbtnConfiguracion.setForeground(Color.BLACK);
+					formulario.rdbtnUsuarios.setForeground(Color.BLACK);
+					formulario.rdbtnAcercaDe.setForeground(Color.BLACK);
 
+					formulario.txtIdentidad.setEditable(false);
+					formulario.txtNombres.setEditable(false);
+					formulario.txtCargo.setEditable(false);
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevo.setVisible(false);
@@ -180,7 +509,203 @@ public class control_usuario implements ActionListener {
 					String nombre = formulario.tabla.getValueAt(filaseleccionada, 4).toString();
 					String cargo = formulario.tabla.getValueAt(filaseleccionada, 5).toString();
 					String tipo = formulario.tabla.getValueAt(filaseleccionada, 6).toString();
-					String permisos = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
+					String todo = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
+					String empleado = formulario.tabla.getValueAt(filaseleccionada, 8).toString();
+					String cargoe = formulario.tabla.getValueAt(filaseleccionada, 9).toString();
+					String horario = formulario.tabla.getValueAt(filaseleccionada, 10).toString();
+					String contrato_e = formulario.tabla.getValueAt(filaseleccionada, 11).toString();
+					String cliente = formulario.tabla.getValueAt(filaseleccionada, 12).toString();
+					String contrato_c = formulario.tabla.getValueAt(filaseleccionada, 13).toString();
+					String compra = formulario.tabla.getValueAt(filaseleccionada, 14).toString();
+					String proveedor = formulario.tabla.getValueAt(filaseleccionada, 15).toString();
+					String inventario = formulario.tabla.getValueAt(filaseleccionada, 16).toString();
+					String factura_c = formulario.tabla.getValueAt(filaseleccionada, 17).toString();
+					String factura_e = formulario.tabla.getValueAt(filaseleccionada, 18).toString();
+					String sar = formulario.tabla.getValueAt(filaseleccionada, 19).toString();
+					String ingreso = formulario.tabla.getValueAt(filaseleccionada, 20).toString();
+					String producto = formulario.tabla.getValueAt(filaseleccionada, 21).toString();
+					String servicio = formulario.tabla.getValueAt(filaseleccionada, 22).toString();
+					String venta = formulario.tabla.getValueAt(filaseleccionada, 23).toString();
+					String egreso = formulario.tabla.getValueAt(filaseleccionada, 24).toString();
+					String bonificacion = formulario.tabla.getValueAt(filaseleccionada, 25).toString();
+					String deduccion = formulario.tabla.getValueAt(filaseleccionada, 26).toString();
+					String planilla = formulario.tabla.getValueAt(filaseleccionada, 27).toString();
+					String empresa = formulario.tabla.getValueAt(filaseleccionada, 28).toString();
+					String opciones = formulario.tabla.getValueAt(filaseleccionada, 29).toString();
+					String usuarios = formulario.tabla.getValueAt(filaseleccionada, 30).toString();
+					String acercade = formulario.tabla.getValueAt(filaseleccionada, 31).toString();
+
+					if (todo.equals("SI")) {
+						registro_usuarios.rbdTodos.setSelected(true);
+					} else {
+						registro_usuarios.rbdTodos.setSelected(false);
+					}
+					if (empleado.equals("SI")) {
+						registro_usuarios.rdbtnEmpleados.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnEmpleados.setSelected(false);
+					}
+					if (cargoe.equals("SI")) {
+						registro_usuarios.rdbtnCargos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnCargos.setSelected(false);
+					}
+					if (horario.equals("SI")) {
+						registro_usuarios.rdbtnHorarios.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnHorarios.setSelected(false);
+					}
+
+					if (contrato_e.equals("SI")) {
+						registro_usuarios.rdbtnContratos_e.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnContratos_e.setSelected(false);
+					}
+
+					if (cliente.equals("SI")) {
+						registro_usuarios.rdbtnClientes.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnClientes.setSelected(false);
+					}
+					if (contrato_c.equals("SI")) {
+						registro_usuarios.rdbtnContratos_c.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnContratos_c.setSelected(false);
+					}
+
+					if (compra.equals("SI")) {
+						registro_usuarios.rdbtnCompras.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnCompras.setSelected(false);
+					}
+
+					if (proveedor.equals("SI")) {
+						registro_usuarios.rdbtnProveedores.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnProveedores.setSelected(false);
+
+					}
+					if (inventario.equals("SI")) {
+						registro_usuarios.rdbtnInventario.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnInventario.setSelected(false);
+					}
+
+					if (factura_c.equals("SI")) {
+						registro_usuarios.rdbtnFactCliente.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnFactCliente.setSelected(false);
+					}
+
+					if (factura_e.equals("SI")) {
+						registro_usuarios.rdbtnFactEmpresa.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnFactEmpresa.setSelected(false);
+					}
+
+					if (sar.equals("SI")) {
+						registro_usuarios.rdbtnSar.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnSar.setSelected(false);
+					}
+
+					if (ingreso.equals("SI")) {
+						registro_usuarios.rdbtnIngresos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnIngresos.setSelected(false);
+					}
+
+					if (producto.equals("SI")) {
+						registro_usuarios.rdbtnProductos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnProductos.setSelected(false);
+					}
+
+					if (servicio.equals("SI")) {
+						registro_usuarios.rdbtnServicios.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnServicios.setSelected(false);
+					}
+
+					if (venta.equals("SI")) {
+						registro_usuarios.rdbtnVentas.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnVentas.setSelected(false);
+					}
+
+					if (egreso.equals("SI")) {
+						registro_usuarios.rdbtnEgresos.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnEgresos.setSelected(false);
+
+					}
+					if (bonificacion.equals("SI")) {
+						registro_usuarios.rdbtnBonificaciones.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnBonificaciones.setSelected(false);
+					}
+
+					if (deduccion.equals("SI")) {
+						registro_usuarios.rdbtnDeducc.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnDeducc.setSelected(false);
+					}
+
+					if (planilla.equals("SI")) {
+						registro_usuarios.rdbtnPlanillas.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnPlanillas.setSelected(false);
+					}
+
+					if (empresa.equals("SI")) {
+						registro_usuarios.rdbtnEmpresa.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnEmpresa.setSelected(false);
+					}
+
+					if (opciones.equals("SI")) {
+						registro_usuarios.rdbtnConfiguracion.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnConfiguracion.setSelected(false);
+					}
+
+					if (usuarios.equals("SI")) {
+						registro_usuarios.rdbtnUsuarios.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnUsuarios.setSelected(false);
+					}
+
+					if (acercade.equals("SI")) {
+						registro_usuarios.rdbtnAcercaDe.setSelected(true);
+					} else {
+						registro_usuarios.rdbtnAcercaDe.setSelected(false);
+					}
+
+					todo = "Todos";
+					empleado = "Empleados";
+					cargoe = "Cargos";
+					horario = "Horarios";
+					contrato_e = "Contratos E.";
+					cliente = "Planillas";
+					contrato_c = "Proveedores";
+					compra = "Compras";
+					proveedor = "Proveedores";
+					inventario = "Invetario";
+					factura_c = "Fact. Cliente";
+					factura_e = "Fact. Empre";
+					sar = "SAR";
+					ingreso = "Ingresos";
+					producto = "Productos";
+					servicio = "Servicios";
+					venta = "Ventas";
+					egreso = "Egresos";
+					bonificacion = "Bonific.";
+					deduccion = "Deducc.";
+					planilla = "Planillas";
+					empresa = "Empresa";
+					opciones = "Opciones";
+					usuarios = "Usuarios";
+					acercade = "Acerca de.";
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtUsuario.setText(usuario);
@@ -189,7 +714,31 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setText(nombre);
 					formulario.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
-					formulario.cbxPermiso.setSelectedItem(permisos);
+					formulario.rbdTodos.setText(todo);
+					formulario.rdbtnEmpleados.setText(empleado);
+					formulario.rdbtnCargos.setText(cargoe);
+					formulario.rdbtnHorarios.setText(horario);
+					formulario.rdbtnContratos_e.setText(contrato_e);
+					formulario.rdbtnClientes.setText(cliente);
+					formulario.rdbtnContratos_c.setText(contrato_c);
+					formulario.rdbtnCompras.setText(compra);
+					formulario.rdbtnProveedores.setText(proveedor);
+					formulario.rdbtnInventario.setText(inventario);
+					formulario.rdbtnFactCliente.setText(factura_c);
+					formulario.rdbtnFactEmpresa.setText(factura_e);
+					formulario.rdbtnSar.setText(sar);
+					formulario.rdbtnIngresos.setText(ingreso);
+					formulario.rdbtnProductos.setText(producto);
+					formulario.rdbtnServicios.setText(servicio);
+					formulario.rdbtnVentas.setText(venta);
+					formulario.rdbtnEgresos.setText(egreso);
+					formulario.rdbtnBonificaciones.setText(bonificacion);
+					formulario.rdbtnDeducc.setText(deduccion);
+					formulario.rdbtnPlanillas.setText(planilla);
+					formulario.rdbtnEmpresa.setText(empresa);
+					formulario.rdbtnConfiguracion.setText(opciones);
+					formulario.rdbtnUsuarios.setText(usuarios);
+					formulario.rdbtnAcercaDe.setText(acercade);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
@@ -198,16 +747,38 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setForeground(Color.BLACK);
 					formulario.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
-					formulario.cbxPermiso.setForeground(Color.BLACK);
+					formulario.rbdTodos.setForeground(Color.BLACK);
+					formulario.rdbtnEmpleados.setForeground(Color.BLACK);
+					formulario.rdbtnCargos.setForeground(Color.BLACK);
+					formulario.rdbtnHorarios.setForeground(Color.BLACK);
+					formulario.rdbtnContratos_e.setForeground(Color.BLACK);
+					formulario.rdbtnClientes.setForeground(Color.BLACK);
+					formulario.rdbtnContratos_c.setForeground(Color.BLACK);
+					formulario.rdbtnCompras.setForeground(Color.BLACK);
+					formulario.rdbtnProveedores.setForeground(Color.BLACK);
+					formulario.rdbtnInventario.setForeground(Color.BLACK);
+					formulario.rdbtnFactCliente.setForeground(Color.BLACK);
+					formulario.rdbtnFactEmpresa.setForeground(Color.BLACK);
+					formulario.rdbtnSar.setForeground(Color.BLACK);
+					formulario.rdbtnIngresos.setForeground(Color.BLACK);
+					formulario.rdbtnProductos.setForeground(Color.BLACK);
+					formulario.rdbtnServicios.setForeground(Color.BLACK);
+					formulario.rdbtnVentas.setForeground(Color.BLACK);
+					formulario.rdbtnEgresos.setForeground(Color.BLACK);
+					formulario.rdbtnBonificaciones.setForeground(Color.BLACK);
+					formulario.rdbtnDeducc.setForeground(Color.BLACK);
+					formulario.rdbtnPlanillas.setForeground(Color.BLACK);
+					formulario.rdbtnEmpresa.setForeground(Color.BLACK);
+					formulario.rdbtnConfiguracion.setForeground(Color.BLACK);
+					formulario.rdbtnUsuarios.setForeground(Color.BLACK);
+					formulario.rdbtnAcercaDe.setForeground(Color.BLACK);
 
-					formulario.txtCodigo.setEditable(false);
 					formulario.txtUsuario.setEditable(false);
 					formulario.txtContraseña.setEditable(false);
 					formulario.txtIdentidad.setEditable(false);
 					formulario.txtNombres.setEditable(false);
 					formulario.txtCargo.setEditable(false);
 					formulario.cbxTipoUsuario.setEditable(false);
-					formulario.cbxPermiso.setEditable(false);
 
 					formulario.btnBorrar.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
@@ -259,7 +830,6 @@ public class control_usuario implements ActionListener {
 		/* Nuevo */
 		if (e.getSource() == formulario.btnNuevo) {
 			limpiar();
-			limpiar();
 			formulario.obtenerUltimoId();
 			formulario.btnBorrar.setVisible(false);
 			formulario.btnGuardar.setVisible(true);
@@ -270,7 +840,7 @@ public class control_usuario implements ActionListener {
 			formulario.btnAceptar.setVisible(false);
 			formulario.pistas();
 			formulario.construirTabla();
-			
+
 		}
 
 		/* Aceptar */
@@ -311,6 +881,33 @@ public class control_usuario implements ActionListener {
 		formulario.txtIdentidad.setText(null);
 		formulario.txtNombres.setText(null);
 		formulario.txtCargo.setText(null);
+
+		formulario.rbdTodos.setSelected(false);
+		formulario.rdbtnEmpleados.setSelected(false);
+		formulario.rdbtnCargos.setSelected(false);
+		formulario.rdbtnHorarios.setSelected(false);
+		formulario.rdbtnContratos_e.setSelected(false);
+		formulario.rdbtnClientes.setSelected(false);
+		formulario.rdbtnContratos_c.setSelected(false);
+		formulario.rdbtnCompras.setSelected(false);
+		formulario.rdbtnProveedores.setSelected(false);
+		formulario.rdbtnInventario.setSelected(false);
+		formulario.rdbtnFactCliente.setSelected(false);
+		formulario.rdbtnFactEmpresa.setSelected(false);
+		formulario.rdbtnSar.setSelected(false);
+		formulario.rdbtnIngresos.setSelected(false);
+		formulario.rdbtnProductos.setSelected(false);
+		formulario.rdbtnServicios.setSelected(false);
+		formulario.rdbtnVentas.setSelected(false);
+		formulario.rdbtnEgresos.setSelected(false);
+		formulario.rdbtnBonificaciones.setSelected(false);
+		formulario.rdbtnDeducc.setSelected(false);
+		formulario.rdbtnPlanillas.setSelected(false);
+		formulario.rdbtnEmpresa.setSelected(false);
+		formulario.rdbtnConfiguracion.setSelected(false);
+		formulario.rdbtnUsuarios.setSelected(false);
+		formulario.rdbtnAcercaDe.setSelected(false);
+
 		formulario.txtBusqueda.requestFocusInWindow();
 	}
 
@@ -331,7 +928,31 @@ public class control_usuario implements ActionListener {
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setCargo(rs.getString("cargo"));
 				usuario.setTipo_usuario(rs.getString("tipo_usuario"));
-				usuario.setPermisos(rs.getString("permisos"));
+				usuario.setPermiso_todo(rs.getString("permiso_todo"));
+				usuario.setPermiso_empleado(rs.getString("permiso_empleado"));
+				usuario.setPermiso_cargo(rs.getString("permiso_cargo"));
+				usuario.setPermiso_horario(rs.getString("permiso_horario"));
+				usuario.setPermiso_contrato_e(rs.getString("permiso_contrato_e"));
+				usuario.setPermiso_cliente(rs.getString("permiso_cliente"));
+				usuario.setPermiso_contrato_c(rs.getString("permiso_contrato_c"));
+				usuario.setPermiso_compra(rs.getString("permiso_compra"));
+				usuario.setPermiso_proveedor(rs.getString("permiso_proveedor"));
+				usuario.setPermiso_inventario(rs.getString("permiso_inventario"));
+				usuario.setPermiso_factura_c(rs.getString("permiso_factura_c"));
+				usuario.setPermiso_factura_e(rs.getString("permiso_factura_e"));
+				usuario.setPermiso_sar(rs.getString("permiso_sar"));
+				usuario.setPermiso_ingreso(rs.getString("permiso_ingreso"));
+				usuario.setPermiso_producto(rs.getString("permiso_producto"));
+				usuario.setPermiso_servicio(rs.getString("permiso_servicio"));
+				usuario.setPermiso_venta(rs.getString("permiso_venta"));
+				usuario.setPermiso_egreso(rs.getString("permiso_egreso"));
+				usuario.setPermiso_bonificacion(rs.getString("permiso_bonificacion"));
+				usuario.setPermiso_deduccion(rs.getString("permiso_deduccion"));
+				usuario.setPermiso_planilla(rs.getString("permiso_planilla"));
+				usuario.setPermiso_empresa(rs.getString("permiso_empresa"));
+				usuario.setPermiso_opciones(rs.getString("permiso_opciones"));
+				usuario.setPermiso_usuarios(rs.getString("permiso_usuarios"));
+				usuario.setPermiso_acercade(rs.getString("permiso_acercade"));
 				miLista.add(usuario);
 			}
 			rs.close();
@@ -348,7 +969,7 @@ public class control_usuario implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<usuario> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][8];
+		String matrizInfo[][] = new String[miLista.size()][32];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_usuario() + "";
 			matrizInfo[i][1] = miLista.get(i).getUsuario() + "";
@@ -357,11 +978,205 @@ public class control_usuario implements ActionListener {
 			matrizInfo[i][4] = miLista.get(i).getNombre() + "";
 			matrizInfo[i][5] = miLista.get(i).getCargo() + "";
 			matrizInfo[i][6] = miLista.get(i).getTipo_usuario() + "";
-			matrizInfo[i][7] = miLista.get(i).getPermisos() + "";
-
+			matrizInfo[i][7] = miLista.get(i).getPermiso_todo() + "";
+			matrizInfo[i][8] = miLista.get(i).getPermiso_empleado() + "";
+			matrizInfo[i][9] = miLista.get(i).getPermiso_cargo() + "";
+			matrizInfo[i][10] = miLista.get(i).getPermiso_horario() + "";
+			matrizInfo[i][11] = miLista.get(i).getPermiso_contrato_e() + "";
+			matrizInfo[i][12] = miLista.get(i).getPermiso_cliente() + "";
+			matrizInfo[i][13] = miLista.get(i).getPermiso_contrato_c() + "";
+			matrizInfo[i][14] = miLista.get(i).getPermiso_compra() + "";
+			matrizInfo[i][15] = miLista.get(i).getPermiso_proveedor() + "";
+			matrizInfo[i][16] = miLista.get(i).getPermiso_inventario() + "";
+			matrizInfo[i][17] = miLista.get(i).getPermiso_factura_c() + "";
+			matrizInfo[i][18] = miLista.get(i).getPermiso_factura_e() + "";
+			matrizInfo[i][19] = miLista.get(i).getPermiso_sar() + "";
+			matrizInfo[i][20] = miLista.get(i).getPermiso_ingreso() + "";
+			matrizInfo[i][21] = miLista.get(i).getPermiso_producto() + "";
+			matrizInfo[i][22] = miLista.get(i).getPermiso_servicio() + "";
+			matrizInfo[i][23] = miLista.get(i).getPermiso_venta() + "";
+			matrizInfo[i][24] = miLista.get(i).getPermiso_egreso() + "";
+			matrizInfo[i][25] = miLista.get(i).getPermiso_bonificacion() + "";
+			matrizInfo[i][26] = miLista.get(i).getPermiso_deduccion() + "";
+			matrizInfo[i][27] = miLista.get(i).getPermiso_planilla() + "";
+			matrizInfo[i][28] = miLista.get(i).getPermiso_empresa() + "";
+			matrizInfo[i][29] = miLista.get(i).getPermiso_opciones() + "";
+			matrizInfo[i][30] = miLista.get(i).getPermiso_usuarios() + "";
+			matrizInfo[i][31] = miLista.get(i).getPermiso_acercade() + "";
 		}
 
 		return matrizInfo;
+	}
+
+	public void validarUsuarioPorIdentidad() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT identidad FROM usuario where identidad = '"
+					+ formulario.txtIdentidad.getText().toString() + "'");
+
+			if (rs.next()) {
+				identidad = (rs.getString("identidad"));
+			}
+
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+	public void definirPermisos() {
+		if (formulario.rbdTodos.isSelected()) {
+			todo = "SI";
+		} else {
+			todo = "NO";
+		}
+		if (formulario.rdbtnEmpleados.isSelected()) {
+			empleado = "SI";
+		} else {
+			empleado = "NO";
+		}
+		if (formulario.rdbtnCargos.isSelected()) {
+			cargoe = "SI";
+		} else {
+			cargoe = "NO";
+		}
+		if (formulario.rdbtnHorarios.isSelected()) {
+			horario = "SI";
+		} else {
+			horario = "NO";
+		}
+
+		if (formulario.rdbtnContratos_e.isSelected()) {
+			contrato_e = "SI";
+		} else {
+			contrato_e = "NO";
+		}
+
+		if (formulario.rdbtnClientes.isSelected()) {
+			cliente = "SI";
+		} else {
+			cliente = "NO";
+		}
+		if (formulario.rdbtnContratos_c.isSelected()) {
+			contrato_c = "SI";
+		} else {
+			contrato_c = "NO";
+		}
+
+		if (formulario.rdbtnCompras.isSelected()) {
+			compra = "SI";
+		} else {
+			compra = "NO";
+		}
+
+		if (formulario.rdbtnProveedores.isSelected()) {
+			proveedor = "SI";
+		} else {
+			proveedor = "NO";
+
+		}
+		if (formulario.rdbtnInventario.isSelected()) {
+			inventario = "SI";
+		} else {
+			inventario = "NO";
+		}
+
+		if (formulario.rdbtnFactCliente.isSelected()) {
+			factura_c = "SI";
+		} else {
+			factura_c = "NO";
+		}
+
+		if (formulario.rdbtnFactEmpresa.isSelected()) {
+			factura_e = "SI";
+		} else {
+			factura_e = "NO";
+		}
+
+		if (formulario.rdbtnSar.isSelected()) {
+			sar = "SI";
+		} else {
+			sar = "NO";
+		}
+
+		if (formulario.rdbtnIngresos.isSelected()) {
+			ingreso = "SI";
+		} else {
+			ingreso = "NO";
+		}
+
+		if (formulario.rdbtnProductos.isSelected()) {
+			producto = "SI";
+		} else {
+			producto = "NO";
+		}
+
+		if (formulario.rdbtnServicios.isSelected()) {
+			servicio = "SI";
+		} else {
+			servicio = "NO";
+		}
+
+		if (formulario.rdbtnVentas.isSelected()) {
+			venta = "SI";
+		} else {
+			venta = "NO";
+		}
+
+		if (formulario.rdbtnEgresos.isSelected()) {
+			egreso = "SI";
+		} else {
+			egreso = "NO";
+
+		}
+		if (formulario.rdbtnBonificaciones.isSelected()) {
+			bonificacion = "SI";
+		} else {
+			bonificacion = "NO";
+		}
+
+		if (formulario.rdbtnDeducc.isSelected()) {
+			deduccion = "SI";
+		} else {
+			deduccion = "NO";
+		}
+
+		if (formulario.rdbtnPlanillas.isSelected()) {
+			planilla = "SI";
+		} else {
+			planilla = "NO";
+		}
+
+		if (formulario.rdbtnEmpresa.isSelected()) {
+			empresa = "SI";
+		} else {
+			empresa = "NO";
+		}
+
+		if (formulario.rdbtnConfiguracion.isSelected()) {
+			opciones = "SI";
+		} else {
+			opciones = "NO";
+		}
+
+		if (formulario.rdbtnUsuarios.isSelected()) {
+			usuarios = "SI";
+		} else {
+			usuarios = "NO";
+		}
+
+		if (formulario.rdbtnAcercaDe.isSelected()) {
+			acercade = "SI";
+		} else {
+			acercade = "NO";
+		}
 	}
 
 }
