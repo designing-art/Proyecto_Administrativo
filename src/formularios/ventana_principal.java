@@ -160,7 +160,31 @@ public class ventana_principal extends JFrame {
 	public static JPanel panelOpciones;
 	public static JPanel panelInventario;
 
-	
+	public static String todo;
+	public static String empleado;
+	public static String cargoe;
+	public static String horario;
+	public static String contrato_e;
+	public static String cliente;
+	public static String contrato_c;
+	public static String compra;
+	public static String proveedor;
+	public static String inventario;
+	public static String factura_c;
+	public static String factura_e;
+	public static String sar;
+	public static String ingreso;
+	public static String producto;
+	public static String servicio;
+	public static String venta;
+	public static String egreso;
+	public static String bonificacion;
+	public static String deduccion;
+	public static String planilla;
+	public static String empresa;
+	public static String opciones;
+	public static String usuarios;
+	public static String acercade;
 
 	public ventana_principal() {
 		setType(Type.POPUP);

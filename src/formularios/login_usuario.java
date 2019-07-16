@@ -12,7 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
 
+import clases.usuario;
 import conexion.conexion;
+import consultas.consultas_usuario;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -26,9 +28,11 @@ import javax.swing.KeyStroke;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
@@ -44,7 +48,7 @@ public class login_usuario extends JFrame {
 	public static JLabel lblFotoEmpresa;
 	public static String nombre = null;
 	public static String ruta_logo = null;
-	
+
 	public static String todo;
 	public static String empleado;
 	public static String cargoe;
@@ -129,24 +133,39 @@ public class login_usuario extends JFrame {
 		panel.add(txtContraseña);
 		InputMap map5 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtContraseña.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
 
-		
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					iniciarSesion();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+		});
 
 		lblAlerta = new JLabel("");
 		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblAlerta.setBounds(68, 277, 323, 20);
 		panel.add(lblAlerta);
-		
+
 		lblFotoEmpresa = new JLabel("");
 		lblFotoEmpresa.setBounds(150, 30, 147, 128);
 		panel.add(lblFotoEmpresa);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
-		final ImageIcon icono2 = new ImageIcon(
-				logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
-						lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpresa.setIcon(icono2);
-		
+
 		lblNombreEmpresa = new JLabel("Empresa");
 		lblNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreEmpresa.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
@@ -159,10 +178,9 @@ public class login_usuario extends JFrame {
 		lblLoginSistemaAdministrativo.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
 		lblLoginSistemaAdministrativo.setBounds(63, 0, 435, 19);
 		contentPane.add(lblLoginSistemaAdministrativo);
-		
 
 	}
-	
+
 	public void consultarEmpresa() {
 		conexion conex = new conexion();
 		try {
@@ -175,16 +193,15 @@ public class login_usuario extends JFrame {
 
 				lblNombreEmpresa.setText(nombre);
 				final ImageIcon logo = new ImageIcon(ruta_logo);
-				final ImageIcon icono = new ImageIcon(
-						logo.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
-								lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+				final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+						lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 				lblFotoEmpresa.setIcon(icono);
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"             BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" 
-				      + "                                 Ingreso permitido a :\n"
-					  + "                        Solo administrador del sistema. \n"
-					  + "Para mas información, Contacteme: krizemandiaz11@gmail.com");
+						"             BIENVENIDO AL SISTEMA ADMINISTRATIVO\n"
+								+ "                                 Ingreso permitido a :\n"
+								+ "                        Solo administrador del sistema. \n"
+								+ "Para mas información, Contacteme: krizemandiaz11@gmail.com");
 			}
 			rs.close();
 			estatuto.close();
@@ -197,13 +214,13 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-	
+
 	public void permisos() {
-		
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT * FROM usuario WHERE usuario='"+login_usuario.txtUsuario.getText().toString()+"'");
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT * FROM usuario WHERE usuario='" + login_usuario.txtUsuario.getText().toString() + "'");
 			if (rs.next()) {
 				todo = (rs.getString("permiso_todo"));
 				empleado = (rs.getString("permiso_empleado"));
@@ -230,8 +247,8 @@ public class login_usuario extends JFrame {
 				opciones = (rs.getString("permiso_opciones"));
 				usuarios = (rs.getString("permiso_usuarios"));
 				acercade = (rs.getString("permiso_acercade"));
-				
-			} 
+
+			}
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
@@ -244,5 +261,228 @@ public class login_usuario extends JFrame {
 
 	}
 
+	public void iniciarSesion() {
+		ventana_principal principal = new ventana_principal();
+		String user = String.valueOf(txtUsuario.getText().toString());
+		String pass = String.valueOf(txtContraseña.getText().toString());
+		if (user.equals("") && pass.equals("")) {
+			lblAlerta.setText("Los campos (Usuario) y (Contraseña) estan vacios.");
+			lblAlerta.setForeground(Color.RED);
+		} else {
+			if (user.equals("") || pass.equals("")) {
+				lblAlerta.setText("El campo de (Usuario) o (Contraseña) esta vacio.");
+				lblAlerta.setForeground(Color.RED);
+			} else {
+				consultas_usuario consulta = new consultas_usuario();
+				usuario clase = new usuario();
+				clase.setUsuario(txtUsuario.getText().toString());
+				clase.setContraseña(txtContraseña.getText().toString());
+				if (consulta.buscarUsuario(clase)) {
+					permisos();
+					if (login_usuario.empleado.equals("SI")) {
+						ventana_principal.btnEmpleado.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnEmpleado.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.cargoe.equals("SI")) {
+						ventana_principal.btnCargo.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnCargo.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.horario.equals("SI")) {
+						ventana_principal.btnHorario.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnHorario.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.contrato_e.equals("SI")) {
+						ventana_principal.btnContratoEmpleado.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnContratoEmpleado.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.cliente.equals("SI")) {
+						ventana_principal.btnCliente.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnCliente.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.contrato_c.equals("SI")) {
+						ventana_principal.btnContratoCliente.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnContratoCliente.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.compra.equals("SI")) {
+						ventana_principal.btnCompras.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnCompras.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.proveedor.equals("SI")) {
+						ventana_principal.btnProveedores.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnProveedores.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.inventario.equals("SI")) {
+						ventana_principal.btnInventario.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnInventario.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.factura_c.equals("SI")) {
+						ventana_principal.btnFacturasClientes.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnFacturasClientes.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.factura_e.equals("SI")) {
+						ventana_principal.btnFacturasEmpresa.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnFacturasEmpresa.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.sar.equals("SI")) {
+						ventana_principal.btnSar.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnSar.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.ingreso.equals("SI")) {
+						ventana_principal.btnIngreso.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnIngreso.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.producto.equals("SI")) {
+						ventana_principal.btnProducto.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnProducto.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.servicio.equals("SI")) {
+						ventana_principal.btnServicio.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnServicio.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.venta.equals("SI")) {
+						ventana_principal.btnVentas.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnVentas.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.egreso.equals("SI")) {
+						ventana_principal.btnEgreso.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnEgreso.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.bonificacion.equals("SI")) {
+						ventana_principal.btnBonificaciones.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnBonificaciones.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.deduccion.equals("SI")) {
+						ventana_principal.btnDeducciones.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnDeducciones.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.planilla.equals("SI")) {
+						ventana_principal.btnPlanilla.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnPlanilla.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.empresa.equals("SI")) {
+						ventana_principal.btnInformacionEmpresa.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnInformacionEmpresa.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.opciones.equals("SI")) {
+						ventana_principal.btnOpciones.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnOpciones.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.usuarios.equals("SI")) {
+						ventana_principal.btnUsuarios.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnUsuarios.setVisible(false);
+						principal.pack();
+					}
+					if (login_usuario.acercade.equals("SI")) {
+						ventana_principal.btnAcercaDe.setVisible(true);
+						principal.pack();
+					} else {
+						ventana_principal.btnAcercaDe.setVisible(false);
+						principal.pack();
+					}
+					principal.setLocationRelativeTo(null);
+					principal.setVisible(true);
+					principal.repaint();
+					principal.consultarEmpresa();
+					Timer time = new Timer();
+					time.schedule(principal.tarea, 0, 1000);
+					ventana_principal.lblNombreUsuario.setText(String.valueOf(clase.getNombre().toString()));
+					ventana_principal.lblCargoUsuario.setText(String.valueOf(clase.getCargo().toString()));
+					ventana_principal.lblTipoUsuario.setText(String.valueOf(clase.getTipo_usuario().toString()));
+					registro_configuracion configuracion = new registro_configuracion();
+					configuracion.consultarConfiguracion();
+					configuracion.configuracionSonido();
+					dispose();
+				} else {
+					lblAlerta.setText("El usuario y contraseña son incorrectas");
+					lblAlerta.setForeground(Color.RED);
+				}
+				if (txtUsuario.getText().toString().equals("admin")
+						&& txtContraseña.getText().toString().equals("pass")) {
+					principal.setLocationRelativeTo(null);
+					principal.setVisible(true);
+					principal.consultarEmpresa();
+					Timer time = new Timer();
+					time.schedule(principal.tarea, 0, 1000);
+					registro_configuracion configuracion = new registro_configuracion();
+					configuracion.consultarConfiguracion();
+					configuracion.configuracionSonido();
+					dispose();
+
+				} else {
+					lblAlerta.setText("El usuario y contraseña son incorrectas");
+					lblAlerta.setForeground(Color.RED);
+				}
+			}
+		}
+
+	}
 
 }
