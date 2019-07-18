@@ -60,7 +60,6 @@ import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.inventario;
 
-import java.awt.Component;
 import java.awt.SystemColor;
 
 public class registro_ventas extends JFrame {
@@ -181,6 +180,7 @@ public class registro_ventas extends JFrame {
 
 		btnGuardar = new JButton("Guardar Venta");
 		btnGuardar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
@@ -509,6 +509,7 @@ public class registro_ventas extends JFrame {
 
 		btnActualizarDatos = new JButton("Actualizar Datos");
 		btnActualizarDatos.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -594,6 +595,7 @@ public class registro_ventas extends JFrame {
 		btnInventario.setBounds(28, 399, 119, 23);
 		panel.add(btnInventario);
 		btnInventario.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				inventario clase = new inventario();
 				consultas_inventario consulta = new consultas_inventario();

@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,10 +29,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,16 +37,11 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
@@ -58,18 +49,10 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
-import consultas.consultas_bonificacion;
-import consultas.consultas_planilla;
 import consultas.consultas_usuario;
-import controles.control_cliente;
-import controles.control_inventario;
 import controles.control_usuario;
-import utilidades.visor_imagen;
-
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.JTextArea;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.empleado;
@@ -204,6 +187,7 @@ public class registro_usuarios extends JFrame {
 		
 		rdbtnEmpleados = new JRadioButton("Empleados");
 		rdbtnEmpleados.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 			}
@@ -580,6 +564,7 @@ public class registro_usuarios extends JFrame {
 		btnBuscar.setBounds(342, 83, 82, 23);
 		panelRegistro.add(btnBuscar);
 		btnBuscar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (txtBusqueda.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Por favor ingrese la identidad antes buscar");
@@ -591,6 +576,7 @@ public class registro_usuarios extends JFrame {
 		
 		rbdTodos = new JRadioButton("Todos");
 		rbdTodos.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (rbdTodos.isSelected()) {
 					rdbtnEmpleados.setSelected(true);

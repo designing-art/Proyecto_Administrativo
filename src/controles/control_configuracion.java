@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
-import javax.swing.RepaintManager;
-
 import clases.configuracion;
 import consultas.consultas_configuracion;
 import formularios.registro_configuracion;
@@ -54,7 +52,7 @@ public class control_configuracion implements ActionListener {
 				}
 			}
 			
-			clase.setFrase_configuracion(formulario.txtFrase.getText().toString());
+			clase.setFrase_configuracion(registro_configuracion.txtFrase.getText().toString());
 
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito! Configuracion guardada!");
@@ -89,7 +87,7 @@ public class control_configuracion implements ActionListener {
 			}
 		}
 		
-		clase.setFrase_configuracion(formulario.txtFrase.getText().toString());
+		clase.setFrase_configuracion(registro_configuracion.txtFrase.getText().toString());
 		
 		if (consulta.actualizar(clase)) {
 			JOptionPane.showMessageDialog(null, "Exito Configuracion guardada!");

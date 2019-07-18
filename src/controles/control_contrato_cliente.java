@@ -17,12 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import clases.contrato_cliente;
-import clases.contrato_empleado;
 import conexion.conexion;
 import consultas.consultas_contrato_cliente;
-import consultas.consultas_contrato_empleado;
 import formularios.registro_contratos_clientes;
-import formularios.registro_contratos_empleados;
 
 public class control_contrato_cliente implements ActionListener {
 

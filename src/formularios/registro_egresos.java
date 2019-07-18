@@ -9,9 +9,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,30 +33,19 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_empleado;
-import controles.control_cargo;
 import controles.control_egresos;
-import controles.control_empleado;
-import controles.control_sar;
-import controles.control_venta;
-
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -242,6 +229,7 @@ public class registro_egresos extends JFrame {
 
 		JButton btnObtener = new JButton("Obtener");
 		btnObtener.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				totalizar();
 			}

@@ -17,12 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import clases.cliente;
-import clases.inventario;
 import conexion.conexion;
 import consultas.consultas_cliente;
-import consultas.consultas_inventario;
 import formularios.registro_clientes;
-import formularios.registro_inventario;
 
 public class control_cliente implements ActionListener {
 

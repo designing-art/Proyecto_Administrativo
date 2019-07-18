@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -35,29 +34,20 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_empleado;
-import controles.control_cargo;
-import controles.control_empleado;
 import controles.control_sar;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import com.toedter.calendar.JDateChooser;

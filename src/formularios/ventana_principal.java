@@ -6,8 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -87,8 +85,6 @@ import controles.control_sar;
 import controles.control_servicio;
 import controles.control_usuario;
 import controles.control_venta;
-import principal.television;
-
 import java.awt.event.ActionListener;
 
 import java.sql.ResultSet;
@@ -463,6 +459,7 @@ public class ventana_principal extends JFrame {
 		btnCliente.setBounds(10, 19, 97, 21);
 		panelClientes.add(btnCliente);
 		btnCliente.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cliente clase = new cliente();
 				consultas_cliente consulta = new consultas_cliente();
@@ -622,6 +619,7 @@ public class ventana_principal extends JFrame {
 		btnIngreso.setBounds(10, 19, 97, 21);
 		panelFinanzas.add(btnIngreso);
 		btnIngreso.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				venta clase = new venta();
 				inventario clase2 = new inventario();
@@ -646,6 +644,7 @@ public class ventana_principal extends JFrame {
 		btnEgreso.setBounds(117, 19, 97, 21);
 		panelFinanzas.add(btnEgreso);
 		btnEgreso.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				egreso clase = new egreso();
 				consultas_egreso consulta = new consultas_egreso();
@@ -719,6 +718,7 @@ public class ventana_principal extends JFrame {
 		btnCompras.setBounds(10, 19, 97, 21);
 		panelInventario.add(btnCompras);
 		btnCompras.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				compra clase = new compra();
 				consultas_compra consulta = new consultas_compra();
@@ -754,6 +754,7 @@ public class ventana_principal extends JFrame {
 		btnVentas.setBounds(224, 18, 97, 21);
 		panelInventario.add(btnVentas);
 		btnVentas.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				venta clase = new venta();
 				inventario clase2 = new inventario();
@@ -961,6 +962,7 @@ public class ventana_principal extends JFrame {
 		btnFacturasClientes.setBounds(117, 15, 97, 21);
 		panelFacturas.add(btnFacturasClientes);
 		btnFacturasClientes.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				factura_cliente clase = new factura_cliente();
 				consultas_factura_cliente consulta = new consultas_factura_cliente();
@@ -992,6 +994,7 @@ public class ventana_principal extends JFrame {
 		btnFacturasEmpresa.setBounds(10, 15, 97, 21);
 		panelFacturas.add(btnFacturasEmpresa);
 		btnFacturasEmpresa.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				factura_empresa clase = new factura_empresa();
 				consultas_factura_empresa consulta = new consultas_factura_empresa();
@@ -1020,6 +1023,7 @@ public class ventana_principal extends JFrame {
 		btnSar.setBounds(224, 15, 97, 21);
 		panelFacturas.add(btnSar);
 		btnSar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				sar clase = new sar();
 				consultas_sar consulta = new consultas_sar();
@@ -1077,6 +1081,7 @@ public class ventana_principal extends JFrame {
 		btnUsuarios.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnUsuarios.setBackground(new Color(219, 112, 147));
 		btnUsuarios.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				usuario clase = new usuario();
 				consultas_usuario consulta = new consultas_usuario();
@@ -1120,6 +1125,7 @@ public class ventana_principal extends JFrame {
 				lblMenuOpciones.getHeight(), Image.SCALE_DEFAULT));
 		lblMenuOpciones.setIcon(icono2);
 		btnAcercaDe.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				acerca_de info = new acerca_de();
 				info.setLocationRelativeTo(null);

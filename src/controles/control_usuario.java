@@ -2,7 +2,6 @@ package controles;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -13,18 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import clases.cliente;
-import clases.inventario;
 import clases.usuario;
 import conexion.conexion;
-import consultas.consultas_cliente;
-import consultas.consultas_inventario;
 import consultas.consultas_usuario;
-import formularios.registro_clientes;
-import formularios.registro_inventario;
 import formularios.registro_usuarios;
 
 public class control_usuario implements ActionListener {
@@ -413,31 +405,31 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setText(nombre);
 					formulario.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
-					formulario.rbdTodos.setText(todo);
-					formulario.rdbtnEmpleados.setText(empleado);
-					formulario.rdbtnCargos.setText(cargoe);
-					formulario.rdbtnHorarios.setText(horario);
-					formulario.rdbtnContratos_e.setText(contrato_e);
-					formulario.rdbtnClientes.setText(cliente);
-					formulario.rdbtnContratos_c.setText(contrato_c);
-					formulario.rdbtnCompras.setText(compra);
-					formulario.rdbtnProveedores.setText(proveedor);
-					formulario.rdbtnInventario.setText(inventario);
-					formulario.rdbtnFactCliente.setText(factura_c);
-					formulario.rdbtnFactEmpresa.setText(factura_e);
-					formulario.rdbtnSar.setText(sar);
-					formulario.rdbtnIngresos.setText(ingreso);
-					formulario.rdbtnProductos.setText(producto);
-					formulario.rdbtnServicios.setText(servicio);
-					formulario.rdbtnVentas.setText(venta);
-					formulario.rdbtnEgresos.setText(egreso);
-					formulario.rdbtnBonificaciones.setText(bonificacion);
-					formulario.rdbtnDeducc.setText(deduccion);
-					formulario.rdbtnPlanillas.setText(planilla);
-					formulario.rdbtnEmpresa.setText(empresa);
-					formulario.rdbtnConfiguracion.setText(opciones);
-					formulario.rdbtnUsuarios.setText(usuarios);
-					formulario.rdbtnAcercaDe.setText(acercade);
+					registro_usuarios.rbdTodos.setText(todo);
+					registro_usuarios.rdbtnEmpleados.setText(empleado);
+					registro_usuarios.rdbtnCargos.setText(cargoe);
+					registro_usuarios.rdbtnHorarios.setText(horario);
+					registro_usuarios.rdbtnContratos_e.setText(contrato_e);
+					registro_usuarios.rdbtnClientes.setText(cliente);
+					registro_usuarios.rdbtnContratos_c.setText(contrato_c);
+					registro_usuarios.rdbtnCompras.setText(compra);
+					registro_usuarios.rdbtnProveedores.setText(proveedor);
+					registro_usuarios.rdbtnInventario.setText(inventario);
+					registro_usuarios.rdbtnFactCliente.setText(factura_c);
+					registro_usuarios.rdbtnFactEmpresa.setText(factura_e);
+					registro_usuarios.rdbtnSar.setText(sar);
+					registro_usuarios.rdbtnIngresos.setText(ingreso);
+					registro_usuarios.rdbtnProductos.setText(producto);
+					registro_usuarios.rdbtnServicios.setText(servicio);
+					registro_usuarios.rdbtnVentas.setText(venta);
+					registro_usuarios.rdbtnEgresos.setText(egreso);
+					registro_usuarios.rdbtnBonificaciones.setText(bonificacion);
+					registro_usuarios.rdbtnDeducc.setText(deduccion);
+					registro_usuarios.rdbtnPlanillas.setText(planilla);
+					registro_usuarios.rdbtnEmpresa.setText(empresa);
+					registro_usuarios.rdbtnConfiguracion.setText(opciones);
+					registro_usuarios.rdbtnUsuarios.setText(usuarios);
+					registro_usuarios.rdbtnAcercaDe.setText(acercade);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
@@ -446,31 +438,31 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setForeground(Color.BLACK);
 					formulario.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
-					formulario.rbdTodos.setForeground(Color.BLACK);
-					formulario.rdbtnEmpleados.setForeground(Color.BLACK);
-					formulario.rdbtnCargos.setForeground(Color.BLACK);
-					formulario.rdbtnHorarios.setForeground(Color.BLACK);
-					formulario.rdbtnContratos_e.setForeground(Color.BLACK);
-					formulario.rdbtnClientes.setForeground(Color.BLACK);
-					formulario.rdbtnContratos_c.setForeground(Color.BLACK);
-					formulario.rdbtnCompras.setForeground(Color.BLACK);
-					formulario.rdbtnProveedores.setForeground(Color.BLACK);
-					formulario.rdbtnInventario.setForeground(Color.BLACK);
-					formulario.rdbtnFactCliente.setForeground(Color.BLACK);
-					formulario.rdbtnFactEmpresa.setForeground(Color.BLACK);
-					formulario.rdbtnSar.setForeground(Color.BLACK);
-					formulario.rdbtnIngresos.setForeground(Color.BLACK);
-					formulario.rdbtnProductos.setForeground(Color.BLACK);
-					formulario.rdbtnServicios.setForeground(Color.BLACK);
-					formulario.rdbtnVentas.setForeground(Color.BLACK);
-					formulario.rdbtnEgresos.setForeground(Color.BLACK);
-					formulario.rdbtnBonificaciones.setForeground(Color.BLACK);
-					formulario.rdbtnDeducc.setForeground(Color.BLACK);
-					formulario.rdbtnPlanillas.setForeground(Color.BLACK);
-					formulario.rdbtnEmpresa.setForeground(Color.BLACK);
-					formulario.rdbtnConfiguracion.setForeground(Color.BLACK);
-					formulario.rdbtnUsuarios.setForeground(Color.BLACK);
-					formulario.rdbtnAcercaDe.setForeground(Color.BLACK);
+					registro_usuarios.rbdTodos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnEmpleados.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnCargos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnHorarios.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnContratos_e.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnClientes.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnContratos_c.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnCompras.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnProveedores.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnInventario.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnFactCliente.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnFactEmpresa.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnSar.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnIngresos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnProductos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnServicios.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnVentas.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnEgresos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnBonificaciones.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnDeducc.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnPlanillas.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnEmpresa.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnConfiguracion.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnUsuarios.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnAcercaDe.setForeground(Color.BLACK);
 
 					formulario.txtIdentidad.setEditable(false);
 					formulario.txtNombres.setEditable(false);
@@ -714,31 +706,31 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setText(nombre);
 					formulario.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
-					formulario.rbdTodos.setText(todo);
-					formulario.rdbtnEmpleados.setText(empleado);
-					formulario.rdbtnCargos.setText(cargoe);
-					formulario.rdbtnHorarios.setText(horario);
-					formulario.rdbtnContratos_e.setText(contrato_e);
-					formulario.rdbtnClientes.setText(cliente);
-					formulario.rdbtnContratos_c.setText(contrato_c);
-					formulario.rdbtnCompras.setText(compra);
-					formulario.rdbtnProveedores.setText(proveedor);
-					formulario.rdbtnInventario.setText(inventario);
-					formulario.rdbtnFactCliente.setText(factura_c);
-					formulario.rdbtnFactEmpresa.setText(factura_e);
-					formulario.rdbtnSar.setText(sar);
-					formulario.rdbtnIngresos.setText(ingreso);
-					formulario.rdbtnProductos.setText(producto);
-					formulario.rdbtnServicios.setText(servicio);
-					formulario.rdbtnVentas.setText(venta);
-					formulario.rdbtnEgresos.setText(egreso);
-					formulario.rdbtnBonificaciones.setText(bonificacion);
-					formulario.rdbtnDeducc.setText(deduccion);
-					formulario.rdbtnPlanillas.setText(planilla);
-					formulario.rdbtnEmpresa.setText(empresa);
-					formulario.rdbtnConfiguracion.setText(opciones);
-					formulario.rdbtnUsuarios.setText(usuarios);
-					formulario.rdbtnAcercaDe.setText(acercade);
+					registro_usuarios.rbdTodos.setText(todo);
+					registro_usuarios.rdbtnEmpleados.setText(empleado);
+					registro_usuarios.rdbtnCargos.setText(cargoe);
+					registro_usuarios.rdbtnHorarios.setText(horario);
+					registro_usuarios.rdbtnContratos_e.setText(contrato_e);
+					registro_usuarios.rdbtnClientes.setText(cliente);
+					registro_usuarios.rdbtnContratos_c.setText(contrato_c);
+					registro_usuarios.rdbtnCompras.setText(compra);
+					registro_usuarios.rdbtnProveedores.setText(proveedor);
+					registro_usuarios.rdbtnInventario.setText(inventario);
+					registro_usuarios.rdbtnFactCliente.setText(factura_c);
+					registro_usuarios.rdbtnFactEmpresa.setText(factura_e);
+					registro_usuarios.rdbtnSar.setText(sar);
+					registro_usuarios.rdbtnIngresos.setText(ingreso);
+					registro_usuarios.rdbtnProductos.setText(producto);
+					registro_usuarios.rdbtnServicios.setText(servicio);
+					registro_usuarios.rdbtnVentas.setText(venta);
+					registro_usuarios.rdbtnEgresos.setText(egreso);
+					registro_usuarios.rdbtnBonificaciones.setText(bonificacion);
+					registro_usuarios.rdbtnDeducc.setText(deduccion);
+					registro_usuarios.rdbtnPlanillas.setText(planilla);
+					registro_usuarios.rdbtnEmpresa.setText(empresa);
+					registro_usuarios.rdbtnConfiguracion.setText(opciones);
+					registro_usuarios.rdbtnUsuarios.setText(usuarios);
+					registro_usuarios.rdbtnAcercaDe.setText(acercade);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
@@ -747,31 +739,31 @@ public class control_usuario implements ActionListener {
 					formulario.txtNombres.setForeground(Color.BLACK);
 					formulario.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
-					formulario.rbdTodos.setForeground(Color.BLACK);
-					formulario.rdbtnEmpleados.setForeground(Color.BLACK);
-					formulario.rdbtnCargos.setForeground(Color.BLACK);
-					formulario.rdbtnHorarios.setForeground(Color.BLACK);
-					formulario.rdbtnContratos_e.setForeground(Color.BLACK);
-					formulario.rdbtnClientes.setForeground(Color.BLACK);
-					formulario.rdbtnContratos_c.setForeground(Color.BLACK);
-					formulario.rdbtnCompras.setForeground(Color.BLACK);
-					formulario.rdbtnProveedores.setForeground(Color.BLACK);
-					formulario.rdbtnInventario.setForeground(Color.BLACK);
-					formulario.rdbtnFactCliente.setForeground(Color.BLACK);
-					formulario.rdbtnFactEmpresa.setForeground(Color.BLACK);
-					formulario.rdbtnSar.setForeground(Color.BLACK);
-					formulario.rdbtnIngresos.setForeground(Color.BLACK);
-					formulario.rdbtnProductos.setForeground(Color.BLACK);
-					formulario.rdbtnServicios.setForeground(Color.BLACK);
-					formulario.rdbtnVentas.setForeground(Color.BLACK);
-					formulario.rdbtnEgresos.setForeground(Color.BLACK);
-					formulario.rdbtnBonificaciones.setForeground(Color.BLACK);
-					formulario.rdbtnDeducc.setForeground(Color.BLACK);
-					formulario.rdbtnPlanillas.setForeground(Color.BLACK);
-					formulario.rdbtnEmpresa.setForeground(Color.BLACK);
-					formulario.rdbtnConfiguracion.setForeground(Color.BLACK);
-					formulario.rdbtnUsuarios.setForeground(Color.BLACK);
-					formulario.rdbtnAcercaDe.setForeground(Color.BLACK);
+					registro_usuarios.rbdTodos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnEmpleados.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnCargos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnHorarios.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnContratos_e.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnClientes.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnContratos_c.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnCompras.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnProveedores.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnInventario.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnFactCliente.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnFactEmpresa.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnSar.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnIngresos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnProductos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnServicios.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnVentas.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnEgresos.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnBonificaciones.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnDeducc.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnPlanillas.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnEmpresa.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnConfiguracion.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnUsuarios.setForeground(Color.BLACK);
+					registro_usuarios.rdbtnAcercaDe.setForeground(Color.BLACK);
 
 					formulario.txtUsuario.setEditable(false);
 					formulario.txtContraseña.setEditable(false);
@@ -882,31 +874,31 @@ public class control_usuario implements ActionListener {
 		formulario.txtNombres.setText(null);
 		formulario.txtCargo.setText(null);
 
-		formulario.rbdTodos.setSelected(false);
-		formulario.rdbtnEmpleados.setSelected(false);
-		formulario.rdbtnCargos.setSelected(false);
-		formulario.rdbtnHorarios.setSelected(false);
-		formulario.rdbtnContratos_e.setSelected(false);
-		formulario.rdbtnClientes.setSelected(false);
-		formulario.rdbtnContratos_c.setSelected(false);
-		formulario.rdbtnCompras.setSelected(false);
-		formulario.rdbtnProveedores.setSelected(false);
-		formulario.rdbtnInventario.setSelected(false);
-		formulario.rdbtnFactCliente.setSelected(false);
-		formulario.rdbtnFactEmpresa.setSelected(false);
-		formulario.rdbtnSar.setSelected(false);
-		formulario.rdbtnIngresos.setSelected(false);
-		formulario.rdbtnProductos.setSelected(false);
-		formulario.rdbtnServicios.setSelected(false);
-		formulario.rdbtnVentas.setSelected(false);
-		formulario.rdbtnEgresos.setSelected(false);
-		formulario.rdbtnBonificaciones.setSelected(false);
-		formulario.rdbtnDeducc.setSelected(false);
-		formulario.rdbtnPlanillas.setSelected(false);
-		formulario.rdbtnEmpresa.setSelected(false);
-		formulario.rdbtnConfiguracion.setSelected(false);
-		formulario.rdbtnUsuarios.setSelected(false);
-		formulario.rdbtnAcercaDe.setSelected(false);
+		registro_usuarios.rbdTodos.setSelected(false);
+		registro_usuarios.rdbtnEmpleados.setSelected(false);
+		registro_usuarios.rdbtnCargos.setSelected(false);
+		registro_usuarios.rdbtnHorarios.setSelected(false);
+		registro_usuarios.rdbtnContratos_e.setSelected(false);
+		registro_usuarios.rdbtnClientes.setSelected(false);
+		registro_usuarios.rdbtnContratos_c.setSelected(false);
+		registro_usuarios.rdbtnCompras.setSelected(false);
+		registro_usuarios.rdbtnProveedores.setSelected(false);
+		registro_usuarios.rdbtnInventario.setSelected(false);
+		registro_usuarios.rdbtnFactCliente.setSelected(false);
+		registro_usuarios.rdbtnFactEmpresa.setSelected(false);
+		registro_usuarios.rdbtnSar.setSelected(false);
+		registro_usuarios.rdbtnIngresos.setSelected(false);
+		registro_usuarios.rdbtnProductos.setSelected(false);
+		registro_usuarios.rdbtnServicios.setSelected(false);
+		registro_usuarios.rdbtnVentas.setSelected(false);
+		registro_usuarios.rdbtnEgresos.setSelected(false);
+		registro_usuarios.rdbtnBonificaciones.setSelected(false);
+		registro_usuarios.rdbtnDeducc.setSelected(false);
+		registro_usuarios.rdbtnPlanillas.setSelected(false);
+		registro_usuarios.rdbtnEmpresa.setSelected(false);
+		registro_usuarios.rdbtnConfiguracion.setSelected(false);
+		registro_usuarios.rdbtnUsuarios.setSelected(false);
+		registro_usuarios.rdbtnAcercaDe.setSelected(false);
 
 		formulario.txtBusqueda.requestFocusInWindow();
 	}
@@ -1032,147 +1024,147 @@ public class control_usuario implements ActionListener {
 	}
 
 	public void definirPermisos() {
-		if (formulario.rbdTodos.isSelected()) {
+		if (registro_usuarios.rbdTodos.isSelected()) {
 			todo = "SI";
 		} else {
 			todo = "NO";
 		}
-		if (formulario.rdbtnEmpleados.isSelected()) {
+		if (registro_usuarios.rdbtnEmpleados.isSelected()) {
 			empleado = "SI";
 		} else {
 			empleado = "NO";
 		}
-		if (formulario.rdbtnCargos.isSelected()) {
+		if (registro_usuarios.rdbtnCargos.isSelected()) {
 			cargoe = "SI";
 		} else {
 			cargoe = "NO";
 		}
-		if (formulario.rdbtnHorarios.isSelected()) {
+		if (registro_usuarios.rdbtnHorarios.isSelected()) {
 			horario = "SI";
 		} else {
 			horario = "NO";
 		}
 
-		if (formulario.rdbtnContratos_e.isSelected()) {
+		if (registro_usuarios.rdbtnContratos_e.isSelected()) {
 			contrato_e = "SI";
 		} else {
 			contrato_e = "NO";
 		}
 
-		if (formulario.rdbtnClientes.isSelected()) {
+		if (registro_usuarios.rdbtnClientes.isSelected()) {
 			cliente = "SI";
 		} else {
 			cliente = "NO";
 		}
-		if (formulario.rdbtnContratos_c.isSelected()) {
+		if (registro_usuarios.rdbtnContratos_c.isSelected()) {
 			contrato_c = "SI";
 		} else {
 			contrato_c = "NO";
 		}
 
-		if (formulario.rdbtnCompras.isSelected()) {
+		if (registro_usuarios.rdbtnCompras.isSelected()) {
 			compra = "SI";
 		} else {
 			compra = "NO";
 		}
 
-		if (formulario.rdbtnProveedores.isSelected()) {
+		if (registro_usuarios.rdbtnProveedores.isSelected()) {
 			proveedor = "SI";
 		} else {
 			proveedor = "NO";
 
 		}
-		if (formulario.rdbtnInventario.isSelected()) {
+		if (registro_usuarios.rdbtnInventario.isSelected()) {
 			inventario = "SI";
 		} else {
 			inventario = "NO";
 		}
 
-		if (formulario.rdbtnFactCliente.isSelected()) {
+		if (registro_usuarios.rdbtnFactCliente.isSelected()) {
 			factura_c = "SI";
 		} else {
 			factura_c = "NO";
 		}
 
-		if (formulario.rdbtnFactEmpresa.isSelected()) {
+		if (registro_usuarios.rdbtnFactEmpresa.isSelected()) {
 			factura_e = "SI";
 		} else {
 			factura_e = "NO";
 		}
 
-		if (formulario.rdbtnSar.isSelected()) {
+		if (registro_usuarios.rdbtnSar.isSelected()) {
 			sar = "SI";
 		} else {
 			sar = "NO";
 		}
 
-		if (formulario.rdbtnIngresos.isSelected()) {
+		if (registro_usuarios.rdbtnIngresos.isSelected()) {
 			ingreso = "SI";
 		} else {
 			ingreso = "NO";
 		}
 
-		if (formulario.rdbtnProductos.isSelected()) {
+		if (registro_usuarios.rdbtnProductos.isSelected()) {
 			producto = "SI";
 		} else {
 			producto = "NO";
 		}
 
-		if (formulario.rdbtnServicios.isSelected()) {
+		if (registro_usuarios.rdbtnServicios.isSelected()) {
 			servicio = "SI";
 		} else {
 			servicio = "NO";
 		}
 
-		if (formulario.rdbtnVentas.isSelected()) {
+		if (registro_usuarios.rdbtnVentas.isSelected()) {
 			venta = "SI";
 		} else {
 			venta = "NO";
 		}
 
-		if (formulario.rdbtnEgresos.isSelected()) {
+		if (registro_usuarios.rdbtnEgresos.isSelected()) {
 			egreso = "SI";
 		} else {
 			egreso = "NO";
 
 		}
-		if (formulario.rdbtnBonificaciones.isSelected()) {
+		if (registro_usuarios.rdbtnBonificaciones.isSelected()) {
 			bonificacion = "SI";
 		} else {
 			bonificacion = "NO";
 		}
 
-		if (formulario.rdbtnDeducc.isSelected()) {
+		if (registro_usuarios.rdbtnDeducc.isSelected()) {
 			deduccion = "SI";
 		} else {
 			deduccion = "NO";
 		}
 
-		if (formulario.rdbtnPlanillas.isSelected()) {
+		if (registro_usuarios.rdbtnPlanillas.isSelected()) {
 			planilla = "SI";
 		} else {
 			planilla = "NO";
 		}
 
-		if (formulario.rdbtnEmpresa.isSelected()) {
+		if (registro_usuarios.rdbtnEmpresa.isSelected()) {
 			empresa = "SI";
 		} else {
 			empresa = "NO";
 		}
 
-		if (formulario.rdbtnConfiguracion.isSelected()) {
+		if (registro_usuarios.rdbtnConfiguracion.isSelected()) {
 			opciones = "SI";
 		} else {
 			opciones = "NO";
 		}
 
-		if (formulario.rdbtnUsuarios.isSelected()) {
+		if (registro_usuarios.rdbtnUsuarios.isSelected()) {
 			usuarios = "SI";
 		} else {
 			usuarios = "NO";
 		}
 
-		if (formulario.rdbtnAcercaDe.isSelected()) {
+		if (registro_usuarios.rdbtnAcercaDe.isSelected()) {
 			acercade = "SI";
 		} else {
 			acercade = "NO";

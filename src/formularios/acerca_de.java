@@ -1,19 +1,18 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 
 public class acerca_de extends JFrame {
@@ -25,6 +24,7 @@ public class acerca_de extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					acerca_de frame = new acerca_de();
@@ -41,7 +41,7 @@ public class acerca_de extends JFrame {
 	 */
 	public acerca_de() {
 		setType(Type.UTILITY);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 387, 365);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

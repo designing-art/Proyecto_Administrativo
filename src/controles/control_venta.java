@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Locale.Category;
-
 import javax.swing.JOptionPane;
 
 import clases.factura_cliente;
@@ -27,7 +25,6 @@ import consultas.consultas_inventario;
 import consultas.consultas_venta;
 import formularios.registro_facturas_clientes;
 import formularios.registro_ingresos;
-import formularios.registro_inventario;
 import formularios.registro_ventas;
 
 public class control_venta implements ActionListener {

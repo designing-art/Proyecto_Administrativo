@@ -42,10 +42,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_empleado;
-import controles.control_empleado;
 import controles.control_horario;
 
 import javax.swing.DefaultComboBoxModel;

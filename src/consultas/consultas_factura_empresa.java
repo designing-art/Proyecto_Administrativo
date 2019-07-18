@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import clases.compra;
 import clases.factura_empresa;
-import clases.inventario;
 import conexion.conexion;
 
 public class consultas_factura_empresa extends conexion {

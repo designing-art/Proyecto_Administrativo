@@ -490,6 +490,7 @@ public class registro_inventario extends JFrame {
 		
 		JButton btnCalcularExistencia = new JButton("Obtener");
 		btnCalcularExistencia.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				totalizarExistencia();
 			}

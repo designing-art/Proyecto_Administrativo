@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import clases.compra;
-import clases.inventario;
 import conexion.conexion;
 
 public class consultas_compra extends conexion {

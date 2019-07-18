@@ -499,6 +499,7 @@ public class registro_productos extends JFrame {
 
 		button_1 = new JButton("Obtener");
 		button_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(txtBusquedaContratosEmpleados.equals("")) { 
 					JOptionPane.showMessageDialog(null, "Debe buscar el producto para conocer su existencia total.");

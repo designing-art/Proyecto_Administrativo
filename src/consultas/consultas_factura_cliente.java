@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import clases.factura_cliente;
-import clases.inventario;
 import clases.sar;
-import clases.venta;
 import conexion.conexion;
 
 public class consultas_factura_cliente extends conexion {

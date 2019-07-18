@@ -49,11 +49,8 @@ import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
 
-import clases.empleado;
 import conexion.conexion;
-import consultas.consultas_empleado;
 import controles.control_contrato_empleado;
-import controles.control_empleado;
 import utilidades.visor_imagen;
 
 import javax.swing.DefaultComboBoxModel;

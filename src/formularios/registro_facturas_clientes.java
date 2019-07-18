@@ -10,8 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,45 +25,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.MaskFormatter;
-
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
-import controles.control_cliente;
 import controles.control_factura_cliente;
-import controles.control_inventario;
-import utilidades.visor_imagen;
-
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class registro_facturas_clientes extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -354,7 +335,7 @@ public class registro_facturas_clientes extends JFrame {
 		panelRegistro.add(txtRF);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(27, 269, 412, 137);
 		panelRegistro.add(panel);
@@ -492,6 +473,7 @@ public class registro_facturas_clientes extends JFrame {
 
 		btnActualizarDatos = new JButton("Actualizar Datos");
 		btnActualizarDatos.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});

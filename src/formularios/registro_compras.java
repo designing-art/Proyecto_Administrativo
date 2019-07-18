@@ -49,7 +49,6 @@ import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
 import controles.control_compra;
-import controles.control_inventario;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;

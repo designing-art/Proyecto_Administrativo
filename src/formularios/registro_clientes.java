@@ -37,15 +37,12 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
@@ -54,13 +51,11 @@ import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
 import controles.control_cliente;
-import controles.control_inventario;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -399,6 +394,7 @@ public class registro_clientes extends JFrame {
 
 		JButton button_1 = new JButton("Tomar");
 		button_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				tomarFoto();
 			}
@@ -409,6 +405,7 @@ public class registro_clientes extends JFrame {
 
 		JButton button_2 = new JButton("Ver");
 		button_2.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				verFotoEmpleado();
 			}
@@ -419,6 +416,7 @@ public class registro_clientes extends JFrame {
 
 		JButton button_3 = new JButton("Subir");
 		button_3.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				selecionarFoto();
 
@@ -644,6 +642,7 @@ public class registro_clientes extends JFrame {
 
 		btnActualizarDatos = new JButton("Actualizar Datos");
 		btnActualizarDatos.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});

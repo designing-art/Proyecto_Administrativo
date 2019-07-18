@@ -14,16 +14,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import clases.compra;
 import clases.factura_empresa;
-import clases.inventario;
 import conexion.conexion;
-import consultas.consultas_compra;
 import consultas.consultas_factura_empresa;
-import consultas.consultas_inventario;
-import formularios.registro_compras;
 import formularios.registro_facturas_empresa;
-import formularios.registro_inventario;
 
 public class control_factura_empresa implements ActionListener {
 
@@ -49,7 +43,7 @@ public class control_factura_empresa implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtFechaHoraFactura.getText().isEmpty()
+			if (registro_facturas_empresa.txtFechaHoraFactura.getText().isEmpty()
 					|| formulario.txtFoto.getText().isEmpty()
 					|| formulario.txtCompra.getText().isEmpty()
 					||formulario.txtPrecio.getText().isEmpty()
@@ -58,7 +52,7 @@ public class control_factura_empresa implements ActionListener {
 			{
 			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la factura!");
 		} else {
-			clase.setFecha_factura(formulario.txtFechaHoraFactura.getText().toString());
+			clase.setFecha_factura(registro_facturas_empresa.txtFechaHoraFactura.getText().toString());
 			clase.setCompra_factura(formulario.txtCompra.getText().toString());
 			clase.setPrecio_factura(Double.parseDouble(formulario.txtPrecio.getText().toString()));
 			clase.setCantidad_factura(formulario.txtCantidad.getText().toString());
@@ -78,7 +72,7 @@ public class control_factura_empresa implements ActionListener {
 	}
 		
 		if (e.getSource() == formulario.btnActualizar) {
-			if (formulario.txtFechaHoraFactura.getText().isEmpty()
+			if (registro_facturas_empresa.txtFechaHoraFactura.getText().isEmpty()
 					|| formulario.txtFoto.getText().isEmpty()
 					|| formulario.txtCompra.getText().isEmpty()
 					||formulario.txtPrecio.getText().isEmpty()
@@ -88,7 +82,7 @@ public class control_factura_empresa implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la compra!");
 		} else {
 			clase.setId_factura(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-			clase.setFecha_factura(formulario.txtFechaHoraFactura.getText().toString());
+			clase.setFecha_factura(registro_facturas_empresa.txtFechaHoraFactura.getText().toString());
 			clase.setCompra_factura(formulario.txtCompra.getText().toString());
 			clase.setPrecio_factura(Double.parseDouble(formulario.txtDescripcion.getText().toString()));
 			clase.setCantidad_factura(formulario.txtCantidad.getText().toString());
@@ -123,7 +117,7 @@ public class control_factura_empresa implements ActionListener {
 					String foto = formulario.tabla.getValueAt(filaseleccionada, 6).toString();
 
 					formulario.txtCodigo.setText(codigo);
-					formulario.txtFechaHoraFactura.setText(fecha);
+					registro_facturas_empresa.txtFechaHoraFactura.setText(fecha);
 					formulario.txtCompra.setText(compra);
 					formulario.txtPrecio.setText(precio);
 					formulario.txtCantidad.setText(cantidad);
@@ -132,7 +126,7 @@ public class control_factura_empresa implements ActionListener {
 				
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
-					formulario.txtFechaHoraFactura.setForeground(Color.BLACK);
+					registro_facturas_empresa.txtFechaHoraFactura.setForeground(Color.BLACK);
 					formulario.txtCompra.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
 					formulario.txtCantidad.setForeground(Color.BLACK);
@@ -177,7 +171,7 @@ public class control_factura_empresa implements ActionListener {
 					String foto = formulario.tabla.getValueAt(filaseleccionada, 6).toString();
 
 					formulario.txtCodigo.setText(codigo);
-					formulario.txtFechaHoraFactura.setText(fecha);
+					registro_facturas_empresa.txtFechaHoraFactura.setText(fecha);
 					formulario.txtCompra.setText(compra);
 					formulario.txtPrecio.setText(precio);
 					formulario.txtCantidad.setText(cantidad);
@@ -186,14 +180,14 @@ public class control_factura_empresa implements ActionListener {
 				
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
-					formulario.txtFechaHoraFactura.setForeground(Color.BLACK);
+					registro_facturas_empresa.txtFechaHoraFactura.setForeground(Color.BLACK);
 					formulario.txtCompra.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
 					formulario.txtCantidad.setForeground(Color.BLACK);
 					formulario.txtDescripcion.setForeground(Color.BLACK);
 					formulario.txtFoto.setForeground(Color.BLACK);
 					
-					formulario.txtFechaHoraFactura.setEditable(false);
+					registro_facturas_empresa.txtFechaHoraFactura.setEditable(false);
 					formulario.txtPrecio.setEditable(false);
 					formulario.txtDescripcion.setEditable(false);
 					formulario.txtFoto.setEditable(false);
@@ -280,7 +274,7 @@ public class control_factura_empresa implements ActionListener {
 			formulario.obtenerUltimoId();
 			formulario.pistas();
 			formulario.construirTabla();
-			formulario.txtFechaHoraFactura.setEditable(false);
+			registro_facturas_empresa.txtFechaHoraFactura.setEditable(false);
 			formulario.txtPrecio.setEditable(false);
 			formulario.txtDescripcion.setEditable(false);
 			formulario.txtFoto.setEditable(false);

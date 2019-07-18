@@ -349,7 +349,7 @@ public class control_servicio implements ActionListener {
 		try {
 			PreparedStatement stmtr = conn.prepareStatement(
 					"SELECT existencia_producto FROM productos WHERE dispositivo_de_entrega_producto ='"
-							+ formulario.txtDispositivo.getText().toString() + "'");
+							+ registro_servicios.txtDispositivo.getText().toString() + "'");
 			ResultSet rsr = stmtr.executeQuery();
 			rsr.next();
 			cantidad = (rsr.getString("existencia_producto"));

@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import clases.cargo;
 import clases.empleado;
-import clases.sar;
 import clases.usuario;
 import conexion.conexion;
 

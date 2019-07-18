@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,12 +16,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-import clases.inventario;
 import clases.sar;
 import conexion.conexion;
-import consultas.consultas_inventario;
 import consultas.consultas_sar;
-import formularios.registro_inventario;
 import formularios.registro_sar;
 
 public class control_sar implements ActionListener {

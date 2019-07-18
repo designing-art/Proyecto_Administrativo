@@ -15,18 +15,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import clases.factura_cliente;
-import clases.inventario;
 import clases.sar;
-import clases.venta;
 import conexion.conexion;
 import consultas.consultas_factura_cliente;
-import consultas.consultas_inventario;
 import consultas.consultas_sar;
-import consultas.consultas_venta;
 import formularios.registro_facturas_clientes;
-import formularios.registro_inventario;
 import formularios.registro_sar;
-import formularios.registro_ventas;
 
 public class control_factura_cliente implements ActionListener {
 
@@ -59,7 +53,7 @@ public class control_factura_cliente implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtFechaHoraFactura.getText().isEmpty()
+			if (registro_facturas_clientes.txtFechaHoraFactura.getText().isEmpty()
 					|| formulario.txtPorConceptoDe.getText().isEmpty()
 					|| formulario.txtNumeroFactura.getText().isEmpty()
 					|| formulario.txtCantidadLetras.getText().isEmpty() 
@@ -72,7 +66,7 @@ public class control_factura_cliente implements ActionListener {
 			} else {
 				formulario.sumarFactura();
 				clase.setNumero_factura_cliente(formulario.txtNumeroFactura.getText().toString());
-				clase.setFecha_hora_factura_cliente(formulario.txtFechaHoraFactura.getText().toString());
+				clase.setFecha_hora_factura_cliente(registro_facturas_clientes.txtFechaHoraFactura.getText().toString());
 				clase.setFirma_cliente(formulario.txtCliente.getText().toString());
 				clase.setRtn_factura_cliente(formulario.txtRTN.getText().toString());
 				clase.setDireccion_cliente(formulario.txtDireccion.getText().toString());
@@ -94,7 +88,7 @@ public class control_factura_cliente implements ActionListener {
 					formulario.construirTabla();
 					formulario.establecerDatosEmpresa();
 					formulario.ObtenerUltimosDatosSar();
-					formulario.txtFechaHoraFactura.setText(formulario.getFechaYHora());
+					registro_facturas_clientes.txtFechaHoraFactura.setText(registro_facturas_clientes.getFechaYHora());
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
 					limpiar();
@@ -104,7 +98,7 @@ public class control_factura_cliente implements ActionListener {
 		}
 
 		if (e.getSource() == formulario.btnActualizar) {
-			if (formulario.txtFechaHoraFactura.getText().isEmpty() || formulario.txtPorConceptoDe.getText().isEmpty()
+			if (registro_facturas_clientes.txtFechaHoraFactura.getText().isEmpty() || formulario.txtPorConceptoDe.getText().isEmpty()
 					|| formulario.txtNumeroFactura.getText().isEmpty()
 					|| formulario.txtCantidadLetras.getText().isEmpty() || formulario.txtCliente.getText().isEmpty()
 					|| formulario.txtCantidadNumeros.getText().isEmpty() || formulario.txtDireccion.getText().isEmpty()
@@ -113,7 +107,7 @@ public class control_factura_cliente implements ActionListener {
 			} else {
 				clase.setId_facturas_cliente(Integer.parseInt(formulario.txtCodigo.getText().toString()));
 				clase.setNumero_factura_cliente(formulario.txtNumeroFactura.getText().toString());
-				clase.setFecha_hora_factura_cliente(formulario.txtFechaHoraFactura.getText().toString());
+				clase.setFecha_hora_factura_cliente(registro_facturas_clientes.txtFechaHoraFactura.getText().toString());
 				clase.setFirma_cliente(formulario.txtCliente.getText().toString());
 				clase.setRtn_factura_cliente(formulario.txtRTN.getText().toString());
 				clase.setDireccion_cliente(formulario.txtDireccion.getText().toString());
@@ -130,7 +124,7 @@ public class control_factura_cliente implements ActionListener {
 					formulario.construirTabla();
 					formulario.establecerDatosEmpresa();
 					formulario.ObtenerUltimosDatosSar();
-					formulario.txtFechaHoraFactura.setText(formulario.getFechaYHora());
+					registro_facturas_clientes.txtFechaHoraFactura.setText(registro_facturas_clientes.getFechaYHora());
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
 					limpiar();
@@ -159,7 +153,7 @@ public class control_factura_cliente implements ActionListener {
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtNumeroFactura.setText(factura);
-					formulario.txtFechaHoraFactura.setText(fecha);
+					registro_facturas_clientes.txtFechaHoraFactura.setText(fecha);
 					formulario.txtCliente.setText(firma);
 					formulario.txtRTN.setText(rtn);
 					formulario.txtDireccion.setText(direccion);
@@ -170,7 +164,7 @@ public class control_factura_cliente implements ActionListener {
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNumeroFactura.setForeground(Color.BLACK);
-					formulario.txtFechaHoraFactura.setForeground(Color.BLACK);
+					registro_facturas_clientes.txtFechaHoraFactura.setForeground(Color.BLACK);
 					formulario.txtCliente.setForeground(Color.BLACK);
 					formulario.txtRTN.setForeground(Color.BLACK);
 					formulario.txtDireccion.setForeground(Color.BLACK);
@@ -219,7 +213,7 @@ public class control_factura_cliente implements ActionListener {
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtNumeroFactura.setText(factura);
-					formulario.txtFechaHoraFactura.setText(fecha);
+					registro_facturas_clientes.txtFechaHoraFactura.setText(fecha);
 					formulario.txtCliente.setText(firma);
 					formulario.txtRTN.setText(rtn);
 					formulario.txtDireccion.setText(direccion);
@@ -230,7 +224,7 @@ public class control_factura_cliente implements ActionListener {
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNumeroFactura.setForeground(Color.BLACK);
-					formulario.txtFechaHoraFactura.setForeground(Color.BLACK);
+					registro_facturas_clientes.txtFechaHoraFactura.setForeground(Color.BLACK);
 					formulario.txtCliente.setForeground(Color.BLACK);
 					formulario.txtRTN.setForeground(Color.BLACK);
 					formulario.txtDireccion.setForeground(Color.BLACK);
@@ -241,7 +235,7 @@ public class control_factura_cliente implements ActionListener {
 					
 					formulario.txtCodigo.setEditable(false);
 					formulario.txtNumeroFactura.setEditable(false);
-					formulario.txtFechaHoraFactura.setEditable(false);
+					registro_facturas_clientes.txtFechaHoraFactura.setEditable(false);
 					formulario.txtCliente.setEditable(false);
 					formulario.txtRTN.setEditable(false);
 					formulario.txtDireccion.setEditable(false);
@@ -306,7 +300,7 @@ public class control_factura_cliente implements ActionListener {
 			formulario.construirTabla();
 			formulario.establecerDatosEmpresa();
 			formulario.ObtenerUltimosDatosSar();
-			formulario.txtFechaHoraFactura.setText(formulario.getFechaYHora());
+			registro_facturas_clientes.txtFechaHoraFactura.setText(registro_facturas_clientes.getFechaYHora());
 			formulario.btnBorrar.setVisible(false);
 			formulario.btnGuardar.setVisible(true);
 			formulario.btnNuevo.setVisible(true);
@@ -341,7 +335,7 @@ public class control_factura_cliente implements ActionListener {
 			formulario.txtCantidadLetras.setEditable(true);
 			formulario.txtCantidadNumeros.setEditable(true);
 			formulario.txtEmpleado.setEditable(true);
-			formulario.txtFechaHoraFactura.setText(formulario.getFechaYHora());
+			registro_facturas_clientes.txtFechaHoraFactura.setText(registro_facturas_clientes.getFechaYHora());
 			formulario.txtCliente.requestFocusInWindow();
 			
 			
@@ -354,7 +348,7 @@ public class control_factura_cliente implements ActionListener {
 		formulario.txtBusqueda.setText(null);
 		formulario.txtCodigo.setText(null);
 		formulario.txtNumeroFactura.setText(null);
-		formulario.txtFechaHoraFactura.setText(null);
+		registro_facturas_clientes.txtFechaHoraFactura.setText(null);
 		formulario.txtCliente.setText(null);
 		formulario.txtRTN.setText(null);
 		formulario.txtDireccion.setText(null);

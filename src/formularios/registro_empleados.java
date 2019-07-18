@@ -1,7 +1,5 @@
 package formularios;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +24,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -63,12 +60,10 @@ import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.cargo;
 import clases.contrato_empleado;
-import clases.empleado;
 import clases.horario;
 import conexion.conexion;
 import consultas.consultas_cargo;
 import consultas.consultas_contrato_empleado;
-import consultas.consultas_empleado;
 import consultas.consultas_horario;
 import controles.control_cargo;
 import controles.control_contrato_empleado;
@@ -814,6 +809,7 @@ public class registro_empleados extends JFrame {
 		btnAsignar.setBounds(76, 12, 83, 18);
 		panel_2.add(btnAsignar);
 		btnAsignar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				cargo clase = new cargo();
 				consultas_cargo consulta = new consultas_cargo();
@@ -843,6 +839,7 @@ public class registro_empleados extends JFrame {
 		btnAsignar_1.setBounds(76, 100, 83, 18);
 		panel_2.add(btnAsignar_1);
 		btnAsignar_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				horario clase = new horario();
 				consultas_horario consulta = new consultas_horario();
@@ -872,6 +869,7 @@ public class registro_empleados extends JFrame {
 		btnAsignar_2.setBounds(76, 175, 83, 18);
 		panel_2.add(btnAsignar_2);
 		btnAsignar_2.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				contrato_empleado clase = new contrato_empleado();
 				consultas_contrato_empleado consulta = new consultas_contrato_empleado();

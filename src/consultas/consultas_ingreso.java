@@ -3,9 +3,7 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import clases.cargo;
 import clases.ingreso;
-import clases.sar;
 import conexion.conexion;
 
 public class consultas_ingreso extends conexion {
