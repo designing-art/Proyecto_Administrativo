@@ -1,9 +1,0 @@
-#JSGF V1.0;
-
-grammar com.sarf.talkingjava.example;
-
-public <startExample> =
-(hola | My name is cris| 
-What is your Name | Open Firefox | Open notepad |Open grammar |
-Please to meet you ) *;
-public <endExample> = [thanks | thank you | thank you very much];
