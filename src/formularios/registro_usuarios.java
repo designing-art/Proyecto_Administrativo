@@ -107,7 +107,7 @@ public class registro_usuarios extends JFrame {
 	public JLabel lblContrasea;
 	public JPasswordField txtContraseña;
 	public JTextField txtCodigo;
-	public JFormattedTextField txtBusqueda;
+	public static JFormattedTextField txtBusqueda;
 	public JLabel label;
 	public JButton btnBuscar;
 	public static int contador;

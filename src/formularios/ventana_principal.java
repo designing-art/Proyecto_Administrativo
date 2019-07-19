@@ -4,8 +4,11 @@ import javax.swing.JFrame;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -1062,10 +1065,24 @@ public class ventana_principal extends JFrame {
 
 		btnOpciones = new JButton("Configuraci\u00F3n");
 		btnOpciones.setBounds(10, 20, 103, 21);
-		panelOpciones.add(btnOpciones);
 		btnOpciones.setForeground(Color.BLACK);
 		btnOpciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		btnOpciones.setBackground(new Color(219, 112, 147));
+		panelOpciones.add(btnOpciones);
+		btnOpciones.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				configuracion clase = new configuracion();
+				consultas_configuracion consulta = new consultas_configuracion();
+				configuraciones formulario = new configuraciones();
+				control_configuracion control = new control_configuracion(clase, consulta, formulario);
+				formulario.consultarConfiguracion();
+				formulario.mostrarConfiguracion();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 
 		btnAcercaDe = new JButton("Acerca de.");
 		btnAcercaDe.setBounds(225, 20, 94, 21);
@@ -1132,20 +1149,7 @@ public class ventana_principal extends JFrame {
 				info.setVisible(true);
 			}
 		});
-		btnOpciones.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				configuracion clase = new configuracion();
-				consultas_configuracion consulta = new consultas_configuracion();
-				registro_configuracion formulario = new registro_configuracion();
-				control_configuracion control = new control_configuracion(clase, consulta, formulario);
-				formulario.consultarConfiguracion();
-				formulario.mostrarConfiguracion();
-				formulario.setVisible(true);
-				formulario.setLocationRelativeTo(null);
-
-			}
-		});
+		
 
 	}
 
@@ -1225,5 +1229,4 @@ public class ventana_principal extends JFrame {
 		}
 
 	}
-
 }

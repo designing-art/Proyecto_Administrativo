@@ -417,31 +417,29 @@ public class login_usuario extends JFrame {
 					}
 					if (login_usuario.empresa.equals("SI")) {
 						ventana_principal.btnInformacionEmpresa.setVisible(true);
-						principal.pack();
+				
 					} else {
 						ventana_principal.btnInformacionEmpresa.setVisible(false);
-						principal.pack();
+		
 					}
 					if (login_usuario.opciones.equals("SI")) {
 						ventana_principal.btnOpciones.setVisible(true);
-						principal.pack();
+			
 					} else {
 						ventana_principal.btnOpciones.setVisible(false);
-						principal.pack();
+			
 					}
 					if (login_usuario.usuarios.equals("SI")) {
 						ventana_principal.btnUsuarios.setVisible(true);
-						principal.pack();
+			
 					} else {
 						ventana_principal.btnUsuarios.setVisible(false);
-						principal.pack();
+	
 					}
 					if (login_usuario.acercade.equals("SI")) {
 						ventana_principal.btnAcercaDe.setVisible(true);
-						principal.pack();
 					} else {
 						ventana_principal.btnAcercaDe.setVisible(false);
-						principal.pack();
 					}
 					principal.setLocationRelativeTo(null);
 					principal.setVisible(true);
@@ -452,9 +450,9 @@ public class login_usuario extends JFrame {
 					ventana_principal.lblNombreUsuario.setText(String.valueOf(clase.getNombre().toString()));
 					ventana_principal.lblCargoUsuario.setText(String.valueOf(clase.getCargo().toString()));
 					ventana_principal.lblTipoUsuario.setText(String.valueOf(clase.getTipo_usuario().toString()));
-					registro_configuracion configuracion = new registro_configuracion();
+					configuraciones configuracion = new configuraciones();
 					configuracion.consultarConfiguracion();
-					configuracion.configuracionSonido();
+					configuracion.establecerConfiguraciones();
 					dispose();
 				} else {
 					lblAlerta.setText("El usuario y contraseña son incorrectas");
@@ -467,9 +465,9 @@ public class login_usuario extends JFrame {
 					principal.consultarEmpresa();
 					Timer time = new Timer();
 					time.schedule(principal.tarea, 0, 1000);
-					registro_configuracion configuracion = new registro_configuracion();
+					configuraciones configuracion = new configuraciones();
 					configuracion.consultarConfiguracion();
-					configuracion.configuracionSonido();
+					configuracion.establecerConfiguraciones();
 					dispose();
 
 				} else {

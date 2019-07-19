@@ -29,6 +29,7 @@ import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
@@ -87,7 +88,7 @@ public class registro_empleados extends JFrame {
 	public JFormattedTextField txtIdentidadEmpleado;
 	public JTextField txtNombreReferencia;
 	public JTextField txtTelefonoReferencia;
-	public JTextField txtEdadEmpleado;
+	public static JTextField txtEdadEmpleado;
 	public JFormattedTextField txtTelefonoEmpleado;
 	public JComboBox<?> cbxGeneroEmpleado;
 	public JComboBox<?> cbxUsuarioEmpleado;
@@ -316,8 +317,27 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
+				try {
+					conexion conex = new conexion();
+					Statement estatuto = conex.getConexion().createStatement();
+					ResultSet rs = estatuto.executeQuery(
+							"SELECT identidad_empleado FROM empleados where identidad_empleado = '" + txtIdentidadEmpleado.getText().toString() + "'");
+					if (rs.next() == true) {
+						JOptionPane.showMessageDialog(null, "Atencion! Este identidad ya pertenece a un empleado registrado!");
+						txtIdentidadEmpleado.setText("");
+					} 
+					rs.close();
+					estatuto.close();
+					conex.desconectar();
+
+				} catch (SQLException exx) {
+					System.out.println(exx.getMessage());
+					JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
 			}
 		});
+		
 
 		JLabel lblEdad = new JLabel("10. Edad :");
 		lblEdad.setBounds(39, 362, 83, 14);
@@ -432,6 +452,20 @@ public class registro_empleados extends JFrame {
 		editor3 = (JTextFieldDateEditor) dateFechaNacimiento.getDateEditor();
 		editor3.setEditable(false);
 		editor3.setHorizontalAlignment(SwingConstants.CENTER);
+		editor3.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				calcularEdad();
+			}
+		});
 
 		label_1 = new JLabel("");
 		label_1.setBounds(475, 55, 68, 54);
