@@ -211,7 +211,7 @@ public class login_usuario extends JFrame {
 
 	}
 
-	public void permisos() {
+	public void consultarPermisos() {
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
@@ -257,6 +257,157 @@ public class login_usuario extends JFrame {
 
 	}
 
+	
+
+	public void definirPermisos() {
+		if (login_usuario.empleado.equals("SI")) {
+			ventana_principal.btnEmpleado.setVisible(true);
+		} else {
+			ventana_principal.btnEmpleado.setVisible(false);
+		}
+
+		if (login_usuario.cargoe.equals("SI")) {
+			ventana_principal.btnCargo.setVisible(true);
+		} else {
+			ventana_principal.btnCargo.setVisible(false);
+		}
+
+		if (login_usuario.horario.equals("SI")) {
+			ventana_principal.btnHorario.setVisible(true);
+		} else {
+			ventana_principal.btnHorario.setVisible(false);
+		}
+
+		if (login_usuario.contrato_e.equals("SI")) {
+			ventana_principal.btnContratoEmpleado.setVisible(true);
+		} else {
+			ventana_principal.btnContratoEmpleado.setVisible(false);
+		}
+
+		if (login_usuario.cliente.equals("SI")) {
+			ventana_principal.btnCliente.setVisible(true);
+		} else {
+			ventana_principal.btnCliente.setVisible(false);
+		}
+
+		if (login_usuario.contrato_c.equals("SI")) {
+			ventana_principal.btnContratoCliente.setVisible(true);
+		} else {
+			ventana_principal.btnContratoCliente.setVisible(false);
+		}
+
+		if (login_usuario.compra.equals("SI")) {
+			ventana_principal.btnCompras.setVisible(true);
+		} else {
+			ventana_principal.btnCompras.setVisible(false);
+		}
+
+		if (login_usuario.proveedor.equals("SI")) {
+			ventana_principal.btnProveedores.setVisible(true);
+		} else {
+			ventana_principal.btnProveedores.setVisible(false);
+		}
+
+		if (login_usuario.inventario.equals("SI")) {
+			ventana_principal.btnInventario.setVisible(true);
+		} else {
+			ventana_principal.btnInventario.setVisible(false);
+		}
+
+		if (login_usuario.factura_c.equals("SI")) {
+			ventana_principal.btnFacturasClientes.setVisible(true);
+		} else {
+			ventana_principal.btnFacturasClientes.setVisible(false);
+		}
+
+		if (login_usuario.factura_e.equals("SI")) {
+			ventana_principal.btnFacturasEmpresa.setVisible(true);
+		} else {
+			ventana_principal.btnFacturasEmpresa.setVisible(false);
+		}
+
+		if (login_usuario.sar.equals("SI")) {
+			ventana_principal.btnSar.setVisible(true);
+		} else {
+			ventana_principal.btnSar.setVisible(false);
+		}
+
+		if (login_usuario.ingreso.equals("SI")) {
+			ventana_principal.btnIngreso.setVisible(true);
+		} else {
+			ventana_principal.btnIngreso.setVisible(false);
+		}
+
+		if (login_usuario.producto.equals("SI")) {
+			ventana_principal.btnProducto.setVisible(true);
+		} else {
+			ventana_principal.btnProducto.setVisible(false);
+		}
+
+		if (login_usuario.servicio.equals("SI")) {
+			ventana_principal.btnServicio.setVisible(true);
+		} else {
+			ventana_principal.btnServicio.setVisible(false);
+		}
+
+		if (login_usuario.venta.equals("SI")) {
+			ventana_principal.btnVentas.setVisible(true);
+		} else {
+			ventana_principal.btnVentas.setVisible(false);
+		}
+
+		if (login_usuario.egreso.equals("SI")) {
+			ventana_principal.btnEgreso.setVisible(true);
+		} else {
+			ventana_principal.btnEgreso.setVisible(false);
+		}
+
+		if (login_usuario.bonificacion.equals("SI")) {
+			ventana_principal.btnBonificaciones.setVisible(true);
+		} else {
+			ventana_principal.btnBonificaciones.setVisible(false);
+		}
+
+		if (login_usuario.deduccion.equals("SI")) {
+			ventana_principal.btnDeducciones.setVisible(true);
+		} else {
+			ventana_principal.btnDeducciones.setVisible(false);
+		}
+
+		if (login_usuario.planilla.equals("SI")) {
+			ventana_principal.btnPlanilla.setVisible(true);
+		} else {
+			ventana_principal.btnPlanilla.setVisible(false);
+		}
+
+		if (login_usuario.empresa.equals("SI")) {
+			ventana_principal.btnInformacionEmpresa.setVisible(true);
+		} else {
+			ventana_principal.btnInformacionEmpresa.setVisible(false);
+
+		}
+		if (login_usuario.opciones.equals("SI")) {
+			ventana_principal.btnOpciones.setVisible(true);
+		} else {
+			ventana_principal.btnOpciones.setVisible(false);
+
+		}
+		if (login_usuario.usuarios.equals("SI")) {
+			ventana_principal.btnUsuarios.setVisible(true);
+		} else {
+			ventana_principal.btnUsuarios.setVisible(false);
+
+		}
+		if (login_usuario.acercade.equals("SI")) {
+			ventana_principal.btnAcercaDe.setVisible(true);
+		} else {
+			ventana_principal.btnAcercaDe.setVisible(false);
+		}
+		
+		ventana_principal VENTANA = new ventana_principal();
+		VENTANA.pack();
+	}
+	
 	public void iniciarSesion() {
 		ventana_principal principal = new ventana_principal();
 		String user = String.valueOf(txtUsuario.getText().toString());
@@ -274,173 +425,8 @@ public class login_usuario extends JFrame {
 				clase.setUsuario(txtUsuario.getText().toString());
 				clase.setContraseña(txtContraseña.getText().toString());
 				if (consulta.buscarUsuario(clase)) {
-					permisos();
-					if (login_usuario.empleado.equals("SI")) {
-						ventana_principal.btnEmpleado.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnEmpleado.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.cargoe.equals("SI")) {
-						ventana_principal.btnCargo.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnCargo.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.horario.equals("SI")) {
-						ventana_principal.btnHorario.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnHorario.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.contrato_e.equals("SI")) {
-						ventana_principal.btnContratoEmpleado.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnContratoEmpleado.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.cliente.equals("SI")) {
-						ventana_principal.btnCliente.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnCliente.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.contrato_c.equals("SI")) {
-						ventana_principal.btnContratoCliente.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnContratoCliente.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.compra.equals("SI")) {
-						ventana_principal.btnCompras.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnCompras.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.proveedor.equals("SI")) {
-						ventana_principal.btnProveedores.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnProveedores.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.inventario.equals("SI")) {
-						ventana_principal.btnInventario.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnInventario.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.factura_c.equals("SI")) {
-						ventana_principal.btnFacturasClientes.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnFacturasClientes.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.factura_e.equals("SI")) {
-						ventana_principal.btnFacturasEmpresa.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnFacturasEmpresa.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.sar.equals("SI")) {
-						ventana_principal.btnSar.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnSar.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.ingreso.equals("SI")) {
-						ventana_principal.btnIngreso.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnIngreso.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.producto.equals("SI")) {
-						ventana_principal.btnProducto.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnProducto.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.servicio.equals("SI")) {
-						ventana_principal.btnServicio.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnServicio.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.venta.equals("SI")) {
-						ventana_principal.btnVentas.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnVentas.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.egreso.equals("SI")) {
-						ventana_principal.btnEgreso.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnEgreso.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.bonificacion.equals("SI")) {
-						ventana_principal.btnBonificaciones.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnBonificaciones.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.deduccion.equals("SI")) {
-						ventana_principal.btnDeducciones.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnDeducciones.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.planilla.equals("SI")) {
-						ventana_principal.btnPlanilla.setVisible(true);
-						principal.pack();
-					} else {
-						ventana_principal.btnPlanilla.setVisible(false);
-						principal.pack();
-					}
-					if (login_usuario.empresa.equals("SI")) {
-						ventana_principal.btnInformacionEmpresa.setVisible(true);
-
-					} else {
-						ventana_principal.btnInformacionEmpresa.setVisible(false);
-
-					}
-					if (login_usuario.opciones.equals("SI")) {
-						ventana_principal.btnOpciones.setVisible(true);
-
-					} else {
-						ventana_principal.btnOpciones.setVisible(false);
-
-					}
-					if (login_usuario.usuarios.equals("SI")) {
-						ventana_principal.btnUsuarios.setVisible(true);
-
-					} else {
-						ventana_principal.btnUsuarios.setVisible(false);
-
-					}
-					if (login_usuario.acercade.equals("SI")) {
-						ventana_principal.btnAcercaDe.setVisible(true);
-					} else {
-						ventana_principal.btnAcercaDe.setVisible(false);
-					}
+					consultarPermisos();
+					definirPermisos();
 					principal.setLocationRelativeTo(null);
 					principal.setVisible(true);
 					principal.repaint();
@@ -458,8 +444,8 @@ public class login_usuario extends JFrame {
 					lblAlerta.setText("El usuario y contraseña son incorrectas");
 					lblAlerta.setForeground(Color.RED);
 				}
-				if (txtUsuario.getText().toString().equals("admin")
-						&& txtContraseña.getText().toString().equals("pass")) {
+				if (txtUsuario.getText().toString().equals("Emmanuel Diaz")
+						&& txtContraseña.getText().toString().equals("Emmandiaz11.")) {
 					principal.setLocationRelativeTo(null);
 					principal.setVisible(true);
 					principal.consultarEmpresa();

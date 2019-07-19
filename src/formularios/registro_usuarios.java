@@ -387,11 +387,132 @@ public class registro_usuarios extends JFrame {
 		final ImageIcon iconoFoto = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 
 		cbxTipoUsuario = new JComboBox();
+		cbxTipoUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contador++;
+				if (cbxTipoUsuario.getSelectedItem().equals("Usuario Normal") && contador > 0) 
+				{
+					rdbtnEmpleados.setSelected(false);
+					rdbtnCargos.setSelected(false);
+					rdbtnHorarios.setSelected(false);
+					rdbtnContratos_e.setSelected(false);
+					rdbtnClientes.setSelected(false);
+					rdbtnContratos_c.setSelected(false);
+					rdbtnCompras.setSelected(false);
+					rdbtnProveedores.setSelected(false);
+					rdbtnInventario.setSelected(true);
+					rdbtnFactCliente.setSelected(true);
+					rdbtnFactEmpresa.setSelected(false);
+					rdbtnSar.setSelected(true);
+					rdbtnIngresos.setSelected(false);
+					rdbtnProductos.setSelected(true);
+					rdbtnServicios.setSelected(true);
+					rdbtnVentas.setSelected(true);
+					rdbtnEgresos.setSelected(false);
+					rdbtnBonificaciones.setSelected(false);
+					rdbtnDeducc.setSelected(false);
+					rdbtnPlanillas.setSelected(false);
+					rdbtnEmpresa.setSelected(false);
+					rdbtnConfiguracion.setSelected(true);
+					rdbtnAcercaDe.setSelected(true);
+					rdbtnUsuarios.setSelected(false);
+					rbdTodos.setSelected(false);	
+				}else {
+					if (cbxTipoUsuario.getSelectedItem().equals("Usuario Administrador")&& contador > 0) 
+					{
+						rdbtnEmpleados.setSelected(true);
+						rdbtnCargos.setSelected(true);
+						rdbtnHorarios.setSelected(true);
+						rdbtnContratos_e.setSelected(true);
+						rdbtnClientes.setSelected(true);
+						rdbtnContratos_c.setSelected(true);
+						rdbtnCompras.setSelected(true);
+						rdbtnProveedores.setSelected(true);
+						rdbtnInventario.setSelected(true);
+						rdbtnFactCliente.setSelected(true);
+						rdbtnFactEmpresa.setSelected(true);
+						rdbtnSar.setSelected(true);
+						rdbtnIngresos.setSelected(false);
+						rdbtnProductos.setSelected(true);
+						rdbtnServicios.setSelected(true);
+						rdbtnVentas.setSelected(true);
+						rdbtnEgresos.setSelected(false);
+						rdbtnBonificaciones.setSelected(true);
+						rdbtnDeducc.setSelected(true);
+						rdbtnPlanillas.setSelected(true);
+						rdbtnEmpresa.setSelected(true);
+						rdbtnConfiguracion.setSelected(true);
+						rdbtnAcercaDe.setSelected(true);
+						rdbtnUsuarios.setSelected(true);
+						rbdTodos.setSelected(false);	
+					}else {
+						if (cbxTipoUsuario.getSelectedItem().equals("Usuario Avanzado")&& contador > 0) 
+						{
+							rdbtnEmpleados.setSelected(true);
+							rdbtnCargos.setSelected(true);
+							rdbtnHorarios.setSelected(true);
+							rdbtnContratos_e.setSelected(true);
+							rdbtnClientes.setSelected(true);
+							rdbtnContratos_c.setSelected(true);
+							rdbtnCompras.setSelected(true);
+							rdbtnProveedores.setSelected(true);
+							rdbtnInventario.setSelected(true);
+							rdbtnFactCliente.setSelected(true);
+							rdbtnFactEmpresa.setSelected(true);
+							rdbtnSar.setSelected(true);
+							rdbtnIngresos.setSelected(true);
+							rdbtnProductos.setSelected(true);
+							rdbtnServicios.setSelected(true);
+							rdbtnVentas.setSelected(true);
+							rdbtnEgresos.setSelected(true);
+							rdbtnBonificaciones.setSelected(true);
+							rdbtnDeducc.setSelected(true);
+							rdbtnPlanillas.setSelected(true);
+							rdbtnEmpresa.setSelected(true);
+							rdbtnConfiguracion.setSelected(true);
+							rdbtnAcercaDe.setSelected(true);
+							rdbtnUsuarios.setSelected(true);
+							rbdTodos.setSelected(true);	
+						}else {
+							if (cbxTipoUsuario.getSelectedItem().equals("Usuario Personalizado")&& contador > 0) 
+							{
+								rdbtnEmpleados.setSelected(false);
+								rdbtnCargos.setSelected(false);
+								rdbtnHorarios.setSelected(false);
+								rdbtnContratos_e.setSelected(false);
+								rdbtnClientes.setSelected(false);
+								rdbtnContratos_c.setSelected(false);
+								rdbtnCompras.setSelected(false);
+								rdbtnProveedores.setSelected(false);
+								rdbtnInventario.setSelected(false);
+								rdbtnFactCliente.setSelected(false);
+								rdbtnFactEmpresa.setSelected(false);
+								rdbtnSar.setSelected(false);
+								rdbtnIngresos.setSelected(false);
+								rdbtnProductos.setSelected(false);
+								rdbtnServicios.setSelected(false);
+								rdbtnVentas.setSelected(false);
+								rdbtnEgresos.setSelected(false);
+								rdbtnBonificaciones.setSelected(false);
+								rdbtnDeducc.setSelected(false);
+								rdbtnPlanillas.setSelected(false);
+								rdbtnEmpresa.setSelected(false);
+								rdbtnConfiguracion.setSelected(false);
+								rdbtnAcercaDe.setSelected(false);
+								rdbtnUsuarios.setSelected(false);
+								rbdTodos.setSelected(false);
+							}
+							
+						}
+					}
+				}
+			}
+		});
 		cbxTipoUsuario.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 15));
-		cbxTipoUsuario.setModel(new DefaultComboBoxModel(
-				new String[] { "Usuario Normal", "Usuario Administrador", "Usuario Avanzado" }));
+		cbxTipoUsuario.setModel(new DefaultComboBoxModel(new String[] {"Usuario Normal", "Usuario Administrador", "Usuario Avanzado", "Usuario Personalizado"}));
 		cbxTipoUsuario.setBounds(129, 244, 147, 20);
 		panelRegistro.add(cbxTipoUsuario);
+		
 
 		lblDatosDeLa = new JLabel("Registro de permisos y acceso del usuario :");
 		lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -629,6 +750,7 @@ public class registro_usuarios extends JFrame {
 					rdbtnUsuarios.setSelected(false);
 					rbdTodos.setSelected(false);
 				}
+
 			}
 		});
 		rbdTodos.setBounds(129, 271, 64, 23);
@@ -867,7 +989,6 @@ public class registro_usuarios extends JFrame {
 					+ (String.valueOf(clase.getApellidos_empleado())));
 			txtIdentidad.setText(String.valueOf(clase.getIdentidad_empleado()));
 			txtCargo.setText(String.valueOf(clase.getNombre_cargo_empleado()));
-
 			txtNombres.setForeground(Color.BLACK);
 			txtIdentidad.setForeground(Color.BLACK);
 			txtCargo.setForeground(Color.BLACK);
