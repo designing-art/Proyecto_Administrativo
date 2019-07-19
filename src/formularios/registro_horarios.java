@@ -89,7 +89,7 @@ public class registro_horarios extends JFrame {
 
 	public registro_horarios() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 865, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

@@ -133,7 +133,7 @@ public class registro_bonificaciones extends JFrame {
 
 	public registro_bonificaciones() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 900, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

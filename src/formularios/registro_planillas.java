@@ -152,7 +152,7 @@ public class registro_planillas extends JFrame {
 	public static JLabel label_22;
 
 	public registro_planillas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 900, 671);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

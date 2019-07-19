@@ -130,7 +130,7 @@ public class registro_deducciones extends JFrame {
 
 	public registro_deducciones() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 900, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

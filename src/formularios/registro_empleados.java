@@ -181,7 +181,7 @@ public class registro_empleados extends JFrame {
 
 	public registro_empleados() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 1221, 720);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
