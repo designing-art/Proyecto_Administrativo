@@ -10,7 +10,7 @@ import clases.planilla;
 import conexion.conexion;
 
 public class consultas_planilla extends conexion {
-	
+
 	public boolean registrar(planilla planilla) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

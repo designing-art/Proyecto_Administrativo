@@ -43,80 +43,78 @@ public class control_producto implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
 			if (formulario.txtDireccionFotoProducto.getText().isEmpty() || formulario.txtDispositivo.getText().isEmpty()
 					|| formulario.txtCapasidad.getText().isEmpty() || formulario.txtColor.getText().isEmpty()
-					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el producto!");
-		} else {
-			clase.setDispositivo_de_entrega_producto(formulario.txtDispositivo.getText().toString());
-			clase.setCapacidad_produto(formulario.txtCapasidad.getText().toString());
-			clase.setColor_producto(formulario.txtColor.getText().toString());
-			clase.setMarca_producto(formulario.txtMarca.getText().toString());
-			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
-			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setExistencia_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setFecha_registro_producto(formulario.editor.getText().toString());
-			
-			if (consulta.insertar(clase)) {
-				JOptionPane.showMessageDialog(null, "Producto registrado!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
-				final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
-				final ImageIcon iconofoto = new ImageIcon(
-						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-				formulario.lbl_foto_contrato.setIcon(iconofoto);
-				formulario.txtDireccionFotoProducto.setText("Sin Fotografia");
+					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el producto!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
-				limpiar();
-				formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
+				clase.setDispositivo_de_entrega_producto(formulario.txtDispositivo.getText().toString());
+				clase.setCapacidad_produto(formulario.txtCapasidad.getText().toString());
+				clase.setColor_producto(formulario.txtColor.getText().toString());
+				clase.setMarca_producto(formulario.txtMarca.getText().toString());
+				clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
+				clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setExistencia_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setFecha_registro_producto(formulario.editor.getText().toString());
+
+				if (consulta.insertar(clase)) {
+					JOptionPane.showMessageDialog(null, "Producto registrado!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
+					final ImageIcon iconofoto = new ImageIcon(
+							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lbl_foto_contrato.setIcon(iconofoto);
+					formulario.txtDireccionFotoProducto.setText("Sin Fotografia");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! producto no registrado");
+					limpiar();
+					formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
+				}
 			}
 		}
-	}
-		
+
 		/* Actualizar */
 		if (e.getSource() == formulario.btnActualizarProducto) {
 			if (formulario.txtDireccionFotoProducto.getText().isEmpty() || formulario.txtDispositivo.getText().isEmpty()
 					|| formulario.txtCapasidad.getText().isEmpty() || formulario.txtColor.getText().isEmpty()
-					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el producto!");
-		} else {
-			clase.setId_producto(Integer.parseInt(formulario.txtCodigoProducto.getText().toString()));
-			clase.setDispositivo_de_entrega_producto(formulario.txtDispositivo.getText().toString());
-			clase.setCapacidad_produto(formulario.txtCapasidad.getText().toString());
-			clase.setColor_producto(formulario.txtColor.getText().toString());
-			clase.setMarca_producto(formulario.txtMarca.getText().toString());
-			clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
-			clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setExistencia_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setFecha_registro_producto(formulario.editor.getText().toString());
-			if (consulta.actualizar(clase)) {
-				JOptionPane.showMessageDialog(null, "Producto actualizado!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
-				final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
-				final ImageIcon iconofoto = new ImageIcon(
-						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-				formulario.lbl_foto_contrato.setIcon(iconofoto);
-				formulario.txtDireccionFotoProducto.setText("Sin Fotografia");
+					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el producto!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! producto no registrado");
-				limpiar();
-				formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
+				clase.setId_producto(Integer.parseInt(formulario.txtCodigoProducto.getText().toString()));
+				clase.setDispositivo_de_entrega_producto(formulario.txtDispositivo.getText().toString());
+				clase.setCapacidad_produto(formulario.txtCapasidad.getText().toString());
+				clase.setColor_producto(formulario.txtColor.getText().toString());
+				clase.setMarca_producto(formulario.txtMarca.getText().toString());
+				clase.setDireccion_foto_producto(formulario.txtDireccionFotoProducto.getText().toString());
+				clase.setPrecio_producto(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setCantidad_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setExistencia_producto(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setFecha_registro_producto(formulario.editor.getText().toString());
+				if (consulta.actualizar(clase)) {
+					JOptionPane.showMessageDialog(null, "Producto actualizado!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usb.png"));
+					final ImageIcon iconofoto = new ImageIcon(
+							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lbl_foto_contrato.setIcon(iconofoto);
+					formulario.txtDireccionFotoProducto.setText("Sin Fotografia");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! producto no registrado");
+					limpiar();
+					formulario.txtDireccionFotoProducto.setText("Sin Fotografia.");
+				}
 			}
 		}
-	}
-	
+
 		if (e.getSource() == formulario.btnActualizarDatosProducto) {
 			int filaseleccionada;
 			try {
@@ -193,7 +191,6 @@ public class control_producto implements ActionListener {
 					String foto = formulario.tablaProductos.getValueAt(filaseleccionada, 6).toString();
 					String cantidad = formulario.tablaProductos.getValueAt(filaseleccionada, 7).toString();
 
-
 					formulario.txtCodigoProducto.setText(codigo);
 					formulario.txtDispositivo.setText(dispo);
 					formulario.txtMarca.setText(marca);
@@ -202,7 +199,6 @@ public class control_producto implements ActionListener {
 					formulario.txtPrecio.setText(precio);
 					formulario.txtDireccionFotoProducto.setText(foto);
 					formulario.txtCantidad.setText(cantidad);
-
 
 					final ImageIcon foto_contrato = new ImageIcon(foto);
 					final ImageIcon logo = new ImageIcon(
@@ -234,8 +230,6 @@ public class control_producto implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
-		
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrarProducto) {

@@ -123,7 +123,7 @@ public class registro_facturas_clientes extends JFrame {
 	public static int nuevaCantidad = 0;
 	public JTextField txtNuevaFactura;
 	public JTextField txtCodigoSAR;
-	
+
 	public static String codSAR = null;
 
 	public registro_facturas_clientes() {
@@ -514,7 +514,8 @@ public class registro_facturas_clientes extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Factura", "Fecha", "Cliente", "RTN", "Direccion", "Concepto", "Cantidad en Letras", "Cantidad en Numeros", "Atendido por" };
+		String titulos[] = { "Codigo", "Factura", "Fecha", "Cliente", "RTN", "Direccion", "Concepto",
+				"Cantidad en Letras", "Cantidad en Numeros", "Atendido por" };
 		String informacion[][] = control_factura_cliente.obtenerMatriz();
 		tabla = new JTable(informacion, titulos);
 		barra.setViewportView(tabla);
@@ -543,7 +544,8 @@ public class registro_facturas_clientes extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM facturas_clientes ORDER BY id_facturas_cliente DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM facturas_clientes ORDER BY id_facturas_cliente DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				ultimoValor = rsr.getString("id_facturas_cliente");
@@ -709,7 +711,7 @@ public class registro_facturas_clientes extends JFrame {
 			}
 			txtCodigoSAR.setText(codSAR);
 			txtNuevaFactura.setText(nuevaFactura);
-			
+
 			;
 			stmtr.close();
 			rsr.close();

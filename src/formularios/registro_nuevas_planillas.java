@@ -70,11 +70,11 @@ public class registro_nuevas_planillas extends JFrame {
 	public JButton btnActualizar;
 	public JButton btnBorrar;
 	public JButton btnNuevo;
-	
+
 	public PlaceHolder pista;
 	public JComboBox cbxEstadoPlanilla;
 	public JComboBox cbxTipoPlanillaFinal;
-	 
+
 	public JButton btnBorrarPlanilla;
 	public JButton btnVerPlanilla;
 	public JButton btnActualizarDatosPlanilla;
@@ -101,8 +101,6 @@ public class registro_nuevas_planillas extends JFrame {
 	public JTextField txtTotalPlanilla;
 	public JDateChooser dateRegistro;
 	public JDateChooser datePago;
-	
-	
 
 	public static String bonificaciones = null;
 	public static String deducciones = null;
@@ -306,7 +304,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 		cbxEstadoPlanilla = new JComboBox();
 		cbxEstadoPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxEstadoPlanilla.setModel(new DefaultComboBoxModel(new String[] {"Vigente", "Cerrada"}));
+		cbxEstadoPlanilla.setModel(new DefaultComboBoxModel(new String[] { "Vigente", "Cerrada" }));
 		cbxEstadoPlanilla.setBounds(163, 307, 79, 20);
 		panel.add(cbxEstadoPlanilla);
 
@@ -375,18 +373,18 @@ public class registro_nuevas_planillas extends JFrame {
 		dateRegistro = new JDateChooser();
 		dateRegistro.setBounds(139, 11, 90, 20);
 		panel.add(dateRegistro);
-		
+
 		JLabel label = new JLabel("Tipo :");
 		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		label.setBounds(10, 298, 63, 14);
 		panel.add(label);
-		
+
 		cbxTipoPlanillaFinal = new JComboBox();
 		cbxTipoPlanillaFinal.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxTipoPlanillaFinal.setModel(new DefaultComboBoxModel(new String[] {"Mensual", "Quincenal", "Eventual"}));
+		cbxTipoPlanillaFinal.setModel(new DefaultComboBoxModel(new String[] { "Mensual", "Quincenal", "Eventual" }));
 		cbxTipoPlanillaFinal.setBounds(47, 296, 100, 20);
 		panel.add(cbxTipoPlanillaFinal);
-		
+
 		editor2 = (JTextFieldDateEditor) dateRegistro.getDateEditor();
 		dateRegistro.setVisible(false);
 		editor2.setEditable(false);
@@ -437,8 +435,8 @@ public class registro_nuevas_planillas extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Código", "Estado", "Tipo", "Nombre", "Fecha de creación", "Fecha de pago",
-				"Deducciones", "Bonificaciones", "Sueldos", "Total Planilla" };
+		String titulos[] = { "Código", "Estado", "Tipo", "Nombre", "Fecha de creación", "Fecha de pago", "Deducciones",
+				"Bonificaciones", "Sueldos", "Total Planilla" };
 		String informacion[][] = control_historial_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
@@ -475,7 +473,8 @@ public class registro_nuevas_planillas extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM historial_planillas ORDER BY id_planilla_final DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM historial_planillas ORDER BY id_planilla_final DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				ultimoValor = rsr.getString("id_planilla_final");
@@ -492,7 +491,6 @@ public class registro_nuevas_planillas extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
 
 	Timer time = new Timer();
 	public TimerTask tarea = new TimerTask() {
@@ -555,7 +553,7 @@ public class registro_nuevas_planillas extends JFrame {
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void iniciarEncero() {
 		double cero = 0.0;
 		String numero = String.valueOf(cero);

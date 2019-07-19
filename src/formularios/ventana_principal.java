@@ -4,11 +4,7 @@ import javax.swing.JFrame;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -1106,7 +1102,7 @@ public class ventana_principal extends JFrame {
 				control_usuario control = new control_usuario(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.txtBusqueda.requestFocusInWindow();
+				registro_usuarios.txtBusqueda.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.pistas();
 				formulario.consultarEmpresa();
@@ -1149,7 +1145,6 @@ public class ventana_principal extends JFrame {
 				info.setVisible(true);
 			}
 		});
-		
 
 	}
 

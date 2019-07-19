@@ -2,18 +2,11 @@ package controles;
 
 import java.awt.event.ActionEvent;
 
-
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Timer;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
 import clases.configuracion;
-import conexion.conexion;
 import consultas.consultas_configuracion;
 import formularios.configuraciones;
 import formularios.ventana_principal;
@@ -26,8 +19,7 @@ public class control_configuracion implements ActionListener {
 	public configuraciones formulario;
 	public ventana_principal formulario2 = new ventana_principal();
 
-	public control_configuracion(configuracion clase, consultas_configuracion consulta,
-			configuraciones formulario) {
+	public control_configuracion(configuracion clase, consultas_configuracion consulta, configuraciones formulario) {
 		this.clase = clase;
 		this.consulta = consulta;
 		this.formulario = formulario;
@@ -41,10 +33,10 @@ public class control_configuracion implements ActionListener {
 
 		if (e.getSource() == formulario.btnGuardar) {
 
-			if (formulario.rdbtnActivar.isSelected()) {
-				clase.setSonido_configuracion(formulario.rdbtnActivar.getText().toString());
+			if (configuraciones.rdbtnActivar.isSelected()) {
+				clase.setSonido_configuracion(configuraciones.rdbtnActivar.getText().toString());
 			} else {
-				clase.setSonido_configuracion(formulario.rdbtnDesactivar.getText().toString());
+				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());
 			}
 
 			clase.setFrase_configuracion(configuraciones.txtFrase.getText().toString());
@@ -65,35 +57,35 @@ public class control_configuracion implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 			}
 		}
-	
-	if (e.getSource() == formulario.btnActualizar) {
-		
-		clase.setId_configuracion(Integer.parseInt(formulario.txtCodigo.getText().toString()));
 
-		if (formulario.rdbtnActivar.isSelected()) {
-			clase.setSonido_configuracion(formulario.rdbtnActivar.getText().toString());
-		} else {
-			clase.setSonido_configuracion(formulario.rdbtnDesactivar.getText().toString());
-		}
+		if (e.getSource() == formulario.btnActualizar) {
 
-		clase.setFrase_configuracion(configuraciones.txtFrase.getText().toString());
-		
-		if (consulta.actualizar(clase)) {
-			JOptionPane.showMessageDialog(null, "Exito Configuracion guardada!");
-			formulario.dispose();
-			formulario2.setLocationRelativeTo(null);
-			formulario2.setVisible(true);
-			formulario2.consultarEmpresa();
-			Timer time = new Timer();
-			time.schedule(formulario2.tarea, 0, 1000);
-			configuraciones configuracion = new configuraciones();
-			configuracion.consultarConfiguracion();
-			configuracion.establecerConfiguraciones();
-			ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
-		} else {
-			JOptionPane.showMessageDialog(null, "Error! datos no actualizados");
+			clase.setId_configuracion(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+
+			if (configuraciones.rdbtnActivar.isSelected()) {
+				clase.setSonido_configuracion(configuraciones.rdbtnActivar.getText().toString());
+			} else {
+				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());
+			}
+
+			clase.setFrase_configuracion(configuraciones.txtFrase.getText().toString());
+
+			if (consulta.actualizar(clase)) {
+				JOptionPane.showMessageDialog(null, "Exito Configuracion guardada!");
+				formulario.dispose();
+				formulario2.setLocationRelativeTo(null);
+				formulario2.setVisible(true);
+				formulario2.consultarEmpresa();
+				Timer time = new Timer();
+				time.schedule(formulario2.tarea, 0, 1000);
+				configuraciones configuracion = new configuraciones();
+				configuracion.consultarConfiguracion();
+				configuracion.establecerConfiguraciones();
+				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
+			} else {
+				JOptionPane.showMessageDialog(null, "Error! datos no actualizados");
+			}
 		}
 	}
-}
 
 }

@@ -403,7 +403,7 @@ public class registro_facturas_empresa extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Fecha", "Compra", "Precio", "Cantidad", "Descripcion", "Foto"};
+		String titulos[] = { "Codigo", "Fecha", "Compra", "Precio", "Cantidad", "Descripcion", "Foto" };
 		String informacion[][] = control_factura_empresa.obtenerMatriz();
 		tabla = new JTable(informacion, titulos);
 		barra.setViewportView(tabla);
@@ -432,8 +432,7 @@ public class registro_facturas_empresa extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn
-					.prepareStatement("SELECT * FROM facturas_compras ORDER BY id_factura DESC");
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM facturas_compras ORDER BY id_factura DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				ultimoValor = rsr.getString("id_factura");

@@ -43,10 +43,9 @@ public class control_cliente implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtNombresCliente.getText().isEmpty()
-					|| formulario.txtNombreEmpresa.getText().isEmpty()
+			if (formulario.txtNombresCliente.getText().isEmpty() || formulario.txtNombreEmpresa.getText().isEmpty()
 					|| formulario.txtApellidosCliente.getText().isEmpty()
 					|| formulario.txtDireccionCliente.getText().isEmpty()
 					|| formulario.txtTelefonoCliente.getText().isEmpty()
@@ -55,8 +54,7 @@ public class control_cliente implements ActionListener {
 					|| formulario.txtFotoCliente.getText().isEmpty() || formulario.txtNombreEmpresa.getText().isEmpty()
 					|| formulario.txtDireccionEmpresa.getText().isEmpty()
 					|| formulario.txtRTNEmpresa.getText().isEmpty() || formulario.txtTelefonoEmpresa.getText().isEmpty()
-					|| formulario.txtCorreoEmpresa.getText().isEmpty()) 
-			{
+					|| formulario.txtCorreoEmpresa.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el cliente!");
 			} else {
 				clase.setNombres_cliente(formulario.txtNombresCliente.getText().toString());
@@ -81,9 +79,8 @@ public class control_cliente implements ActionListener {
 					formulario.obtenerUltimoId();
 					formulario.txtFotoCliente.setText("Sin Fotografia.");
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-									formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoC.setIcon(iconofoto);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Cliente no registrado");
@@ -93,8 +90,7 @@ public class control_cliente implements ActionListener {
 
 		}
 
-		if (e.getSource() == formulario.btnActualizar)
-		{
+		if (e.getSource() == formulario.btnActualizar) {
 			if (formulario.txtNombresCliente.getText().isEmpty() || formulario.txtNombreEmpresa.getText().isEmpty()
 					|| formulario.txtApellidosCliente.getText().isEmpty()
 					|| formulario.txtDireccionCliente.getText().isEmpty()
@@ -130,9 +126,8 @@ public class control_cliente implements ActionListener {
 					formulario.obtenerUltimoId();
 					formulario.txtFotoCliente.setText("Sin Fotografia.");
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-									formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoC.setIcon(iconofoto);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! Cliente no actualizado");
@@ -195,11 +190,10 @@ public class control_cliente implements ActionListener {
 					formulario.txtRTNEmpresa.setForeground(Color.BLACK);
 					formulario.txtTelefonoEmpresa.setForeground(Color.BLACK);
 					formulario.txtCorreoEmpresa.setForeground(Color.BLACK);
-					
+
 					final ImageIcon iconoContrato = new ImageIcon(foto);
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-									formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoC.setIcon(iconofoto);
 
 					formulario.btnBorrar.setVisible(true);
@@ -292,11 +286,10 @@ public class control_cliente implements ActionListener {
 					formulario.txtRTNEmpresa.setEditable(false);
 					formulario.txtTelefonoEmpresa.setEditable(false);
 					formulario.txtCorreoEmpresa.setEditable(false);
-					
+
 					final ImageIcon iconoContrato = new ImageIcon(foto);
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-									formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoC.setIcon(iconofoto);
 
 					formulario.btnBorrar.setVisible(false);
@@ -339,11 +332,10 @@ public class control_cliente implements ActionListener {
 					formulario.btnActualizar.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevo.setVisible(false);
-					
+
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-									formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblFotoC.setIcon(iconofoto);
 
 				}
@@ -367,11 +359,10 @@ public class control_cliente implements ActionListener {
 			formulario.btnAceptar.setVisible(false);
 			formulario.pistas();
 			formulario.construirTabla();
-			
+
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-			final ImageIcon iconofoto = new ImageIcon(
-					iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-							formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+					formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoC.setIcon(iconofoto);
 		}
 
@@ -407,11 +398,10 @@ public class control_cliente implements ActionListener {
 			formulario.txtTelefonoEmpresa.setEditable(true);
 			formulario.txtCorreoEmpresa.setEditable(true);
 			formulario.txtNombresCliente.requestFocusInWindow();
-			
+
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-			final ImageIcon iconofoto = new ImageIcon(
-					iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-							formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+					formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lblFotoC.setIcon(iconofoto);
 		}
 

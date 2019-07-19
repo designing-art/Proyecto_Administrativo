@@ -7,7 +7,6 @@ import clases.ingreso;
 import conexion.conexion;
 
 public class consultas_ingreso extends conexion {
-	
 
 	/* Actualizar */
 	public boolean actualizar(ingreso ingreso) {

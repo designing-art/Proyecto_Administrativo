@@ -13,7 +13,7 @@ public class consultas_servicio extends conexion {
 		Connection con = getConexion();
 
 		String sql = "INSERT INTO servicios (tipo_servicio, tiempo_servicio, precio_servicio, descripcion_servicio, producto_servicio) VALUES(?,?,?,?,?)";
-		
+
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, servicio.getTipo_servicio());
@@ -41,7 +41,7 @@ public class consultas_servicio extends conexion {
 		Connection con = getConexion();
 
 		String sql = "UPDATE servicios SET id_servicio=?, tipo_servicio=?, tiempo_servicio=?, precio_servicio=?, descripcion_servicio=?, producto_servicio=? WHERE id_servicio=? ";
-		
+
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, servicio.getId_servicio());

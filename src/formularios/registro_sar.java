@@ -680,7 +680,7 @@ public class registro_sar extends JFrame {
 	public void calcularDatosFacturas() {
 		double existencia = 0.50 * total;
 		double existencia2 = 0.10 * total;
-		
+
 		if (txtTotalFacturas.getText().isEmpty()) {
 			txtNota.setText("Agrege un nuevo rango SAR de facturas.");
 			txtNota.setForeground(Color.BLUE);

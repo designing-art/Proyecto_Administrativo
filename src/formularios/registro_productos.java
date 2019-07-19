@@ -84,7 +84,7 @@ public class registro_productos extends JFrame {
 	public static String ruta_logo;
 	public static JLabel label;
 	public static JLabel label_2;
-	
+
 	public JDateChooser dateRegistro;
 	public JTextFieldDateEditor editor;
 
@@ -376,7 +376,6 @@ public class registro_productos extends JFrame {
 		lblL.setBounds(155, 230, 17, 14);
 		panelRegistro.add(lblL);
 
-		
 		dateRegistro = new JDateChooser();
 		dateRegistro.setBounds(219, 84, 95, 20);
 		dateRegistro.setDateFormatString("dd-MMMMM-yyyy");
@@ -501,10 +500,10 @@ public class registro_productos extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(txtBusquedaContratosEmpleados.equals("")) { 
+				if (txtBusquedaContratosEmpleados.equals("")) {
 					JOptionPane.showMessageDialog(null, "Debe buscar el producto para conocer su existencia total.");
-				}else {
-					totalizarExistencia();	
+				} else {
+					totalizarExistencia();
 				}
 			}
 		});
@@ -544,7 +543,7 @@ public class registro_productos extends JFrame {
 			tcr2 = new DefaultTableCellRenderer();
 			tcr2.setHorizontalAlignment(SwingConstants.CENTER);
 			tablaProductos.getColumnModel().getColumn(7).setCellRenderer(tcr2);
-			
+
 			DefaultTableCellRenderer tcr3;
 			tcr3 = new DefaultTableCellRenderer();
 			tcr3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -696,7 +695,7 @@ public class registro_productos extends JFrame {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}
 	}
-	
+
 	public void establecerFechaRegistro() {
 		try {
 			LocalDate fechaActual = LocalDate.now();

@@ -66,7 +66,7 @@ public class consultas_usuario extends conexion {
 		Connection con = getConexion();
 
 		String sql = "UPDATE usuario SET id_usuario=?, usuario=?, contraseña=?, identidad=?, nombre=?, cargo=?, tipo_usuario=?, permiso_todo=?, permiso_empleado=?, permiso_cargo=?, permiso_horario=?, permiso_contrato_e=?, permiso_cliente=?, permiso_contrato_c=?, permiso_compra=?, permiso_proveedor=?, permiso_inventario=?, permiso_factura_c=?, permiso_factura_e=?, permiso_sar=?, permiso_ingreso=?, permiso_producto=?, permiso_servicio=?, permiso_venta=?, permiso_egreso=?, permiso_bonificacion=?, permiso_deduccion=?, permiso_planilla=?, permiso_empresa=?, permiso_opciones=?, permiso_usuarios=?, permiso_acercade=? WHERE id_usuario=? ";
-			
+
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, usuario.getId_usuario());
@@ -117,7 +117,7 @@ public class consultas_usuario extends conexion {
 		}
 
 	}
-	
+
 	public boolean buscar(empleado empleado) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -149,7 +149,7 @@ public class consultas_usuario extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean buscarUsuario(usuario usuario) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;

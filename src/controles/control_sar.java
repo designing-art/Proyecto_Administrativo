@@ -72,7 +72,8 @@ public class control_sar implements ActionListener {
 							clase.setRango_inicial_sar(
 									Integer.parseInt(formulario.txtRangoInicial.getText().toString()));
 							clase.setRango_final_sar(Integer.parseInt(formulario.txtRangoFinal.getText().toString()));
-							clase.setFactura_actual_sar(Integer.parseInt(formulario.txtRangoInicial.getText().toString()));
+							clase.setFactura_actual_sar(
+									Integer.parseInt(formulario.txtRangoInicial.getText().toString()));
 							clase.setFecha_limite_sar(formulario.editor.getText().toString());
 							if (consulta.insertar(clase)) {
 								JOptionPane.showMessageDialog(null, "SAR registrado!");
@@ -372,12 +373,12 @@ public class control_sar implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void validarFechaLimite() {
 		LocalDate date = LocalDate.now();
 		Date fechaActual = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Date fechaSeleccionada = formulario.dateFechaLimite.getDate();
-		
+
 		switch (fechaSeleccionada.compareTo(fechaActual)) {
 		case 1:
 			valor = 1;

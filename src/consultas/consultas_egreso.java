@@ -7,13 +7,12 @@ import clases.egreso;
 import conexion.conexion;
 
 public class consultas_egreso extends conexion {
-	
 
 	public boolean insertarEgreso(egreso egreso) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 		String sql = "INSERT INTO egresos (tipo_egreso, cantidad_egreso, descripcion_egreso, fecha_egreso) VALUES(?,?,?,?)";
-		
+
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, egreso.getTipo_egreso());
@@ -33,7 +32,7 @@ public class consultas_egreso extends conexion {
 			}
 		}
 	}
-	
+
 	/* Actualizar */
 	public boolean actualizarEgreso(egreso egreso) {
 		PreparedStatement ps = null;

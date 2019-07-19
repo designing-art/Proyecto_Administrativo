@@ -14,7 +14,7 @@ public class consultas_venta extends conexion {
 	public boolean insertar(venta venta) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
-		
+
 		String sql = "INSERT INTO ventas (nombre_objeto_venta, descripcion_objeto_venta, peso_objeto_venta, color_objeto_venta, marca_objeto_venta, modelo_objeto_venta, existencia_objeto_venta, cantidad_objeto_venta, precio_compra_venta, precio_venta, fecha_registro_venta ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
@@ -80,54 +80,54 @@ public class consultas_venta extends conexion {
 			}
 		}
 	}
-		
-		/* Actualizar */
-		public boolean actualizarInventario(inventario inventario) {
-			PreparedStatement ps = null;
-			Connection con = getConexion();
-			String sql = "UPDATE inventario SET existencias_objeto_inventario=? WHERE id_inventario=? ";
-			try {
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, inventario.getExistencias_objeto_inventario());
-				ps.setInt(2, inventario.getId_inventario());
-				ps.execute();
-				return true;
-			} catch (SQLException e) {
-				System.err.println(e);
-				return false;
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.err.println(e);
-				}
-			}
 
-		}
-		
-		public boolean insertarIngreso(ingreso ingreso) {
-			PreparedStatement ps = null;
-			Connection con = getConexion();
-			String sql = "INSERT INTO ingresos (tipo_ingreso, cantidad_ingreso, descripcion_ingreso, fecha_ingreso) VALUES(?,?,?,?)";
-			
+	/* Actualizar */
+	public boolean actualizarInventario(inventario inventario) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+		String sql = "UPDATE inventario SET existencias_objeto_inventario=? WHERE id_inventario=? ";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, inventario.getExistencias_objeto_inventario());
+			ps.setInt(2, inventario.getId_inventario());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
 			try {
-				ps = con.prepareStatement(sql);
-				ps.setString(1, ingreso.getTipo_ingreso());
-				ps.setDouble(2, ingreso.getCantidad_ingreso());
-				ps.setString(3, ingreso.getDescripcion_ingreso());
-				ps.setString(4, ingreso.getFecha_ingreso());
-				ps.execute();
-				return true;
+				con.close();
 			} catch (SQLException e) {
 				System.err.println(e);
-				return false;
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.err.println(e);
-				}
 			}
 		}
 
 	}
+
+	public boolean insertarIngreso(ingreso ingreso) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+		String sql = "INSERT INTO ingresos (tipo_ingreso, cantidad_ingreso, descripcion_ingreso, fecha_ingreso) VALUES(?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, ingreso.getTipo_ingreso());
+			ps.setDouble(2, ingreso.getCantidad_ingreso());
+			ps.setString(3, ingreso.getDescripcion_ingreso());
+			ps.setString(4, ingreso.getFecha_ingreso());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+}

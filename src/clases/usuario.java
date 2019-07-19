@@ -9,18 +9,18 @@ public class usuario {
 	String nombre;
 	String cargo;
 	String tipo_usuario;
-	String permiso_todo; 
-	String permiso_empleado; 
+	String permiso_todo;
+	String permiso_empleado;
 	String permiso_cargo;
 	String permiso_horario;
 	String permiso_contrato_e;
 	String permiso_cliente;
-	String permiso_contrato_c; 
+	String permiso_contrato_c;
 	String permiso_compra;
-	String permiso_proveedor; 
-	String permiso_inventario; 
-	String permiso_factura_c; 
-	String permiso_factura_e; 
+	String permiso_proveedor;
+	String permiso_inventario;
+	String permiso_factura_c;
+	String permiso_factura_e;
 	String permiso_sar;
 	String permiso_ingreso;
 	String permiso_producto;
@@ -29,8 +29,8 @@ public class usuario {
 	String permiso_egreso;
 	String permiso_bonificacion;
 	String permiso_deduccion;
-	String permiso_planilla; 
-	String permiso_empresa; 
+	String permiso_planilla;
+	String permiso_empresa;
 	String permiso_opciones;
 	String permiso_usuarios;
 	String permiso_acercade;
@@ -290,7 +290,5 @@ public class usuario {
 	public void setPermiso_acercade(String permiso_acercade) {
 		this.permiso_acercade = permiso_acercade;
 	}
-	
-	
 
 }

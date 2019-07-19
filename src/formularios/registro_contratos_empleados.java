@@ -80,7 +80,6 @@ public class registro_contratos_empleados extends JFrame {
 	public JScrollPane barraContratos;
 	public JTable tablaContratosEmpleados;
 	public JTextField txtCodigoContratoEmpleado;
-	
 
 	public static String ruta_logo;
 	public static JLabel label;
@@ -147,7 +146,7 @@ public class registro_contratos_empleados extends JFrame {
 		label = new JLabel();
 		label.setBounds(265, 48, 49, 44);
 		panelRegistro.add(label);
-		
+
 		btnNuevoContrato = new JButton("Nuevo");
 		btnNuevoContrato.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevoContrato.setBounds(27, 393, 99, 23);
@@ -368,7 +367,7 @@ public class registro_contratos_empleados extends JFrame {
 		btnMostrarContrato.setBackground(new Color(0, 206, 209));
 		btnMostrarContrato.setBounds(149, 395, 108, 23);
 		panelTablaCargos.add(btnMostrarContrato);
-		
+
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
 			@Override
@@ -376,27 +375,27 @@ public class registro_contratos_empleados extends JFrame {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
 				String encabezado = "Reporte de contratos de " + nombreEmpresa;
-				utilJTablePrint(tablaContratosEmpleados, encabezado, "Pagina {0}"
-						+ "                                                  " + fecha, true);
+				utilJTablePrint(tablaContratosEmpleados, encabezado,
+						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(210, 40, 137, 19);
 		panelTablaCargos.add(button);
-				
-				btnAsignar = new JButton("Asignar");
-				btnAsignar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-				btnAsignar.setBackground(new Color(34, 139, 34));
-				btnAsignar.setBounds(30, 395, 99, 23);
-				panelTablaCargos.add(btnAsignar);
-				
-						JLabel label_5 = new JLabel();
-						label_5.setBounds(0, 0, 431, 449);
-						panelTablaCargos.add(label_5);
-						final ImageIcon logo1 = new ImageIcon(
-								icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-						label_5.setIcon(logo1);
+
+		btnAsignar = new JButton("Asignar");
+		btnAsignar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnAsignar.setBackground(new Color(34, 139, 34));
+		btnAsignar.setBounds(30, 395, 99, 23);
+		panelTablaCargos.add(btnAsignar);
+
+		JLabel label_5 = new JLabel();
+		label_5.setBounds(0, 0, 431, 449);
+		panelTablaCargos.add(label_5);
+		final ImageIcon logo1 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+		label_5.setIcon(logo1);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 	}
@@ -483,16 +482,13 @@ public class registro_contratos_empleados extends JFrame {
 			visor_imagen.lblImagen.setIcon(imagen);
 		}
 	}
-	
+
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			boolean complete = jTable.print(mode,
-					new MessageFormat(header),
-					new MessageFormat(footer),
-					showPrintDialog,
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
@@ -506,7 +502,7 @@ public class registro_contratos_empleados extends JFrame {
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public static String getFechaYHora() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -515,7 +511,7 @@ public class registro_contratos_empleados extends JFrame {
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
+
 	public void consultarEmpresa() {
 		conexion conex = new conexion();
 		try {
@@ -525,17 +521,17 @@ public class registro_contratos_empleados extends JFrame {
 			if (rs.next()) {
 				ruta_logo = (rs.getString("direccion_logo_empresa"));
 				final ImageIcon logo = new ImageIcon(ruta_logo);
-				
+
 				final ImageIcon icono = new ImageIcon(
 						logo.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 				label.setIcon(icono);
-				
-				final ImageIcon icono2 = new ImageIcon(
-						logo.getImage().getScaledInstance(label_2.getWidth(), label_2.getHeight(), Image.SCALE_DEFAULT));
+
+				final ImageIcon icono2 = new ImageIcon(logo.getImage().getScaledInstance(label_2.getWidth(),
+						label_2.getHeight(), Image.SCALE_DEFAULT));
 				label_2.setIcon(icono2);
-			}else {
-				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
-						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
 			}
 			rs.close();
 			estatuto.close();

@@ -579,9 +579,8 @@ public class registro_servicios extends JFrame {
 			int total = Integer.parseInt(cantidad);
 			int existencia = total - 1;
 			String resultado = String.valueOf(existencia);
-			PreparedStatement stmtr2 = conn.prepareStatement("UPDATE productos SET existencia_producto='"
-					+resultado+"' WHERE dispositivo_de_entrega_producto='"
-					+txtDispositivo.getText().toString()+"'");
+			PreparedStatement stmtr2 = conn.prepareStatement("UPDATE productos SET existencia_producto='" + resultado
+					+ "' WHERE dispositivo_de_entrega_producto='" + txtDispositivo.getText().toString() + "'");
 			ResultSet rsr2 = stmtr2.executeQuery();
 			rsr2.next();
 			;
@@ -593,5 +592,5 @@ public class registro_servicios extends JFrame {
 			e21.printStackTrace();
 		}
 	}
-	
+
 }

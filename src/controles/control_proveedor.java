@@ -43,89 +43,93 @@ public class control_proveedor implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
 			validarIdentidad();
-			if (formulario.txtNombresProveedor.getText().isEmpty() || formulario.txtDireccionFotoProveedor.getText().isEmpty()
-					|| formulario.txtCorreoProveedor.getText().isEmpty() || formulario.txtDireccionProveedor.getText().isEmpty()
-					|| formulario.txtCuentaProveedor.getText().isEmpty() || formulario.txtTelefonoProveedor.getText().isEmpty() || formulario.txtRtnProveedor.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el proveedor!");
+			if (formulario.txtNombresProveedor.getText().isEmpty()
+					|| formulario.txtDireccionFotoProveedor.getText().isEmpty()
+					|| formulario.txtCorreoProveedor.getText().isEmpty()
+					|| formulario.txtDireccionProveedor.getText().isEmpty()
+					|| formulario.txtCuentaProveedor.getText().isEmpty()
+					|| formulario.txtTelefonoProveedor.getText().isEmpty()
+					|| formulario.txtRtnProveedor.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el proveedor!");
 			} else {
-				if (formulario.txtRtnProveedor.getText().toString().equals(rtn)) 
-				{
+				if (formulario.txtRtnProveedor.getText().toString().equals(rtn)) {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad o rtn : " + rtn,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-			clase.setNombres_proveedor(formulario.txtNombresProveedor.getText().toString());
-			clase.setCuenta_bancaria_proveedor(formulario.txtCuentaProveedor.getText().toString());
-			clase.setDireccion_proveedor(formulario.txtDireccionProveedor.getText().toString());
-			clase.setRtn_proveedor(formulario.txtRtnProveedor.getText().toString());
-			clase.setTelefono_proveedor(formulario.txtTelefonoProveedor.getText().toString());
-			clase.setCorreo_electronico_proveedor(formulario.txtCorreoProveedor.getText().toString());
-			clase.setFoto_proveedor(formulario.txtDireccionFotoProveedor.getText().toString());
-			
-			if (consulta.insertar(clase)) {
-				JOptionPane.showMessageDialog(null, "Proveedor registrado!");
-				limpiar();
-				formulario.txtDireccionFotoProveedor.setText("Sin Fotografia.");
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
-				final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-				final ImageIcon iconofoto = new ImageIcon(
-						iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-								formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-				formulario.lbl_foto_contrato.setIcon(iconofoto);
-			} else {
-				JOptionPane.showMessageDialog(null, "Error! proveedor no registrado");
-				limpiar();
-			}
-				}
-		}
-	}
-		
-		/* Actualizar */
-			if (e.getSource() == formulario.btnActualizar) {
-				if (formulario.txtNombresProveedor.getText().isEmpty() || formulario.txtDireccionFotoProveedor.getText().isEmpty()
-						|| formulario.txtCorreoProveedor.getText().isEmpty() || formulario.txtDireccionProveedor.getText().isEmpty()
-						|| formulario.txtCuentaProveedor.getText().isEmpty() || formulario.txtTelefonoProveedor.getText().isEmpty() || formulario.txtRtnProveedor.getText().isEmpty())
-				{
-				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el proveedor!");
-				} else {
-					if (formulario.txtRtnProveedor.getText().toString().equals(rtn)) 
-					{
-						JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad o rtn : " + rtn,
-								"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
+					clase.setNombres_proveedor(formulario.txtNombresProveedor.getText().toString());
+					clase.setCuenta_bancaria_proveedor(formulario.txtCuentaProveedor.getText().toString());
+					clase.setDireccion_proveedor(formulario.txtDireccionProveedor.getText().toString());
+					clase.setRtn_proveedor(formulario.txtRtnProveedor.getText().toString());
+					clase.setTelefono_proveedor(formulario.txtTelefonoProveedor.getText().toString());
+					clase.setCorreo_electronico_proveedor(formulario.txtCorreoProveedor.getText().toString());
+					clase.setFoto_proveedor(formulario.txtDireccionFotoProveedor.getText().toString());
+
+					if (consulta.insertar(clase)) {
+						JOptionPane.showMessageDialog(null, "Proveedor registrado!");
+						limpiar();
+						formulario.txtDireccionFotoProveedor.setText("Sin Fotografia.");
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+						final ImageIcon iconofoto = new ImageIcon(
+								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lbl_foto_contrato.setIcon(iconofoto);
 					} else {
-				
-				clase.setId_proveedor(Integer.parseInt(formulario.txtCodigoProveedor.getText().toString()));
-				clase.setNombres_proveedor(formulario.txtNombresProveedor.getText().toString());
-				clase.setCuenta_bancaria_proveedor(formulario.txtCuentaProveedor.getText().toString());
-				clase.setDireccion_proveedor(formulario.txtDireccionProveedor.getText().toString());
-				clase.setRtn_proveedor(formulario.txtRtnProveedor.getText().toString());
-				clase.setTelefono_proveedor(formulario.txtTelefonoProveedor.getText().toString());
-				clase.setCorreo_electronico_proveedor(formulario.txtCorreoProveedor.getText().toString());
-				clase.setFoto_proveedor(formulario.txtDireccionFotoProveedor.getText().toString());
-				
-				if (consulta.actualizar(clase)) {
-					JOptionPane.showMessageDialog(null, "Proveedor actualizado!");
-					limpiar();
-					formulario.txtDireccionFotoProveedor.setText("Sin Fotografia.");
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lbl_foto_contrato.setIcon(iconofoto);
-				} else {
-					JOptionPane.showMessageDialog(null, "Error! proveedor no actualizado");
-					limpiar();
+						JOptionPane.showMessageDialog(null, "Error! proveedor no registrado");
+						limpiar();
+					}
 				}
 			}
-				}
 		}
-	
+
+		/* Actualizar */
+		if (e.getSource() == formulario.btnActualizar) {
+			if (formulario.txtNombresProveedor.getText().isEmpty()
+					|| formulario.txtDireccionFotoProveedor.getText().isEmpty()
+					|| formulario.txtCorreoProveedor.getText().isEmpty()
+					|| formulario.txtDireccionProveedor.getText().isEmpty()
+					|| formulario.txtCuentaProveedor.getText().isEmpty()
+					|| formulario.txtTelefonoProveedor.getText().isEmpty()
+					|| formulario.txtRtnProveedor.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el proveedor!");
+			} else {
+				if (formulario.txtRtnProveedor.getText().toString().equals(rtn)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad o rtn : " + rtn,
+							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+
+					clase.setId_proveedor(Integer.parseInt(formulario.txtCodigoProveedor.getText().toString()));
+					clase.setNombres_proveedor(formulario.txtNombresProveedor.getText().toString());
+					clase.setCuenta_bancaria_proveedor(formulario.txtCuentaProveedor.getText().toString());
+					clase.setDireccion_proveedor(formulario.txtDireccionProveedor.getText().toString());
+					clase.setRtn_proveedor(formulario.txtRtnProveedor.getText().toString());
+					clase.setTelefono_proveedor(formulario.txtTelefonoProveedor.getText().toString());
+					clase.setCorreo_electronico_proveedor(formulario.txtCorreoProveedor.getText().toString());
+					clase.setFoto_proveedor(formulario.txtDireccionFotoProveedor.getText().toString());
+
+					if (consulta.actualizar(clase)) {
+						JOptionPane.showMessageDialog(null, "Proveedor actualizado!");
+						limpiar();
+						formulario.txtDireccionFotoProveedor.setText("Sin Fotografia.");
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+						final ImageIcon iconofoto = new ImageIcon(
+								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lbl_foto_contrato.setIcon(iconofoto);
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! proveedor no actualizado");
+						limpiar();
+					}
+				}
+			}
+		}
+
 		if (e.getSource() == formulario.btnActualizarDatos) {
 			int filaseleccionada;
 			try {
@@ -141,7 +145,6 @@ public class control_proveedor implements ActionListener {
 					String telefono = formulario.tablaProveedores.getValueAt(filaseleccionada, 5).toString();
 					String correo = formulario.tablaProveedores.getValueAt(filaseleccionada, 6).toString();
 					String foto = formulario.tablaProveedores.getValueAt(filaseleccionada, 7).toString();
-
 
 					formulario.txtCodigoProveedor.setText(codigo);
 					formulario.txtNombresProveedor.setText(nombre);
@@ -166,7 +169,6 @@ public class control_proveedor implements ActionListener {
 					formulario.txtDireccionProveedor.setForeground(Color.BLACK);
 					formulario.txtTelefonoProveedor.setForeground(Color.BLACK);
 					formulario.txtRtnProveedor.setForeground(Color.BLACK);
-
 
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
@@ -203,7 +205,6 @@ public class control_proveedor implements ActionListener {
 					String telefono = formulario.tablaProveedores.getValueAt(filaseleccionada, 5).toString();
 					String correo = formulario.tablaProveedores.getValueAt(filaseleccionada, 6).toString();
 					String foto = formulario.tablaProveedores.getValueAt(filaseleccionada, 7).toString();
-
 
 					formulario.txtCodigoProveedor.setText(codigo);
 					formulario.txtNombresProveedor.setText(nombre);
@@ -244,8 +245,6 @@ public class control_proveedor implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
-		
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {
@@ -325,9 +324,9 @@ public class control_proveedor implements ActionListener {
 					iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
 							formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
 			formulario.lbl_foto_contrato.setIcon(iconofoto);
+		}
+
 	}
-			
-}
 
 	public void limpiar() {
 		formulario.txtBusqueda.setText(null);
@@ -389,7 +388,7 @@ public class control_proveedor implements ActionListener {
 
 		return matrizInfo;
 	}
-	
+
 	public void validarIdentidad() {
 		conexion conex = new conexion();
 		try {

@@ -114,17 +114,18 @@ public class registro_empresa extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
 				ruta = txtDireccionLogoEmpresa.getText().toString();
-				nombre = txtNombreEmpresa.getText().toString(); 
+				nombre = txtNombreEmpresa.getText().toString();
 				imagen = new ImageIcon(ruta);
-				imagenLogo_aplicado = new ImageIcon(imagen.getImage().getScaledInstance(ventana_principal.lbl_logo_empresa_principal.getWidth(),
-						ventana_principal.lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				imagenLogo_aplicado = new ImageIcon(
+						imagen.getImage().getScaledInstance(ventana_principal.lbl_logo_empresa_principal.getWidth(),
+								ventana_principal.lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
 				ventana_principal.lbl_logo_empresa_principal.setIcon(imagenLogo_aplicado);
 				ventana_principal.lbl_nombre_empresa_principal.setText(nombre);
 				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
 				dispose();
 				Timer time = new Timer();
-				time.schedule(principal.tarea, 0, 1000);	
+				time.schedule(principal.tarea, 0, 1000);
 			}
 		});
 
@@ -322,10 +323,10 @@ public class registro_empresa extends JFrame {
 		txtNombreEmpresa.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent evt) {
-				String Caracteres = txtNombreEmpresa.getText(); 
-		        if(Caracteres.length()>=50){ 
-		            evt.consume(); 
-		        } 
+				String Caracteres = txtNombreEmpresa.getText();
+				if (Caracteres.length() >= 50) {
+					evt.consume();
+				}
 			}
 		});
 		txtNombreEmpresa.setBounds(93, 33, 210, 20);
@@ -358,10 +359,10 @@ public class registro_empresa extends JFrame {
 		txtDireccionEmpresa.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent evt) {
-				String Caracteres = txtDireccionEmpresa.getText(); 
-		        if(Caracteres.length()>=50){ 
-		            evt.consume(); 
-		        } 
+				String Caracteres = txtDireccionEmpresa.getText();
+				if (Caracteres.length() >= 50) {
+					evt.consume();
+				}
 			}
 		});
 
@@ -504,7 +505,7 @@ public class registro_empresa extends JFrame {
 		txtCodigoEmpresa.setVisible(false);
 		txtCodigoEmpresa.setColumns(10);
 		panel_1.add(txtCodigoEmpresa);
-		
+
 		JLabel label = new JLabel("Ejemplo: Banco Atlantida: 100220066086");
 		label.setForeground(Color.GRAY);
 		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -519,7 +520,7 @@ public class registro_empresa extends JFrame {
 		final ImageIcon logo3 = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo3);
-		
+
 		txtNombre_Empresa = new JTextField();
 		txtNombre_Empresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		txtNombre_Empresa.setBackground(Color.WHITE);
@@ -688,9 +689,8 @@ public class registro_empresa extends JFrame {
 		pista = new PlaceHolder(txtNombreEmpresa, "Ingrese el nombre de la empresa.");
 		pista = new PlaceHolder(txtDireccionEmpresa, "Ingrese la direccion de la empresa.");
 		pista = new PlaceHolder(txtCorreoEmpresa, "Ingrese el correo del la empresa.");
-		pista = new PlaceHolder(txtCuentaEmpresa, "Escriba la o las cuentas bancarias.\n"
-				+ "Ejemplo: Banco Atlantida: 100220066086");
+		pista = new PlaceHolder(txtCuentaEmpresa,
+				"Escriba la o las cuentas bancarias.\n" + "Ejemplo: Banco Atlantida: 100220066086");
 	}
 
-	
 }

@@ -8,7 +8,7 @@ import clases.historial_planilla;
 import conexion.conexion;
 
 public class consultas_historial_planilla extends conexion {
-	
+
 	public boolean registrar(historial_planilla historial_planilla) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
@@ -40,7 +40,7 @@ public class consultas_historial_planilla extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean modificar(historial_planilla historial_planilla) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

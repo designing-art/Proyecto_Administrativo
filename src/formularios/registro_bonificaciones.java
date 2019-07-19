@@ -751,8 +751,8 @@ public class registro_bonificaciones extends JFrame {
 				ruta_logo = (rs.getString("direccion_logo_empresa"));
 				final ImageIcon logo = new ImageIcon(ruta_logo);
 
-				final ImageIcon icono = new ImageIcon(
-						logo.getImage().getScaledInstance(label_21.getWidth(), label_21.getHeight(), Image.SCALE_DEFAULT));
+				final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(label_21.getWidth(),
+						label_21.getHeight(), Image.SCALE_DEFAULT));
 				label_21.setIcon(icono);
 
 			} else {

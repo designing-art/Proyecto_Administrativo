@@ -232,18 +232,18 @@ public class registro_ingresos extends JFrame {
 		btnObtener.setBackground(new Color(60, 179, 113));
 		btnObtener.setBounds(296, 418, 108, 19);
 		panelTablaCargos.add(btnObtener);
-		
+
 		JLabel label_3 = new JLabel("L.");
 		label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		label_3.setBounds(133, 423, 63, 18);
 		panelTablaCargos.add(label_3);
-		
-				JLabel label_5 = new JLabel();
-				label_5.setBounds(0, 0, 431, 497);
-				panelTablaCargos.add(label_5);
-				final ImageIcon logo1 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-				label_5.setIcon(logo1);
+
+		JLabel label_5 = new JLabel();
+		label_5.setBounds(0, 0, 431, 497);
+		panelTablaCargos.add(label_5);
+		final ImageIcon logo1 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+		label_5.setIcon(logo1);
 
 		JPanel panelRegistro = new JPanel();
 		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
@@ -368,18 +368,18 @@ public class registro_ingresos extends JFrame {
 		txtDescripcion = new JTextArea();
 		txtDescripcion.setEditable(false);
 		scrollPane.setViewportView(txtDescripcion);
-		
+
 		JLabel label_1 = new JLabel("L.");
 		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		label_1.setBounds(191, 114, 63, 18);
 		panelRegistro.add(label_1);
-		
-				JLabel lblImagenLibreta = new JLabel();
-				lblImagenLibreta.setBounds(0, 0, 341, 279);
-				panelRegistro.add(lblImagenLibreta);
-				final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-						lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-				lblImagenLibreta.setIcon(logo);
+
+		JLabel lblImagenLibreta = new JLabel();
+		lblImagenLibreta.setBounds(0, 0, 341, 279);
+		panelRegistro.add(lblImagenLibreta);
+		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblImagenLibreta.setIcon(logo);
 
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 

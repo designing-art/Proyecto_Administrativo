@@ -61,7 +61,8 @@ public class control_bonificacion implements ActionListener {
 				clase.setTipo_bonificacion(formulario.cbxTipoBonificacion.getSelectedItem().toString());
 				clase.setObservacion_bonificacion(formulario.txtObservacionBonificacion.getText());
 				clase.setCantidad_bonificacion(Double.parseDouble(formulario.txtCantidadBonificacion.getText()));
-				clase.setIdentidad_empleado_bonificacion(registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText());
+				clase.setIdentidad_empleado_bonificacion(
+						registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText());
 				clase.setFecha_bonificacion(formulario.editor.getText());
 
 				if (consulta.registrar(clase)) {
@@ -203,7 +204,8 @@ public class control_bonificacion implements ActionListener {
 				clase.setTipo_bonificacion(formulario.cbxTipoBonificacion.getSelectedItem().toString());
 				clase.setObservacion_bonificacion(formulario.txtObservacionBonificacion.getText());
 				clase.setCantidad_bonificacion(Double.parseDouble(formulario.txtCantidadBonificacion.getText()));
-				clase.setIdentidad_empleado_bonificacion(registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText());
+				clase.setIdentidad_empleado_bonificacion(
+						registro_bonificaciones.txtIdentidadEmpleadoBonificacion.getText());
 				clase.setFecha_bonificacion(formulario.editor.getText());
 				clase.setId_bonificacion(Integer.parseInt(formulario.txtCodigo.getText()));
 

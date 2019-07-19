@@ -32,21 +32,22 @@ public class control_venta implements ActionListener {
 	public venta clase;
 	public consultas_venta consulta;
 	public registro_ventas formulario;
-	
+
 	public inventario clase2;
 	public consultas_inventario consulta2;
 	public registro_ingresos formulario2;
-	
+
 	public ingreso clase3;
 	public consultas_ingreso consulta3;
 	public registro_ingresos formulario3;
-	
+
 	public static String identidad = null;
 
 	public static int cantidad = 0;
 	public static int existencia = 0;
 
-	public control_venta(venta clase, inventario clase2, ingreso clase3, consultas_venta consulta, registro_ventas formulario, registro_ingresos formulario2) {
+	public control_venta(venta clase, inventario clase2, ingreso clase3, consultas_venta consulta,
+			registro_ventas formulario, registro_ingresos formulario2) {
 		this.clase = clase;
 		this.clase2 = clase2;
 		this.clase3 = clase3;
@@ -78,9 +79,8 @@ public class control_venta implements ActionListener {
 				existencia = Integer.parseInt(formulario.txtExistencia.getText().toString());
 				cantidad = Integer.parseInt(formulario.txtCantidadVenta.getText().toString());
 				if (cantidad > existencia) {
-					JOptionPane.showMessageDialog(null, "Cantidad de venta incorrecta!\n" 
-				+ "imposible hacer la venta\n"
-				+ "No hay suficiente existencia.\n");
+					JOptionPane.showMessageDialog(null, "Cantidad de venta incorrecta!\n" + "imposible hacer la venta\n"
+							+ "No hay suficiente existencia.\n");
 				} else {
 					if (existencia == 0) {
 						JOptionPane.showMessageDialog(null, "No hay productos disponibles para la venta.");
@@ -100,29 +100,31 @@ public class control_venta implements ActionListener {
 								Double.parseDouble(formulario.txtPrecioCompra.getText().toString()));
 						clase.setPrecio_venta(Double.parseDouble(formulario.txtPrecioVenta.getText().toString()));
 						clase.setFecha_registro_venta(formulario.editor.getText().toString());
-						
-						clase2.setId_inventario(
-								Integer.parseInt(formulario.txtCodigoInventario.getText().toString()));
+
+						clase2.setId_inventario(Integer.parseInt(formulario.txtCodigoInventario.getText().toString()));
 						clase2.setExistencias_objeto_inventario(
 								Integer.parseInt(formulario.txtExistencia.getText().toString()));
-						
-						clase3.setTipo_ingreso("Venta de : "+formulario.txtNombre.getText().toString());
+
+						clase3.setTipo_ingreso("Venta de : " + formulario.txtNombre.getText().toString());
 						clase3.setCantidad_ingreso(Double.parseDouble(formulario.txtPrecioVenta.getText().toString()));
-						clase3.setDescripcion_ingreso("Caracteristicas de la venta : "+formulario.txtDescripcion.getText().toString());
+						clase3.setDescripcion_ingreso(
+								"Caracteristicas de la venta : " + formulario.txtDescripcion.getText().toString());
 						clase3.setFecha_ingreso(formulario.editor.getText().toString());
-						
-						if (consulta.insertar(clase) && consulta.actualizarInventario(clase2)&& consulta.insertarIngreso(clase3)) {
+
+						if (consulta.insertar(clase) && consulta.actualizarInventario(clase2)
+								&& consulta.insertarIngreso(clase3)) {
 							JOptionPane.showMessageDialog(null, "Venta registrada!");
 							limpiar();
 							formulario.obtenerUltimoId();
 							formulario.construirTablaVenta();
 							formulario.construirTablaInventario();
-							
+
 							factura_cliente clase = new factura_cliente();
 							consultas_factura_cliente consulta = new consultas_factura_cliente();
 							registro_facturas_clientes formulario2 = new registro_facturas_clientes();
 							sar clase2 = new sar();
-							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2, clase2);
+							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2,
+									clase2);
 							formulario2.setVisible(true);
 							formulario2.setLocationRelativeTo(null);
 							formulario2.txtCliente.requestFocusInWindow();
@@ -138,7 +140,7 @@ public class control_venta implements ActionListener {
 							formulario2.btnAceptar.setVisible(false);
 							formulario2.btnBorrar.setVisible(false);
 							formulario.dispose();
-							
+
 						} else {
 							JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
 							limpiar();
@@ -362,7 +364,7 @@ public class control_venta implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 		if (e.getSource() == formulario2.btnMostrar) {
 			int filaseleccionada;
 			try {
@@ -397,7 +399,6 @@ public class control_venta implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {
@@ -471,7 +472,7 @@ public class control_venta implements ActionListener {
 			formulario.txtExistencia.setText("0");
 			formulario.txtNombre.requestFocusInWindow();
 		}
-		
+
 		/* Aceptar */
 		if (e.getSource() == formulario2.btnAceptar) {
 			limpiar2();
@@ -499,7 +500,7 @@ public class control_venta implements ActionListener {
 		formulario.txtExistencia.setText(null);
 		formulario.txtCantidadVenta.setText(null);
 	}
-	
+
 	public void limpiar2() {
 		formulario2.txtBusquedaCargos.setText(null);
 		formulario2.txtCodigo.setText(null);
@@ -568,7 +569,7 @@ public class control_venta implements ActionListener {
 
 		return matrizInfo;
 	}
-	
+
 	/* Metodos para mostrar datos en tabla Contratos de los empleados */
 	public static ArrayList<ingreso> buscarUsuariosConMatriz2() {
 		conexion conex = new conexion();
@@ -613,6 +614,5 @@ public class control_venta implements ActionListener {
 
 		return matrizInfo;
 	}
-
 
 }

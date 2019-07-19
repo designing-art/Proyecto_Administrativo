@@ -417,24 +417,24 @@ public class login_usuario extends JFrame {
 					}
 					if (login_usuario.empresa.equals("SI")) {
 						ventana_principal.btnInformacionEmpresa.setVisible(true);
-				
+
 					} else {
 						ventana_principal.btnInformacionEmpresa.setVisible(false);
-		
+
 					}
 					if (login_usuario.opciones.equals("SI")) {
 						ventana_principal.btnOpciones.setVisible(true);
-			
+
 					} else {
 						ventana_principal.btnOpciones.setVisible(false);
-			
+
 					}
 					if (login_usuario.usuarios.equals("SI")) {
 						ventana_principal.btnUsuarios.setVisible(true);
-			
+
 					} else {
 						ventana_principal.btnUsuarios.setVisible(false);
-	
+
 					}
 					if (login_usuario.acercade.equals("SI")) {
 						ventana_principal.btnAcercaDe.setVisible(true);

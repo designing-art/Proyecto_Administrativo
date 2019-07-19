@@ -130,7 +130,6 @@ public class control_egresos implements ActionListener {
 			}
 		}
 
-		
 		if (e.getSource() == formulario.btnMostrar) {
 			int filaseleccionada;
 			try {
@@ -196,7 +195,7 @@ public class control_egresos implements ActionListener {
 				System.out.println(ex.toString());
 			}
 		}
-		
+
 		if (e.getSource() == formulario.btnNuevo) {
 			limpiar();
 			formulario.obtenerUltimoId();

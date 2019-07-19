@@ -130,7 +130,7 @@ public class control_horario implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 		if (e.getSource() == formularioHorario.btnAsignar) {
 
 			int filaseleccionada;
@@ -150,7 +150,7 @@ public class control_horario implements ActionListener {
 					registro_empleados.lbl_tipo_horario_asignacion.setForeground(Color.BLACK);
 					registro_empleados.lbl_dias_horario_asignacion.setForeground(Color.BLACK);
 					registro_empleados.lbl_horas_horario_asignacion.setForeground(Color.BLACK);
-					
+
 					formularioHorario.dispose();
 
 				}

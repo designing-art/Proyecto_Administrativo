@@ -46,10 +46,10 @@ public class consultas_compra extends conexion {
 		Connection con = getConexion();
 
 		String sql = "UPDATE compras SET id_compra=?, nombre_objeto_compra=?, precio_objeto_compra=?, descripcion_objeto_compra=?, peso_objeto_compra=?, color_objeto_compra=?, marca_objeto_compra=?, modelo_objeto_compra=?, cantidad_objeto_compra=?, fecha_registro_compra=? WHERE nombre_objeto_compra=? ";
-		
+
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setInt(1,compra.getId_compra());
+			ps.setInt(1, compra.getId_compra());
 			ps.setString(2, compra.getNombre_objeto_compra());
 			ps.setDouble(3, compra.getPrecio_objeto_compra());
 			ps.setString(4, compra.getDescripcion_objeto_compra());
@@ -75,6 +75,5 @@ public class consultas_compra extends conexion {
 		}
 
 	}
-	
 
 }

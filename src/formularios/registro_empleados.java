@@ -29,7 +29,6 @@ import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
@@ -320,12 +319,14 @@ public class registro_empleados extends JFrame {
 				try {
 					conexion conex = new conexion();
 					Statement estatuto = conex.getConexion().createStatement();
-					ResultSet rs = estatuto.executeQuery(
-							"SELECT identidad_empleado FROM empleados where identidad_empleado = '" + txtIdentidadEmpleado.getText().toString() + "'");
+					ResultSet rs = estatuto
+							.executeQuery("SELECT identidad_empleado FROM empleados where identidad_empleado = '"
+									+ txtIdentidadEmpleado.getText().toString() + "'");
 					if (rs.next() == true) {
-						JOptionPane.showMessageDialog(null, "Atencion! Este identidad ya pertenece a un empleado registrado!");
+						JOptionPane.showMessageDialog(null,
+								"Atencion! Este identidad ya pertenece a un empleado registrado!");
 						txtIdentidadEmpleado.setText("");
-					} 
+					}
 					rs.close();
 					estatuto.close();
 					conex.desconectar();
@@ -337,7 +338,6 @@ public class registro_empleados extends JFrame {
 				}
 			}
 		});
-		
 
 		JLabel lblEdad = new JLabel("10. Edad :");
 		lblEdad.setBounds(39, 362, 83, 14);

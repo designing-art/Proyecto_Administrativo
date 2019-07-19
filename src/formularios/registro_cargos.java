@@ -48,7 +48,6 @@ import controles.control_cargo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 public class registro_cargos extends JFrame {
 	public JComboBox<?> cbxTipoCargo;
@@ -412,19 +411,19 @@ public class registro_cargos extends JFrame {
 		btnImprimirReporte.setBackground(new Color(60, 179, 113));
 		btnImprimirReporte.setBounds(210, 40, 137, 19);
 		panelTablaCargos.add(btnImprimirReporte);
-		
+
 		btnAsignar = new JButton("Asignar");
 		btnAsignar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAsignar.setBackground(new Color(34, 139, 34));
 		btnAsignar.setBounds(30, 392, 99, 23);
 		panelTablaCargos.add(btnAsignar);
-		
-				JLabel label_5 = new JLabel();
-				label_5.setBounds(0, 0, 431, 449);
-				panelTablaCargos.add(label_5);
-				final ImageIcon logo1 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
-				label_5.setIcon(logo1);
+
+		JLabel label_5 = new JLabel();
+		label_5.setBounds(0, 0, 431, 449);
+		panelTablaCargos.add(label_5);
+		final ImageIcon logo1 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
+		label_5.setIcon(logo1);
 
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 

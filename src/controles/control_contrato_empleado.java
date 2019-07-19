@@ -54,13 +54,13 @@ public class control_contrato_empleado implements ActionListener {
 					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el contrato!");
 			} else {
-				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) 
-				{
+				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
-					clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
+					clase.setTiempo_contrato_empleado(
+							formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
 					clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
 					clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
 
@@ -136,8 +136,7 @@ public class control_contrato_empleado implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
-		
+
 		if (e.getSource() == formulario.btnAsignar) {
 
 			int filaseleccionada;
@@ -160,7 +159,7 @@ public class control_contrato_empleado implements ActionListener {
 					registro_empleados.lbl_tipo_empleado_asignacion.setForeground(Color.BLACK);
 					registro_empleados.lbl_tiempo_empleado_asignacion.setForeground(Color.BLACK);
 					registro_empleados.lbl_foto_empleado_asignacion.setForeground(Color.BLACK);
-					
+
 					formulario.dispose();
 
 				}
@@ -227,42 +226,42 @@ public class control_contrato_empleado implements ActionListener {
 					|| formulario.txtIdentidadContratoEmpleado.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el contrato!");
 			} else {
-				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) 
-				{
+				if (formulario.txtIdentidadContratoEmpleado.getText().toString().equals(identidad)) {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-				clase.setId_contrato_empleado(
-						Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
-				clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
-				clase.setTiempo_contrato_empleado(formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
-				clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
-				clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
-				clase.setId_contrato_empleado(
-						Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
+					clase.setId_contrato_empleado(
+							Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
+					clase.setTipo_contrato_empleado(formulario.cbxTipoContratoEmpleado.getSelectedItem().toString());
+					clase.setTiempo_contrato_empleado(
+							formulario.cbxTiempoContratoEmpleado.getSelectedItem().toString());
+					clase.setDireccion_foto_contrato_empleado(formulario.txtDireccionFotoContrato.getText().toString());
+					clase.setIdentidad_contrato_empleado(formulario.txtIdentidadContratoEmpleado.getText().toString());
+					clase.setId_contrato_empleado(
+							Integer.parseInt(formulario.txtCodigoContratoEmpleado.getText().toString()));
 
-				if (consulta.actualizar(clase)) {
-					JOptionPane.showMessageDialog(null, "Contrato Actualizado!");
-					limpiar();
-					formulario.txtDireccionFotoContrato.setText("Sin Fotografia.");
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					formulario.btnActualizarContrato.setVisible(false);
-					formulario.btnSubirFotoContrato.setVisible(false);
-					formulario.txtCodigoContratoEmpleado.setEnabled(false);
-					formulario.txtCodigoContratoEmpleado.setText(null);
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
-									formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lbl_foto_contrato.setIcon(iconofoto);
+					if (consulta.actualizar(clase)) {
+						JOptionPane.showMessageDialog(null, "Contrato Actualizado!");
+						limpiar();
+						formulario.txtDireccionFotoContrato.setText("Sin Fotografia.");
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						formulario.btnActualizarContrato.setVisible(false);
+						formulario.btnSubirFotoContrato.setVisible(false);
+						formulario.txtCodigoContratoEmpleado.setEnabled(false);
+						formulario.txtCodigoContratoEmpleado.setText(null);
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/contrato.png"));
+						final ImageIcon iconofoto = new ImageIcon(
+								iconoContrato.getImage().getScaledInstance(formulario.lbl_foto_contrato.getWidth(),
+										formulario.lbl_foto_contrato.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lbl_foto_contrato.setIcon(iconofoto);
 
-				} else {
-					JOptionPane.showMessageDialog(null, "Error! contrato no Actualizado");
-					limpiar();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! contrato no Actualizado");
+						limpiar();
+					}
+
 				}
-
-			}
 			}
 		}
 

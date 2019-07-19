@@ -111,7 +111,7 @@ public class registro_usuarios extends JFrame {
 	public JLabel label;
 	public JButton btnBuscar;
 	public static int contador;
-	
+
 	public static JRadioButton rdbtnEmpleados;
 	public static JRadioButton rdbtnCargos;
 	public static JRadioButton rdbtnHorarios;
@@ -137,7 +137,6 @@ public class registro_usuarios extends JFrame {
 	public static JRadioButton rdbtnAcercaDe;
 	public static JRadioButton rdbtnUsuarios;
 	public static JRadioButton rbdTodos;
-	
 
 	public registro_usuarios() {
 		setResizable(false);
@@ -179,110 +178,110 @@ public class registro_usuarios extends JFrame {
 		panelRegistro.setBounds(28, 60, 465, 550);
 		contentPane.add(panelRegistro);
 		panelRegistro.setLayout(null);
-		
+
 		JPanel panelPermisos = new JPanel();
 		panelPermisos.setBounds(37, 301, 387, 106);
 		panelRegistro.add(panelPermisos);
 		panelPermisos.setLayout(null);
-		
+
 		rdbtnEmpleados = new JRadioButton("Empleados");
 		rdbtnEmpleados.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		rdbtnEmpleados.setBounds(6, 7, 90, 15);
 		panelPermisos.add(rdbtnEmpleados);
-		
+
 		rdbtnCargos = new JRadioButton("Cargos");
 		rdbtnCargos.setBounds(98, 7, 90, 15);
 		panelPermisos.add(rdbtnCargos);
-		
+
 		rdbtnHorarios = new JRadioButton("Horarios");
 		rdbtnHorarios.setBounds(190, 7, 90, 15);
 		panelPermisos.add(rdbtnHorarios);
-		
+
 		rdbtnContratos_e = new JRadioButton("Contratos E.");
 		rdbtnContratos_e.setBounds(282, 7, 90, 15);
 		panelPermisos.add(rdbtnContratos_e);
-		
+
 		rdbtnClientes = new JRadioButton("Clientes");
 		rdbtnClientes.setBounds(6, 21, 90, 15);
 		panelPermisos.add(rdbtnClientes);
-		
+
 		rdbtnContratos_c = new JRadioButton("Contratos C.");
 		rdbtnContratos_c.setBounds(98, 21, 90, 15);
 		panelPermisos.add(rdbtnContratos_c);
-		
+
 		rdbtnCompras = new JRadioButton("Compras");
 		rdbtnCompras.setBounds(190, 21, 90, 15);
 		panelPermisos.add(rdbtnCompras);
-		
+
 		rdbtnProveedores = new JRadioButton("Proveedores");
 		rdbtnProveedores.setBounds(282, 21, 90, 15);
 		panelPermisos.add(rdbtnProveedores);
-		
+
 		rdbtnInventario = new JRadioButton("Inventario");
 		rdbtnInventario.setBounds(6, 35, 90, 15);
 		panelPermisos.add(rdbtnInventario);
-		
+
 		rdbtnFactCliente = new JRadioButton("Fact. Cliente");
 		rdbtnFactCliente.setBounds(98, 35, 90, 15);
 		panelPermisos.add(rdbtnFactCliente);
-		
+
 		rdbtnFactEmpresa = new JRadioButton("Fact. Empre");
 		rdbtnFactEmpresa.setBounds(190, 35, 90, 15);
 		panelPermisos.add(rdbtnFactEmpresa);
-		
+
 		rdbtnSar = new JRadioButton("SAR");
 		rdbtnSar.setBounds(282, 35, 90, 15);
 		panelPermisos.add(rdbtnSar);
-		
+
 		rdbtnIngresos = new JRadioButton("Ingresos");
 		rdbtnIngresos.setBounds(6, 50, 90, 15);
 		panelPermisos.add(rdbtnIngresos);
-		
+
 		rdbtnProductos = new JRadioButton("Productos");
 		rdbtnProductos.setBounds(98, 50, 90, 15);
 		panelPermisos.add(rdbtnProductos);
-		
+
 		rdbtnServicios = new JRadioButton("Servicios");
 		rdbtnServicios.setBounds(190, 50, 90, 15);
 		panelPermisos.add(rdbtnServicios);
-		
+
 		rdbtnVentas = new JRadioButton("Ventas");
 		rdbtnVentas.setBounds(282, 50, 90, 15);
 		panelPermisos.add(rdbtnVentas);
-		
+
 		rdbtnEgresos = new JRadioButton("Egresos");
 		rdbtnEgresos.setBounds(6, 64, 90, 15);
 		panelPermisos.add(rdbtnEgresos);
-		
+
 		rdbtnBonificaciones = new JRadioButton("Bonific.");
 		rdbtnBonificaciones.setBounds(98, 64, 90, 15);
 		panelPermisos.add(rdbtnBonificaciones);
-		
+
 		rdbtnDeducc = new JRadioButton("Deducc.");
 		rdbtnDeducc.setBounds(190, 64, 90, 15);
 		panelPermisos.add(rdbtnDeducc);
-		
+
 		rdbtnPlanillas = new JRadioButton("Planillas.");
 		rdbtnPlanillas.setBounds(282, 64, 90, 15);
 		panelPermisos.add(rdbtnPlanillas);
-		
+
 		rdbtnEmpresa = new JRadioButton("Empresa");
 		rdbtnEmpresa.setBounds(6, 84, 90, 15);
 		panelPermisos.add(rdbtnEmpresa);
-		
+
 		rdbtnConfiguracion = new JRadioButton("Opciones");
 		rdbtnConfiguracion.setBounds(98, 84, 90, 15);
 		panelPermisos.add(rdbtnConfiguracion);
-		
+
 		rdbtnAcercaDe = new JRadioButton("Usuarios");
 		rdbtnAcercaDe.setBounds(190, 84, 90, 15);
 		panelPermisos.add(rdbtnAcercaDe);
-		
+
 		rdbtnUsuarios = new JRadioButton("Acerca de.");
 		rdbtnUsuarios.setBounds(282, 84, 90, 15);
 		panelPermisos.add(rdbtnUsuarios);
@@ -483,7 +482,7 @@ public class registro_usuarios extends JFrame {
 					if (rs.next() == true) {
 						JOptionPane.showMessageDialog(null, "Este nombre de usuario ya existe");
 						txtUsuario.setText("");
-					} 
+					}
 					rs.close();
 					estatuto.close();
 					conex.desconectar();
@@ -501,7 +500,6 @@ public class registro_usuarios extends JFrame {
 		panelRegistro.add(txtUsuario);
 		InputMap map14 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
 		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		
 
 		lblContrasea = new JLabel("8. Contrase\u00F1a :");
 		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -513,7 +511,7 @@ public class registro_usuarios extends JFrame {
 		txtContraseña.setColumns(10);
 		txtContraseña.setBounds(129, 447, 147, 23);
 		panelRegistro.add(txtContraseña);
-		
+
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
@@ -521,7 +519,7 @@ public class registro_usuarios extends JFrame {
 		txtCodigo.setBounds(366, 243, 58, 23);
 		panelRegistro.add(txtCodigo);
 		txtCodigo.setVisible(false);
-		
+
 		MaskFormatter formatooo = null;
 		try {
 			formatooo = new MaskFormatter("####-####-#####");
@@ -552,13 +550,12 @@ public class registro_usuarios extends JFrame {
 			}
 		});
 
-		
 		label = new JLabel("Ingrese la Identidad :");
 		label.setForeground(new Color(0, 128, 0));
 		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		label.setBounds(37, 80, 168, 27);
 		panelRegistro.add(label);
-		
+
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBackground(new Color(60, 179, 113));
 		btnBuscar.setBounds(342, 83, 82, 23);
@@ -573,7 +570,7 @@ public class registro_usuarios extends JFrame {
 				}
 			}
 		});
-		
+
 		rbdTodos = new JRadioButton("Todos");
 		rbdTodos.addActionListener(new ActionListener() {
 			@Override
@@ -604,8 +601,8 @@ public class registro_usuarios extends JFrame {
 					rdbtnAcercaDe.setSelected(true);
 					rdbtnUsuarios.setSelected(true);
 					rbdTodos.setSelected(true);
-					
-				}else {
+
+				} else {
 					rdbtnEmpleados.setSelected(false);
 					rdbtnCargos.setSelected(false);
 					rdbtnHorarios.setSelected(false);
@@ -636,12 +633,11 @@ public class registro_usuarios extends JFrame {
 		});
 		rbdTodos.setBounds(129, 271, 64, 23);
 		panelRegistro.add(rbdTodos);
-		
+
 		JLabel lblBusquedaDelEmpleado = new JLabel("Busqueda del empleado :");
 		lblBusquedaDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblBusquedaDelEmpleado.setBounds(37, 50, 249, 32);
 		panelRegistro.add(lblBusquedaDelEmpleado);
-		
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 465, 550);
@@ -752,11 +748,12 @@ public class registro_usuarios extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Usuario", "Contraseña", "Identidad", "Nombre", "Cargo", "Tipo","Permiso Todo", "Permiso Empleados",
-				"Permiso Cargos","Permiso Horarios","Permiso Contr. Empl","Permiso Clientes","Permiso Contr. Clientes","Permiso Compra","Permiso Proveedor",
-				"Permiso Inventario","Permiso Fact. Client","Permiso Fact. Empl","Permiso SAR","Permiso Ingreso",
-				"Permiso Producto","Permiso Servicio","Permiso Venta","Permiso Egreso","Permiso Bonificacion",
-				"Permiso Deduccion","Permiso Planilla","Permiso Empresa","Permiso Opciones","Permiso Usuarios","Permiso Acerca De"};
+		String titulos[] = { "Codigo", "Usuario", "Contraseña", "Identidad", "Nombre", "Cargo", "Tipo", "Permiso Todo",
+				"Permiso Empleados", "Permiso Cargos", "Permiso Horarios", "Permiso Contr. Empl", "Permiso Clientes",
+				"Permiso Contr. Clientes", "Permiso Compra", "Permiso Proveedor", "Permiso Inventario",
+				"Permiso Fact. Client", "Permiso Fact. Empl", "Permiso SAR", "Permiso Ingreso", "Permiso Producto",
+				"Permiso Servicio", "Permiso Venta", "Permiso Egreso", "Permiso Bonificacion", "Permiso Deduccion",
+				"Permiso Planilla", "Permiso Empresa", "Permiso Opciones", "Permiso Usuarios", "Permiso Acerca De" };
 		String informacion[][] = control_usuario.obtenerMatriz();
 		tabla = new JTable(informacion, titulos);
 		barra.setViewportView(tabla);
@@ -860,13 +857,14 @@ public class registro_usuarios extends JFrame {
 		}
 
 	}
-	
+
 	public void busquedaDatosEmpleado() {
 		consultas_usuario consulta = new consultas_usuario();
 		empleado clase = new empleado();
 		clase.setIdentidad_empleado(txtBusqueda.getText());
 		if (consulta.buscar(clase)) {
-			txtNombres.setText(String.valueOf(clase.getNombres_empleado())+" "+(String.valueOf(clase.getApellidos_empleado())));
+			txtNombres.setText(String.valueOf(clase.getNombres_empleado()) + " "
+					+ (String.valueOf(clase.getApellidos_empleado())));
 			txtIdentidad.setText(String.valueOf(clase.getIdentidad_empleado()));
 			txtCargo.setText(String.valueOf(clase.getNombre_cargo_empleado()));
 
@@ -878,5 +876,5 @@ public class registro_usuarios extends JFrame {
 
 		}
 	}
-	
+
 }

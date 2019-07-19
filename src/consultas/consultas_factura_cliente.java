@@ -13,7 +13,7 @@ public class consultas_factura_cliente extends conexion {
 	public boolean insertar(factura_cliente factura_cliente) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
-		
+
 		String sql = "INSERT INTO facturas_clientes (numero_factura_cliente, fecha_hora_factura_cliente, firma_cliente, rtn_factura_cliente, direccion_cliente, por_concepto_cliente, cantidad_letras_cliente, cantidad_pagada_cliente, empleado_atencion_cliente) VALUES(?,?,?,?,?,?,?,?,?)";
 
 		try {
@@ -75,29 +75,29 @@ public class consultas_factura_cliente extends conexion {
 			}
 		}
 	}
-		
-		/* Actualizar */
-		public boolean actualizarDatosSAR(sar sar) {
-			PreparedStatement ps = null;
-			Connection con = getConexion();
-			String sql = "UPDATE sar SET factura_actual_sar=? WHERE id_sar=? ";
+
+	/* Actualizar */
+	public boolean actualizarDatosSAR(sar sar) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+		String sql = "UPDATE sar SET factura_actual_sar=? WHERE id_sar=? ";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, sar.getFactura_actual_sar());
+			ps.setInt(2, sar.getId_sar());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
 			try {
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, sar.getFactura_actual_sar());
-				ps.setInt(2, sar.getId_sar());
-				ps.execute();
-				return true;
+				con.close();
 			} catch (SQLException e) {
 				System.err.println(e);
-				return false;
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.err.println(e);
-				}
 			}
-
 		}
 
 	}
+
+}

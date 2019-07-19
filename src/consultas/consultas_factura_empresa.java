@@ -43,7 +43,7 @@ public class consultas_factura_empresa extends conexion {
 		Connection con = getConexion();
 
 		String sql = "UPDATE facturas_compras SET id_factura=?, fecha_factura=?, compra_factura=?, precio_factura=?, cantidad_factura=?, descripcion_factura=?, foto_factura=? WHERE id_factura=? ";
-		
+
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, factura_empresa.getId_factura());
@@ -69,6 +69,5 @@ public class consultas_factura_empresa extends conexion {
 		}
 
 	}
-	
 
 }

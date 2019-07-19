@@ -476,7 +476,7 @@ public class control_usuario implements ActionListener {
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
 
-					formulario.txtBusqueda.requestFocusInWindow();
+					registro_usuarios.txtBusqueda.requestFocusInWindow();
 
 				}
 
@@ -857,7 +857,7 @@ public class control_usuario implements ActionListener {
 			formulario.txtIdentidad.setEditable(true);
 			formulario.txtNombres.setEditable(true);
 			formulario.txtCargo.setEditable(true);
-			formulario.txtBusqueda.requestFocusInWindow();
+			registro_usuarios.txtBusqueda.requestFocusInWindow();
 		}
 
 	}
@@ -866,7 +866,7 @@ public class control_usuario implements ActionListener {
 
 	/* Metodo para el boton nuevo que limpia los datos de los txtFields */
 	public void limpiar() {
-		formulario.txtBusqueda.setText(null);
+		registro_usuarios.txtBusqueda.setText(null);
 		formulario.txtCodigo.setText(null);
 		formulario.txtUsuario.setText(null);
 		formulario.txtContraseña.setText(null);
@@ -900,7 +900,7 @@ public class control_usuario implements ActionListener {
 		registro_usuarios.rdbtnUsuarios.setSelected(false);
 		registro_usuarios.rdbtnAcercaDe.setSelected(false);
 
-		formulario.txtBusqueda.requestFocusInWindow();
+		registro_usuarios.txtBusqueda.requestFocusInWindow();
 	}
 
 	public static ArrayList<usuario> buscarUsuariosConMatriz() {

@@ -40,70 +40,68 @@ public class control_inventario implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
 			if (formulario.txtNombre.getText().isEmpty() || formulario.txtDescripcion.getText().isEmpty()
-					|| formulario.txtColor.getText().isEmpty() ||formulario.txtCantidad.getText().isEmpty()
+					|| formulario.txtColor.getText().isEmpty() || formulario.txtCantidad.getText().isEmpty()
 					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
-					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el Objeto!");
-		} else {
-			clase.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
-			clase.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
-			clase.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
-			clase.setColor_objeto_inventario(formulario.txtColor.getText().toString());
-			clase.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
-			clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
-			clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setFecha_registro_inventario(formulario.editor.getText().toString());
-			
-			if (consulta.insertar(clase)) {
-				JOptionPane.showMessageDialog(null, "Objeto registrado!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
+					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el Objeto!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
-				limpiar();
+				clase.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
+				clase.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
+				clase.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
+				clase.setColor_objeto_inventario(formulario.txtColor.getText().toString());
+				clase.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
+				clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
+				clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setFecha_registro_inventario(formulario.editor.getText().toString());
+
+				if (consulta.insertar(clase)) {
+					JOptionPane.showMessageDialog(null, "Objeto registrado!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
+					limpiar();
+				}
 			}
 		}
-	}
-		
+
 		if (e.getSource() == formulario.btnActualizar) {
 			if (formulario.txtNombre.getText().isEmpty() || formulario.txtDescripcion.getText().isEmpty()
 					|| formulario.txtColor.getText().isEmpty() || formulario.txtCantidad.getText().isEmpty()
 					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
-					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el Objeto!");
-		} else {
-			clase.setId_inventario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-			clase.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
-			clase.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
-			clase.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
-			clase.setColor_objeto_inventario(formulario.txtColor.getText().toString());
-			clase.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
-			clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
-			clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setFecha_registro_inventario(formulario.editor.getText().toString());
-			
-			if (consulta.actualizar(clase)) {
-				JOptionPane.showMessageDialog(null, "Objeto actualizado!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.txtCodigo.setText("");
+					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el Objeto!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! objeto no actualizado");
-				limpiar();
+				clase.setId_inventario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+				clase.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
+				clase.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
+				clase.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
+				clase.setColor_objeto_inventario(formulario.txtColor.getText().toString());
+				clase.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
+				clase.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
+				clase.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setFecha_registro_inventario(formulario.editor.getText().toString());
+
+				if (consulta.actualizar(clase)) {
+					JOptionPane.showMessageDialog(null, "Objeto actualizado!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.txtCodigo.setText("");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! objeto no actualizado");
+					limpiar();
+				}
 			}
 		}
-	}
-	
+
 		if (e.getSource() == formulario.btnActualizarDatos) {
 			int filaseleccionada;
 			try {
@@ -144,7 +142,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtMarca.setForeground(Color.BLACK);
 					formulario.txtModelo.setForeground(Color.BLACK);
 					formulario.txtCantidad.setForeground(Color.BLACK);
-					formulario.txtExistencia.setForeground(Color.BLACK);					
+					formulario.txtExistencia.setForeground(Color.BLACK);
 
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
@@ -154,7 +152,7 @@ public class control_inventario implements ActionListener {
 					formulario.btnVer.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
-					
+
 					formulario.txtCantidad.setEditable(false);
 					formulario.txtExistencia.setEditable(false);
 
@@ -199,7 +197,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtCantidad.setText(cantidad);
 					formulario.txtExistencia.setText(existencia);
 					formulario.editor.setText(fecha);
-					
+
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNombre.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
@@ -210,7 +208,7 @@ public class control_inventario implements ActionListener {
 					formulario.txtModelo.setForeground(Color.BLACK);
 					formulario.txtCantidad.setForeground(Color.BLACK);
 					formulario.txtExistencia.setForeground(Color.BLACK);
-					
+
 					formulario.txtCodigo.setEditable(false);
 					formulario.txtNombre.setEditable(false);
 					formulario.txtPrecio.setEditable(false);
@@ -237,8 +235,6 @@ public class control_inventario implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
-		
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {
@@ -355,7 +351,8 @@ public class control_inventario implements ActionListener {
 				inventario.setMarca_objeto_inventario(rs.getString("marca_objeto_inventario"));
 				inventario.setModelo_objeto_inventario(rs.getString("modelo_objeto_inventario"));
 				inventario.setCantidad_objeto_inventario(Integer.parseInt(rs.getString("cantidad_objeto_inventario")));
-				inventario.setExistencias_objeto_inventario(Integer.parseInt(rs.getString("existencias_objeto_inventario")));
+				inventario.setExistencias_objeto_inventario(
+						Integer.parseInt(rs.getString("existencias_objeto_inventario")));
 				inventario.setFecha_registro_inventario(rs.getString("fecha_registro_inventario"));
 				miLista.add(inventario);
 			}
@@ -391,5 +388,5 @@ public class control_inventario implements ActionListener {
 
 		return matrizInfo;
 	}
-	
+
 }

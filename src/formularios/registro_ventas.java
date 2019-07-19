@@ -588,7 +588,7 @@ public class registro_ventas extends JFrame {
 		lblInventarioDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblInventarioDeLa.setBounds(28, 41, 195, 23);
 		panel.add(lblInventarioDeLa);
-		
+
 		JButton btnInventario = new JButton("Inventario");
 		btnInventario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnInventario.setBackground(new Color(100, 149, 237));
@@ -618,26 +618,26 @@ public class registro_ventas extends JFrame {
 				dispose();
 			}
 		});
-		
-				label_7 = new JLabel();
-				label_7.setBounds(0, 0, 404, 449);
-				panel.add(label_7);
-				final ImageIcon logo2 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
-				label_7.setIcon(logo2);
-		
+
+		label_7 = new JLabel();
+		label_7.setBounds(0, 0, 404, 449);
+		panel.add(label_7);
+		final ImageIcon logo2 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
+		label_7.setIcon(logo2);
+
 		lblInventarioDeLa_1 = new JLabel("1. Inventario de la empresa.");
 		lblInventarioDeLa_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInventarioDeLa_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblInventarioDeLa_1.setBounds(10, 31, 404, 29);
 		contentPane.add(lblInventarioDeLa_1);
-		
+
 		lblDetalleDeLa = new JLabel("2. Detalle de la venta.");
 		lblDetalleDeLa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDetalleDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
 		lblDetalleDeLa.setBounds(424, 31, 341, 29);
 		contentPane.add(lblDetalleDeLa);
-		
+
 		lblRegistroDeLa = new JLabel("3. Registro de la venta.");
 		lblRegistroDeLa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -667,8 +667,8 @@ public class registro_ventas extends JFrame {
 	}
 
 	public void construirTablaVenta() {
-		String titulos[] = { "Codigo", "Nombre", "Descripcion", "Peso", "Color", "Marca", "Modelo",
-				"Cantidad",  "Existencia", "Precio de compra", "Precio de venta", "Registro" };
+		String titulos[] = { "Codigo", "Nombre", "Descripcion", "Peso", "Color", "Marca", "Modelo", "Cantidad",
+				"Existencia", "Precio de compra", "Precio de venta", "Registro" };
 		String informacion[][] = control_venta.obtenerMatriz();
 		tablaVentas = new JTable(informacion, titulos);
 		barraVentas.setViewportView(tablaVentas);

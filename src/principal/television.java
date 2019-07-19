@@ -14,6 +14,7 @@ public class television extends JFrame {
 		login.setVisible(true);
 		login.consultarEmpresa();
 		login.btnIngresar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				login.iniciarSesion();
 			}

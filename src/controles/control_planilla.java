@@ -225,42 +225,42 @@ public class control_planilla implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 
 			} else {
-					clase_planilla.setId_planilla(Integer.parseInt(formulario_planilla.txtCodigo.getText()));
-					clase_planilla.setFecha_planilla(formulario_planilla.editor.getText());
-					clase_planilla.setNombres_planilla(formulario_planilla.txtNombresPlanilla.getText());
-					clase_planilla.setApellidos_planilla(formulario_planilla.txtApellidosPlanilla.getText());
-					clase_planilla.setIdentidad_planilla(formulario_planilla.txtIdentidadPlanilla.getText());
-					clase_planilla.setCargo_planilla(formulario_planilla.txtCargoPlanilla.getText());
-					clase_planilla.setSueldo_bruto_planilla(
-							Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
-					clase_planilla.setTotal_deducciones_planilla(
-							Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
-					clase_planilla.setTotal_bonificaciones_planilla(
-							Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
-					clase_planilla.setSueldo_neto_planilla(
-							Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
-					clase_planilla.setTotal_apagar_planilla(
-							Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
-					clase_planilla.setId_planilla(Integer.parseInt(formulario_planilla.txtCodigo.getText()));
+				clase_planilla.setId_planilla(Integer.parseInt(formulario_planilla.txtCodigo.getText()));
+				clase_planilla.setFecha_planilla(formulario_planilla.editor.getText());
+				clase_planilla.setNombres_planilla(formulario_planilla.txtNombresPlanilla.getText());
+				clase_planilla.setApellidos_planilla(formulario_planilla.txtApellidosPlanilla.getText());
+				clase_planilla.setIdentidad_planilla(formulario_planilla.txtIdentidadPlanilla.getText());
+				clase_planilla.setCargo_planilla(formulario_planilla.txtCargoPlanilla.getText());
+				clase_planilla
+						.setSueldo_bruto_planilla(Double.parseDouble(registro_planillas.txtCantidadPlanilla.getText()));
+				clase_planilla.setTotal_deducciones_planilla(
+						Double.parseDouble(registro_planillas.txtTotalDeduccionesPlanilla.getText()));
+				clase_planilla.setTotal_bonificaciones_planilla(
+						Double.parseDouble(registro_planillas.txtTotalBonificacionesPlanilla.getText()));
+				clase_planilla.setSueldo_neto_planilla(
+						Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
+				clase_planilla.setTotal_apagar_planilla(
+						Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
+				clase_planilla.setId_planilla(Integer.parseInt(formulario_planilla.txtCodigo.getText()));
 
-					if (consulta_planilla.modificar(clase_planilla)) {
-						JOptionPane.showMessageDialog(null, "Datos del pago actualizados!");
-						limpiar();
-						formulario_planilla.construirTabla();
-						formulario_planilla.obtenerUltimoId();
-						formulario_planilla.btnActualizar.setVisible(false);
-						final ImageIcon logo = new ImageIcon(
-								usuario.getImage().getScaledInstance(formulario_planilla.lblFotoPlanilla.getWidth(),
-										formulario_planilla.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
-						formulario_planilla.lblFotoPlanilla.setIcon(logo);
-						formulario_planilla.txtBusquedaPlanilla.requestFocusInWindow();
+				if (consulta_planilla.modificar(clase_planilla)) {
+					JOptionPane.showMessageDialog(null, "Datos del pago actualizados!");
+					limpiar();
+					formulario_planilla.construirTabla();
+					formulario_planilla.obtenerUltimoId();
+					formulario_planilla.btnActualizar.setVisible(false);
+					final ImageIcon logo = new ImageIcon(
+							usuario.getImage().getScaledInstance(formulario_planilla.lblFotoPlanilla.getWidth(),
+									formulario_planilla.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
+					formulario_planilla.lblFotoPlanilla.setIcon(logo);
+					formulario_planilla.txtBusquedaPlanilla.requestFocusInWindow();
 
-					} else {
-						JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
-						limpiar();
-					}
-
+				} else {
+					JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
+					limpiar();
 				}
+
+			}
 		}
 
 		if (e.getSource() == formulario_planilla.btnBorrarPlanilla) {
@@ -342,8 +342,8 @@ public class control_planilla implements ActionListener {
 			formulario_planilla.txtDireccionFoto.setText(null);
 
 		}
-		
-		//------------------------------------------------------------------------------------------------//
+
+		// ------------------------------------------------------------------------------------------------//
 
 	}
 

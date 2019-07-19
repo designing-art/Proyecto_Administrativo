@@ -860,7 +860,7 @@ public class registro_planillas extends JFrame {
 
 	public void construirTabla() {
 		String titulos[] = { "Codigo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo", "Deducciones",
-				"Bonificaciones", "Sueldo Neto", "Total"};
+				"Bonificaciones", "Sueldo Neto", "Total" };
 		String informacion[][] = control_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);

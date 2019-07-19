@@ -121,7 +121,7 @@ public class control_cargo implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 		if (e.getSource() == formularioCargo.btnAsignar) {
 
 			int filaseleccionada;
@@ -144,7 +144,7 @@ public class control_cargo implements ActionListener {
 					registro_empleados.lbl_sueldo_cargo_asignacion.setForeground(Color.BLACK);
 					registro_empleados.lbl_horaextra_cargo_asignacion.setForeground(Color.BLACK);
 					registro_empleados.lbl_funciones_cargo_asignacion.setForeground(Color.BLACK);
-					
+
 					formularioCargo.dispose();
 
 				}

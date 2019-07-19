@@ -335,19 +335,19 @@ public class registro_horarios extends JFrame {
 		btnAsignar.setBackground(new Color(34, 139, 34));
 		btnAsignar.setBounds(30, 347, 99, 23);
 		panelTablaHorario.add(btnAsignar);
-		
-				btnBorrarHorario = new JButton("Borrar");
-				btnBorrarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-				btnBorrarHorario.setBackground(new Color(220, 20, 60));
-				btnBorrarHorario.setBounds(30, 347, 99, 23);
-				panelTablaHorario.add(btnBorrarHorario);
-				
-						JLabel label_2_1 = new JLabel();
-						label_2_1.setBounds(0, 0, 440, 401);
-						panelTablaHorario.add(label_2_1);
-						final ImageIcon logo2 = new ImageIcon(
-								icono2.getImage().getScaledInstance(label_2_1.getWidth(), label_2_1.getHeight(), Image.SCALE_DEFAULT));
-						label_2_1.setIcon(logo2);
+
+		btnBorrarHorario = new JButton("Borrar");
+		btnBorrarHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnBorrarHorario.setBackground(new Color(220, 20, 60));
+		btnBorrarHorario.setBounds(30, 347, 99, 23);
+		panelTablaHorario.add(btnBorrarHorario);
+
+		JLabel label_2_1 = new JLabel();
+		label_2_1.setBounds(0, 0, 440, 401);
+		panelTablaHorario.add(label_2_1);
+		final ImageIcon logo2 = new ImageIcon(
+				icono2.getImage().getScaledInstance(label_2_1.getWidth(), label_2_1.getHeight(), Image.SCALE_DEFAULT));
+		label_2_1.setIcon(logo2);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE HORARIOS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));

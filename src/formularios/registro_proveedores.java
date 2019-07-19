@@ -237,7 +237,6 @@ public class registro_proveedores extends JFrame {
 		btnVerFotoProducto.setBounds(99, 313, 70, 23);
 		panelRegistro.add(btnVerFotoProducto);
 
-		
 		txtNombresProveedor = new JTextField();
 		txtNombresProveedor.setColumns(10);
 		txtNombresProveedor.setBounds(125, 111, 189, 23);

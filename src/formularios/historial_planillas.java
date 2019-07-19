@@ -263,5 +263,3 @@ public class historial_planillas extends JFrame {
 
 	}
 }
-
-	

@@ -99,7 +99,7 @@ public class control_empresa implements ActionListener {
 							logo_empresa.getImage().getScaledInstance(formulario.lblLogoEmpresa.getWidth(),
 									formulario.lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblLogoEmpresa.setIcon(logo2);
-					
+
 					registro_empresa.txtNombre_Empresa.setText(registro_empresa.txtNombreEmpresa.getText());
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! datos no registrados");
@@ -178,7 +178,7 @@ public class control_empresa implements ActionListener {
 							logo_empresa.getImage().getScaledInstance(formulario.lblLogoEmpresa.getWidth(),
 									formulario.lblLogoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 					formulario.lblLogoEmpresa.setIcon(logo2);
-					
+
 					registro_empresa.txtNombre_Empresa.setText(registro_empresa.txtNombreEmpresa.getText());
 				} else {
 					JOptionPane.showMessageDialog(null, "Error! datos no actualizados.");

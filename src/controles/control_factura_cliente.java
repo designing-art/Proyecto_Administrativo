@@ -56,28 +56,26 @@ public class control_factura_cliente implements ActionListener {
 			if (registro_facturas_clientes.txtFechaHoraFactura.getText().isEmpty()
 					|| formulario.txtPorConceptoDe.getText().isEmpty()
 					|| formulario.txtNumeroFactura.getText().isEmpty()
-					|| formulario.txtCantidadLetras.getText().isEmpty() 
-					|| formulario.txtCliente.getText().isEmpty()
-					|| formulario.txtCantidadNumeros.getText().isEmpty() 
-					|| formulario.txtDireccion.getText().isEmpty()
-					|| formulario.txtEmpleado.getText().isEmpty()
-					|| formulario.txtRTN.getText().isEmpty()) {
+					|| formulario.txtCantidadLetras.getText().isEmpty() || formulario.txtCliente.getText().isEmpty()
+					|| formulario.txtCantidadNumeros.getText().isEmpty() || formulario.txtDireccion.getText().isEmpty()
+					|| formulario.txtEmpleado.getText().isEmpty() || formulario.txtRTN.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la factura!");
 			} else {
 				formulario.sumarFactura();
 				clase.setNumero_factura_cliente(formulario.txtNumeroFactura.getText().toString());
-				clase.setFecha_hora_factura_cliente(registro_facturas_clientes.txtFechaHoraFactura.getText().toString());
+				clase.setFecha_hora_factura_cliente(
+						registro_facturas_clientes.txtFechaHoraFactura.getText().toString());
 				clase.setFirma_cliente(formulario.txtCliente.getText().toString());
 				clase.setRtn_factura_cliente(formulario.txtRTN.getText().toString());
 				clase.setDireccion_cliente(formulario.txtDireccion.getText().toString());
 				clase.setPor_concepto_cliente(formulario.txtPorConceptoDe.getText().toString());
 				clase.setCantidad_letras_cliente(formulario.txtCantidadLetras.getText().toString());
-				clase.setCantidad_pagada_cliente(Double.parseDouble(formulario.txtCantidadNumeros.getText().toString()));
+				clase.setCantidad_pagada_cliente(
+						Double.parseDouble(formulario.txtCantidadNumeros.getText().toString()));
 				clase.setEmpleado_atencion_cliente(formulario.txtEmpleado.getText().toString());
 
 				clase2.setId_sar(Integer.parseInt(formulario.txtCodigoSAR.getText().toString()));
-				clase2.setFactura_actual_sar(
-						Integer.parseInt(formulario.txtNuevaFactura.getText().toString()));
+				clase2.setFactura_actual_sar(Integer.parseInt(formulario.txtNuevaFactura.getText().toString()));
 
 				if (consulta.insertar(clase) && consulta.actualizarDatosSAR(clase2)) {
 					JOptionPane.showMessageDialog(null, "Factura registrada!");
@@ -98,7 +96,8 @@ public class control_factura_cliente implements ActionListener {
 		}
 
 		if (e.getSource() == formulario.btnActualizar) {
-			if (registro_facturas_clientes.txtFechaHoraFactura.getText().isEmpty() || formulario.txtPorConceptoDe.getText().isEmpty()
+			if (registro_facturas_clientes.txtFechaHoraFactura.getText().isEmpty()
+					|| formulario.txtPorConceptoDe.getText().isEmpty()
 					|| formulario.txtNumeroFactura.getText().isEmpty()
 					|| formulario.txtCantidadLetras.getText().isEmpty() || formulario.txtCliente.getText().isEmpty()
 					|| formulario.txtCantidadNumeros.getText().isEmpty() || formulario.txtDireccion.getText().isEmpty()
@@ -107,13 +106,15 @@ public class control_factura_cliente implements ActionListener {
 			} else {
 				clase.setId_facturas_cliente(Integer.parseInt(formulario.txtCodigo.getText().toString()));
 				clase.setNumero_factura_cliente(formulario.txtNumeroFactura.getText().toString());
-				clase.setFecha_hora_factura_cliente(registro_facturas_clientes.txtFechaHoraFactura.getText().toString());
+				clase.setFecha_hora_factura_cliente(
+						registro_facturas_clientes.txtFechaHoraFactura.getText().toString());
 				clase.setFirma_cliente(formulario.txtCliente.getText().toString());
 				clase.setRtn_factura_cliente(formulario.txtRTN.getText().toString());
 				clase.setDireccion_cliente(formulario.txtDireccion.getText().toString());
 				clase.setPor_concepto_cliente(formulario.txtPorConceptoDe.getText().toString());
 				clase.setCantidad_letras_cliente(formulario.txtCantidadLetras.getText().toString());
-				clase.setCantidad_pagada_cliente(Double.parseDouble(formulario.txtCantidadNumeros.getText().toString()));
+				clase.setCantidad_pagada_cliente(
+						Double.parseDouble(formulario.txtCantidadNumeros.getText().toString()));
 				clase.setEmpleado_atencion_cliente(formulario.txtEmpleado.getText().toString());
 				if (consulta.actualizar(clase)) {
 					JOptionPane.showMessageDialog(null, "Factura Actualizada!");
@@ -149,7 +150,6 @@ public class control_factura_cliente implements ActionListener {
 					String letras = formulario.tabla.getValueAt(filaseleccionada, 7).toString();
 					String numeros = formulario.tabla.getValueAt(filaseleccionada, 8).toString();
 					String empleado = formulario.tabla.getValueAt(filaseleccionada, 9).toString();
-
 
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtNumeroFactura.setText(factura);
@@ -210,7 +210,6 @@ public class control_factura_cliente implements ActionListener {
 					String numeros = formulario.tabla.getValueAt(filaseleccionada, 8).toString();
 					String empleado = formulario.tabla.getValueAt(filaseleccionada, 9).toString();
 
-
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtNumeroFactura.setText(factura);
 					registro_facturas_clientes.txtFechaHoraFactura.setText(fecha);
@@ -232,7 +231,7 @@ public class control_factura_cliente implements ActionListener {
 					formulario.txtCantidadLetras.setForeground(Color.BLACK);
 					formulario.txtCantidadNumeros.setForeground(Color.BLACK);
 					formulario.txtEmpleado.setForeground(Color.BLACK);
-					
+
 					formulario.txtCodigo.setEditable(false);
 					formulario.txtNumeroFactura.setEditable(false);
 					registro_facturas_clientes.txtFechaHoraFactura.setEditable(false);
@@ -337,9 +336,7 @@ public class control_factura_cliente implements ActionListener {
 			formulario.txtEmpleado.setEditable(true);
 			registro_facturas_clientes.txtFechaHoraFactura.setText(registro_facturas_clientes.getFechaYHora());
 			formulario.txtCliente.requestFocusInWindow();
-			
-			
-			
+
 		}
 
 	}

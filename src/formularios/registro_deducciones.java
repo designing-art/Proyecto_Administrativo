@@ -91,7 +91,7 @@ public class registro_deducciones extends JFrame {
 	public PlaceHolder pista;
 	public JDateChooser dateFechaDeduccion;
 	public static String hora_fecha_reporte;
-	
+
 	public static String ruta_logo;
 	public static JLabel label_22;
 
@@ -267,7 +267,7 @@ public class registro_deducciones extends JFrame {
 		btnPlanillaDeducciones.setBounds(303, 371, 99, 23);
 		btnPlanillaDeducciones.setVisible(false);
 		panel_2.add(btnPlanillaDeducciones);
-		
+
 		button = new JButton("Imprimir Reporte");
 		button.addActionListener(new ActionListener() {
 			@Override
@@ -275,21 +275,21 @@ public class registro_deducciones extends JFrame {
 				String fecha = getFechaYHora();
 				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
 				String encabezado = "Reporte de deducciones de " + nombreEmpresa;
-				utilJTablePrint(tablaDeducciones, encabezado, "Pagina {0}"
-						+ "                                                  " + fecha, true);
+				utilJTablePrint(tablaDeducciones, encabezado,
+						"Pagina {0}" + "                                                  " + fecha, true);
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(206, 41, 137, 19);
 		panel_2.add(button);
-		
-				label_8 = new JLabel("");
-				label_8.setBounds(0, 0, 430, 456);
-				panel_2.add(label_8);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-				label_8.setIcon(logo);
+
+		label_8 = new JLabel("");
+		label_8.setBounds(0, 0, 430, 456);
+		panel_2.add(label_8);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+		label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE DEDUCCIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -707,16 +707,13 @@ public class registro_deducciones extends JFrame {
 
 		}
 	}
-	
+
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
 		boolean interactive = true;
 		JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
 		try {
-			boolean complete = jTable.print(mode,
-					new MessageFormat(header),
-					new MessageFormat(footer),
-					showPrintDialog,
+			boolean complete = jTable.print(mode, new MessageFormat(header), new MessageFormat(footer), showPrintDialog,
 					null, interactive);
 			if (complete) {
 				JOptionPane.showMessageDialog(jTable, "Print complete (Impresión completa)",
@@ -730,7 +727,7 @@ public class registro_deducciones extends JFrame {
 					"Print result (Resultado de la impresión)", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public static String getFechaYHora() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -739,7 +736,7 @@ public class registro_deducciones extends JFrame {
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
+
 	public void consultarEmpresa() {
 		conexion conex = new conexion();
 		try {
@@ -749,14 +746,14 @@ public class registro_deducciones extends JFrame {
 			if (rs.next()) {
 				ruta_logo = (rs.getString("direccion_logo_empresa"));
 				final ImageIcon logo = new ImageIcon(ruta_logo);
-				
-				final ImageIcon icono = new ImageIcon(
-						logo.getImage().getScaledInstance(label_22.getWidth(), label_22.getHeight(), Image.SCALE_DEFAULT));
+
+				final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(label_22.getWidth(),
+						label_22.getHeight(), Image.SCALE_DEFAULT));
 				label_22.setIcon(icono);
 
-			}else {
-				JOptionPane.showMessageDialog(null, "Para una mejor experiencia Personalice su empresa en :"
-						+ " MAS INFORMACIONS DE LA EMPRESA.");		
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
 			}
 			rs.close();
 			estatuto.close();

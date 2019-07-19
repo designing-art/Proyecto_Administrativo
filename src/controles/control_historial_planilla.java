@@ -23,7 +23,9 @@ public class control_historial_planilla implements ActionListener {
 	public historial_planilla clase_historial_planilla;
 	public consultas_historial_planilla consulta_historial_planilla;
 	public registro_nuevas_planillas formulario_historial_planilla;
-	public control_historial_planilla(historial_planilla clase, consultas_historial_planilla consulta, registro_nuevas_planillas formulario) {
+
+	public control_historial_planilla(historial_planilla clase, consultas_historial_planilla consulta,
+			registro_nuevas_planillas formulario) {
 		this.clase_historial_planilla = clase;
 		this.consulta_historial_planilla = consulta;
 		this.formulario_historial_planilla = formulario;
@@ -35,43 +37,48 @@ public class control_historial_planilla implements ActionListener {
 		this.formulario_historial_planilla.btnVerPlanilla.addActionListener(this);
 		this.formulario_historial_planilla.btnAceptar.addActionListener(this);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario_historial_planilla.btnGuardar) {
 			if (formulario_historial_planilla.txtNombrePlanilla.getText().isEmpty()
 					|| formulario_historial_planilla.editor.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para crear la planilla!");
 			} else {
-					clase_historial_planilla.setEstado_planila(formulario_historial_planilla.cbxEstadoPlanilla.getSelectedItem().toString());
-					clase_historial_planilla.setTipo_planilla_final(formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
-					clase_historial_planilla.setNombre_planilla_final(formulario_historial_planilla.txtNombrePlanilla.getText().toString());
-					clase_historial_planilla.setFecha_crecion_planilla_final(formulario_historial_planilla.editor2.getText());
-					clase_historial_planilla.setFecha_pago_planilla_final(formulario_historial_planilla.editor.getText());
+				clase_historial_planilla.setEstado_planila(
+						formulario_historial_planilla.cbxEstadoPlanilla.getSelectedItem().toString());
+				clase_historial_planilla.setTipo_planilla_final(
+						formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
+				clase_historial_planilla
+						.setNombre_planilla_final(formulario_historial_planilla.txtNombrePlanilla.getText().toString());
+				clase_historial_planilla
+						.setFecha_crecion_planilla_final(formulario_historial_planilla.editor2.getText());
+				clase_historial_planilla.setFecha_pago_planilla_final(formulario_historial_planilla.editor.getText());
 
-					clase_historial_planilla.setTotal_deducciones_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalDeducciones.getText().toString()));
-					clase_historial_planilla.setTotal_bonificaciones_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalBonos.getText().toString()));
-					clase_historial_planilla.setTotal_sueldos_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalSueldos.getText().toString()));
-					
-					clase_historial_planilla.setTotal_pago_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalPlanilla.getText().toString()));
+				clase_historial_planilla.setTotal_deducciones_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalDeducciones.getText().toString()));
+				clase_historial_planilla.setTotal_bonificaciones_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalBonos.getText().toString()));
+				clase_historial_planilla.setTotal_sueldos_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalSueldos.getText().toString()));
 
-					if (consulta_historial_planilla.registrar(clase_historial_planilla)) {
-						JOptionPane.showMessageDialog(null, "Exito! Datos de la panilla! Guardados.");
-						limpiar();
-						formulario_historial_planilla.construirTabla();
-						formulario_historial_planilla.obtenerUltimoId();
-						formulario_historial_planilla.establecerFechaRegistro();
-						formulario_historial_planilla.iniciarEncero();
+				clase_historial_planilla.setTotal_pago_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalPlanilla.getText().toString()));
 
-					} else {
-						JOptionPane.showMessageDialog(null, "Error!  no Registrado");
-						limpiar();
-						formulario_historial_planilla.iniciarEncero();
-					}
+				if (consulta_historial_planilla.registrar(clase_historial_planilla)) {
+					JOptionPane.showMessageDialog(null, "Exito! Datos de la panilla! Guardados.");
+					limpiar();
+					formulario_historial_planilla.construirTabla();
+					formulario_historial_planilla.obtenerUltimoId();
+					formulario_historial_planilla.establecerFechaRegistro();
+					formulario_historial_planilla.iniciarEncero();
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Error!  no Registrado");
+					limpiar();
+					formulario_historial_planilla.iniciarEncero();
+				}
 			}
 		}
 
@@ -82,17 +89,26 @@ public class control_historial_planilla implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					String codigo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
-					String estado = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
-					String nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
-					String creacion = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
-					String vencimiento = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
-					String bonos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
-					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String sueldos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
-	
+					String codigo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0)
+							.toString();
+					String tipo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1)
+							.toString();
+					String estado = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2)
+							.toString();
+					String nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3)
+							.toString();
+					String creacion = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4)
+							.toString();
+					String vencimiento = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5)
+							.toString();
+					String bonos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6)
+							.toString();
+					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7)
+							.toString();
+					String sueldos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8)
+							.toString();
+					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9)
+							.toString();
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 					formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
@@ -142,17 +158,26 @@ public class control_historial_planilla implements ActionListener {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 					formulario_historial_planilla.txtNombrePlanilla.setText(null);
 				} else {
-					String codigo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
-					String estado = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
-					String nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
-					String creacion = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
-					String vencimiento = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
-					String bonos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
-					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String sueldos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-	
+					String codigo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0)
+							.toString();
+					String tipo = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1)
+							.toString();
+					String estado = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2)
+							.toString();
+					String nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3)
+							.toString();
+					String creacion = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4)
+							.toString();
+					String vencimiento = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5)
+							.toString();
+					String bonos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6)
+							.toString();
+					String deduc = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7)
+							.toString();
+					String sueldos = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8)
+							.toString();
+					String total = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8)
+							.toString();
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 					formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
@@ -197,37 +222,42 @@ public class control_historial_planilla implements ActionListener {
 					|| formulario_historial_planilla.editor.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para crear la planilla!");
 			} else {
-				clase_historial_planilla.setId_planilla_final(Integer.parseInt(formulario_historial_planilla.txtCodigoPlanilla.getText()));
-				clase_historial_planilla.setEstado_planila(formulario_historial_planilla.cbxEstadoPlanilla.getSelectedItem().toString());
-					clase_historial_planilla.setTipo_planilla_final(formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
-					clase_historial_planilla.setNombre_planilla_final(formulario_historial_planilla.txtNombrePlanilla.getText().toString());
-					clase_historial_planilla.setFecha_crecion_planilla_final(formulario_historial_planilla.editor2.getText());
-					clase_historial_planilla.setFecha_pago_planilla_final(formulario_historial_planilla.editor.getText());
+				clase_historial_planilla.setId_planilla_final(
+						Integer.parseInt(formulario_historial_planilla.txtCodigoPlanilla.getText()));
+				clase_historial_planilla.setEstado_planila(
+						formulario_historial_planilla.cbxEstadoPlanilla.getSelectedItem().toString());
+				clase_historial_planilla.setTipo_planilla_final(
+						formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
+				clase_historial_planilla
+						.setNombre_planilla_final(formulario_historial_planilla.txtNombrePlanilla.getText().toString());
+				clase_historial_planilla
+						.setFecha_crecion_planilla_final(formulario_historial_planilla.editor2.getText());
+				clase_historial_planilla.setFecha_pago_planilla_final(formulario_historial_planilla.editor.getText());
 
-					clase_historial_planilla.setTotal_deducciones_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalDeducciones.getText()));
-					clase_historial_planilla.setTotal_bonificaciones_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalBonos.getText()));
-					clase_historial_planilla.setTotal_sueldos_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalSueldos.getText().toString()));
-					
-					clase_historial_planilla.setTotal_pago_planilla_final(
-							Double.parseDouble(formulario_historial_planilla.txtTotalPlanilla.getText()));
+				clase_historial_planilla.setTotal_deducciones_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalDeducciones.getText()));
+				clase_historial_planilla.setTotal_bonificaciones_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalBonos.getText()));
+				clase_historial_planilla.setTotal_sueldos_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalSueldos.getText().toString()));
 
-					if (consulta_historial_planilla.modificar(clase_historial_planilla)) {
-						JOptionPane.showMessageDialog(null, "Exito! Datos de la panilla! Actualizados.");
-						limpiar();
-						formulario_historial_planilla.construirTabla();
-						formulario_historial_planilla.obtenerUltimoId();
-						formulario_historial_planilla.establecerFechaRegistro();
-						formulario_historial_planilla.iniciarEncero();
+				clase_historial_planilla.setTotal_pago_planilla_final(
+						Double.parseDouble(formulario_historial_planilla.txtTotalPlanilla.getText()));
 
-					} else {
-						JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
-						limpiar();
-					}
+				if (consulta_historial_planilla.modificar(clase_historial_planilla)) {
+					JOptionPane.showMessageDialog(null, "Exito! Datos de la panilla! Actualizados.");
+					limpiar();
+					formulario_historial_planilla.construirTabla();
+					formulario_historial_planilla.obtenerUltimoId();
+					formulario_historial_planilla.establecerFechaRegistro();
+					formulario_historial_planilla.iniciarEncero();
 
+				} else {
+					JOptionPane.showMessageDialog(null, "Error!  no Actualizado");
+					limpiar();
 				}
+
+			}
 		}
 
 		if (e.getSource() == formulario_historial_planilla.btnBorrarPlanilla) {
@@ -293,7 +323,7 @@ public class control_historial_planilla implements ActionListener {
 			formulario_historial_planilla.txtNombrePlanilla.setEditable(true);
 
 		}
-		
+
 	}
 
 	public void limpiar() {
@@ -303,7 +333,7 @@ public class control_historial_planilla implements ActionListener {
 		formulario_historial_planilla.txtTotalDeducciones.setText(null);
 		formulario_historial_planilla.txtTotalBonos.setText(null);
 		formulario_historial_planilla.txtTotalPlanilla.setText(null);
-		
+
 	}
 
 	public static ArrayList<historial_planilla> buscarUsuariosConMatriz() {
@@ -322,9 +352,12 @@ public class control_historial_planilla implements ActionListener {
 				planilla.setNombre_planilla_final(rs.getString("nombre_planilla_final"));
 				planilla.setFecha_crecion_planilla_final(rs.getString("fecha_crecion_planilla_final"));
 				planilla.setFecha_pago_planilla_final(rs.getString("fecha_pago_planilla_final"));
-				planilla.setTotal_deducciones_planilla_final(Double.parseDouble(rs.getString("total_deducciones_planilla_final")));
-				planilla.setTotal_bonificaciones_planilla_final(Double.parseDouble(rs.getString("total_bonificaciones_planilla_final")));
-				planilla.setTotal_sueldos_planilla_final(Double.parseDouble(rs.getString("total_sueldos_planilla_final")));
+				planilla.setTotal_deducciones_planilla_final(
+						Double.parseDouble(rs.getString("total_deducciones_planilla_final")));
+				planilla.setTotal_bonificaciones_planilla_final(
+						Double.parseDouble(rs.getString("total_bonificaciones_planilla_final")));
+				planilla.setTotal_sueldos_planilla_final(
+						Double.parseDouble(rs.getString("total_sueldos_planilla_final")));
 				planilla.setTotal_pago_planilla_final(Double.parseDouble(rs.getString("total_pago_planilla_final")));
 				miLista.add(planilla);
 			}
@@ -354,8 +387,9 @@ public class control_historial_planilla implements ActionListener {
 			matrizInfo[i][7] = miLista.get(i).getTotal_bonificaciones_planilla_final() + "";
 			matrizInfo[i][8] = miLista.get(i).getTotal_sueldos_planilla_final() + "";
 			matrizInfo[i][9] = miLista.get(i).getTotal_pago_planilla_final() + "";
-		
+
 		}
 
 		return matrizInfo;
-	}}
+	}
+}

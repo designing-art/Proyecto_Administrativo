@@ -27,12 +27,13 @@ public class control_compra implements ActionListener {
 	public compra clase;
 	public consultas_compra consulta;
 	public registro_compras formulario;
-	
+
 	public inventario clase2;
 	public consultas_inventario consulta2;
 	public registro_inventario formulario2;
 
-	public control_compra(compra clase, inventario clase2, consultas_compra consulta, consultas_inventario consulta2, registro_compras formulario, registro_inventario formulario2) {
+	public control_compra(compra clase, inventario clase2, consultas_compra consulta, consultas_inventario consulta2,
+			registro_compras formulario, registro_inventario formulario2) {
 		this.clase = clase;
 		this.consulta = consulta;
 		this.formulario = formulario;
@@ -50,91 +51,89 @@ public class control_compra implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
 			if (formulario.txtNombre.getText().isEmpty() || formulario.txtDescripcion.getText().isEmpty()
-					|| formulario.txtColor.getText().isEmpty() ||formulario.txtCantidad.getText().isEmpty()
+					|| formulario.txtColor.getText().isEmpty() || formulario.txtCantidad.getText().isEmpty()
 					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
-					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la compra!");
-		} else {
-			clase.setNombre_objeto_compra(formulario.txtNombre.getText().toString());
-			clase.setPrecio_objeto_compra(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setDescripcion_objeto_compra(formulario.txtDescripcion.getText().toString());
-			clase.setPeso_objeto_compra(formulario.txtPeso.getText().toString());
-			clase.setColor_objeto_compra(formulario.txtColor.getText().toString());
-			clase.setMarca_objeto_compra(formulario.txtMarca.getText().toString());
-			clase.setModelo_objeto_compra(formulario.txtModelo.getText().toString());
-			clase.setCantidad_objeto_compra(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setFecha_registro_compra(formulario.editor.getText().toString());
-			
-			clase2.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
-			clase2.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase2.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
-			clase2.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
-			clase2.setColor_objeto_inventario(formulario.txtColor.getText().toString());
-			clase2.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
-			clase2.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
-			clase2.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase2.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase2.setFecha_registro_inventario(formulario.editor.getText().toString());
-			
-			if (consulta.insertar(clase)&&consulta2.insertar(clase2)) {
-				JOptionPane.showMessageDialog(null, "Compra registrada!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
+					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la compra!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! compra no registrada");
-				limpiar();
+				clase.setNombre_objeto_compra(formulario.txtNombre.getText().toString());
+				clase.setPrecio_objeto_compra(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setDescripcion_objeto_compra(formulario.txtDescripcion.getText().toString());
+				clase.setPeso_objeto_compra(formulario.txtPeso.getText().toString());
+				clase.setColor_objeto_compra(formulario.txtColor.getText().toString());
+				clase.setMarca_objeto_compra(formulario.txtMarca.getText().toString());
+				clase.setModelo_objeto_compra(formulario.txtModelo.getText().toString());
+				clase.setCantidad_objeto_compra(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setFecha_registro_compra(formulario.editor.getText().toString());
+
+				clase2.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
+				clase2.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase2.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
+				clase2.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
+				clase2.setColor_objeto_inventario(formulario.txtColor.getText().toString());
+				clase2.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
+				clase2.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
+				clase2.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase2.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase2.setFecha_registro_inventario(formulario.editor.getText().toString());
+
+				if (consulta.insertar(clase) && consulta2.insertar(clase2)) {
+					JOptionPane.showMessageDialog(null, "Compra registrada!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! compra no registrada");
+					limpiar();
+				}
 			}
 		}
-	}
-		
+
 		if (e.getSource() == formulario.btnActualizar) {
 			if (formulario.txtNombre.getText().isEmpty() || formulario.txtDescripcion.getText().isEmpty()
 					|| formulario.txtColor.getText().isEmpty() || formulario.txtCantidad.getText().isEmpty()
 					|| formulario.txtMarca.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
-					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la compra!");
-		} else {
-			clase.setId_compra(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-			clase.setNombre_objeto_compra(formulario.txtNombre.getText().toString());
-			clase.setPrecio_objeto_compra(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setDescripcion_objeto_compra(formulario.txtDescripcion.getText().toString());
-			clase.setPeso_objeto_compra(formulario.txtPeso.getText().toString());
-			clase.setColor_objeto_compra(formulario.txtColor.getText().toString());
-			clase.setMarca_objeto_compra(formulario.txtMarca.getText().toString());
-			clase.setModelo_objeto_compra(formulario.txtModelo.getText().toString());
-			clase.setCantidad_objeto_compra(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase.setFecha_registro_compra(formulario.editor.getText().toString());
-			
-			clase2.setId_inventario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-			clase2.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
-			clase2.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase2.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
-			clase2.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
-			clase2.setColor_objeto_inventario(formulario.txtColor.getText().toString());
-			clase2.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
-			clase2.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
-			clase2.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase2.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
-			clase2.setFecha_registro_inventario(formulario.editor.getText().toString());
-			
-			if (consulta.actualizar(clase)&&consulta2.actualizar(clase2)) {
-				JOptionPane.showMessageDialog(null, "compra actualizada!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.txtCodigo.setText("");
+					|| formulario.txtPeso.getText().isEmpty() || formulario.txtModelo.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la compra!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! compra no actualizada");
-				limpiar();
+				clase.setId_compra(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+				clase.setNombre_objeto_compra(formulario.txtNombre.getText().toString());
+				clase.setPrecio_objeto_compra(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setDescripcion_objeto_compra(formulario.txtDescripcion.getText().toString());
+				clase.setPeso_objeto_compra(formulario.txtPeso.getText().toString());
+				clase.setColor_objeto_compra(formulario.txtColor.getText().toString());
+				clase.setMarca_objeto_compra(formulario.txtMarca.getText().toString());
+				clase.setModelo_objeto_compra(formulario.txtModelo.getText().toString());
+				clase.setCantidad_objeto_compra(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase.setFecha_registro_compra(formulario.editor.getText().toString());
+
+				clase2.setId_inventario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+				clase2.setNombre_objeto_inventario(formulario.txtNombre.getText().toString());
+				clase2.setPrecio_objeto_inventario(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase2.setDescripcion_objeto_inventario(formulario.txtDescripcion.getText().toString());
+				clase2.setPeso_objeto_inventario(formulario.txtPeso.getText().toString());
+				clase2.setColor_objeto_inventario(formulario.txtColor.getText().toString());
+				clase2.setMarca_objeto_inventario(formulario.txtMarca.getText().toString());
+				clase2.setModelo_objeto_inventario(formulario.txtModelo.getText().toString());
+				clase2.setCantidad_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase2.setExistencias_objeto_inventario(Integer.parseInt(formulario.txtCantidad.getText().toString()));
+				clase2.setFecha_registro_inventario(formulario.editor.getText().toString());
+
+				if (consulta.actualizar(clase) && consulta2.actualizar(clase2)) {
+					JOptionPane.showMessageDialog(null, "compra actualizada!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.txtCodigo.setText("");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! compra no actualizada");
+					limpiar();
+				}
 			}
 		}
-	}
-	
+
 		if (e.getSource() == formulario.btnActualizarDatos) {
 			int filaseleccionada;
 			try {
@@ -182,7 +181,7 @@ public class control_compra implements ActionListener {
 					formulario.btnVer.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
-					
+
 					formulario.txtCantidad.setEditable(false);
 
 					formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
@@ -224,7 +223,7 @@ public class control_compra implements ActionListener {
 					formulario.txtModelo.setText(modelo);
 					formulario.txtCantidad.setText(cantidad);
 					formulario.editor.setText(fecha);
-					
+
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtNombre.setForeground(Color.BLACK);
 					formulario.txtPrecio.setForeground(Color.BLACK);
@@ -234,7 +233,7 @@ public class control_compra implements ActionListener {
 					formulario.txtMarca.setForeground(Color.BLACK);
 					formulario.txtModelo.setForeground(Color.BLACK);
 					formulario.txtCantidad.setForeground(Color.BLACK);
-					
+
 					formulario.txtCodigo.setEditable(false);
 					formulario.txtNombre.setEditable(false);
 					formulario.txtPrecio.setEditable(false);
@@ -260,8 +259,6 @@ public class control_compra implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
-		
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {
@@ -409,5 +406,5 @@ public class control_compra implements ActionListener {
 
 		return matrizInfo;
 	}
-	
+
 }

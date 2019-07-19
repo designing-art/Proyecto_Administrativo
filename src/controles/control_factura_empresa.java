@@ -41,66 +41,60 @@ public class control_factura_empresa implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == formulario.btnGuardar) {
 			if (registro_facturas_empresa.txtFechaHoraFactura.getText().isEmpty()
-					|| formulario.txtFoto.getText().isEmpty()
-					|| formulario.txtCompra.getText().isEmpty()
-					||formulario.txtPrecio.getText().isEmpty()
-					|| formulario.txtCantidad.getText().isEmpty()
-					|| formulario.txtDescripcion.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la factura!");
-		} else {
-			clase.setFecha_factura(registro_facturas_empresa.txtFechaHoraFactura.getText().toString());
-			clase.setCompra_factura(formulario.txtCompra.getText().toString());
-			clase.setPrecio_factura(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-			clase.setCantidad_factura(formulario.txtCantidad.getText().toString());
-			clase.setDescripcion_factura(formulario.txtDescripcion.getText().toString());
-			clase.setFoto_factura(formulario.txtFoto.getText().toString());
-			
-			if (consulta.insertar(clase)) {
-				JOptionPane.showMessageDialog(null, "Factura registrada!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
+					|| formulario.txtFoto.getText().isEmpty() || formulario.txtCompra.getText().isEmpty()
+					|| formulario.txtPrecio.getText().isEmpty() || formulario.txtCantidad.getText().isEmpty()
+					|| formulario.txtDescripcion.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la factura!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! compra no registrada");
-				limpiar();
+				clase.setFecha_factura(registro_facturas_empresa.txtFechaHoraFactura.getText().toString());
+				clase.setCompra_factura(formulario.txtCompra.getText().toString());
+				clase.setPrecio_factura(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+				clase.setCantidad_factura(formulario.txtCantidad.getText().toString());
+				clase.setDescripcion_factura(formulario.txtDescripcion.getText().toString());
+				clase.setFoto_factura(formulario.txtFoto.getText().toString());
+
+				if (consulta.insertar(clase)) {
+					JOptionPane.showMessageDialog(null, "Factura registrada!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! compra no registrada");
+					limpiar();
+				}
 			}
 		}
-	}
-		
+
 		if (e.getSource() == formulario.btnActualizar) {
 			if (registro_facturas_empresa.txtFechaHoraFactura.getText().isEmpty()
-					|| formulario.txtFoto.getText().isEmpty()
-					|| formulario.txtCompra.getText().isEmpty()
-					||formulario.txtPrecio.getText().isEmpty()
-					|| formulario.txtCantidad.getText().isEmpty()
-					|| formulario.txtDescripcion.getText().isEmpty())
-			{
-			JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la compra!");
-		} else {
-			clase.setId_factura(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-			clase.setFecha_factura(registro_facturas_empresa.txtFechaHoraFactura.getText().toString());
-			clase.setCompra_factura(formulario.txtCompra.getText().toString());
-			clase.setPrecio_factura(Double.parseDouble(formulario.txtDescripcion.getText().toString()));
-			clase.setCantidad_factura(formulario.txtCantidad.getText().toString());
-			clase.setDescripcion_factura(formulario.txtDescripcion.getText().toString());
-			clase.setFoto_factura(formulario.txtFoto.getText().toString());
-			
-			if (consulta.actualizar(clase)) {
-				JOptionPane.showMessageDialog(null, "Factura actualizada!");
-				limpiar();
-				formulario.construirTabla();
-				formulario.txtCodigo.setText("");
+					|| formulario.txtFoto.getText().isEmpty() || formulario.txtCompra.getText().isEmpty()
+					|| formulario.txtPrecio.getText().isEmpty() || formulario.txtCantidad.getText().isEmpty()
+					|| formulario.txtDescripcion.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar la compra!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Error! compra no actualizada");
-				limpiar();
+				clase.setId_factura(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+				clase.setFecha_factura(registro_facturas_empresa.txtFechaHoraFactura.getText().toString());
+				clase.setCompra_factura(formulario.txtCompra.getText().toString());
+				clase.setPrecio_factura(Double.parseDouble(formulario.txtDescripcion.getText().toString()));
+				clase.setCantidad_factura(formulario.txtCantidad.getText().toString());
+				clase.setDescripcion_factura(formulario.txtDescripcion.getText().toString());
+				clase.setFoto_factura(formulario.txtFoto.getText().toString());
+
+				if (consulta.actualizar(clase)) {
+					JOptionPane.showMessageDialog(null, "Factura actualizada!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.txtCodigo.setText("");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error! compra no actualizada");
+					limpiar();
+				}
 			}
 		}
-	}
-	
+
 		if (e.getSource() == formulario.btnActualizarDatos) {
 			int filaseleccionada;
 			try {
@@ -123,7 +117,6 @@ public class control_factura_empresa implements ActionListener {
 					formulario.txtCantidad.setText(cantidad);
 					formulario.txtDescripcion.setText(descrip);
 					formulario.txtFoto.setText(foto);
-				
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					registro_facturas_empresa.txtFechaHoraFactura.setForeground(Color.BLACK);
@@ -141,7 +134,7 @@ public class control_factura_empresa implements ActionListener {
 					formulario.btnVer.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
-					
+
 					formulario.txtCantidad.setEditable(false);
 
 					formulario.txtCompra.requestFocusInWindow();
@@ -177,7 +170,6 @@ public class control_factura_empresa implements ActionListener {
 					formulario.txtCantidad.setText(cantidad);
 					formulario.txtDescripcion.setText(descrip);
 					formulario.txtFoto.setText(foto);
-				
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					registro_facturas_empresa.txtFechaHoraFactura.setForeground(Color.BLACK);
@@ -186,7 +178,7 @@ public class control_factura_empresa implements ActionListener {
 					formulario.txtCantidad.setForeground(Color.BLACK);
 					formulario.txtDescripcion.setForeground(Color.BLACK);
 					formulario.txtFoto.setForeground(Color.BLACK);
-					
+
 					registro_facturas_empresa.txtFechaHoraFactura.setEditable(false);
 					formulario.txtPrecio.setEditable(false);
 					formulario.txtDescripcion.setEditable(false);
@@ -209,8 +201,6 @@ public class control_factura_empresa implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
-		
 
 		/* Borrar */
 		if (e.getSource() == formulario.btnBorrar) {

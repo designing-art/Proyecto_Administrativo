@@ -23,10 +23,8 @@ import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_empleado;
 import consultas.consultas_usuario;
-import formularios.configuraciones;
 import formularios.registro_empleados;
 import formularios.registro_usuarios;
-import formularios.ventana_principal;
 
 public class control_empleado implements ActionListener {
 
@@ -64,7 +62,7 @@ public class control_empleado implements ActionListener {
 			if (formularioEmpleado.txtNombresEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
-					|| formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
+					|| registro_empleados.txtEdadEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
@@ -80,7 +78,7 @@ public class control_empleado implements ActionListener {
 					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
 
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Calcular edad ->")
+					|| registro_empleados.txtEdadEmpleado.getText().equals("Calcular edad ->")
 
 					|| formularioEmpleado.editor.getText().toString().equalsIgnoreCase("")
 					|| formularioEmpleado.editor2.getText().toString().equalsIgnoreCase("")
@@ -111,7 +109,7 @@ public class control_empleado implements ActionListener {
 						claseEmpleado.setFecha_inicio_labores_empleado(formularioEmpleado.editor.getText().toString());
 						claseEmpleado
 								.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-						claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+						claseEmpleado.setEdad_empleado(registro_empleados.txtEdadEmpleado.getText().toString());
 						claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
 						claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
 						claseEmpleado
@@ -177,7 +175,7 @@ public class control_empleado implements ActionListener {
 								control_usuario control = new control_usuario(clase, consulta, formulario);
 								formulario.setVisible(true);
 								formulario.setLocationRelativeTo(null);
-								formulario.txtBusqueda.requestFocusInWindow();
+								registro_usuarios.txtBusqueda.requestFocusInWindow();
 								formulario.obtenerUltimoId();
 								formulario.pistas();
 								formulario.consultarEmpresa();
@@ -210,7 +208,7 @@ public class control_empleado implements ActionListener {
 					// validaciones para datos vacios
 					|| formularioEmpleado.txtApellidosEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtIdentidadEmpleado.getText().isEmpty()
-					|| formularioEmpleado.txtEdadEmpleado.getText().isEmpty()
+					|| registro_empleados.txtEdadEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtTelefonoEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtCorreoEmpleado.getText().isEmpty()
 					|| formularioEmpleado.txtDireccionEmpleado.getText().isEmpty()
@@ -227,7 +225,7 @@ public class control_empleado implements ActionListener {
 							.equalsIgnoreCase("Ingrese el correo del empleado.")
 					|| formularioEmpleado.txtDireccionEmpleado.getText().toString()
 							.equalsIgnoreCase("Ingrese la direccion del empleado.")
-					|| formularioEmpleado.txtEdadEmpleado.getText().equals("Calcular edad ->")
+					|| registro_empleados.txtEdadEmpleado.getText().equals("Calcular edad ->")
 					|| formularioEmpleado.editor.getText().toString().equalsIgnoreCase("")
 					|| formularioEmpleado.editor2.getText().toString().equalsIgnoreCase("")
 					|| formularioEmpleado.editor3.getText().toString().equalsIgnoreCase("")
@@ -253,7 +251,7 @@ public class control_empleado implements ActionListener {
 					claseEmpleado.setFecha_registro_empleado(formularioEmpleado.editor2.getText().toString());
 					claseEmpleado.setFecha_inicio_labores_empleado(formularioEmpleado.editor.getText().toString());
 					claseEmpleado.setDireccion_foto_empleado(formularioEmpleado.txtDireccionFoto.getText().toString());
-					claseEmpleado.setEdad_empleado(formularioEmpleado.txtEdadEmpleado.getText().toString());
+					claseEmpleado.setEdad_empleado(registro_empleados.txtEdadEmpleado.getText().toString());
 					claseEmpleado.setTelefono_empleado(formularioEmpleado.txtTelefonoEmpleado.getText().toString());
 					claseEmpleado.setCorreo_empleado(formularioEmpleado.txtCorreoEmpleado.getText().toString());
 					claseEmpleado.setDireccion_empleado(formularioEmpleado.txtDireccionEmpleado.getText().toString());
@@ -301,7 +299,7 @@ public class control_empleado implements ActionListener {
 						formularioEmpleado.txtApellidosEmpleado.setEditable(false);
 						formularioEmpleado.txtIdentidadEmpleado.setEditable(false);
 						formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
-						formularioEmpleado.txtEdadEmpleado.setEditable(false);
+						registro_empleados.txtEdadEmpleado.setEditable(false);
 						formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
 						formularioEmpleado.txtCorreoEmpleado.setEditable(false);
 						formularioEmpleado.txtDireccionEmpleado.setEditable(false);
@@ -354,7 +352,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtApellidosEmpleado.setEditable(false);
 					formularioEmpleado.txtIdentidadEmpleado.setEnabled(false);
 					formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
-					formularioEmpleado.txtEdadEmpleado.setEditable(false);
+					registro_empleados.txtEdadEmpleado.setEditable(false);
 					formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
 					formularioEmpleado.txtCorreoEmpleado.setEditable(false);
 					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
@@ -404,7 +402,7 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.txtApellidosEmpleado.setEditable(true);
 			formularioEmpleado.txtIdentidadEmpleado.setEnabled(true);
 			formularioEmpleado.cbxGeneroEmpleado.setEditable(true);
-			formularioEmpleado.txtEdadEmpleado.setEditable(true);
+			registro_empleados.txtEdadEmpleado.setEditable(true);
 			formularioEmpleado.txtTelefonoEmpleado.setEditable(true);
 			formularioEmpleado.txtTelefonoEmpleado.setText(null);
 			formularioEmpleado.txtCorreoEmpleado.setEditable(true);
@@ -449,7 +447,7 @@ public class control_empleado implements ActionListener {
 			formularioEmpleado.txtApellidosEmpleado.setEditable(true);
 			formularioEmpleado.txtIdentidadEmpleado.setEnabled(true);
 			formularioEmpleado.cbxGeneroEmpleado.setEditable(true);
-			formularioEmpleado.txtEdadEmpleado.setEditable(true);
+			registro_empleados.txtEdadEmpleado.setEditable(true);
 			formularioEmpleado.txtTelefonoEmpleado.setEditable(true);
 			formularioEmpleado.txtTelefonoEmpleado.setText(null);
 			formularioEmpleado.txtCorreoEmpleado.setEditable(true);
@@ -517,7 +515,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtApellidosEmpleado.setText(apellidos);
 					formularioEmpleado.txtIdentidadEmpleado.setText(identidad);
 					formularioEmpleado.cbxGeneroEmpleado.setSelectedItem(genero);
-					formularioEmpleado.txtEdadEmpleado.setText(edad);
+					registro_empleados.txtEdadEmpleado.setText(edad);
 					formularioEmpleado.txtTelefonoEmpleado.setText(telefono);
 					formularioEmpleado.txtCorreoEmpleado.setText(correo);
 					formularioEmpleado.txtDireccionEmpleado.setText(direccion);
@@ -552,7 +550,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtIdentidadEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.cbxGeneroEmpleado.setForeground(Color.BLACK);
-					formularioEmpleado.txtEdadEmpleado.setForeground(Color.BLACK);
+					registro_empleados.txtEdadEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtTelefonoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtCorreoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtDireccionEmpleado.setForeground(Color.BLACK);
@@ -620,7 +618,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtApellidosEmpleado.setText(apellidos);
 					formularioEmpleado.txtIdentidadEmpleado.setText(identidad);
 					formularioEmpleado.cbxGeneroEmpleado.setSelectedItem(genero);
-					formularioEmpleado.txtEdadEmpleado.setText(edad);
+					registro_empleados.txtEdadEmpleado.setText(edad);
 					formularioEmpleado.txtTelefonoEmpleado.setText(telefono);
 					formularioEmpleado.txtCorreoEmpleado.setText(correo);
 					formularioEmpleado.txtDireccionEmpleado.setText(direccion);
@@ -655,7 +653,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtApellidosEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtIdentidadEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.cbxGeneroEmpleado.setForeground(Color.BLACK);
-					formularioEmpleado.txtEdadEmpleado.setForeground(Color.BLACK);
+					registro_empleados.txtEdadEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtTelefonoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtCorreoEmpleado.setForeground(Color.BLACK);
 					formularioEmpleado.txtDireccionEmpleado.setForeground(Color.BLACK);
@@ -679,7 +677,7 @@ public class control_empleado implements ActionListener {
 					formularioEmpleado.txtApellidosEmpleado.setEditable(false);
 					formularioEmpleado.txtIdentidadEmpleado.setEditable(false);
 					formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
-					formularioEmpleado.txtEdadEmpleado.setEditable(false);
+					registro_empleados.txtEdadEmpleado.setEditable(false);
 					formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
 					formularioEmpleado.txtCorreoEmpleado.setEditable(false);
 					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
@@ -704,7 +702,7 @@ public class control_empleado implements ActionListener {
 		formularioEmpleado.txtNombresEmpleado.setText(null);
 		formularioEmpleado.txtApellidosEmpleado.setText(null);
 		formularioEmpleado.txtIdentidadEmpleado.setText(null);
-		formularioEmpleado.txtEdadEmpleado.setText(null);
+		registro_empleados.txtEdadEmpleado.setText(null);
 		formularioEmpleado.txtTelefonoEmpleado.setText(null);
 		formularioEmpleado.txtCorreoEmpleado.setText(null);
 		formularioEmpleado.txtDireccionEmpleado.setText(null);

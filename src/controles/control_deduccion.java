@@ -56,36 +56,35 @@ public class control_deduccion implements ActionListener {
 					|| formulario.txtCantidadDeduccion.getText().toString().equalsIgnoreCase("Digite la cantidad.")) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar la deduccion!");
 			} else {
-				if (formulario.txtIdentidadDeduccion.getText().toString().equals(identidad)) 
-				{
+				if (formulario.txtIdentidadDeduccion.getText().toString().equals(identidad)) {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-				clase.setTipo_deduccion(formulario.cbxTipoDeduccion.getSelectedItem().toString());
-				clase.setObservacion_deduccion(formulario.txtObservacionDeduccion.getText());
-				clase.setCantidad_deduccion(Double.parseDouble(formulario.txtCantidadDeduccion.getText()));
-				clase.setIdentidad_empleado_deduccion(registro_deducciones.txtIdentidadEmpleadoDeduccion.getText());
-				clase.setFecha_deduccion(formulario.editor.getText());
+					clase.setTipo_deduccion(formulario.cbxTipoDeduccion.getSelectedItem().toString());
+					clase.setObservacion_deduccion(formulario.txtObservacionDeduccion.getText());
+					clase.setCantidad_deduccion(Double.parseDouble(formulario.txtCantidadDeduccion.getText()));
+					clase.setIdentidad_empleado_deduccion(registro_deducciones.txtIdentidadEmpleadoDeduccion.getText());
+					clase.setFecha_deduccion(formulario.editor.getText());
 
-				if (consulta.registrar(clase)) {
-					JOptionPane.showMessageDialog(null, "Deduccion registrada!");
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
-					formulario.establecerFechaRegistro();
+					if (consulta.registrar(clase)) {
+						JOptionPane.showMessageDialog(null, "Deduccion registrada!");
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+						formulario.establecerFechaRegistro();
 
-					final ImageIcon logo = new ImageIcon(
-							usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
-									formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoDeduccion.setIcon(logo);
-					formulario.txtDireccionFoto.setText(null);
-					registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(null);
-					registro_deducciones.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
+						final ImageIcon logo = new ImageIcon(
+								usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
+										formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lblFotoDeduccion.setIcon(logo);
+						formulario.txtDireccionFoto.setText(null);
+						registro_deducciones.txtIdentidadEmpleadoDeduccion.setText(null);
+						registro_deducciones.txtIdentidadEmpleadoDeduccion.requestFocusInWindow();
 
-				} else {
-					JOptionPane.showMessageDialog(null, "Error! Deduccion no Registrado");
-					limpiar();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! Deduccion no Registrado");
+						limpiar();
+					}
 				}
-			}
 			}
 		}
 
@@ -386,7 +385,7 @@ public class control_deduccion implements ActionListener {
 
 		return matrizInfo;
 	}
-	
+
 	public void validarIdentidad() {
 		conexion conex = new conexion();
 		try {
