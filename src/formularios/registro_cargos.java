@@ -227,7 +227,7 @@ public class registro_cargos extends JFrame {
 
 		JLabel lblFuncionesCargo = new JLabel("6. Funciones :");
 		lblFuncionesCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFuncionesCargo.setBounds(27, 235, 99, 14);
+		lblFuncionesCargo.setBounds(27, 233, 99, 14);
 		panelRegistro.add(lblFuncionesCargo);
 
 		cbxTipoCargo = new JComboBox();
@@ -248,13 +248,31 @@ public class registro_cargos extends JFrame {
 		panelRegistro.add(label_1);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(122, 233, 193, 111);
+		scrollPane.setBounds(27, 279, 288, 65);
 		panelRegistro.add(scrollPane);
 		txtFuncionesCargo = new JTextArea();
 		txtFuncionesCargo.setBackground(Color.WHITE);
 		scrollPane.setViewportView(txtFuncionesCargo);
 		InputMap map5 = txtFuncionesCargo.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtFuncionesCargo.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtFuncionesCargo.getText().trim();
+		            txtFuncionesCargo.setText(str);
+		        }
+			}
+		});
 
 		txtNombreCargo = new JTextField();
 		txtNombreCargo.setHorizontalAlignment(SwingConstants.LEFT);
@@ -266,13 +284,15 @@ public class registro_cargos extends JFrame {
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
-			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
+				if (txtNombreCargo.getText().length() == 30)
+					ke.consume();
 			}
 
 			@Override
@@ -280,9 +300,30 @@ public class registro_cargos extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {
+			public void keyReleased(KeyEvent ke) {	
+				try {
+					conexion conex = new conexion();
+					Statement estatuto = conex.getConexion().createStatement();
+					ResultSet rs = estatuto
+							.executeQuery("SELECT nombre_cargo FROM cargos where nombre_cargo = '"
+									+ txtNombreCargo.getText().toString() + "'");
+					if (rs.next() == true) {
+						JOptionPane.showMessageDialog(null,
+								"Atencion! Este nombre de cargo ya fue registrado!");
+						txtNombreCargo.setText("");
+					}
+					rs.close();
+					estatuto.close();
+					conex.desconectar();
+
+				} catch (SQLException exx) {
+					System.out.println(exx.getMessage());
+					JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
 			}
 		});
+
 
 		txtCodigoCargo = new JTextField();
 		txtCodigoCargo.setEditable(false);
@@ -301,13 +342,20 @@ public class registro_cargos extends JFrame {
 		btnAceptar.setBackground(new Color(255, 255, 255));
 		btnAceptar.setBounds(27, 355, 99, 23);
 		panelRegistro.add(btnAceptar);
-
-		JLabel lblImagenLibreta = new JLabel();
-		lblImagenLibreta.setBounds(0, 0, 341, 450);
-		panelRegistro.add(lblImagenLibreta);
-		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-		lblImagenLibreta.setIcon(logo);
+				
+				JTextArea txtrNotaEscribaY = new JTextArea();
+				txtrNotaEscribaY.setFont(new Font("Cambria Math", Font.PLAIN, 12));
+				txtrNotaEscribaY.setText("Nota: Escriba y enumere las funciones del empleado.\r\nEjemplo: 1. Operar, 2. Limpiar, 3. Cerrar etc ...");
+				txtrNotaEscribaY.setBackground(Color.WHITE);
+				txtrNotaEscribaY.setBounds(27, 247, 286, 34);
+				panelRegistro.add(txtrNotaEscribaY);
+				
+						JLabel lblImagenLibreta = new JLabel();
+						lblImagenLibreta.setBounds(0, 0, 341, 450);
+						panelRegistro.add(lblImagenLibreta);
+						final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+								lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+						lblImagenLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);

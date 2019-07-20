@@ -11,7 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Event;
+import java.awt.FocusTraversalPolicy;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -29,6 +31,7 @@ import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
@@ -48,6 +51,8 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
 import javax.swing.DefaultComboBoxModel;
@@ -74,6 +79,8 @@ import utilidades.visor_imagen;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.FocusAdapter;
 
 public class registro_empleados extends JFrame {
 
@@ -178,7 +185,7 @@ public class registro_empleados extends JFrame {
 	public JButton btnAsignar;
 	public JButton btnAsignar_1;
 	public JButton btnAsignar_2;
-
+	
 	public registro_empleados() {
 		setResizable(false);
 		setDefaultCloseOperation(0);
@@ -234,10 +241,13 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
+				if (txtNombresEmpleado.getText().length() == 30)
+					ke.consume();
 			}
 
 			@Override
@@ -245,7 +255,7 @@ public class registro_empleados extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {
+			public void keyReleased(KeyEvent ke) {	
 			}
 		});
 
@@ -268,10 +278,13 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
+				if (txtApellidosEmpleado.getText().length() == 40)
+					ke.consume();
 			}
 
 			@Override
@@ -488,10 +501,13 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
+				if (txtNombreReferencia.getText().length() == 50)
+					ke.consume();
 			}
 
 			@Override
@@ -558,6 +574,24 @@ public class registro_empleados extends JFrame {
 		scrollPane.setViewportView(txtDireccionEmpleado);
 		InputMap map90 = txtDireccionEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map90.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDireccionEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDireccionEmpleado.getText().trim();
+		            txtDireccionEmpleado.setText(str);
+		        }
+			}
+		});
 
 		btnTomarFoto = new JButton("Tomar");
 		btnTomarFoto.addActionListener(new ActionListener() {
@@ -981,7 +1015,8 @@ public class registro_empleados extends JFrame {
 		txtBusquedaEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaEmpleado.setColumns(10);
 		txtBusquedaEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map41 = txtBusquedaEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
+		InputMap map59 = txtBusquedaEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
+		map59.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaEmpleado.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
@@ -1103,16 +1138,6 @@ public class registro_empleados extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void pistas() {
-		pista = new PlaceHolder(txtNombresEmpleado, "Ingrese nombres del empleado.");
-		pista = new PlaceHolder(txtApellidosEmpleado, "Ingrese apellidos del empleado.");
-		pista = new PlaceHolder(txtDireccionEmpleado, "Ingrese la direccion del empleado.");
-		pista = new PlaceHolder(txtNombreReferencia, "Ingrese nombre completo de la referencia.");
-		pista = new PlaceHolder(txtCorreoEmpleado, "Ingrese el correo del empleado");
-		pista = new PlaceHolder(txtBusquedaEmpleado, "Escriba para buscar");
-		pista = new PlaceHolder(txtEdadEmpleado, "Calcular edad ->");
 	}
 
 	public void establecerFechaRegistro() {

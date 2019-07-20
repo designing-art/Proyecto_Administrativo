@@ -11,13 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import javax.swing.JOptionPane;
 
 import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_usuario;
+import formularios.configuraciones;
 import formularios.registro_usuarios;
+import formularios.ventana_principal;
 
 public class control_usuario implements ActionListener {
 
@@ -140,48 +143,59 @@ public class control_usuario implements ActionListener {
 					|| formulario.txtUsuario.getText().isEmpty() || formulario.txtContraseña.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
 			} else {
-				definirPermisos();
-				clase.setId_usuario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+				consultas_usuario consulta = new consultas_usuario();
+				usuario clase = new usuario();
 				clase.setUsuario(formulario.txtUsuario.getText().toString());
 				clase.setContraseña(formulario.txtContraseña.getText().toString());
-				clase.setIdentidad(formulario.txtIdentidad.getText().toString());
-				clase.setNombre(formulario.txtNombres.getText().toString());
-				clase.setCargo(formulario.txtCargo.getText().toString());
-				clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
-				clase.setPermiso_todo(todo);
-				clase.setPermiso_empleado(empleado);
-				clase.setPermiso_cargo(cargoe);
-				clase.setPermiso_horario(horario);
-				clase.setPermiso_contrato_e(contrato_e);
-				clase.setPermiso_cliente(cliente);
-				clase.setPermiso_contrato_c(contrato_c);
-				clase.setPermiso_compra(compra);
-				clase.setPermiso_proveedor(proveedor);
-				clase.setPermiso_inventario(inventario);
-				clase.setPermiso_factura_c(factura_c);
-				clase.setPermiso_factura_e(factura_e);
-				clase.setPermiso_sar(sar);
-				clase.setPermiso_ingreso(ingreso);
-				clase.setPermiso_producto(producto);
-				clase.setPermiso_servicio(servicio);
-				clase.setPermiso_venta(venta);
-				clase.setPermiso_egreso(egreso);
-				clase.setPermiso_bonificacion(bonificacion);
-				clase.setPermiso_deduccion(deduccion);
-				clase.setPermiso_planilla(planilla);
-				clase.setPermiso_empresa(empresa);
-				clase.setPermiso_opciones(opciones);
-				clase.setPermiso_usuarios(usuarios);
-				clase.setPermiso_acercade(acercade);
+				if (consulta.buscarUsuario(clase)) {
 
-				if (consulta.actualizar(clase)) {
-					JOptionPane.showMessageDialog(null, "Usuario actualizado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.obtenerUltimoId();
+					JOptionPane.showMessageDialog(null,
+							"Imposible realizar la accion no tiene permisos para actualizar\n"
+									+ "Sus propias credenciales o permisos.");
 				} else {
-					JOptionPane.showMessageDialog(null, "Error! Usuario no actualizado");
-					limpiar();
+					definirPermisos();
+					clase.setId_usuario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+					clase.setUsuario(formulario.txtUsuario.getText().toString());
+					clase.setContraseña(formulario.txtContraseña.getText().toString());
+					clase.setIdentidad(formulario.txtIdentidad.getText().toString());
+					clase.setNombre(formulario.txtNombres.getText().toString());
+					clase.setCargo(formulario.txtCargo.getText().toString());
+					clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
+					clase.setPermiso_todo(todo);
+					clase.setPermiso_empleado(empleado);
+					clase.setPermiso_cargo(cargoe);
+					clase.setPermiso_horario(horario);
+					clase.setPermiso_contrato_e(contrato_e);
+					clase.setPermiso_cliente(cliente);
+					clase.setPermiso_contrato_c(contrato_c);
+					clase.setPermiso_compra(compra);
+					clase.setPermiso_proveedor(proveedor);
+					clase.setPermiso_inventario(inventario);
+					clase.setPermiso_factura_c(factura_c);
+					clase.setPermiso_factura_e(factura_e);
+					clase.setPermiso_sar(sar);
+					clase.setPermiso_ingreso(ingreso);
+					clase.setPermiso_producto(producto);
+					clase.setPermiso_servicio(servicio);
+					clase.setPermiso_venta(venta);
+					clase.setPermiso_egreso(egreso);
+					clase.setPermiso_bonificacion(bonificacion);
+					clase.setPermiso_deduccion(deduccion);
+					clase.setPermiso_planilla(planilla);
+					clase.setPermiso_empresa(empresa);
+					clase.setPermiso_opciones(opciones);
+					clase.setPermiso_usuarios(usuarios);
+					clase.setPermiso_acercade(acercade);
+
+					if (consulta.actualizar(clase)) {
+						JOptionPane.showMessageDialog(null, "Usuario actualizado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.obtenerUltimoId();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! Usuario no actualizado");
+						limpiar();
+					}
 				}
 			}
 		}
@@ -475,8 +489,11 @@ public class control_usuario implements ActionListener {
 					formulario.btnVer.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
+					formulario.txtBusqueda.setText("");
+					formulario.txtBusqueda.setEditable(false);
+					
 
-					registro_usuarios.txtBusqueda.requestFocusInWindow();
+					formulario.txtUsuario.requestFocusInWindow();
 
 				}
 
@@ -831,7 +848,14 @@ public class control_usuario implements ActionListener {
 			formulario.btnVer.setVisible(true);
 			formulario.btnAceptar.setVisible(false);
 			formulario.pistas();
-			formulario.construirTabla();
+			formulario.construirTabla();formulario.txtCodigo.setEditable(false);
+			formulario.txtUsuario.setEditable(true);
+			formulario.txtContraseña.setEditable(true);
+			formulario.txtIdentidad.setEditable(false);
+			formulario.txtNombres.setEditable(false);
+			formulario.txtCargo.setEditable(false);
+			formulario.txtBusqueda.setEditable(true);
+			registro_usuarios.txtBusqueda.requestFocusInWindow();
 
 		}
 
@@ -851,12 +875,12 @@ public class control_usuario implements ActionListener {
 			formulario.pistas();
 			formulario.construirTabla();
 			formulario.txtCodigo.setEditable(false);
-			formulario.txtCodigo.setEditable(true);
 			formulario.txtUsuario.setEditable(true);
 			formulario.txtContraseña.setEditable(true);
-			formulario.txtIdentidad.setEditable(true);
-			formulario.txtNombres.setEditable(true);
-			formulario.txtCargo.setEditable(true);
+			formulario.txtIdentidad.setEditable(false);
+			formulario.txtNombres.setEditable(false);
+			formulario.txtCargo.setEditable(false);
+			formulario.txtBusqueda.setEditable(true);
 			registro_usuarios.txtBusqueda.requestFocusInWindow();
 		}
 

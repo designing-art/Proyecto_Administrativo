@@ -290,7 +290,6 @@ public class ventana_principal extends JFrame {
 				formulario.setLocationRelativeTo(null);
 				formulario.txtNombresEmpleado.requestFocusInWindow();
 				formulario.obtenerUltimoId();
-				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.establecerFechaRegistro();
 				formulario.construirTablaEmpleados();
