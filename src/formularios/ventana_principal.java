@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -103,6 +105,7 @@ import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.LineBorder;
 
 public class ventana_principal extends JFrame {
 
@@ -118,6 +121,7 @@ public class ventana_principal extends JFrame {
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
 	public static JTextField txtFrase;
+	public static JLabel labelfotousuario;
 
 	public static JButton btnProducto;
 
@@ -188,7 +192,7 @@ public class ventana_principal extends JFrame {
 		setBounds(100, 100, 700, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
@@ -219,6 +223,13 @@ public class ventana_principal extends JFrame {
 		btnPlanilla.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				historial_planillas formulario = new historial_planillas();
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.consultarPlanillas();
+				formulario.cargarPlanillasCreadas();
+				dispose();
+				/*
 				planilla clase = new planilla();
 				consultas_planilla consulta = new consultas_planilla();
 				registro_planillas formulario = new registro_planillas();
@@ -239,7 +250,9 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				Timer time = new Timer();
 				time.schedule(formulario.tarea, 0, 1000);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
+				*/
 			}
 		});
 
@@ -269,6 +282,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
 				formulario.btnAsignar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -299,6 +313,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarEmpleado.setVisible(false);
 				formulario.btnCancelarEmpleado.setVisible(false);
 				formulario.btnBorrarEmpleado.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);	
 				dispose();
 			}
 		});
@@ -331,6 +346,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnAsignar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -363,6 +379,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosBonificacion.setVisible(true);
 				formulario.btnVerBonificacion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -395,6 +412,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosDeduccion.setVisible(true);
 				formulario.btnVerDeduccion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -427,6 +445,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnMostrarHorario.setVisible(true);
 				formulario.btnAceptarHorario.setVisible(false);
 				formulario.btnAsignar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -474,6 +493,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -503,6 +523,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarContrato.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -533,6 +554,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarProducto.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarProducto.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 
 			}
@@ -564,6 +586,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				control.consultarProductos();
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -593,6 +616,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -631,6 +655,7 @@ public class ventana_principal extends JFrame {
 				formulario2.txtBusquedaCargos.requestFocusInWindow();
 				formulario2.consultarEmpresa();
 				formulario2.construirTabla();
+				formulario2.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -661,6 +686,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatos.setVisible(true);
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -705,6 +731,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				formulario.txtExistencia.setText("0");
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -741,6 +768,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -776,6 +804,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				formulario.txtExistencia.setText("0");
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -790,37 +819,37 @@ public class ventana_principal extends JFrame {
 		lbl_horaSistema = new JLabel();
 		lbl_horaSistema.setBounds(0, 0, 131, 26);
 		panel_4.add(lbl_horaSistema);
-		lbl_horaSistema.setFont(new Font("Arial Black", Font.PLAIN, 16));
+		lbl_horaSistema.setFont(new Font("Franklin Gothic Demi", Font.BOLD, 16));
 		lbl_horaSistema.setBackground(UIManager.getColor("Button.background"));
 		lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_5.setBackground(Color.WHITE);
 		panel_5.setBounds(410, 73, 274, 175);
 		contentPane.add(panel_5);
 		panel_5.setLayout(null);
 
 		lblTipoUsuario = new JLabel("tipo");
-		lblTipoUsuario.setBounds(16, 94, 119, 14);
+		lblTipoUsuario.setBounds(16, 111, 119, 28);
 		panel_5.add(lblTipoUsuario);
-		lblTipoUsuario.setForeground(Color.BLACK);
+		lblTipoUsuario.setForeground(new Color(0, 128, 128));
 		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblUsuario_1 = new JLabel("Tipo.");
-		lblUsuario_1.setBounds(16, 80, 75, 14);
+		JLabel lblUsuario_1 = new JLabel("Tipo de usuario.");
+		lblUsuario_1.setBounds(16, 97, 138, 14);
 		panel_5.add(lblUsuario_1);
 		lblUsuario_1.setForeground(Color.BLACK);
 		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		lblCargoUsuario = new JLabel("cargo");
-		lblCargoUsuario.setBounds(16, 61, 119, 20);
+		lblCargoUsuario.setBounds(16, 68, 119, 32);
 		panel_5.add(lblCargoUsuario);
-		lblCargoUsuario.setForeground(Color.BLACK);
+		lblCargoUsuario.setForeground(new Color(0, 128, 128));
 		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
-		JLabel lblCargo = new JLabel("Cargo.");
-		lblCargo.setBounds(16, 49, 75, 14);
+		JLabel lblCargo = new JLabel("Cargo del usuario.");
+		lblCargo.setBounds(16, 56, 138, 14);
 		panel_5.add(lblCargo);
 		lblCargo.setForeground(Color.BLACK);
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -832,40 +861,35 @@ public class ventana_principal extends JFrame {
 		lblNombreUsuario.setForeground(Color.BLACK);
 		lblNombreUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
-		JLabel labelfotousuario = new JLabel();
-		labelfotousuario.setBounds(145, 36, 100, 105);
-		panel_5.add(labelfotousuario);
-		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
-		labelfotousuario.setForeground(Color.LIGHT_GRAY);
-		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
-				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
-		labelfotousuario.setIcon(iconousuario);
-
 		JLabel lblInformacionDelUsuario = new JLabel();
 		lblInformacionDelUsuario.setText("Administraci\u00F3n del Usuario\r\n. ");
 		lblInformacionDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInformacionDelUsuario.setForeground(Color.BLACK);
-		lblInformacionDelUsuario.setFont(new Font("Cooper Black", Font.PLAIN, 15));
+		lblInformacionDelUsuario.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
 		lblInformacionDelUsuario.setBounds(10, 0, 254, 25);
 		panel_5.add(lblInformacionDelUsuario);
 
-		JLabel lblDatos = new JLabel("Datos :");
+		JLabel lblDatos = new JLabel("Datos del usuario :");
 		lblDatos.setForeground(Color.BLACK);
 		lblDatos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblDatos.setBounds(16, 31, 157, 14);
 		panel_5.add(lblDatos);
-
-		JLabel lblPermiso = new JLabel("Permiso.");
-		lblPermiso.setForeground(Color.BLACK);
-		lblPermiso.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblPermiso.setBounds(16, 111, 75, 14);
-		panel_5.add(lblPermiso);
-
-		JLabel lblPermisoUsuario = new JLabel("permiso");
-		lblPermisoUsuario.setForeground(Color.BLACK);
-		lblPermisoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblPermisoUsuario.setBounds(16, 125, 119, 14);
-		panel_5.add(lblPermisoUsuario);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel.setBackground(new Color(0, 191, 255));
+		panel.setBounds(145, 23, 119, 125);
+		panel_5.add(panel);
+		panel.setLayout(null);
+		
+				labelfotousuario = new JLabel();
+				labelfotousuario.setBounds(10, 11, 99, 103);
+				panel.add(labelfotousuario);
+				labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
+				labelfotousuario.setForeground(Color.LIGHT_GRAY);
+				final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
+						.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+				labelfotousuario.setIcon(iconousuario);
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -875,30 +899,23 @@ public class ventana_principal extends JFrame {
 		panel_6.setLayout(null);
 
 		lbl_fechaSistema = new JLabel();
+		lbl_fechaSistema.setForeground(new Color(0, 139, 139));
 		lbl_fechaSistema.setBounds(0, 0, 274, 26);
 		panel_6.add(lbl_fechaSistema);
-		lbl_fechaSistema.setFont(new Font("Cooper Black", Font.PLAIN, 15));
+		lbl_fechaSistema.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
 		lbl_fechaSistema.setBackground(Color.WHITE);
 		lbl_fechaSistema.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fechaSistema.setText(getFecha());
 
 		JPanel panel_7 = new JPanel();
-		panel_7.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_7.setBackground(Color.WHITE);
 		panel_7.setBounds(410, 250, 274, 290);
 		contentPane.add(panel_7);
 		panel_7.setLayout(null);
 
-		lbl_logo_empresa_principal = new JLabel();
-		lbl_logo_empresa_principal.setBounds(10, 32, 252, 215);
-		panel_7.add(lbl_logo_empresa_principal);
-		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
-		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
-				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-		lbl_logo_empresa_principal.setIcon(icono);
-
 		lbl_nombre_empresa_principal = new JLabel();
-		lbl_nombre_empresa_principal.setBounds(0, 0, 274, 35);
+		lbl_nombre_empresa_principal.setBounds(0, 0, 274, 33);
 		panel_7.add(lbl_nombre_empresa_principal);
 		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
 		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
@@ -911,6 +928,21 @@ public class ventana_principal extends JFrame {
 		btnInformacionEmpresa.setBackground(Color.WHITE);
 		btnInformacionEmpresa.setForeground(Color.BLACK);
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
+		
+		panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(0, 191, 255));
+		panel_1.setBounds(10, 32, 252, 223);
+		panel_7.add(panel_1);
+		
+				lbl_logo_empresa_principal = new JLabel();
+				lbl_logo_empresa_principal.setBounds(10, 11, 232, 201);
+				panel_1.add(lbl_logo_empresa_principal);
+				lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+				final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
+						lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+				lbl_logo_empresa_principal.setIcon(icono);
 		btnInformacionEmpresa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -924,7 +956,9 @@ public class ventana_principal extends JFrame {
 				formulario.pistas();
 				nombre = lbl_nombre_empresa_principal.getText().toString();
 				registro_empresa.txtNombre_Empresa.setText(nombre);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 			}
 		});
 
@@ -981,7 +1015,9 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
+				
 			}
 		});
 
@@ -1010,6 +1046,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1040,6 +1077,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 
 			}
@@ -1075,6 +1113,7 @@ public class ventana_principal extends JFrame {
 				formulario.mostrarConfiguracion();
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1112,6 +1151,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1142,6 +1182,7 @@ public class ventana_principal extends JFrame {
 				acerca_de info = new acerca_de();
 				info.setLocationRelativeTo(null);
 				info.setVisible(true);
+				info.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
 			}
 		});
 
@@ -1179,6 +1220,8 @@ public class ventana_principal extends JFrame {
 			lbl_horaSistema.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
+	private JPanel panel_1;
+
 
 	public static String getFecha() {
 		Date date = new Date();
@@ -1223,5 +1266,4 @@ public class ventana_principal extends JFrame {
 		}
 
 	}
-	
 }

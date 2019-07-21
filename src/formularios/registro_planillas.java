@@ -362,6 +362,7 @@ public class registro_planillas extends JFrame {
 				formulario.setLocationRelativeTo(null);
 				formulario.consultarPlanillas();
 				formulario.cargarPlanillasCreadas();
+				dispose();
 			}
 		});
 		btnHistorialPlanillas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -833,12 +834,22 @@ public class registro_planillas extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventana_principal principal = new ventana_principal();
-				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
-				dispose();
+				principal.setVisible(true);
+				principal.consultarEmpresa();
+				login_usuario usuario = new login_usuario();
+				usuario.consultarDatosInicioSesionUsuario();
+				usuario.establecerDatosInicioSesionUsuario();
+				usuario.consultarPermisos();
+				usuario.definirPermisos();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
-				principal.consultarEmpresa();
+				configuraciones configuracion = new configuraciones();
+				configuracion.consultarConfiguracion();
+				configuracion.establecerConfiguraciones();
+				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				
+				dispose();
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

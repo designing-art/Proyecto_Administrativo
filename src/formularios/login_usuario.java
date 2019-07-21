@@ -32,6 +32,7 @@ import java.sql.Statement;
 import java.util.Timer;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class login_usuario extends JFrame {
 
@@ -70,12 +71,18 @@ public class login_usuario extends JFrame {
 	public static String opciones;
 	public static String usuarios;
 	public static String acercade;
+	
+	public static String nombreCompletoUsuario;
+	public static String cargoUsuario;
+	public static String tipoUsuario;
+	public static String direccionFotoUsuario;
+	public static String nombreUsuario;
 
 	public login_usuario() {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 574, 386);
+		setBounds(100, 100, 396, 386);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,28 +95,28 @@ public class login_usuario extends JFrame {
 		contentPane.add(btnSalir);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(63, 23, 445, 302);
+		panel.setBounds(31, 27, 327, 302);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblUsuario = new JLabel("Usuario :");
 		lblUsuario.setForeground(new Color(0, 0, 0));
 		lblUsuario.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblUsuario.setBounds(194, 160, 108, 20);
+		lblUsuario.setBounds(136, 154, 108, 20);
 		panel.add(lblUsuario);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
 		lblContrasea.setForeground(new Color(0, 0, 0));
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblContrasea.setBounds(180, 201, 98, 20);
+		lblContrasea.setBounds(122, 195, 98, 20);
 		panel.add(lblContrasea);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtUsuario.setBounds(132, 180, 181, 20);
+		txtUsuario.setBounds(74, 174, 181, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		InputMap map4 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
@@ -119,13 +126,13 @@ public class login_usuario extends JFrame {
 		btnIngresar.setForeground(new Color(0, 0, 0));
 		btnIngresar.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 		btnIngresar.setBackground(new Color(60, 179, 113));
-		btnIngresar.setBounds(165, 251, 113, 23);
+		btnIngresar.setBounds(107, 245, 113, 23);
 		panel.add(btnIngresar);
 
 		txtContraseña = new JPasswordField();
 		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtContraseña.setBounds(132, 220, 181, 20);
+		txtContraseña.setBounds(74, 214, 181, 20);
 		panel.add(txtContraseña);
 		InputMap map5 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -151,11 +158,11 @@ public class login_usuario extends JFrame {
 		lblAlerta = new JLabel("");
 		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblAlerta.setBounds(68, 277, 323, 20);
+		lblAlerta.setBounds(10, 271, 307, 20);
 		panel.add(lblAlerta);
 
 		lblFotoEmpresa = new JLabel("");
-		lblFotoEmpresa.setBounds(150, 30, 147, 128);
+		lblFotoEmpresa.setBounds(92, 26, 147, 128);
 		panel.add(lblFotoEmpresa);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
@@ -165,14 +172,14 @@ public class login_usuario extends JFrame {
 		lblNombreEmpresa = new JLabel("Empresa");
 		lblNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreEmpresa.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
-		lblNombreEmpresa.setBounds(10, 0, 425, 33);
+		lblNombreEmpresa.setBounds(10, 0, 303, 33);
 		panel.add(lblNombreEmpresa);
 
 		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
 		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
 		lblLoginSistemaAdministrativo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLoginSistemaAdministrativo.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
-		lblLoginSistemaAdministrativo.setBounds(63, 0, 435, 19);
+		lblLoginSistemaAdministrativo.setBounds(31, 0, 327, 30);
 		contentPane.add(lblLoginSistemaAdministrativo);
 
 	}
@@ -408,6 +415,42 @@ public class login_usuario extends JFrame {
 		VENTANA.pack();
 	}
 	
+	public void consultarDatosInicioSesionUsuario() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT * FROM usuario WHERE usuario='" + login_usuario.txtUsuario.getText().toString() + "'");
+			if (rs.next()) {
+				nombreCompletoUsuario = (rs.getString("nombre"));
+				cargoUsuario = (rs.getString("cargo"));
+				tipoUsuario = (rs.getString("tipo_usuario"));
+				direccionFotoUsuario = (rs.getString("direccion_foto_usuario"));
+				nombreUsuario = (rs.getString("usuario"));
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+	
+	public void establecerDatosInicioSesionUsuario() {
+		ventana_principal.lblNombreUsuario.setText(nombreCompletoUsuario);
+		ventana_principal.lblCargoUsuario.setText(cargoUsuario);
+		ventana_principal.lblTipoUsuario.setText(tipoUsuario);
+		final ImageIcon icono = new ImageIcon(direccionFotoUsuario);
+		final ImageIcon iconofoto = new ImageIcon(icono.getImage().getScaledInstance(
+				ventana_principal.labelfotousuario.getWidth(),
+				ventana_principal.labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+		ventana_principal.labelfotousuario.setIcon(iconofoto);
+	}
+	
 	public void iniciarSesion() {
 		ventana_principal principal = new ventana_principal();
 		String user = String.valueOf(txtUsuario.getText().toString());
@@ -425,17 +468,16 @@ public class login_usuario extends JFrame {
 				clase.setUsuario(txtUsuario.getText().toString());
 				clase.setContraseña(txtContraseña.getText().toString());
 				if (consulta.buscarUsuario(clase)) {
-					consultarPermisos();
-					definirPermisos();
 					principal.setLocationRelativeTo(null);
 					principal.setVisible(true);
-					principal.repaint();
 					principal.consultarEmpresa();
+					consultarDatosInicioSesionUsuario();
+					establecerDatosInicioSesionUsuario();
+					consultarPermisos();
+					definirPermisos();
+					principal.setTitle("Sesión iniciada por: "+nombreCompletoUsuario);
 					Timer time = new Timer();
 					time.schedule(principal.tarea, 0, 1000);
-					ventana_principal.lblNombreUsuario.setText(String.valueOf(clase.getNombre().toString()));
-					ventana_principal.lblCargoUsuario.setText(String.valueOf(clase.getCargo().toString()));
-					ventana_principal.lblTipoUsuario.setText(String.valueOf(clase.getTipo_usuario().toString()));
 					configuraciones configuracion = new configuraciones();
 					configuracion.consultarConfiguracion();
 					configuracion.establecerConfiguraciones();

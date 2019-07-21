@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import clases.configuracion;
 import consultas.consultas_configuracion;
 import formularios.configuraciones;
+import formularios.login_usuario;
 import formularios.ventana_principal;
 
 public class control_configuracion implements ActionListener {
@@ -44,15 +45,23 @@ public class control_configuracion implements ActionListener {
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito! Configuracion guardada!");
 				formulario.dispose();
-				formulario2.setLocationRelativeTo(null);
-				formulario2.setVisible(true);
-				formulario2.consultarEmpresa();
+				ventana_principal principal = new ventana_principal();
+				principal.setLocationRelativeTo(null);
+				principal.setVisible(true);
+				principal.consultarEmpresa();
+				login_usuario usuario = new login_usuario();
+				usuario.consultarDatosInicioSesionUsuario();
+				usuario.establecerDatosInicioSesionUsuario();
+				usuario.consultarPermisos();
+				usuario.definirPermisos();
 				Timer time = new Timer();
-				time.schedule(formulario2.tarea, 0, 1000);
+				time.schedule(principal.tarea, 0, 1000);
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
 				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
+				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 			}
@@ -73,15 +82,23 @@ public class control_configuracion implements ActionListener {
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito Configuracion guardada!");
 				formulario.dispose();
-				formulario2.setLocationRelativeTo(null);
-				formulario2.setVisible(true);
-				formulario2.consultarEmpresa();
+				ventana_principal principal = new ventana_principal();
+				principal.setLocationRelativeTo(null);
+				principal.setVisible(true);
+				principal.consultarEmpresa();
+				login_usuario usuario = new login_usuario();
+				usuario.consultarDatosInicioSesionUsuario();
+				usuario.establecerDatosInicioSesionUsuario();
+				usuario.consultarPermisos();
+				usuario.definirPermisos();
 				Timer time = new Timer();
-				time.schedule(formulario2.tarea, 0, 1000);
+				time.schedule(principal.tarea, 0, 1000);
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
 				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
+				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no actualizados");
 			}

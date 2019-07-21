@@ -8,7 +8,10 @@ import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
+import consultas.consultas_planilla;
 import controles.control_historial_planilla;
+import controles.control_planilla;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -54,6 +57,9 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
+
+import clases.planilla;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
@@ -234,6 +240,38 @@ public class registro_nuevas_planillas extends JFrame {
 				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
 				utilJTablePrint(tablaPlanilla, "Canal 40 (COFFEE TV CHANNEL)",
 						"Reporte de la Planilla.____. " + hora_fecha_reporte, true);
+			}
+		});
+
+		button = new JButton("Trabajar");
+		button.setFont(new Font("Dialog", Font.PLAIN, 12));
+		button.setBackground(new Color(255, 165, 0));
+		button.setBounds(303, 112, 99, 23);
+		panel_2.add(button);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				planilla clase = new planilla();
+				consultas_planilla consulta = new consultas_planilla();
+				registro_planillas formulario = new registro_planillas();
+				control_planilla control = new control_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				dispose();
 			}
 		});
 
@@ -524,6 +562,7 @@ public class registro_nuevas_planillas extends JFrame {
 			lbl_hora.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
+	private JButton button;
 
 	public static String getFecha() {
 		Date date = new Date();

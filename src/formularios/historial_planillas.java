@@ -6,9 +6,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import clases.historial_planilla;
+import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_historial_planilla;
+import consultas.consultas_planilla;
 import controles.control_historial_planilla;
+import controles.control_planilla;
+
 import java.awt.Color;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
@@ -120,6 +124,32 @@ public class historial_planillas extends JFrame {
 		btnTrabajar.setBackground(new Color(255, 165, 0));
 		btnTrabajar.setBounds(38, 165, 128, 23);
 		panel.add(btnTrabajar);
+		btnTrabajar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				planilla clase = new planilla();
+				consultas_planilla consulta = new consultas_planilla();
+				registro_planillas formulario = new registro_planillas();
+				control_planilla control = new control_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				dispose();
+			}
+		});
 
 		JLabel lblNombreDeLa = new JLabel("Nombre de la planilla :");
 		lblNombreDeLa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

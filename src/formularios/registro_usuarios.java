@@ -142,11 +142,7 @@ public class registro_usuarios extends JFrame {
 	public static JRadioButton rbdTodos;
 	public static JTextField txtDirecFoto;
 	public static JLabel lblFotoUsuario;
-	private JLabel lblNombreConexion;
-	public static JLabel lblNombreCompleto;
-	public static JLabel lblUsuario;
-	public static JLabel lblPassword;
-	private JLabel lblCredenciales;
+	public static JTextField lblUsuarioLogeado;;
 
 	public registro_usuarios() {
 		setResizable(false);
@@ -168,12 +164,22 @@ public class registro_usuarios extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
-				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
-				dispose();
+				principal.setVisible(true);
+				principal.consultarEmpresa();
+				login_usuario usuario = new login_usuario();
+				usuario.consultarDatosInicioSesionUsuario();
+				usuario.establecerDatosInicioSesionUsuario();
+				usuario.consultarPermisos();
+				usuario.definirPermisos();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
-				principal.consultarEmpresa();
+				configuraciones configuracion = new configuraciones();
+				configuracion.consultarConfiguracion();
+				configuracion.establecerConfiguraciones();
+				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				
+				dispose();
 			}
 		});
 
@@ -937,35 +943,15 @@ public class registro_usuarios extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
-
-		lblNombreConexion = new JLabel("Credenciales del usuario actual :");
-		lblNombreConexion.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
-		lblNombreConexion.setBounds(28, 0, 272, 23);
-		contentPane.add(lblNombreConexion);
-
-		lblNombreCompleto = new JLabel("Nombre completo.");
-		lblNombreCompleto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreCompleto.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
-		lblNombreCompleto.setBounds(282, 0, 272, 23);
-		contentPane.add(lblNombreCompleto);
-
-		lblUsuario = new JLabel("Usuario.");
-		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuario.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
-		lblUsuario.setBounds(704, 0, 135, 23);
-		contentPane.add(lblUsuario);
-
-		lblPassword = new JLabel("Password");
-		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
-		lblPassword.setBounds(849, 0, 135, 23);
-		contentPane.add(lblPassword);
-
-		lblCredenciales = new JLabel("Credenciales : ");
-		lblCredenciales.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCredenciales.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
-		lblCredenciales.setBounds(567, 0, 127, 23);
-		contentPane.add(lblCredenciales);
+		
+		lblUsuarioLogeado = new JTextField("usuario");
+		lblUsuarioLogeado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuarioLogeado.setBackground(Color.WHITE);
+		lblUsuarioLogeado.setEditable(false);
+		lblUsuarioLogeado.setForeground(new Color(220, 20, 60));
+		lblUsuarioLogeado.setFont(new Font("Bauhaus 93", Font.BOLD, 15));
+		lblUsuarioLogeado.setBounds(28, 0, 131, 23);
+		contentPane.add(lblUsuarioLogeado);
 
 	}
 
@@ -1107,15 +1093,4 @@ public class registro_usuarios extends JFrame {
 
 		}
 	}
-
-	public void validarModificacionUsuarioLogeado() {
-		if (txtUsuario.getText().toString().trim().equals(lblUsuario)) {
-			txtUsuario.setEditable(false);
-			txtContraseña.setEditable(false);
-		} else {
-			txtUsuario.setEditable(true);
-			txtContraseña.setEditable(true);
-		}
-	}
-
 }

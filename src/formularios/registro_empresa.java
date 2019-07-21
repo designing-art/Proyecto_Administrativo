@@ -113,19 +113,22 @@ public class registro_empresa extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventana_principal principal = new ventana_principal();
-				ruta = txtDireccionLogoEmpresa.getText().toString();
-				nombre = txtNombreEmpresa.getText().toString();
-				imagen = new ImageIcon(ruta);
-				imagenLogo_aplicado = new ImageIcon(
-						imagen.getImage().getScaledInstance(ventana_principal.lbl_logo_empresa_principal.getWidth(),
-								ventana_principal.lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-				ventana_principal.lbl_logo_empresa_principal.setIcon(imagenLogo_aplicado);
-				ventana_principal.lbl_nombre_empresa_principal.setText(nombre);
-				principal.setVisible(true);
 				principal.setLocationRelativeTo(null);
-				dispose();
+				principal.setVisible(true);
+				principal.consultarEmpresa();
+				login_usuario usuario = new login_usuario();
+				usuario.consultarDatosInicioSesionUsuario();
+				usuario.establecerDatosInicioSesionUsuario();
+				usuario.consultarPermisos();
+				usuario.definirPermisos();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				configuraciones configuracion = new configuraciones();
+				configuracion.consultarConfiguracion();
+				configuracion.establecerConfiguraciones();
+				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				
+				dispose();
 			}
 		});
 
