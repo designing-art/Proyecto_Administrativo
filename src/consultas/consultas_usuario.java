@@ -12,7 +12,7 @@ public class consultas_usuario extends conexion {
 	public boolean insertar(usuario usuario) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
-		String sql = "INSERT INTO usuario (usuario, contraseña, identidad, nombre, cargo, tipo_usuario, permiso_todo, permiso_empleado, permiso_cargo, permiso_horario, permiso_contrato_e, permiso_cliente, permiso_contrato_c, permiso_compra, permiso_proveedor, permiso_inventario, permiso_factura_c, permiso_factura_e, permiso_sar, permiso_ingreso, permiso_producto, permiso_servicio, permiso_venta, permiso_egreso, permiso_bonificacion, permiso_deduccion, permiso_planilla, permiso_empresa, permiso_opciones, permiso_usuarios, permiso_acercade) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO usuario (usuario, contraseña, identidad, nombre, cargo, tipo_usuario, permiso_todo, permiso_empleado, permiso_cargo, permiso_horario, permiso_contrato_e, permiso_cliente, permiso_contrato_c, permiso_compra, permiso_proveedor, permiso_inventario, permiso_factura_c, permiso_factura_e, permiso_sar, permiso_ingreso, permiso_producto, permiso_servicio, permiso_venta, permiso_egreso, permiso_bonificacion, permiso_deduccion, permiso_planilla, permiso_empresa, permiso_opciones, permiso_usuarios, permiso_acercade, direccion_foto_usuario) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, usuario.getUsuario());
@@ -46,6 +46,7 @@ public class consultas_usuario extends conexion {
 			ps.setString(29, usuario.getPermiso_opciones());
 			ps.setString(30, usuario.getPermiso_usuarios());
 			ps.setString(31, usuario.getPermiso_acercade());
+			ps.setString(32, usuario.getDireccion_foto_usuario());
 			ps.execute();
 			return true;
 		} catch (SQLException e) {
@@ -65,7 +66,7 @@ public class consultas_usuario extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE usuario SET id_usuario=?, usuario=?, contraseña=?, identidad=?, nombre=?, cargo=?, tipo_usuario=?, permiso_todo=?, permiso_empleado=?, permiso_cargo=?, permiso_horario=?, permiso_contrato_e=?, permiso_cliente=?, permiso_contrato_c=?, permiso_compra=?, permiso_proveedor=?, permiso_inventario=?, permiso_factura_c=?, permiso_factura_e=?, permiso_sar=?, permiso_ingreso=?, permiso_producto=?, permiso_servicio=?, permiso_venta=?, permiso_egreso=?, permiso_bonificacion=?, permiso_deduccion=?, permiso_planilla=?, permiso_empresa=?, permiso_opciones=?, permiso_usuarios=?, permiso_acercade=? WHERE id_usuario=? ";
+		String sql = "UPDATE usuario SET id_usuario=?, usuario=?, contraseña=?, identidad=?, nombre=?, cargo=?, tipo_usuario=?, permiso_todo=?, permiso_empleado=?, permiso_cargo=?, permiso_horario=?, permiso_contrato_e=?, permiso_cliente=?, permiso_contrato_c=?, permiso_compra=?, permiso_proveedor=?, permiso_inventario=?, permiso_factura_c=?, permiso_factura_e=?, permiso_sar=?, permiso_ingreso=?, permiso_producto=?, permiso_servicio=?, permiso_venta=?, permiso_egreso=?, permiso_bonificacion=?, permiso_deduccion=?, permiso_planilla=?, permiso_empresa=?, permiso_opciones=?, permiso_usuarios=?, permiso_acercade=?, direccion_foto_usuario=? WHERE id_usuario=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -101,7 +102,8 @@ public class consultas_usuario extends conexion {
 			ps.setString(30, usuario.getPermiso_opciones());
 			ps.setString(31, usuario.getPermiso_usuarios());
 			ps.setString(32, usuario.getPermiso_acercade());
-			ps.setInt(33, usuario.getId_usuario());
+			ps.setString(33, usuario.getDireccion_foto_usuario());
+			ps.setInt(34, usuario.getId_usuario());
 			ps.execute();
 
 			return true;
@@ -123,7 +125,7 @@ public class consultas_usuario extends conexion {
 		ResultSet rs = null;
 		Connection con = getConexion();
 
-		String sql = "SELECT nombres_empleado, apellidos_empleado, identidad_empleado, nombre_cargo_empleado FROM empleados WHERE identidad_empleado = ? ";
+		String sql = "SELECT nombres_empleado, apellidos_empleado, identidad_empleado, nombre_cargo_empleado, direccion_foto_empleado FROM empleados WHERE identidad_empleado = ? ";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -135,6 +137,7 @@ public class consultas_usuario extends conexion {
 				empleado.setApellidos_empleado(rs.getString("apellidos_empleado"));
 				empleado.setIdentidad_empleado(rs.getString("identidad_empleado"));
 				empleado.setNombre_cargo_empleado(rs.getString("nombre_cargo_empleado"));
+				empleado.setDireccion_foto_empleado(rs.getString("direccion_foto_empleado"));
 				return true;
 			}
 			return false;
@@ -192,6 +195,7 @@ public class consultas_usuario extends conexion {
 				usuario.setPermiso_opciones(rs.getString("permiso_opciones"));
 				usuario.setPermiso_usuarios(rs.getString("permiso_usuarios"));
 				usuario.setPermiso_acercade(rs.getString("permiso_acercade"));
+				usuario.setDireccion_foto_usuario(rs.getString("direccion_foto_usuario"));
 				return true;
 			}
 			return false;

@@ -34,6 +34,7 @@ public class usuario {
 	String permiso_opciones;
 	String permiso_usuarios;
 	String permiso_acercade;
+	String direccion_foto_usuario;
 
 	public int getId_usuario() {
 		return id_usuario;
@@ -290,5 +291,14 @@ public class usuario {
 	public void setPermiso_acercade(String permiso_acercade) {
 		this.permiso_acercade = permiso_acercade;
 	}
+
+	public String getDireccion_foto_usuario() {
+		return direccion_foto_usuario;
+	}
+
+	public void setDireccion_foto_usuario(String direccion_foto_usuario) {
+		this.direccion_foto_usuario = direccion_foto_usuario;
+	}
+	
 
 }

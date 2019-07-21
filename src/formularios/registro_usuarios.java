@@ -51,11 +51,14 @@ import com.placeholder.PlaceHolder;
 import conexion.conexion;
 import consultas.consultas_usuario;
 import controles.control_usuario;
+import utilidades.visor_imagen;
+
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.empleado;
+import clases.usuario;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -137,6 +140,13 @@ public class registro_usuarios extends JFrame {
 	public static JRadioButton rdbtnAcercaDe;
 	public static JRadioButton rdbtnUsuarios;
 	public static JRadioButton rbdTodos;
+	public static JTextField txtDirecFoto;
+	public static JLabel lblFotoUsuario;
+	private JLabel lblNombreConexion;
+	public static JLabel lblNombreCompleto;
+	public static JLabel lblUsuario;
+	public static JLabel lblPassword;
+	private JLabel lblCredenciales;
 
 	public registro_usuarios() {
 		setResizable(false);
@@ -169,7 +179,7 @@ public class registro_usuarios extends JFrame {
 
 		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DE PERMISOS Y USUARIOS DE LA EMPRESA");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistrarCargo.setBounds(28, 20, 819, 29);
+		lblRegistrarCargo.setBounds(28, 26, 819, 23);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
@@ -331,7 +341,7 @@ public class registro_usuarios extends JFrame {
 		txtNombres.setEditable(false);
 		txtNombres.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNombres.setColumns(10);
-		txtNombres.setBounds(129, 134, 295, 23);
+		txtNombres.setBounds(129, 134, 197, 23);
 		panelRegistro.add(txtNombres);
 		InputMap map1 = txtNombres.getInputMap(JComponent.WHEN_FOCUSED);
 		map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -390,8 +400,7 @@ public class registro_usuarios extends JFrame {
 		cbxTipoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contador++;
-				if (cbxTipoUsuario.getSelectedItem().equals("Usuario Normal") && contador > 0) 
-				{
+				if (cbxTipoUsuario.getSelectedItem().equals("Usuario Normal") && contador > 0) {
 					rdbtnEmpleados.setSelected(false);
 					rdbtnCargos.setSelected(false);
 					rdbtnHorarios.setSelected(false);
@@ -416,10 +425,9 @@ public class registro_usuarios extends JFrame {
 					rdbtnConfiguracion.setSelected(true);
 					rdbtnAcercaDe.setSelected(true);
 					rdbtnUsuarios.setSelected(false);
-					rbdTodos.setSelected(false);	
-				}else {
-					if (cbxTipoUsuario.getSelectedItem().equals("Usuario Administrador")&& contador > 0) 
-					{
+					rbdTodos.setSelected(false);
+				} else {
+					if (cbxTipoUsuario.getSelectedItem().equals("Usuario Administrador") && contador > 0) {
 						rdbtnEmpleados.setSelected(true);
 						rdbtnCargos.setSelected(true);
 						rdbtnHorarios.setSelected(true);
@@ -444,10 +452,9 @@ public class registro_usuarios extends JFrame {
 						rdbtnConfiguracion.setSelected(true);
 						rdbtnAcercaDe.setSelected(true);
 						rdbtnUsuarios.setSelected(true);
-						rbdTodos.setSelected(false);	
-					}else {
-						if (cbxTipoUsuario.getSelectedItem().equals("Usuario Avanzado")&& contador > 0) 
-						{
+						rbdTodos.setSelected(false);
+					} else {
+						if (cbxTipoUsuario.getSelectedItem().equals("Usuario Avanzado") && contador > 0) {
 							rdbtnEmpleados.setSelected(true);
 							rdbtnCargos.setSelected(true);
 							rdbtnHorarios.setSelected(true);
@@ -472,10 +479,9 @@ public class registro_usuarios extends JFrame {
 							rdbtnConfiguracion.setSelected(true);
 							rdbtnAcercaDe.setSelected(true);
 							rdbtnUsuarios.setSelected(true);
-							rbdTodos.setSelected(true);	
-						}else {
-							if (cbxTipoUsuario.getSelectedItem().equals("Usuario Personalizado")&& contador > 0) 
-							{
+							rbdTodos.setSelected(true);
+						} else {
+							if (cbxTipoUsuario.getSelectedItem().equals("Usuario Personalizado") && contador > 0) {
 								rdbtnEmpleados.setSelected(false);
 								rdbtnCargos.setSelected(false);
 								rdbtnHorarios.setSelected(false);
@@ -502,21 +508,21 @@ public class registro_usuarios extends JFrame {
 								rdbtnUsuarios.setSelected(false);
 								rbdTodos.setSelected(false);
 							}
-							
+
 						}
 					}
 				}
 			}
 		});
 		cbxTipoUsuario.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 15));
-		cbxTipoUsuario.setModel(new DefaultComboBoxModel(new String[] {"Usuario Normal", "Usuario Administrador", "Usuario Avanzado", "Usuario Personalizado"}));
+		cbxTipoUsuario.setModel(new DefaultComboBoxModel(new String[] { "Usuario Normal", "Usuario Administrador",
+				"Usuario Avanzado", "Usuario Personalizado" }));
 		cbxTipoUsuario.setBounds(129, 244, 147, 20);
 		panelRegistro.add(cbxTipoUsuario);
-		
 
 		lblDatosDeLa = new JLabel("Registro de permisos y acceso del usuario :");
 		lblDatosDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDatosDeLa.setBounds(37, 214, 387, 32);
+		lblDatosDeLa.setBounds(37, 214, 356, 32);
 		panelRegistro.add(lblDatosDeLa);
 
 		MaskFormatter formatter11 = null;
@@ -548,7 +554,7 @@ public class registro_usuarios extends JFrame {
 		txtIdentidad.setEditable(false);
 		txtIdentidad.setHorizontalAlignment(SwingConstants.CENTER);
 		txtIdentidad.setColumns(10);
-		txtIdentidad.setBounds(129, 160, 295, 23);
+		txtIdentidad.setBounds(129, 160, 197, 23);
 		panelRegistro.add(txtIdentidad);
 		InputMap map22 = txtIdentidad.getInputMap(JComponent.WHEN_FOCUSED);
 		map22.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -578,7 +584,7 @@ public class registro_usuarios extends JFrame {
 		txtCargo.setEditable(false);
 		txtCargo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCargo.setColumns(10);
-		txtCargo.setBounds(129, 186, 295, 23);
+		txtCargo.setBounds(129, 186, 197, 23);
 		panelRegistro.add(txtCargo);
 
 		lblPermisos = new JLabel("5. Permisos :");
@@ -592,9 +598,26 @@ public class registro_usuarios extends JFrame {
 		panelRegistro.add(lblCargo);
 
 		txtUsuario = new JTextField();
-		txtUsuario.addKeyListener(new KeyAdapter() {
+		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(129, 419, 147, 23);
+		panelRegistro.add(txtUsuario);
+		InputMap map5 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txtUsuario.addKeyListener(new KeyListener() {
 			@Override
-			public void keyReleased(KeyEvent arg0) {
+			public void keyTyped(KeyEvent ke) {
+				if (txtUsuario.getText().length() == 15)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
 				try {
 					conexion conex = new conexion();
 					Statement estatuto = conex.getConexion().createStatement();
@@ -615,12 +638,6 @@ public class registro_usuarios extends JFrame {
 				}
 			}
 		});
-		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		txtUsuario.setColumns(10);
-		txtUsuario.setBounds(129, 419, 147, 23);
-		panelRegistro.add(txtUsuario);
-		InputMap map14 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
-		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
 		lblContrasea = new JLabel("8. Contrase\u00F1a :");
 		lblContrasea.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -632,6 +649,21 @@ public class registro_usuarios extends JFrame {
 		txtContraseña.setColumns(10);
 		txtContraseña.setBounds(129, 447, 147, 23);
 		panelRegistro.add(txtContraseña);
+		txtContraseña.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtUsuario.getText().length() == 15)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -722,6 +754,7 @@ public class registro_usuarios extends JFrame {
 					rdbtnAcercaDe.setSelected(true);
 					rdbtnUsuarios.setSelected(true);
 					rbdTodos.setSelected(true);
+					cbxTipoUsuario.setSelectedItem("Usuario Avanzado");
 
 				} else {
 					rdbtnEmpleados.setSelected(false);
@@ -749,6 +782,7 @@ public class registro_usuarios extends JFrame {
 					rdbtnAcercaDe.setSelected(false);
 					rdbtnUsuarios.setSelected(false);
 					rbdTodos.setSelected(false);
+					cbxTipoUsuario.setSelectedItem("Usuario Personalizado");
 				}
 
 			}
@@ -760,6 +794,43 @@ public class registro_usuarios extends JFrame {
 		lblBusquedaDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblBusquedaDelEmpleado.setBounds(37, 50, 249, 32);
 		panelRegistro.add(lblBusquedaDelEmpleado);
+
+		lblFotoUsuario = new JLabel("");
+		lblFotoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFotoUsuario.setBackground(Color.LIGHT_GRAY);
+		lblFotoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblFotoUsuario.setBounds(340, 134, 84, 73);
+		panelRegistro.add(lblFotoUsuario);
+		final ImageIcon usu = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+		final ImageIcon iconousuario = new ImageIcon(usu.getImage().getScaledInstance(lblFotoUsuario.getWidth(),
+				lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoUsuario.setIcon(iconousuario);
+
+		txtDirecFoto = new JTextField();
+		txtDirecFoto.setEditable(false);
+		txtDirecFoto.setBounds(340, 115, 86, 12);
+		panelRegistro.add(txtDirecFoto);
+		txtDirecFoto.setColumns(10);
+
+		JButton btnVerfoto = new JButton("Ver");
+		btnVerfoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (txtDirecFoto.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+				} else {
+					visor_imagen visor = new visor_imagen();
+					ruta = txtDirecFoto.getText().toString();
+					visor.txtRutaImagen.setText(ruta);
+					visor.setVisible(true);
+					visor.setLocationRelativeTo(null);
+					imagen = new ImageIcon(ruta);
+					visor_imagen.lblImagen.setIcon(imagen);
+				}
+			}
+		});
+		btnVerfoto.setBackground(new Color(255, 255, 255));
+		btnVerfoto.setBounds(340, 209, 84, 12);
+		panelRegistro.add(btnVerfoto);
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 465, 550);
@@ -867,6 +938,35 @@ public class registro_usuarios extends JFrame {
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
 
+		lblNombreConexion = new JLabel("Credenciales del usuario actual :");
+		lblNombreConexion.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
+		lblNombreConexion.setBounds(28, 0, 272, 23);
+		contentPane.add(lblNombreConexion);
+
+		lblNombreCompleto = new JLabel("Nombre completo.");
+		lblNombreCompleto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreCompleto.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
+		lblNombreCompleto.setBounds(282, 0, 272, 23);
+		contentPane.add(lblNombreCompleto);
+
+		lblUsuario = new JLabel("Usuario.");
+		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuario.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
+		lblUsuario.setBounds(704, 0, 135, 23);
+		contentPane.add(lblUsuario);
+
+		lblPassword = new JLabel("Password");
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassword.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
+		lblPassword.setBounds(849, 0, 135, 23);
+		contentPane.add(lblPassword);
+
+		lblCredenciales = new JLabel("Credenciales : ");
+		lblCredenciales.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCredenciales.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 14));
+		lblCredenciales.setBounds(567, 0, 127, 23);
+		contentPane.add(lblCredenciales);
+
 	}
 
 	public void construirTabla() {
@@ -875,7 +975,8 @@ public class registro_usuarios extends JFrame {
 				"Permiso Contr. Clientes", "Permiso Compra", "Permiso Proveedor", "Permiso Inventario",
 				"Permiso Fact. Client", "Permiso Fact. Empl", "Permiso SAR", "Permiso Ingreso", "Permiso Producto",
 				"Permiso Servicio", "Permiso Venta", "Permiso Egreso", "Permiso Bonificacion", "Permiso Deduccion",
-				"Permiso Planilla", "Permiso Empresa", "Permiso Opciones", "Permiso Usuarios", "Permiso Acerca De" };
+				"Permiso Planilla", "Permiso Empresa", "Permiso Opciones", "Permiso Usuarios", "Permiso Acerca De",
+				"Foto" };
 		String informacion[][] = control_usuario.obtenerMatriz();
 		tabla = new JTable(informacion, titulos);
 		barra.setViewportView(tabla);
@@ -989,12 +1090,31 @@ public class registro_usuarios extends JFrame {
 					+ (String.valueOf(clase.getApellidos_empleado())));
 			txtIdentidad.setText(String.valueOf(clase.getIdentidad_empleado()));
 			txtCargo.setText(String.valueOf(clase.getNombre_cargo_empleado()));
+			txtDirecFoto.setText(String.valueOf(clase.getDireccion_foto_empleado()));
+			String foto = String.valueOf(clase.getDireccion_foto_empleado());
+
 			txtNombres.setForeground(Color.BLACK);
 			txtIdentidad.setForeground(Color.BLACK);
 			txtCargo.setForeground(Color.BLACK);
+
+			final ImageIcon icono = new ImageIcon(foto);
+			final ImageIcon iconofoto = new ImageIcon(icono.getImage().getScaledInstance(lblFotoUsuario.getWidth(),
+					lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+			lblFotoUsuario.setIcon(iconofoto);
+
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 
+		}
+	}
+
+	public void validarModificacionUsuarioLogeado() {
+		if (txtUsuario.getText().toString().trim().equals(lblUsuario)) {
+			txtUsuario.setEditable(false);
+			txtContraseña.setEditable(false);
+		} else {
+			txtUsuario.setEditable(true);
+			txtContraseña.setEditable(true);
 		}
 	}
 

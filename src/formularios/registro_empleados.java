@@ -389,6 +389,21 @@ public class registro_empleados extends JFrame {
 		txtCorreoEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		InputMap map8 = txtCorreoEmpleado.getInputMap(JComponent.WHEN_FOCUSED);
 		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCorreoEmpleado.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtCorreoEmpleado.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblTelefonos = new JLabel("7.Nº Celular :");
 		lblTelefonos.setBounds(39, 244, 83, 14);
@@ -506,7 +521,7 @@ public class registro_empleados extends JFrame {
 		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
-				if (txtNombreReferencia.getText().length() == 50)
+				if (txtNombreReferencia.getText().length() == 30)
 					ke.consume();
 			}
 

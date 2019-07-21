@@ -1223,4 +1223,5 @@ public class ventana_principal extends JFrame {
 		}
 
 	}
+	
 }
