@@ -23,6 +23,7 @@ import consultas.consultas_factura_cliente;
 import consultas.consultas_ingreso;
 import consultas.consultas_inventario;
 import consultas.consultas_venta;
+import formularios.login_usuario;
 import formularios.registro_facturas_clientes;
 import formularios.registro_ingresos;
 import formularios.registro_ventas;
@@ -123,8 +124,7 @@ public class control_venta implements ActionListener {
 							consultas_factura_cliente consulta = new consultas_factura_cliente();
 							registro_facturas_clientes formulario2 = new registro_facturas_clientes();
 							sar clase2 = new sar();
-							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2,
-									clase2);
+							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2, clase2);
 							formulario2.setVisible(true);
 							formulario2.setLocationRelativeTo(null);
 							formulario2.txtCliente.requestFocusInWindow();
@@ -139,7 +139,9 @@ public class control_venta implements ActionListener {
 							formulario2.btnActualizar.setVisible(false);
 							formulario2.btnAceptar.setVisible(false);
 							formulario2.btnBorrar.setVisible(false);
-							formulario.dispose();
+							formulario2.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+							formulario2.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
+							formulario.dispose();	
 
 						} else {
 							JOptionPane.showMessageDialog(null, "Error! objeto no registrado");

@@ -301,7 +301,6 @@ public class control_cargo implements ActionListener {
 			formularioCargo.txtHoraExtraCargo.setEditable(true);
 			formularioCargo.txtFuncionesCargo.setEditable(true);
 			formularioCargo.btnActualizarCargo.setVisible(false);
-			formularioCargo.pistas();
 			formularioCargo.construirTabla();
 			formularioCargo.txtFuncionesCargo.setBackground(Color.WHITE);
 		}
@@ -323,7 +322,6 @@ public class control_cargo implements ActionListener {
 			formularioCargo.btnMostrar.setVisible(true);
 			formularioCargo.btnAceptar.setVisible(false);
 			formularioCargo.txtFuncionesCargo.setBackground(Color.WHITE);
-			formularioCargo.pistas();
 			formularioCargo.construirTabla();
 		}
 

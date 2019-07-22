@@ -102,7 +102,7 @@ public class registro_contratos_clientes extends JFrame {
 
 	public registro_contratos_clientes() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -133,8 +133,8 @@ public class registro_contratos_clientes extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -432,7 +432,7 @@ public class registro_contratos_clientes extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		File ruta = new File("C:\\Sistema Administrativo");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {

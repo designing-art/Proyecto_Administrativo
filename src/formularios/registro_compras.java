@@ -105,7 +105,7 @@ public class registro_compras extends JFrame {
 
 	public registro_compras() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

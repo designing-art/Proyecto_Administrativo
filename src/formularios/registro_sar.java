@@ -108,7 +108,7 @@ public class registro_sar extends JFrame {
 
 	public registro_sar() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -361,6 +361,9 @@ public class registro_sar extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if (txtRangoInicial.getText().length() == 8)
+					ke.consume();
 			}
 
 			@Override
@@ -396,6 +399,9 @@ public class registro_sar extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtRangoFinal.getText().length() == 8)
 					ke.consume();
 			}
 

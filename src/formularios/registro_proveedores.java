@@ -102,7 +102,7 @@ public class registro_proveedores extends JFrame {
 
 	public registro_proveedores() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -257,11 +257,9 @@ public class registro_proveedores extends JFrame {
 			@Override
 			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				
+				if (txtNombresProveedor.getText().length() == 30)
 					ke.consume();
-				}
 			}
 
 			@Override
@@ -310,6 +308,28 @@ public class registro_proveedores extends JFrame {
 		panelRegistro.add(txtDireccionProveedor);
 		InputMap map51 = txtDireccionProveedor.getInputMap(JComponent.WHEN_FOCUSED);
 		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDireccionProveedor.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDireccionProveedor.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDireccionProveedor.getText().trim();
+		            txtDireccionProveedor.setText(str);
+		        }
+			}
+		});
 
 		JLabel lblCapasidad = new JLabel("4. Direcci\u00F3n :");
 		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -394,6 +414,21 @@ public class registro_proveedores extends JFrame {
 		panelRegistro.add(txtCorreoProveedor);
 		InputMap map22 = txtCorreoProveedor.getInputMap(JComponent.WHEN_FOCUSED);
 		map22.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCorreoProveedor.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtCorreoProveedor.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblFotografiaDel = new JLabel("8. Fotografia del proveedor :");
 		lblFotografiaDel.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

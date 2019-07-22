@@ -141,7 +141,7 @@ public class registro_horarios extends JFrame {
 
 		JLabel lblDescripcionHorario = new JLabel("5. Descripcion Horario :");
 		lblDescripcionHorario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDescripcionHorario.setBounds(30, 187, 150, 14);
+		lblDescripcionHorario.setBounds(30, 182, 150, 19);
 		panel.add(lblDescripcionHorario);
 
 		JLabel lblDiasDelHorario = new JLabel("3. Dias del horario :");
@@ -232,18 +232,62 @@ public class registro_horarios extends JFrame {
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(178, 182, 135, 44);
+		scrollPane_1.setBounds(30, 200, 283, 44);
 		panel.add(scrollPane_1);
 
 		txtDescripcionHorario = new JTextArea();
 		scrollPane_1.setViewportView(txtDescripcionHorario);
+		InputMap map5 = txtDescripcionHorario.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDescripcionHorario.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDescripcionHorario.getText().length() == 100)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDescripcionHorario.getText().trim();
+		            txtDescripcionHorario.setText(str);
+		        }
+			}
+		});
 
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(178, 242, 135, 44);
+		scrollPane_2.setBounds(30, 262, 283, 44);
 		panel.add(scrollPane_2);
 
 		txtObservacionHorario = new JTextArea();
 		scrollPane_2.setViewportView(txtObservacionHorario);
+		InputMap map6 = txtObservacionHorario.getInputMap(JComponent.WHEN_FOCUSED);
+		map6.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtObservacionHorario.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtObservacionHorario.getText().length() == 100)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtObservacionHorario.getText().trim();
+		            txtObservacionHorario.setText(str);
+		        }
+			}
+		});
 
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 341, 401);

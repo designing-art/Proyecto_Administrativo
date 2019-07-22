@@ -592,6 +592,10 @@ public class registro_empleados extends JFrame {
 		txtDireccionEmpleado.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
+				if (txtDireccionEmpleado.getText().length() == 100) {
+					ke.consume();
+				}
+					
 			}
 
 			@Override
@@ -607,6 +611,8 @@ public class registro_empleados extends JFrame {
 		        }
 			}
 		});
+		
+		
 
 		btnTomarFoto = new JButton("Tomar");
 		btnTomarFoto.addActionListener(new ActionListener() {
@@ -903,7 +909,6 @@ public class registro_empleados extends JFrame {
 				formulario.txtNombreCargo.requestFocusInWindow();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
-				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.btnBorrarCargo.setVisible(false);
 				formulario.btnGuardarCargo.setVisible(true);
@@ -933,7 +938,6 @@ public class registro_empleados extends JFrame {
 				formulario.txtDescripcionHorario.requestFocusInWindow();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
-				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.btnBorrarHorario.setVisible(false);
 				formulario.btnGuardarHorario.setVisible(true);
@@ -963,7 +967,6 @@ public class registro_empleados extends JFrame {
 				formulario.txtBusquedaContratosEmpleados.requestFocusInWindow();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
-				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.btnBorrarContrato.setVisible(false);
 				formulario.btnGuardarContrato.setVisible(true);
@@ -1142,7 +1145,7 @@ public class registro_empleados extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		File ruta = new File("C:\\Sistema Administrativo");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -1158,7 +1161,7 @@ public class registro_empleados extends JFrame {
 
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
+			camara.exec("C:\\\\Sistema Administrativo\\portable-webcam.exe");
 
 		} catch (IOException e) {
 			e.printStackTrace();

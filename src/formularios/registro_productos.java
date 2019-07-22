@@ -113,7 +113,7 @@ public class registro_productos extends JFrame {
 
 	public registro_productos() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -271,6 +271,22 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(txtDispositivo);
 		InputMap map1 = txtDispositivo.getInputMap(JComponent.WHEN_FOCUSED);
 		map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDispositivo.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				
+				if (txtDispositivo.getText().length() == 20)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtMarca = new JTextField();
 		txtMarca.setColumns(10);
@@ -278,6 +294,22 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(txtMarca);
 		InputMap map2 = txtMarca.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtMarca.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				
+				if (txtMarca.getText().length() == 20)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtCapasidad = new JTextField();
 		txtCapasidad.setColumns(10);
@@ -285,6 +317,22 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(txtCapasidad);
 		InputMap map4 = txtCapasidad.getInputMap(JComponent.WHEN_FOCUSED);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCapasidad.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				
+				if (txtCapasidad.getText().length() == 20)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblCapasidad = new JLabel("4. Capacidad :");
 		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -302,15 +350,12 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(txtColor);
 		InputMap map3 = txtColor.getInputMap(JComponent.WHEN_FOCUSED);
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtColor.addKeyListener(new KeyListener() {
+		txtCapasidad.addKeyListener(new KeyListener() {
 			@Override
-			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				
+				if (txtCapasidad.getText().length() == 20)
 					ke.consume();
-				}
 			}
 
 			@Override
@@ -341,6 +386,8 @@ public class registro_productos extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				if (txtPrecio.getText().length() == 8)
+					ke.consume();
 			}
 
 			@Override
@@ -369,6 +416,8 @@ public class registro_productos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+				if (txtPrecio.getText().length() == 8)
 					ke.consume();
 			}
 

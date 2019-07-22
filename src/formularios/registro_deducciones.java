@@ -447,6 +447,8 @@ public class registro_deducciones extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				if (txtCantidadDeduccion.getText().length() == 8)
+					ke.consume();
 			}
 
 			@Override
@@ -471,6 +473,28 @@ public class registro_deducciones extends JFrame {
 		InputMap map45 = txtObservacionDeduccion.getInputMap(JComponent.WHEN_FOCUSED);
 		map45.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		scrollPane_1.setViewportView(txtObservacionDeduccion);
+		txtObservacionDeduccion.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtObservacionDeduccion.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtObservacionDeduccion.getText().trim();
+		            txtObservacionDeduccion.setText(str);
+		        }
+			}
+		});
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

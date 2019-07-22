@@ -129,7 +129,7 @@ public class registro_ventas extends JFrame {
 
 	public registro_ventas() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 1200, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

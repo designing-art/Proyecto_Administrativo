@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,12 +39,15 @@ import java.util.Date;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
 import controles.control_factura_empresa;
+import utilidades.visor_imagen;
+
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
@@ -107,7 +112,7 @@ public class registro_facturas_empresa extends JFrame {
 
 	public registro_facturas_empresa() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 1016, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -217,6 +222,28 @@ public class registro_facturas_empresa extends JFrame {
 
 		txtDescripcion = new JTextArea();
 		scrollPane.setViewportView(txtDescripcion);
+		InputMap map5 = txtDescripcion.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDescripcion.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDescripcion.getText().length() == 100)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDescripcion.getText().trim();
+		            txtDescripcion.setText(str);
+		        }
+			}
+		});
 
 		JLabel lblCompra = new JLabel("2. Compra :");
 		lblCompra.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -238,6 +265,28 @@ public class registro_facturas_empresa extends JFrame {
 		txtPrecio.setColumns(10);
 		txtPrecio.setBounds(129, 68, 178, 23);
 		panel.add(txtPrecio);
+		InputMap map2 = txtPrecio.getInputMap(JComponent.WHEN_FOCUSED);
+		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtPrecio.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtPrecio.getText().length() == 8)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblDescripcionDe = new JLabel("5. Descripcion de la compra :");
 		lblDescripcionDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -266,12 +315,57 @@ public class registro_facturas_empresa extends JFrame {
 		txtCantidad.setColumns(10);
 		txtCantidad.setBounds(130, 98, 178, 23);
 		panel.add(txtCantidad);
+		InputMap map21 = txtCantidad.getInputMap(JComponent.WHEN_FOCUSED);
+		map21.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCantidad.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtCantidad.getText().length() == 6)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtCompra = new JTextField();
 		txtCompra.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCompra.setColumns(10);
 		txtCompra.setBounds(129, 41, 178, 23);
 		panel.add(txtCompra);
+		InputMap map3 = txtCompra.getInputMap(JComponent.WHEN_FOCUSED);
+		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCompra.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					ke.consume();
+				}
+				if (txtCompra.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {	
+			}
+		});
 
 		JLabel lblImagenDe = new JLabel("6. Imagen de la factura de compra.");
 		lblImagenDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -279,11 +373,21 @@ public class registro_facturas_empresa extends JFrame {
 		panel.add(lblImagenDe);
 
 		JButton btnSubir = new JButton("Subir");
+		btnSubir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selecionarFoto();
+			}
+		});
 		btnSubir.setBackground(new Color(250, 128, 114));
 		btnSubir.setBounds(57, 243, 70, 23);
 		panel.add(btnSubir);
 
 		JButton btnVerFoto = new JButton("Ver");
+		btnVerFoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verFotoEmpleado();
+			}
+		});
 		btnVerFoto.setBackground(Color.WHITE);
 		btnVerFoto.setBounds(132, 243, 70, 23);
 		panel.add(btnVerFoto);
@@ -489,6 +593,38 @@ public class registro_facturas_empresa extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("dd '/' MMMMM '/' yyyy 'a las' HH:mm:ss '" + ampm + "'");
 		date = cal.getTime();
 		return df.format(date);
+	}
+	
+	public void selecionarFoto() {
+		JFileChooser archivo = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
+				"jpeg");
+		archivo.addChoosableFileFilter(filtro);
+		archivo.setDialogTitle("Abrir Archivo");
+		File ruta = new File("C:\\Sistema Administrativo");
+		archivo.setCurrentDirectory(ruta);
+		int ventana = archivo.showOpenDialog(null);
+		if (ventana == JFileChooser.APPROVE_OPTION) {
+			File file = archivo.getSelectedFile();
+			txtFoto.setText(String.valueOf(file));
+			Image foto = getToolkit().getImage(txtFoto.getText());
+			foto = foto.getScaledInstance(lblFactura.getHeight(), lblFactura.getWidth(), Image.SCALE_DEFAULT);
+			lblFactura.setIcon(new ImageIcon(foto));
+		}
+	}
+	
+	public void verFotoEmpleado() {
+		if (txtFoto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
+		} else {
+			visor_imagen visor = new visor_imagen();
+			ruta = txtFoto.getText().toString();
+			visor.txtRutaImagen.setText(ruta);
+			visor.setVisible(true);
+			visor.setLocationRelativeTo(null);
+			imagen = new ImageIcon(ruta);
+			visor_imagen.lblImagen.setIcon(imagen);
+		}
 	}
 
 	public void consultarEmpresa() {

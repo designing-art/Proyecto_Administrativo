@@ -47,9 +47,12 @@ public class control_sar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtFormatoSar.getText().isEmpty() || formulario.txtCaiSar.getText().isEmpty()
-					|| formulario.txtRangoFinal.getText().isEmpty() || formulario.txtRangoFinal.getText().isEmpty()
-					|| formulario.txtD.getText().isEmpty()) {
+			if (formulario.txtFormatoSar.getText().isEmpty()
+					|| formulario.txtCaiSar.getText().isEmpty()
+					|| formulario.txtRangoFinal.getText().isEmpty() 
+					|| formulario.txtRangoFinal.getText().isEmpty()
+					|| formulario.txtD.getText().isEmpty()
+					|| formulario.editor.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el SAR!");
 			} else {
 
@@ -95,7 +98,8 @@ public class control_sar implements ActionListener {
 		if (e.getSource() == formulario.btnActualizar) {
 			if (formulario.txtFormatoSar.getText().isEmpty() || formulario.txtCaiSar.getText().isEmpty()
 					|| formulario.txtRangoFinal.getText().isEmpty() || formulario.txtRangoFinal.getText().isEmpty()
-					|| formulario.txtD.getText().isEmpty()) {
+					|| formulario.txtD.getText().isEmpty()
+					|| formulario.editor.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el SAR!");
 			} else {
 				clase.setId_sar(Integer.parseInt(formulario.txtCodigoSar.getText().toString()));

@@ -25,6 +25,7 @@ import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_empleado;
 import consultas.consultas_usuario;
+import formularios.login_usuario;
 import formularios.registro_empleados;
 import formularios.registro_usuarios;
 
@@ -103,7 +104,8 @@ public class control_empleado implements ActionListener {
 						Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 								+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-						Matcher mather = pattern.matcher(formularioEmpleado.txtCorreoEmpleado.getText().toString().trim());
+						Matcher mather = pattern
+								.matcher(formularioEmpleado.txtCorreoEmpleado.getText().toString().trim());
 						if (mather.find() == false) {
 							JOptionPane.showMessageDialog(null, "El email ingresado es inválido.");
 						} else {
@@ -248,9 +250,12 @@ public class control_empleado implements ActionListener {
 				JOptionPane.showMessageDialog(null,
 						"Porfavor llene los campos para actualizar los datos del empleado!");
 			} else {
-				if (formularioEmpleado.txtIdentidadEmpleado.getText().toString().equals(identidad)) {
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
-							"Alerta!", JOptionPane.INFORMATION_MESSAGE);
+				if (login_usuario.tipoUsuario.equals("Usuario Normal")
+						|| login_usuario.tipoUsuario.equals("Usuario Personalizado")) {
+					JOptionPane.showMessageDialog(null,
+							"Alerta! No tiene permisos para cambiar o modificar.\n"
+									+ "sus credenciales indican que NO es un administrador.\n"
+									+ "Alerta! el intento o robo de credenciales en un delito.");
 				} else {
 					claseEmpleado.setId_empleado(
 							Integer.parseInt(formularioEmpleado.txtCodigoEmpleado.getText().toString()));
@@ -345,53 +350,62 @@ public class control_empleado implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formularioEmpleado.tablaEmpleados.getSelectedRow();
-					String codigo = formularioEmpleado.tablaEmpleados.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM empleados WHERE id_empleado=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Datos del Empleado Eliminados");
-					limpiar();
-					formularioEmpleado.construirTablaEmpleados();
-					formularioEmpleado.btnActualizarEmpleado.setVisible(false);
-					formularioEmpleado.btnCalcularEdad.setEnabled(false);
-					formularioEmpleado.txtCodigoEmpleado.setEditable(false);
-					formularioEmpleado.txtCodigoEmpleado.setText("");
-					formularioEmpleado.txtNombresEmpleado.setEditable(false);
-					formularioEmpleado.txtApellidosEmpleado.setEditable(false);
-					formularioEmpleado.txtIdentidadEmpleado.setEnabled(false);
-					formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
-					registro_empleados.txtEdadEmpleado.setEditable(false);
-					formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
-					formularioEmpleado.txtCorreoEmpleado.setEditable(false);
-					formularioEmpleado.txtDireccionEmpleado.setEditable(false);
-					formularioEmpleado.txtDireccionEmpleado.setBackground(Color.LIGHT_GRAY);
-					formularioEmpleado.txtDireccionFoto.setEditable(false);
-					formularioEmpleado.txtDireccionFoto.setText("");
-					formularioEmpleado.txtNombreReferencia.setEditable(false);
-					formularioEmpleado.txtTelefonoReferencia.setEditable(false);
-					formularioEmpleado.dateFechaNacimiento.setEnabled(false);
-					formularioEmpleado.dateFechaRegistro.setEnabled(false);
-					formularioEmpleado.dateFechaLabores.setEnabled(false);
-					formularioEmpleado.cbxUsuarioEmpleado.setEditable(false);
-					formularioEmpleado.btnTomarFoto.setEnabled(false);
-					formularioEmpleado.btnSubirFoto.setEnabled(false);
-					formularioEmpleado.btnVerFotoEmpleado.setEnabled(false);
-					formularioEmpleado.btnGuardarEmpleado.setVisible(false);
+					if (login_usuario.tipoUsuario.equals("Usuario Normal")
+							|| login_usuario.tipoUsuario.equals("Usuario Personalizado")) {
+						JOptionPane.showMessageDialog(null,
+								"Alerta! No tiene permisos para cambiar o modificar.\n"
+										+ "sus credenciales indican que NO es un administrador.\n"
+										+ "Alerta! el intento o robo de credenciales en un delito.");
+					} else {
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formularioEmpleado.tablaEmpleados.getSelectedRow();
+						String codigo = formularioEmpleado.tablaEmpleados.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM empleados WHERE id_empleado=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Datos del Empleado Eliminados");
+						limpiar();
+						formularioEmpleado.construirTablaEmpleados();
+						formularioEmpleado.btnActualizarEmpleado.setVisible(false);
+						formularioEmpleado.btnCalcularEdad.setEnabled(false);
+						formularioEmpleado.txtCodigoEmpleado.setEditable(false);
+						formularioEmpleado.txtCodigoEmpleado.setText("");
+						formularioEmpleado.txtNombresEmpleado.setEditable(false);
+						formularioEmpleado.txtApellidosEmpleado.setEditable(false);
+						formularioEmpleado.txtIdentidadEmpleado.setEnabled(false);
+						formularioEmpleado.cbxGeneroEmpleado.setEditable(false);
+						registro_empleados.txtEdadEmpleado.setEditable(false);
+						formularioEmpleado.txtTelefonoEmpleado.setEditable(false);
+						formularioEmpleado.txtCorreoEmpleado.setEditable(false);
+						formularioEmpleado.txtDireccionEmpleado.setEditable(false);
+						formularioEmpleado.txtDireccionEmpleado.setBackground(Color.LIGHT_GRAY);
+						formularioEmpleado.txtDireccionFoto.setEditable(false);
+						formularioEmpleado.txtDireccionFoto.setText("");
+						formularioEmpleado.txtNombreReferencia.setEditable(false);
+						formularioEmpleado.txtTelefonoReferencia.setEditable(false);
+						formularioEmpleado.dateFechaNacimiento.setEnabled(false);
+						formularioEmpleado.dateFechaRegistro.setEnabled(false);
+						formularioEmpleado.dateFechaLabores.setEnabled(false);
+						formularioEmpleado.cbxUsuarioEmpleado.setEditable(false);
+						formularioEmpleado.btnTomarFoto.setEnabled(false);
+						formularioEmpleado.btnSubirFoto.setEnabled(false);
+						formularioEmpleado.btnVerFotoEmpleado.setEnabled(false);
+						formularioEmpleado.btnGuardarEmpleado.setVisible(false);
 
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(
-							iconoContrato.getImage().getScaledInstance(formularioEmpleado.lblFotoEmpleado.getWidth(),
-									formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
-					formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/material/usuario.png"));
+						final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+								formularioEmpleado.lblFotoEmpleado.getWidth(),
+								formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
+						formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
 
+					}
 				}
 			} catch (SQLException ex) {
 				JOptionPane.showMessageDialog(null, "Error al Eliminar Datos del Empleado");
 				System.out.println(ex.toString());
 			}
+
 		}
 
 		/* Cancelar */

@@ -70,7 +70,7 @@ public class historial_planillas extends JFrame {
 
 	public historial_planillas() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 486, 305);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -292,4 +292,5 @@ public class historial_planillas extends JFrame {
 		}
 
 	}
+
 }

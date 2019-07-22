@@ -146,7 +146,7 @@ public class registro_usuarios extends JFrame {
 
 	public registro_usuarios() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 1016, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -655,10 +655,12 @@ public class registro_usuarios extends JFrame {
 		txtContraseña.setColumns(10);
 		txtContraseña.setBounds(129, 447, 147, 23);
 		panelRegistro.add(txtContraseña);
+		InputMap map51 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
+		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtContraseña.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtUsuario.getText().length() == 15)
+				if (txtContraseña.getText().toString().length() == 15)
 					ke.consume();
 			}
 

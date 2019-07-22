@@ -159,6 +159,9 @@ public class ventana_principal extends JFrame {
 	public static JPanel panelOpciones;
 	public static JPanel panelInventario;
 
+	public static String sardato = null;
+	public static String productodato = null;
+
 	public static String todo;
 	public static String empleado;
 	public static String cargoe;
@@ -230,29 +233,24 @@ public class ventana_principal extends JFrame {
 				formulario.cargarPlanillasCreadas();
 				dispose();
 				/*
-				planilla clase = new planilla();
-				consultas_planilla consulta = new consultas_planilla();
-				registro_planillas formulario = new registro_planillas();
-				control_planilla control = new control_planilla(clase, consulta, formulario);
-				formulario.setVisible(true);
-				formulario.setLocationRelativeTo(null);
-				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
-				formulario.establecerFechaRegistro();
-				formulario.pistas();
-				formulario.btnBorrarPlanilla.setVisible(false);
-				formulario.btnGuardar.setVisible(true);
-				formulario.btnNuevo.setVisible(true);
-				formulario.btnActualizar.setVisible(false);
-				formulario.btnActualizarDatosPlanilla.setVisible(true);
-				formulario.btnVerPlanilla.setVisible(true);
-				formulario.btnAceptar.setVisible(false);
-				Timer time = new Timer();
-				time.schedule(formulario.tarea, 0, 1000);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				dispose();
-				*/
+				 * planilla clase = new planilla(); consultas_planilla consulta = new
+				 * consultas_planilla(); registro_planillas formulario = new
+				 * registro_planillas(); control_planilla control = new control_planilla(clase,
+				 * consulta, formulario); formulario.setVisible(true);
+				 * formulario.setLocationRelativeTo(null);
+				 * registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				 * formulario.construirTabla(); formulario.obtenerUltimoId();
+				 * formulario.establecerFechaRegistro(); formulario.pistas();
+				 * formulario.btnBorrarPlanilla.setVisible(false);
+				 * formulario.btnGuardar.setVisible(true); formulario.btnNuevo.setVisible(true);
+				 * formulario.btnActualizar.setVisible(false);
+				 * formulario.btnActualizarDatosPlanilla.setVisible(true);
+				 * formulario.btnVerPlanilla.setVisible(true);
+				 * formulario.btnAceptar.setVisible(false); Timer time = new Timer();
+				 * time.schedule(formulario.tarea, 0, 1000);
+				 * formulario.setTitle("Sesión iniciada por: "+login_usuario.
+				 * nombreCompletoUsuario); dispose();
+				 */
 			}
 		});
 
@@ -282,7 +280,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
 				formulario.btnAsignar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -313,7 +311,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarEmpleado.setVisible(false);
 				formulario.btnCancelarEmpleado.setVisible(false);
 				formulario.btnBorrarEmpleado.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);	
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -336,7 +334,6 @@ public class ventana_principal extends JFrame {
 				formulario.txtNombreCargo.requestFocusInWindow();
 				formulario.construirTabla();
 				formulario.obtenerUltimoId();
-				formulario.pistas();
 				formulario.consultarEmpresa();
 				formulario.btnBorrarCargo.setVisible(false);
 				formulario.btnGuardarCargo.setVisible(true);
@@ -346,7 +343,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnAsignar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -379,7 +376,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosBonificacion.setVisible(true);
 				formulario.btnVerBonificacion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -412,7 +409,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosDeduccion.setVisible(true);
 				formulario.btnVerDeduccion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -445,7 +442,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnMostrarHorario.setVisible(true);
 				formulario.btnAceptarHorario.setVisible(false);
 				formulario.btnAsignar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -493,7 +490,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -523,7 +520,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarContrato.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarContrato.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -554,7 +551,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarProducto.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrarProducto.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 
 			}
@@ -569,25 +566,35 @@ public class ventana_principal extends JFrame {
 		btnServicio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				servicio clase = new servicio();
-				consultas_servicio consulta = new consultas_servicio();
-				registro_servicios formulario = new registro_servicios();
-				control_servicio control = new control_servicio(clase, consulta, formulario);
-				formulario.setVisible(true);
-				formulario.setLocationRelativeTo(null);
-				formulario.txtServicio.requestFocusInWindow();
-				formulario.obtenerUltimoId();
-				formulario.pistas();
-				formulario.consultarEmpresa();
-				formulario.construirTabla();
-				formulario.btnGuardar.setVisible(true);
-				formulario.btnNuevo.setVisible(true);
-				formulario.btnActualizar.setVisible(false);
-				formulario.btnAceptar.setVisible(false);
-				formulario.btnBorrar.setVisible(false);
-				control.consultarProductos();
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				dispose();
+				consultarProductos();
+				if (productodato == null) {
+					JOptionPane.showMessageDialog(null,
+							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+									+ "         debe hacer algunos ajustes.\n" + "         Ingrese a:\n"
+									+ "                Productos\n" + "          y agrege nuevos productos al inventario!\n"
+									+ "            ******* Buen Dia! *******");
+
+				} else {
+					servicio clase = new servicio();
+					consultas_servicio consulta = new consultas_servicio();
+					registro_servicios formulario = new registro_servicios();
+					control_servicio control = new control_servicio(clase, consulta, formulario);
+					formulario.setVisible(true);
+					formulario.setLocationRelativeTo(null);
+					formulario.txtServicio.requestFocusInWindow();
+					formulario.obtenerUltimoId();
+					formulario.pistas();
+					formulario.consultarEmpresa();
+					formulario.construirTabla();
+					formulario.btnGuardar.setVisible(true);
+					formulario.btnNuevo.setVisible(true);
+					formulario.btnActualizar.setVisible(false);
+					formulario.btnAceptar.setVisible(false);
+					formulario.btnBorrar.setVisible(false);
+					control.consultarProductos();
+					formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+					dispose();
+				}
 			}
 		});
 
@@ -616,7 +623,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -655,7 +662,7 @@ public class ventana_principal extends JFrame {
 				formulario2.txtBusquedaCargos.requestFocusInWindow();
 				formulario2.consultarEmpresa();
 				formulario2.construirTabla();
-				formulario2.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario2.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -686,7 +693,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatos.setVisible(true);
 				formulario.btnMostrar.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -731,7 +738,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				formulario.txtExistencia.setText("0");
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -768,7 +775,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -804,7 +811,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				formulario.txtExistencia.setText("0");
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -874,22 +881,22 @@ public class ventana_principal extends JFrame {
 		lblDatos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblDatos.setBounds(16, 31, 157, 14);
 		panel_5.add(lblDatos);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBackground(new Color(0, 191, 255));
 		panel.setBounds(145, 23, 119, 125);
 		panel_5.add(panel);
 		panel.setLayout(null);
-		
-				labelfotousuario = new JLabel();
-				labelfotousuario.setBounds(10, 11, 99, 103);
-				panel.add(labelfotousuario);
-				labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
-				labelfotousuario.setForeground(Color.LIGHT_GRAY);
-				final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
-						.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
-				labelfotousuario.setIcon(iconousuario);
+
+		labelfotousuario = new JLabel();
+		labelfotousuario.setBounds(10, 11, 99, 103);
+		panel.add(labelfotousuario);
+		labelfotousuario.setHorizontalAlignment(SwingConstants.CENTER);
+		labelfotousuario.setForeground(Color.LIGHT_GRAY);
+		final ImageIcon iconousuario = new ImageIcon(logousuario.getImage()
+				.getScaledInstance(labelfotousuario.getWidth(), labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+		labelfotousuario.setIcon(iconousuario);
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -928,21 +935,21 @@ public class ventana_principal extends JFrame {
 		btnInformacionEmpresa.setBackground(Color.WHITE);
 		btnInformacionEmpresa.setForeground(Color.BLACK);
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
-		
+
 		panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(0, 191, 255));
 		panel_1.setBounds(10, 32, 252, 223);
 		panel_7.add(panel_1);
-		
-				lbl_logo_empresa_principal = new JLabel();
-				lbl_logo_empresa_principal.setBounds(10, 11, 232, 201);
-				panel_1.add(lbl_logo_empresa_principal);
-				lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
-				final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
-						lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
-				lbl_logo_empresa_principal.setIcon(icono);
+
+		lbl_logo_empresa_principal = new JLabel();
+		lbl_logo_empresa_principal.setBounds(10, 11, 232, 201);
+		panel_1.add(lbl_logo_empresa_principal);
+		lbl_logo_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
+		final ImageIcon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl_logo_empresa_principal.getWidth(),
+				lbl_logo_empresa_principal.getHeight(), Image.SCALE_DEFAULT));
+		lbl_logo_empresa_principal.setIcon(icono);
 		btnInformacionEmpresa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -956,9 +963,9 @@ public class ventana_principal extends JFrame {
 				formulario.pistas();
 				nombre = lbl_nombre_empresa_principal.getText().toString();
 				registro_empresa.txtNombre_Empresa.setText(nombre);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 			}
 		});
 
@@ -996,28 +1003,49 @@ public class ventana_principal extends JFrame {
 		btnFacturasClientes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				factura_cliente clase = new factura_cliente();
-				consultas_factura_cliente consulta = new consultas_factura_cliente();
-				registro_facturas_clientes formulario = new registro_facturas_clientes();
-				sar clase2 = new sar();
-				control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario, clase2);
-				formulario.setVisible(true);
-				formulario.setLocationRelativeTo(null);
-				formulario.txtCliente.requestFocusInWindow();
-				formulario.obtenerUltimoId();
-				formulario.pistas();
-				formulario.consultarEmpresa();
-				formulario.construirTabla();
-				formulario.establecerDatosEmpresa();
-				formulario.ObtenerUltimosDatosSar();
-				formulario.btnGuardar.setVisible(true);
-				formulario.btnNuevo.setVisible(true);
-				formulario.btnActualizar.setVisible(false);
-				formulario.btnAceptar.setVisible(false);
-				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				dispose();
-				
+				consultarEmpresa();
+				if (nombre == null) {
+					JOptionPane.showMessageDialog(null,
+							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+									+ "         debe hacer algunos ajustes.\n" + "         Ingrese a:\n"
+									+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
+									+ "            ******* Buen Dia! *******");
+
+				} else {
+					consultarSAR();
+					if (sardato == null) {
+						JOptionPane.showMessageDialog(null,
+								"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+										+ "         debe hacer algunos ajustes.\n" + "         Ingrese a:\n"
+										+ "                SAR\n" + "          y agrege un nuevo rango SAR!\n"
+										+ "            ******* Buen Dia! *******");
+
+					} else {
+						factura_cliente clase = new factura_cliente();
+						consultas_factura_cliente consulta = new consultas_factura_cliente();
+						registro_facturas_clientes formulario = new registro_facturas_clientes();
+						sar clase2 = new sar();
+						control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario,
+								clase2);
+						formulario.setVisible(true);
+						formulario.setLocationRelativeTo(null);
+						formulario.txtCliente.requestFocusInWindow();
+						formulario.obtenerUltimoId();
+						formulario.pistas();
+						formulario.consultarEmpresa();
+						formulario.construirTabla();
+						formulario.establecerDatosEmpresa();
+						formulario.ObtenerUltimosDatosSar();
+						formulario.btnGuardar.setVisible(true);
+						formulario.btnNuevo.setVisible(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnAceptar.setVisible(false);
+						formulario.btnBorrar.setVisible(false);
+						formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+						formulario.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
+						dispose();
+					}
+				}
 			}
 		});
 
@@ -1046,7 +1074,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1077,7 +1105,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 
 			}
@@ -1113,7 +1141,7 @@ public class ventana_principal extends JFrame {
 				formulario.mostrarConfiguracion();
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1151,7 +1179,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
-				formulario.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1182,7 +1210,7 @@ public class ventana_principal extends JFrame {
 				acerca_de info = new acerca_de();
 				info.setLocationRelativeTo(null);
 				info.setVisible(true);
-				info.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				info.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 			}
 		});
 
@@ -1222,7 +1250,6 @@ public class ventana_principal extends JFrame {
 	};
 	private JPanel panel_1;
 
-
 	public static String getFecha() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -1254,6 +1281,46 @@ public class ventana_principal extends JFrame {
 								+ "         podria hacer algunos ajustes.\n" + "         Ingrese a:\n"
 								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
 								+ "            ******* Buen Dia! *******");
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+	public void consultarSAR() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT factura_actual_sar FROM sar");
+			if (rs.next()) {
+				sardato = (rs.getString("factura_actual_sar"));
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+
+	public void consultarProductos() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM productos");
+			if (rs.next()) {
+				productodato = (rs.getString("existencia_producto"));
 			}
 			rs.close();
 			estatuto.close();

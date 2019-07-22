@@ -450,6 +450,8 @@ public class registro_bonificaciones extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				if (txtCantidadBonificacion.getText().length() == 8)
+					ke.consume();
 			}
 
 			@Override
@@ -474,6 +476,28 @@ public class registro_bonificaciones extends JFrame {
 		InputMap map45 = txtObservacionBonificacion.getInputMap(JComponent.WHEN_FOCUSED);
 		map45.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		scrollPane_1.setViewportView(txtObservacionBonificacion);
+		txtObservacionBonificacion.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtObservacionBonificacion.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtObservacionBonificacion.getText().trim();
+		            txtObservacionBonificacion.setText(str);
+		        }
+			}
+		});
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

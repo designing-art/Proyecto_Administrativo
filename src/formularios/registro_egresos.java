@@ -88,7 +88,7 @@ public class registro_egresos extends JFrame {
 
 	public registro_egresos() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 581);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -370,6 +370,23 @@ public class registro_egresos extends JFrame {
 		txtEgreso.setColumns(10);
 		txtEgreso.setBounds(137, 84, 177, 19);
 		panelRegistro.add(txtEgreso);
+		InputMap map22 = txtEgreso.getInputMap(JComponent.WHEN_FOCUSED);
+		map22.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtEgreso.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtEgreso.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblCantidad = new JLabel("3. Cantidad :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -381,6 +398,26 @@ public class registro_egresos extends JFrame {
 		txtCantidad.setColumns(10);
 		txtCantidad.setBounds(215, 113, 99, 19);
 		panelRegistro.add(txtCantidad);
+		InputMap map21 = txtCantidad.getInputMap(JComponent.WHEN_FOCUSED);
+		map21.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCantidad.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+				if (txtCantidad.getText().length() == 8)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblDescripcion = new JLabel("4. Descripcion :");
 		lblDescripcion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -393,6 +430,30 @@ public class registro_egresos extends JFrame {
 
 		txtDescripcion = new JTextArea();
 		scrollPane.setViewportView(txtDescripcion);
+		InputMap map90 = txtDescripcion.getInputMap(JComponent.WHEN_FOCUSED);
+		map90.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDescripcion.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDescripcion.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDescripcion.getText().trim();
+		            txtDescripcion.setText(str);
+		        }
+			}
+		});
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

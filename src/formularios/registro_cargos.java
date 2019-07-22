@@ -173,6 +173,9 @@ public class registro_cargos extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if (txtSueldoCargo.getText().length() == 8)
+					ke.consume();
 			}
 
 			@Override
@@ -197,6 +200,9 @@ public class registro_cargos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtSueldoCargo.getText().length() == 6)
 					ke.consume();
 			}
 
@@ -267,6 +273,8 @@ public class registro_cargos extends JFrame {
 		txtFuncionesCargo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
+				if (txtFuncionesCargo.getText().length() == 100)
+					ke.consume();
 			}
 
 			@Override
@@ -522,15 +530,7 @@ public class registro_cargos extends JFrame {
 		filtroCodigo = txtBusquedaCargos.getText();
 		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0, 1, 2, 3, 4, 5));
 	}
-
-	public void pistas() {
-		pista = new PlaceHolder(txtBusquedaCargos, "Escriba para buscar.");
-		pista = new PlaceHolder(txtNombreCargo, "Ingrese el nombre del cargo.");
-		pista = new PlaceHolder(txtSueldoCargo, "Digite el sueldo.");
-		pista = new PlaceHolder(txtHoraExtraCargo, "Digite precio hora extra.");
-		pista = new PlaceHolder(txtFuncionesCargo, "Ingrese las Funciones.");
-	}
-
+	
 	public void obtenerUltimoId() {
 		String ultimoValor = null;
 		int valor;

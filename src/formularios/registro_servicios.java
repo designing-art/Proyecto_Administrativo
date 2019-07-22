@@ -102,7 +102,7 @@ public class registro_servicios extends JFrame {
 
 	public registro_servicios() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -219,6 +219,27 @@ public class registro_servicios extends JFrame {
 		panelRegistro.add(txtServicio);
 		InputMap map1 = txtServicio.getInputMap(JComponent.WHEN_FOCUSED);
 		map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtServicio.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					ke.consume();
+				}
+				if (txtServicio.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {	
+			}
+		});
 
 		txtTiempo = new JTextField();
 		txtTiempo.setColumns(10);
@@ -226,6 +247,21 @@ public class registro_servicios extends JFrame {
 		panelRegistro.add(txtTiempo);
 		InputMap map2 = txtTiempo.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtTiempo.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtTiempo.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {	
+			}
+		});
 
 		JLabel lblCapasidad = new JLabel("4. Descripci\u00F3n :");
 		lblCapasidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -250,6 +286,9 @@ public class registro_servicios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtPrecio.getText().length() == 8)
 					ke.consume();
 			}
 
@@ -279,6 +318,30 @@ public class registro_servicios extends JFrame {
 		txtDescripcion = new JTextArea();
 		txtDescripcion.setFont(new Font("Dialog", Font.PLAIN, 12));
 		scrollPane.setViewportView(txtDescripcion);
+		InputMap map90 = txtDescripcion.getInputMap(JComponent.WHEN_FOCUSED);
+		map90.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDescripcion.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDescripcion.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDescripcion.getText().trim();
+		            txtDescripcion.setText(str);
+		        }
+			}
+		});
 
 		cbxProductos = new JComboBox<String>();
 		cbxProductos.setModel(new DefaultComboBoxModel<String>(new String[] { "Ninguno" }));

@@ -95,7 +95,7 @@ public class registro_empresa extends JFrame {
 
 	public registro_empresa() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 808, 561);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -323,15 +323,6 @@ public class registro_empresa extends JFrame {
 		lblNombre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		txtNombreEmpresa = new JTextField();
-		txtNombreEmpresa.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent evt) {
-				String Caracteres = txtNombreEmpresa.getText();
-				if (Caracteres.length() >= 50) {
-					evt.consume();
-				}
-			}
-		});
 		txtNombreEmpresa.setBounds(93, 33, 210, 20);
 		panel_1.add(txtNombreEmpresa);
 		txtNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -339,6 +330,27 @@ public class registro_empresa extends JFrame {
 		txtNombreEmpresa.setColumns(10);
 		InputMap map10 = txtNombreEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map10.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtNombreEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					ke.consume();
+				}
+				if (txtNombreEmpresa.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {	
+			}
+		});
 
 		JLabel lblDatosDeLa = new JLabel("Datos de la empresa :");
 		lblDatosDeLa.setBounds(29, 0, 175, 31);
@@ -359,13 +371,26 @@ public class registro_empresa extends JFrame {
 		scrollPane.setViewportView(txtDireccionEmpresa);
 		InputMap map11 = txtDireccionEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map11.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtDireccionEmpresa.addKeyListener(new KeyAdapter() {
+		txtDireccionEmpresa.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent evt) {
-				String Caracteres = txtDireccionEmpresa.getText();
-				if (Caracteres.length() >= 50) {
-					evt.consume();
+			public void keyTyped(KeyEvent ke) {
+				if (txtDireccionEmpresa.getText().length() == 100) {
+					ke.consume();
 				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDireccionEmpresa.getText().trim();
+		            txtDireccionEmpresa.setText(str);
+		        }
 			}
 		});
 
@@ -449,6 +474,21 @@ public class registro_empresa extends JFrame {
 		txtCorreoEmpresa.setColumns(10);
 		InputMap map14 = txtCorreoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map14.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCorreoEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtCorreoEmpresa.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblCorreo = new JLabel("Correo :");
 		lblCorreo.setBounds(29, 175, 83, 14);
@@ -468,6 +508,28 @@ public class registro_empresa extends JFrame {
 		scrollPane_1.setViewportView(txtCuentaEmpresa);
 		InputMap map15 = txtCuentaEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map15.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCuentaEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtCuentaEmpresa.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtCuentaEmpresa.getText().trim();
+		            txtCuentaEmpresa.setText(str);
+		        }
+			}
+		});
 
 		JButton btnFacebook = new JButton("");
 		btnFacebook.setBounds(92, 335, 62, 58);
@@ -615,7 +677,7 @@ public class registro_empresa extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		File ruta = new File("C:\\Sistema Administrativo");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -633,7 +695,7 @@ public class registro_empresa extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		File ruta = new File("C:\\Sistema Administrativo");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {

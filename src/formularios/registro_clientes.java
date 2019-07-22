@@ -121,7 +121,7 @@ public class registro_clientes extends JFrame {
 
 	public registro_clientes() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 1016, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -240,13 +240,15 @@ public class registro_clientes extends JFrame {
 		map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtNombresCliente.addKeyListener(new KeyListener() {
 			@Override
-			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
+				if (txtNombresCliente.getText().length() == 30)
+					ke.consume();
 			}
 
 			@Override
@@ -254,7 +256,7 @@ public class registro_clientes extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {
+			public void keyReleased(KeyEvent ke) {	
 			}
 		});
 
@@ -265,15 +267,17 @@ public class registro_clientes extends JFrame {
 		panelRegistro.add(txtApellidosCliente);
 		InputMap map2 = txtApellidosCliente.getInputMap(JComponent.WHEN_FOCUSED);
 		map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtNombresCliente.addKeyListener(new KeyListener() {
+		txtApellidosCliente.addKeyListener(new KeyListener() {
 			@Override
-			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
+				if (txtApellidosCliente.getText().length() == 30)
+					ke.consume();
 			}
 
 			@Override
@@ -281,7 +285,7 @@ public class registro_clientes extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {
+			public void keyReleased(KeyEvent ke) {	
 			}
 		});
 
@@ -337,6 +341,21 @@ public class registro_clientes extends JFrame {
 		panelRegistro.add(txtCorreoCliente);
 		InputMap map5 = txtCorreoCliente.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCorreoCliente.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtCorreoCliente.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblCantidad = new JLabel("8. Genero :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -357,6 +376,27 @@ public class registro_clientes extends JFrame {
 		panelRegistro.add(txtNombreEmpresa);
 		InputMap map54 = txtNombreEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map54.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtNombreEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (!Character.isLetter(ke.getKeyChar())
+		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					ke.consume();
+				}
+				if (txtNombreEmpresa.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {	
+			}
+		});
 
 		JLabel lblExistencia = new JLabel("12. Direccion :");
 		lblExistencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -371,6 +411,28 @@ public class registro_clientes extends JFrame {
 		scrollPane.setViewportView(txtDireccionCliente);
 		InputMap map52 = txtDireccionCliente.getInputMap(JComponent.WHEN_FOCUSED);
 		map52.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDireccionCliente.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDireccionCliente.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDireccionCliente.getText().trim();
+		            txtDireccionCliente.setText(str);
+		        }
+			}
+		});
 
 		lblCantidad_1 = new JLabel("11. Descripcion :");
 		lblCantidad_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -489,6 +551,21 @@ public class registro_clientes extends JFrame {
 		panelRegistro.add(txtCorreoEmpresa);
 		InputMap map30 = txtCorreoEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map30.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCorreoEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtCorreoCliente.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		lblRtn = new JLabel("13. RTN :");
 		lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -533,6 +610,28 @@ public class registro_clientes extends JFrame {
 		scrollPane_1.setViewportView(txtDireccionEmpresa);
 		InputMap map57 = txtDireccionEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map57.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDireccionEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDireccionEmpresa.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDireccionEmpresa.getText().trim();
+		            txtDireccionEmpresa.setText(str);
+		        }
+			}
+		});
 
 		JLabel lblIdentidad = new JLabel("5. Identidad :");
 		lblIdentidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -577,6 +676,28 @@ public class registro_clientes extends JFrame {
 		scrollPane_2.setViewportView(txtDescripcionEmpresa);
 		InputMap map56 = txtDescripcionEmpresa.getInputMap(JComponent.WHEN_FOCUSED);
 		map56.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDescripcionEmpresa.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDescripcionEmpresa.getText().length() == 100) {
+					ke.consume();
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+		            String str = txtDescripcionEmpresa.getText().trim();
+		            txtDescripcionEmpresa.setText(str);
+		        }
+			}
+		});
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 465, 550);
@@ -820,8 +941,7 @@ public class registro_clientes extends JFrame {
 	public void tomarFoto() {
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\portable-webcam.exe");
-
+			camara.exec("C:\\\\Sistema Administrativo\\portable-webcam.exe");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -833,7 +953,7 @@ public class registro_clientes extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Users\\hp\\Documents\\GitHub\\Proyecto_Administrativo\\fotografias_empleados");
+		File ruta = new File("C:\\Sistema Administrativo");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {

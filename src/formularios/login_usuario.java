@@ -471,6 +471,7 @@ public class login_usuario extends JFrame {
 					principal.setLocationRelativeTo(null);
 					principal.setVisible(true);
 					principal.consultarEmpresa();
+					principal.consultarSAR();
 					consultarDatosInicioSesionUsuario();
 					establecerDatosInicioSesionUsuario();
 					consultarPermisos();

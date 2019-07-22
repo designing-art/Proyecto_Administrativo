@@ -1,15 +1,19 @@
 package formularios;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Robot;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,21 +28,29 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.MaskFormatter;
+
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
@@ -48,9 +60,10 @@ import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JTextFieldDateEditor;
 
-public class registro_facturas_clientes extends JFrame {
+public class registro_facturas_clientes extends JFrame implements Printable {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
+	public JPanel panelRegistro;
 
 	public JButton btnGuardar;
 	public JButton btnNuevo;
@@ -95,7 +108,7 @@ public class registro_facturas_clientes extends JFrame {
 	public JLabel lblCai;
 	public JLabel lblCliente;
 	public JTextField txtCliente;
-	public JTextField txtRTN;
+	public JFormattedTextField txtRTN;
 	public JTextField txtDireccion;
 	public JLabel lblRtn;
 	public JLabel lblDireccion_1;
@@ -128,7 +141,7 @@ public class registro_facturas_clientes extends JFrame {
 
 	public registro_facturas_clientes() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 1016, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -159,8 +172,8 @@ public class registro_facturas_clientes extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -171,7 +184,7 @@ public class registro_facturas_clientes extends JFrame {
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
-		JPanel panelRegistro = new JPanel();
+		panelRegistro = new JPanel();
 		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelRegistro.setBounds(28, 60, 465, 550);
 		contentPane.add(panelRegistro);
@@ -278,18 +291,85 @@ public class registro_facturas_clientes extends JFrame {
 		txtCliente.setColumns(10);
 		txtCliente.setBounds(111, 202, 328, 15);
 		panelRegistro.add(txtCliente);
+		InputMap map501 = txtCliente.getInputMap(JComponent.WHEN_FOCUSED);
+		map501.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCliente.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCliente.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					ke.consume();
+				}
+				if (txtCliente.getText().length() == 50)
+					ke.consume();
+			}
 
-		txtRTN = new JTextField();
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
+
+		MaskFormatter formato1 = null;
+		try {
+			formato1 = new MaskFormatter("##############");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		txtRTN = new JFormattedTextField(formato1);
 		txtRTN.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRTN.setColumns(10);
 		txtRTN.setBounds(111, 222, 328, 15);
 		panelRegistro.add(txtRTN);
+		txtRTN.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		txtDireccion = new JTextField();
 		txtDireccion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDireccion.setColumns(10);
 		txtDireccion.setBounds(111, 242, 328, 15);
 		panelRegistro.add(txtDireccion);
+		InputMap map5 = txtDireccion.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDireccion.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtDireccion.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+					String str = txtDireccion.getText().trim();
+					txtDireccion.setText(str);
+				}
+			}
+		});
 
 		lblRtn = new JLabel("RTN :");
 		lblRtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -315,6 +395,7 @@ public class registro_facturas_clientes extends JFrame {
 		panelRegistro.add(lblEmpleado);
 
 		txtEmpleado = new JTextField();
+		txtEmpleado.setEditable(false);
 		txtEmpleado.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEmpleado.setColumns(10);
 		txtEmpleado.setBounds(111, 440, 328, 15);
@@ -362,6 +443,28 @@ public class registro_facturas_clientes extends JFrame {
 
 		txtPorConceptoDe = new JTextArea();
 		scrollPane.setViewportView(txtPorConceptoDe);
+		InputMap map52 = txtPorConceptoDe.getInputMap(JComponent.WHEN_FOCUSED);
+		map52.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtPorConceptoDe.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtPorConceptoDe.getText().length() == 100)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
+					String str = txtPorConceptoDe.getText().trim();
+					txtPorConceptoDe.setText(str);
+				}
+			}
+		});
 
 		JLabel lblCantidad = new JLabel("Cantidad en letras :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -372,6 +475,29 @@ public class registro_facturas_clientes extends JFrame {
 		txtCantidadLetras.setColumns(10);
 		txtCantidadLetras.setBounds(160, 91, 242, 15);
 		panel.add(txtCantidadLetras);
+		InputMap map54 = txtCantidadLetras.getInputMap(JComponent.WHEN_FOCUSED);
+		map54.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCantidadLetras.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCantidadLetras.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					ke.consume();
+				}
+				if (txtCantidadLetras.getText().length() == 50)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblCantidadEnNumeros = new JLabel("Cantidad en numeros :");
 		lblCantidadEnNumeros.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -383,6 +509,28 @@ public class registro_facturas_clientes extends JFrame {
 		txtCantidadNumeros.setColumns(10);
 		txtCantidadNumeros.setBounds(160, 110, 86, 15);
 		panel.add(txtCantidadNumeros);
+		InputMap map51 = txtCantidadNumeros.getInputMap(JComponent.WHEN_FOCUSED);
+		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtCantidadNumeros.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtCantidadNumeros.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+
+				if (txtCantidadNumeros.getText().length() == 8)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		lblLaFacturaEs = new JLabel("La factura es derecho de todos, EXIJALA!");
 		lblLaFacturaEs.setHorizontalAlignment(SwingConstants.CENTER);
@@ -409,6 +557,22 @@ public class registro_facturas_clientes extends JFrame {
 		panelRegistro.add(txtCodigoSAR);
 		txtCodigoSAR.setColumns(10);
 		txtCodigoSAR.setVisible(false);
+
+		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setBounds(25, 48, 89, 23);
+		panelRegistro.add(btnImprimir);
+		btnImprimir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				btnImprimir.setVisible(false);
+				btnNuevo.setVisible(false);
+				btnGuardar.setVisible(false);
+				imprimirFactura();
+				btnImprimir.setVisible(true);
+				btnNuevo.setVisible(true);
+				btnGuardar.setVisible(true);
+			}
+		});
 
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 465, 550);
@@ -730,4 +894,25 @@ public class registro_facturas_clientes extends JFrame {
 			e.printStackTrace();
 		}
 	}
+
+	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+        if (pageIndex == 0) {
+            Graphics2D g2d = (Graphics2D) graphics;
+            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+            panelRegistro.printAll(graphics);
+            return PAGE_EXISTS;
+        } else {
+            return NO_SUCH_PAGE;
+        }
+    }
+	
+	public void imprimirFactura() {
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        printerJob.setPrintable(this);
+        try {
+            printerJob.print();
+        } catch (PrinterException ex) {
+            System.out.println("Error:" + ex);
+        }
+    }
 }

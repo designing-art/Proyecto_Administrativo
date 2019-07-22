@@ -1,8 +1,11 @@
 package formularios;
 
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.ResultSet;
@@ -11,13 +14,16 @@ import java.sql.Statement;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import conexion.conexion;
@@ -42,7 +48,7 @@ public class configuraciones extends JFrame {
 
 	public configuraciones() {
 		setType(Type.UTILITY);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 387, 365);
 		setUndecorated(true);
 		contentPane = new JPanel();
@@ -98,6 +104,23 @@ public class configuraciones extends JFrame {
 		txtFrase.setColumns(10);
 		txtFrase.setBounds(16, 300, 351, 20);
 		contentPane.add(txtFrase);
+		InputMap map8 = txtFrase.getInputMap(JComponent.WHEN_FOCUSED);
+		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtFrase.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtFrase.getText().length() == 90)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

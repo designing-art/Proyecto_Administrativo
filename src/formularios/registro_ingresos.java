@@ -82,7 +82,7 @@ public class registro_ingresos extends JFrame {
 
 	public registro_ingresos() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 850, 581);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
