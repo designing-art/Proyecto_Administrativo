@@ -40,6 +40,7 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import clases.empresa;
+import conexion.conexion;
 import consultas.consultas_empresa;
 import utilidades.visor_imagen;
 
@@ -333,12 +334,7 @@ public class registro_empresa extends JFrame {
 		txtNombreEmpresa.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-					ke.consume();
-				}
+				
 				if (txtNombreEmpresa.getText().length() == 30)
 					ke.consume();
 			}
@@ -677,7 +673,7 @@ public class registro_empresa extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Sistema Administrativo");
+		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Empresa");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -695,7 +691,7 @@ public class registro_empresa extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Sistema Administrativo");
+		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Empresa");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {

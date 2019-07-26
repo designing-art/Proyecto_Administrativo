@@ -64,6 +64,9 @@ public class registro_egresos extends JFrame {
 	public JButton btnBorrar;
 	public JButton btnActualizarDatos;
 
+	public static String nombreEmpresa = null;
+	public static String totalDatos = null;
+
 	public int pagina = 0;
 
 	public JPanel contentPane;
@@ -201,22 +204,67 @@ public class registro_egresos extends JFrame {
 		btnImprimirReporte.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String ampm;
-				String horas;
-				Calendar cal = new GregorianCalendar();
-				ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-				if (ampm.equals("PM")) {
-					int h = cal.get(Calendar.HOUR_OF_DAY) - 12;
-					horas = h > 9 ? "" + h : "0" + h;
+				obtenerTotalDatosReporte();
+				if (totalDatos == null) {
+					JOptionPane.showMessageDialog(null, "No hay registros disponibles para imprimir un reporte");
 				} else {
-					horas = cal.get(Calendar.HOUR_OF_DAY) > 9 ? "" + cal.get(Calendar.HOUR_OF_DAY)
-							: "0" + cal.get(Calendar.HOUR_OF_DAY);
+					String ampm;
+					Calendar cal = new GregorianCalendar();
+					ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+					String fecha = getFechaYHora() + ampm;
+					nombreEmpresa = login_usuario.nombre.toString();
+					int total = Integer.valueOf(totalDatos);
+					String i = null;
+					if (total <= 46) {
+						i = "1";
+					} else {
+						if (total > 46 && total <= 92) {
+							i = "2";
+						} else {
+							if (total > 92 && total <= 138) {
+								i = "3";
+							} else {
+								if (total > 138 && total <= 184) {
+									i = "4";
+								} else {
+									if (total > 184 && total <= 230) {
+										i = "5";
+									} else {
+										if (total > 230 && total <= 276) {
+											i = "6";
+										} else {
+											if (total > 276 && total <= 322) {
+												i = "7";
+											} else {
+												if (total > 322 && total <= 368) {
+													i = "8";
+												} else {
+													if (total > 368 && total <= 414) {
+														i = "9";
+													} else {
+														if (total > 414 && total <= 460) {
+															i = "10";
+														} else {
+															i = "Mas de 10 paginas";
+
+														}
+
+													}
+
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					String encabezado = "Reporte de egresos de " + login_usuario.nombre.toString();
+
+					utilJTablePrint(tabla, encabezado,
+							"Pagina {0} de " + i + "                                  " + fecha, true);
 				}
-				String fecha = getFechaYHora() + ampm;
-				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de ingresos de " + nombreEmpresa;
-				utilJTablePrint(tabla, encabezado,
-						"Pagina {0}" + "                                             " + fecha, true);
 			}
 		});
 		btnImprimirReporte.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -605,6 +653,24 @@ public class registro_egresos extends JFrame {
 			txtTotalIngresos.setText(String.valueOf(t));
 		} else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
+		}
+	}
+	
+	public void obtenerTotalDatosReporte() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM egresos ORDER BY id_egreso DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				totalDatos = rsr.getString("id_egreso");
+			}
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

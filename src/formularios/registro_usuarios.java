@@ -39,6 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
@@ -76,6 +77,8 @@ public class registro_usuarios extends JFrame {
 	public JButton btnVer;
 	public JButton btnAceptar;
 	public static String hora_fecha_reporte;
+	public static String nombreEmpresa = null;
+	public static String totalDatos = null;
 
 	public static String ruta;
 	public static String usuario;
@@ -99,11 +102,11 @@ public class registro_usuarios extends JFrame {
 	public ImageIcon iconoProducto = new ImageIcon(getClass().getResource("/iconos/usb.png"));
 	public JButton btnAtras;
 	public JButton button;
-	public JTextField txtNombres;
+	public static JTextField txtNombres;
 	public JTextFieldDateEditor editor;
 	public JLabel lblDatosDeLa;
-	public JFormattedTextField txtIdentidad;
-	public JTextField txtCargo;
+	public static JFormattedTextField txtIdentidad;
+	public static JTextField txtCargo;
 	public JLabel lblPermisos;
 	public JLabel lblCargo;
 	public JTextField txtUsuario;
@@ -177,8 +180,8 @@ public class registro_usuarios extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -632,16 +635,23 @@ public class registro_usuarios extends JFrame {
 					if (rs.next() == true) {
 						JOptionPane.showMessageDialog(null, "Este nombre de usuario ya existe");
 						txtUsuario.setText("");
+					} else {
+						if (txtUsuario.getText().toString().equals("admin")) {
+							JOptionPane.showMessageDialog(null, "Este nombre de usuario ya existe");
+							txtUsuario.setText("");
+						} else {
+							rs.close();
+							estatuto.close();
+							conex.desconectar();
+						}
 					}
-					rs.close();
-					estatuto.close();
-					conex.desconectar();
 
 				} catch (SQLException exx) {
 					System.out.println(exx.getMessage());
 					JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 
 				}
+
 			}
 		});
 
@@ -658,6 +668,7 @@ public class registro_usuarios extends JFrame {
 		InputMap map51 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
 		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtContraseña.addKeyListener(new KeyListener() {
+
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				if (txtContraseña.getText().toString().length() == 15)
@@ -927,11 +938,67 @@ public class registro_usuarios extends JFrame {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String fecha = getFechaYHora();
-				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de usuarios de " + nombreEmpresa;
-				utilJTablePrint(tabla, encabezado,
-						"Pagina {0}" + "                                                  " + fecha, true);
+				obtenerTotalDatosReporte();
+				if (totalDatos == null) {
+					JOptionPane.showMessageDialog(null, "No hay registros disponibles para imprimir un reporte");
+				} else {
+					String ampm;
+					Calendar cal = new GregorianCalendar();
+					ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+					String fecha = getFechaYHora() + ampm;
+					nombreEmpresa = login_usuario.nombre.toString();
+					int total = Integer.valueOf(totalDatos);
+					String i = null;
+					if (total <= 46) {
+						i = "1";
+					} else {
+						if (total > 46 && total <= 92) {
+							i = "2";
+						} else {
+							if (total > 92 && total <= 138) {
+								i = "3";
+							} else {
+								if (total > 138 && total <= 184) {
+									i = "4";
+								} else {
+									if (total > 184 && total <= 230) {
+										i = "5";
+									} else {
+										if (total > 230 && total <= 276) {
+											i = "6";
+										} else {
+											if (total > 276 && total <= 322) {
+												i = "7";
+											} else {
+												if (total > 322 && total <= 368) {
+													i = "8";
+												} else {
+													if (total > 368 && total <= 414) {
+														i = "9";
+													} else {
+														if (total > 414 && total <= 460) {
+															i = "10";
+														} else {
+															i = "Mas de 10 paginas";
+
+														}
+
+													}
+
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					String encabezado = "Reporte de usuarios de " + login_usuario.nombre.toString();
+
+					utilJTablePrint(tabla, encabezado,
+							"Pagina {0} de " + i + "                                  " + fecha, true);
+				}
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -945,7 +1012,7 @@ public class registro_usuarios extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
-		
+
 		lblUsuarioLogeado = new JTextField("usuario");
 		lblUsuarioLogeado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuarioLogeado.setBackground(Color.WHITE);
@@ -1093,6 +1160,25 @@ public class registro_usuarios extends JFrame {
 		} else {
 			JOptionPane.showMessageDialog(null, "No se encontro ningun registro");
 
+		}
+	}
+	
+
+	public void obtenerTotalDatosReporte() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM usuario ORDER BY id_usuario DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				totalDatos = rsr.getString("id_usuario");
+			}
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

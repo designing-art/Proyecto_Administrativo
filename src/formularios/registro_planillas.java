@@ -98,6 +98,11 @@ public class registro_planillas extends JFrame {
 	public JButton button;
 	public PlaceHolder pista;
 	public JDateChooser dateFechaPlanilla;
+	
+
+	public static String nombreEmpresa = null;
+	public static String totalDatos = null;
+	
 
 	public JButton btnBorrarPlanilla;
 	public JButton btnVerPlanilla;
@@ -318,11 +323,67 @@ public class registro_planillas extends JFrame {
 		button_3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String fecha = getFechaYHora();
-				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de planilla de " + nombreEmpresa;
-				utilJTablePrint(tablaPlanilla, encabezado,
-						"Pagina {0}" + "                                                  " + fecha, true);
+				obtenerTotalDatosReporte();
+				if (totalDatos == null) {
+					JOptionPane.showMessageDialog(null, "No hay registros disponibles para imprimir un reporte");
+				} else {
+					String ampm;
+					Calendar cal = new GregorianCalendar();
+					ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+					String fecha = getFechaYHora() + ampm;
+					nombreEmpresa = login_usuario.nombre.toString();
+					int total = Integer.valueOf(totalDatos);
+					String i = null;
+					if (total <= 46) {
+						i = "1";
+					} else {
+						if (total > 46 && total <= 92) {
+							i = "2";
+						} else {
+							if (total > 92 && total <= 138) {
+								i = "3";
+							} else {
+								if (total > 138 && total <= 184) {
+									i = "4";
+								} else {
+									if (total > 184 && total <= 230) {
+										i = "5";
+									} else {
+										if (total > 230 && total <= 276) {
+											i = "6";
+										} else {
+											if (total > 276 && total <= 322) {
+												i = "7";
+											} else {
+												if (total > 322 && total <= 368) {
+													i = "8";
+												} else {
+													if (total > 368 && total <= 414) {
+														i = "9";
+													} else {
+														if (total > 414 && total <= 460) {
+															i = "10";
+														} else {
+															i = "Mas de 10 paginas";
+
+														}
+
+													}
+
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					String encabezado = "Reporte de planilla de " + login_usuario.nombre.toString();
+
+					utilJTablePrint(tablaPlanilla, encabezado,
+							"Pagina {0} de " + i + "                                  " + fecha, true);
+				}
 			}
 		});
 		button_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -1050,5 +1111,23 @@ public class registro_planillas extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
 		date = cal.getTime();
 		return df.format(date);
+	}
+	
+	public void obtenerTotalDatosReporte() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM planillas ORDER BY id_planilla DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				totalDatos = rsr.getString("id_planilla");
+			}
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -38,6 +38,12 @@ public class control_empleado implements ActionListener {
 	public String fechaRegistro;
 	public String fechaLabores;
 	public static String identidad = null;
+	
+	public static String identidadDato = null;
+	public static String nombreDato = null;
+	public static String cargoDato = null;
+	public static String direccionFoto = null;
+	
 	public registro_usuarios usuario = new registro_usuarios();
 	public static int valor = 0;
 
@@ -156,6 +162,11 @@ public class control_empleado implements ActionListener {
 									registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
 							claseEmpleado.setFoto_contrato_empleado_asignado(
 									registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
+							
+							identidadDato = formularioEmpleado.txtIdentidadEmpleado.getText().toString();
+							nombreDato = formularioEmpleado.txtNombresEmpleado.getText().toString()+" "+formularioEmpleado.txtApellidosEmpleado.getText().toString();
+							cargoDato = formularioEmpleado.lbl_nombre_cargo_asignacion.getText().toString();
+							direccionFoto = formularioEmpleado.txtDireccionFoto.getText().toString();
 
 							if (consultaEmpleado.registrar(claseEmpleado)) {
 								JOptionPane.showMessageDialog(null, "Exito! Datos de nuevo empleado guardados!");
@@ -179,7 +190,7 @@ public class control_empleado implements ActionListener {
 										formularioEmpleado.lblFotoEmpleado.getWidth(),
 										formularioEmpleado.lblFotoEmpleado.getHeight(), Image.SCALE_DEFAULT));
 								formularioEmpleado.lblFotoEmpleado.setIcon(iconofoto);
-
+								
 								if (formularioEmpleado.cbxUsuarioEmpleado.getSelectedItem().toString().equals("Si")) {
 									usuario clase = new usuario();
 									consultas_usuario consulta = new consultas_usuario();
@@ -187,7 +198,7 @@ public class control_empleado implements ActionListener {
 									control_usuario control = new control_usuario(clase, consulta, formulario);
 									formulario.setVisible(true);
 									formulario.setLocationRelativeTo(null);
-									registro_usuarios.txtBusqueda.requestFocusInWindow();
+									formulario.txtBusqueda.requestFocusInWindow();
 									formulario.obtenerUltimoId();
 									formulario.pistas();
 									formulario.consultarEmpresa();
@@ -198,8 +209,26 @@ public class control_empleado implements ActionListener {
 									formulario.btnActualizar.setVisible(false);
 									formulario.btnAceptar.setVisible(false);
 									formulario.btnBorrar.setVisible(false);
-									registro_usuarios.txtBusqueda
-											.setText(formularioEmpleado.txtIdentidadEmpleado.getText().toString());
+									
+									registro_usuarios.txtBusqueda.setText(identidadDato);
+									registro_usuarios.txtNombres.setText(nombreDato);
+									registro_usuarios.txtIdentidad.setText(identidadDato);
+									registro_usuarios.txtCargo.setText(cargoDato);
+									registro_usuarios.txtDirecFoto.setText(direccionFoto);
+									
+									registro_usuarios.txtBusqueda.setForeground(Color.BLACK);
+									registro_usuarios.txtNombres.setForeground(Color.BLACK);
+									registro_usuarios.txtIdentidad.setForeground(Color.BLACK);
+									registro_usuarios.txtIdentidad.setForeground(Color.BLACK);
+									registro_usuarios.txtDirecFoto.setForeground(Color.BLACK);
+									
+									final ImageIcon icono = new ImageIcon(registro_usuarios.txtDirecFoto.getText().toString());
+									final ImageIcon iconofotografia = new ImageIcon(icono.getImage().getScaledInstance(
+											registro_usuarios.lblFotoUsuario.getWidth(),
+											registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+									registro_usuarios.lblFotoUsuario.setIcon(iconofotografia);
+
+									formularioEmpleado.dispose();
 								}
 
 							} else {
@@ -526,10 +555,10 @@ public class control_empleado implements ActionListener {
 					String horaex = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 18).toString();
 					String oblig = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 19).toString();
 					String horario = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 20).toString();
-					String tipo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 21).toString();
-					String dias = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 22).toString();
-					String horas = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 23).toString();
-					String ident = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 24).toString();
+					String dias = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 21).toString();
+					String horas = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 22).toString();
+					String ident = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 23).toString();
+					String tipo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 24).toString();
 					String tiempo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 25).toString();
 					String foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 26).toString();
 
@@ -628,11 +657,12 @@ public class control_empleado implements ActionListener {
 					String sueldo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 17).toString();
 					String horaex = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 18).toString();
 					String oblig = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 19).toString();
+					
 					String horario = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 20).toString();
-					String tipo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 21).toString();
-					String dias = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 22).toString();
-					String horas = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 23).toString();
-					String ident = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 24).toString();
+					String dias = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 21).toString();
+					String horas = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 22).toString();
+					String ident = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 23).toString();
+					String tipo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 24).toString();
 					String tiempo = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 25).toString();
 					String foto = formularioEmpleado.tablaEmpleados.getValueAt(filaseleccionada, 26).toString();
 

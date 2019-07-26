@@ -50,6 +50,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -88,10 +89,10 @@ public class registro_empleados extends JFrame {
 	public JPanel panel;
 	public JPanel panel_2;
 	public JTextField txtCodigoEmpleado;
-	public JTextField txtNombresEmpleado;
-	public JTextField txtApellidosEmpleado;
+	public static JTextField txtNombresEmpleado;
+	public static JTextField txtApellidosEmpleado;
 	public JTextField txtCorreoEmpleado;
-	public JFormattedTextField txtIdentidadEmpleado;
+	public static JFormattedTextField txtIdentidadEmpleado;
 	public JTextField txtNombreReferencia;
 	public JTextField txtTelefonoReferencia;
 	public static JTextField txtEdadEmpleado;
@@ -111,6 +112,8 @@ public class registro_empleados extends JFrame {
 	public static ImageIcon imagen;
 	public static String hora_fecha_reporte;
 	public static String ruta_logo;
+	public static String nombreEmpresa = null;
+	public static String totalDatos = null;
 
 	public JTextFieldDateEditor editor;
 	public JTextFieldDateEditor editor2;
@@ -144,7 +147,7 @@ public class registro_empleados extends JFrame {
 	public JButton btnActualizarEmpleado;
 	public JButton btnCancelarEmpleado;
 	public JButton btnAgregarEdad;
-	public JTextField txtDireccionFoto;
+	public static JTextField txtDireccionFoto;
 	public JTextField textField;
 	public JLabel lblAsignacionesYLista;
 	public JButton btnRegresar;
@@ -185,7 +188,7 @@ public class registro_empleados extends JFrame {
 	public JButton btnAsignar;
 	public JButton btnAsignar_1;
 	public JButton btnAsignar_2;
-	
+
 	public registro_empleados() {
 		setResizable(false);
 		setDefaultCloseOperation(0);
@@ -241,9 +244,8 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtNombresEmpleado.getText().length() == 30)
@@ -255,7 +257,7 @@ public class registro_empleados extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -278,9 +280,8 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtApellidosEmpleado.getText().length() == 40)
@@ -516,9 +517,8 @@ public class registro_empleados extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtNombreReferencia.getText().length() == 30)
@@ -595,7 +595,7 @@ public class registro_empleados extends JFrame {
 				if (txtDireccionEmpleado.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -606,13 +606,11 @@ public class registro_empleados extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDireccionEmpleado.getText().trim();
-		            txtDireccionEmpleado.setText(str);
-		        }
+					String str = txtDireccionEmpleado.getText().trim();
+					txtDireccionEmpleado.setText(str);
+				}
 			}
 		});
-		
-		
 
 		btnTomarFoto = new JButton("Tomar");
 		btnTomarFoto.addActionListener(new ActionListener() {
@@ -1089,12 +1087,68 @@ public class registro_empleados extends JFrame {
 		btnImprimirReporteEmpleados = new JButton("Imprimir Reporte");
 		btnImprimirReporteEmpleados.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				String fecha = getFechaYHora();
-				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de empleados de " + nombreEmpresa;
-				utilJTablePrint(tablaEmpleados, encabezado,
-						"Pagina {0}" + "                                                  " + fecha, true);
+			public void actionPerformed(ActionEvent arg0) {
+				obtenerTotalDatosReporte();
+				if (totalDatos == null) {
+					JOptionPane.showMessageDialog(null, "No hay registros disponibles para imprimir un reporte");
+				} else {
+					String ampm;
+					Calendar cal = new GregorianCalendar();
+					ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+					String fecha = getFechaYHora() + ampm;
+					nombreEmpresa = login_usuario.nombre.toString();
+					int total = Integer.valueOf(totalDatos);
+					String i = null;
+					if (total <= 46) {
+						i = "1";
+					} else {
+						if (total > 46 && total <= 92) {
+							i = "2";
+						} else {
+							if (total > 92 && total <= 138) {
+								i = "3";
+							} else {
+								if (total > 138 && total <= 184) {
+									i = "4";
+								} else {
+									if (total > 184 && total <= 230) {
+										i = "5";
+									} else {
+										if (total > 230 && total <= 276) {
+											i = "6";
+										} else {
+											if (total > 276 && total <= 322) {
+												i = "7";
+											} else {
+												if (total > 322 && total <= 368) {
+													i = "8";
+												} else {
+													if (total > 368 && total <= 414) {
+														i = "9";
+													} else {
+														if (total > 414 && total <= 460) {
+															i = "10";
+														} else {
+															i = "Mas de 10 paginas";
+
+														}
+
+													}
+
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					String encabezado = "Reporte de empleados de " + login_usuario.nombre.toString();
+
+					utilJTablePrint(tablaEmpleados, encabezado,
+							"Pagina {0} de " + i + "                                  " + fecha, true);
+				}
 			}
 		});
 		btnImprimirReporteEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -1131,8 +1185,7 @@ public class registro_empleados extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -1145,7 +1198,7 @@ public class registro_empleados extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("C:\\Sistema Administrativo");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Empleados");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -1161,7 +1214,7 @@ public class registro_empleados extends JFrame {
 
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("C:\\\\Sistema Administrativo\\portable-webcam.exe");
+			camara.exec("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\cam.exe");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -1265,6 +1318,24 @@ public class registro_empleados extends JFrame {
 				id = String.valueOf(valor);
 			}
 			txtCodigoEmpleado.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void obtenerTotalDatosReporte() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM empleados ORDER BY id_empleado DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				totalDatos = rsr.getString("id_empleado");
+			}
 			;
 			stmtr.close();
 			rsr.close();

@@ -11,7 +11,8 @@ public class conexion {
 	private final String base = "television";
 	private final String user = "root";
 	private final String password = "1234";
-	private final String url = "jdbc:mysql://localhost:3306/" + base;
+	public static String urlGlobal = "localhost:3306";
+	private final String url = "jdbc:mysql://"+urlGlobal+"/" + base;
 	private Connection con = null;
 
 	public Connection getConexion() {

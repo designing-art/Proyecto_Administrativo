@@ -59,6 +59,8 @@ public class registro_cargos extends JFrame {
 	public PlaceHolder pista;
 	public JScrollPane scrollPane;
 	public JButton btnAtras;
+	public static String nombreEmpresa = null;
+	public static String totalDatos = null;
 
 	public JButton btnGuardarCargo;
 	public JButton btnNuevoCargo;
@@ -120,7 +122,7 @@ public class registro_cargos extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -173,7 +175,7 @@ public class registro_cargos extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtSueldoCargo.getText().length() == 8)
 					ke.consume();
 			}
@@ -201,7 +203,7 @@ public class registro_cargos extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtSueldoCargo.getText().length() == 6)
 					ke.consume();
 			}
@@ -285,9 +287,9 @@ public class registro_cargos extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtFuncionesCargo.getText().trim();
-		            txtFuncionesCargo.setText(str);
-		        }
+					String str = txtFuncionesCargo.getText().trim();
+					txtFuncionesCargo.setText(str);
+				}
 			}
 		});
 
@@ -303,9 +305,8 @@ public class registro_cargos extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtNombreCargo.getText().length() == 30)
@@ -317,16 +318,14 @@ public class registro_cargos extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 				try {
 					conexion conex = new conexion();
 					Statement estatuto = conex.getConexion().createStatement();
-					ResultSet rs = estatuto
-							.executeQuery("SELECT nombre_cargo FROM cargos where nombre_cargo = '"
-									+ txtNombreCargo.getText().toString() + "'");
+					ResultSet rs = estatuto.executeQuery("SELECT nombre_cargo FROM cargos where nombre_cargo = '"
+							+ txtNombreCargo.getText().toString() + "'");
 					if (rs.next() == true) {
-						JOptionPane.showMessageDialog(null,
-								"Atencion! Este nombre de cargo ya fue registrado!");
+						JOptionPane.showMessageDialog(null, "Atencion! Este nombre de cargo ya fue registrado!");
 						txtNombreCargo.setText("");
 					}
 					rs.close();
@@ -340,7 +339,6 @@ public class registro_cargos extends JFrame {
 				}
 			}
 		});
-
 
 		txtCodigoCargo = new JTextField();
 		txtCodigoCargo.setEditable(false);
@@ -359,20 +357,21 @@ public class registro_cargos extends JFrame {
 		btnAceptar.setBackground(new Color(255, 255, 255));
 		btnAceptar.setBounds(27, 355, 99, 23);
 		panelRegistro.add(btnAceptar);
-				
-				JTextArea txtrNotaEscribaY = new JTextArea();
-				txtrNotaEscribaY.setFont(new Font("Cambria Math", Font.PLAIN, 12));
-				txtrNotaEscribaY.setText("Nota: Escriba y enumere las funciones del empleado.\r\nEjemplo: 1. Operar, 2. Limpiar, 3. Cerrar etc ...");
-				txtrNotaEscribaY.setBackground(Color.WHITE);
-				txtrNotaEscribaY.setBounds(27, 247, 286, 34);
-				panelRegistro.add(txtrNotaEscribaY);
-				
-						JLabel lblImagenLibreta = new JLabel();
-						lblImagenLibreta.setBounds(0, 0, 341, 450);
-						panelRegistro.add(lblImagenLibreta);
-						final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
-								lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
-						lblImagenLibreta.setIcon(logo);
+
+		JTextArea txtrNotaEscribaY = new JTextArea();
+		txtrNotaEscribaY.setFont(new Font("Cambria Math", Font.PLAIN, 12));
+		txtrNotaEscribaY.setText(
+				"Nota: Escriba y enumere las funciones del empleado.\r\nEjemplo: 1. Operar, 2. Limpiar, 3. Cerrar etc ...");
+		txtrNotaEscribaY.setBackground(Color.WHITE);
+		txtrNotaEscribaY.setBounds(27, 247, 286, 34);
+		panelRegistro.add(txtrNotaEscribaY);
+
+		JLabel lblImagenLibreta = new JLabel();
+		lblImagenLibreta.setBounds(0, 0, 341, 450);
+		panelRegistro.add(lblImagenLibreta);
+		final ImageIcon logo = new ImageIcon(icono.getImage().getScaledInstance(lblImagenLibreta.getWidth(),
+				lblImagenLibreta.getHeight(), Image.SCALE_DEFAULT));
+		lblImagenLibreta.setIcon(logo);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -454,22 +453,67 @@ public class registro_cargos extends JFrame {
 		btnImprimirReporte.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String ampm;
-				String horas;
-				Calendar cal = new GregorianCalendar();
-				ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-				if (ampm.equals("PM")) {
-					int h = cal.get(Calendar.HOUR_OF_DAY) - 12;
-					horas = h > 9 ? "" + h : "0" + h;
+				obtenerTotalDatosReporte();
+				if (totalDatos == null) {
+					JOptionPane.showMessageDialog(null, "No hay registros disponibles para imprimir un reporte");
 				} else {
-					horas = cal.get(Calendar.HOUR_OF_DAY) > 9 ? "" + cal.get(Calendar.HOUR_OF_DAY)
-							: "0" + cal.get(Calendar.HOUR_OF_DAY);
+					String ampm;
+					Calendar cal = new GregorianCalendar();
+					ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+					String fecha = getFechaYHora() + ampm;
+					nombreEmpresa = login_usuario.nombre.toString();
+					int total = Integer.valueOf(totalDatos);
+					String i = null;
+					if (total <= 46) {
+						i = "1";
+					} else {
+						if (total > 46 && total <= 92) {
+							i = "2";
+						} else {
+							if (total > 92 && total <= 138) {
+								i = "3";
+							} else {
+								if (total > 138 && total <= 184) {
+									i = "4";
+								} else {
+									if (total > 184 && total <= 230) {
+										i = "5";
+									} else {
+										if (total > 230 && total <= 276) {
+											i = "6";
+										} else {
+											if (total > 276 && total <= 322) {
+												i = "7";
+											} else {
+												if (total > 322 && total <= 368) {
+													i = "8";
+												} else {
+													if (total > 368 && total <= 414) {
+														i = "9";
+													} else {
+														if (total > 414 && total <= 460) {
+															i = "10";
+														} else {
+															i = "Mas de 10 paginas";
+
+														}
+
+													}
+
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					String encabezado = "Reporte de cargos de " + login_usuario.nombre.toString();
+
+					utilJTablePrint(tablaCargos, encabezado,
+							"Pagina {0} de " + i + "                                  " + fecha, true);
 				}
-				String fecha = getFechaYHora() + ampm;
-				String nombreEmpresa = ventana_principal.lbl_nombre_empresa_principal.getText();
-				String encabezado = "Reporte de cargos de " + nombreEmpresa;
-				utilJTablePrint(tablaCargos, encabezado,
-						"Pagina {0}" + "                                             " + fecha, true);
 			}
 		});
 		btnImprimirReporte.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -530,7 +574,7 @@ public class registro_cargos extends JFrame {
 		filtroCodigo = txtBusquedaCargos.getText();
 		trsfiltroCodigo.setRowFilter(RowFilter.regexFilter(txtBusquedaCargos.getText(), 0, 1, 2, 3, 4, 5));
 	}
-	
+
 	public void obtenerUltimoId() {
 		String ultimoValor = null;
 		int valor;
@@ -547,6 +591,24 @@ public class registro_cargos extends JFrame {
 				id = String.valueOf(valor);
 			}
 			txtCodigoCargo.setText(id);
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void obtenerTotalDatosReporte() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM cargos ORDER BY id_cargo DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				totalDatos = rsr.getString("id_cargo");
+			}
 			;
 			stmtr.close();
 			rsr.close();

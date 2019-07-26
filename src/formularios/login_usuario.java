@@ -487,22 +487,6 @@ public class login_usuario extends JFrame {
 					lblAlerta.setText("El usuario y contraseña son incorrectas");
 					lblAlerta.setForeground(Color.RED);
 				}
-				if (txtUsuario.getText().toString().equals("Emmanuel Diaz")
-						&& txtContraseña.getText().toString().equals("Emmandiaz11.")) {
-					principal.setLocationRelativeTo(null);
-					principal.setVisible(true);
-					principal.consultarEmpresa();
-					Timer time = new Timer();
-					time.schedule(principal.tarea, 0, 1000);
-					configuraciones configuracion = new configuraciones();
-					configuracion.consultarConfiguracion();
-					configuracion.establecerConfiguraciones();
-					dispose();
-
-				} else {
-					lblAlerta.setText("El usuario y contraseña son incorrectas");
-					lblAlerta.setForeground(Color.RED);
-				}
 			}
 		}
 
