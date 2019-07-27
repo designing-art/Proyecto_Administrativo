@@ -35,7 +35,7 @@ import javax.swing.border.LineBorder;
 
 public class configuraciones extends JFrame {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
 	public static JTextField txtFrase;
 	public static JRadioButton rdbtnDesactivar;
 	public static JRadioButton rdbtnActivar;
@@ -47,11 +47,11 @@ public class configuraciones extends JFrame {
 	public JTextField txtCodigo;
 	public ButtonGroup grupo;
 	public ButtonGroup grupo2;
-	private JLabel lblTemasDelSistema;
-	private static JRadioButton rdbtnClaro;
-	private static JRadioButton rdbtnObscuro;
-	private static JRadioButton rdbtnColorido;
-	private static JRadioButton rdbtnClaroobscuro;
+	public JLabel lblTemasDelSistema;
+	public static JRadioButton rdbtnClaro;
+	public static JRadioButton rdbtnObscuro;
+	public static JRadioButton rdbtnColorido;
+	public static JRadioButton rdbtnClaroobscuro;
 
 	public configuraciones() {
 		setType(Type.UTILITY);
@@ -224,12 +224,13 @@ public class configuraciones extends JFrame {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery(
-					"SELECT sonido_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
+					"SELECT sonido_configuracion, tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
 
 			if (rs.next()) {
 				sonido = (rs.getString("sonido_configuracion"));
-				frase = (rs.getString("frase_configuracion"));
 				tema = (rs.getString("tema_configuracion"));
+				frase = (rs.getString("frase_configuracion"));
+				
 
 				if (sonido.equals("Activar")) {
 					try {
@@ -242,6 +243,7 @@ public class configuraciones extends JFrame {
 						e.printStackTrace();
 					}
 				}
+				
 				if (!frase.equals("")) {
 					ventana_principal.txtFrase.setText(frase);
 				} else {
@@ -249,15 +251,13 @@ public class configuraciones extends JFrame {
 							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
 				}
 
-				if (tema.toString().equals("Claro")) {
+				if (tema == "Claro") {
 					ventana_principal.contentPane.setBackground(Color.WHITE);
-					ventana_principal menu = new ventana_principal();
-					menu.pack();
+					
 				} else {
-					if (tema.toString().equals("Obscuro")) {
+					if (tema == "Obscuro") {
 						ventana_principal.contentPane.setBackground(Color.GRAY);
-						ventana_principal menu = new ventana_principal();
-						menu.pack();
+						
 					}
 				}
 			}
@@ -275,12 +275,14 @@ public class configuraciones extends JFrame {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery(
-					"SELECT sonido_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
+					"SELECT sonido_configuracion, tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
 
 			if (rs.next()) {
+
 				sonido = (rs.getString("sonido_configuracion"));
-				frase = (rs.getString("frase_configuracion"));
 				tema = (rs.getString("tema_configuracion"));
+				frase = (rs.getString("frase_configuracion"));
+				
 
 				if (sonido.equals("Activar")) {
 					rdbtnActivar.setSelected(true);
@@ -290,6 +292,26 @@ public class configuraciones extends JFrame {
 					repaint();
 				}
 
+				if (tema.equals("Claro")) {
+					rdbtnClaro.setSelected(true);
+					repaint();
+				} else {
+					if (tema.equals("Obscuro")) {
+						rdbtnObscuro.setSelected(true);
+						repaint();
+					} else {
+						if (tema.equals("Colorido")) {
+							rdbtnColorido.setSelected(true);
+							repaint();
+						} else {
+							if (tema.equals("Claro-Obscuro")) {
+								rdbtnClaroobscuro.setSelected(true);
+								repaint();
+							}
+						}
+					}
+				}
+
 				if (frase.equals("")) {
 					txtFrase.setText(
 							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
@@ -297,26 +319,6 @@ public class configuraciones extends JFrame {
 				} else {
 					txtFrase.setText(frase);
 					repaint();
-				}
-				
-				if (tema.equals("Claro")) {
-					rdbtnClaro.setSelected(true);
-					repaint();
-				} else {
-					if (tema.equals("Obscuro")) {
-						rdbtnClaro.setSelected(true);
-						repaint();
-					} else {
-						if (tema.equals("Colorido")) {
-							rdbtnClaro.setSelected(true);
-							repaint();
-						} else {
-							if (tema.equals("Claro-Obscuro")) {
-								rdbtnClaro.setSelected(true);
-								repaint();
-							} 
-						}
-					}
 				}
 			}
 

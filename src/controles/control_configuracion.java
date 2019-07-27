@@ -38,11 +38,21 @@ public class control_configuracion implements ActionListener {
 			} else {
 				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());
 			}
-			
-			if (formulario.rd.isSelected()) {
-				clase.setSonido_configuracion(configuraciones.rdbtnActivar.getText().toString());
+
+			if (configuraciones.rdbtnClaro.isSelected()) {
+				clase.setTema_configuracion(configuraciones.rdbtnClaro.getText().toString());
 			} else {
-				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());
+				if (configuraciones.rdbtnObscuro.isSelected()) {
+					clase.setTema_configuracion(configuraciones.rdbtnObscuro.getText().toString());
+				} else {
+					if (configuraciones.rdbtnColorido.isSelected()) {
+						clase.setTema_configuracion(configuraciones.rdbtnColorido.getText().toString());
+					} else {
+						clase.setTema_configuracion(configuraciones.rdbtnClaroobscuro.getText().toString());
+					}
+
+				}
+
 			}
 
 			clase.setFrase_configuracion(configuraciones.txtFrase.getText().toString());
@@ -65,14 +75,17 @@ public class control_configuracion implements ActionListener {
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
 				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				principal.pack();
+
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 			}
 		}
 
-		if (e.getSource() == formulario.btnActualizar) {
+		if (e.getSource() == formulario.btnActualizar)
+
+		{
 
 			clase.setId_configuracion(Integer.parseInt(formulario.txtCodigo.getText().toString()));
 
@@ -82,28 +95,45 @@ public class control_configuracion implements ActionListener {
 				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());
 			}
 
+			if (configuraciones.rdbtnClaro.isSelected()) {
+				clase.setTema_configuracion(configuraciones.rdbtnClaro.getText().toString());
+			} else {
+				if (configuraciones.rdbtnObscuro.isSelected()) {
+					clase.setTema_configuracion(configuraciones.rdbtnObscuro.getText().toString());
+				} else {
+					if (configuraciones.rdbtnColorido.isSelected()) {
+						clase.setTema_configuracion(configuraciones.rdbtnColorido.getText().toString());
+					} else {
+						clase.setTema_configuracion(configuraciones.rdbtnClaroobscuro.getText().toString());
+					}
+
+				}
+
+			}
+
 			clase.setFrase_configuracion(configuraciones.txtFrase.getText().toString());
 
 			if (consulta.actualizar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito Configuracion guardada!");
 				formulario.dispose();
-				ventana_principal principal = new ventana_principal();
-				principal.setLocationRelativeTo(null);
-				principal.setVisible(true);
-				principal.consultarEmpresa();
 				login_usuario usuario = new login_usuario();
 				usuario.consultarDatosInicioSesionUsuario();
 				usuario.establecerDatosInicioSesionUsuario();
 				usuario.consultarPermisos();
 				usuario.definirPermisos();
-				Timer time = new Timer();
-				time.schedule(principal.tarea, 0, 1000);
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
+				ventana_principal principal = new ventana_principal();
+				principal.setLocationRelativeTo(null);
+				principal.setVisible(true);
+				principal.consultarEmpresa();
 				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				Timer time = new Timer();
+				time.schedule(principal.tarea, 0, 1000);
+				principal.pack();
+
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no actualizados");
 			}
