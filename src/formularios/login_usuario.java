@@ -104,19 +104,19 @@ public class login_usuario extends JFrame {
 		JLabel lblUsuario = new JLabel("Usuario :");
 		lblUsuario.setForeground(new Color(0, 0, 0));
 		lblUsuario.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblUsuario.setBounds(136, 154, 108, 20);
+		lblUsuario.setBounds(136, 165, 108, 20);
 		panel.add(lblUsuario);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
 		lblContrasea.setForeground(new Color(0, 0, 0));
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblContrasea.setBounds(122, 195, 98, 20);
+		lblContrasea.setBounds(122, 206, 98, 20);
 		panel.add(lblContrasea);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtUsuario.setBounds(74, 174, 181, 20);
+		txtUsuario.setBounds(74, 185, 181, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		InputMap map4 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
@@ -124,15 +124,15 @@ public class login_usuario extends JFrame {
 
 		btnIngresar = new JButton("Ingresar");
 		btnIngresar.setForeground(new Color(0, 0, 0));
-		btnIngresar.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		btnIngresar.setFont(new Font("Dubai", Font.BOLD, 14));
 		btnIngresar.setBackground(new Color(60, 179, 113));
-		btnIngresar.setBounds(107, 245, 113, 23);
+		btnIngresar.setBounds(107, 253, 113, 20);
 		panel.add(btnIngresar);
 
 		txtContraseña = new JPasswordField();
 		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtContraseña.setBounds(74, 214, 181, 20);
+		txtContraseña.setBounds(74, 225, 181, 20);
 		panel.add(txtContraseña);
 		InputMap map5 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -158,22 +158,29 @@ public class login_usuario extends JFrame {
 		lblAlerta = new JLabel("");
 		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblAlerta.setBounds(10, 271, 307, 20);
+		lblAlerta.setBounds(10, 277, 307, 14);
 		panel.add(lblAlerta);
-
-		lblFotoEmpresa = new JLabel("");
-		lblFotoEmpresa.setBounds(92, 26, 147, 128);
-		panel.add(lblFotoEmpresa);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
-		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
-				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
-		lblFotoEmpresa.setIcon(icono2);
 
 		lblNombreEmpresa = new JLabel("Empresa");
 		lblNombreEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreEmpresa.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
 		lblNombreEmpresa.setBounds(10, 0, 303, 33);
 		panel.add(lblNombreEmpresa);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(88, 27, 152, 135);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+				lblFotoEmpresa = new JLabel("");
+				lblFotoEmpresa.setBounds(10, 11, 132, 113);
+				panel_1.add(lblFotoEmpresa);
+				final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+						lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+				lblFotoEmpresa.setIcon(icono2);
 
 		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
 		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
@@ -491,5 +498,4 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-
 }

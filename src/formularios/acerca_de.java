@@ -14,6 +14,7 @@ import java.awt.Image;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 public class acerca_de extends JFrame {
 
@@ -45,7 +46,7 @@ public class acerca_de extends JFrame {
 		setBounds(100, 100, 387, 365);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 

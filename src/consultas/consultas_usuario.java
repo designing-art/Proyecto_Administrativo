@@ -210,5 +210,32 @@ public class consultas_usuario extends conexion {
 			}
 		}
 	}
+	
+	
+	public boolean modificarUsuario(usuario usuario) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+		String sql = "UPDATE usuario SET nombre=?, identidad=?, cargo=?, direccion_foto_usuario=? WHERE identidad=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, usuario.getNombre());
+			ps.setString(2, usuario.getIdentidad());
+			ps.setString(3, usuario.getCargo());
+			ps.setString(4, usuario.getDireccion_foto_usuario());
+			ps.setString(5, usuario.getIdentidad());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+
+	}
 
 }

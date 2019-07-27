@@ -41,15 +41,22 @@ public class configuraciones extends JFrame {
 	public static JRadioButton rdbtnActivar;
 	public static String sonido = null;
 	public static String frase = null;
+	public static String tema = null;
 	public JButton btnGuardar;
 	public JButton btnActualizar;
 	public JTextField txtCodigo;
 	public ButtonGroup grupo;
+	public ButtonGroup grupo2;
+	private JLabel lblTemasDelSistema;
+	private static JRadioButton rdbtnClaro;
+	private static JRadioButton rdbtnObscuro;
+	private static JRadioButton rdbtnColorido;
+	private static JRadioButton rdbtnClaroobscuro;
 
 	public configuraciones() {
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(0);
-		setBounds(100, 100, 387, 365);
+		setBounds(100, 100, 387, 437);
 		setUndecorated(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -79,13 +86,15 @@ public class configuraciones extends JFrame {
 		label.setIcon(icono2);
 
 		rdbtnDesactivar = new JRadioButton("Desactivar");
+		rdbtnDesactivar.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnDesactivar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnDesactivar.setBounds(115, 237, 89, 23);
+		rdbtnDesactivar.setBounds(115, 233, 89, 23);
 		contentPane.add(rdbtnDesactivar);
 
 		rdbtnActivar = new JRadioButton("Activar");
+		rdbtnActivar.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnActivar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnActivar.setBounds(206, 237, 89, 23);
+		rdbtnActivar.setBounds(206, 233, 89, 23);
 		contentPane.add(rdbtnActivar);
 
 		grupo = new ButtonGroup();
@@ -102,7 +111,7 @@ public class configuraciones extends JFrame {
 		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFrase.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 10));
 		txtFrase.setColumns(10);
-		txtFrase.setBounds(16, 300, 351, 20);
+		txtFrase.setBounds(10, 372, 351, 20);
 		contentPane.add(txtFrase);
 		InputMap map8 = txtFrase.getInputMap(JComponent.WHEN_FOCUSED);
 		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -125,31 +134,68 @@ public class configuraciones extends JFrame {
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(50, 205, 50));
-		btnGuardar.setBounds(20, 331, 104, 23);
+		btnGuardar.setBounds(14, 403, 104, 23);
 		contentPane.add(btnGuardar);
 
 		btnActualizar = new JButton("Guardar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(50, 205, 50));
-		btnActualizar.setBounds(267, 331, 104, 23);
+		btnActualizar.setBounds(261, 403, 104, 23);
 		contentPane.add(btnActualizar);
 
 		JLabel lblFraseMotivadora = new JLabel("Frase Motivadora :");
 		lblFraseMotivadora.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFraseMotivadora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		lblFraseMotivadora.setBounds(103, 257, 190, 25);
+		lblFraseMotivadora.setBounds(97, 334, 190, 20);
 		contentPane.add(lblFraseMotivadora);
 
 		JLabel lblEscribaUnaFrase = new JLabel("Escriba una frase motivadora.");
 		lblEscribaUnaFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscribaUnaFrase.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblEscribaUnaFrase.setBounds(16, 277, 371, 26);
+		lblEscribaUnaFrase.setBounds(10, 349, 371, 26);
 		contentPane.add(lblEscribaUnaFrase);
 
 		txtCodigo = new JTextField();
 		txtCodigo.setBounds(10, 64, 86, 20);
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
+
+		lblTemasDelSistema = new JLabel("Temas del sistema :");
+		lblTemasDelSistema.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemasDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+		lblTemasDelSistema.setBounds(105, 257, 188, 26);
+		contentPane.add(lblTemasDelSistema);
+
+		rdbtnClaro = new JRadioButton("Claro");
+		rdbtnClaro.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnClaro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnClaro.setBounds(84, 278, 119, 23);
+		contentPane.add(rdbtnClaro);
+
+		rdbtnObscuro = new JRadioButton("Obscuro");
+		rdbtnObscuro.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnObscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnObscuro.setBounds(205, 278, 119, 23);
+		contentPane.add(rdbtnObscuro);
+
+		rdbtnColorido = new JRadioButton("Colorido");
+		rdbtnColorido.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnColorido.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnColorido.setBounds(84, 304, 119, 23);
+		contentPane.add(rdbtnColorido);
+
+		rdbtnClaroobscuro = new JRadioButton("Gris");
+		rdbtnClaroobscuro.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnClaroobscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		rdbtnClaroobscuro.setBounds(205, 304, 119, 23);
+		contentPane.add(rdbtnClaroobscuro);
+
+		grupo2 = new ButtonGroup();
+		grupo2.add(rdbtnClaro);
+		grupo2.add(rdbtnObscuro);
+		grupo2.add(rdbtnColorido);
+		grupo2.add(rdbtnClaroobscuro);
+
 		txtCodigo.setVisible(false);
 
 	}
@@ -183,6 +229,8 @@ public class configuraciones extends JFrame {
 			if (rs.next()) {
 				sonido = (rs.getString("sonido_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
+				tema = (rs.getString("tema_configuracion"));
+
 				if (sonido.equals("Activar")) {
 					try {
 						vozBienvenido();
@@ -199,6 +247,18 @@ public class configuraciones extends JFrame {
 				} else {
 					ventana_principal.txtFrase.setText(
 							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
+				}
+
+				if (tema.toString().equals("Claro")) {
+					ventana_principal.contentPane.setBackground(Color.WHITE);
+					ventana_principal menu = new ventana_principal();
+					menu.pack();
+				} else {
+					if (tema.toString().equals("Obscuro")) {
+						ventana_principal.contentPane.setBackground(Color.GRAY);
+						ventana_principal menu = new ventana_principal();
+						menu.pack();
+					}
 				}
 			}
 			rs.close();
@@ -220,6 +280,7 @@ public class configuraciones extends JFrame {
 			if (rs.next()) {
 				sonido = (rs.getString("sonido_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
+				tema = (rs.getString("tema_configuracion"));
 
 				if (sonido.equals("Activar")) {
 					rdbtnActivar.setSelected(true);
@@ -236,6 +297,26 @@ public class configuraciones extends JFrame {
 				} else {
 					txtFrase.setText(frase);
 					repaint();
+				}
+				
+				if (tema.equals("Claro")) {
+					rdbtnClaro.setSelected(true);
+					repaint();
+				} else {
+					if (tema.equals("Obscuro")) {
+						rdbtnClaro.setSelected(true);
+						repaint();
+					} else {
+						if (tema.equals("Colorido")) {
+							rdbtnClaro.setSelected(true);
+							repaint();
+						} else {
+							if (tema.equals("Claro-Obscuro")) {
+								rdbtnClaro.setSelected(true);
+								repaint();
+							} 
+						}
+					}
 				}
 			}
 

@@ -34,6 +34,10 @@ public class control_empleado implements ActionListener {
 	public empleado claseEmpleado;
 	public consultas_empleado consultaEmpleado;
 	public registro_empleados formularioEmpleado;
+	
+	public usuario claseUsuario;
+	public consultas_usuario consultaUsuario;
+	
 	public String fechaNacimiento;
 	public String fechaRegistro;
 	public String fechaLabores;
@@ -47,10 +51,11 @@ public class control_empleado implements ActionListener {
 	public registro_usuarios usuario = new registro_usuarios();
 	public static int valor = 0;
 
-	public control_empleado(empleado claseEmpleado, consultas_empleado consultaEmpleado,
-			registro_empleados formularioEmpleado) {
+	public control_empleado(empleado claseEmpleado, usuario claseUsuario, consultas_empleado consultaEmpleado, consultas_usuario consultaUsuario,registro_empleados formularioEmpleado) {
 		this.claseEmpleado = claseEmpleado;
+		this.claseUsuario = claseUsuario;
 		this.consultaEmpleado = consultaEmpleado;
+		this.consultaUsuario = consultaUsuario;
 		this.formularioEmpleado = formularioEmpleado;
 		this.formularioEmpleado.btnActualizarEmpleado.addActionListener(this);
 		this.formularioEmpleado.btnNuevoEmpleado.addActionListener(this);
@@ -327,8 +332,13 @@ public class control_empleado implements ActionListener {
 							registro_empleados.lbl_tiempo_empleado_asignacion.getText().toString());
 					claseEmpleado.setFoto_contrato_empleado_asignado(
 							registro_empleados.lbl_foto_empleado_asignacion.getText().toString());
-
-					if (consultaEmpleado.modificar(claseEmpleado)) {
+					
+					claseUsuario.setNombre(registro_empleados.txtNombresEmpleado.getText().toString()+" "+registro_empleados.txtApellidosEmpleado.getText().toString());
+					claseUsuario.setIdentidad(registro_empleados.txtIdentidadEmpleado.getText().toString());
+					claseUsuario.setCargo(registro_empleados.lbl_nombre_cargo_asignacion.getText().toString());
+					claseUsuario.setDireccion_foto_usuario(registro_empleados.txtDireccionFoto.getText().toString());
+					
+					if (consultaEmpleado.modificar(claseEmpleado)&&consultaUsuario.modificarUsuario(claseUsuario)) {
 						JOptionPane.showMessageDialog(null, "Exito! Datos del Empleado actualizados.");
 						limpiar();
 						formularioEmpleado.construirTablaEmpleados();

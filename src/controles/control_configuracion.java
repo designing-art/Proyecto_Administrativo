@@ -24,7 +24,6 @@ public class control_configuracion implements ActionListener {
 		this.clase = clase;
 		this.consulta = consulta;
 		this.formulario = formulario;
-		this.formulario = formulario;
 		this.formulario.btnGuardar.addActionListener(this);
 		this.formulario.btnActualizar.addActionListener(this);
 	}
@@ -35,6 +34,12 @@ public class control_configuracion implements ActionListener {
 		if (e.getSource() == formulario.btnGuardar) {
 
 			if (configuraciones.rdbtnActivar.isSelected()) {
+				clase.setSonido_configuracion(configuraciones.rdbtnActivar.getText().toString());
+			} else {
+				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());
+			}
+			
+			if (formulario.rd.isSelected()) {
 				clase.setSonido_configuracion(configuraciones.rdbtnActivar.getText().toString());
 			} else {
 				clase.setSonido_configuracion(configuraciones.rdbtnDesactivar.getText().toString());

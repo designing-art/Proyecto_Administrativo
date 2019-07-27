@@ -194,7 +194,7 @@ public class ventana_principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 580);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -296,8 +296,10 @@ public class ventana_principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();
+				usuario clase2 = new usuario();
+				consultas_usuario consulta2 = new consultas_usuario();
 				registro_empleados formulario = new registro_empleados();
-				control_empleado control = new control_empleado(clase, consulta, formulario);
+				control_empleado control = new control_empleado(clase, clase2, consulta, consulta2, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				formulario.txtNombresEmpleado.requestFocusInWindow();
@@ -818,12 +820,13 @@ public class ventana_principal extends JFrame {
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
-		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_4.setBounds(481, 41, 133, 26);
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
 
 		lbl_horaSistema = new JLabel();
+		lbl_horaSistema.setForeground(new Color(0, 128, 128));
 		lbl_horaSistema.setBounds(0, 0, 131, 26);
 		panel_4.add(lbl_horaSistema);
 		lbl_horaSistema.setFont(new Font("Franklin Gothic Demi", Font.BOLD, 16));
@@ -831,32 +834,32 @@ public class ventana_principal extends JFrame {
 		lbl_horaSistema.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_5.setBackground(Color.WHITE);
 		panel_5.setBounds(410, 73, 274, 175);
 		contentPane.add(panel_5);
 		panel_5.setLayout(null);
 
 		lblTipoUsuario = new JLabel("tipo");
-		lblTipoUsuario.setBounds(16, 111, 119, 28);
+		lblTipoUsuario.setBounds(10, 111, 177, 28);
 		panel_5.add(lblTipoUsuario);
 		lblTipoUsuario.setForeground(new Color(0, 128, 128));
-		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel lblUsuario_1 = new JLabel("Tipo de usuario.");
-		lblUsuario_1.setBounds(16, 97, 138, 14);
+		lblUsuario_1.setBounds(10, 97, 177, 14);
 		panel_5.add(lblUsuario_1);
 		lblUsuario_1.setForeground(Color.BLACK);
 		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		lblCargoUsuario = new JLabel("cargo");
-		lblCargoUsuario.setBounds(16, 68, 119, 32);
+		lblCargoUsuario.setBounds(10, 68, 177, 32);
 		panel_5.add(lblCargoUsuario);
 		lblCargoUsuario.setForeground(new Color(0, 128, 128));
-		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel lblCargo = new JLabel("Cargo del usuario.");
-		lblCargo.setBounds(16, 56, 138, 14);
+		lblCargo.setBounds(10, 56, 177, 14);
 		panel_5.add(lblCargo);
 		lblCargo.setForeground(Color.BLACK);
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -865,7 +868,7 @@ public class ventana_principal extends JFrame {
 		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setBounds(10, 150, 254, 14);
 		panel_5.add(lblNombreUsuario);
-		lblNombreUsuario.setForeground(Color.BLACK);
+		lblNombreUsuario.setForeground(new Color(0, 128, 128));
 		lblNombreUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		JLabel lblInformacionDelUsuario = new JLabel();
@@ -879,12 +882,12 @@ public class ventana_principal extends JFrame {
 		JLabel lblDatos = new JLabel("Datos del usuario :");
 		lblDatos.setForeground(Color.BLACK);
 		lblDatos.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblDatos.setBounds(16, 31, 157, 14);
+		lblDatos.setBounds(10, 31, 177, 14);
 		panel_5.add(lblDatos);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel.setBackground(new Color(0, 191, 255));
+		panel.setBackground(new Color(255, 255, 255));
 		panel.setBounds(145, 23, 119, 125);
 		panel_5.add(panel);
 		panel.setLayout(null);
@@ -899,14 +902,14 @@ public class ventana_principal extends JFrame {
 		labelfotousuario.setIcon(iconousuario);
 
 		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_6.setBackground(Color.WHITE);
 		panel_6.setBounds(410, 11, 274, 26);
 		contentPane.add(panel_6);
 		panel_6.setLayout(null);
 
 		lbl_fechaSistema = new JLabel();
-		lbl_fechaSistema.setForeground(new Color(0, 139, 139));
+		lbl_fechaSistema.setForeground(new Color(0, 128, 128));
 		lbl_fechaSistema.setBounds(0, 0, 274, 26);
 		panel_6.add(lbl_fechaSistema);
 		lbl_fechaSistema.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
@@ -915,7 +918,7 @@ public class ventana_principal extends JFrame {
 		lbl_fechaSistema.setText(getFecha());
 
 		JPanel panel_7 = new JPanel();
-		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_7.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_7.setBackground(Color.WHITE);
 		panel_7.setBounds(410, 250, 274, 290);
 		contentPane.add(panel_7);
@@ -924,22 +927,22 @@ public class ventana_principal extends JFrame {
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setBounds(0, 0, 274, 33);
 		panel_7.add(lbl_nombre_empresa_principal);
-		lbl_nombre_empresa_principal.setForeground(Color.BLACK);
+		lbl_nombre_empresa_principal.setForeground(new Color(0, 128, 128));
 		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_nombre_empresa_principal.setFont(new Font("Cooper Black", Font.PLAIN, 18));
+		lbl_nombre_empresa_principal.setFont(new Font("Eras Bold ITC", Font.PLAIN, 18));
 		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
 
 		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
 		btnInformacionEmpresa.setBounds(10, 256, 252, 23);
 		panel_7.add(btnInformacionEmpresa);
-		btnInformacionEmpresa.setBackground(Color.WHITE);
-		btnInformacionEmpresa.setForeground(Color.BLACK);
+		btnInformacionEmpresa.setBackground(new Color(255, 255, 255));
+		btnInformacionEmpresa.setForeground(new Color(0, 128, 128));
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setLayout(null);
-		panel_1.setBackground(new Color(0, 191, 255));
+		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBounds(10, 32, 252, 223);
 		panel_7.add(panel_1);
 
@@ -970,7 +973,7 @@ public class ventana_principal extends JFrame {
 		});
 
 		JPanel panel_8 = new JPanel();
-		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_8.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_8.setBackground(Color.WHITE);
 		panel_8.setBounds(21, 11, 379, 34);
 		contentPane.add(panel_8);
@@ -978,7 +981,7 @@ public class ventana_principal extends JFrame {
 		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
 		panel_8.add(lblBienvenidoAlSistema);
 		lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBienvenidoAlSistema.setForeground(Color.BLACK);
+		lblBienvenidoAlSistema.setForeground(new Color(0, 128, 128));
 		lblBienvenidoAlSistema.setFont(new Font("Cooper Black", Font.PLAIN, 18));
 
 		panelFacturas = new JPanel();
@@ -1278,10 +1281,26 @@ public class ventana_principal extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
-								+ "         podria hacer algunos ajustes.\n" + "         Ingrese a:\n"
-								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
+								+ "         podria hacer algunos ajustes.\n" + "         Ingresaremos a:\n"
+								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalizar su empresa!\n"
 								+ "            ******* Buen Dia! *******");
+				empresa clase = new empresa();
+				consultas_empresa consulta = new consultas_empresa();
+				registro_empresa formulario = new registro_empresa();
+				control_empresa control = new control_empresa(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.mostrarEmpresa();
+				formulario.pistas();
+				formulario.btnActualizarDatos.setVisible(false);
+				nombre = lbl_nombre_empresa_principal.getText().toString();
+				registro_empresa.txtNombre_Empresa.setText(nombre);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				dispose();
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				
 			}
+			
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
