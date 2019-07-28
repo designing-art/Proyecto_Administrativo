@@ -184,7 +184,7 @@ public class configuraciones extends JFrame {
 		rdbtnColorido.setBounds(84, 304, 119, 23);
 		contentPane.add(rdbtnColorido);
 
-		rdbtnClaroobscuro = new JRadioButton("Gris");
+		rdbtnClaroobscuro = new JRadioButton("Plateado");
 		rdbtnClaroobscuro.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnClaroobscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		rdbtnClaroobscuro.setBounds(205, 304, 119, 23);
@@ -230,7 +230,6 @@ public class configuraciones extends JFrame {
 				sonido = (rs.getString("sonido_configuracion"));
 				tema = (rs.getString("tema_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
-				
 
 				if (sonido.equals("Activar")) {
 					try {
@@ -243,24 +242,36 @@ public class configuraciones extends JFrame {
 						e.printStackTrace();
 					}
 				}
-				
-				if (!frase.equals("")) {
-					ventana_principal.txtFrase.setText(frase);
-				} else {
+
+				if (frase == "") {
 					ventana_principal.txtFrase.setText(
 							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
+				} else {
+					ventana_principal.txtFrase.setText(frase);
 				}
 
 				if (tema == "Claro") {
 					ventana_principal.contentPane.setBackground(Color.WHITE);
-					
+
 				} else {
 					if (tema == "Obscuro") {
-						ventana_principal.contentPane.setBackground(Color.GRAY);
-						
+						ventana_principal.contentPane.setBackground(Color.LIGHT_GRAY);
+
+					}else {
+						if (tema == "Colorido") {
+							ventana_principal.contentPane.setBackground(Color.blue);
+
+						}else {
+							if (tema == "Plateado") {
+								ventana_principal.contentPane.setBackground(Color.DARK_GRAY);
+
+							}
+						}
 					}
 				}
 			}
+			ventana_principal menu = new ventana_principal();
+			menu.pack();
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
@@ -282,7 +293,6 @@ public class configuraciones extends JFrame {
 				sonido = (rs.getString("sonido_configuracion"));
 				tema = (rs.getString("tema_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
-				
 
 				if (sonido.equals("Activar")) {
 					rdbtnActivar.setSelected(true);

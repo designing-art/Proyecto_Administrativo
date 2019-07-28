@@ -76,7 +76,6 @@ public class control_configuracion implements ActionListener {
 				configuracion.establecerConfiguraciones();
 				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
 				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
-				principal.pack();
 
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no registrados");
@@ -132,7 +131,6 @@ public class control_configuracion implements ActionListener {
 				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
-				principal.pack();
 
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no actualizados");

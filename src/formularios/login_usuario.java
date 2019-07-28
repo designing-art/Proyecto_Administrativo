@@ -33,6 +33,7 @@ import java.util.Timer;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.JRadioButton;
 
 public class login_usuario extends JFrame {
 
@@ -71,7 +72,7 @@ public class login_usuario extends JFrame {
 	public static String opciones;
 	public static String usuarios;
 	public static String acercade;
-	
+
 	public static String nombreCompletoUsuario;
 	public static String cargoUsuario;
 	public static String tipoUsuario;
@@ -167,20 +168,24 @@ public class login_usuario extends JFrame {
 		lblNombreEmpresa.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
 		lblNombreEmpresa.setBounds(10, 0, 303, 33);
 		panel.add(lblNombreEmpresa);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBounds(88, 27, 152, 135);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
-		
-				lblFotoEmpresa = new JLabel("");
-				lblFotoEmpresa.setBounds(10, 11, 132, 113);
-				panel_1.add(lblFotoEmpresa);
-				final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
-						lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
-				lblFotoEmpresa.setIcon(icono2);
+
+		lblFotoEmpresa = new JLabel("");
+		lblFotoEmpresa.setBounds(10, 11, 132, 113);
+		panel_1.add(lblFotoEmpresa);
+		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
+				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
+		lblFotoEmpresa.setIcon(icono2);
+
+		JRadioButton radioButton = new JRadioButton("");
+		radioButton.setBounds(261, 225, 21, 23);
+		panel.add(radioButton);
 
 		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
 		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
@@ -270,8 +275,6 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-
-	
 
 	public void definirPermisos() {
 		if (login_usuario.empleado.equals("SI")) {
@@ -417,11 +420,11 @@ public class login_usuario extends JFrame {
 		} else {
 			ventana_principal.btnAcercaDe.setVisible(false);
 		}
-		
+
 		ventana_principal VENTANA = new ventana_principal();
 		VENTANA.pack();
 	}
-	
+
 	public void consultarDatosInicioSesionUsuario() {
 		conexion conex = new conexion();
 		try {
@@ -446,18 +449,18 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-	
+
 	public void establecerDatosInicioSesionUsuario() {
 		ventana_principal.lblNombreUsuario.setText(nombreCompletoUsuario);
 		ventana_principal.lblCargoUsuario.setText(cargoUsuario);
 		ventana_principal.lblTipoUsuario.setText(tipoUsuario);
 		final ImageIcon icono = new ImageIcon(direccionFotoUsuario);
-		final ImageIcon iconofoto = new ImageIcon(icono.getImage().getScaledInstance(
-				ventana_principal.labelfotousuario.getWidth(),
-				ventana_principal.labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon iconofoto = new ImageIcon(
+				icono.getImage().getScaledInstance(ventana_principal.labelfotousuario.getWidth(),
+						ventana_principal.labelfotousuario.getHeight(), Image.SCALE_DEFAULT));
 		ventana_principal.labelfotousuario.setIcon(iconofoto);
 	}
-	
+
 	public void iniciarSesion() {
 		ventana_principal principal = new ventana_principal();
 		String user = String.valueOf(txtUsuario.getText().toString());
@@ -479,15 +482,14 @@ public class login_usuario extends JFrame {
 					principal.setVisible(true);
 					principal.consultarEmpresa();
 					principal.consultarSAR();
+					principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
+					Timer time = new Timer();
+					time.schedule(principal.tarea, 0, 1000);
 					consultarDatosInicioSesionUsuario();
 					establecerDatosInicioSesionUsuario();
 					consultarPermisos();
 					definirPermisos();
-					principal.setTitle("Sesión iniciada por: "+nombreCompletoUsuario);
-					Timer time = new Timer();
-					time.schedule(principal.tarea, 0, 1000);
 					configuraciones configuracion = new configuraciones();
-					configuracion.consultarConfiguracion();
 					configuracion.establecerConfiguraciones();
 					dispose();
 				} else {

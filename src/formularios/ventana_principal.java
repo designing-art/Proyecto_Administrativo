@@ -1194,6 +1194,7 @@ public class ventana_principal extends JFrame {
 		scrollPane.setViewportBorder(UIManager.getBorder("ComboBox.editorBorder"));
 
 		txtFrase = new JTextField();
+		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPane.setViewportView(txtFrase);
 		txtFrase.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 12));
 		txtFrase.setText(
