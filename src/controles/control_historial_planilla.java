@@ -10,19 +10,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import javax.swing.JOptionPane;
 
 import clases.historial_planilla;
+import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_historial_planilla;
+import consultas.consultas_planilla;
+import formularios.login_usuario;
 import formularios.registro_nuevas_planillas;
+import formularios.registro_planillas;
 
 public class control_historial_planilla implements ActionListener {
 
 	public historial_planilla clase_historial_planilla;
 	public consultas_historial_planilla consulta_historial_planilla;
 	public registro_nuevas_planillas formulario_historial_planilla;
+	
+	public static String id = null;
+	public static String nombre = null;
 
 	public control_historial_planilla(historial_planilla clase, consultas_historial_planilla consulta,
 			registro_nuevas_planillas formulario) {
@@ -36,6 +44,7 @@ public class control_historial_planilla implements ActionListener {
 		this.formulario_historial_planilla.btnBorrarPlanilla.addActionListener(this);
 		this.formulario_historial_planilla.btnVerPlanilla.addActionListener(this);
 		this.formulario_historial_planilla.btnAceptar.addActionListener(this);
+		this.formulario_historial_planilla.btnContinuar.addActionListener(this);
 	}
 
 	@Override
@@ -47,7 +56,7 @@ public class control_historial_planilla implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para crear la planilla!");
 			} else {
 				clase_historial_planilla.setEstado_planila(
-						formulario_historial_planilla.cbxEstadoPlanilla.getSelectedItem().toString());
+						formulario_historial_planilla.txtEstadoPlanilla.getText().toString());
 				clase_historial_planilla.setTipo_planilla_final(
 						formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
 				clase_historial_planilla
@@ -112,7 +121,7 @@ public class control_historial_planilla implements ActionListener {
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 					formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
-					formulario_historial_planilla.cbxEstadoPlanilla.setSelectedItem(estado);
+					formulario_historial_planilla.txtEstadoPlanilla.setText(estado);
 					formulario_historial_planilla.txtNombrePlanilla.setText(nombre);
 					formulario_historial_planilla.editor2.setText(creacion);
 					formulario_historial_planilla.editor.setText(vencimiento);
@@ -181,7 +190,7 @@ public class control_historial_planilla implements ActionListener {
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 					formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
-					formulario_historial_planilla.cbxEstadoPlanilla.setSelectedItem(estado);
+					formulario_historial_planilla.txtEstadoPlanilla.setText(estado);
 					formulario_historial_planilla.txtNombrePlanilla.setText(nombre);
 					formulario_historial_planilla.editor2.setText(creacion);
 					formulario_historial_planilla.editor.setText(vencimiento);
@@ -225,7 +234,7 @@ public class control_historial_planilla implements ActionListener {
 				clase_historial_planilla.setId_planilla_final(
 						Integer.parseInt(formulario_historial_planilla.txtCodigoPlanilla.getText()));
 				clase_historial_planilla.setEstado_planila(
-						formulario_historial_planilla.cbxEstadoPlanilla.getSelectedItem().toString());
+						formulario_historial_planilla.txtEstadoPlanilla.getText().toString());
 				clase_historial_planilla.setTipo_planilla_final(
 						formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
 				clase_historial_planilla
@@ -286,9 +295,47 @@ public class control_historial_planilla implements ActionListener {
 				System.out.println(ex.toString());
 			}
 		}
+		
+		if (e.getSource() == formulario_historial_planilla.btnContinuar) {
+			int filaseleccionada;
+			filaseleccionada = formulario_historial_planilla.tablaPlanilla.getSelectedRow();
+			if (filaseleccionada == -1) {
+				JOptionPane.showMessageDialog(null, "Para continuar trabajando, seleccione una planilla.");
+			} else {
+				id = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
+				nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
+				planilla clase = new planilla();
+				consultas_planilla consulta = new consultas_planilla();
+				registro_planillas formulario = new registro_planillas();
+				control_planilla control = new control_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				formulario.consultarPlanillaActual();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				registro_planillas.txtCodigoPlanillaNueva.setText(id);
+				registro_planillas.lblNombrePlanillaNueva.setText(nombre);
+				formulario_historial_planilla.dispose();
+
+			}
+		}
 
 		if (e.getSource() == formulario_historial_planilla.btnNuevo) {
 			limpiar();
+			formulario_historial_planilla.iniciarEncero();
 			formulario_historial_planilla.obtenerUltimoId();
 			formulario_historial_planilla.btnBorrarPlanilla.setVisible(false);
 			formulario_historial_planilla.btnGuardar.setVisible(true);
@@ -307,6 +354,7 @@ public class control_historial_planilla implements ActionListener {
 		if (e.getSource() == formulario_historial_planilla.btnAceptar) {
 			limpiar();
 			limpiar();
+			formulario_historial_planilla.iniciarEncero();
 			formulario_historial_planilla.obtenerUltimoId();
 			formulario_historial_planilla.btnBorrarPlanilla.setVisible(false);
 			formulario_historial_planilla.btnGuardar.setVisible(true);
@@ -333,6 +381,7 @@ public class control_historial_planilla implements ActionListener {
 		formulario_historial_planilla.txtTotalDeducciones.setText(null);
 		formulario_historial_planilla.txtTotalBonos.setText(null);
 		formulario_historial_planilla.txtTotalPlanilla.setText(null);
+		formulario_historial_planilla.iniciarEncero();
 
 	}
 

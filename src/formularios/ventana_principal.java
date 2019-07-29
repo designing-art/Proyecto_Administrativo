@@ -30,6 +30,7 @@ import clases.empleado;
 import clases.empresa;
 import clases.factura_cliente;
 import clases.factura_empresa;
+import clases.historial_planilla;
 import clases.horario;
 import clases.ingreso;
 import clases.inventario;
@@ -55,6 +56,7 @@ import consultas.consultas_empleado;
 import consultas.consultas_empresa;
 import consultas.consultas_factura_cliente;
 import consultas.consultas_factura_empresa;
+import consultas.consultas_historial_planilla;
 import consultas.consultas_horario;
 import consultas.consultas_inventario;
 import consultas.consultas_planilla;
@@ -77,6 +79,7 @@ import controles.control_empleado;
 import controles.control_empresa;
 import controles.control_factura_cliente;
 import controles.control_factura_empresa;
+import controles.control_historial_planilla;
 import controles.control_horario;
 import controles.control_inventario;
 import controles.control_planilla;
@@ -226,31 +229,29 @@ public class ventana_principal extends JFrame {
 		btnPlanilla.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				historial_planillas formulario = new historial_planillas();
+				planilla clase = new planilla();
+				consultas_planilla consulta = new consultas_planilla();
+				registro_planillas formulario = new registro_planillas();
+				control_planilla control = new control_planilla(clase, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.consultarPlanillas();
-				formulario.cargarPlanillasCreadas();
+				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				formulario.consultarPlanillaActual();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
-				/*
-				 * planilla clase = new planilla(); consultas_planilla consulta = new
-				 * consultas_planilla(); registro_planillas formulario = new
-				 * registro_planillas(); control_planilla control = new control_planilla(clase,
-				 * consulta, formulario); formulario.setVisible(true);
-				 * formulario.setLocationRelativeTo(null);
-				 * registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
-				 * formulario.construirTabla(); formulario.obtenerUltimoId();
-				 * formulario.establecerFechaRegistro(); formulario.pistas();
-				 * formulario.btnBorrarPlanilla.setVisible(false);
-				 * formulario.btnGuardar.setVisible(true); formulario.btnNuevo.setVisible(true);
-				 * formulario.btnActualizar.setVisible(false);
-				 * formulario.btnActualizarDatosPlanilla.setVisible(true);
-				 * formulario.btnVerPlanilla.setVisible(true);
-				 * formulario.btnAceptar.setVisible(false); Timer time = new Timer();
-				 * time.schedule(formulario.tarea, 0, 1000);
-				 * formulario.setTitle("Sesión iniciada por: "+login_usuario.
-				 * nombreCompletoUsuario); dispose();
-				 */
 			}
 		});
 
@@ -378,6 +379,8 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosBonificacion.setVisible(true);
 				formulario.btnVerBonificacion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
+				formulario.btnPlanilla.setVisible(false);
+				formulario.btnSinBonif.setVisible(false);
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
@@ -411,6 +414,8 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizarDatosDeduccion.setVisible(true);
 				formulario.btnVerDeduccion.setVisible(true);
 				formulario.btnAceptar.setVisible(false);
+				formulario.btnPlanillaDeducciones.setVisible(false);
+				formulario.btnSinDeduc.setVisible(false);
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
@@ -573,14 +578,17 @@ public class ventana_principal extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
 									+ "         debe hacer algunos ajustes.\n" + "         Ingrese a:\n"
-									+ "                Productos\n" + "          y agrege nuevos productos al inventario!\n"
+									+ "                Productos\n"
+									+ "          y agrege nuevos productos al inventario!\n"
 									+ "            ******* Buen Dia! *******");
 
 				} else {
 					servicio clase = new servicio();
+					producto clase2 = new producto();
+					ingreso clase3 = new ingreso();
 					consultas_servicio consulta = new consultas_servicio();
 					registro_servicios formulario = new registro_servicios();
-					control_servicio control = new control_servicio(clase, consulta, formulario);
+					control_servicio control = new control_servicio(clase, clase2, clase3, consulta, formulario);
 					formulario.setVisible(true);
 					formulario.setLocationRelativeTo(null);
 					formulario.txtServicio.requestFocusInWindow();
@@ -588,6 +596,7 @@ public class ventana_principal extends JFrame {
 					formulario.pistas();
 					formulario.consultarEmpresa();
 					formulario.construirTabla();
+					formulario.establecerFechaRegistro();
 					formulario.btnGuardar.setVisible(true);
 					formulario.btnNuevo.setVisible(true);
 					formulario.btnActualizar.setVisible(false);
@@ -826,7 +835,7 @@ public class ventana_principal extends JFrame {
 		panel_4.setLayout(null);
 
 		lbl_horaSistema = new JLabel();
-		lbl_horaSistema.setForeground(new Color(0, 128, 128));
+		lbl_horaSistema.setForeground(new Color(0, 0, 0));
 		lbl_horaSistema.setBounds(0, 0, 131, 26);
 		panel_4.add(lbl_horaSistema);
 		lbl_horaSistema.setFont(new Font("Franklin Gothic Demi", Font.BOLD, 16));
@@ -841,10 +850,10 @@ public class ventana_principal extends JFrame {
 		panel_5.setLayout(null);
 
 		lblTipoUsuario = new JLabel("tipo");
-		lblTipoUsuario.setBounds(10, 111, 177, 28);
+		lblTipoUsuario.setBounds(10, 111, 131, 28);
 		panel_5.add(lblTipoUsuario);
-		lblTipoUsuario.setForeground(new Color(0, 128, 128));
-		lblTipoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblTipoUsuario.setForeground(new Color(0, 0, 128));
+		lblTipoUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
 
 		JLabel lblUsuario_1 = new JLabel("Tipo de usuario.");
 		lblUsuario_1.setBounds(10, 97, 177, 14);
@@ -853,10 +862,10 @@ public class ventana_principal extends JFrame {
 		lblUsuario_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		lblCargoUsuario = new JLabel("cargo");
-		lblCargoUsuario.setBounds(10, 68, 177, 32);
+		lblCargoUsuario.setBounds(10, 68, 131, 32);
 		panel_5.add(lblCargoUsuario);
-		lblCargoUsuario.setForeground(new Color(0, 128, 128));
-		lblCargoUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblCargoUsuario.setForeground(new Color(0, 0, 128));
+		lblCargoUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
 
 		JLabel lblCargo = new JLabel("Cargo del usuario.");
 		lblCargo.setBounds(10, 56, 177, 14);
@@ -868,8 +877,8 @@ public class ventana_principal extends JFrame {
 		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setBounds(10, 150, 254, 14);
 		panel_5.add(lblNombreUsuario);
-		lblNombreUsuario.setForeground(new Color(0, 128, 128));
-		lblNombreUsuario.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblNombreUsuario.setForeground(new Color(0, 0, 128));
+		lblNombreUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
 
 		JLabel lblInformacionDelUsuario = new JLabel();
 		lblInformacionDelUsuario.setText("Administraci\u00F3n del Usuario\r\n. ");
@@ -909,7 +918,7 @@ public class ventana_principal extends JFrame {
 		panel_6.setLayout(null);
 
 		lbl_fechaSistema = new JLabel();
-		lbl_fechaSistema.setForeground(new Color(0, 128, 128));
+		lbl_fechaSistema.setForeground(new Color(0, 0, 128));
 		lbl_fechaSistema.setBounds(0, 0, 274, 26);
 		panel_6.add(lbl_fechaSistema);
 		lbl_fechaSistema.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
@@ -927,7 +936,7 @@ public class ventana_principal extends JFrame {
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setBounds(0, 0, 274, 33);
 		panel_7.add(lbl_nombre_empresa_principal);
-		lbl_nombre_empresa_principal.setForeground(new Color(0, 128, 128));
+		lbl_nombre_empresa_principal.setForeground(new Color(0, 0, 128));
 		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_nombre_empresa_principal.setFont(new Font("Eras Bold ITC", Font.PLAIN, 18));
 		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
@@ -936,7 +945,7 @@ public class ventana_principal extends JFrame {
 		btnInformacionEmpresa.setBounds(10, 256, 252, 23);
 		panel_7.add(btnInformacionEmpresa);
 		btnInformacionEmpresa.setBackground(new Color(255, 255, 255));
-		btnInformacionEmpresa.setForeground(new Color(0, 128, 128));
+		btnInformacionEmpresa.setForeground(new Color(0, 0, 128));
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 
 		panel_1 = new JPanel();
@@ -981,7 +990,7 @@ public class ventana_principal extends JFrame {
 		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
 		panel_8.add(lblBienvenidoAlSistema);
 		lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBienvenidoAlSistema.setForeground(new Color(0, 128, 128));
+		lblBienvenidoAlSistema.setForeground(new Color(0, 0, 128));
 		lblBienvenidoAlSistema.setFont(new Font("Cooper Black", Font.PLAIN, 18));
 
 		panelFacturas = new JPanel();
@@ -1283,7 +1292,7 @@ public class ventana_principal extends JFrame {
 				JOptionPane.showMessageDialog(null,
 						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
 								+ "         podria hacer algunos ajustes.\n" + "         Ingresaremos a:\n"
-								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalizar su empresa!\n"
+								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          a personalizar su empresa!\n"
 								+ "            ******* Buen Dia! *******");
 				empresa clase = new empresa();
 				consultas_empresa consulta = new consultas_empresa();
@@ -1299,9 +1308,9 @@ public class ventana_principal extends JFrame {
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
-				
+
 			}
-			
+
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
@@ -1353,4 +1362,5 @@ public class ventana_principal extends JFrame {
 		}
 
 	}
+	
 }

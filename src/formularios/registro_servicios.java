@@ -34,6 +34,8 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -46,6 +48,8 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
 import com.placeholder.PlaceHolder;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 import conexion.conexion;
 import controles.control_servicio;
@@ -67,6 +71,12 @@ public class registro_servicios extends JFrame {
 	public JButton btnAceptar;
 	public static String hora_fecha_reporte;
 	public int contador = 0;
+	public JDateChooser dateRegistro;
+	
+	public static String nuevaExstenciaProducto = null;
+	public static String totalExistencProd = null;
+	public static int cantidadProducto = 0;
+	public static int existenciaProducto = 0;
 
 	public static String nombreEmpresa = null;
 	public static String totalDatos = null;
@@ -87,6 +97,7 @@ public class registro_servicios extends JFrame {
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
+	public JTextFieldDateEditor editor;
 
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
@@ -103,6 +114,8 @@ public class registro_servicios extends JFrame {
 	public static JTextField txtCapasidad;
 	public static JTextField txtPrecioProducto;
 	public static JTextField txtMarca;
+	public static JTextField txtExistenciaProducto;
+	public static JTextField txtCodigoProducto;
 
 	public registro_servicios() {
 		setResizable(false);
@@ -137,8 +150,8 @@ public class registro_servicios extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -227,9 +240,8 @@ public class registro_servicios extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtServicio.getText().length() == 30)
@@ -241,7 +253,7 @@ public class registro_servicios extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -263,7 +275,7 @@ public class registro_servicios extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -291,7 +303,7 @@ public class registro_servicios extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
 			}
@@ -307,7 +319,7 @@ public class registro_servicios extends JFrame {
 
 		JLabel lblCantidad = new JLabel("6. Productos :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCantidad.setBounds(27, 285, 158, 22);
+		lblCantidad.setBounds(27, 285, 127, 22);
 		panelRegistro.add(lblCantidad);
 
 		lblL = new JLabel("L.");
@@ -330,7 +342,7 @@ public class registro_servicios extends JFrame {
 				if (txtDescripcion.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -341,9 +353,9 @@ public class registro_servicios extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDescripcion.getText().trim();
-		            txtDescripcion.setText(str);
-		        }
+					String str = txtDescripcion.getText().trim();
+					txtDescripcion.setText(str);
+				}
 			}
 		});
 
@@ -359,6 +371,8 @@ public class registro_servicios extends JFrame {
 					txtMarca.setText("");
 					txtCapasidad.setText("");
 					txtPrecioProducto.setText("");
+					txtCodigoProducto.setText("");
+					txtExistenciaProducto.setText("");
 				} else {
 					cargarDatosProducto();
 				}
@@ -402,12 +416,37 @@ public class registro_servicios extends JFrame {
 		txtrNotaSiEs.setBounds(27, 248, 287, 38);
 		panelRegistro.add(txtrNotaSiEs);
 
+		txtExistenciaProducto = new JTextField();
+		txtExistenciaProducto.setHorizontalAlignment(SwingConstants.CENTER);
+		txtExistenciaProducto.setEditable(false);
+		txtExistenciaProducto.setColumns(10);
+		txtExistenciaProducto.setBounds(124, 287, 43, 20);
+		panelRegistro.add(txtExistenciaProducto);
+
+		txtCodigoProducto = new JTextField();
+		txtCodigoProducto.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCodigoProducto.setEditable(false);
+		txtCodigoProducto.setColumns(10);
+		txtCodigoProducto.setBounds(150, 371, 43, 20);
+		panelRegistro.add(txtCodigoProducto);
+		txtCodigoProducto.setVisible(false);
+
+		dateRegistro = new JDateChooser();
+		dateRegistro.setBounds(177, 84, 95, 20);
+		dateRegistro.setDateFormatString("dd-MMMMM-yyyy");
+		panelRegistro.add(dateRegistro);
+		editor = (JTextFieldDateEditor) dateRegistro.getDateEditor();
+		editor.setEditable(false);
+		editor.setHorizontalAlignment(SwingConstants.CENTER);
+		dateRegistro.setVisible(false);
+
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 341, 450);
 		panelRegistro.add(lblLibreta);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo);
+		
 
 		JPanel panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -687,7 +726,7 @@ public class registro_servicios extends JFrame {
 		try {
 			if (contador > 0) {
 				PreparedStatement stmtr = conn.prepareStatement(
-						"SELECT dispositivo_de_entrega_producto, marca_producto, capacidad_produto, precio_producto FROM productos where dispositivo_de_entrega_producto = '"
+						"SELECT dispositivo_de_entrega_producto, marca_producto, capacidad_produto, precio_producto, id_producto, existencia_producto FROM productos where dispositivo_de_entrega_producto = '"
 								+ cbxProductos.getSelectedItem() + "'");
 				ResultSet rsr = stmtr.executeQuery();
 				rsr.next();
@@ -695,6 +734,8 @@ public class registro_servicios extends JFrame {
 				txtMarca.setText(rsr.getString("marca_producto"));
 				txtCapasidad.setText(rsr.getString("capacidad_produto"));
 				txtPrecioProducto.setText(rsr.getString("precio_producto"));
+				txtCodigoProducto.setText(rsr.getString("id_producto"));
+				txtExistenciaProducto.setText(rsr.getString("existencia_producto"));
 				;
 				stmtr.close();
 				rsr.close();
@@ -704,7 +745,7 @@ public class registro_servicios extends JFrame {
 			e21.printStackTrace();
 		}
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
@@ -721,6 +762,17 @@ public class registro_servicios extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void establecerFechaRegistro() {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			Date date = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			dateRegistro.setDate(date);
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	public void restar() {
@@ -743,5 +795,11 @@ public class registro_servicios extends JFrame {
 			e21.printStackTrace();
 		}
 	}
-
+	
+	public void restarVenta() {
+		existenciaProducto = Integer.parseInt(txtExistenciaProducto.getText().toString());
+		cantidadProducto = 1;
+		nuevaExstenciaProducto = String.valueOf(existenciaProducto - cantidadProducto);
+		txtExistenciaProducto.setText(nuevaExstenciaProducto);
+	}
 }

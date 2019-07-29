@@ -15,7 +15,7 @@ public class consultas_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "INSERT INTO planillas (fecha_planilla, nombres_planilla, apellidos_planilla, identidad_planilla, cargo_planilla, sueldo_bruto_planilla, total_deducciones_planilla, total_bonificaciones_planilla, sueldo_neto_planilla, total_apagar_planilla) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO planillas (fecha_planilla, nombres_planilla, apellidos_planilla, identidad_planilla, cargo_planilla, sueldo_bruto_planilla, total_deducciones_planilla, total_bonificaciones_planilla, sueldo_neto_planilla, total_apagar_planilla, nombre_planilla) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -29,6 +29,7 @@ public class consultas_planilla extends conexion {
 			ps.setDouble(8, planilla.getTotal_bonificaciones_planilla());
 			ps.setDouble(9, planilla.getSueldo_neto_planilla());
 			ps.setDouble(10, planilla.getTotal_apagar_planilla());
+			ps.setString(11, planilla.getNombre_planilla());
 			ps.execute();
 
 			return true;
@@ -48,7 +49,7 @@ public class consultas_planilla extends conexion {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
 
-		String sql = "UPDATE planillas SET id_planilla=?, fecha_planilla=?, nombres_planilla=?, apellidos_planilla=?, identidad_planilla=?, cargo_planilla=?, sueldo_bruto_planilla=?, total_deducciones_planilla=?, total_bonificaciones_planilla=?, sueldo_neto_planilla=?, total_apagar_planilla=? WHERE id_planilla=? ";
+		String sql = "UPDATE planillas SET id_planilla=?, fecha_planilla=?, nombres_planilla=?, apellidos_planilla=?, identidad_planilla=?, cargo_planilla=?, sueldo_bruto_planilla=?, total_deducciones_planilla=?, total_bonificaciones_planilla=?, sueldo_neto_planilla=?, total_apagar_planilla=?, nombre_planilla=? WHERE id_planilla=? ";
 
 		try {
 			ps = con.prepareStatement(sql);
@@ -63,7 +64,8 @@ public class consultas_planilla extends conexion {
 			ps.setDouble(9, planilla.getTotal_bonificaciones_planilla());
 			ps.setDouble(10, planilla.getSueldo_neto_planilla());
 			ps.setDouble(11, planilla.getTotal_apagar_planilla());
-			ps.setInt(12, planilla.getId_planilla());
+			ps.setString(12, planilla.getNombre_planilla());
+			ps.setInt(13, planilla.getId_planilla());
 			ps.execute();
 
 			return true;

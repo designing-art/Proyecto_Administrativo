@@ -12,6 +12,7 @@ public class planilla {
 	Double total_bonificaciones_planilla;
 	Double sueldo_neto_planilla;
 	Double total_apagar_planilla;
+	String nombre_planilla;
 
 	public int getId_planilla() {
 		return id_planilla;
@@ -99,6 +100,14 @@ public class planilla {
 
 	public void setTotal_apagar_planilla(Double total_apagar_planilla) {
 		this.total_apagar_planilla = total_apagar_planilla;
+	}
+
+	public String getNombre_planilla() {
+		return nombre_planilla;
+	}
+
+	public void setNombre_planilla(String nombre_planilla) {
+		this.nombre_planilla = nombre_planilla;
 	}
 
 }

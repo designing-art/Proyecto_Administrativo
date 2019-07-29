@@ -75,6 +75,7 @@ public class registro_deducciones extends JFrame {
 	public JLabel label_5;
 	public JTextField txtIdentidadDeduccion;
 	public JLabel lblBuscarEmpleadoPor;
+	public JButton btnSinDeduc;
 
 	public static String nombreEmpresa = null;
 	public static String totalDatos = null;
@@ -129,7 +130,7 @@ public class registro_deducciones extends JFrame {
 	public JLabel label;
 	public JTextField txtCodigo;
 	private JLabel lblFecha;
-	private JButton btnPlanillaDeducciones;
+	public JButton btnPlanillaDeducciones;
 	private JButton button;
 
 	public registro_deducciones() {
@@ -250,7 +251,7 @@ public class registro_deducciones extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (txtTotalDeducciones.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "No hay bonificaciones para este empleado.");
+					JOptionPane.showMessageDialog(null, "No hay deducciones para este empleado.");
 				} else {
 					registro_planillas.txtTotalDeduccionesPlanilla.setText(txtTotalDeducciones.getText());
 					double a = 0;
@@ -343,13 +344,32 @@ public class registro_deducciones extends JFrame {
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(206, 41, 137, 19);
 		panel_2.add(button);
-
-		label_8 = new JLabel("");
-		label_8.setBounds(0, 0, 430, 456);
-		panel_2.add(label_8);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-		label_8.setIcon(logo);
+		
+		btnSinDeduc = new JButton("Sin Deducciones");
+		btnSinDeduc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					JOptionPane.showMessageDialog(null, "Sin Deducciones.");
+					registro_planillas.txtTotalDeduccionesPlanilla.setText("0");
+					double a = 0;
+					double b = 0;
+					double c = 0;
+					a = Double.valueOf(registro_planillas.txtSueldoNetoPlanilla.getText());
+					b = Double.valueOf(registro_planillas.txtTotalDeduccionesPlanilla.getText());
+					c = a - b;
+					registro_planillas.txtTotalPagoEmpleado.setText(String.valueOf(c));
+					dispose();
+			}
+		});
+		btnSinDeduc.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnSinDeduc.setBounds(147, 371, 150, 23);
+		panel_2.add(btnSinDeduc);
+		
+				label_8 = new JLabel("");
+				label_8.setBounds(0, 0, 430, 456);
+				panel_2.add(label_8);
+				final ImageIcon logo = new ImageIcon(
+						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+				label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE DEDUCCIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -769,7 +789,6 @@ public class registro_deducciones extends JFrame {
 				t += p;
 			}
 			txtTotalDeducciones.setText(String.valueOf(t));
-			btnPlanillaDeducciones.setVisible(true);
 		} else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}

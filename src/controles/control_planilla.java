@@ -74,6 +74,7 @@ public class control_planilla implements ActionListener {
 							Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
 					clase_planilla.setTotal_apagar_planilla(
 							Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
+					clase_planilla.setNombre_planilla(registro_planillas.lblNombrePlanillaNueva.getText().toString());
 
 					if (consulta_planilla.registrar(clase_planilla)) {
 						JOptionPane.showMessageDialog(null, "Exito! Empleado agregado a la panilla!");
@@ -107,17 +108,17 @@ public class control_planilla implements ActionListener {
 					registro_planillas.txtIdentidadEmpleadoPlanilla.setText(null);
 				} else {
 					String codigo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
-					String fecha = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
-					String nombres = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
-					String apellidos = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
-					String identidad = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
-					String cargo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
-					String sueldob = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String deduc = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-					String bonif = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
-					String sueldon = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
-					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
+					String fecha = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
+					String nombres = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
+					String apellidos = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
+					String identidad = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
+					String cargo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
+					String sueldob = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
+					String deduc = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
+					String bonif = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
+					String sueldon = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
+					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
+					String nombre = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
 
 					formulario_planilla.txtCodigo.setText(codigo);
 					formulario_planilla.editor.setText(fecha);
@@ -125,11 +126,12 @@ public class control_planilla implements ActionListener {
 					formulario_planilla.txtApellidosPlanilla.setText(apellidos);
 					formulario_planilla.txtIdentidadPlanilla.setText(identidad);
 					formulario_planilla.txtCargoPlanilla.setText(cargo);
-					registro_planillas.txtCantidadPlanilla.setText(sueldob);
-					registro_planillas.txtTotalDeduccionesPlanilla.setText(deduc);
-					registro_planillas.txtTotalBonificacionesPlanilla.setText(bonif);
-					registro_planillas.txtSueldoNetoPlanilla.setText(sueldon);
-					registro_planillas.txtTotalPagoEmpleado.setText(total);
+					formulario_planilla.txtCantidadPlanilla.setText(sueldob);
+					formulario_planilla.txtTotalDeduccionesPlanilla.setText(deduc);
+					formulario_planilla.txtTotalBonificacionesPlanilla.setText(bonif);
+					formulario_planilla.txtSueldoNetoPlanilla.setText(sueldon);
+					formulario_planilla.txtTotalPagoEmpleado.setText(total);
+					formulario_planilla.lblNombrePlanillaNueva.setText(nombre);
 
 					formulario_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtNombresPlanilla.setForeground(Color.BLACK);
@@ -165,29 +167,32 @@ public class control_planilla implements ActionListener {
 					registro_planillas.txtIdentidadEmpleadoPlanilla.setText(null);
 				} else {
 					String codigo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-					String tipo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
-					String fecha = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
-					String nombres = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
-					String apellidos = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
-					String identidad = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
-					String cargo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
-					String sueldob = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
-					String deduc = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
-					String bonif = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
-					String sueldon = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
-					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
+					String fecha = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 1).toString();
+					String nombres = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
+					String apellidos = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
+					String identidad = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 4).toString();
+					String cargo = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 5).toString();
+					String sueldob = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 6).toString();
+					String deduc = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 7).toString();
+					String bonif = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 8).toString();
+					String sueldon = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 9).toString();
+					String total = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 10).toString();
+					String nombre = formulario_planilla.tablaPlanilla.getValueAt(filaseleccionada, 11).toString();
 
+					
 					formulario_planilla.txtCodigo.setText(codigo);
 					formulario_planilla.editor.setText(fecha);
 					formulario_planilla.txtNombresPlanilla.setText(nombres);
 					formulario_planilla.txtApellidosPlanilla.setText(apellidos);
 					formulario_planilla.txtIdentidadPlanilla.setText(identidad);
 					formulario_planilla.txtCargoPlanilla.setText(cargo);
-					registro_planillas.txtCantidadPlanilla.setText(sueldob);
-					registro_planillas.txtTotalDeduccionesPlanilla.setText(deduc);
-					registro_planillas.txtTotalBonificacionesPlanilla.setText(bonif);
-					registro_planillas.txtSueldoNetoPlanilla.setText(sueldon);
-					registro_planillas.txtTotalPagoEmpleado.setText(total);
+					formulario_planilla.txtCantidadPlanilla.setText(sueldob);
+					formulario_planilla.txtTotalDeduccionesPlanilla.setText(deduc);
+					formulario_planilla.txtTotalBonificacionesPlanilla.setText(bonif);
+					formulario_planilla.txtSueldoNetoPlanilla.setText(sueldon);
+					formulario_planilla.txtTotalPagoEmpleado.setText(total);
+					formulario_planilla.lblNombrePlanillaNueva.setText(nombre);
+
 
 					formulario_planilla.txtCodigoPlanilla.setForeground(Color.BLACK);
 					formulario_planilla.txtNombresPlanilla.setForeground(Color.BLACK);
@@ -241,7 +246,8 @@ public class control_planilla implements ActionListener {
 						Double.parseDouble(registro_planillas.txtSueldoNetoPlanilla.getText()));
 				clase_planilla.setTotal_apagar_planilla(
 						Double.parseDouble(registro_planillas.txtTotalPagoEmpleado.getText()));
-				clase_planilla.setId_planilla(Integer.parseInt(formulario_planilla.txtCodigo.getText()));
+				clase_planilla.setNombre_planilla(registro_planillas.lblNombrePlanillaNueva.getText().toString());
+
 
 				if (consulta_planilla.modificar(clase_planilla)) {
 					JOptionPane.showMessageDialog(null, "Datos del pago actualizados!");
@@ -367,6 +373,7 @@ public class control_planilla implements ActionListener {
 
 	public static ArrayList<planilla> buscarUsuariosConMatriz() {
 		conexion conex = new conexion();
+		registro_planillas planillas = new registro_planillas();
 		ArrayList<planilla> miLista = new ArrayList<planilla>();
 		planilla planilla;
 		try {
@@ -387,6 +394,7 @@ public class control_planilla implements ActionListener {
 						Double.parseDouble(rs.getString("total_bonificaciones_planilla")));
 				planilla.setSueldo_neto_planilla(Double.parseDouble(rs.getString("sueldo_neto_planilla")));
 				planilla.setTotal_apagar_planilla(Double.parseDouble(rs.getString("total_apagar_planilla")));
+				planilla.setNombre_planilla(rs.getString("nombre_planilla"));
 				miLista.add(planilla);
 			}
 			rs.close();
@@ -403,7 +411,7 @@ public class control_planilla implements ActionListener {
 
 	public static String[][] obtenerMatriz() {
 		ArrayList<planilla> miLista = buscarUsuariosConMatriz();
-		String matrizInfo[][] = new String[miLista.size()][11];
+		String matrizInfo[][] = new String[miLista.size()][12];
 		for (int i = 0; i < miLista.size(); i++) {
 			matrizInfo[i][0] = miLista.get(i).getId_planilla() + "";
 			matrizInfo[i][1] = miLista.get(i).getFecha_planilla() + "";
@@ -416,6 +424,7 @@ public class control_planilla implements ActionListener {
 			matrizInfo[i][8] = miLista.get(i).getTotal_bonificaciones_planilla() + "";
 			matrizInfo[i][9] = miLista.get(i).getSueldo_neto_planilla() + "";
 			matrizInfo[i][10] = miLista.get(i).getTotal_apagar_planilla() + "";
+			matrizInfo[i][11] = miLista.get(i).getNombre_planilla() + "";
 		}
 
 		return matrizInfo;

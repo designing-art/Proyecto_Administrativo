@@ -134,6 +134,7 @@ public class registro_bonificaciones extends JFrame {
 	public JLabel lblFecha;
 	public JButton btnPlanilla;
 	private JButton button;
+	public JButton btnSinBonif;
 
 	public registro_bonificaciones() {
 		setResizable(false);
@@ -347,6 +348,25 @@ public class registro_bonificaciones extends JFrame {
 		button.setBounds(206, 41, 137, 19);
 		panel_2.add(button);
 
+		btnSinBonif = new JButton("Sin Deducciones");
+		btnSinBonif.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Sin bonificaciones.");
+				registro_planillas.txtTotalBonificacionesPlanilla.setText("0");
+				double a = 0;
+				double b = 0;
+				double c = 0;
+				a = Double.valueOf(registro_planillas.txtCantidadPlanilla.getText());
+				b = Double.valueOf(registro_planillas.txtTotalBonificacionesPlanilla.getText());
+				c = a + b;
+				registro_planillas.txtSueldoNetoPlanilla.setText(String.valueOf(c));
+				dispose();
+			}
+		});
+		btnSinBonif.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnSinBonif.setBounds(147, 378, 150, 23);
+		panel_2.add(btnSinBonif);
+
 		label_8 = new JLabel("");
 		label_8.setBounds(0, 0, 430, 456);
 		panel_2.add(label_8);
@@ -542,7 +562,7 @@ public class registro_bonificaciones extends JFrame {
 				if (txtObservacionBonificacion.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -553,9 +573,9 @@ public class registro_bonificaciones extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtObservacionBonificacion.getText().trim();
-		            txtObservacionBonificacion.setText(str);
-		        }
+					String str = txtObservacionBonificacion.getText().trim();
+					txtObservacionBonificacion.setText(str);
+				}
 			}
 		});
 
@@ -683,7 +703,7 @@ public class registro_bonificaciones extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -772,7 +792,6 @@ public class registro_bonificaciones extends JFrame {
 				t += p;
 			}
 			txtTotalBonificacion.setText(String.valueOf(t));
-			btnPlanilla.setVisible(true);
 		} else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}
@@ -863,12 +882,13 @@ public class registro_bonificaciones extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM bonificaciones ORDER BY id_bonificacion DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM bonificaciones ORDER BY id_bonificacion DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				totalDatos = rsr.getString("id_bonificacion");

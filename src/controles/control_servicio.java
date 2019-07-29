@@ -13,9 +13,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import clases.factura_cliente;
+import clases.ingreso;
+import clases.producto;
+import clases.sar;
 import clases.servicio;
 import conexion.conexion;
+import consultas.consultas_factura_cliente;
+import consultas.consultas_ingreso;
+import consultas.consultas_producto;
 import consultas.consultas_servicio;
+import formularios.login_usuario;
+import formularios.registro_facturas_clientes;
+import formularios.registro_ingresos;
+import formularios.registro_productos;
 import formularios.registro_servicios;
 
 public class control_servicio implements ActionListener {
@@ -23,15 +35,27 @@ public class control_servicio implements ActionListener {
 	public servicio clase;
 	public consultas_servicio consulta;
 	public registro_servicios formulario;
+
+	public producto clase2;
+	public consultas_producto consulta2;
+	public registro_productos formulario2;
+
+	public ingreso clase3;
+	public consultas_ingreso consulta3;
+	public registro_ingresos formulario3;
+
 	public static String identidad = null;
 	public static int contador = 0;
 	public static String cantidad = null;
+	public static int cantidadp = 1;
 	public static int total = 0;
 	public static int existencia = 0;
 	public static String resultado = null;
 
-	public control_servicio(servicio clase, consultas_servicio consulta, registro_servicios formulario) {
+	public control_servicio(servicio clase, producto clase2, ingreso clase3, consultas_servicio consulta, registro_servicios formulario) {
 		this.clase = clase;
+		this.clase2 = clase2;
+		this.clase3 = clase3;
 		this.consulta = consulta;
 		this.formulario = formulario;
 		this.formulario.btnGuardar.addActionListener(this);
@@ -52,32 +76,106 @@ public class control_servicio implements ActionListener {
 					|| formulario.txtPrecio.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el servicio!");
 			} else {
-				clase.setTipo_servicio(formulario.txtServicio.getText().toString());
-				clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
-				clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-				clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
-				clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
-				consultarExistencia();
-				if (cantidad.equals(0)) {
-					JOptionPane.showMessageDialog(null, "No hay productos disponibles para la venta!");
-				} else {
-					if (consulta.insertar(clase)) {
-						JOptionPane.showMessageDialog(null, "Producto Vendido!");
-						JOptionPane.showMessageDialog(null, "Servicio registrado!");
-						limpiar();
-						formulario.construirTabla();
-						formulario.obtenerUltimoId();
+				
+				if (formulario.cbxProductos.getSelectedItem().toString().equals("Ninguno")) {
 
-					} else {
-						JOptionPane.showMessageDialog(null, "Error! servicio no registrado");
+					clase.setTipo_servicio(formulario.txtServicio.getText().toString());
+					clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
+					clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+					clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
+					clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
+					
+					clase3.setTipo_ingreso(
+							"Ingreso por servicio de: " + formulario.txtServicio.getText().toString());
+					clase3.setCantidad_ingreso(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+					clase3.setDescripcion_ingreso(
+							"Caracteristicas del servicio : " + formulario.txtDescripcion.getText().toString()
+									+ " y " + "venta de :" + formulario.txtDispositivo.getText().toString());
+					clase3.setFecha_ingreso(formulario.editor.getText().toString());
+					if (consulta.insertar(clase)&& consulta.insertarIngreso(clase3)) {
+						JOptionPane.showMessageDialog(null, "Venta registrada!");
 						limpiar();
+						formulario.obtenerUltimoId();
+						formulario.construirTabla();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
+						limpiar();
+					}
+
+				} else {
+
+					existencia = Integer.parseInt(formulario.txtExistenciaProducto.getText().toString());
+					if (cantidadp > existencia) {
+						JOptionPane.showMessageDialog(null, "Cantidad de venta incorrecta!\n"
+								+ "imposible hacer la venta\n" + "No hay suficiente existencia.\n");
+					} else {
+						if (existencia == 0) {
+							JOptionPane.showMessageDialog(null, "No hay productos disponibles para la venta.");
+						} else {
+							formulario.restarVenta();
+							clase.setTipo_servicio(formulario.txtServicio.getText().toString());
+							clase.setTiempo_servicio(formulario.txtTiempo.getText().toString());
+							clase.setPrecio_servicio(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+							clase.setDescripcion_servicio(formulario.txtDescripcion.getText().toString());
+							clase.setProducto_servicio(registro_servicios.cbxProductos.getSelectedItem().toString());
+
+							clase2.setExistencia_producto(
+									Integer.parseInt(formulario.txtExistenciaProducto.getText().toString()));
+							clase2.setId_producto(Integer.parseInt(formulario.txtCodigoProducto.getText().toString()));
+
+							clase3.setTipo_ingreso(
+									"Ingreso por servicio de: " + formulario.txtServicio.getText().toString());
+							clase3.setCantidad_ingreso(Double.parseDouble(formulario.txtPrecio.getText().toString()));
+							clase3.setDescripcion_ingreso(
+									"Caracteristicas del servicio : " + formulario.txtDescripcion.getText().toString()
+											+ " y " + "venta de :" + formulario.txtDispositivo.getText().toString());
+							clase3.setFecha_ingreso(formulario.editor.getText().toString());
+
+							if (consulta.insertar(clase) && consulta.actualizarInventarioProductos(clase2)
+									&& consulta.insertarIngreso(clase3)) {
+								JOptionPane.showMessageDialog(null, "Venta registrada!");
+								limpiar();
+								formulario.obtenerUltimoId();
+								formulario.construirTabla();
+
+								factura_cliente clase = new factura_cliente();
+								consultas_factura_cliente consulta = new consultas_factura_cliente();
+								registro_facturas_clientes formulario2 = new registro_facturas_clientes();
+								sar clase2 = new sar();
+								control_factura_cliente control = new control_factura_cliente(clase, consulta,
+										formulario2, clase2);
+								formulario2.setVisible(true);
+								formulario2.setLocationRelativeTo(null);
+								formulario2.txtCliente.requestFocusInWindow();
+								formulario2.obtenerUltimoId();
+								formulario2.pistas();
+								formulario2.consultarEmpresa();
+								formulario2.construirTabla();
+								formulario2.establecerDatosEmpresa();
+								formulario2.ObtenerUltimosDatosSar();
+								formulario2.btnGuardar.setVisible(true);
+								formulario2.btnNuevo.setVisible(true);
+								formulario2.btnActualizar.setVisible(false);
+								formulario2.btnAceptar.setVisible(false);
+								formulario2.btnBorrar.setVisible(false);
+								formulario2.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+								formulario2.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
+								formulario.dispose();
+
+							} else {
+								JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
+								limpiar();
+							}
+						}
 					}
 				}
 			}
 		}
 
 		/* Actualizar */
-		if (e.getSource() == formulario.btnActualizar) {
+		if (e.getSource() == formulario.btnActualizar)
+
+		{
 			if (formulario.txtServicio.getText().isEmpty() || formulario.txtTiempo.getText().isEmpty()
 					|| formulario.txtDescripcion.getText().isEmpty() || formulario.txtPrecio.getText().isEmpty()
 					|| formulario.txtPrecio.getText().isEmpty()) {

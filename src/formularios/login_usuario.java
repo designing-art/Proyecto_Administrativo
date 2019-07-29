@@ -34,6 +34,8 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class login_usuario extends JFrame {
 
@@ -46,6 +48,8 @@ public class login_usuario extends JFrame {
 	public static JLabel lblFotoEmpresa;
 	public static String nombre = null;
 	public static String ruta_logo = null;
+	public static JRadioButton rdbtnPass;
+	public static JLabel lblestadocontraseña;
 
 	public static String todo;
 	public static String empleado;
@@ -83,13 +87,15 @@ public class login_usuario extends JFrame {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 396, 386);
+		setBounds(100, 100, 396, 398);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+		final ImageIcon ver = new ImageIcon(getClass().getResource("/iconos/ver.png"));
+		final ImageIcon ocultar = new ImageIcon(getClass().getResource("/iconos/ocultar.png"));
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(586, 426, 98, 34);
@@ -98,9 +104,16 @@ public class login_usuario extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(31, 27, 327, 302);
+		panel.setBounds(31, 27, 327, 308);
 		contentPane.add(panel);
 		panel.setLayout(null);
+
+		lblestadocontraseña = new JLabel("");
+		lblestadocontraseña.setBounds(278, 228, 21, 20);
+		panel.add(lblestadocontraseña);
+		final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
+				lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+		lblestadocontraseña.setIcon(iconoocultar);
 
 		JLabel lblUsuario = new JLabel("Usuario :");
 		lblUsuario.setForeground(new Color(0, 0, 0));
@@ -111,7 +124,7 @@ public class login_usuario extends JFrame {
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
 		lblContrasea.setForeground(new Color(0, 0, 0));
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblContrasea.setBounds(122, 206, 98, 20);
+		lblContrasea.setBounds(125, 209, 98, 20);
 		panel.add(lblContrasea);
 
 		txtUsuario = new JTextField();
@@ -122,24 +135,41 @@ public class login_usuario extends JFrame {
 		txtUsuario.setColumns(10);
 		InputMap map4 = txtUsuario.getInputMap(JComponent.WHEN_FOCUSED);
 		map4.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtUsuario.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtUsuario.getText().length() == 15)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		btnIngresar = new JButton("Ingresar");
 		btnIngresar.setForeground(new Color(0, 0, 0));
 		btnIngresar.setFont(new Font("Dubai", Font.BOLD, 14));
 		btnIngresar.setBackground(new Color(60, 179, 113));
-		btnIngresar.setBounds(107, 253, 113, 20);
+		btnIngresar.setBounds(107, 256, 113, 20);
 		panel.add(btnIngresar);
 
 		txtContraseña = new JPasswordField();
 		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtContraseña.setBounds(74, 225, 181, 20);
+		txtContraseña.setBounds(74, 228, 181, 20);
 		panel.add(txtContraseña);
 		InputMap map5 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtContraseña.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
+				if (txtContraseña.getText().length() == 15)
+					e.consume();
 
 			}
 
@@ -159,7 +189,7 @@ public class login_usuario extends JFrame {
 		lblAlerta = new JLabel("");
 		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblAlerta.setBounds(10, 277, 307, 14);
+		lblAlerta.setBounds(10, 283, 307, 14);
 		panel.add(lblAlerta);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
 
@@ -168,6 +198,27 @@ public class login_usuario extends JFrame {
 		lblNombreEmpresa.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
 		lblNombreEmpresa.setBounds(10, 0, 303, 33);
 		panel.add(lblNombreEmpresa);
+
+		rdbtnPass = new JRadioButton("");
+		rdbtnPass.setBackground(Color.WHITE);
+		rdbtnPass.setBounds(256, 228, 21, 20);
+		panel.add(rdbtnPass);
+		rdbtnPass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (rdbtnPass.isSelected()) {
+					txtContraseña.setEchoChar((char) 0);
+					final ImageIcon iconover = new ImageIcon(ver.getImage().getScaledInstance(
+							lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+					lblestadocontraseña.setIcon(iconover);
+				} else {
+					txtContraseña.setEchoChar('*');
+					final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
+							lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+					lblestadocontraseña.setIcon(iconoocultar);
+					setBackground(Color.BLACK);
+				}
+			}
+		});
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -182,10 +233,6 @@ public class login_usuario extends JFrame {
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
 				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpresa.setIcon(icono2);
-
-		JRadioButton radioButton = new JRadioButton("");
-		radioButton.setBounds(261, 225, 21, 23);
-		panel.add(radioButton);
 
 		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
 		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
@@ -461,6 +508,7 @@ public class login_usuario extends JFrame {
 		ventana_principal.labelfotousuario.setIcon(iconofoto);
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public void iniciarSesion() {
 		ventana_principal principal = new ventana_principal();
 		String user = String.valueOf(txtUsuario.getText().toString());
@@ -469,32 +517,37 @@ public class login_usuario extends JFrame {
 			lblAlerta.setText("Los campos (Usuario) y (Contraseña) estan vacios.");
 			lblAlerta.setForeground(Color.RED);
 		} else {
-			if (user.equals("") || pass.equals("")) {
-				lblAlerta.setText("El campo de (Usuario) o (Contraseña) esta vacio.");
+			if (user.equals("")) {
+				lblAlerta.setText("El campo de (Usuario) esta vacio.");
 				lblAlerta.setForeground(Color.RED);
 			} else {
-				consultas_usuario consulta = new consultas_usuario();
-				usuario clase = new usuario();
-				clase.setUsuario(txtUsuario.getText().toString());
-				clase.setContraseña(txtContraseña.getText().toString());
-				if (consulta.buscarUsuario(clase)) {
-					principal.setLocationRelativeTo(null);
-					principal.setVisible(true);
-					principal.consultarEmpresa();
-					principal.consultarSAR();
-					principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
-					Timer time = new Timer();
-					time.schedule(principal.tarea, 0, 1000);
-					consultarDatosInicioSesionUsuario();
-					establecerDatosInicioSesionUsuario();
-					consultarPermisos();
-					definirPermisos();
-					configuraciones configuracion = new configuraciones();
-					configuracion.establecerConfiguraciones();
-					dispose();
-				} else {
-					lblAlerta.setText("El usuario y contraseña son incorrectas");
+				if (pass.equals("")) {
+					lblAlerta.setText("El campo de (Contraseña) esta vacio.");
 					lblAlerta.setForeground(Color.RED);
+				} else {
+					consultas_usuario consulta = new consultas_usuario();
+					usuario clase = new usuario();
+					clase.setUsuario(txtUsuario.getText().toString());
+					clase.setContraseña(txtContraseña.getText().toString());
+					if (consulta.buscarUsuario(clase)) {
+						principal.setLocationRelativeTo(null);
+						principal.setVisible(true);
+						principal.consultarEmpresa();
+						principal.consultarSAR();
+						Timer time = new Timer();
+						time.schedule(principal.tarea, 0, 1000);
+						consultarDatosInicioSesionUsuario();
+						establecerDatosInicioSesionUsuario();
+						consultarPermisos();
+						definirPermisos();
+						configuraciones configuracion = new configuraciones();
+						configuracion.establecerConfiguraciones();
+						principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
+						dispose();
+					} else {
+						lblAlerta.setText("El usuario y contraseña son incorrectas");
+						lblAlerta.setForeground(Color.RED);
+					}
 				}
 			}
 		}

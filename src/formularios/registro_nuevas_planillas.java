@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -38,6 +39,8 @@ import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -76,9 +79,13 @@ public class registro_nuevas_planillas extends JFrame {
 	public JButton btnActualizar;
 	public JButton btnBorrar;
 	public JButton btnNuevo;
+	public JButton btnContinuar;
+
+	public static String nombreEmpresa = null;
+	public static String totalDatos = null;
 
 	public PlaceHolder pista;
-	public JComboBox cbxEstadoPlanilla;
+	public static JTextField txtEstadoPlanilla;
 	public JComboBox cbxTipoPlanillaFinal;
 
 	public JButton btnBorrarPlanilla;
@@ -119,7 +126,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 	public registro_nuevas_planillas() {
 		setResizable(false);
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(0);
 		setBounds(100, 100, 761, 575);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -235,46 +242,76 @@ public class registro_nuevas_planillas extends JFrame {
 		btnImprimir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Date date = new Date();
-				DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-				hora_fecha_reporte = ("Hora y fecha del reporte : " + hourdateFormat.format(date));
-				utilJTablePrint(tablaPlanilla, "Canal 40 (COFFEE TV CHANNEL)",
-						"Reporte de la Planilla.____. " + hora_fecha_reporte, true);
+				obtenerTotalDatosReporte();
+				if (totalDatos == null) {
+					JOptionPane.showMessageDialog(null, "No hay registros disponibles para imprimir un reporte");
+				} else {
+					String ampm;
+					Calendar cal = new GregorianCalendar();
+					ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+					String fecha = getFechaYHora() + ampm;
+					nombreEmpresa = login_usuario.nombre.toString();
+					int total = Integer.valueOf(totalDatos);
+					String i = null;
+					if (total <= 46) {
+						i = "1";
+					} else {
+						if (total > 46 && total <= 92) {
+							i = "2";
+						} else {
+							if (total > 92 && total <= 138) {
+								i = "3";
+							} else {
+								if (total > 138 && total <= 184) {
+									i = "4";
+								} else {
+									if (total > 184 && total <= 230) {
+										i = "5";
+									} else {
+										if (total > 230 && total <= 276) {
+											i = "6";
+										} else {
+											if (total > 276 && total <= 322) {
+												i = "7";
+											} else {
+												if (total > 322 && total <= 368) {
+													i = "8";
+												} else {
+													if (total > 368 && total <= 414) {
+														i = "9";
+													} else {
+														if (total > 414 && total <= 460) {
+															i = "10";
+														} else {
+															i = "Mas de 10 paginas";
+
+														}
+
+													}
+
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					String encabezado = "Reporte de planillas de " + login_usuario.nombre.toString();
+
+					utilJTablePrint(tablaPlanilla, encabezado,
+							"Pagina {0} de " + i + "                                  " + fecha, true);
+				}
 			}
 		});
 
-		button = new JButton("Trabajar");
-		button.setFont(new Font("Dialog", Font.PLAIN, 12));
-		button.setBackground(new Color(255, 165, 0));
-		button.setBounds(303, 112, 99, 23);
-		panel_2.add(button);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				planilla clase = new planilla();
-				consultas_planilla consulta = new consultas_planilla();
-				registro_planillas formulario = new registro_planillas();
-				control_planilla control = new control_planilla(clase, consulta, formulario);
-				formulario.setVisible(true);
-				formulario.setLocationRelativeTo(null);
-				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
-				formulario.construirTabla();
-				formulario.obtenerUltimoId();
-				formulario.establecerFechaRegistro();
-				formulario.pistas();
-				formulario.btnBorrarPlanilla.setVisible(false);
-				formulario.btnGuardar.setVisible(true);
-				formulario.btnNuevo.setVisible(true);
-				formulario.btnActualizar.setVisible(false);
-				formulario.btnActualizarDatosPlanilla.setVisible(true);
-				formulario.btnVerPlanilla.setVisible(true);
-				formulario.btnAceptar.setVisible(false);
-				Timer time = new Timer();
-				time.schedule(formulario.tarea, 0, 1000);
-				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
-				dispose();
-			}
-		});
-
+		btnContinuar = new JButton("Continuar");
+		btnContinuar.setFont(new Font("Dialog", Font.PLAIN, 12));
+		btnContinuar.setBackground(new Color(255, 165, 0));
+		btnContinuar.setBounds(303, 112, 99, 23);
+		panel_2.add(btnContinuar);
+		
 		label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
 		label_8.setBounds(0, 0, 430, 496);
@@ -285,7 +322,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE HISTORIAL DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistroYMantenimiento.setBounds(10, 0, 698, 40);
+		lblRegistroYMantenimiento.setBounds(10, 2, 698, 40);
 		contentPane.add(lblRegistroYMantenimiento);
 
 		JPanel panel_1 = new JPanel();
@@ -327,6 +364,46 @@ public class registro_nuevas_planillas extends JFrame {
 		txtNombrePlanilla.setColumns(10);
 		txtNombrePlanilla.setBounds(81, 42, 148, 20);
 		panel.add(txtNombrePlanilla);
+		InputMap map5 = txtNombrePlanilla.getInputMap(JComponent.WHEN_FOCUSED);
+		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtNombrePlanilla.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNombrePlanilla.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				if (txtNombrePlanilla.getText().length() == 45)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				try {
+					conexion conex = new conexion();
+					Statement estatuto = conex.getConexion().createStatement();
+					ResultSet rs = estatuto
+							.executeQuery("SELECT nombre_planilla FROM planillas where nombre_planilla = '"
+									+ txtNombrePlanilla.getText().toString() + "'");
+					if (rs.next() == true) {
+						JOptionPane.showMessageDialog(null, "Este nombre de planilla ya existe");
+						txtNombrePlanilla.setText("");
+					} else {
+						rs.close();
+						estatuto.close();
+						conex.desconectar();
+
+					}
+
+				} catch (SQLException exx) {
+					System.out.println(exx.getMessage());
+					JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
+
+			}
+		});
 
 		JLabel lblFechaDePago = new JLabel("Fecha de pago :");
 		lblFechaDePago.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -340,11 +417,14 @@ public class registro_nuevas_planillas extends JFrame {
 		editor.setEditable(false);
 		editor.setHorizontalAlignment(SwingConstants.CENTER);
 
-		cbxEstadoPlanilla = new JComboBox();
-		cbxEstadoPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		cbxEstadoPlanilla.setModel(new DefaultComboBoxModel(new String[] { "Vigente", "Cerrada" }));
-		cbxEstadoPlanilla.setBounds(163, 307, 79, 20);
-		panel.add(cbxEstadoPlanilla);
+		txtEstadoPlanilla = new JTextField();
+		txtEstadoPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEstadoPlanilla.setText("Abierta");
+		txtEstadoPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtEstadoPlanilla.setBounds(163, 307, 79, 20);
+		panel.add(txtEstadoPlanilla);
+		txtEstadoPlanilla.setEditable(false);
+		txtEstadoPlanilla.setBackground(new Color(60, 179, 113));
 
 		JLabel lblTotalSueldosPlanilla = new JLabel("Total Sueldos Planilla");
 		lblTotalSueldosPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -459,6 +539,39 @@ public class registro_nuevas_planillas extends JFrame {
 		final ImageIcon logo21 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
 		label_7.setIcon(logo21);
+		
+		JButton button = new JButton("Regresar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				planilla clase = new planilla();
+				consultas_planilla consulta = new consultas_planilla();
+				registro_planillas formulario = new registro_planillas();
+				control_planilla control = new control_planilla(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
+				formulario.btnBorrarPlanilla.setVisible(false);
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnActualizarDatosPlanilla.setVisible(true);
+				formulario.btnVerPlanilla.setVisible(true);
+				formulario.btnAceptar.setVisible(false);
+				formulario.consultarPlanillaActual();
+				formulario.construirTabla();
+				formulario.obtenerUltimoId();
+				formulario.establecerFechaRegistro();
+				formulario.pistas();
+				Timer time = new Timer();
+				time.schedule(formulario.tarea, 0, 1000);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				dispose();
+			}
+		});
+		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		button.setBackground(new Color(255, 127, 80));
+		button.setBounds(644, 13, 102, 23);
+		contentPane.add(button);
 	}
 
 	public void establecerFechaRegistro() {
@@ -562,16 +675,6 @@ public class registro_nuevas_planillas extends JFrame {
 			lbl_hora.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
-	private JButton button;
-
-	public static String getFecha() {
-		Date date = new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
-		date = cal.getTime();
-		return df.format(date);
-	}
 
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
@@ -600,5 +703,41 @@ public class registro_nuevas_planillas extends JFrame {
 		txtTotalDeducciones.setText(numero);
 		txtTotalBonos.setText(numero);
 		txtTotalPlanilla.setText(numero);
+	}
+	
+	public static String getFecha() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
+		date = cal.getTime();
+		return df.format(date);
+	}
+	
+	public static String getFechaYHora() {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		date = cal.getTime();
+		return df.format(date);
+	}
+
+	public void obtenerTotalDatosReporte() {
+		conexion objCon = new conexion();
+		Connection conn = objCon.getConexion();
+		try {
+			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM historial_planillas ORDER BY id_planilla_final DESC");
+			ResultSet rsr = stmtr.executeQuery();
+			if (rsr.next()) {
+				totalDatos = rsr.getString("id_planilla_final");
+			}
+			;
+			stmtr.close();
+			rsr.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

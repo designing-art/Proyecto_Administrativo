@@ -100,6 +100,9 @@ public class registro_usuarios extends JFrame {
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 	public ImageIcon iconoProducto = new ImageIcon(getClass().getResource("/iconos/usb.png"));
+	final ImageIcon ver = new ImageIcon(getClass().getResource("/iconos/ver.png"));
+	final ImageIcon ocultar = new ImageIcon(getClass().getResource("/iconos/ocultar.png"));
+
 	public JButton btnAtras;
 	public JButton button;
 	public static JTextField txtNombres;
@@ -117,6 +120,7 @@ public class registro_usuarios extends JFrame {
 	public JLabel label;
 	public JButton btnBuscar;
 	public static int contador;
+	public static JLabel lblestadocontraseña;
 
 	public static JRadioButton rdbtnEmpleados;
 	public static JRadioButton rdbtnCargos;
@@ -143,6 +147,9 @@ public class registro_usuarios extends JFrame {
 	public static JRadioButton rdbtnAcercaDe;
 	public static JRadioButton rdbtnUsuarios;
 	public static JRadioButton rbdTodos;
+
+	public static JRadioButton rdbtnPass;
+
 	public static JTextField txtDirecFoto;
 	public static JLabel lblFotoUsuario;
 	public static JTextField lblUsuarioLogeado;;
@@ -851,12 +858,40 @@ public class registro_usuarios extends JFrame {
 		btnVerfoto.setBounds(340, 209, 84, 12);
 		panelRegistro.add(btnVerfoto);
 
+		rdbtnPass = new JRadioButton("");
+		rdbtnPass.setBackground(Color.WHITE);
+		rdbtnPass.setBounds(282, 448, 21, 20);
+		panelRegistro.add(rdbtnPass);
+
+		lblestadocontraseña = new JLabel("");
+		lblestadocontraseña.setBounds(309, 451, 21, 20);
+		panelRegistro.add(lblestadocontraseña);
+		final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
+				lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+		lblestadocontraseña.setIcon(iconoocultar);
+
 		JLabel lblLibreta = new JLabel();
 		lblLibreta.setBounds(0, 0, 465, 550);
 		panelRegistro.add(lblLibreta);
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo);
+		rdbtnPass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (rdbtnPass.isSelected()) {
+					txtContraseña.setEchoChar((char) 0);
+					final ImageIcon iconover = new ImageIcon(ver.getImage().getScaledInstance(
+							lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+					lblestadocontraseña.setIcon(iconover);
+				} else {
+					txtContraseña.setEchoChar('*');
+					final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
+							lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+					lblestadocontraseña.setIcon(iconoocultar);
+					setBackground(Color.BLACK);
+				}
+			}
+		});
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
@@ -1162,7 +1197,6 @@ public class registro_usuarios extends JFrame {
 
 		}
 	}
-	
 
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
