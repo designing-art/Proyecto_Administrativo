@@ -303,7 +303,7 @@ public class control_historial_planilla implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Para continuar trabajando, seleccione una planilla.");
 			} else {
 				id = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
-				nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 2).toString();
+				nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
 				planilla clase = new planilla();
 				consultas_planilla consulta = new consultas_planilla();
 				registro_planillas formulario = new registro_planillas();

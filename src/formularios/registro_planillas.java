@@ -16,6 +16,7 @@ import clases.historial_planilla;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_deduccion;
+import consultas.consultas_empleado;
 import consultas.consultas_historial_planilla;
 import consultas.consultas_planilla;
 import controles.control_bonificacion;
@@ -636,9 +637,6 @@ public class registro_planillas extends JFrame {
 				} else {
 					busquedaDatosEmpleadoPlanilla();
 				}
-
-			
-
 			}
 		});
 
@@ -840,7 +838,8 @@ public class registro_planillas extends JFrame {
 					JOptionPane.showMessageDialog(null, "Por favor, busque el empleado para continuar.");
 				} else {
 					if (txtSueldoNetoPlanilla.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Por favor, primero calcule las bonificaciones para continuar.");
+						JOptionPane.showMessageDialog(null,
+								"Por favor, primero calcule las bonificaciones para continuar.");
 					} else {
 						deduccion clase = new deduccion();
 						consultas_deduccion consulta = new consultas_deduccion();
@@ -927,7 +926,7 @@ public class registro_planillas extends JFrame {
 
 	public void construirTabla() {
 		String titulos[] = { "Codigo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo", "Deducciones",
-				"Bonificaciones", "Sueldo Neto", "Total", "Planilla"};
+				"Bonificaciones", "Sueldo Neto", "Total", "Planilla" };
 		String informacion[][] = control_planilla.obtenerMatriz();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
@@ -999,9 +998,9 @@ public class registro_planillas extends JFrame {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}
 	}
-	
+
 	public void busquedaDatosEmpleadoPlanilla() {
-		consultas_bonificacion consulta = new consultas_bonificacion();
+		consultas_planilla consulta = new consultas_planilla();
 		empleado clase = new empleado();
 		clase.setIdentidad_empleado(txtIdentidadEmpleadoPlanilla.getText());
 		if (consulta.buscar(clase)) {
@@ -1012,11 +1011,13 @@ public class registro_planillas extends JFrame {
 			txtDireccionFoto.setText(String.valueOf(clase.getDireccion_foto_empleado()));
 			txtCargoPlanilla.setText(String.valueOf(clase.getNombre_cargo_empleado()));
 			txtCantidadPlanilla.setText(String.valueOf(clase.getSueldo_cargo_empleado()));
+
 			String ruta = txtDireccionFoto.getText().toString();
 			final ImageIcon foto = new ImageIcon(ruta);
 			final ImageIcon logo = new ImageIcon(foto.getImage().getScaledInstance(lblFotoPlanilla.getWidth(),
 					lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
 			lblFotoPlanilla.setIcon(logo);
+
 			txtCodigoPlanilla.setForeground(Color.BLACK);
 			txtNombresPlanilla.setForeground(Color.BLACK);
 			txtApellidosPlanilla.setForeground(Color.BLACK);

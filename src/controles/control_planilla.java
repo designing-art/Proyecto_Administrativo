@@ -373,12 +373,11 @@ public class control_planilla implements ActionListener {
 
 	public static ArrayList<planilla> buscarUsuariosConMatriz() {
 		conexion conex = new conexion();
-		registro_planillas planillas = new registro_planillas();
 		ArrayList<planilla> miLista = new ArrayList<planilla>();
 		planilla planilla;
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT * FROM planillas");
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM planillas ORDER BY id_planilla DESC");
 
 			while (rs.next()) {
 				planilla = new planilla();
