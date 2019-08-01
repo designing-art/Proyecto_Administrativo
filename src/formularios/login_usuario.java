@@ -108,13 +108,6 @@ public class login_usuario extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		lblestadocontraseña = new JLabel("");
-		lblestadocontraseña.setBounds(278, 228, 21, 20);
-		panel.add(lblestadocontraseña);
-		final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
-				lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
-		lblestadocontraseña.setIcon(iconoocultar);
-
 		JLabel lblUsuario = new JLabel("Usuario :");
 		lblUsuario.setForeground(new Color(0, 0, 0));
 		lblUsuario.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
@@ -126,6 +119,15 @@ public class login_usuario extends JFrame {
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
 		lblContrasea.setBounds(125, 209, 98, 20);
 		panel.add(lblContrasea);
+		
+				lblestadocontraseña = new JLabel("");
+				lblestadocontraseña.setBackground(Color.WHITE);
+				lblestadocontraseña.setHorizontalAlignment(SwingConstants.CENTER);
+				lblestadocontraseña.setBounds(277, 228, 21, 20);
+				panel.add(lblestadocontraseña);
+				final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
+						lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+				lblestadocontraseña.setIcon(iconoocultar);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -200,6 +202,7 @@ public class login_usuario extends JFrame {
 		panel.add(lblNombreEmpresa);
 
 		rdbtnPass = new JRadioButton("");
+		rdbtnPass.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnPass.setBackground(Color.WHITE);
 		rdbtnPass.setBounds(256, 228, 21, 20);
 		panel.add(rdbtnPass);

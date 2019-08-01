@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
@@ -146,7 +147,7 @@ public class registro_usuarios extends JFrame {
 	public static JRadioButton rdbtnConfiguracion;
 	public static JRadioButton rdbtnAcercaDe;
 	public static JRadioButton rdbtnUsuarios;
-	public static JRadioButton rbdTodos;
+	public static JToggleButton rbdTodos;
 
 	public static JRadioButton rdbtnPass;
 
@@ -750,7 +751,10 @@ public class registro_usuarios extends JFrame {
 			}
 		});
 
-		rbdTodos = new JRadioButton("Todos");
+		rbdTodos = new JToggleButton("Todos");
+		rbdTodos.setBackground(new Color(60, 179, 113));
+		rbdTodos.setBounds(129, 271, 76, 19);
+		panelRegistro.add(rbdTodos);
 		rbdTodos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -781,7 +785,6 @@ public class registro_usuarios extends JFrame {
 					rdbtnUsuarios.setSelected(true);
 					rbdTodos.setSelected(true);
 					cbxTipoUsuario.setSelectedItem("Usuario Avanzado");
-
 				} else {
 					rdbtnEmpleados.setSelected(false);
 					rdbtnCargos.setSelected(false);
@@ -809,12 +812,12 @@ public class registro_usuarios extends JFrame {
 					rdbtnUsuarios.setSelected(false);
 					rbdTodos.setSelected(false);
 					cbxTipoUsuario.setSelectedItem("Usuario Personalizado");
+
 				}
 
 			}
+
 		});
-		rbdTodos.setBounds(129, 271, 64, 23);
-		panelRegistro.add(rbdTodos);
 
 		JLabel lblBusquedaDelEmpleado = new JLabel("Busqueda del empleado :");
 		lblBusquedaDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -840,6 +843,7 @@ public class registro_usuarios extends JFrame {
 
 		JButton btnVerfoto = new JButton("Ver");
 		btnVerfoto.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtDirecFoto.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");

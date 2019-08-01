@@ -237,6 +237,9 @@ public class registro_inventario extends JFrame {
 					Toolkit.getDefaultToolkit().beep();
 					ke.consume();
 				}
+				
+				if (txtNombre.getText().length() == 50)
+					ke.consume();
 			}
 
 			@Override
@@ -261,6 +264,9 @@ public class registro_inventario extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtPrecio.getText().length() == 8)
 					ke.consume();
 			}
 

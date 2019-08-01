@@ -266,7 +266,7 @@ public class registro_servicios extends JFrame {
 		txtTiempo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtTiempo.getText().length() == 30)
+				if (txtTiempo.getText().length() == 20)
 					ke.consume();
 			}
 
@@ -339,7 +339,7 @@ public class registro_servicios extends JFrame {
 		txtDescripcion.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtDescripcion.getText().length() == 100) {
+				if (txtDescripcion.getText().length() == 50) {
 					ke.consume();
 				}
 

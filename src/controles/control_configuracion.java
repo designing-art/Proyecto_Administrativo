@@ -59,24 +59,22 @@ public class control_configuracion implements ActionListener {
 
 			if (consulta.insertar(clase)) {
 				JOptionPane.showMessageDialog(null, "Exito! Configuracion guardada!");
-				formulario.dispose();
 				ventana_principal principal = new ventana_principal();
 				principal.setLocationRelativeTo(null);
 				principal.setVisible(true);
 				principal.consultarEmpresa();
-				login_usuario usuario = new login_usuario();
-				usuario.consultarDatosInicioSesionUsuario();
-				usuario.establecerDatosInicioSesionUsuario();
-				usuario.consultarPermisos();
-				usuario.definirPermisos();
+				principal.consultarSAR();
 				Timer time = new Timer();
 				time.schedule(principal.tarea, 0, 1000);
+				login_usuario login = new login_usuario();
+				login.consultarDatosInicioSesionUsuario();
+				login.establecerDatosInicioSesionUsuario();
+				login.consultarPermisos();
+				login.definirPermisos();
 				configuraciones configuracion = new configuraciones();
-				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				ventana_principal.txtFrase.setText(configuraciones.txtFrase.getText().toString());
-				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
-
+				principal.setTitle("Sesión iniciada por: " + login.nombreCompletoUsuario);
+				formulario.dispose();
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 			}

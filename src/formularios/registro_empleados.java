@@ -198,6 +198,7 @@ public class registro_empleados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setFocusable(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/logo_corchetes.png")));
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 
@@ -250,14 +251,19 @@ public class registro_empleados extends JFrame {
 				}
 				if (txtNombresEmpleado.getText().length() == 30)
 					ke.consume();
+
 			}
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					txtApellidosEmpleado.requestFocusInWindow();
+				}
 			}
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
+
 			}
 		});
 
@@ -290,6 +296,9 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					txtIdentidadEmpleado.requestFocusInWindow();
+				}
 			}
 
 			@Override
@@ -326,6 +335,9 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					txtCorreoEmpleado.requestFocusInWindow();
+				}
 			}
 
 			@Override
@@ -399,6 +411,9 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					txtTelefonoEmpleado.requestFocusInWindow();
+				}
 			}
 
 			@Override
@@ -435,6 +450,9 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					txtDireccionEmpleado.requestFocusInWindow();
+				}
 			}
 
 			@Override
@@ -527,6 +545,9 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					txtTelefonoReferencia.requestFocusInWindow();
+				}
 			}
 
 			@Override
@@ -563,6 +584,9 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnSubirFoto.requestFocusInWindow();
+				}
 			}
 
 			@Override
@@ -1038,6 +1062,9 @@ public class registro_empleados extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigoEmpleado = new TableRowSorter(tablaEmpleados.getModel());
 				tablaEmpleados.setRowSorter(trsfiltroCodigoEmpleado);
+				
+				if (txtBusquedaEmpleado.getText().length() == 50)
+					ke.consume();
 			}
 
 			@Override
@@ -1430,4 +1457,6 @@ public class registro_empleados extends JFrame {
 		}
 
 	}
+
 }
+

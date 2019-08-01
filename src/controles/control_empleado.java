@@ -227,6 +227,8 @@ public class control_empleado implements ActionListener {
 									registro_usuarios.txtIdentidad.setForeground(Color.BLACK);
 									registro_usuarios.txtDirecFoto.setForeground(Color.BLACK);
 									
+									registro_usuarios.txtBusqueda.setEditable(false);
+									
 									final ImageIcon icono = new ImageIcon(registro_usuarios.txtDirecFoto.getText().toString());
 									final ImageIcon iconofotografia = new ImageIcon(icono.getImage().getScaledInstance(
 											registro_usuarios.lblFotoUsuario.getWidth(),

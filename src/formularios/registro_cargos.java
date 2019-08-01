@@ -204,7 +204,7 @@ public class registro_cargos extends JFrame {
 				if ((c < '0' || c > '9'))
 					ke.consume();
 
-				if (txtSueldoCargo.getText().length() == 6)
+				if (txtHoraExtraCargo.getText().length() == 6)
 					ke.consume();
 			}
 
@@ -403,6 +403,11 @@ public class registro_cargos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
 				tablaCargos.setRowSorter(trsfiltroCodigo);
+				
+				if (txtBusquedaCargos.getText().length() == 30)
+					ke.consume();
+				
+				
 			}
 
 			@Override

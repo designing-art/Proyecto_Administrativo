@@ -1191,6 +1191,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				registro_usuarios.lblUsuarioLogeado.setText(login_usuario.nombreUsuario);
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}

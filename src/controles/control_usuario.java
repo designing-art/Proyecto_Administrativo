@@ -177,56 +177,61 @@ public class control_usuario implements ActionListener {
 										+ "sus credenciales indican que NO es un administrador.\n"
 										+ "Alerta! el intento o robo de credenciales en un delito.");
 					} else {
-						definirPermisos();
-						clase.setId_usuario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
-						clase.setUsuario(formulario.txtUsuario.getText().toString());
-						clase.setContraseña(formulario.txtContraseña.getText().toString());
-						clase.setIdentidad(formulario.txtIdentidad.getText().toString());
-						clase.setNombre(formulario.txtNombres.getText().toString());
-						clase.setCargo(formulario.txtCargo.getText().toString());
-						clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
-						clase.setPermiso_todo(todo);
-						clase.setPermiso_empleado(empleado);
-						clase.setPermiso_cargo(cargoe);
-						clase.setPermiso_horario(horario);
-						clase.setPermiso_contrato_e(contrato_e);
-						clase.setPermiso_cliente(cliente);
-						clase.setPermiso_contrato_c(contrato_c);
-						clase.setPermiso_compra(compra);
-						clase.setPermiso_proveedor(proveedor);
-						clase.setPermiso_inventario(inventario);
-						clase.setPermiso_factura_c(factura_c);
-						clase.setPermiso_factura_e(factura_e);
-						clase.setPermiso_sar(sar);
-						clase.setPermiso_ingreso(ingreso);
-						clase.setPermiso_producto(producto);
-						clase.setPermiso_servicio(servicio);
-						clase.setPermiso_venta(venta);
-						clase.setPermiso_egreso(egreso);
-						clase.setPermiso_bonificacion(bonificacion);
-						clase.setPermiso_deduccion(deduccion);
-						clase.setPermiso_planilla(planilla);
-						clase.setPermiso_empresa(empresa);
-						clase.setPermiso_opciones(opciones);
-						clase.setPermiso_usuarios(usuarios);
-						clase.setPermiso_acercade(acercade);
-						clase.setDireccion_foto_usuario(formulario.txtDirecFoto.getText().toString());
+						if (login_usuario.cargoUsuario.toString().equals("Usuario Avanzado")||login_usuario.cargoUsuario.toString().equals("Super Usuario")) {
+							definirPermisos();
+							clase.setId_usuario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
+							clase.setUsuario(formulario.txtUsuario.getText().toString());
+							clase.setContraseña(formulario.txtContraseña.getText().toString());
+							clase.setIdentidad(formulario.txtIdentidad.getText().toString());
+							clase.setNombre(formulario.txtNombres.getText().toString());
+							clase.setCargo(formulario.txtCargo.getText().toString());
+							clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
+							clase.setPermiso_todo(todo);
+							clase.setPermiso_empleado(empleado);
+							clase.setPermiso_cargo(cargoe);
+							clase.setPermiso_horario(horario);
+							clase.setPermiso_contrato_e(contrato_e);
+							clase.setPermiso_cliente(cliente);
+							clase.setPermiso_contrato_c(contrato_c);
+							clase.setPermiso_compra(compra);
+							clase.setPermiso_proveedor(proveedor);
+							clase.setPermiso_inventario(inventario);
+							clase.setPermiso_factura_c(factura_c);
+							clase.setPermiso_factura_e(factura_e);
+							clase.setPermiso_sar(sar);
+							clase.setPermiso_ingreso(ingreso);
+							clase.setPermiso_producto(producto);
+							clase.setPermiso_servicio(servicio);
+							clase.setPermiso_venta(venta);
+							clase.setPermiso_egreso(egreso);
+							clase.setPermiso_bonificacion(bonificacion);
+							clase.setPermiso_deduccion(deduccion);
+							clase.setPermiso_planilla(planilla);
+							clase.setPermiso_empresa(empresa);
+							clase.setPermiso_opciones(opciones);
+							clase.setPermiso_usuarios(usuarios);
+							clase.setPermiso_acercade(acercade);
+							clase.setDireccion_foto_usuario(formulario.txtDirecFoto.getText().toString());
 
-						if (consulta.actualizar(clase)) {
-							JOptionPane.showMessageDialog(null, "Usuario actualizado!");
-							limpiar();
-							formulario.construirTabla();
-							formulario.obtenerUltimoId();
-							formulario.txtDirecFoto.setText("");
-							final ImageIcon iconoContrato = new ImageIcon(
-									getClass().getResource("/iconos/usuario.png"));
-							final ImageIcon iconofoto = new ImageIcon(
-									iconoContrato.getImage().getScaledInstance(formulario.lblFotoUsuario.getWidth(),
-											formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-							formulario.lblFotoUsuario.setIcon(iconofoto);
+							if (consulta.actualizar(clase)) {
+								JOptionPane.showMessageDialog(null, "Usuario actualizado!");
+								limpiar();
+								formulario.construirTabla();
+								formulario.obtenerUltimoId();
+								formulario.txtDirecFoto.setText("");
+								final ImageIcon iconoContrato = new ImageIcon(
+										getClass().getResource("/iconos/usuario.png"));
+								final ImageIcon iconofoto = new ImageIcon(
+										iconoContrato.getImage().getScaledInstance(formulario.lblFotoUsuario.getWidth(),
+												formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+								formulario.lblFotoUsuario.setIcon(iconofoto);
+							} else {
+								JOptionPane.showMessageDialog(null, "Error! Usuario no actualizado");
+								limpiar();
+							}
 						} else {
-							JOptionPane.showMessageDialog(null, "Error! Usuario no actualizado");
-							limpiar();
+							JOptionPane.showMessageDialog(null, "No tiene permiso para actualizar los usuarios");
+
 						}
 					}
 				}
@@ -513,7 +518,7 @@ public class control_usuario implements ActionListener {
 					registro_usuarios.rdbtnUsuarios.setForeground(Color.BLACK);
 					registro_usuarios.rdbtnAcercaDe.setForeground(Color.BLACK);
 
-					if (formulario.txtUsuario.getText().toString().equals(login_usuario.nombreUsuario)) {
+					if (formulario.txtUsuario.getText().toString().equals(login_usuario.nombreUsuario.toString())) {
 						formulario.txtUsuario.setEditable(false);
 						formulario.txtContraseña.setEditable(false);
 					} else {
@@ -552,7 +557,9 @@ public class control_usuario implements ActionListener {
 		}
 
 		/* Pasar datos de la tabla al formulario para ver los datos */
-		if (e.getSource() == formulario.btnVer) {
+		if (e.getSource() == formulario.btnVer)
+
+		{
 			int filaseleccionada;
 			try {
 				filaseleccionada = formulario.tabla.getSelectedRow();
@@ -870,22 +877,29 @@ public class control_usuario implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tabla.getSelectedRow();
-					String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM usuario WHERE id_usuario=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Usuario Eliminado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.txtCodigo.setText(null);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tabla.getSelectedRow();
+						String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM usuario WHERE id_usuario=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Usuario Eliminado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.txtCodigo.setText(null);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
+
 				}
+
 			} catch (SQLException ex) {
 				JOptionPane.showMessageDialog(null, "Error al Eliminar");
 				System.out.println(ex.toString());

@@ -348,7 +348,7 @@ public class registro_clientes extends JFrame {
 		txtCorreoCliente.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtCorreoCliente.getText().length() == 50)
+				if (txtCorreoCliente.getText().length() == 40)
 					ke.consume();
 			}
 
@@ -418,7 +418,7 @@ public class registro_clientes extends JFrame {
 		txtDireccionCliente.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtDireccionCliente.getText().length() == 100) {
+				if (txtDireccionCliente.getText().length() == 50) {
 					ke.consume();
 				}
 					
@@ -558,7 +558,7 @@ public class registro_clientes extends JFrame {
 		txtCorreoEmpresa.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtCorreoCliente.getText().length() == 50)
+				if (txtCorreoEmpresa.getText().length() == 40)
 					ke.consume();
 			}
 
@@ -617,7 +617,7 @@ public class registro_clientes extends JFrame {
 		txtDireccionEmpresa.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtDireccionEmpresa.getText().length() == 100) {
+				if (txtDireccionEmpresa.getText().length() == 50) {
 					ke.consume();
 				}
 					
@@ -683,7 +683,7 @@ public class registro_clientes extends JFrame {
 		txtDescripcionEmpresa.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				if (txtDescripcionEmpresa.getText().length() == 100) {
+				if (txtDescripcionEmpresa.getText().length() == 50) {
 					ke.consume();
 				}
 					

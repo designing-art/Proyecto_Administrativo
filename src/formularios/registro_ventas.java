@@ -398,14 +398,17 @@ public class registro_ventas extends JFrame {
 		txtCantidadVenta.setColumns(10);
 		txtCantidadVenta.setBounds(181, 288, 133, 23);
 		panelRegistro.add(txtCantidadVenta);
-		InputMap map57 = txtCantidadVenta.getInputMap(JComponent.WHEN_FOCUSED);
-		map57.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		InputMap map21 = txtCantidadVenta.getInputMap(JComponent.WHEN_FOCUSED);
+		map21.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtCantidadVenta.addKeyListener(new KeyListener() {
 			@Override
 			// Metodo que valida el ingreso de solo numeros
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+
+				if (txtCantidadVenta.getText().length() == 8)
 					ke.consume();
 			}
 
@@ -415,6 +418,10 @@ public class registro_ventas extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
+				if (txtCantidadVenta.getText().toString().equals("0")) {
+					JOptionPane.showMessageDialog(null, "No es posible vender 0 productos!");
+					txtCantidadVenta.setText("");
+				}
 			}
 		});
 
@@ -432,6 +439,28 @@ public class registro_ventas extends JFrame {
 		txtPrecioVenta.setColumns(10);
 		txtPrecioVenta.setBounds(181, 340, 133, 23);
 		panelRegistro.add(txtPrecioVenta);
+		InputMap map22 = txtPrecioVenta.getInputMap(JComponent.WHEN_FOCUSED);
+		map22.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtPrecioVenta.addKeyListener(new KeyListener() {
+			@Override
+			// Metodo que valida el ingreso de solo numeros
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+
+				if (txtPrecioVenta.getText().length() == 8)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblPrecioDe = new JLabel("11. Precio de venta :");
 		lblPrecioDe.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -636,6 +665,28 @@ public class registro_ventas extends JFrame {
 		txtBusquedaInventario.setColumns(10);
 		txtBusquedaInventario.setBounds(136, 64, 187, 21);
 		panel.add(txtBusquedaInventario);
+		InputMap map61 = txtBusquedaInventario.getInputMap(JComponent.WHEN_FOCUSED);
+		map61.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtBusquedaInventario.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				trsfiltroCodigo = new TableRowSorter(tablaInventario.getModel());
+				tablaInventario.setRowSorter(trsfiltroCodigo);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				String cadena = (txtBusquedaInventario.getText());
+				txtBusquedaInventario.setText(cadena);
+				repaint();
+				filtro();
+			}
+		});
 
 		barraInventario = new JScrollPane(tablaInventario, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);

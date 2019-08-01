@@ -354,11 +354,11 @@ public class registro_productos extends JFrame {
 		panelRegistro.add(txtColor);
 		InputMap map3 = txtColor.getInputMap(JComponent.WHEN_FOCUSED);
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		txtCapasidad.addKeyListener(new KeyListener() {
+		txtColor.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				
-				if (txtCapasidad.getText().length() == 20)
+				if (txtColor.getText().length() == 20)
 					ke.consume();
 			}
 
@@ -421,7 +421,7 @@ public class registro_productos extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				if (txtPrecio.getText().length() == 8)
+				if (txtCantidad.getText().length() == 8)
 					ke.consume();
 			}
 
