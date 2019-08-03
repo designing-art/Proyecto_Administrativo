@@ -42,7 +42,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.FieldPosition;
 import java.text.MessageFormat;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -61,6 +63,7 @@ import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
+import clases.historial_planilla;
 import clases.planilla;
 
 import javax.swing.border.SoftBevelBorder;
@@ -93,12 +96,19 @@ public class registro_nuevas_planillas extends JFrame {
 	public JButton btnActualizarDatosPlanilla;
 	public JTextFieldDateEditor editor;
 	public JTextFieldDateEditor editor2;
+	public JTextFieldDateEditor editor3;
+	
+	public JDateChooser dateRegistro;
 
 	public JScrollPane barraTablaPlanilla;
 	public JTable tablaPlanilla;
 
 	public TableRowSorter trsfiltro;
 	String filtro;
+	
+	private JLabel label_4;
+	private JLabel labelFechaRegistro;
+
 
 	public static String ruta;
 	public static ImageIcon imagen;
@@ -112,7 +122,6 @@ public class registro_nuevas_planillas extends JFrame {
 	public JTextField txtTotalBonos;
 	public JTextField txtTotalDeducciones;
 	public JTextField txtTotalPlanilla;
-	public JDateChooser dateRegistro;
 	public JDateChooser datePago;
 
 	public static String bonificaciones = null;
@@ -340,7 +349,7 @@ public class registro_nuevas_planillas extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-		panel.setBounds(22, 74, 242, 327);
+		panel.setBounds(22, 74, 242, 338);
 		panel_1.add(panel);
 		panel.setLayout(null);
 
@@ -351,18 +360,18 @@ public class registro_nuevas_planillas extends JFrame {
 
 		txtCodigoPlanilla = new JTextField();
 		txtCodigoPlanilla.setEditable(false);
-		txtCodigoPlanilla.setBounds(83, 12, 46, 20);
+		txtCodigoPlanilla.setBounds(81, 12, 46, 20);
 		panel.add(txtCodigoPlanilla);
 		txtCodigoPlanilla.setColumns(10);
 
 		JLabel lblNombre = new JLabel("Nombre :");
 		lblNombre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblNombre.setBounds(10, 42, 74, 20);
+		lblNombre.setBounds(10, 35, 74, 20);
 		panel.add(lblNombre);
 
 		txtNombrePlanilla = new JTextField();
 		txtNombrePlanilla.setColumns(10);
-		txtNombrePlanilla.setBounds(81, 42, 148, 20);
+		txtNombrePlanilla.setBounds(81, 35, 148, 20);
 		panel.add(txtNombrePlanilla);
 		InputMap map5 = txtNombrePlanilla.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -407,107 +416,125 @@ public class registro_nuevas_planillas extends JFrame {
 
 		JLabel lblFechaDePago = new JLabel("Fecha de pago :");
 		lblFechaDePago.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFechaDePago.setBounds(10, 73, 119, 20);
+		lblFechaDePago.setBounds(10, 87, 119, 20);
 		panel.add(lblFechaDePago);
 
 		datePago = new JDateChooser();
-		datePago.setBounds(113, 73, 116, 20);
+		datePago.setBounds(113, 87, 116, 20);
 		panel.add(datePago);
 		editor = (JTextFieldDateEditor) datePago.getDateEditor();
 		editor.setEditable(false);
 		editor.setHorizontalAlignment(SwingConstants.CENTER);
+		datePago.setMinSelectableDate(new Date());
 
 		txtEstadoPlanilla = new JTextField();
 		txtEstadoPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEstadoPlanilla.setText("Abierta");
 		txtEstadoPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtEstadoPlanilla.setBounds(163, 307, 79, 20);
+		txtEstadoPlanilla.setBounds(150, 11, 79, 20);
 		panel.add(txtEstadoPlanilla);
 		txtEstadoPlanilla.setEditable(false);
 		txtEstadoPlanilla.setBackground(new Color(60, 179, 113));
 
 		JLabel lblTotalSueldosPlanilla = new JLabel("Total Sueldos Planilla");
 		lblTotalSueldosPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalSueldosPlanilla.setBounds(10, 106, 139, 14);
+		lblTotalSueldosPlanilla.setBounds(10, 140, 139, 14);
 		panel.add(lblTotalSueldosPlanilla);
 
 		JLabel label_1 = new JLabel("L.");
 		label_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_1.setBounds(10, 126, 18, 18);
+		label_1.setBounds(10, 160, 18, 18);
 		panel.add(label_1);
 
 		txtTotalSueldos = new JTextField();
 		txtTotalSueldos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalSueldos.setEditable(false);
 		txtTotalSueldos.setColumns(10);
-		txtTotalSueldos.setBounds(27, 126, 116, 20);
+		txtTotalSueldos.setBounds(27, 160, 148, 20);
 		panel.add(txtTotalSueldos);
 
 		JLabel label_3 = new JLabel("L.");
 		label_3.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_3.setBounds(10, 178, 18, 18);
+		label_3.setBounds(10, 212, 18, 18);
 		panel.add(label_3);
 
 		txtTotalBonos = new JTextField();
 		txtTotalBonos.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalBonos.setEditable(false);
 		txtTotalBonos.setColumns(10);
-		txtTotalBonos.setBounds(27, 177, 116, 20);
+		txtTotalBonos.setBounds(27, 211, 148, 20);
 		panel.add(txtTotalBonos);
 
 		JLabel label_5 = new JLabel("L.");
 		label_5.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_5.setBounds(10, 232, 18, 18);
+		label_5.setBounds(10, 266, 18, 18);
 		panel.add(label_5);
 
 		txtTotalDeducciones = new JTextField();
 		txtTotalDeducciones.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalDeducciones.setEditable(false);
 		txtTotalDeducciones.setColumns(10);
-		txtTotalDeducciones.setBounds(27, 230, 116, 20);
+		txtTotalDeducciones.setBounds(27, 264, 148, 20);
 		panel.add(txtTotalDeducciones);
 
 		JLabel lblTotalBonificacionesPlanilla = new JLabel("Total Bonificaciones Planilla");
 		lblTotalBonificacionesPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalBonificacionesPlanilla.setBounds(10, 155, 195, 14);
+		lblTotalBonificacionesPlanilla.setBounds(10, 189, 195, 14);
 		panel.add(lblTotalBonificacionesPlanilla);
 
 		JLabel lblTotalDeduccionesPlanilla = new JLabel("Total Deducciones Planilla");
 		lblTotalDeduccionesPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalDeduccionesPlanilla.setBounds(10, 207, 181, 14);
+		lblTotalDeduccionesPlanilla.setBounds(10, 241, 181, 14);
 		panel.add(lblTotalDeduccionesPlanilla);
 
 		JLabel lblTotalPlanilla = new JLabel("Total Planilla : ");
 		lblTotalPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalPlanilla.setBounds(10, 265, 100, 20);
+		lblTotalPlanilla.setBounds(10, 287, 100, 20);
 		panel.add(lblTotalPlanilla);
 
 		txtTotalPlanilla = new JTextField();
 		txtTotalPlanilla.setEditable(false);
 		txtTotalPlanilla.setColumns(10);
-		txtTotalPlanilla.setBounds(113, 265, 116, 20);
+		txtTotalPlanilla.setBounds(27, 310, 148, 20);
 		panel.add(txtTotalPlanilla);
+		txtTotalPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
 
-		dateRegistro = new JDateChooser();
-		dateRegistro.setBounds(139, 11, 90, 20);
-		panel.add(dateRegistro);
-
-		JLabel label = new JLabel("Tipo :");
-		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label.setBounds(10, 298, 63, 14);
-		panel.add(label);
+		JLabel lblTipoDePlanilla = new JLabel("Tipo de planilla :");
+		lblTipoDePlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblTipoDePlanilla.setBounds(10, 112, 117, 20);
+		panel.add(lblTipoDePlanilla);
 
 		cbxTipoPlanillaFinal = new JComboBox();
 		cbxTipoPlanillaFinal.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		cbxTipoPlanillaFinal.setModel(new DefaultComboBoxModel(new String[] { "Mensual", "Quincenal", "Eventual" }));
-		cbxTipoPlanillaFinal.setBounds(47, 296, 100, 20);
+		cbxTipoPlanillaFinal.setBounds(113, 112, 116, 20);
 		panel.add(cbxTipoPlanillaFinal);
-
-		editor2 = (JTextFieldDateEditor) dateRegistro.getDateEditor();
+		
+		JLabel label_2 = new JLabel("Creacion :");
+		label_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label_2.setBounds(10, 61, 74, 20);
+		panel.add(label_2);
+		
+		dateRegistro = new JDateChooser();
+		dateRegistro.setBounds(113, 61, 116, 20);
+		panel.add(dateRegistro);
 		dateRegistro.setVisible(false);
+		
+		label_4 = new JLabel("L.");
+		label_4.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		label_4.setBounds(10, 312, 18, 18);
+		panel.add(label_4);
+		
+		labelFechaRegistro = new JLabel("");
+		labelFechaRegistro.setHorizontalAlignment(SwingConstants.CENTER);
+		labelFechaRegistro.setBounds(81, 61, 148, 18);
+		panel.add(labelFechaRegistro);
+		labelFechaRegistro.setText(getFecha());
+		editor2 = (JTextFieldDateEditor) dateRegistro.getDateEditor();
 		editor2.setEditable(false);
 		editor2.setHorizontalAlignment(SwingConstants.CENTER);
-		dateRegistro.setVisible(false);
+		editor2.setForeground(Color.BLACK);
+		
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -544,9 +571,10 @@ public class registro_nuevas_planillas extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				planilla clase = new planilla();
+				historial_planilla clase2 = new historial_planilla();
 				consultas_planilla consulta = new consultas_planilla();
 				registro_planillas formulario = new registro_planillas();
-				control_planilla control = new control_planilla(clase, consulta, formulario);
+				control_planilla control = new control_planilla(clase, clase2, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
@@ -709,7 +737,7 @@ public class registro_nuevas_planillas extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("EEEEEEEEE dd'-'MMMMM'-'yyyy");
 		date = cal.getTime();
 		return df.format(date);
 	}

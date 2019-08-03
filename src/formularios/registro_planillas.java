@@ -74,6 +74,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
+import javax.swing.JToggleButton;
 
 public class registro_planillas extends JFrame {
 
@@ -100,7 +101,7 @@ public class registro_planillas extends JFrame {
 	public JPanel panel_2;
 	public JLabel label_8;
 	public JTextField txtBusquedaPlanilla;
-	public JTextField txtTotalPlanilla;
+	public static JTextField txtTotaPlanilla;
 	public JLabel lblFotoPlanilla;
 	public JButton button;
 	public PlaceHolder pista;
@@ -137,6 +138,11 @@ public class registro_planillas extends JFrame {
 	public JLabel label;
 	public JTextField txtCodigo;
 	public JLabel lblFecha;
+	public static JTextField txtSueldosPlanilla;
+	public static JTextField txtSueldosTotalPlanilla;
+	public static JTextField txtDeduccionesPlanilla;
+	public static JTextField txtBonificacionesPlanilla;
+	private JLabel lblPlanillasCreadasCon;
 	public static JTextField txtTotalBonificacionesPlanilla;
 	public static JTextField txtTotalDeduccionesPlanilla;
 	public JLabel lblCargo;
@@ -197,7 +203,7 @@ public class registro_planillas extends JFrame {
 		txtBusquedaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaPlanilla.setColumns(10);
 
-		txtBusquedaPlanilla.setBounds(87, 124, 271, 18);
+		txtBusquedaPlanilla.setBounds(87, 124, 315, 18);
 
 		txtBusquedaPlanilla.setBounds(87, 124, 312, 18);
 
@@ -232,7 +238,7 @@ public class registro_planillas extends JFrame {
 		btnBorrarPlanilla = new JButton("Borrar");
 		btnBorrarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnBorrarPlanilla.setBackground(new Color(220, 20, 60));
-		btnBorrarPlanilla.setBounds(28, 513, 99, 23);
+		btnBorrarPlanilla.setBounds(38, 513, 99, 23);
 		panel_2.add(btnBorrarPlanilla);
 
 		btnVerPlanilla = new JButton("Ver detalles");
@@ -249,20 +255,20 @@ public class registro_planillas extends JFrame {
 
 		barraTablaPlanilla = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		barraTablaPlanilla.setBounds(28, 169, 376, 305);
+		barraTablaPlanilla.setBounds(28, 169, 376, 260);
 		panel_2.add(barraTablaPlanilla);
 
-		lblTotalDeducciones = new JLabel("Total Pago :");
-		lblTotalDeducciones.setBounds(28, 482, 87, 22);
+		lblTotalDeducciones = new JLabel("Bonificaciones :");
+		lblTotalDeducciones.setBounds(167, 428, 88, 15);
 		panel_2.add(lblTotalDeducciones);
-		lblTotalDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblTotalDeducciones.setFont(new Font("Arial Narrow", Font.BOLD, 12));
 
-		txtTotalPlanilla = new JTextField();
-		txtTotalPlanilla.setBounds(147, 482, 136, 20);
-		panel_2.add(txtTotalPlanilla);
-		txtTotalPlanilla.setEditable(false);
-		txtTotalPlanilla.setColumns(10);
-		txtTotalPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtTotaPlanilla = new JTextField();
+		txtTotaPlanilla.setBounds(50, 474, 87, 18);
+		panel_2.add(txtTotaPlanilla);
+		txtTotaPlanilla.setEditable(false);
+		txtTotaPlanilla.setColumns(10);
+		txtTotaPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		JButton btnCalcularPlanilla = new JButton("Calcular");
 		btnCalcularPlanilla.addActionListener(new ActionListener() {
@@ -271,15 +277,15 @@ public class registro_planillas extends JFrame {
 				totalizar();
 			}
 		});
-		btnCalcularPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 10));
-		btnCalcularPlanilla.setBounds(304, 482, 99, 21);
+		btnCalcularPlanilla.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnCalcularPlanilla.setBounds(147, 471, 108, 22);
 		panel_2.add(btnCalcularPlanilla);
-		btnCalcularPlanilla.setBackground(new Color(60, 179, 113));
+		btnCalcularPlanilla.setBackground(new Color(65, 105, 225));
 
 		label = new JLabel("L.");
-		label.setBounds(125, 484, 28, 18);
+		label.setBounds(150, 440, 18, 18);
 		panel_2.add(label);
-		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		label.setFont(new Font("Arial Narrow", Font.BOLD, 12));
 
 		lblPlanillaCanal = new JLabel("Registros Planilla.");
 		lblPlanillaCanal.setHorizontalAlignment(SwingConstants.CENTER);
@@ -446,22 +452,82 @@ public class registro_planillas extends JFrame {
 		});
 		btnNuevaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnNuevaPlanilla.setBackground(new Color(0, 250, 154));
-		btnNuevaPlanilla.setBounds(87, 145, 153, 22);
+		btnNuevaPlanilla.setBounds(157, 145, 156, 22);
 		panel_2.add(btnNuevaPlanilla);
 
 		btnGuardarPlanilla = new JButton("Guardar Planilla");
-		btnGuardarPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		btnGuardarPlanilla.setBackground(new Color(60, 179, 113));
-		btnGuardarPlanilla.setBounds(250, 145, 149, 22);
+		btnGuardarPlanilla.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnGuardarPlanilla.setBackground(new Color(34, 139, 34));
+		btnGuardarPlanilla.setBounds(265, 471, 134, 22);
 		panel_2.add(btnGuardarPlanilla);
 
-		label_8 = new JLabel("");
-		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setBounds(0, 0, 430, 575);
-		panel_2.add(label_8);
-		final ImageIcon logo = new ImageIcon(
-				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-		label_8.setIcon(logo);
+		JLabel lblSueldos = new JLabel("Sueldos :");
+		lblSueldos.setFont(new Font("Arial Narrow", Font.BOLD, 12));
+		lblSueldos.setBounds(53, 428, 87, 15);
+		panel_2.add(lblSueldos);
+
+		JLabel label_10 = new JLabel("L.");
+		label_10.setFont(new Font("Arial Narrow", Font.BOLD, 12));
+		label_10.setBounds(38, 442, 21, 15);
+		panel_2.add(label_10);
+
+		JLabel lblDeducciones_1 = new JLabel("Deducciones :");
+		lblDeducciones_1.setFont(new Font("Arial Narrow", Font.BOLD, 12));
+		lblDeducciones_1.setBounds(279, 428, 88, 15);
+		panel_2.add(lblDeducciones_1);
+
+		JLabel label_18 = new JLabel("L.");
+		label_18.setFont(new Font("Arial Narrow", Font.BOLD, 12));
+		label_18.setBounds(262, 442, 18, 15);
+		panel_2.add(label_18);
+
+		txtDeduccionesPlanilla = new JTextField();
+		txtDeduccionesPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtDeduccionesPlanilla.setEditable(false);
+		txtDeduccionesPlanilla.setColumns(10);
+		txtDeduccionesPlanilla.setBounds(274, 441, 87, 19);
+		panel_2.add(txtDeduccionesPlanilla);
+
+		JLabel label_19 = new JLabel("L.");
+		label_19.setFont(new Font("Arial Narrow", Font.BOLD, 12));
+		label_19.setBounds(38, 475, 18, 15);
+		panel_2.add(label_19);
+
+		JLabel lblTotalPlanilla = new JLabel("Total Planilla :");
+		lblTotalPlanilla.setFont(new Font("Arial Narrow", Font.BOLD, 12));
+		lblTotalPlanilla.setBounds(50, 459, 87, 18);
+		panel_2.add(lblTotalPlanilla);
+
+		txtBonificacionesPlanilla = new JTextField();
+		txtBonificacionesPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtBonificacionesPlanilla.setEditable(false);
+		txtBonificacionesPlanilla.setColumns(10);
+		txtBonificacionesPlanilla.setBounds(161, 441, 87, 18);
+		panel_2.add(txtBonificacionesPlanilla);
+
+		lblPlanillasCreadasCon = new JLabel("Planillas Creadas :");
+		lblPlanillasCreadasCon.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblPlanillasCreadasCon.setBounds(28, 145, 208, 22);
+		panel_2.add(lblPlanillasCreadasCon);
+
+		txtSueldosPlanilla = new JTextField();
+		txtSueldosPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtSueldosPlanilla.setEditable(false);
+		txtSueldosPlanilla.setColumns(10);
+		txtSueldosPlanilla.setBounds(50, 441, 87, 19);
+		panel_2.add(txtSueldosPlanilla);
+				
+				JToggleButton toggleButton = new JToggleButton("");
+				toggleButton.setBounds(358, 146, 44, 23);
+				panel_2.add(toggleButton);
+				
+						label_8 = new JLabel("");
+						label_8.setHorizontalAlignment(SwingConstants.CENTER);
+						label_8.setBounds(0, 0, 430, 575);
+						panel_2.add(label_8);
+						final ImageIcon logo = new ImageIcon(
+								icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+						label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -615,11 +681,6 @@ public class registro_planillas extends JFrame {
 		panel_1.add(btnActualizar);
 
 		btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(60, 179, 113));
 		btnGuardar.setBounds(293, 515, 99, 23);
@@ -986,14 +1047,39 @@ public class registro_planillas extends JFrame {
 	}
 
 	public void totalizar() {
-		double t = 0;
-		double p = 0;
+		double t1 = 0;
+		double p1 = 0;
+		double t2 = 0;
+		double p2 = 0;
+		double t3 = 0;
+		double p3 = 0;
+		double t4 = 0;
+		double p4 = 0;
 		if (tablaPlanilla.getRowCount() > 0) {
 			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
-				p = Double.parseDouble(tablaPlanilla.getValueAt(i, 10).toString());
-				t += p;
+				p1 = Double.parseDouble(tablaPlanilla.getValueAt(i, 6).toString());
+				t1 += p1;
 			}
-			txtTotalPlanilla.setText(String.valueOf(t));
+			txtSueldosPlanilla.setText(String.valueOf(t1));
+
+			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
+				p2 = Double.parseDouble(tablaPlanilla.getValueAt(i, 8).toString());
+				t2 += p2;
+			}
+			txtBonificacionesPlanilla.setText(String.valueOf(t2));
+
+			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
+				p3 = Double.parseDouble(tablaPlanilla.getValueAt(i, 7).toString());
+				t3 += p3;
+			}
+			txtDeduccionesPlanilla.setText(String.valueOf(t3));
+
+			for (int i = 0; i < tablaPlanilla.getRowCount(); i++) {
+				p4 = Double.parseDouble(tablaPlanilla.getValueAt(i, 10).toString());
+				t4 += p4;
+			}
+			txtTotaPlanilla.setText(String.valueOf(t4));
+
 		} else {
 			JOptionPane.showMessageDialog(null, "No hay datos que totalizar");
 		}

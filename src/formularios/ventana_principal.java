@@ -230,9 +230,10 @@ public class ventana_principal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				planilla clase = new planilla();
+				historial_planilla clase2 = new historial_planilla();
 				consultas_planilla consulta = new consultas_planilla();
 				registro_planillas formulario = new registro_planillas();
-				control_planilla control = new control_planilla(clase, consulta, formulario);
+				control_planilla control = new control_planilla(clase, clase2, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();

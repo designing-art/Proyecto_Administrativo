@@ -75,4 +75,29 @@ public class consultas_historial_planilla extends conexion {
 		}
 	}
 
+	public boolean actualizarEstadoPlanilla(historial_planilla historial_planilla) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "UPDATE historial_planillas SET estado_planilla=? WHERE id_planilla_final=? ";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, historial_planilla.getEstado_planila());
+			ps.setInt(2, historial_planilla.getId_planilla_final());
+			ps.execute();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
 }

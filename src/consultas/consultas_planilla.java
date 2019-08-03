@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import clases.empleado;
+import clases.historial_planilla;
 import clases.planilla;
 import conexion.conexion;
 
@@ -104,6 +105,34 @@ public class consultas_planilla extends conexion {
 				return true;
 			}
 			return false;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+	
+	public boolean actualizarDatosPlanilla(historial_planilla historial_planilla) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "UPDATE historial_planillas SET total_deducciones_planilla_final=?, total_bonificaciones_planilla_final=?, total_sueldos_planilla_final=?, total_pago_planilla_final=? WHERE id_planilla_final=? ";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, historial_planilla.getTotal_deducciones_planilla_final());
+			ps.setDouble(2, historial_planilla.getTotal_bonificaciones_planilla_final());
+			ps.setDouble(3, historial_planilla.getTotal_sueldos_planilla_final());
+			ps.setDouble(4, historial_planilla.getTotal_pago_planilla_final());
+			ps.setInt(5, historial_planilla.getId_planilla_final());
+			ps.execute();
+
+			return true;
 		} catch (SQLException e) {
 			System.err.println(e);
 			return false;

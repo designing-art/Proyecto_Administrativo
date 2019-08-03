@@ -514,7 +514,7 @@ public class registro_cargos extends JFrame {
 						}
 					}
 
-					String encabezado = "Reporte de cargos de " + login_usuario.nombre.toString();
+					String encabezado = "Reporte de cargos de " +login_usuario.nombre.toString();
 
 					utilJTablePrint(tablaCargos, encabezado,
 							"Pagina {0} de " + i + "                                  " + fecha, true);

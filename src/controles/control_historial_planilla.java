@@ -305,9 +305,10 @@ public class control_historial_planilla implements ActionListener {
 				id = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 0).toString();
 				nombre = formulario_historial_planilla.tablaPlanilla.getValueAt(filaseleccionada, 3).toString();
 				planilla clase = new planilla();
+				historial_planilla clase2 = new historial_planilla();
 				consultas_planilla consulta = new consultas_planilla();
 				registro_planillas formulario = new registro_planillas();
-				control_planilla control = new control_planilla(clase, consulta, formulario);
+				control_planilla control = new control_planilla(clase, clase2, consulta, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
 				registro_planillas.txtIdentidadEmpleadoPlanilla.requestFocusInWindow();
