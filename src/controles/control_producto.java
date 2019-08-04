@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import clases.producto;
 import conexion.conexion;
 import consultas.consultas_producto;
+import formularios.login_usuario;
 import formularios.registro_productos;
 
 public class control_producto implements ActionListener {
@@ -240,6 +241,8 @@ public class control_producto implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+						
 					conexion objCon = new conexion();
 					Connection conn = objCon.getConexion();
 					int Fila = formulario.tablaProductos.getSelectedRow();
@@ -257,6 +260,10 @@ public class control_producto implements ActionListener {
 					formulario.btnActualizarProducto.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevoProducto.setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+				}
 
 				}
 			} catch (SQLException ex) {

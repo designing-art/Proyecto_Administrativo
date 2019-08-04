@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import clases.cargo;
 import conexion.conexion;
 import consultas.consultas_cargo;
+import formularios.login_usuario;
 import formularios.registro_cargos;
 import formularios.registro_empleados;
 
@@ -261,23 +262,30 @@ public class control_cargo implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formularioCargo.tablaCargos.getSelectedRow();
-					String codigo = formularioCargo.tablaCargos.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM cargos WHERE id_cargo=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Cargo Eliminado");
-					limpiar();
-					formularioCargo.construirTabla();
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
 
-					formularioCargo.cbxTipoCargo.setEditable(false);
-					formularioCargo.txtNombreCargo.setEditable(false);
-					formularioCargo.txtSueldoCargo.setEditable(false);
-					formularioCargo.txtHoraExtraCargo.setEditable(false);
-					formularioCargo.txtFuncionesCargo.setEditable(false);
-					formularioCargo.btnActualizarCargo.setVisible(false);
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formularioCargo.tablaCargos.getSelectedRow();
+						String codigo = formularioCargo.tablaCargos.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM cargos WHERE id_cargo=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Cargo Eliminado");
+						limpiar();
+						formularioCargo.construirTabla();
+
+						formularioCargo.cbxTipoCargo.setEditable(false);
+						formularioCargo.txtNombreCargo.setEditable(false);
+						formularioCargo.txtSueldoCargo.setEditable(false);
+						formularioCargo.txtHoraExtraCargo.setEditable(false);
+						formularioCargo.txtFuncionesCargo.setEditable(false);
+						formularioCargo.btnActualizarCargo.setVisible(false);
+
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import clases.proveedor;
 import conexion.conexion;
 import consultas.consultas_proveedor;
+import formularios.login_usuario;
 import formularios.registro_proveedores;
 
 public class control_proveedor implements ActionListener {
@@ -255,23 +256,29 @@ public class control_proveedor implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaProveedores.getSelectedRow();
-					String codigo = formulario.tablaProveedores.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM proveedores WHERE id_proveedor=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Proveedor Eliminado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.txtCodigoProveedor.setText(null);
-					formulario.btnSubirFotoContrato.setEnabled(false);
-					formulario.lbl_foto_contrato.setEnabled(false);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaProveedores.getSelectedRow();
+						String codigo = formulario.tablaProveedores.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM proveedores WHERE id_proveedor=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Proveedor Eliminado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.txtCodigoProveedor.setText(null);
+						formulario.btnSubirFotoContrato.setEnabled(false);
+						formulario.lbl_foto_contrato.setEnabled(false);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

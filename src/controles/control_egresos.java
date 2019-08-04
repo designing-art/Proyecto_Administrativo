@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import clases.egreso;
 import conexion.conexion;
 import consultas.consultas_egreso;
+import formularios.login_usuario;
 import formularios.registro_egresos;
 
 public class control_egresos implements ActionListener {
@@ -173,21 +174,27 @@ public class control_egresos implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tabla.getSelectedRow();
-					String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM egresos WHERE id_egreso=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Egreso Eliminado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.txtCodigo.setText(null);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tabla.getSelectedRow();
+						String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM egresos WHERE id_egreso=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Egreso Eliminado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.txtCodigo.setText(null);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

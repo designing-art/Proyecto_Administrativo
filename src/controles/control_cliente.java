@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import clases.cliente;
 import conexion.conexion;
 import consultas.consultas_cliente;
+import formularios.login_usuario;
 import formularios.registro_clientes;
 
 public class control_cliente implements ActionListener {
@@ -317,26 +318,32 @@ public class control_cliente implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tabla.getSelectedRow();
-					String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM clientes WHERE id_cliente=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Cliente Eliminado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.txtCodigo.setText(null);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
 
-					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
-							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoC.setIcon(iconofoto);
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tabla.getSelectedRow();
+						String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM clientes WHERE id_cliente=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Cliente Eliminado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.txtCodigo.setText(null);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+
+						final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+						final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+								formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lblFotoC.setIcon(iconofoto);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

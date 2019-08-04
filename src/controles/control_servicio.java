@@ -299,6 +299,8 @@ public class control_servicio implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+						
 					conexion objCon = new conexion();
 					Connection conn = objCon.getConexion();
 					int Fila = formulario.tablaServicios.getSelectedRow();
@@ -314,6 +316,10 @@ public class control_servicio implements ActionListener {
 					formulario.btnActualizar.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

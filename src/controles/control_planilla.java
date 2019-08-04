@@ -19,6 +19,7 @@ import clases.historial_planilla;
 import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_planilla;
+import formularios.login_usuario;
 import formularios.registro_planillas;
 
 public class control_planilla implements ActionListener {
@@ -29,6 +30,7 @@ public class control_planilla implements ActionListener {
 	public registro_planillas formulario_planilla;
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 	public static String identidad = null;
+	public static String planilla = null;
 
 	public control_planilla(planilla clase, historial_planilla clase2, consultas_planilla consulta, registro_planillas formulario) {
 		this.clase_planilla = clase;
@@ -43,6 +45,7 @@ public class control_planilla implements ActionListener {
 		this.formulario_planilla.btnBorrarPlanilla.addActionListener(this);
 		this.formulario_planilla.btnVerPlanilla.addActionListener(this);
 		this.formulario_planilla.btnAceptar.addActionListener(this);
+		this.formulario_planilla.up_down.addActionListener(this);
 	}
 
 	@Override
@@ -59,7 +62,7 @@ public class control_planilla implements ActionListener {
 					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 			} else {
-				if (formulario_planilla.txtIdentidadPlanilla.getText().toString().equals(identidad)) {
+				if (formulario_planilla.txtIdentidadPlanilla.getText().toString().equals(identidad)&&formulario_planilla.lblNombrePlanillaNueva.getText().toString().equals(planilla)) {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
@@ -315,6 +318,7 @@ public class control_planilla implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
 					conexion objCon = new conexion();
 					Connection conn = objCon.getConexion();
 					int Fila = formulario_planilla.tablaPlanilla.getSelectedRow();
@@ -332,6 +336,10 @@ public class control_planilla implements ActionListener {
 									formulario_planilla.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
 					formulario_planilla.lblFotoPlanilla.setIcon(logo);
 					formulario_planilla.txtDireccionFoto.setText(null);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {
@@ -386,6 +394,14 @@ public class control_planilla implements ActionListener {
 			formulario_planilla.txtDireccionFoto.setText(null);
 
 		}
+		
+		if (e.getSource() == formulario_planilla.up_down) {
+			if (formulario_planilla.up_down.isSelected()) {
+				formulario_planilla.construirTabla2();
+			}else {
+				formulario_planilla.construirTabla();
+			}
+		}
 
 		// ------------------------------------------------------------------------------------------------//
 
@@ -415,7 +431,44 @@ public class control_planilla implements ActionListener {
 		planilla planilla;
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT * FROM planillas ORDER BY id_planilla DESC");
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM planillas where nombre_planilla='"+registro_planillas.lblNombrePlanillaNueva.getText().toString()+"' ORDER BY id_planilla DESC");
+
+			while (rs.next()) {
+				planilla = new planilla();
+				planilla.setId_planilla(Integer.parseInt(rs.getString("id_planilla")));
+				planilla.setFecha_planilla(rs.getString("fecha_planilla"));
+				planilla.setNombres_planilla(rs.getString("nombres_planilla"));
+				planilla.setApellidos_planilla(rs.getString("apellidos_planilla"));
+				planilla.setIdentidad_planilla(rs.getString("identidad_planilla"));
+				planilla.setCargo_planilla(rs.getString("cargo_planilla"));
+				planilla.setSueldo_bruto_planilla(Double.parseDouble(rs.getString("sueldo_bruto_planilla")));
+				planilla.setTotal_deducciones_planilla(Double.parseDouble(rs.getString("total_deducciones_planilla")));
+				planilla.setTotal_bonificaciones_planilla(
+						Double.parseDouble(rs.getString("total_bonificaciones_planilla")));
+				planilla.setSueldo_neto_planilla(Double.parseDouble(rs.getString("sueldo_neto_planilla")));
+				planilla.setTotal_apagar_planilla(Double.parseDouble(rs.getString("total_apagar_planilla")));
+				planilla.setNombre_planilla(rs.getString("nombre_planilla"));
+				miLista.add(planilla);
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+		return miLista;
+	}
+	
+	public static ArrayList<planilla> buscarUsuariosConMatriz2() {
+		conexion conex = new conexion();
+		ArrayList<planilla> miLista = new ArrayList<planilla>();
+		planilla planilla;
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM planillas where nombre_planilla='"+registro_planillas.lblNombrePlanillaNueva.getText().toString()+"'");
 
 			while (rs.next()) {
 				planilla = new planilla();
@@ -466,16 +519,38 @@ public class control_planilla implements ActionListener {
 
 		return matrizInfo;
 	}
+	
+	public static String[][] obtenerMatriz2() {
+		ArrayList<planilla> miLista = buscarUsuariosConMatriz2();
+		String matrizInfo[][] = new String[miLista.size()][12];
+		for (int i = 0; i < miLista.size(); i++) {
+			matrizInfo[i][0] = miLista.get(i).getId_planilla() + "";
+			matrizInfo[i][1] = miLista.get(i).getFecha_planilla() + "";
+			matrizInfo[i][2] = miLista.get(i).getNombres_planilla() + "";
+			matrizInfo[i][3] = miLista.get(i).getApellidos_planilla() + "";
+			matrizInfo[i][4] = miLista.get(i).getIdentidad_planilla() + "";
+			matrizInfo[i][5] = miLista.get(i).getCargo_planilla() + "";
+			matrizInfo[i][6] = miLista.get(i).getSueldo_bruto_planilla() + "";
+			matrizInfo[i][7] = miLista.get(i).getTotal_deducciones_planilla() + "";
+			matrizInfo[i][8] = miLista.get(i).getTotal_bonificaciones_planilla() + "";
+			matrizInfo[i][9] = miLista.get(i).getSueldo_neto_planilla() + "";
+			matrizInfo[i][10] = miLista.get(i).getTotal_apagar_planilla() + "";
+			matrizInfo[i][11] = miLista.get(i).getNombre_planilla() + "";
+		}
+
+		return matrizInfo;
+	}
 
 	public void validarIdentidad() {
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT identidad_planilla FROM planillas where identidad_planilla = '"
+			ResultSet rs = estatuto.executeQuery("SELECT identidad_planilla, nombre_planilla FROM planillas where identidad_planilla = '"
 					+ formulario_planilla.txtIdentidadPlanilla.getText().toString() + "'");
 
 			if (rs.next()) {
 				identidad = (rs.getString("identidad_planilla"));
+				planilla = (rs.getString("nombre_planilla"));
 			}
 
 			rs.close();

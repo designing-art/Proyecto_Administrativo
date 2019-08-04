@@ -124,7 +124,8 @@ public class control_venta implements ActionListener {
 							consultas_factura_cliente consulta = new consultas_factura_cliente();
 							registro_facturas_clientes formulario2 = new registro_facturas_clientes();
 							sar clase2 = new sar();
-							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2, clase2);
+							control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario2,
+									clase2);
 							formulario2.setVisible(true);
 							formulario2.setLocationRelativeTo(null);
 							formulario2.txtCliente.requestFocusInWindow();
@@ -139,9 +140,9 @@ public class control_venta implements ActionListener {
 							formulario2.btnActualizar.setVisible(false);
 							formulario2.btnAceptar.setVisible(false);
 							formulario2.btnBorrar.setVisible(false);
-							formulario2.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+							formulario2.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 							formulario2.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
-							formulario.dispose();	
+							formulario.dispose();
 
 						} else {
 							JOptionPane.showMessageDialog(null, "Error! objeto no registrado");
@@ -411,22 +412,28 @@ public class control_venta implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaVentas.getSelectedRow();
-					String codigo = formulario.tablaVentas.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM ventas WHERE id_venta=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Objeto Eliminado!");
-					limpiar();
-					formulario.construirTablaInventario();
-					formulario.construirTablaVenta();
-					formulario.txtCodigo.setText(null);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaVentas.getSelectedRow();
+						String codigo = formulario.tablaVentas.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM ventas WHERE id_venta=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Objeto Eliminado!");
+						limpiar();
+						formulario.construirTablaInventario();
+						formulario.construirTablaVenta();
+						formulario.txtCodigo.setText(null);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

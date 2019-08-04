@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import clases.horario;
 import conexion.conexion;
 import consultas.consultas_horario;
+import formularios.login_usuario;
 import formularios.registro_empleados;
 import formularios.registro_horarios;
 
@@ -267,22 +268,28 @@ public class control_horario implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formularioHorario.tablaHorario.getSelectedRow();
-					String codigo = formularioHorario.tablaHorario.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM horarios WHERE id_horario=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Horario Eliminado");
-					limpiar();
-					formularioHorario.construirTabla();
-					formularioHorario.txtCodigoHorario.setEditable(false);
-					formularioHorario.txtDescripcionHorario.setEditable(false);
-					formularioHorario.txtObservacionHorario.setEditable(false);
-					formularioHorario.btnActualizarHorario.setVisible(false);
-					formularioHorario.txtDescripcionHorario.setBackground(Color.LIGHT_GRAY);
-					formularioHorario.txtObservacionHorario.setBackground(Color.LIGHT_GRAY);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formularioHorario.tablaHorario.getSelectedRow();
+						String codigo = formularioHorario.tablaHorario.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM horarios WHERE id_horario=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Horario Eliminado");
+						limpiar();
+						formularioHorario.construirTabla();
+						formularioHorario.txtCodigoHorario.setEditable(false);
+						formularioHorario.txtDescripcionHorario.setEditable(false);
+						formularioHorario.txtObservacionHorario.setEditable(false);
+						formularioHorario.btnActualizarHorario.setVisible(false);
+						formularioHorario.txtDescripcionHorario.setBackground(Color.LIGHT_GRAY);
+						formularioHorario.txtObservacionHorario.setBackground(Color.LIGHT_GRAY);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 				}
 			} catch (SQLException ex) {
 				JOptionPane.showMessageDialog(null, "Error al Eliminar Horario");

@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import clases.bonificacion;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
+import formularios.login_usuario;
 import formularios.registro_bonificaciones;
 
 public class control_bonificacion implements ActionListener {
@@ -242,29 +243,36 @@ public class control_bonificacion implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaBonificaciones.getSelectedRow();
-					String codigo = formulario.tablaBonificaciones.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM bonificaciones WHERE id_bonificacion=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Bonificacion Eliminada!");
-					limpiar();
-					formulario.construirTabla();
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
 
-					formulario.cbxTipoBonificacion.setEditable(false);
-					formulario.txtObservacionBonificacion.setEditable(false);
-					registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setEditable(false);
-					formulario.txtCantidadBonificacion.setEditable(false);
-					formulario.txtObservacionBonificacion.setBackground(Color.LIGHT_GRAY);
-					formulario.btnActualizar.setVisible(false);
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaBonificaciones.getSelectedRow();
+						String codigo = formulario.tablaBonificaciones.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM bonificaciones WHERE id_bonificacion=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Bonificacion Eliminada!");
+						limpiar();
+						formulario.construirTabla();
 
-					final ImageIcon logo = new ImageIcon(
-							usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
-									formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoBonificacion.setIcon(logo);
-					formulario.txtDireccionFoto.setText(null);
+						formulario.cbxTipoBonificacion.setEditable(false);
+						formulario.txtObservacionBonificacion.setEditable(false);
+						registro_bonificaciones.txtIdentidadEmpleadoBonificacion.setEditable(false);
+						formulario.txtCantidadBonificacion.setEditable(false);
+						formulario.txtObservacionBonificacion.setBackground(Color.LIGHT_GRAY);
+						formulario.btnActualizar.setVisible(false);
+
+						final ImageIcon logo = new ImageIcon(
+								usuario.getImage().getScaledInstance(formulario.lblFotoBonificacion.getWidth(),
+										formulario.lblFotoBonificacion.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lblFotoBonificacion.setIcon(logo);
+						formulario.txtDireccionFoto.setText(null);
+
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

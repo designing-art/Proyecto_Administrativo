@@ -194,7 +194,14 @@ public class ventana_principal extends JFrame {
 	public ventana_principal() {
 		setType(Type.POPUP);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+		addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent evt) {
+				close();
+			}
+		});
 		setBounds(100, 100, 700, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -1364,5 +1371,11 @@ public class ventana_principal extends JFrame {
 		}
 
 	}
-	
+
+	private void close() {
+		if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?", "Salir del sistema",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+			System.exit(0);
+	}
+
 }

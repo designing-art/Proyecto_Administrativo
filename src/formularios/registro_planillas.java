@@ -86,6 +86,7 @@ public class registro_planillas extends JFrame {
 	public JLabel label_3;
 	public JLabel label_4;
 	public JLabel label_5;
+	public JToggleButton up_down;
 	public static JLabel lblNombrePlanillaNueva;
 	public JTextField txtIdentidadPlanilla;
 	public JLabel lblBuscarEmpleadoPor;
@@ -185,6 +186,7 @@ public class registro_planillas extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+		final ImageIcon upand = new ImageIcon(getClass().getResource("/iconos/upandown.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(444, 46, 430, 575);
@@ -203,7 +205,7 @@ public class registro_planillas extends JFrame {
 		txtBusquedaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaPlanilla.setColumns(10);
 
-		txtBusquedaPlanilla.setBounds(87, 124, 315, 18);
+		txtBusquedaPlanilla.setBounds(87, 124, 317, 18);
 
 		txtBusquedaPlanilla.setBounds(87, 124, 312, 18);
 
@@ -280,7 +282,7 @@ public class registro_planillas extends JFrame {
 		btnCalcularPlanilla.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnCalcularPlanilla.setBounds(147, 471, 108, 22);
 		panel_2.add(btnCalcularPlanilla);
-		btnCalcularPlanilla.setBackground(new Color(65, 105, 225));
+		btnCalcularPlanilla.setBackground(new Color(0, 139, 139));
 
 		label = new JLabel("L.");
 		label.setBounds(150, 440, 18, 18);
@@ -306,10 +308,10 @@ public class registro_planillas extends JFrame {
 		panel_2.add(panel_3);
 
 		lbl_hora = new JLabel();
-		lbl_hora.setBounds(0, 0, 116, 22);
+		lbl_hora.setBounds(0, 0, 108, 22);
 		panel_3.add(lbl_hora);
 		lbl_hora.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_hora.setFont(new Font("Bernard MT Condensed", Font.BOLD, 15));
+		lbl_hora.setFont(new Font("Bookman Old Style", Font.BOLD, 15));
 		lbl_hora.setBackground(SystemColor.menu);
 		panel_3.setBounds(291, 79, 108, 22);
 		panel_2.add(panel_3);
@@ -328,6 +330,7 @@ public class registro_planillas extends JFrame {
 		label_17.setHorizontalAlignment(SwingConstants.CENTER);
 		label_17.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_17.setBackground(Color.WHITE);
+		label_17.setText(getFecha());
 
 		button_3 = new JButton("Imprimir Reporte");
 		button_3.addActionListener(new ActionListener() {
@@ -457,7 +460,7 @@ public class registro_planillas extends JFrame {
 
 		btnGuardarPlanilla = new JButton("Guardar Planilla");
 		btnGuardarPlanilla.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnGuardarPlanilla.setBackground(new Color(34, 139, 34));
+		btnGuardarPlanilla.setBackground(new Color(60, 179, 113));
 		btnGuardarPlanilla.setBounds(265, 471, 134, 22);
 		panel_2.add(btnGuardarPlanilla);
 
@@ -516,18 +519,21 @@ public class registro_planillas extends JFrame {
 		txtSueldosPlanilla.setColumns(10);
 		txtSueldosPlanilla.setBounds(50, 441, 87, 19);
 		panel_2.add(txtSueldosPlanilla);
-				
-				JToggleButton toggleButton = new JToggleButton("");
-				toggleButton.setBounds(358, 146, 44, 23);
-				panel_2.add(toggleButton);
-				
-						label_8 = new JLabel("");
-						label_8.setHorizontalAlignment(SwingConstants.CENTER);
-						label_8.setBounds(0, 0, 430, 575);
-						panel_2.add(label_8);
-						final ImageIcon logo = new ImageIcon(
-								icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-						label_8.setIcon(logo);
+
+		up_down = new JToggleButton("");
+		up_down.setBounds(378, 149, 21, 18);
+		panel_2.add(up_down);
+		final ImageIcon logoq = new ImageIcon(
+				upand.getImage().getScaledInstance(up_down.getWidth(), up_down.getHeight(), Image.SCALE_DEFAULT));
+		up_down.setIcon(logoq);
+
+		label_8 = new JLabel("");
+		label_8.setHorizontalAlignment(SwingConstants.CENTER);
+		label_8.setBounds(0, 0, 430, 575);
+		panel_2.add(label_8);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+		label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE PLANILLAS");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -949,23 +955,26 @@ public class registro_planillas extends JFrame {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventana_principal principal = new ventana_principal();
-				principal.setLocationRelativeTo(null);
-				principal.setVisible(true);
-				principal.consultarEmpresa();
-				login_usuario usuario = new login_usuario();
-				usuario.consultarDatosInicioSesionUsuario();
-				usuario.establecerDatosInicioSesionUsuario();
-				usuario.consultarPermisos();
-				usuario.definirPermisos();
-				Timer time = new Timer();
-				time.schedule(principal.tarea, 0, 1000);
-				configuraciones configuracion = new configuraciones();
-				configuracion.consultarConfiguracion();
-				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
-
-				dispose();
+				int resp = JOptionPane.showConfirmDialog(null,
+						"Saliendo de planillas!, Antes, debe confirmar si guardo sus cambios.");
+				if (JOptionPane.OK_OPTION == resp) {
+					ventana_principal principal = new ventana_principal();
+					principal.setLocationRelativeTo(null);
+					principal.setVisible(true);
+					principal.consultarEmpresa();
+					login_usuario usuario = new login_usuario();
+					usuario.consultarDatosInicioSesionUsuario();
+					usuario.establecerDatosInicioSesionUsuario();
+					usuario.consultarPermisos();
+					usuario.definirPermisos();
+					Timer time = new Timer();
+					time.schedule(principal.tarea, 0, 1000);
+					configuraciones configuracion = new configuraciones();
+					configuracion.consultarConfiguracion();
+					configuracion.establecerConfiguraciones();
+					principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+					dispose();
+				}
 			}
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -989,6 +998,29 @@ public class registro_planillas extends JFrame {
 		String titulos[] = { "Codigo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo", "Deducciones",
 				"Bonificaciones", "Sueldo Neto", "Total", "Planilla" };
 		String informacion[][] = control_planilla.obtenerMatriz();
+		tablaPlanilla = new JTable(informacion, titulos);
+		barraTablaPlanilla.setViewportView(tablaPlanilla);
+		for (int c = 0; c < tablaPlanilla.getColumnCount(); c++) {
+			Class<?> col_class = tablaPlanilla.getColumnClass(c);
+			tablaPlanilla.setDefaultEditor(col_class, null);
+			tablaPlanilla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaPlanilla.getTableHeader().setReorderingAllowed(false);
+
+			DefaultTableCellRenderer tcr;
+			tcr = new DefaultTableCellRenderer();
+			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+			tablaPlanilla.getColumnModel().getColumn(10).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+		}
+	}
+
+	public void construirTabla2() {
+		String titulos[] = { "Codigo", "Fecha", "Nombres", "Apellidos", "Identidad", "Cargo", "Sueldo", "Deducciones",
+				"Bonificaciones", "Sueldo Neto", "Total", "Planilla" };
+		String informacion[][] = control_planilla.obtenerMatriz2();
 		tablaPlanilla = new JTable(informacion, titulos);
 		barraTablaPlanilla.setViewportView(tablaPlanilla);
 		for (int c = 0; c < tablaPlanilla.getColumnCount(); c++) {
@@ -1218,7 +1250,7 @@ public class registro_planillas extends JFrame {
 				registro_planillas.lblNombrePlanillaNueva.setText(nombrePlanilla);
 
 			} else {
-				JOptionPane.showMessageDialog(null, "BIENVENIDO A LAS PLANILLAS\n" + "         Antes de comensar\n"
+				JOptionPane.showMessageDialog(null, "BIENVENIDO A LAS PLANILLAS\n" + "         Antes de comenzar\n"
 						+ "  es necesario crear una nueva planilla.\n" + "  Ingresaremos a:\n" + "  Nuevas Planillas\n"
 						+ "   y crearemos una nueva!\n" + "            ******* Buen Dia! *******");
 				dispose();

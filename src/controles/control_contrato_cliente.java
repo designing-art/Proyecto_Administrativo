@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import clases.contrato_cliente;
 import conexion.conexion;
 import consultas.consultas_contrato_cliente;
+import formularios.login_usuario;
 import formularios.registro_contratos_clientes;
 
 public class control_contrato_cliente implements ActionListener {
@@ -233,23 +234,29 @@ public class control_contrato_cliente implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaContratos.getSelectedRow();
-					String codigo = formulario.tablaContratos.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM contrato_cliente WHERE id_contrato_cliente=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Contrato Eliminado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.txtCodigo.setText(null);
-					formulario.btnSubirFotoContrato.setEnabled(false);
-					formulario.lbl_foto_contrato.setEnabled(false);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizarContrato.setVisible(false);
-					formulario.btnGuardarContrato.setVisible(false);
-					formulario.btnNuevoContrato.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaContratos.getSelectedRow();
+						String codigo = formulario.tablaContratos.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM contrato_cliente WHERE id_contrato_cliente=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Contrato Eliminado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.txtCodigo.setText(null);
+						formulario.btnSubirFotoContrato.setEnabled(false);
+						formulario.lbl_foto_contrato.setEnabled(false);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizarContrato.setVisible(false);
+						formulario.btnGuardarContrato.setVisible(false);
+						formulario.btnNuevoContrato.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

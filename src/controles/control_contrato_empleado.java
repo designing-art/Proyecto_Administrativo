@@ -277,23 +277,30 @@ public class control_contrato_empleado implements ActionListener {
 										+ "sus credenciales indican que NO es un administrador.\n"
 										+ "Alerta! el intento o robo de credenciales en un delito.");
 					} else {
-						conexion objCon = new conexion();
-						Connection conn = objCon.getConexion();
-						int Fila = formulario.tablaContratosEmpleados.getSelectedRow();
-						String codigo = formulario.tablaContratosEmpleados.getValueAt(Fila, 0).toString();
-						ps = conn.prepareStatement("DELETE FROM contrato_empleado WHERE id_contrato_empleado=?");
-						ps.setString(1, codigo);
-						ps.execute();
-						JOptionPane.showMessageDialog(null, "Contrato Eliminado!");
-						limpiar();
-						formulario.construirTabla();
-						formulario.txtCodigoContratoEmpleado.setText(null);
-						formulario.btnSubirFotoContrato.setEnabled(false);
-						formulario.lbl_foto_contrato.setEnabled(false);
-						formulario.btnAceptar.setEnabled(true);
-						formulario.btnActualizarContrato.setVisible(false);
-						formulario.btnGuardarContrato.setVisible(false);
-						formulario.btnNuevoContrato.setVisible(false);
+						if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+							conexion objCon = new conexion();
+							Connection conn = objCon.getConexion();
+							int Fila = formulario.tablaContratosEmpleados.getSelectedRow();
+							String codigo = formulario.tablaContratosEmpleados.getValueAt(Fila, 0).toString();
+							ps = conn.prepareStatement("DELETE FROM contrato_empleado WHERE id_contrato_empleado=?");
+							ps.setString(1, codigo);
+							ps.execute();
+							JOptionPane.showMessageDialog(null, "Contrato Eliminado!");
+							limpiar();
+							formulario.construirTabla();
+							formulario.txtCodigoContratoEmpleado.setText(null);
+							formulario.btnSubirFotoContrato.setEnabled(false);
+							formulario.lbl_foto_contrato.setEnabled(false);
+							formulario.btnAceptar.setEnabled(true);
+							formulario.btnActualizarContrato.setVisible(false);
+							formulario.btnGuardarContrato.setVisible(false);
+							formulario.btnNuevoContrato.setVisible(false);
+
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+						}
 
 					}
 				}

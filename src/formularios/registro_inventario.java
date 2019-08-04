@@ -238,7 +238,7 @@ public class registro_inventario extends JFrame {
 					ke.consume();
 				}
 				
-				if (txtNombre.getText().length() == 50)
+				if (txtNombre.getText().length() == 30)
 					ke.consume();
 			}
 
@@ -295,6 +295,28 @@ public class registro_inventario extends JFrame {
 		panelRegistro.add(txtPeso);
 		InputMap map3 = txtPeso.getInputMap(JComponent.WHEN_FOCUSED);
 		map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtPeso.addKeyListener(new KeyListener() {
+			@Override
+			// metodo de solo letras y simbolos
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+				
+				if (txtPeso.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblPrecio = new JLabel("6. Color :");
 		lblPrecio.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -307,6 +329,28 @@ public class registro_inventario extends JFrame {
 		panelRegistro.add(txtColor);
 		InputMap map5 = txtColor.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtColor.addKeyListener(new KeyListener() {
+			@Override
+			// metodo de solo letras y simbolos
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+				
+				if (txtColor.getText().length() == 20)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblCantidad = new JLabel("7. Marca :");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -317,8 +361,30 @@ public class registro_inventario extends JFrame {
 		txtMarca.setColumns(10);
 		txtMarca.setBounds(136, 259, 178, 23);
 		panelRegistro.add(txtMarca);
-		InputMap map51 = txtColor.getInputMap(JComponent.WHEN_FOCUSED);
+		InputMap map51 = txtMarca.getInputMap(JComponent.WHEN_FOCUSED);
 		map51.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtMarca.addKeyListener(new KeyListener() {
+			@Override
+			// metodo de solo letras y simbolos
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+				
+				if (txtMarca.getText().length() == 30)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		lblL = new JLabel("L.");
 		lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
@@ -336,6 +402,28 @@ public class registro_inventario extends JFrame {
 		panelRegistro.add(txtModelo);
 		InputMap map54 = txtModelo.getInputMap(JComponent.WHEN_FOCUSED);
 		map54.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtModelo.addKeyListener(new KeyListener() {
+			@Override
+			// metodo de solo letras y simbolos
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+				
+				if (txtModelo.getText().length() == 40)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		JLabel lblExistencia = new JLabel("10. Existencia :");
 		lblExistencia.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -357,6 +445,28 @@ public class registro_inventario extends JFrame {
 		scrollPane.setViewportView(txtDescripcion);
 		InputMap map52 = txtDescripcion.getInputMap(JComponent.WHEN_FOCUSED);
 		map52.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtDescripcion.addKeyListener(new KeyListener() {
+			@Override
+			// metodo de solo letras y simbolos
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if (Character.isDigit(c)) {
+					Toolkit.getDefaultToolkit().beep();
+					ke.consume();
+				}
+				
+				if (txtDescripcion.getText().length() == 80)
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		lblCantidad_1 = new JLabel("9. Cantidad :");
 		lblCantidad_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -376,6 +486,9 @@ public class registro_inventario extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
+					ke.consume();
+				
+				if (txtCantidad.getText().length() == 8)
 					ke.consume();
 			}
 

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import clases.sar;
 import conexion.conexion;
 import consultas.consultas_sar;
+import formularios.login_usuario;
 import formularios.registro_sar;
 
 public class control_sar implements ActionListener {
@@ -47,12 +48,9 @@ public class control_sar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == formulario.btnGuardar) {
-			if (formulario.txtFormatoSar.getText().isEmpty()
-					|| formulario.txtCaiSar.getText().isEmpty()
-					|| formulario.txtRangoFinal.getText().isEmpty() 
-					|| formulario.txtRangoFinal.getText().isEmpty()
-					|| formulario.txtD.getText().isEmpty()
-					|| formulario.editor.getText().isEmpty()) {
+			if (formulario.txtFormatoSar.getText().isEmpty() || formulario.txtCaiSar.getText().isEmpty()
+					|| formulario.txtRangoFinal.getText().isEmpty() || formulario.txtRangoFinal.getText().isEmpty()
+					|| formulario.txtD.getText().isEmpty() || formulario.editor.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el SAR!");
 			} else {
 
@@ -98,8 +96,7 @@ public class control_sar implements ActionListener {
 		if (e.getSource() == formulario.btnActualizar) {
 			if (formulario.txtFormatoSar.getText().isEmpty() || formulario.txtCaiSar.getText().isEmpty()
 					|| formulario.txtRangoFinal.getText().isEmpty() || formulario.txtRangoFinal.getText().isEmpty()
-					|| formulario.txtD.getText().isEmpty()
-					|| formulario.editor.getText().isEmpty()) {
+					|| formulario.txtD.getText().isEmpty() || formulario.editor.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para actualizar el SAR!");
 			} else {
 				clase.setId_sar(Integer.parseInt(formulario.txtCodigoSar.getText().toString()));
@@ -230,23 +227,29 @@ public class control_sar implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaSAR.getSelectedRow();
-					String codigo = formulario.tablaSAR.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM sar WHERE id_sar=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "SAR Eliminado!");
-					limpiar();
-					formulario.ObtenerUltimosDatosSar();
-					formulario.calcularDatosFacturas();
-					formulario.construirTabla();
-					formulario.txtCodigoSar.setText(null);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaSAR.getSelectedRow();
+						String codigo = formulario.tablaSAR.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM sar WHERE id_sar=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "SAR Eliminado!");
+						limpiar();
+						formulario.ObtenerUltimosDatosSar();
+						formulario.calcularDatosFacturas();
+						formulario.construirTabla();
+						formulario.txtCodigoSar.setText(null);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

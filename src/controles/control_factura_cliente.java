@@ -270,22 +270,28 @@ public class control_factura_cliente implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tabla.getSelectedRow();
-					String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM facturas_clientes WHERE id_facturas_cliente=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Factura Eliminada!");
-					limpiar();
-					formulario.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
-					formulario.construirTabla();
-					formulario.txtCodigo.setText(null);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizar.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevo.setVisible(false);
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tabla.getSelectedRow();
+						String codigo = formulario.tabla.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM facturas_clientes WHERE id_facturas_cliente=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Factura Eliminada!");
+						limpiar();
+						formulario.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
+						formulario.construirTabla();
+						formulario.txtCodigo.setText(null);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizar.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

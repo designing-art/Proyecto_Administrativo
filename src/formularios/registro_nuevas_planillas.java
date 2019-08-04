@@ -70,6 +70,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
+import javax.swing.JToggleButton;
 
 public class registro_nuevas_planillas extends JFrame {
 
@@ -108,6 +109,7 @@ public class registro_nuevas_planillas extends JFrame {
 	
 	private JLabel label_4;
 	private JLabel labelFechaRegistro;
+	public JToggleButton btnupanddown;
 
 
 	public static String ruta;
@@ -145,6 +147,7 @@ public class registro_nuevas_planillas extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 		final ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+		final ImageIcon upand = new ImageIcon(getClass().getResource("/iconos/upandown.png"));
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(316, 36, 430, 496);
@@ -162,7 +165,7 @@ public class registro_nuevas_planillas extends JFrame {
 		map41.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 		txtBusquedaPlanilla.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusquedaPlanilla.setColumns(10);
-		txtBusquedaPlanilla.setBounds(86, 114, 195, 18);
+		txtBusquedaPlanilla.setBounds(86, 114, 179, 18);
 		panel_2.add(txtBusquedaPlanilla);
 		txtBusquedaPlanilla.addKeyListener(new KeyListener() {
 			@Override
@@ -242,6 +245,7 @@ public class registro_nuevas_planillas extends JFrame {
 		label_17.setHorizontalAlignment(SwingConstants.CENTER);
 		label_17.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_17.setBackground(Color.WHITE);
+		label_17.setText(getFecha());
 
 		btnImprimir = new JButton("Imprimir Reporte");
 		btnImprimir.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -318,8 +322,15 @@ public class registro_nuevas_planillas extends JFrame {
 		btnContinuar = new JButton("Continuar");
 		btnContinuar.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnContinuar.setBackground(new Color(255, 165, 0));
-		btnContinuar.setBounds(303, 112, 99, 23);
+		btnContinuar.setBounds(275, 112, 99, 23);
 		panel_2.add(btnContinuar);
+		
+		btnupanddown = new JToggleButton("");
+		btnupanddown.setBounds(381, 113, 21, 18);
+		panel_2.add(btnupanddown);
+		final ImageIcon logoq = new ImageIcon(
+				upand.getImage().getScaledInstance(btnupanddown.getWidth(), btnupanddown.getHeight(), Image.SCALE_DEFAULT));
+		btnupanddown.setIcon(logoq);
 		
 		label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -634,6 +645,28 @@ public class registro_nuevas_planillas extends JFrame {
 			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
 		}
 	}
+	
+	public void construirTabla2() {
+		String titulos[] = { "Código", "Estado", "Tipo", "Nombre", "Fecha de creación", "Fecha de pago", "Deducciones",
+				"Bonificaciones", "Sueldos", "Total Planilla" };
+		String informacion[][] = control_historial_planilla.obtenerMatriz2();
+		tablaPlanilla = new JTable(informacion, titulos);
+		barraTablaPlanilla.setViewportView(tablaPlanilla);
+		for (int c = 0; c < tablaPlanilla.getColumnCount(); c++) {
+			Class<?> col_class = tablaPlanilla.getColumnClass(c);
+			tablaPlanilla.setDefaultEditor(col_class, null);
+			tablaPlanilla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaPlanilla.getTableHeader().setReorderingAllowed(false);
+
+			DefaultTableCellRenderer tcr;
+			tcr = new DefaultTableCellRenderer();
+			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+			tablaPlanilla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
+		}
+	}
 
 	public void filtro() {
 		filtro = txtBusquedaPlanilla.getText();
@@ -703,6 +736,7 @@ public class registro_nuevas_planillas extends JFrame {
 			lbl_hora.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
+	
 
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import clases.inventario;
 import conexion.conexion;
 import consultas.consultas_inventario;
+import formularios.login_usuario;
 import formularios.registro_inventario;
 
 public class control_inventario implements ActionListener {
@@ -245,6 +246,8 @@ public class control_inventario implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+						
 					conexion objCon = new conexion();
 					Connection conn = objCon.getConexion();
 					int Fila = formulario.tabla.getSelectedRow();
@@ -260,6 +263,10 @@ public class control_inventario implements ActionListener {
 					formulario.btnActualizar.setVisible(false);
 					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevo.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

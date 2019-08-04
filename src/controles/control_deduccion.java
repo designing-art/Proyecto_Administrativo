@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import clases.deduccion;
 import conexion.conexion;
 import consultas.consultas_deduccion;
+import formularios.login_usuario;
 import formularios.registro_deducciones;
 
 public class control_deduccion implements ActionListener {
@@ -242,29 +243,35 @@ public class control_deduccion implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaDeducciones.getSelectedRow();
-					String codigo = formulario.tablaDeducciones.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM deducciones WHERE id_deduccion=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Deduccion Eliminada!");
-					limpiar();
-					formulario.construirTabla();
+					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
 
-					formulario.cbxTipoDeduccion.setEditable(false);
-					formulario.txtObservacionDeduccion.setEditable(false);
-					registro_deducciones.txtIdentidadEmpleadoDeduccion.setEditable(false);
-					formulario.txtCantidadDeduccion.setEditable(false);
-					formulario.txtObservacionDeduccion.setBackground(Color.LIGHT_GRAY);
-					formulario.btnActualizar.setVisible(false);
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaDeducciones.getSelectedRow();
+						String codigo = formulario.tablaDeducciones.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM deducciones WHERE id_deduccion=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Deduccion Eliminada!");
+						limpiar();
+						formulario.construirTabla();
 
-					final ImageIcon logo = new ImageIcon(
-							usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
-									formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoDeduccion.setIcon(logo);
-					formulario.txtDireccionFoto.setText(null);
+						formulario.cbxTipoDeduccion.setEditable(false);
+						formulario.txtObservacionDeduccion.setEditable(false);
+						registro_deducciones.txtIdentidadEmpleadoDeduccion.setEditable(false);
+						formulario.txtCantidadDeduccion.setEditable(false);
+						formulario.txtObservacionDeduccion.setBackground(Color.LIGHT_GRAY);
+						formulario.btnActualizar.setVisible(false);
+
+						final ImageIcon logo = new ImageIcon(
+								usuario.getImage().getScaledInstance(formulario.lblFotoDeduccion.getWidth(),
+										formulario.lblFotoDeduccion.getHeight(), Image.SCALE_DEFAULT));
+						formulario.lblFotoDeduccion.setIcon(logo);
+						formulario.txtDireccionFoto.setText(null);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

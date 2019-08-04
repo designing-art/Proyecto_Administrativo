@@ -91,7 +91,7 @@ public class control_usuario implements ActionListener {
 					if (formulario.txtUsuario.getText().toString().equals(usuario)) {
 						JOptionPane.showMessageDialog(null,
 								"Se encontrado un usuario que ya pertenece a : " + identidad,
-								"Alerta!\n" + "Nota: Un empleado no puede tener 2 o mas usuarios",
+								"Alerta! \n" + "Nota: Un empleado no puede tener 2 o mas usuarios",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						if (login_usuario.tipoUsuario.equals("Usuario Normal")
