@@ -13,14 +13,17 @@ import clases.bonificacion;
 import clases.deduccion;
 import clases.empleado;
 import clases.historial_planilla;
+import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_bonificacion;
 import consultas.consultas_deduccion;
 import consultas.consultas_empleado;
 import consultas.consultas_historial_planilla;
 import consultas.consultas_planilla;
+import consultas.consultas_usuario;
 import controles.control_bonificacion;
 import controles.control_deduccion;
+import controles.control_empleado;
 import controles.control_historial_planilla;
 import controles.control_planilla;
 import utilidades.visor_imagen;
@@ -79,20 +82,21 @@ import javax.swing.JToggleButton;
 public class registro_planillas extends JFrame {
 
 	public JPanel contentPane;
-	public JTextField txtApellidosPlanilla;
-	public JTextField txtNombresPlanilla;
-	public JTextField txtCodigoPlanilla;
+	public static JTextField txtApellidosPlanilla;
+	public static JTextField txtNombresPlanilla;
+	public static JTextField txtCodigoPlanilla;
 	public JLabel label_2;
 	public JLabel label_3;
 	public JLabel label_4;
 	public JLabel label_5;
 	public JToggleButton up_down;
 	public static JLabel lblNombrePlanillaNueva;
-	public JTextField txtIdentidadPlanilla;
+	public static JTextField txtIdentidadPlanilla;
 	public JLabel lblBuscarEmpleadoPor;
 	public static JFormattedTextField txtIdentidadEmpleadoPlanilla;
 	public JPanel panel;
 	public JLabel label_6;
+	public JButton btnAgregar;
 	public JLabel lblCantidad;
 
 	public static String idPlanilla;
@@ -103,7 +107,7 @@ public class registro_planillas extends JFrame {
 	public JLabel label_8;
 	public JTextField txtBusquedaPlanilla;
 	public static JTextField txtTotaPlanilla;
-	public JLabel lblFotoPlanilla;
+	public static JLabel lblFotoPlanilla;
 	public JButton button;
 	public PlaceHolder pista;
 	public JDateChooser dateFechaPlanilla;
@@ -123,22 +127,28 @@ public class registro_planillas extends JFrame {
 	public JTextFieldDateEditor editor;
 
 	public JScrollPane barraTablaPlanilla;
+	public JScrollPane barraTablaEmpleados;
 	public JTable tablaPlanilla;
+	public JTable tablaEmpleados;
 
 	public TableRowSorter trsfiltro;
 	String filtro;
+	
+	public TableRowSorter trsfiltro2;
+	String filtro2;
+	public JLabel lblDetalleDeLa;
+	public JTextField txtBusquedaEmpleados;
 
 	public static String ruta;
 	public static ImageIcon imagen;
 
 	public static String bonificaciones = null;
 	public static String deducciones = null;
-	public JTextField txtDireccionFoto;
+	public static JTextField txtDireccionFoto;
 	public JButton btnVer;
 	public JLabel lblL;
 	public JLabel label;
 	public JTextField txtCodigo;
-	public JLabel lblFecha;
 	public static JTextField txtSueldosPlanilla;
 	public static JTextField txtSueldosTotalPlanilla;
 	public static JTextField txtDeduccionesPlanilla;
@@ -147,7 +157,7 @@ public class registro_planillas extends JFrame {
 	public static JTextField txtTotalBonificacionesPlanilla;
 	public static JTextField txtTotalDeduccionesPlanilla;
 	public JLabel lblCargo;
-	public JTextField txtCargoPlanilla;
+	public static JTextField txtCargoPlanilla;
 	public JLabel lblSueldoNeto;
 	public static JTextField txtSueldoNetoPlanilla;
 	public JLabel label_12;
@@ -177,7 +187,7 @@ public class registro_planillas extends JFrame {
 	public registro_planillas() {
 		setResizable(false);
 		setDefaultCloseOperation(0);
-		setBounds(100, 100, 900, 671);
+		setBounds(100, 100, 1336, 670);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -189,7 +199,7 @@ public class registro_planillas extends JFrame {
 		final ImageIcon upand = new ImageIcon(getClass().getResource("/iconos/upandown.png"));
 
 		panel_2 = new JPanel();
-		panel_2.setBounds(444, 46, 430, 575);
+		panel_2.setBounds(885, 39, 430, 575);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -289,7 +299,7 @@ public class registro_planillas extends JFrame {
 		panel_2.add(label);
 		label.setFont(new Font("Arial Narrow", Font.BOLD, 12));
 
-		lblPlanillaCanal = new JLabel("Registros Planilla.");
+		lblPlanillaCanal = new JLabel("Planilla.");
 		lblPlanillaCanal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlanillaCanal.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 
@@ -541,15 +551,9 @@ public class registro_planillas extends JFrame {
 		contentPane.add(lblRegistroYMantenimiento);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 46, 424, 575);
+		panel_1.setBounds(451, 39, 424, 575);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-
-		lblBuscarEmpleadoPor = new JLabel("Ingrese la Identidad :");
-		lblBuscarEmpleadoPor.setForeground(new Color(0, 128, 0));
-		lblBuscarEmpleadoPor.setBounds(35, 67, 168, 27);
-		panel_1.add(lblBuscarEmpleadoPor);
-		lblBuscarEmpleadoPor.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 
 		MaskFormatter formato = null;
 		try {
@@ -557,42 +561,19 @@ public class registro_planillas extends JFrame {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		txtIdentidadEmpleadoPlanilla = new JFormattedTextField(formato);
-		txtIdentidadEmpleadoPlanilla.setBounds(168, 71, 132, 20);
-		txtIdentidadEmpleadoPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
-		InputMap map42 = txtIdentidadEmpleadoPlanilla.getInputMap(JComponent.WHEN_FOCUSED);
-		map42.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-		panel_1.add(txtIdentidadEmpleadoPlanilla);
-		txtIdentidadEmpleadoPlanilla.setColumns(10);
-		txtIdentidadEmpleadoPlanilla.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if ((c < '0' || c > '9'))
-					ke.consume();
-			}
-
-			@Override
-			public void keyPressed(KeyEvent ke) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent ke) {
-			}
-		});
 
 		JLabel lblDatosDelEmpleado = new JLabel("Datos del empleado :");
-		lblDatosDelEmpleado.setBounds(35, 91, 168, 28);
+		lblDatosDelEmpleado.setBounds(35, 114, 168, 28);
 		panel_1.add(lblDatosDelEmpleado);
 		lblDatosDelEmpleado.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		label_4 = new JLabel("Codigo :");
 		label_4.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_4.setBounds(35, 126, 63, 14);
+		label_4.setBounds(35, 149, 63, 14);
 		panel_1.add(label_4);
 
 		txtCodigoPlanilla = new JTextField();
-		txtCodigoPlanilla.setBounds(102, 123, 28, 20);
+		txtCodigoPlanilla.setBounds(102, 146, 28, 20);
 		panel_1.add(txtCodigoPlanilla);
 		txtCodigoPlanilla.setEditable(false);
 		txtCodigoPlanilla.setColumns(10);
@@ -600,47 +581,47 @@ public class registro_planillas extends JFrame {
 
 		label_2 = new JLabel("Nombres :");
 		label_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_2.setBounds(35, 152, 63, 14);
+		label_2.setBounds(35, 197, 63, 19);
 		panel_1.add(label_2);
 
 		txtNombresPlanilla = new JTextField();
 		txtNombresPlanilla.setEditable(false);
-		txtNombresPlanilla.setBounds(102, 149, 186, 20);
+		txtNombresPlanilla.setBounds(102, 197, 186, 20);
 		panel_1.add(txtNombresPlanilla);
 		txtNombresPlanilla.setColumns(10);
 		txtNombresPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
 
 		label_3 = new JLabel("Apellidos :");
 		label_3.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_3.setBounds(35, 177, 63, 14);
+		label_3.setBounds(35, 224, 63, 17);
 		panel_1.add(label_3);
 
 		txtApellidosPlanilla = new JTextField();
 		txtApellidosPlanilla.setEditable(false);
-		txtApellidosPlanilla.setBounds(102, 174, 186, 20);
+		txtApellidosPlanilla.setBounds(102, 224, 186, 20);
 		panel_1.add(txtApellidosPlanilla);
 		txtApellidosPlanilla.setColumns(10);
 		txtApellidosPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
 
 		label_5 = new JLabel("Identidad :");
 		label_5.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_5.setBounds(35, 205, 63, 14);
+		label_5.setBounds(35, 250, 63, 19);
 		panel_1.add(label_5);
 
 		txtIdentidadPlanilla = new JTextField();
 		txtIdentidadPlanilla.setEditable(false);
-		txtIdentidadPlanilla.setBounds(102, 199, 186, 20);
+		txtIdentidadPlanilla.setBounds(102, 250, 186, 20);
 		panel_1.add(txtIdentidadPlanilla);
 		txtIdentidadPlanilla.setColumns(10);
 		txtIdentidadPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
 
 		label_6 = new JLabel("Fotografia :");
 		label_6.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_6.setBounds(310, 98, 82, 14);
+		label_6.setBounds(310, 138, 82, 14);
 		panel_1.add(label_6);
 
 		panel = new JPanel();
-		panel.setBounds(298, 113, 94, 87);
+		panel.setBounds(298, 153, 94, 87);
 		panel_1.add(panel);
 		panel.setLayout(null);
 
@@ -652,18 +633,18 @@ public class registro_planillas extends JFrame {
 		lblFotoPlanilla.setIcon(logo22);
 
 		lblAgregarDeduccion = new JLabel("Datos monetarios del empleado :");
-		lblAgregarDeduccion.setBounds(35, 249, 253, 26);
+		lblAgregarDeduccion.setBounds(34, 280, 253, 26);
 		panel_1.add(lblAgregarDeduccion);
 		lblAgregarDeduccion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 
 		lblCantidad = new JLabel("Sueldo");
 		lblCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCantidad.setBounds(35, 313, 63, 14);
+		lblCantidad.setBounds(34, 317, 63, 14);
 		panel_1.add(lblCantidad);
 
 		txtCantidadPlanilla = new JTextField();
 		txtCantidadPlanilla.setEditable(false);
-		txtCantidadPlanilla.setBounds(153, 311, 116, 20);
+		txtCantidadPlanilla.setBounds(152, 317, 116, 20);
 		txtCantidadPlanilla.setColumns(10);
 		txtCantidadPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(txtCantidadPlanilla);
@@ -692,29 +673,14 @@ public class registro_planillas extends JFrame {
 		btnGuardar.setBounds(293, 515, 99, 23);
 		panel_1.add(btnGuardar);
 
-		btnBuscarIdentidadPlanilla = new JButton("Buscar");
-		btnBuscarIdentidadPlanilla.setBackground(new Color(60, 179, 113));
-		btnBuscarIdentidadPlanilla.setBounds(310, 70, 82, 23);
-		panel_1.add(btnBuscarIdentidadPlanilla);
-		btnBuscarIdentidadPlanilla.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (txtIdentidadEmpleadoPlanilla.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Por favor ingrese la identidad antes buscar");
-				} else {
-					busquedaDatosEmpleadoPlanilla();
-				}
-			}
-		});
-
 		txtDireccionFoto = new JTextField();
 		txtDireccionFoto.setEditable(false);
 		txtDireccionFoto.setColumns(10);
-		txtDireccionFoto.setBounds(298, 199, 94, 20);
+		txtDireccionFoto.setBounds(298, 241, 94, 14);
 		panel_1.add(txtDireccionFoto);
 
 		btnVer = new JButton("Ver");
-		btnVer.setBounds(308, 218, 73, 15);
+		btnVer.setBounds(308, 254, 73, 15);
 		panel_1.add(btnVer);
 		btnVer.addActionListener(new ActionListener() {
 			@Override
@@ -736,29 +702,19 @@ public class registro_planillas extends JFrame {
 
 		lblL = new JLabel("L.");
 		lblL.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		lblL.setBounds(136, 313, 18, 18);
+		lblL.setBounds(135, 317, 18, 18);
 		panel_1.add(lblL);
-
-		JLabel label_1 = new JLabel("Codigo :");
-		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label_1.setBounds(35, 286, 63, 14);
-		panel_1.add(label_1);
 
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(153, 282, 28, 20);
+		txtCodigo.setBounds(364, 257, 28, 20);
 		panel_1.add(txtCodigo);
-
-		lblFecha = new JLabel("Fecha :");
-		lblFecha.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblFecha.setBounds(279, 253, 109, 20);
-		panel_1.add(lblFecha);
-		lblFecha.setVisible(false);
+		txtCodigo.setVisible(false);
 
 		dateFechaPlanilla = new JDateChooser();
-		dateFechaPlanilla.setBounds(279, 280, 109, 20);
+		dateFechaPlanilla.setBounds(283, 288, 109, 20);
 		dateFechaPlanilla.setDateFormatString("dd-MMMMM-yyyy");
 		panel_1.add(dateFechaPlanilla);
 		editor = (JTextFieldDateEditor) dateFechaPlanilla.getDateEditor();
@@ -768,90 +724,90 @@ public class registro_planillas extends JFrame {
 
 		JLabel lblBonificaciones = new JLabel("Bonificaciones :");
 		lblBonificaciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblBonificaciones.setBounds(35, 340, 95, 14);
+		lblBonificaciones.setBounds(34, 344, 95, 14);
 		panel_1.add(lblBonificaciones);
 
 		JLabel label_11 = new JLabel("L.");
 		label_11.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_11.setBounds(136, 339, 18, 18);
+		label_11.setBounds(135, 343, 18, 18);
 		panel_1.add(label_11);
 
 		txtTotalBonificacionesPlanilla = new JTextField();
 		txtTotalBonificacionesPlanilla.setEditable(false);
 		txtTotalBonificacionesPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalBonificacionesPlanilla.setColumns(10);
-		txtTotalBonificacionesPlanilla.setBounds(153, 338, 116, 20);
+		txtTotalBonificacionesPlanilla.setBounds(152, 344, 116, 20);
 		panel_1.add(txtTotalBonificacionesPlanilla);
 
 		JLabel lblDeducciones = new JLabel("(Deducciones) :");
 		lblDeducciones.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblDeducciones.setBounds(35, 402, 95, 20);
+		lblDeducciones.setBounds(34, 406, 95, 20);
 		panel_1.add(lblDeducciones);
 
 		JLabel label_13 = new JLabel("L.");
 		label_13.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_13.setBounds(136, 404, 18, 18);
+		label_13.setBounds(135, 408, 18, 18);
 		panel_1.add(label_13);
 
 		txtTotalDeduccionesPlanilla = new JTextField();
 		txtTotalDeduccionesPlanilla.setEditable(false);
 		txtTotalDeduccionesPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalDeduccionesPlanilla.setColumns(10);
-		txtTotalDeduccionesPlanilla.setBounds(153, 402, 116, 20);
+		txtTotalDeduccionesPlanilla.setBounds(152, 408, 116, 20);
 		panel_1.add(txtTotalDeduccionesPlanilla);
 
 		lblCargo = new JLabel("Cargo :");
 		lblCargo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblCargo.setBounds(140, 126, 63, 14);
+		lblCargo.setBounds(35, 171, 63, 20);
 		panel_1.add(lblCargo);
 
 		txtCargoPlanilla = new JTextField();
 		txtCargoPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCargoPlanilla.setEditable(false);
 		txtCargoPlanilla.setColumns(10);
-		txtCargoPlanilla.setBounds(194, 120, 94, 20);
+		txtCargoPlanilla.setBounds(102, 171, 186, 20);
 		panel_1.add(txtCargoPlanilla);
 
 		lblSueldoNeto = new JLabel("Sueldo Neto :");
 		lblSueldoNeto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblSueldoNeto.setBounds(35, 377, 95, 14);
+		lblSueldoNeto.setBounds(34, 381, 95, 14);
 		panel_1.add(lblSueldoNeto);
 
 		txtSueldoNetoPlanilla = new JTextField();
 		txtSueldoNetoPlanilla.setEditable(false);
 		txtSueldoNetoPlanilla.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtSueldoNetoPlanilla.setColumns(10);
-		txtSueldoNetoPlanilla.setBounds(153, 375, 116, 20);
+		txtSueldoNetoPlanilla.setBounds(152, 381, 116, 20);
 		panel_1.add(txtSueldoNetoPlanilla);
 
 		label_12 = new JLabel("L.");
 		label_12.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_12.setBounds(136, 376, 18, 18);
+		label_12.setBounds(135, 380, 18, 18);
 		panel_1.add(label_12);
 
 		lblTotalAPagar = new JLabel("Total a pagar :");
 		lblTotalAPagar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblTotalAPagar.setBounds(35, 455, 95, 14);
+		lblTotalAPagar.setBounds(34, 459, 95, 14);
 		panel_1.add(lblTotalAPagar);
 
 		txtTotalPagoEmpleado = new JTextField();
 		txtTotalPagoEmpleado.setEditable(false);
 		txtTotalPagoEmpleado.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTotalPagoEmpleado.setColumns(10);
-		txtTotalPagoEmpleado.setBounds(153, 453, 116, 20);
+		txtTotalPagoEmpleado.setBounds(152, 459, 116, 20);
 		panel_1.add(txtTotalPagoEmpleado);
 
 		label_14 = new JLabel("L.");
 		label_14.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
-		label_14.setBounds(136, 454, 18, 18);
+		label_14.setBounds(135, 458, 18, 18);
 		panel_1.add(label_14);
 
 		label_15 = new JLabel("______________________");
-		label_15.setBounds(146, 356, 154, 14);
+		label_15.setBounds(145, 362, 154, 14);
 		panel_1.add(label_15);
 
 		label_16 = new JLabel("______________________");
-		label_16.setBounds(147, 422, 154, 20);
+		label_16.setBounds(146, 428, 154, 20);
 		panel_1.add(label_16);
 
 		btnActualizar_Bonificaciones = new JButton("Calcular");
@@ -894,7 +850,7 @@ public class registro_planillas extends JFrame {
 			}
 		});
 		btnActualizar_Bonificaciones.setBackground(new Color(60, 179, 113));
-		btnActualizar_Bonificaciones.setBounds(274, 338, 109, 20);
+		btnActualizar_Bonificaciones.setBounds(283, 343, 109, 20);
 		panel_1.add(btnActualizar_Bonificaciones);
 
 		btnActualizar_Deducciones = new JButton("Calcular");
@@ -941,8 +897,31 @@ public class registro_planillas extends JFrame {
 			}
 		});
 		btnActualizar_Deducciones.setBackground(new Color(60, 179, 113));
-		btnActualizar_Deducciones.setBounds(274, 403, 107, 20);
+		btnActualizar_Deducciones.setBounds(283, 408, 107, 20);
 		panel_1.add(btnActualizar_Deducciones);
+
+		lblDetalleDeLa = new JLabel("Detalle de la planilla.");
+		lblDetalleDeLa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDetalleDeLa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lblDetalleDeLa.setBounds(35, 59, 371, 22);
+		panel_1.add(lblDetalleDeLa);
+
+		lblBuscarEmpleadoPor = new JLabel("Ingrese la Identidad :");
+		lblBuscarEmpleadoPor.setBounds(35, 82, 168, 27);
+		panel_1.add(lblBuscarEmpleadoPor);
+		lblBuscarEmpleadoPor.setForeground(new Color(0, 128, 0));
+		lblBuscarEmpleadoPor.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtIdentidadEmpleadoPlanilla = new JFormattedTextField(formato);
+		txtIdentidadEmpleadoPlanilla.setBounds(168, 86, 132, 20);
+		panel_1.add(txtIdentidadEmpleadoPlanilla);
+		txtIdentidadEmpleadoPlanilla.setHorizontalAlignment(SwingConstants.CENTER);
+		InputMap map42 = txtIdentidadEmpleadoPlanilla.getInputMap(JComponent.WHEN_FOCUSED);
+		txtIdentidadEmpleadoPlanilla.setColumns(10);
+
+		btnBuscarIdentidadPlanilla = new JButton("Buscar");
+		btnBuscarIdentidadPlanilla.setBounds(310, 85, 82, 23);
+		panel_1.add(btnBuscarIdentidadPlanilla);
+		btnBuscarIdentidadPlanilla.setBackground(new Color(60, 179, 113));
 
 		JLabel label_7 = new JLabel("");
 		label_7.setBounds(0, 0, 424, 575);
@@ -950,6 +929,32 @@ public class registro_planillas extends JFrame {
 		final ImageIcon logo21 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
 		label_7.setIcon(logo21);
+		btnBuscarIdentidadPlanilla.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (txtIdentidadEmpleadoPlanilla.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese la identidad antes buscar");
+				} else {
+					busquedaDatosEmpleadoPlanilla();
+				}
+			}
+		});
+		txtIdentidadEmpleadoPlanilla.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				if ((c < '0' || c > '9'))
+					ke.consume();
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+			}
+		});
 
 		button = new JButton("Regresar");
 		button.addActionListener(new ActionListener() {
@@ -979,8 +984,103 @@ public class registro_planillas extends JFrame {
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(255, 127, 80));
-		button.setBounds(772, 12, 102, 23);
+		button.setBounds(1213, 11, 102, 23);
 		contentPane.add(button);
+
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBounds(10, 39, 430, 575);
+		contentPane.add(panel_5);
+
+		barraTablaEmpleados = new JScrollPane(tablaEmpleados, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraTablaEmpleados.setBounds(28, 107, 376, 397);
+		panel_5.add(barraTablaEmpleados);
+
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnAgregar.setBackground(new Color(0, 139, 139));
+		btnAgregar.setBounds(241, 515, 108, 22);
+		panel_5.add(btnAgregar);
+
+		JLabel lblEmpleadosRegistrados = new JLabel("Empleados registrados.");
+		lblEmpleadosRegistrados.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEmpleadosRegistrados.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+		lblEmpleadosRegistrados.setBounds(28, 58, 371, 22);
+		panel_5.add(lblEmpleadosRegistrados);
+
+		JLabel label_1 = new JLabel("Buscar :");
+		label_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		label_1.setBounds(28, 78, 136, 17);
+		panel_5.add(label_1);
+
+		txtBusquedaEmpleados = new JTextField();
+		txtBusquedaEmpleados.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBusquedaEmpleados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtBusquedaEmpleados.setColumns(10);
+		txtBusquedaEmpleados.setBounds(87, 78, 317, 18);
+		panel_5.add(txtBusquedaEmpleados);
+		InputMap map411 = txtBusquedaEmpleados.getInputMap(JComponent.WHEN_FOCUSED);
+		map411.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtBusquedaEmpleados.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				trsfiltro2 = new TableRowSorter(tablaEmpleados.getModel());
+				tablaEmpleados.setRowSorter(trsfiltro2);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				String cadena = (txtBusquedaEmpleados.getText());
+				txtBusquedaEmpleados.setText(cadena);
+				repaint();
+				filtro2();
+			}
+		});
+		
+		JButton btnEmpleados = new JButton("Empleados");
+		btnEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				empleado clase = new empleado();
+				consultas_empleado consulta = new consultas_empleado();
+				usuario clase2 = new usuario();
+				consultas_usuario consulta2 = new consultas_usuario();
+				registro_empleados formulario = new registro_empleados();
+				control_empleado control = new control_empleado(clase, clase2, consulta, consulta2, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombresEmpleado.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.consultarEmpresa();
+				formulario.establecerFechaRegistro();
+				formulario.construirTablaEmpleados();
+				formulario.btnNuevoEmpleado.setVisible(true);
+				formulario.btnMostrarEmpleado.setVisible(true);
+				formulario.btnActualizarDatosEmpleado.setVisible(true);
+				formulario.btnActualizarEmpleado.setVisible(false);
+				formulario.btnCancelarEmpleado.setVisible(false);
+				formulario.btnBorrarEmpleado.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				dispose();
+			}
+		});
+		btnEmpleados.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnEmpleados.setBackground(new Color(147, 112, 219));
+		btnEmpleados.setBounds(87, 515, 108, 22);
+		panel_5.add(btnEmpleados);
+		
+		
+				JLabel label_34 = new JLabel("");
+				label_34.setBounds(0, 0, 430, 575);
+				panel_5.add(label_34);
+				final ImageIcon logo212 = new ImageIcon(
+						icono.getImage().getScaledInstance(label_34.getWidth(), label_34.getHeight(), Image.SCALE_DEFAULT));
+				label_34.setIcon(logo212);
 	}
 
 	public void establecerFechaRegistro() {
@@ -1043,6 +1143,11 @@ public class registro_planillas extends JFrame {
 	public void filtro() {
 		filtro = txtBusquedaPlanilla.getText();
 		trsfiltro.setRowFilter(RowFilter.regexFilter(txtBusquedaPlanilla.getText(), 0, 1, 2, 3, 4));
+	}
+	
+	public void filtro2() {
+		filtro2 = txtBusquedaEmpleados.getText();
+		trsfiltro2.setRowFilter(RowFilter.regexFilter(txtBusquedaEmpleados.getText(), 0, 1, 2, 3, 4));
 	}
 
 	public void pistas() {
@@ -1288,5 +1393,28 @@ public class registro_planillas extends JFrame {
 
 		}
 
+	}
+
+	public void construirTablaEmpleados() {
+		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Identidad", "Genero", "Edad", "Telefono", "Correo",
+				"Direccion", "Foto", "Nombre_Referencia", "Telefono_Referencia", "Fecha_Nacimiento", "Fecha_Registro",
+				"Fecha_Labores", "Usuario", "Cargo", "Sueldo", "Hora Extra", "Obligaciones", "Horario", "Dias", "Horas",
+				"Identidad_Contrato", "Tipo", "Tiempo", "Foto" };
+		String informacion[][] = control_empleado.obtenerMatriz();
+		tablaEmpleados = new JTable(informacion, titulos);
+		barraTablaEmpleados.setViewportView(tablaEmpleados);
+		tablaEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaEmpleados.getTableHeader().setReorderingAllowed(false);
+
+		DefaultTableCellRenderer tcr;
+		tcr = new DefaultTableCellRenderer();
+		tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+		tablaEmpleados.getColumnModel().getColumn(17).setCellRenderer(tcr);
+		tablaEmpleados.getColumnModel().getColumn(18).setCellRenderer(tcr);
+
+		for (int c = 0; c < tablaEmpleados.getColumnCount(); c++) {
+			Class<?> col_class = tablaEmpleados.getColumnClass(c);
+			tablaEmpleados.setDefaultEditor(col_class, null);
+		}
 	}
 }

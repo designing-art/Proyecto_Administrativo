@@ -598,6 +598,7 @@ public class registro_nuevas_planillas extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.consultarPlanillaActual();
 				formulario.construirTabla();
+				formulario.construirTablaEmpleados();
 				formulario.obtenerUltimoId();
 				formulario.establecerFechaRegistro();
 				formulario.pistas();

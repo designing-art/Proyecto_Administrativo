@@ -496,6 +496,7 @@ public class registro_empleados extends JFrame {
 		dateFechaNacimiento.setBounds(199, 331, 132, 20);
 		dateFechaNacimiento.setDateFormatString("dd-MMMMM-yyyy");
 		panel.add(dateFechaNacimiento);
+		dateFechaNacimiento.setMaxSelectableDate(new Date());
 		editor3 = (JTextFieldDateEditor) dateFechaNacimiento.getDateEditor();
 		editor3.setEditable(false);
 		editor3.setHorizontalAlignment(SwingConstants.CENTER);

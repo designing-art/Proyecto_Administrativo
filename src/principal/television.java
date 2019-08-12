@@ -8,7 +8,6 @@ import formularios.*;
 public class television extends JFrame {
 
 	public static void main(String[] args) {
-		ventana_principal principal = new ventana_principal();
 		login_usuario login = new login_usuario();
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
@@ -19,6 +18,5 @@ public class television extends JFrame {
 				login.iniciarSesion();
 			}
 		});
-
 	}
 }

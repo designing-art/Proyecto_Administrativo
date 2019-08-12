@@ -517,7 +517,7 @@ public class registro_cargos extends JFrame {
 					String encabezado = "Reporte de cargos de " +login_usuario.nombre.toString();
 
 					utilJTablePrint(tablaCargos, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+							"**Pagina {0} de " + i + "** **"+login_usuario.nombreCompletoUsuario+"** **" + fecha +"**", true);
 				}
 			}
 		});
@@ -544,7 +544,7 @@ public class registro_cargos extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funciones" };
+		String titulos[] = {"Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funciones" };
 		String informacion[][] = control_cargo.obtenerMatriz();
 		tablaCargos = new JTable(informacion, titulos);
 		barraCargos.setViewportView(tablaCargos);
@@ -553,8 +553,6 @@ public class registro_cargos extends JFrame {
 			tablaCargos.setDefaultEditor(col_class, null);
 			tablaCargos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			tablaCargos.getTableHeader().setReorderingAllowed(false);
-
-			tablaCargos.getColumnModel().getColumn(0).setPreferredWidth(50);
 			tablaCargos.getColumnModel().getColumn(1).setPreferredWidth(100);
 			tablaCargos.getColumnModel().getColumn(2).setPreferredWidth(100);
 			tablaCargos.getColumnModel().getColumn(3).setPreferredWidth(80);
@@ -565,13 +563,14 @@ public class registro_cargos extends JFrame {
 			DefaultTableCellRenderer tcr;
 			tcr = new DefaultTableCellRenderer();
 			tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-			tablaCargos.getColumnModel().getColumn(3).setCellRenderer(tcr);
 			tablaCargos.getColumnModel().getColumn(4).setCellRenderer(tcr);
+			tablaCargos.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
 			DefaultTableCellRenderer tcr1;
 			tcr1 = new DefaultTableCellRenderer();
 			tcr1.setHorizontalAlignment(SwingConstants.CENTER);
 			tablaCargos.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+			tablaCargos.getColumnModel().getColumn(1).setCellRenderer(tcr1);
 		}
 	}
 
@@ -647,7 +646,7 @@ public class registro_cargos extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss ");
+		SimpleDateFormat df = new SimpleDateFormat("'Fecha: 'dd'/'MMMMM'/'yyyy' Hora: 'HH:mm:ss");
 		date = cal.getTime();
 		return df.format(date);
 	}

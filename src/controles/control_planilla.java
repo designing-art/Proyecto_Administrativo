@@ -20,6 +20,7 @@ import clases.planilla;
 import conexion.conexion;
 import consultas.consultas_planilla;
 import formularios.login_usuario;
+import formularios.registro_empleados;
 import formularios.registro_planillas;
 
 public class control_planilla implements ActionListener {
@@ -28,9 +29,10 @@ public class control_planilla implements ActionListener {
 	public historial_planilla clase_historial_planilla;
 	public consultas_planilla consulta_planilla;
 	public registro_planillas formulario_planilla;
+	public registro_empleados formulario_empleados = new registro_empleados();
 	public ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-	public static String identidad = null;
-	public static String planilla = null;
+	public static String identidadPLA = null;
+	public static String planillaPLA = null;
 
 	public control_planilla(planilla clase, historial_planilla clase2, consultas_planilla consulta, registro_planillas formulario) {
 		this.clase_planilla = clase;
@@ -46,6 +48,7 @@ public class control_planilla implements ActionListener {
 		this.formulario_planilla.btnVerPlanilla.addActionListener(this);
 		this.formulario_planilla.btnAceptar.addActionListener(this);
 		this.formulario_planilla.up_down.addActionListener(this);
+		this.formulario_planilla.btnAgregar.addActionListener(this);
 	}
 
 	@Override
@@ -62,8 +65,9 @@ public class control_planilla implements ActionListener {
 					|| registro_planillas.txtCantidadPlanilla.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el pago!");
 			} else {
-				if (formulario_planilla.txtIdentidadPlanilla.getText().toString().equals(identidad)&&formulario_planilla.lblNombrePlanillaNueva.getText().toString().equals(planilla)) {
-					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
+				if (registro_planillas.txtIdentidadPlanilla.getText().toString().equals(identidadPLA)
+						&&registro_planillas.lblNombrePlanillaNueva.getText().toString().equals(planillaPLA)) {
+					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidadPLA,
 							"Atencion datos duplicados", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					clase_planilla.setFecha_planilla(formulario_planilla.editor.getText());
@@ -252,6 +256,54 @@ public class control_planilla implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		if (e.getSource() == formulario_planilla.btnAgregar) {
+			int filaseleccionada;
+			try {
+				filaseleccionada = formulario_planilla.tablaEmpleados.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String codigo = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 0).toString();
+					String nombres = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 1).toString();
+					String apellidos = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 2).toString();
+					String identidad = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 3).toString();
+					String direccion_foto = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 9)
+							.toString();
+					String cargo = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 16).toString();
+					String sueldo = formulario_planilla.tablaEmpleados.getValueAt(filaseleccionada, 17).toString();
+					
+
+					registro_planillas.txtNombresPlanilla.setText(nombres);
+					registro_planillas.txtApellidosPlanilla.setText(apellidos);
+					registro_planillas.txtIdentidadPlanilla.setText(identidad);
+					registro_planillas.txtCodigoPlanilla.setText(codigo);
+					registro_planillas.txtCargoPlanilla.setText(cargo);
+					registro_planillas.txtDireccionFoto.setText(direccion_foto);
+					registro_planillas.txtCantidadPlanilla.setText(sueldo);
+					
+					registro_planillas.txtNombresPlanilla.setForeground(Color.BLACK);
+					registro_planillas.txtApellidosPlanilla.setForeground(Color.BLACK);
+					registro_planillas.txtIdentidadPlanilla.setForeground(Color.BLACK);
+					registro_planillas.txtCodigoPlanilla.setForeground(Color.BLACK);
+					registro_planillas.txtCargoPlanilla.setForeground(Color.BLACK);
+					registro_planillas.txtDireccionFoto.setForeground(Color.BLACK);
+					registro_planillas.txtCantidadPlanilla.setForeground(Color.BLACK);
+					
+					final ImageIcon foto2 = new ImageIcon(direccion_foto);
+					final ImageIcon logo = new ImageIcon(
+							foto2.getImage().getScaledInstance(formulario_planilla.lblFotoPlanilla.getWidth(),
+									formulario_planilla.lblFotoPlanilla.getHeight(), Image.SCALE_DEFAULT));
+					formulario_planilla.lblFotoPlanilla.setIcon(logo);
+
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
 
 		if (e.getSource() == formulario_planilla.btnVerPlanilla) {
 			int filaseleccionada;
@@ -545,12 +597,12 @@ public class control_planilla implements ActionListener {
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("SELECT identidad_planilla, nombre_planilla FROM planillas where identidad_planilla = '"
-					+ formulario_planilla.txtIdentidadPlanilla.getText().toString() + "'");
+			ResultSet rs = estatuto.executeQuery("SELECT identidad_planilla, nombre_planilla FROM planillas where nombre_planilla = '"
+					+ formulario_planilla.lblNombrePlanillaNueva.getText().toString() + "'");
 
 			if (rs.next()) {
-				identidad = (rs.getString("identidad_planilla"));
-				planilla = (rs.getString("nombre_planilla"));
+				identidadPLA = (rs.getString("identidad_planilla"));
+				planillaPLA = (rs.getString("nombre_planilla"));
 			}
 
 			rs.close();

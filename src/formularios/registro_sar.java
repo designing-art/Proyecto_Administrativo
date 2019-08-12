@@ -387,6 +387,7 @@ public class registro_sar extends JFrame {
 		dateFechaLimite.setBounds(189, 110, 125, 20);
 		dateFechaLimite.setDateFormatString("dd-MMMMM-yyyy");
 		panelRegistro.add(dateFechaLimite);
+		dateFechaLimite.setMinSelectableDate(new Date());
 		editor = (JTextFieldDateEditor) dateFechaLimite.getDateEditor();
 		editor.setEditable(false);
 		editor.setHorizontalAlignment(SwingConstants.CENTER);

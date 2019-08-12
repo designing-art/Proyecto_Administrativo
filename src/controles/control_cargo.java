@@ -23,6 +23,7 @@ public class control_cargo implements ActionListener {
 	public cargo claseCargo;
 	public consultas_cargo consultasCargo;
 	public registro_cargos formularioCargo;
+	public static int numeroRegistro = 0;
 
 	public control_cargo(cargo claseCargo, consultas_cargo consultasCargo, registro_cargos formularioCargo) {
 		this.claseCargo = claseCargo;
@@ -62,7 +63,6 @@ public class control_cargo implements ActionListener {
 				claseCargo.setSueldo_cargo(Double.parseDouble(formularioCargo.txtSueldoCargo.getText()));
 				claseCargo.setValor_hora_extra_cargo(Double.parseDouble(formularioCargo.txtHoraExtraCargo.getText()));
 				claseCargo.setFunciones_cargo(formularioCargo.txtFuncionesCargo.getText());
-
 				if (consultasCargo.insertar(claseCargo)) {
 					JOptionPane.showMessageDialog(null, "Cargo registrado!");
 					limpiar();
@@ -390,7 +390,6 @@ public class control_cargo implements ActionListener {
 			matrizInfo[i][4] = miLista.get(i).getValor_hora_extra_cargo() + "";
 			matrizInfo[i][5] = miLista.get(i).getFunciones_cargo() + "";
 		}
-
 		return matrizInfo;
 	}
 

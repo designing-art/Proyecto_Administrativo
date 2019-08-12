@@ -253,9 +253,9 @@ public class ventana_principal extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.consultarPlanillaActual();
 				formulario.construirTabla();
+				formulario.construirTablaEmpleados();
 				formulario.obtenerUltimoId();
 				formulario.establecerFechaRegistro();
-				formulario.pistas();
 				Timer time = new Timer();
 				time.schedule(formulario.tarea, 0, 1000);
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
@@ -584,7 +584,7 @@ public class ventana_principal extends JFrame {
 				consultarProductos();
 				if (productodato == null) {
 					JOptionPane.showMessageDialog(null,
-							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comenzar\n"
 									+ "         debe hacer algunos ajustes.\n" + "         Ingrese a:\n"
 									+ "                Productos\n"
 									+ "          y agrege nuevos productos al inventario!\n"
@@ -1026,7 +1026,7 @@ public class ventana_principal extends JFrame {
 				consultarEmpresa();
 				if (nombre == null) {
 					JOptionPane.showMessageDialog(null,
-							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+							"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comenzar\n"
 									+ "         debe hacer algunos ajustes.\n" + "         Ingrese a:\n"
 									+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          y personalice su empresa!\n"
 									+ "            ******* Buen Dia! *******");
@@ -1299,7 +1299,7 @@ public class ventana_principal extends JFrame {
 				lbl_logo_empresa_principal.setIcon(icono);
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comensar\n"
+						"BIENVENIDO AL SISTEMA ADMINISTRATIVO\n" + "         Antes de comenzar\n"
 								+ "         podria hacer algunos ajustes.\n" + "         Ingresaremos a:\n"
 								+ "   ¿MAS INFORMACION DE LA EMPRESA?\n" + "          a personalizar su empresa!\n"
 								+ "            ******* Buen Dia! *******");

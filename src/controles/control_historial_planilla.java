@@ -421,6 +421,7 @@ public class control_historial_planilla implements ActionListener {
 					registro_planillas.txtCodigoPlanillaNueva.setText(codigo);
 					registro_planillas.lblNombrePlanillaNueva.setText(nombre);
 					formulario.construirTabla();
+					formulario.construirTablaEmpleados();
 					formulario_historial_planilla.dispose();
 
 				} else {
@@ -453,6 +454,7 @@ public class control_historial_planilla implements ActionListener {
 						registro_planillas.txtCodigoPlanillaNueva.setText(codigo);
 						registro_planillas.lblNombrePlanillaNueva.setText(nombre);
 						formulario.construirTabla();
+						formulario.construirTablaEmpleados();
 						formulario.btnNuevo.setVisible(false);
 						formulario.btnGuardar.setVisible(false);
 						formulario.btnActualizarDatosPlanilla.setVisible(false);
