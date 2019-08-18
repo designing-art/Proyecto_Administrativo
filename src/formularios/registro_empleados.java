@@ -1240,11 +1240,9 @@ public class registro_empleados extends JFrame {
 	}
 
 	public void tomarFoto() {
-
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\cam.exe");
-
+			camara.exec("src/utilidades/cam.exe");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

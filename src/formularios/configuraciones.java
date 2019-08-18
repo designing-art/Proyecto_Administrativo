@@ -64,7 +64,7 @@ public class configuraciones extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblAcercaDe = new JLabel("Configuracion del sistema administrativo.");
+		JLabel lblAcercaDe = new JLabel("Configuraci\u00F3n del sistema administrativo.");
 		lblAcercaDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAcercaDe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		lblAcercaDe.setBounds(0, 11, 371, 26);

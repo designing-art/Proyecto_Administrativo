@@ -47,6 +47,7 @@ public class login_usuario extends JFrame {
 	public static JLabel lblNombreEmpresa;
 	public static JLabel lblFotoEmpresa;
 	public static String nombre = null;
+	public static String frase = null;
 	public static String ruta_logo = null;
 	public static JRadioButton rdbtnPass;
 	public static JLabel lblestadocontraseña;
@@ -499,6 +500,33 @@ public class login_usuario extends JFrame {
 		}
 
 	}
+	
+	public void establecerFrase() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery(
+					"SELECT frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
+
+			if (rs.next()) {
+				frase = (rs.getString("frase_configuracion"));
+
+				if (frase.toString().equals("")) {
+					ventana_principal.txtFrase.setText(
+							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
+				} else {
+					ventana_principal.txtFrase.setText(frase);
+				}
+
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 	public void establecerDatosInicioSesionUsuario() {
 		ventana_principal.lblNombreUsuario.setText(nombreCompletoUsuario);
@@ -547,8 +575,6 @@ public class login_usuario extends JFrame {
 						configuracion.establecerConfiguraciones();
 						configuracion.establecerSonidoInicial();
 						principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
-						principal.txtFrase.setText(configuraciones.frase.toString());
-						principal.txtFrase.repaint();
 						dispose();
 					} else {
 						lblAlerta.setText("El usuario y contraseña son incorrectas");

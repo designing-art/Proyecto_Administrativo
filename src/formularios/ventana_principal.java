@@ -125,6 +125,7 @@ public class ventana_principal extends JFrame {
 	public JLabel lbl_fechaSistema;
 	public static JTextField txtFrase;
 	public static JLabel labelfotousuario;
+	public static String frasebase;
 
 	public static JButton btnProducto;
 
@@ -212,6 +213,7 @@ public class ventana_principal extends JFrame {
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
+		frasebase = configuraciones.frase;
 
 		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1218,8 +1220,8 @@ public class ventana_principal extends JFrame {
 		txtFrase.setBackground(Color.WHITE);
 		txtFrase.setColumns(10);
 		scrollPane.setViewportView(txtFrase);
-		txtFrase.setText(configuraciones.frase);
-		
+		txtFrase.setText(frasebase);
+
 		JLabel lblMenuOpciones = new JLabel();
 		lblMenuOpciones.setBounds(21, 43, 379, 497);
 		contentPane.add(lblMenuOpciones);
