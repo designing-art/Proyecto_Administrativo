@@ -39,7 +39,7 @@ public class consultas_horario extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(horario horario) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

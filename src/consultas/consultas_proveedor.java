@@ -39,7 +39,7 @@ public class consultas_proveedor extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(proveedor proveedor) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

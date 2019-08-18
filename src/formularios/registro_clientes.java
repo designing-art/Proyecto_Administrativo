@@ -55,7 +55,6 @@ import controles.control_cliente;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.JComboBox;

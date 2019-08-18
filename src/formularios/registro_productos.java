@@ -56,7 +56,6 @@ import controles.control_producto;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 

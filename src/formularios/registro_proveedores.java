@@ -54,7 +54,6 @@ import controles.control_proveedor;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 public class registro_proveedores extends JFrame {
 	public JScrollPane scrollFunciones;

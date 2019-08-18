@@ -40,7 +40,7 @@ public class consultas_historial_planilla extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean registrarEliminacion(historial_planilla historial_planilla) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

@@ -37,7 +37,7 @@ public class consultas_cargo extends conexion {
 			}
 		}
 	}
-	
+
 	/* Registrar Eliminacion */
 	public boolean insertarEliminacion(cargo cargo) {
 		PreparedStatement ps = null;

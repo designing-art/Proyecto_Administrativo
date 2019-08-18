@@ -8,8 +8,6 @@ import java.awt.Event;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.border.MatteBorder;
-
 import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_usuario;
@@ -120,15 +118,15 @@ public class login_usuario extends JFrame {
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
 		lblContrasea.setBounds(125, 209, 98, 20);
 		panel.add(lblContrasea);
-		
-				lblestadocontraseña = new JLabel("");
-				lblestadocontraseña.setBackground(Color.WHITE);
-				lblestadocontraseña.setHorizontalAlignment(SwingConstants.CENTER);
-				lblestadocontraseña.setBounds(277, 228, 21, 20);
-				panel.add(lblestadocontraseña);
-				final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
-						lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
-				lblestadocontraseña.setIcon(iconoocultar);
+
+		lblestadocontraseña = new JLabel("");
+		lblestadocontraseña.setBackground(Color.WHITE);
+		lblestadocontraseña.setHorizontalAlignment(SwingConstants.CENTER);
+		lblestadocontraseña.setBounds(277, 228, 21, 20);
+		panel.add(lblestadocontraseña);
+		final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
+				lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
+		lblestadocontraseña.setIcon(iconoocultar);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -208,6 +206,7 @@ public class login_usuario extends JFrame {
 		rdbtnPass.setBounds(256, 228, 21, 20);
 		panel.add(rdbtnPass);
 		rdbtnPass.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnPass.isSelected()) {
 					txtContraseña.setEchoChar((char) 0);
@@ -500,13 +499,13 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-	
+
 	public void establecerFrase() {
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery(
-					"SELECT frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
+			ResultSet rs = estatuto
+					.executeQuery("SELECT frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
 
 			if (rs.next()) {
 				frase = (rs.getString("frase_configuracion"));

@@ -262,7 +262,7 @@ public class control_factura_cliente implements ActionListener {
 						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 		if (e.getSource() == formulario.btnFactura) {
 			int filaseleccionada;
 			try {
@@ -275,10 +275,10 @@ public class control_factura_cliente implements ActionListener {
 					String direccion1 = formulario.tablaCliente.getValueAt(filaseleccionada, 3).toString();
 					String rtn = formulario.tablaCliente.getValueAt(filaseleccionada, 12).toString();
 
-					formulario.txtCliente.setText(nombres+" "+apellidos);
+					formulario.txtCliente.setText(nombres + " " + apellidos);
 					formulario.txtDireccion.setText(direccion1);
 					formulario.txtRTN.setText(rtn);
-					
+
 					formulario.txtPorConceptoDe.requestFocusInWindow();
 				}
 

@@ -304,7 +304,7 @@ public class registro_cargos extends JFrame {
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtNombreCargo.getText().length() == 30)
 					ke.consume();
 			}
@@ -399,11 +399,10 @@ public class registro_cargos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigo = new TableRowSorter(tablaCargos.getModel());
 				tablaCargos.setRowSorter(trsfiltroCodigo);
-				
+
 				if (txtBusquedaCargos.getText().length() == 30)
 					ke.consume();
-				
-				
+
 			}
 
 			@Override
@@ -510,11 +509,11 @@ public class registro_cargos extends JFrame {
 						}
 					}
 
-					String encabezado = "Reporte de cargos de " +login_usuario.nombre.toString();
+					String encabezado = "Reporte de cargos de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaCargos, encabezado,
-							"Pagina {0} de " + i + "          Impreso por: "+login_usuario.nombreCompletoUsuario.toString()+"          "+fecha, true);
-					
+					utilJTablePrint(tablaCargos, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -541,7 +540,7 @@ public class registro_cargos extends JFrame {
 	}
 
 	public void construirTabla() {
-		String titulos[] = {"Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funciones" };
+		String titulos[] = { "Codigo", "Area", "Nombre", "Sueldo", "Hora extra", "Funciones" };
 		String informacion[][] = control_cargo.obtenerMatriz();
 		tablaCargos = new JTable(informacion, titulos);
 		barraCargos.setViewportView(tablaCargos);

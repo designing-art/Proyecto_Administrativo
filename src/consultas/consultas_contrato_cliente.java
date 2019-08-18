@@ -33,7 +33,7 @@ public class consultas_contrato_cliente extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(contrato_cliente contrato) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

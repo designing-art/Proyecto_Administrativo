@@ -65,11 +65,11 @@ public class control_configuracion implements ActionListener {
 				login.definirPermisos();
 				configuraciones configuracion = new configuraciones();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: " + login.nombreCompletoUsuario);
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				formulario.dispose();
 				ventana_principal.txtFrase.setText(configuraciones.frase.toString());
 				ventana_principal.txtFrase.repaint();
-				
+
 			} else {
 				JOptionPane.showMessageDialog(null, "Error! datos no registrados");
 			}

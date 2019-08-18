@@ -242,28 +242,28 @@ public class control_producto implements ActionListener {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
 					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
-						
-					conexion objCon = new conexion();
-					Connection conn = objCon.getConexion();
-					int Fila = formulario.tablaProductos.getSelectedRow();
-					String codigo = formulario.tablaProductos.getValueAt(Fila, 0).toString();
-					ps = conn.prepareStatement("DELETE FROM productos WHERE id_producto=?");
-					ps.setString(1, codigo);
-					ps.execute();
-					JOptionPane.showMessageDialog(null, "Producto Eliminado!");
-					limpiar();
-					formulario.construirTabla();
-					formulario.txtCodigoProducto.setText(null);
-					formulario.btnSubirFotoContrato.setEnabled(false);
-					formulario.lbl_foto_contrato.setEnabled(false);
-					formulario.btnAceptar.setEnabled(true);
-					formulario.btnActualizarProducto.setVisible(false);
-					formulario.btnGuardar.setVisible(false);
-					formulario.btnNuevoProducto.setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
-				}
+
+						conexion objCon = new conexion();
+						Connection conn = objCon.getConexion();
+						int Fila = formulario.tablaProductos.getSelectedRow();
+						String codigo = formulario.tablaProductos.getValueAt(Fila, 0).toString();
+						ps = conn.prepareStatement("DELETE FROM productos WHERE id_producto=?");
+						ps.setString(1, codigo);
+						ps.execute();
+						JOptionPane.showMessageDialog(null, "Producto Eliminado!");
+						limpiar();
+						formulario.construirTabla();
+						formulario.txtCodigoProducto.setText(null);
+						formulario.btnSubirFotoContrato.setEnabled(false);
+						formulario.lbl_foto_contrato.setEnabled(false);
+						formulario.btnAceptar.setEnabled(true);
+						formulario.btnActualizarProducto.setVisible(false);
+						formulario.btnGuardar.setVisible(false);
+						formulario.btnNuevoProducto.setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usted no tiene permisos para eliminar (Solo el jefe de la empresa)");
+					}
 
 				}
 			} catch (SQLException ex) {

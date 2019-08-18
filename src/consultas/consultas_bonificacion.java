@@ -38,7 +38,7 @@ public class consultas_bonificacion extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean registrarEliminacion(bonificacion bonificacion) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

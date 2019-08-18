@@ -50,7 +50,6 @@ import controles.control_factura_empresa;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JTextFieldDateEditor;
 
@@ -372,6 +371,7 @@ public class registro_facturas_empresa extends JFrame {
 
 		JButton btnSubir = new JButton("Subir");
 		btnSubir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				selecionarFoto();
 			}
@@ -382,6 +382,7 @@ public class registro_facturas_empresa extends JFrame {
 
 		JButton btnVerFoto = new JButton("Ver");
 		btnVerFoto.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				verFotoEmpleado();
 			}

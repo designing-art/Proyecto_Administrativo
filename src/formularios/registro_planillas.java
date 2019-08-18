@@ -1046,6 +1046,7 @@ public class registro_planillas extends JFrame {
 
 		JButton btnEmpleados = new JButton("Empleados");
 		btnEmpleados.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				empleado clase = new empleado();
 				consultas_empleado consulta = new consultas_empleado();
@@ -1055,7 +1056,7 @@ public class registro_planillas extends JFrame {
 				control_empleado control = new control_empleado(clase, clase2, consulta, consulta2, formulario);
 				formulario.setVisible(true);
 				formulario.setLocationRelativeTo(null);
-				formulario.txtNombresEmpleado.requestFocusInWindow();
+				registro_empleados.txtNombresEmpleado.requestFocusInWindow();
 				formulario.obtenerUltimoId();
 				formulario.consultarEmpresa();
 				formulario.establecerFechaRegistro();

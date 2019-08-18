@@ -45,7 +45,7 @@ public class consultas_planilla extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean registrarEliminacion(planilla planilla) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
@@ -151,7 +151,7 @@ public class consultas_planilla extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean actualizarDatosPlanilla(historial_planilla historial_planilla) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

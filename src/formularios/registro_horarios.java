@@ -49,7 +49,6 @@ import controles.control_horario;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 public class registro_horarios extends JFrame {
 	public JTextField txtIdHorario;

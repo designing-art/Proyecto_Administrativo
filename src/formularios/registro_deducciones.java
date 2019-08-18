@@ -348,6 +348,7 @@ public class registro_deducciones extends JFrame {
 
 		btnSinDeduc = new JButton("Sin Deducciones");
 		btnSinDeduc.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "Sin Deducciones.");
 				registro_planillas.txtTotalDeduccionesPlanilla.setText("0");

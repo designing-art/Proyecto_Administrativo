@@ -1,13 +1,11 @@
 package formularios;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Robot;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
@@ -44,8 +42,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.TableModel;
@@ -59,13 +55,10 @@ import consultas.consultas_cliente;
 import controles.control_cliente;
 import controles.control_factura_cliente;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.cliente;
-
-import java.awt.Component;
 
 public class registro_facturas_clientes extends JFrame implements Printable {
 	public JScrollPane scrollFunciones;
@@ -829,6 +822,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 		btnFactura = new JButton("Factura");
 		btnFactura.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
@@ -845,6 +839,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				cliente clase = new cliente();
 				consultas_cliente consulta = new consultas_cliente();
@@ -1090,6 +1085,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		}
 	}
 
+	@Override
 	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
 		if (pageIndex == 0) {
 			Graphics2D g2d = (Graphics2D) graphics;

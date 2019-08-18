@@ -32,7 +32,7 @@ public class consultas_egreso extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(egreso egreso) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

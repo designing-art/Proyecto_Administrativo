@@ -11,10 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Event;
-import java.awt.FocusTraversalPolicy;
-
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -31,7 +28,6 @@ import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
@@ -52,8 +48,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
 import javax.swing.DefaultComboBoxModel;
@@ -80,8 +74,6 @@ import utilidades.visor_imagen;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import java.awt.event.KeyAdapter;
-import java.awt.event.FocusAdapter;
 
 public class registro_empleados extends JFrame {
 

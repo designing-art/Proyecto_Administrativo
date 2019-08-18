@@ -39,7 +39,7 @@ public class consultas_inventario extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(inventario inventario) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

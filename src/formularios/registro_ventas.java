@@ -54,7 +54,6 @@ import controles.control_inventario;
 import controles.control_venta;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;

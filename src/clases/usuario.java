@@ -299,6 +299,5 @@ public class usuario {
 	public void setDireccion_foto_usuario(String direccion_foto_usuario) {
 		this.direccion_foto_usuario = direccion_foto_usuario;
 	}
-	
 
 }

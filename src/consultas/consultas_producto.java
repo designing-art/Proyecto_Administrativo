@@ -38,7 +38,7 @@ public class consultas_producto extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(producto producto) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

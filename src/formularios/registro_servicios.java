@@ -55,7 +55,6 @@ import conexion.conexion;
 import controles.control_servicio;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 
 public class registro_servicios extends JFrame {

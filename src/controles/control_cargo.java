@@ -264,7 +264,7 @@ public class control_cargo implements ActionListener {
 				} else {
 					String permiso = login_usuario.tipoUsuario.toString();
 					if (permiso.equals("Usuario Avanzado")) {
-						
+
 						conexion objCon = new conexion();
 						Connection conn = objCon.getConexion();
 						int Fila = formularioCargo.tablaCargos.getSelectedRow();
@@ -273,7 +273,7 @@ public class control_cargo implements ActionListener {
 						ps.setString(1, codigo);
 						ps.execute();
 						JOptionPane.showMessageDialog(null, "Cargo Eliminado");
-						
+
 						claseCargo.setId_cargo(Integer.parseInt(codigo));
 						claseCargo.setArea_cargo("Eliminado");
 						claseCargo.setNombre_cargo("Eliminado");

@@ -36,7 +36,7 @@ public class consultas_factura_empresa extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(factura_empresa factura_empresa) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

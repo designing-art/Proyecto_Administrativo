@@ -17,12 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
@@ -41,10 +39,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.FieldPosition;
 import java.text.MessageFormat;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -579,6 +574,7 @@ public class registro_nuevas_planillas extends JFrame {
 
 		JButton button = new JButton("Regresar");
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				planilla clase = new planilla();
 				historial_planilla clase2 = new historial_planilla();

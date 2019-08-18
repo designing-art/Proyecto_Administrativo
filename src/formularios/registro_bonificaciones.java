@@ -338,9 +338,9 @@ public class registro_bonificaciones extends JFrame {
 
 					String encabezado = "Reporte de bonos de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaBonificaciones, encabezado,
-							"Pagina {0} de " + i + "          Impreso por: "+login_usuario.nombreCompletoUsuario.toString()+"          "+fecha, true);
-					
+					utilJTablePrint(tablaBonificaciones, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -351,6 +351,7 @@ public class registro_bonificaciones extends JFrame {
 
 		btnSinBonif = new JButton("Sin Deducciones");
 		btnSinBonif.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "Sin bonificaciones.");
 				registro_planillas.txtTotalBonificacionesPlanilla.setText("0");

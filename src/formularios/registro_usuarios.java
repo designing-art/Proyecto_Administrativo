@@ -26,7 +26,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
@@ -56,12 +55,9 @@ import controles.control_usuario;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import clases.empleado;
-import clases.usuario;
-
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
@@ -415,6 +411,7 @@ public class registro_usuarios extends JFrame {
 
 		cbxTipoUsuario = new JComboBox();
 		cbxTipoUsuario.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				contador++;
 				if (cbxTipoUsuario.getSelectedItem().equals("Usuario Normal") && contador > 0) {
@@ -844,6 +841,7 @@ public class registro_usuarios extends JFrame {
 		JButton btnVerfoto = new JButton("Ver");
 		btnVerfoto.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtDirecFoto.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -881,6 +879,7 @@ public class registro_usuarios extends JFrame {
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo);
 		rdbtnPass.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnPass.isSelected()) {
 					txtContraseña.setEchoChar((char) 0);

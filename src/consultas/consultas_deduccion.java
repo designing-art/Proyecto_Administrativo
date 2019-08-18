@@ -67,7 +67,7 @@ public class consultas_deduccion extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean modificar(deduccion deduccion) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

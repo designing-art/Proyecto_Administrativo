@@ -64,7 +64,7 @@ public class control_historial_planilla implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para crear la planilla!");
 			} else {
 				clase_historial_planilla
-						.setEstado_planila(formulario_historial_planilla.txtEstadoPlanilla.getText().toString());
+						.setEstado_planila(registro_nuevas_planillas.txtEstadoPlanilla.getText().toString());
 				clase_historial_planilla.setTipo_planilla_final(
 						formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
 				clase_historial_planilla
@@ -129,7 +129,7 @@ public class control_historial_planilla implements ActionListener {
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 					formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
-					formulario_historial_planilla.txtEstadoPlanilla.setText(estado);
+					registro_nuevas_planillas.txtEstadoPlanilla.setText(estado);
 					formulario_historial_planilla.txtNombrePlanilla.setText(nombre);
 					formulario_historial_planilla.editor2.setText(creacion);
 					formulario_historial_planilla.editor.setText(vencimiento);
@@ -198,7 +198,7 @@ public class control_historial_planilla implements ActionListener {
 
 					formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 					formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
-					formulario_historial_planilla.txtEstadoPlanilla.setText(estado);
+					registro_nuevas_planillas.txtEstadoPlanilla.setText(estado);
 					formulario_historial_planilla.txtNombrePlanilla.setText(nombre);
 					formulario_historial_planilla.editor2.setText(creacion);
 					formulario_historial_planilla.editor.setText(vencimiento);
@@ -258,7 +258,7 @@ public class control_historial_planilla implements ActionListener {
 					clase_historial_planilla.setId_planilla_final(
 							Integer.parseInt(formulario_historial_planilla.txtCodigoPlanilla.getText()));
 					clase_historial_planilla
-							.setEstado_planila(formulario_historial_planilla.txtEstadoPlanilla.getText().toString());
+							.setEstado_planila(registro_nuevas_planillas.txtEstadoPlanilla.getText().toString());
 					clase_historial_planilla.setTipo_planilla_final(
 							formulario_historial_planilla.cbxTipoPlanillaFinal.getSelectedItem().toString());
 					clase_historial_planilla.setNombre_planilla_final(
@@ -352,7 +352,7 @@ public class control_historial_planilla implements ActionListener {
 
 				formulario_historial_planilla.txtCodigoPlanilla.setText(codigo);
 				formulario_historial_planilla.cbxTipoPlanillaFinal.setSelectedItem(tipo);
-				formulario_historial_planilla.txtEstadoPlanilla.setText(estado);
+				registro_nuevas_planillas.txtEstadoPlanilla.setText(estado);
 				formulario_historial_planilla.txtNombrePlanilla.setText(nombre);
 				formulario_historial_planilla.editor2.setText(creacion);
 				formulario_historial_planilla.editor.setText(vencimiento);
@@ -425,8 +425,8 @@ public class control_historial_planilla implements ActionListener {
 					formulario_historial_planilla.dispose();
 
 				} else {
-					formulario_historial_planilla.txtEstadoPlanilla.setText("Cerrada");
-					formulario_historial_planilla.txtEstadoPlanilla.setBackground(Color.RED);
+					registro_nuevas_planillas.txtEstadoPlanilla.setText("Cerrada");
+					registro_nuevas_planillas.txtEstadoPlanilla.setBackground(Color.RED);
 					int resp = JOptionPane.showConfirmDialog(null, "Planilla Cerrada!, Pero deseas sus detalles?");
 					if (JOptionPane.OK_OPTION == resp) {
 						planilla clase = new planilla();
@@ -482,8 +482,8 @@ public class control_historial_planilla implements ActionListener {
 			formulario_historial_planilla.establecerFechaRegistro();
 			formulario_historial_planilla.txtNombrePlanilla.requestFocusInWindow();
 			formulario_historial_planilla.txtNombrePlanilla.setEditable(true);
-			formulario_historial_planilla.txtEstadoPlanilla.setText("Abierta");
-			formulario_historial_planilla.txtEstadoPlanilla.setBackground(Color.GREEN);
+			registro_nuevas_planillas.txtEstadoPlanilla.setText("Abierta");
+			registro_nuevas_planillas.txtEstadoPlanilla.setBackground(Color.GREEN);
 			formulario_historial_planilla.iniciarEncero();
 
 		}
@@ -506,8 +506,8 @@ public class control_historial_planilla implements ActionListener {
 			formulario_historial_planilla.establecerFechaRegistro();
 			formulario_historial_planilla.txtNombrePlanilla.requestFocusInWindow();
 			formulario_historial_planilla.txtNombrePlanilla.setEditable(true);
-			formulario_historial_planilla.txtEstadoPlanilla.setText("Abierta");
-			formulario_historial_planilla.txtEstadoPlanilla.setBackground(Color.GREEN);
+			registro_nuevas_planillas.txtEstadoPlanilla.setText("Abierta");
+			registro_nuevas_planillas.txtEstadoPlanilla.setBackground(Color.GREEN);
 
 		}
 
@@ -529,8 +529,8 @@ public class control_historial_planilla implements ActionListener {
 		formulario_historial_planilla.txtTotalBonos.setText(null);
 		formulario_historial_planilla.txtTotalPlanilla.setText(null);
 		formulario_historial_planilla.iniciarEncero();
-		formulario_historial_planilla.txtEstadoPlanilla.setText("Abierta");
-		formulario_historial_planilla.txtEstadoPlanilla.setBackground(Color.GREEN);
+		registro_nuevas_planillas.txtEstadoPlanilla.setText("Abierta");
+		registro_nuevas_planillas.txtEstadoPlanilla.setBackground(Color.GREEN);
 
 	}
 

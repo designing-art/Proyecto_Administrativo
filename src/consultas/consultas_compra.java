@@ -39,7 +39,7 @@ public class consultas_compra extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(compra compra) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

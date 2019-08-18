@@ -25,7 +25,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import conexion.conexion;
 import consultas.*;
 import clases.*;
@@ -188,7 +187,7 @@ public class configuraciones extends JFrame {
 		rdbtnObscuro.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnObscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		grupo2.add(rdbtnObscuro);
-		
+
 		JTextArea txtrNotaApartado = new JTextArea();
 		txtrNotaApartado.setEditable(false);
 		txtrNotaApartado.setForeground(new Color(0, 128, 128));

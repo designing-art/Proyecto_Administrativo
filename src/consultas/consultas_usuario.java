@@ -60,7 +60,7 @@ public class consultas_usuario extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(usuario usuario) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
@@ -263,8 +263,7 @@ public class consultas_usuario extends conexion {
 			}
 		}
 	}
-	
-	
+
 	public boolean modificarUsuario(usuario usuario) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

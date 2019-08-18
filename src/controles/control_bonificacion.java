@@ -254,7 +254,7 @@ public class control_bonificacion implements ActionListener {
 						ps.setString(1, codigo);
 						ps.execute();
 						JOptionPane.showMessageDialog(null, "Bonificacion Eliminada!");
-						
+
 						clase.setId_bonificacion(Integer.parseInt(codigo));
 						clase.setTipo_bonificacion("Eliminado");
 						clase.setObservacion_bonificacion("Eliminado");

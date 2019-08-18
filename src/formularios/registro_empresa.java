@@ -47,7 +47,6 @@ import utilidades.visor_imagen;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
-import java.awt.event.KeyAdapter;
 
 public class registro_empresa extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -127,8 +126,8 @@ public class registro_empresa extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -334,7 +333,7 @@ public class registro_empresa extends JFrame {
 		txtNombreEmpresa.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtNombreEmpresa.getText().length() == 30)
 					ke.consume();
 			}
@@ -344,7 +343,7 @@ public class registro_empresa extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -373,7 +372,7 @@ public class registro_empresa extends JFrame {
 				if (txtDireccionEmpresa.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -384,9 +383,9 @@ public class registro_empresa extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDireccionEmpresa.getText().trim();
-		            txtDireccionEmpresa.setText(str);
-		        }
+					String str = txtDireccionEmpresa.getText().trim();
+					txtDireccionEmpresa.setText(str);
+				}
 			}
 		});
 
@@ -510,7 +509,7 @@ public class registro_empresa extends JFrame {
 				if (txtCuentaEmpresa.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -521,9 +520,9 @@ public class registro_empresa extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtCuentaEmpresa.getText().trim();
-		            txtCuentaEmpresa.setText(str);
-		        }
+					String str = txtCuentaEmpresa.getText().trim();
+					txtCuentaEmpresa.setText(str);
+				}
 			}
 		});
 
@@ -673,7 +672,7 @@ public class registro_empresa extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Empresa");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Empresa");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -691,7 +690,7 @@ public class registro_empresa extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Empresa");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Empresa");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {

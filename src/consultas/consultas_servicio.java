@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import clases.ingreso;
-import clases.inventario;
 import clases.producto;
 import clases.servicio;
 import conexion.conexion;
@@ -38,7 +37,7 @@ public class consultas_servicio extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(servicio servicio) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
@@ -98,7 +97,7 @@ public class consultas_servicio extends conexion {
 		}
 
 	}
-	
+
 	public boolean actualizarInventarioProductos(producto producto) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();
@@ -121,7 +120,7 @@ public class consultas_servicio extends conexion {
 		}
 
 	}
-	
+
 	public boolean insertarIngreso(ingreso ingreso) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

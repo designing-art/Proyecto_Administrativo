@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import clases.empleado;
-import clases.usuario;
 import conexion.conexion;
 
 public class consultas_empleado extends conexion {
@@ -58,7 +57,7 @@ public class consultas_empleado extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean registrarEliminacion(empleado empleado) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

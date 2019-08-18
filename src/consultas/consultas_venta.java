@@ -43,7 +43,7 @@ public class consultas_venta extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean insertarEliminacion(venta venta) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

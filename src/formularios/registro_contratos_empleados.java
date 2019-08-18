@@ -56,7 +56,6 @@ import utilidades.visor_imagen;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 public class registro_contratos_empleados extends JFrame {
 	public JComboBox<?> cbxTiempoContratoEmpleado;

@@ -42,7 +42,7 @@ public class consultas_cliente extends conexion {
 			}
 		}
 	}
-	
+
 	public boolean registrarEliminacion(cliente cliente) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

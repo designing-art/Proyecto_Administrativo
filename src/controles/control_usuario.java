@@ -12,19 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Timer;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import clases.empleado;
 import clases.usuario;
 import conexion.conexion;
 import consultas.consultas_usuario;
-import formularios.configuraciones;
 import formularios.login_usuario;
 import formularios.registro_usuarios;
-import formularios.ventana_principal;
 
 public class control_usuario implements ActionListener {
 
@@ -78,12 +73,12 @@ public class control_usuario implements ActionListener {
 
 		if (e.getSource() == formulario.btnGuardar) {
 			validarUsuarioPorIdentidad();
-			if (formulario.txtNombres.getText().isEmpty() || formulario.txtCargo.getText().isEmpty()
-					|| formulario.txtIdentidad.getText().isEmpty() || formulario.txtUsuario.getText().isEmpty()
+			if (registro_usuarios.txtNombres.getText().isEmpty() || registro_usuarios.txtCargo.getText().isEmpty()
+					|| registro_usuarios.txtIdentidad.getText().isEmpty() || formulario.txtUsuario.getText().isEmpty()
 					|| formulario.txtContraseña.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
 			} else {
-				if (formulario.txtIdentidad.getText().toString().equals(identidad)) {
+				if (registro_usuarios.txtIdentidad.getText().toString().equals(identidad)) {
 					JOptionPane.showMessageDialog(null, "Se encontrado un registro con esta identidad : " + identidad,
 							"Alerta!\n" + "Nota: Un empleado no puede ser registrado 2 o mas veces",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -105,9 +100,9 @@ public class control_usuario implements ActionListener {
 							definirPermisos();
 							clase.setUsuario(formulario.txtUsuario.getText().toString());
 							clase.setContraseña(formulario.txtContraseña.getText().toString());
-							clase.setIdentidad(formulario.txtIdentidad.getText().toString());
-							clase.setNombre(formulario.txtNombres.getText().toString());
-							clase.setCargo(formulario.txtCargo.getText().toString());
+							clase.setIdentidad(registro_usuarios.txtIdentidad.getText().toString());
+							clase.setNombre(registro_usuarios.txtNombres.getText().toString());
+							clase.setCargo(registro_usuarios.txtCargo.getText().toString());
 							clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
 							clase.setPermiso_todo(todo);
 							clase.setPermiso_empleado(empleado);
@@ -134,20 +129,20 @@ public class control_usuario implements ActionListener {
 							clase.setPermiso_opciones(opciones);
 							clase.setPermiso_usuarios(usuarios);
 							clase.setPermiso_acercade(acercade);
-							clase.setDireccion_foto_usuario(formulario.txtDirecFoto.getText().toString());
+							clase.setDireccion_foto_usuario(registro_usuarios.txtDirecFoto.getText().toString());
 
 							if (consulta.insertar(clase)) {
 								JOptionPane.showMessageDialog(null, "Usuario registrado!");
 								limpiar();
 								formulario.construirTabla();
 								formulario.obtenerUltimoId();
-								formulario.txtDirecFoto.setText("");
+								registro_usuarios.txtDirecFoto.setText("");
 								final ImageIcon iconoContrato = new ImageIcon(
 										getClass().getResource("/iconos/usuario.png"));
 								final ImageIcon iconofoto = new ImageIcon(
-										iconoContrato.getImage().getScaledInstance(formulario.lblFotoUsuario.getWidth(),
-												formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-								formulario.lblFotoUsuario.setIcon(iconofoto);
+										iconoContrato.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
+												registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+								registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 							} else {
 								JOptionPane.showMessageDialog(null, "Error! Usuario no registrado");
 								limpiar();
@@ -160,9 +155,9 @@ public class control_usuario implements ActionListener {
 		}
 
 		if (e.getSource() == formulario.btnActualizar) {
-			if (formulario.txtNombres.getText().isEmpty()
+			if (registro_usuarios.txtNombres.getText().isEmpty()
 
-					|| formulario.txtCargo.getText().isEmpty() || formulario.txtIdentidad.getText().isEmpty()
+					|| registro_usuarios.txtCargo.getText().isEmpty() || registro_usuarios.txtIdentidad.getText().isEmpty()
 					|| formulario.txtUsuario.getText().isEmpty() || formulario.txtContraseña.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
 			} else {
@@ -177,14 +172,15 @@ public class control_usuario implements ActionListener {
 										+ "sus credenciales indican que NO es un administrador.\n"
 										+ "Alerta! el intento o robo de credenciales en un delito.");
 					} else {
-						if (login_usuario.cargoUsuario.toString().equals("Usuario Avanzado")||login_usuario.cargoUsuario.toString().equals("Super Usuario")) {
+						if (login_usuario.cargoUsuario.toString().equals("Usuario Avanzado")
+								|| login_usuario.cargoUsuario.toString().equals("Super Usuario")) {
 							definirPermisos();
 							clase.setId_usuario(Integer.parseInt(formulario.txtCodigo.getText().toString()));
 							clase.setUsuario(formulario.txtUsuario.getText().toString());
 							clase.setContraseña(formulario.txtContraseña.getText().toString());
-							clase.setIdentidad(formulario.txtIdentidad.getText().toString());
-							clase.setNombre(formulario.txtNombres.getText().toString());
-							clase.setCargo(formulario.txtCargo.getText().toString());
+							clase.setIdentidad(registro_usuarios.txtIdentidad.getText().toString());
+							clase.setNombre(registro_usuarios.txtNombres.getText().toString());
+							clase.setCargo(registro_usuarios.txtCargo.getText().toString());
 							clase.setTipo_usuario(formulario.cbxTipoUsuario.getSelectedItem().toString());
 							clase.setPermiso_todo(todo);
 							clase.setPermiso_empleado(empleado);
@@ -211,20 +207,20 @@ public class control_usuario implements ActionListener {
 							clase.setPermiso_opciones(opciones);
 							clase.setPermiso_usuarios(usuarios);
 							clase.setPermiso_acercade(acercade);
-							clase.setDireccion_foto_usuario(formulario.txtDirecFoto.getText().toString());
+							clase.setDireccion_foto_usuario(registro_usuarios.txtDirecFoto.getText().toString());
 
 							if (consulta.actualizar(clase)) {
 								JOptionPane.showMessageDialog(null, "Usuario actualizado!");
 								limpiar();
 								formulario.construirTabla();
 								formulario.obtenerUltimoId();
-								formulario.txtDirecFoto.setText("");
+								registro_usuarios.txtDirecFoto.setText("");
 								final ImageIcon iconoContrato = new ImageIcon(
 										getClass().getResource("/iconos/usuario.png"));
 								final ImageIcon iconofoto = new ImageIcon(
-										iconoContrato.getImage().getScaledInstance(formulario.lblFotoUsuario.getWidth(),
-												formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-								formulario.lblFotoUsuario.setIcon(iconofoto);
+										iconoContrato.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
+												registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+								registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 							} else {
 								JOptionPane.showMessageDialog(null, "Error! Usuario no actualizado");
 								limpiar();
@@ -454,9 +450,9 @@ public class control_usuario implements ActionListener {
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtUsuario.setText(usuario);
 					formulario.txtContraseña.setText(contraseña);
-					formulario.txtIdentidad.setText(identidad);
-					formulario.txtNombres.setText(nombre);
-					formulario.txtCargo.setText(cargo);
+					registro_usuarios.txtIdentidad.setText(identidad);
+					registro_usuarios.txtNombres.setText(nombre);
+					registro_usuarios.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
 					registro_usuarios.rbdTodos.setText(todo);
 					registro_usuarios.rdbtnEmpleados.setText(empleado);
@@ -483,14 +479,14 @@ public class control_usuario implements ActionListener {
 					registro_usuarios.rdbtnConfiguracion.setText(opciones);
 					registro_usuarios.rdbtnUsuarios.setText(usuarios);
 					registro_usuarios.rdbtnAcercaDe.setText(acercade);
-					formulario.txtDirecFoto.setText(foto);
+					registro_usuarios.txtDirecFoto.setText(foto);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
 					formulario.txtContraseña.setForeground(Color.BLACK);
-					formulario.txtIdentidad.setForeground(Color.BLACK);
-					formulario.txtNombres.setForeground(Color.BLACK);
-					formulario.txtCargo.setForeground(Color.BLACK);
+					registro_usuarios.txtIdentidad.setForeground(Color.BLACK);
+					registro_usuarios.txtNombres.setForeground(Color.BLACK);
+					registro_usuarios.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
 					registro_usuarios.rbdTodos.setForeground(Color.BLACK);
 					registro_usuarios.rdbtnEmpleados.setForeground(Color.BLACK);
@@ -526,9 +522,9 @@ public class control_usuario implements ActionListener {
 						formulario.txtContraseña.setEditable(true);
 					}
 
-					formulario.txtIdentidad.setEditable(false);
-					formulario.txtNombres.setEditable(false);
-					formulario.txtCargo.setEditable(false);
+					registro_usuarios.txtIdentidad.setEditable(false);
+					registro_usuarios.txtNombres.setEditable(false);
+					registro_usuarios.txtCargo.setEditable(false);
 					formulario.btnBorrar.setVisible(true);
 					formulario.btnGuardar.setVisible(false);
 					formulario.btnNuevo.setVisible(false);
@@ -537,14 +533,14 @@ public class control_usuario implements ActionListener {
 					formulario.btnVer.setVisible(false);
 					formulario.btnAceptar.setText("Cancelar");
 					formulario.btnAceptar.setVisible(true);
-					formulario.txtBusqueda.setText("");
-					formulario.txtBusqueda.setEditable(false);
+					registro_usuarios.txtBusqueda.setText("");
+					registro_usuarios.txtBusqueda.setEditable(false);
 
 					final ImageIcon icono = new ImageIcon(foto);
 					final ImageIcon iconofoto = new ImageIcon(
-							icono.getImage().getScaledInstance(formulario.lblFotoUsuario.getWidth(),
-									formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoUsuario.setIcon(iconofoto);
+							icono.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
+									registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+					registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 
 					formulario.txtUsuario.requestFocusInWindow();
 
@@ -775,9 +771,9 @@ public class control_usuario implements ActionListener {
 					formulario.txtCodigo.setText(codigo);
 					formulario.txtUsuario.setText(usuario);
 					formulario.txtContraseña.setText(contraseña);
-					formulario.txtIdentidad.setText(identidad);
-					formulario.txtNombres.setText(nombre);
-					formulario.txtCargo.setText(cargo);
+					registro_usuarios.txtIdentidad.setText(identidad);
+					registro_usuarios.txtNombres.setText(nombre);
+					registro_usuarios.txtCargo.setText(cargo);
 					formulario.cbxTipoUsuario.setSelectedItem(tipo);
 					registro_usuarios.rbdTodos.setText(todo);
 					registro_usuarios.rdbtnEmpleados.setText(empleado);
@@ -804,14 +800,14 @@ public class control_usuario implements ActionListener {
 					registro_usuarios.rdbtnConfiguracion.setText(opciones);
 					registro_usuarios.rdbtnUsuarios.setText(usuarios);
 					registro_usuarios.rdbtnAcercaDe.setText(acercade);
-					formulario.txtDirecFoto.setText(foto);
+					registro_usuarios.txtDirecFoto.setText(foto);
 
 					formulario.txtCodigo.setForeground(Color.BLACK);
 					formulario.txtUsuario.setForeground(Color.BLACK);
 					formulario.txtContraseña.setForeground(Color.BLACK);
-					formulario.txtIdentidad.setForeground(Color.BLACK);
-					formulario.txtNombres.setForeground(Color.BLACK);
-					formulario.txtCargo.setForeground(Color.BLACK);
+					registro_usuarios.txtIdentidad.setForeground(Color.BLACK);
+					registro_usuarios.txtNombres.setForeground(Color.BLACK);
+					registro_usuarios.txtCargo.setForeground(Color.BLACK);
 					formulario.cbxTipoUsuario.setForeground(Color.BLACK);
 					registro_usuarios.rbdTodos.setForeground(Color.BLACK);
 					registro_usuarios.rdbtnEmpleados.setForeground(Color.BLACK);
@@ -841,15 +837,15 @@ public class control_usuario implements ActionListener {
 
 					final ImageIcon icono = new ImageIcon(foto);
 					final ImageIcon iconofoto = new ImageIcon(
-							icono.getImage().getScaledInstance(formulario.lblFotoUsuario.getWidth(),
-									formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-					formulario.lblFotoUsuario.setIcon(iconofoto);
+							icono.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
+									registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+					registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 
 					formulario.txtUsuario.setEditable(false);
 					formulario.txtContraseña.setEditable(false);
-					formulario.txtIdentidad.setEditable(false);
-					formulario.txtNombres.setEditable(false);
-					formulario.txtCargo.setEditable(false);
+					registro_usuarios.txtIdentidad.setEditable(false);
+					registro_usuarios.txtNombres.setEditable(false);
+					registro_usuarios.txtCargo.setEditable(false);
 					formulario.cbxTipoUsuario.setEditable(false);
 
 					formulario.btnBorrar.setVisible(false);
@@ -922,15 +918,15 @@ public class control_usuario implements ActionListener {
 			formulario.txtCodigo.setEditable(false);
 			formulario.txtUsuario.setEditable(true);
 			formulario.txtContraseña.setEditable(true);
-			formulario.txtIdentidad.setEditable(false);
-			formulario.txtNombres.setEditable(false);
-			formulario.txtCargo.setEditable(false);
-			formulario.txtBusqueda.setEditable(true);
-			formulario.txtDirecFoto.setText("");
+			registro_usuarios.txtIdentidad.setEditable(false);
+			registro_usuarios.txtNombres.setEditable(false);
+			registro_usuarios.txtCargo.setEditable(false);
+			registro_usuarios.txtBusqueda.setEditable(true);
+			registro_usuarios.txtDirecFoto.setText("");
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
-					formulario.lblFotoUsuario.getWidth(), formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-			formulario.lblFotoUsuario.setIcon(iconofoto);
+					registro_usuarios.lblFotoUsuario.getWidth(), registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+			registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 			registro_usuarios.txtBusqueda.requestFocusInWindow();
 
 		}
@@ -953,15 +949,15 @@ public class control_usuario implements ActionListener {
 			formulario.txtCodigo.setEditable(false);
 			formulario.txtUsuario.setEditable(true);
 			formulario.txtContraseña.setEditable(true);
-			formulario.txtIdentidad.setEditable(false);
-			formulario.txtNombres.setEditable(false);
-			formulario.txtCargo.setEditable(false);
-			formulario.txtBusqueda.setEditable(true);
-			formulario.txtDirecFoto.setText("");
+			registro_usuarios.txtIdentidad.setEditable(false);
+			registro_usuarios.txtNombres.setEditable(false);
+			registro_usuarios.txtCargo.setEditable(false);
+			registro_usuarios.txtBusqueda.setEditable(true);
+			registro_usuarios.txtDirecFoto.setText("");
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
-					formulario.lblFotoUsuario.getWidth(), formulario.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-			formulario.lblFotoUsuario.setIcon(iconofoto);
+					registro_usuarios.lblFotoUsuario.getWidth(), registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+			registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 			registro_usuarios.txtBusqueda.requestFocusInWindow();
 		}
 
@@ -975,9 +971,9 @@ public class control_usuario implements ActionListener {
 		formulario.txtCodigo.setText(null);
 		formulario.txtUsuario.setText(null);
 		formulario.txtContraseña.setText(null);
-		formulario.txtIdentidad.setText(null);
-		formulario.txtNombres.setText(null);
-		formulario.txtCargo.setText(null);
+		registro_usuarios.txtIdentidad.setText(null);
+		registro_usuarios.txtNombres.setText(null);
+		registro_usuarios.txtCargo.setText(null);
 
 		registro_usuarios.rbdTodos.setSelected(false);
 		registro_usuarios.rdbtnEmpleados.setSelected(false);
@@ -1112,7 +1108,7 @@ public class control_usuario implements ActionListener {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery("SELECT identidad FROM usuario where identidad = '"
-					+ formulario.txtIdentidad.getText().toString() + "'");
+					+ registro_usuarios.txtIdentidad.getText().toString() + "'");
 
 			if (rs.next()) {
 				identidad = (rs.getString("identidad"));
