@@ -39,6 +39,36 @@ public class consultas_proveedor extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(proveedor proveedor) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO proveedores (id_proveedor, nombres_proveedor, cuenta_bancaria_proveedor, direccion_proveedor, rtn_proveedor, telefono_proveedor, correo_electronico_proveedor, foto_proveedor) VALUES(?,?,?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, proveedor.getId_proveedor());
+			ps.setString(2, proveedor.getNombres_proveedor());
+			ps.setString(3, proveedor.getCuenta_bancaria_proveedor());
+			ps.setString(4, proveedor.getDireccion_proveedor());
+			ps.setString(5, proveedor.getRtn_proveedor());
+			ps.setString(6, proveedor.getTelefono_proveedor());
+			ps.setString(7, proveedor.getCorreo_electronico_proveedor());
+			ps.setString(8, proveedor.getFoto_proveedor());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizar(proveedor proveedor) {

@@ -1175,7 +1175,7 @@ public class registro_empleados extends JFrame {
 					String encabezado = "Reporte de empleados de " + login_usuario.nombre.toString();
 
 					utilJTablePrint(tablaEmpleados, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+							"Pagina {0} de " + i + "          Impreso por: "+login_usuario.nombreCompletoUsuario.toString()+"          "+fecha, true);
 				}
 			}
 		});
@@ -1397,7 +1397,7 @@ public class registro_empleados extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}

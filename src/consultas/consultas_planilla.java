@@ -45,6 +45,41 @@ public class consultas_planilla extends conexion {
 			}
 		}
 	}
+	
+	public boolean registrarEliminacion(planilla planilla) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO planillas (id_planilla, fecha_planilla, nombres_planilla, apellidos_planilla, identidad_planilla, cargo_planilla, sueldo_bruto_planilla, total_deducciones_planilla, total_bonificaciones_planilla, sueldo_neto_planilla, total_apagar_planilla, nombre_planilla) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, planilla.getId_planilla());
+			ps.setString(2, planilla.getFecha_planilla());
+			ps.setString(3, planilla.getNombres_planilla());
+			ps.setString(4, planilla.getApellidos_planilla());
+			ps.setString(5, planilla.getIdentidad_planilla());
+			ps.setString(6, planilla.getCargo_planilla());
+			ps.setDouble(7, planilla.getSueldo_bruto_planilla());
+			ps.setDouble(8, planilla.getTotal_deducciones_planilla());
+			ps.setDouble(9, planilla.getTotal_bonificaciones_planilla());
+			ps.setDouble(10, planilla.getSueldo_neto_planilla());
+			ps.setDouble(11, planilla.getTotal_apagar_planilla());
+			ps.setString(12, planilla.getNombre_planilla());
+			ps.execute();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	public boolean modificar(planilla planilla) {
 		PreparedStatement ps = null;

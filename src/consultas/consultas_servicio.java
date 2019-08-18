@@ -38,6 +38,34 @@ public class consultas_servicio extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(servicio servicio) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO servicios (id_servicio, tipo_servicio, tiempo_servicio, precio_servicio, descripcion_servicio, producto_servicio) VALUES(?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, servicio.getId_servicio());
+			ps.setString(2, servicio.getTipo_servicio());
+			ps.setString(3, servicio.getTiempo_servicio());
+			ps.setDouble(4, servicio.getPrecio_servicio());
+			ps.setString(5, servicio.getDescripcion_servicio());
+			ps.setString(6, servicio.getProducto_servicio());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizar(servicio servicio) {

@@ -32,6 +32,32 @@ public class consultas_egreso extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(egreso egreso) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+		String sql = "INSERT INTO egresos (id_egreso, tipo_egreso, cantidad_egreso, descripcion_egreso, fecha_egreso) VALUES(?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, egreso.getId_egreso());
+			ps.setString(2, egreso.getTipo_egreso());
+			ps.setDouble(3, egreso.getCantidad_egreso());
+			ps.setString(4, egreso.getDescripcion_egreso());
+			ps.setString(5, egreso.getFecha_egreso());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizarEgreso(egreso egreso) {

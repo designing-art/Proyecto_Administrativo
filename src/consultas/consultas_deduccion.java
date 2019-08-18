@@ -39,6 +39,35 @@ public class consultas_deduccion extends conexion {
 		}
 	}
 
+	public boolean registrarEliminacion(deduccion deduccion) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO deducciones (id_deduccion, tipo_deduccion, observacion_deduccion, identidad_empleado_deduccion, cantidad_deduccion, fecha_deduccion) VALUES(?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, deduccion.getId_deduccion());
+			ps.setString(2, deduccion.getTipo_deduccion());
+			ps.setString(3, deduccion.getObservacion_deduccion());
+			ps.setString(4, deduccion.getIdentidad_empleado_deduccion());
+			ps.setDouble(5, deduccion.getCantidad_deduccion());
+			ps.setString(6, deduccion.getFecha_deduccion());
+			ps.execute();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+	
 	public boolean modificar(deduccion deduccion) {
 		PreparedStatement ps = null;
 		Connection con = getConexion();

@@ -60,6 +60,59 @@ public class consultas_usuario extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(usuario usuario) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+		String sql = "INSERT INTO usuario (id_usuario, usuario, contraseña, identidad, nombre, cargo, tipo_usuario, permiso_todo, permiso_empleado, permiso_cargo, permiso_horario, permiso_contrato_e, permiso_cliente, permiso_contrato_c, permiso_compra, permiso_proveedor, permiso_inventario, permiso_factura_c, permiso_factura_e, permiso_sar, permiso_ingreso, permiso_producto, permiso_servicio, permiso_venta, permiso_egreso, permiso_bonificacion, permiso_deduccion, permiso_planilla, permiso_empresa, permiso_opciones, permiso_usuarios, permiso_acercade, direccion_foto_usuario) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, usuario.getId_usuario());
+			ps.setString(2, usuario.getUsuario());
+			ps.setString(3, usuario.getContraseña());
+			ps.setString(4, usuario.getIdentidad());
+			ps.setString(5, usuario.getNombre());
+			ps.setString(6, usuario.getCargo());
+			ps.setString(7, usuario.getTipo_usuario());
+			ps.setString(8, usuario.getPermiso_todo());
+			ps.setString(9, usuario.getPermiso_empleado());
+			ps.setString(10, usuario.getPermiso_cargo());
+			ps.setString(11, usuario.getPermiso_cargo());
+			ps.setString(12, usuario.getPermiso_contrato_e());
+			ps.setString(13, usuario.getPermiso_cliente());
+			ps.setString(14, usuario.getPermiso_contrato_c());
+			ps.setString(15, usuario.getPermiso_compra());
+			ps.setString(16, usuario.getPermiso_proveedor());
+			ps.setString(17, usuario.getPermiso_inventario());
+			ps.setString(18, usuario.getPermiso_factura_c());
+			ps.setString(19, usuario.getPermiso_factura_e());
+			ps.setString(20, usuario.getPermiso_sar());
+			ps.setString(21, usuario.getPermiso_ingreso());
+			ps.setString(22, usuario.getPermiso_producto());
+			ps.setString(23, usuario.getPermiso_servicio());
+			ps.setString(24, usuario.getPermiso_venta());
+			ps.setString(25, usuario.getPermiso_egreso());
+			ps.setString(26, usuario.getPermiso_bonificacion());
+			ps.setString(27, usuario.getPermiso_deduccion());
+			ps.setString(28, usuario.getPermiso_planilla());
+			ps.setString(29, usuario.getPermiso_empresa());
+			ps.setString(30, usuario.getPermiso_opciones());
+			ps.setString(31, usuario.getPermiso_usuarios());
+			ps.setString(32, usuario.getPermiso_acercade());
+			ps.setString(33, usuario.getDireccion_foto_usuario());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizar(usuario usuario) {

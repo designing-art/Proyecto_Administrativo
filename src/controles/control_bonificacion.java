@@ -243,7 +243,8 @@ public class control_bonificacion implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
+					String permiso = login_usuario.tipoUsuario.toString();
+					if (permiso.equals("Usuario Avanzado")) {
 
 						conexion objCon = new conexion();
 						Connection conn = objCon.getConexion();
@@ -253,8 +254,19 @@ public class control_bonificacion implements ActionListener {
 						ps.setString(1, codigo);
 						ps.execute();
 						JOptionPane.showMessageDialog(null, "Bonificacion Eliminada!");
-						limpiar();
-						formulario.construirTabla();
+						
+						clase.setId_bonificacion(Integer.parseInt(codigo));
+						clase.setTipo_bonificacion("Eliminado");
+						clase.setObservacion_bonificacion("Eliminado");
+						clase.setCantidad_bonificacion(Double.parseDouble("0"));
+						clase.setIdentidad_empleado_bonificacion("Eliminado");
+						clase.setFecha_bonificacion("Eliminado");
+
+						if (consulta.registrarEliminacion(clase)) {
+							formulario.construirTabla();
+							formulario.obtenerUltimoId();
+							formulario.establecerFechaRegistro();
+						}
 
 						formulario.cbxTipoBonificacion.setEditable(false);
 						formulario.txtObservacionBonificacion.setEditable(false);

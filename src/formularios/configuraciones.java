@@ -50,8 +50,6 @@ public class configuraciones extends JFrame {
 	public JLabel lblTemasDelSistema;
 	public static JRadioButton rdbtnClaro;
 	public static JRadioButton rdbtnObscuro;
-	public static JRadioButton rdbtnColorido;
-	public static JRadioButton rdbtnClaroobscuro;
 
 	public configuraciones() {
 		setType(Type.UTILITY);
@@ -111,7 +109,7 @@ public class configuraciones extends JFrame {
 		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFrase.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 10));
 		txtFrase.setColumns(10);
-		txtFrase.setBounds(10, 372, 351, 20);
+		txtFrase.setBounds(20, 352, 351, 40);
 		contentPane.add(txtFrase);
 		InputMap map8 = txtFrase.getInputMap(JComponent.WHEN_FOCUSED);
 		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -134,25 +132,25 @@ public class configuraciones extends JFrame {
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(50, 205, 50));
-		btnGuardar.setBounds(14, 403, 104, 23);
+		btnGuardar.setBounds(30, 403, 104, 23);
 		contentPane.add(btnGuardar);
 
 		btnActualizar = new JButton("Guardar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(50, 205, 50));
-		btnActualizar.setBounds(261, 403, 104, 23);
+		btnActualizar.setBounds(254, 403, 104, 23);
 		contentPane.add(btnActualizar);
 
 		JLabel lblFraseMotivadora = new JLabel("Frase Motivadora :");
 		lblFraseMotivadora.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFraseMotivadora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		lblFraseMotivadora.setBounds(97, 334, 190, 20);
+		lblFraseMotivadora.setBounds(97, 308, 190, 20);
 		contentPane.add(lblFraseMotivadora);
 
 		JLabel lblEscribaUnaFrase = new JLabel("Escriba una frase motivadora.");
 		lblEscribaUnaFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscribaUnaFrase.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblEscribaUnaFrase.setBounds(10, 349, 371, 26);
+		lblEscribaUnaFrase.setBounds(10, 323, 371, 26);
 		contentPane.add(lblEscribaUnaFrase);
 
 		txtCodigo = new JTextField();
@@ -178,23 +176,9 @@ public class configuraciones extends JFrame {
 		rdbtnObscuro.setBounds(205, 278, 119, 23);
 		contentPane.add(rdbtnObscuro);
 
-		rdbtnColorido = new JRadioButton("Colorido");
-		rdbtnColorido.setHorizontalAlignment(SwingConstants.CENTER);
-		rdbtnColorido.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnColorido.setBounds(84, 304, 119, 23);
-		contentPane.add(rdbtnColorido);
-
-		rdbtnClaroobscuro = new JRadioButton("Plateado");
-		rdbtnClaroobscuro.setHorizontalAlignment(SwingConstants.CENTER);
-		rdbtnClaroobscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnClaroobscuro.setBounds(205, 304, 119, 23);
-		contentPane.add(rdbtnClaroobscuro);
-
 		grupo2 = new ButtonGroup();
 		grupo2.add(rdbtnClaro);
 		grupo2.add(rdbtnObscuro);
-		grupo2.add(rdbtnColorido);
-		grupo2.add(rdbtnClaroobscuro);
 
 		txtCodigo.setVisible(false);
 
@@ -231,6 +215,7 @@ public class configuraciones extends JFrame {
 				tema = (rs.getString("tema_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
 
+				System.out.print(tema);
 				if (sonido.equals("Activar")) {
 					try {
 						vozBienvenido();
@@ -243,35 +228,26 @@ public class configuraciones extends JFrame {
 					}
 				}
 
-				if (frase == "") {
+				if (frase.equals("")) {
 					ventana_principal.txtFrase.setText(
 							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
 				} else {
 					ventana_principal.txtFrase.setText(frase);
 				}
 
-				if (tema == "Claro") {
-					ventana_principal.contentPane.setBackground(Color.WHITE);
+				if (tema.equals("Claro")) {
+					ventana_principal.panelClientes.setBackground(Color.WHITE);
 
 				} else {
-					if (tema == "Obscuro") {
-						ventana_principal.contentPane.setBackground(Color.LIGHT_GRAY);
+					if (tema.equals("Obscuro")) {
+						ventana_principal.panelClientes.setBackground(Color.LIGHT_GRAY);
 
-					}else {
-						if (tema == "Colorido") {
-							ventana_principal.contentPane.setBackground(Color.blue);
-
-						}else {
-							if (tema == "Plateado") {
-								ventana_principal.contentPane.setBackground(Color.DARK_GRAY);
-
-							}
-						}
+					} else {
+						ventana_principal.panelClientes.setBackground(Color.WHITE);
+						
 					}
 				}
 			}
-			ventana_principal menu = new ventana_principal();
-			menu.pack();
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
@@ -309,16 +285,7 @@ public class configuraciones extends JFrame {
 					if (tema.equals("Obscuro")) {
 						rdbtnObscuro.setSelected(true);
 						repaint();
-					} else {
-						if (tema.equals("Colorido")) {
-							rdbtnColorido.setSelected(true);
-							repaint();
-						} else {
-							if (tema.equals("Claro-Obscuro")) {
-								rdbtnClaroobscuro.setSelected(true);
-								repaint();
-							}
-						}
+
 					}
 				}
 
@@ -335,7 +302,9 @@ public class configuraciones extends JFrame {
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
-		} catch (SQLException exx) {
+		} catch (
+
+		SQLException exx) {
 			System.out.println(exx.getMessage());
 			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 		}

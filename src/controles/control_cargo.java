@@ -262,8 +262,9 @@ public class control_cargo implements ActionListener {
 				if (filaseleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
 				} else {
-					if (login_usuario.cargoUsuario.toString() == "Usuario Avanzado") {
-
+					String permiso = login_usuario.tipoUsuario.toString();
+					if (permiso.equals("Usuario Avanzado")) {
+						
 						conexion objCon = new conexion();
 						Connection conn = objCon.getConexion();
 						int Fila = formularioCargo.tablaCargos.getSelectedRow();
@@ -272,8 +273,18 @@ public class control_cargo implements ActionListener {
 						ps.setString(1, codigo);
 						ps.execute();
 						JOptionPane.showMessageDialog(null, "Cargo Eliminado");
-						limpiar();
-						formularioCargo.construirTabla();
+						
+						claseCargo.setId_cargo(Integer.parseInt(codigo));
+						claseCargo.setArea_cargo("Eliminado");
+						claseCargo.setNombre_cargo("Eliminado");
+						claseCargo.setSueldo_cargo(Double.parseDouble("0"));
+						claseCargo.setValor_hora_extra_cargo(Double.parseDouble("0"));
+						claseCargo.setFunciones_cargo("Eliminado");
+						if (consultasCargo.insertarEliminacion(claseCargo)) {
+							limpiar();
+							formularioCargo.construirTabla();
+							formularioCargo.obtenerUltimoId();
+						}
 
 						formularioCargo.cbxTipoCargo.setEditable(false);
 						formularioCargo.txtNombreCargo.setEditable(false);

@@ -43,6 +43,40 @@ public class consultas_venta extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(venta venta) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO ventas (id_venta, nombre_objeto_venta, descripcion_objeto_venta, peso_objeto_venta, color_objeto_venta, marca_objeto_venta, modelo_objeto_venta, existencia_objeto_venta, cantidad_objeto_venta, precio_compra_venta, precio_venta, fecha_registro_venta ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, venta.getId_venta());
+			ps.setString(2, venta.getNombre_objeto_venta());
+			ps.setString(3, venta.getDescripcion_objeto_venta());
+			ps.setString(4, venta.getPeso_objeto_venta());
+			ps.setString(5, venta.getColor_objeto_venta());
+			ps.setString(6, venta.getMarca_objeto_venta());
+			ps.setString(7, venta.getModelo_objeto_venta());
+			ps.setInt(8, venta.getExistencia_objeto_venta());
+			ps.setInt(9, venta.getCantidad_objeto_venta());
+			ps.setDouble(10, venta.getPrecio_compra_venta());
+			ps.setDouble(11, venta.getPrecio_venta());
+			ps.setString(12, venta.getFecha_registro_venta());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizar(venta venta) {

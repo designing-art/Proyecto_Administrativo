@@ -36,6 +36,33 @@ public class consultas_contrato_empleado extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(contrato_empleado contrato) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO contrato_empleado (id_contrato_empleado, identidad_contrato_empleado, tipo_contrato_empleado, tiempo_contrato_empleado, direccion_foto_contrato_empleado) VALUES(?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, contrato.getId_contrato_empleado());
+			ps.setString(2, contrato.getIdentidad_contrato_empleado());
+			ps.setString(3, contrato.getTipo_contrato_empleado());
+			ps.setString(4, contrato.getTiempo_contrato_empleado());
+			ps.setString(5, contrato.getDireccion_foto_contrato_empleado());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizar(contrato_empleado contrato) {

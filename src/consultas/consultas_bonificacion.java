@@ -38,6 +38,35 @@ public class consultas_bonificacion extends conexion {
 			}
 		}
 	}
+	
+	public boolean registrarEliminacion(bonificacion bonificacion) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO bonificaciones (id_bonificacion, tipo_bonificacion, observacion_bonificacion, identidad_empleado_bonificacion, cantidad_bonificacion, fecha_bonificacion) VALUES(?,?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bonificacion.getId_bonificacion());
+			ps.setString(2, bonificacion.getTipo_bonificacion());
+			ps.setString(3, bonificacion.getObservacion_bonificacion());
+			ps.setString(4, bonificacion.getIdentidad_empleado_bonificacion());
+			ps.setDouble(5, bonificacion.getCantidad_bonificacion());
+			ps.setString(6, bonificacion.getFecha_bonificacion());
+			ps.execute();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	public boolean modificar(bonificacion bonificacion) {
 		PreparedStatement ps = null;

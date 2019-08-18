@@ -33,6 +33,33 @@ public class consultas_contrato_cliente extends conexion {
 			}
 		}
 	}
+	
+	public boolean insertarEliminacion(contrato_cliente contrato) {
+		PreparedStatement ps = null;
+		Connection con = getConexion();
+
+		String sql = "INSERT INTO contrato_cliente (id_contrato_cliente, tipo_contrato_cliente, tiempo_contrato_cliente, foto_contrato_cliente, identidad_rtn_cliente) VALUES(?,?,?,?,?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, contrato.getId_contrato_cliente());
+			ps.setString(2, contrato.getTipo_contrato_cliente());
+			ps.setString(3, contrato.getTiempo_contrato_cliente());
+			ps.setString(4, contrato.getFoto_contrato_cliente());
+			ps.setString(5, contrato.getIdentidad_rtn_cliente());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 
 	/* Actualizar */
 	public boolean actualizar(contrato_cliente contrato) {
