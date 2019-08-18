@@ -339,7 +339,8 @@ public class registro_bonificaciones extends JFrame {
 					String encabezado = "Reporte de bonos de " + login_usuario.nombre.toString();
 
 					utilJTablePrint(tablaBonificaciones, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+							"Pagina {0} de " + i + "          Impreso por: "+login_usuario.nombreCompletoUsuario.toString()+"          "+fecha, true);
+					
 				}
 			}
 		});
@@ -848,7 +849,7 @@ public class registro_bonificaciones extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}

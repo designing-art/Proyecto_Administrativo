@@ -147,8 +147,8 @@ public class registro_facturas_empresa extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -243,9 +243,9 @@ public class registro_facturas_empresa extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDescripcion.getText().trim();
-		            txtDescripcion.setText(str);
-		        }
+					String str = txtDescripcion.getText().trim();
+					txtDescripcion.setText(str);
+				}
 			}
 		});
 
@@ -278,7 +278,7 @@ public class registro_facturas_empresa extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
 			}
@@ -328,7 +328,7 @@ public class registro_facturas_empresa extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtCantidad.getText().length() == 6)
 					ke.consume();
 			}
@@ -361,7 +361,7 @@ public class registro_facturas_empresa extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -551,8 +551,9 @@ public class registro_facturas_empresa extends JFrame {
 
 					String encabezado = "Reporte de fact. empresa de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tabla, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tabla, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -642,20 +643,18 @@ public class registro_facturas_empresa extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		String ampm;
-		ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-		SimpleDateFormat df = new SimpleDateFormat("dd '/' MMMMM '/' yyyy 'a las' HH:mm:ss '" + ampm + "'");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
+
 	public void selecionarFoto() {
 		JFileChooser archivo = new JFileChooser();
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg",
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Facturas Empresa");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Facturas Empresa");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -666,7 +665,7 @@ public class registro_facturas_empresa extends JFrame {
 			lblFactura.setIcon(new ImageIcon(foto));
 		}
 	}
-	
+
 	public void verFotoEmpleado() {
 		if (txtFoto.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No hay imagen que mostrar");
@@ -713,7 +712,7 @@ public class registro_facturas_empresa extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();

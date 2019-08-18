@@ -156,7 +156,7 @@ public class registro_clientes extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -246,9 +246,8 @@ public class registro_clientes extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtNombresCliente.getText().length() == 30)
@@ -260,7 +259,7 @@ public class registro_clientes extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -275,9 +274,8 @@ public class registro_clientes extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					ke.consume();
 				}
 				if (txtApellidosCliente.getText().length() == 30)
@@ -289,7 +287,7 @@ public class registro_clientes extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -392,7 +390,7 @@ public class registro_clientes extends JFrame {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent ke) {	
+			public void keyReleased(KeyEvent ke) {
 			}
 		});
 
@@ -415,7 +413,7 @@ public class registro_clientes extends JFrame {
 				if (txtDireccionCliente.getText().length() == 50) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -426,9 +424,9 @@ public class registro_clientes extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDireccionCliente.getText().trim();
-		            txtDireccionCliente.setText(str);
-		        }
+					String str = txtDireccionCliente.getText().trim();
+					txtDireccionCliente.setText(str);
+				}
 			}
 		});
 
@@ -614,7 +612,7 @@ public class registro_clientes extends JFrame {
 				if (txtDireccionEmpresa.getText().length() == 50) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -625,9 +623,9 @@ public class registro_clientes extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDireccionEmpresa.getText().trim();
-		            txtDireccionEmpresa.setText(str);
-		        }
+					String str = txtDireccionEmpresa.getText().trim();
+					txtDireccionEmpresa.setText(str);
+				}
 			}
 		});
 
@@ -680,7 +678,7 @@ public class registro_clientes extends JFrame {
 				if (txtDescripcionEmpresa.getText().length() == 50) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -691,9 +689,9 @@ public class registro_clientes extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDescripcionEmpresa.getText().trim();
-		            txtDescripcionEmpresa.setText(str);
-		        }
+					String str = txtDescripcionEmpresa.getText().trim();
+					txtDescripcionEmpresa.setText(str);
+				}
 			}
 		});
 
@@ -847,8 +845,9 @@ public class registro_clientes extends JFrame {
 
 					String encabezado = "Reporte de clientes de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tabla, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tabla, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -940,7 +939,7 @@ public class registro_clientes extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -995,7 +994,7 @@ public class registro_clientes extends JFrame {
 	public void tomarFoto() {
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\cam.exe");
+			camara.exec("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\cam.exe");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1007,7 +1006,7 @@ public class registro_clientes extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Clientes");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Clientes");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -1018,7 +1017,7 @@ public class registro_clientes extends JFrame {
 			lblFotoC.setIcon(new ImageIcon(foto));
 		}
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();

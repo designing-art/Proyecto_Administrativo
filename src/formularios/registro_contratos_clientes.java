@@ -92,7 +92,6 @@ public class registro_contratos_clientes extends JFrame {
 	public JButton btnSubirFotoContrato;
 	public JButton btnVerFotoContrato;
 	public JLabel lbl_foto_contrato;
-	
 
 	public static String nombreEmpresa = null;
 	public static String totalDatos = null;
@@ -443,8 +442,9 @@ public class registro_contratos_clientes extends JFrame {
 
 					String encabezado = "Reporte de contr. clientes de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaContratos, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaContratos, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -493,7 +493,7 @@ public class registro_contratos_clientes extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Contratos Clientes");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Contratos Clientes");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -570,7 +570,7 @@ public class registro_contratos_clientes extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -607,12 +607,13 @@ public class registro_contratos_clientes extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM contrato_cliente ORDER BY id_contrato_cliente DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM contrato_cliente ORDER BY id_contrato_cliente DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				totalDatos = rsr.getString("id_contrato_cliente");

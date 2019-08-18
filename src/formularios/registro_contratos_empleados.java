@@ -63,7 +63,6 @@ public class registro_contratos_empleados extends JFrame {
 	public JComboBox<?> cbxTipoContratoEmpleado;
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
-	
 
 	public static String nombreEmpresa = null;
 	public static String totalDatos = null;
@@ -140,8 +139,8 @@ public class registro_contratos_empleados extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -446,7 +445,10 @@ public class registro_contratos_empleados extends JFrame {
 					String encabezado = "Reporte de contr. empleado de " + login_usuario.nombre.toString();
 
 					utilJTablePrint(tablaContratosEmpleados, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+							"Pagina {0} de " + i + "          Impreso por: "
+									+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha,
+							true);
+
 				}
 			}
 		});
@@ -501,7 +503,7 @@ public class registro_contratos_empleados extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Contratos Empleados");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Contratos Empleados");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -578,7 +580,7 @@ public class registro_contratos_empleados extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -615,12 +617,13 @@ public class registro_contratos_empleados extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM contrato_empleado ORDER BY id_contrato_empleado DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM contrato_empleado ORDER BY id_contrato_empleado DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				totalDatos = rsr.getString("id_contrato_empleado");

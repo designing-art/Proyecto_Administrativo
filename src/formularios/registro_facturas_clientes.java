@@ -71,7 +71,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
 	public JPanel panelRegistro;
-	public JLabel lblLibreta; 
+	public JLabel lblLibreta;
 	public JButton btnFactura;
 	public static JLabel label_3;
 
@@ -100,7 +100,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 	public JTextField txtBusqueda;
 	public JScrollPane barra;
 	public JTable tabla;
-	
+
 	public JScrollPane barraCliente;
 	public JTable tablaCliente;
 
@@ -110,7 +110,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
-	
+
 	public TableRowSorter<TableModel> trsfiltroCodigoCliente;
 	String filtroCodigoCliente;
 
@@ -757,8 +757,9 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 					String encabezado = "Reporte de fact. cliente de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tabla, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tabla, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -773,19 +774,19 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(3, 45, 404, 550);
 		contentPane.add(panel_1);
-		
+
 		JLabel lblBuscarCliente = new JLabel("Buscar Cliente:");
 		lblBuscarCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		lblBuscarCliente.setBounds(28, 77, 119, 22);
 		panel_1.add(lblBuscarCliente);
-		
+
 		txtBusquedaCliente = new JTextField();
 		txtBusquedaCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBusquedaCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -813,19 +814,19 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				repaint();
 				filtroClientes();
 			}
-		});		
-		
+		});
+
 		barraCliente = new JScrollPane(tablaCliente, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		barraCliente.setBounds(28, 106, 350, 381);
 		panel_1.add(barraCliente);
 		tablaCliente = new JTable();
 		barraCliente.setViewportView(tablaCliente);
-		
+
 		label_3 = new JLabel();
 		label_3.setBounds(321, 49, 57, 50);
 		panel_1.add(label_3);
-		
+
 		btnFactura = new JButton("Factura");
 		btnFactura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -835,13 +836,13 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		btnFactura.setBackground(new Color(60, 179, 113));
 		btnFactura.setBounds(259, 492, 119, 23);
 		panel_1.add(btnFactura);
-		
+
 		JLabel lblClientesRegistradosEn = new JLabel("Clientes registrados en la empresa.");
 		lblClientesRegistradosEn.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClientesRegistradosEn.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		lblClientesRegistradosEn.setBounds(28, 49, 299, 29);
 		panel_1.add(lblClientesRegistradosEn);
-		
+
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -868,7 +869,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		btnClientes.setBackground(new Color(100, 149, 237));
 		btnClientes.setBounds(28, 493, 119, 23);
 		panel_1.add(btnClientes);
-		
+
 		JLabel label_6 = new JLabel();
 		label_6.setBounds(0, 0, 404, 550);
 		panel_1.add(label_6);
@@ -952,9 +953,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		String ampm;
-		ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-		SimpleDateFormat df = new SimpleDateFormat("dd '/' MMMMM '/' yyyy 'a las' HH:mm:ss '" + ampm + "'");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -976,12 +975,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				final ImageIcon icono2 = new ImageIcon(logo.getImage().getScaledInstance(label_2.getWidth(),
 						label_2.getHeight(), Image.SCALE_DEFAULT));
 				label_2.setIcon(icono2);
-				
+
 				final ImageIcon icono4 = new ImageIcon(logo.getImage().getScaledInstance(label_3.getWidth(),
 						label_3.getHeight(), Image.SCALE_DEFAULT));
 				label_3.setIcon(icono4);
-				
-				
+
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
@@ -1093,32 +1091,33 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 	}
 
 	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        if (pageIndex == 0) {
-            Graphics2D g2d = (Graphics2D) graphics;
-            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-            panelRegistro.printAll(graphics);
-            panelRegistro.printAll(graphics);
-            return PAGE_EXISTS;
-        } else {
-            return NO_SUCH_PAGE;
-        }
-    }
-	
+		if (pageIndex == 0) {
+			Graphics2D g2d = (Graphics2D) graphics;
+			g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+			panelRegistro.printAll(graphics);
+			panelRegistro.printAll(graphics);
+			return PAGE_EXISTS;
+		} else {
+			return NO_SUCH_PAGE;
+		}
+	}
+
 	public void imprimirFactura() {
-        PrinterJob printerJob = PrinterJob.getPrinterJob();
-        printerJob.setPrintable(this);
-        try {
-            printerJob.print();
-        } catch (PrinterException ex) {
-            System.out.println("Error:" + ex);
-        }
-    }
-	
+		PrinterJob printerJob = PrinterJob.getPrinterJob();
+		printerJob.setPrintable(this);
+		try {
+			printerJob.print();
+		} catch (PrinterException ex) {
+			System.out.println("Error:" + ex);
+		}
+	}
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM facturas_clientes ORDER BY id_facturas_cliente DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM facturas_clientes ORDER BY id_facturas_cliente DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				totalDatos = rsr.getString("id_facturas_cliente");
@@ -1131,7 +1130,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void construirTablaClientes() {
 		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Genero", "Identidad",
 				"Foto", "Empresa", "Descripcion Empresa", "Direccion Empresa", "RTN", "Telefono Empresa",
@@ -1150,6 +1149,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 	public void filtroClientes() {
 		filtroCodigoCliente = txtBusquedaCliente.getText();
-		trsfiltroCodigoCliente.setRowFilter(RowFilter.regexFilter(txtBusquedaCliente.getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14));
+		trsfiltroCodigoCliente.setRowFilter(
+				RowFilter.regexFilter(txtBusquedaCliente.getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14));
 	}
 }

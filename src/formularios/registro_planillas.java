@@ -133,7 +133,7 @@ public class registro_planillas extends JFrame {
 
 	public TableRowSorter trsfiltro;
 	String filtro;
-	
+
 	public TableRowSorter trsfiltro2;
 	String filtro2;
 	public JLabel lblDetalleDeLa;
@@ -404,8 +404,9 @@ public class registro_planillas extends JFrame {
 
 					String encabezado = "Reporte de planilla de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaPlanilla, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaPlanilla, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -1042,7 +1043,7 @@ public class registro_planillas extends JFrame {
 				filtro2();
 			}
 		});
-		
+
 		JButton btnEmpleados = new JButton("Empleados");
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1073,14 +1074,13 @@ public class registro_planillas extends JFrame {
 		btnEmpleados.setBackground(new Color(147, 112, 219));
 		btnEmpleados.setBounds(87, 515, 108, 22);
 		panel_5.add(btnEmpleados);
-		
-		
-				JLabel label_34 = new JLabel("");
-				label_34.setBounds(0, 0, 430, 575);
-				panel_5.add(label_34);
-				final ImageIcon logo212 = new ImageIcon(
-						icono.getImage().getScaledInstance(label_34.getWidth(), label_34.getHeight(), Image.SCALE_DEFAULT));
-				label_34.setIcon(logo212);
+
+		JLabel label_34 = new JLabel("");
+		label_34.setBounds(0, 0, 430, 575);
+		panel_5.add(label_34);
+		final ImageIcon logo212 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_34.getWidth(), label_34.getHeight(), Image.SCALE_DEFAULT));
+		label_34.setIcon(logo212);
 	}
 
 	public void establecerFechaRegistro() {
@@ -1144,7 +1144,7 @@ public class registro_planillas extends JFrame {
 		filtro = txtBusquedaPlanilla.getText();
 		trsfiltro.setRowFilter(RowFilter.regexFilter(txtBusquedaPlanilla.getText(), 0, 1, 2, 3, 4));
 	}
-	
+
 	public void filtro2() {
 		filtro2 = txtBusquedaEmpleados.getText();
 		trsfiltro2.setRowFilter(RowFilter.regexFilter(txtBusquedaEmpleados.getText(), 0, 1, 2, 3, 4));
@@ -1319,7 +1319,7 @@ public class registro_planillas extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}

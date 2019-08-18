@@ -148,8 +148,8 @@ public class registro_productos extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -278,7 +278,7 @@ public class registro_productos extends JFrame {
 		txtDispositivo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtDispositivo.getText().length() == 20)
 					ke.consume();
 			}
@@ -301,7 +301,7 @@ public class registro_productos extends JFrame {
 		txtMarca.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtMarca.getText().length() == 20)
 					ke.consume();
 			}
@@ -324,7 +324,7 @@ public class registro_productos extends JFrame {
 		txtCapasidad.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtCapasidad.getText().length() == 20)
 					ke.consume();
 			}
@@ -357,7 +357,7 @@ public class registro_productos extends JFrame {
 		txtColor.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtColor.getText().length() == 20)
 					ke.consume();
 			}
@@ -593,8 +593,9 @@ public class registro_productos extends JFrame {
 
 					String encabezado = "Reporte de productos de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaProductos, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaProductos, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -687,7 +688,7 @@ public class registro_productos extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Productos");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Productos");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -763,7 +764,7 @@ public class registro_productos extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -825,7 +826,6 @@ public class registro_productos extends JFrame {
 		}
 
 	}
-	
 
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();

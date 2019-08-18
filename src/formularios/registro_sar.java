@@ -144,8 +144,8 @@ public class registro_sar extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -294,8 +294,9 @@ public class registro_sar extends JFrame {
 
 					String encabezado = "Reporte de SAR de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaSAR, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaSAR, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -410,7 +411,7 @@ public class registro_sar extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtRangoInicial.getText().length() == 8)
 					ke.consume();
 			}
@@ -449,7 +450,7 @@ public class registro_sar extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtRangoFinal.getText().length() == 8)
 					ke.consume();
 			}
@@ -670,7 +671,7 @@ public class registro_sar extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss ");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -741,7 +742,6 @@ public class registro_sar extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();

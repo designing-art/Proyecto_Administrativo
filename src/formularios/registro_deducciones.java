@@ -335,8 +335,9 @@ public class registro_deducciones extends JFrame {
 
 					String encabezado = "Reporte de deducciones de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaDeducciones, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaDeducciones, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -344,32 +345,32 @@ public class registro_deducciones extends JFrame {
 		button.setBackground(new Color(60, 179, 113));
 		button.setBounds(206, 41, 137, 19);
 		panel_2.add(button);
-		
+
 		btnSinDeduc = new JButton("Sin Deducciones");
 		btnSinDeduc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					JOptionPane.showMessageDialog(null, "Sin Deducciones.");
-					registro_planillas.txtTotalDeduccionesPlanilla.setText("0");
-					double a = 0;
-					double b = 0;
-					double c = 0;
-					a = Double.valueOf(registro_planillas.txtSueldoNetoPlanilla.getText());
-					b = Double.valueOf(registro_planillas.txtTotalDeduccionesPlanilla.getText());
-					c = a - b;
-					registro_planillas.txtTotalPagoEmpleado.setText(String.valueOf(c));
-					dispose();
+				JOptionPane.showMessageDialog(null, "Sin Deducciones.");
+				registro_planillas.txtTotalDeduccionesPlanilla.setText("0");
+				double a = 0;
+				double b = 0;
+				double c = 0;
+				a = Double.valueOf(registro_planillas.txtSueldoNetoPlanilla.getText());
+				b = Double.valueOf(registro_planillas.txtTotalDeduccionesPlanilla.getText());
+				c = a - b;
+				registro_planillas.txtTotalPagoEmpleado.setText(String.valueOf(c));
+				dispose();
 			}
 		});
 		btnSinDeduc.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnSinDeduc.setBounds(147, 371, 150, 23);
 		panel_2.add(btnSinDeduc);
-		
-				label_8 = new JLabel("");
-				label_8.setBounds(0, 0, 430, 456);
-				panel_2.add(label_8);
-				final ImageIcon logo = new ImageIcon(
-						icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
-				label_8.setIcon(logo);
+
+		label_8 = new JLabel("");
+		label_8.setBounds(0, 0, 430, 456);
+		panel_2.add(label_8);
+		final ImageIcon logo = new ImageIcon(
+				icono.getImage().getScaledInstance(label_8.getWidth(), label_8.getHeight(), Image.SCALE_DEFAULT));
+		label_8.setIcon(logo);
 
 		JLabel lblRegistroYMantenimiento = new JLabel("REGISTRO Y MANTENIMIENTO DE DEDUCCIONES");
 		lblRegistroYMantenimiento.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
@@ -559,7 +560,7 @@ public class registro_deducciones extends JFrame {
 				if (txtObservacionDeduccion.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -570,9 +571,9 @@ public class registro_deducciones extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtObservacionDeduccion.getText().trim();
-		            txtObservacionDeduccion.setText(str);
-		        }
+					String str = txtObservacionDeduccion.getText().trim();
+					txtObservacionDeduccion.setText(str);
+				}
 			}
 		});
 
@@ -700,8 +701,8 @@ public class registro_deducciones extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -845,7 +846,7 @@ public class registro_deducciones extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -879,7 +880,7 @@ public class registro_deducciones extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();

@@ -547,6 +547,8 @@ public class login_usuario extends JFrame {
 						configuracion.establecerConfiguraciones();
 						configuracion.establecerSonidoInicial();
 						principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
+						principal.txtFrase.setText(configuraciones.frase.toString());
+						principal.txtFrase.repaint();
 						dispose();
 					} else {
 						lblAlerta.setText("El usuario y contraseña son incorrectas");

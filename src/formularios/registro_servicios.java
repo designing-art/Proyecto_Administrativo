@@ -72,7 +72,7 @@ public class registro_servicios extends JFrame {
 	public static String hora_fecha_reporte;
 	public int contador = 0;
 	public JDateChooser dateRegistro;
-	
+
 	public static String nuevaExstenciaProducto = null;
 	public static String totalExistencProd = null;
 	public static int cantidadProducto = 0;
@@ -441,7 +441,6 @@ public class registro_servicios extends JFrame {
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo);
-		
 
 		JPanel panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -581,8 +580,9 @@ public class registro_servicios extends JFrame {
 
 					String encabezado = "Reporte de servicios de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaServicios, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaServicios, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -677,7 +677,7 @@ public class registro_servicios extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -758,7 +758,7 @@ public class registro_servicios extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void establecerFechaRegistro() {
 		try {
 			LocalDate fechaActual = LocalDate.now();
@@ -790,7 +790,7 @@ public class registro_servicios extends JFrame {
 			e21.printStackTrace();
 		}
 	}
-	
+
 	public void restarVenta() {
 		existenciaProducto = Integer.parseInt(txtExistenciaProducto.getText().toString());
 		cantidadProducto = 1;

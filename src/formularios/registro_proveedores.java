@@ -81,7 +81,6 @@ public class registro_proveedores extends JFrame {
 	public static String ruta_logo;
 	public static JLabel label;
 	public static JLabel label_2;
-	
 
 	public static String nombreEmpresa = null;
 	public static String totalDatos = null;
@@ -138,8 +137,8 @@ public class registro_proveedores extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -262,7 +261,7 @@ public class registro_proveedores extends JFrame {
 			@Override
 			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
-				
+
 				if (txtNombresProveedor.getText().length() == 30)
 					ke.consume();
 			}
@@ -319,7 +318,7 @@ public class registro_proveedores extends JFrame {
 				if (txtDireccionProveedor.getText().length() == 100) {
 					ke.consume();
 				}
-					
+
 			}
 
 			@Override
@@ -330,9 +329,9 @@ public class registro_proveedores extends JFrame {
 			public void keyReleased(KeyEvent ke) {
 				char c = ke.getKeyChar();
 				if (ke.getKeyChar() == '\n' || ke.getKeyChar() == '\t') {
-		            String str = txtDireccionProveedor.getText().trim();
-		            txtDireccionProveedor.setText(str);
-		        }
+					String str = txtDireccionProveedor.getText().trim();
+					txtDireccionProveedor.setText(str);
+				}
 			}
 		});
 
@@ -584,8 +583,9 @@ public class registro_proveedores extends JFrame {
 
 					String encabezado = "Reporte de proveedores de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaProveedores, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaProveedores, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -633,7 +633,7 @@ public class registro_proveedores extends JFrame {
 				"jpeg");
 		archivo.addChoosableFileFilter(filtro);
 		archivo.setDialogTitle("Abrir Archivo");
-		File ruta = new File("\\\\"+conexion.urlGlobal+"\\Sistema Administrativo\\Proveedores");
+		File ruta = new File("\\\\" + conexion.urlGlobal + "\\Sistema Administrativo\\Proveedores");
 		archivo.setCurrentDirectory(ruta);
 		int ventana = archivo.showOpenDialog(null);
 		if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -709,7 +709,7 @@ public class registro_proveedores extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -746,7 +746,7 @@ public class registro_proveedores extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();

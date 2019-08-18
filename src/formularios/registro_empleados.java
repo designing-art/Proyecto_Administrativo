@@ -1063,7 +1063,7 @@ public class registro_empleados extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				trsfiltroCodigoEmpleado = new TableRowSorter(tablaEmpleados.getModel());
 				tablaEmpleados.setRowSorter(trsfiltroCodigoEmpleado);
-				
+
 				if (txtBusquedaEmpleado.getText().length() == 50)
 					ke.consume();
 			}
@@ -1174,8 +1174,9 @@ public class registro_empleados extends JFrame {
 
 					String encabezado = "Reporte de empleados de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaEmpleados, encabezado,
-							"Pagina {0} de " + i + "          Impreso por: "+login_usuario.nombreCompletoUsuario.toString()+"          "+fecha, true);
+					utilJTablePrint(tablaEmpleados, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -1460,4 +1461,3 @@ public class registro_empleados extends JFrame {
 	}
 
 }
-

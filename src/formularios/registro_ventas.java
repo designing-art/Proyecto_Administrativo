@@ -78,7 +78,6 @@ public class registro_ventas extends JFrame {
 	public static String nuevaExstencia = null;
 	public static int cantidad = 0;
 	public static int existencia = 0;
-	
 
 	public static String nombreEmpresa = null;
 	public static String totalDatos = null;
@@ -165,8 +164,8 @@ public class registro_ventas extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
-				
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+
 				dispose();
 			}
 		});
@@ -630,8 +629,9 @@ public class registro_ventas extends JFrame {
 
 					String encabezado = "Reporte de ventas de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaVentas, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaVentas, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -871,7 +871,7 @@ public class registro_ventas extends JFrame {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -923,7 +923,6 @@ public class registro_ventas extends JFrame {
 		}
 
 	}
-	
 
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();

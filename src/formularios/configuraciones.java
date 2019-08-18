@@ -225,13 +225,13 @@ public class configuraciones extends JFrame {
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
 			ResultSet rs = estatuto.executeQuery(
-					"SELECT sonido_configuracion, tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
+					"SELECT tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
 
 			if (rs.next()) {
 				tema = (rs.getString("tema_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
 
-				if (frase.equals("")) {
+				if (frase.toString().equals("")) {
 					ventana_principal.txtFrase.setText(
 							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
 				} else {

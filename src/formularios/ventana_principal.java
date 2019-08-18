@@ -1214,13 +1214,12 @@ public class ventana_principal extends JFrame {
 
 		txtFrase = new JTextField();
 		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
-		scrollPane.setViewportView(txtFrase);
 		txtFrase.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 12));
-		txtFrase.setText(
-				"El sabio no dice nunca todo lo que piensa, pero siempre piensa todo lo que dice. Arist\u00F3teles.");
 		txtFrase.setBackground(Color.WHITE);
 		txtFrase.setColumns(10);
-
+		scrollPane.setViewportView(txtFrase);
+		txtFrase.setText(configuraciones.frase);
+		
 		JLabel lblMenuOpciones = new JLabel();
 		lblMenuOpciones.setBounds(21, 43, 379, 497);
 		contentPane.add(lblMenuOpciones);

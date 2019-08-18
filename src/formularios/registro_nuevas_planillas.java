@@ -98,7 +98,7 @@ public class registro_nuevas_planillas extends JFrame {
 	public JTextFieldDateEditor editor;
 	public JTextFieldDateEditor editor2;
 	public JTextFieldDateEditor editor3;
-	
+
 	public JDateChooser dateRegistro;
 
 	public JScrollPane barraTablaPlanilla;
@@ -106,11 +106,10 @@ public class registro_nuevas_planillas extends JFrame {
 
 	public TableRowSorter trsfiltro;
 	String filtro;
-	
+
 	private JLabel label_4;
 	private JLabel labelFechaRegistro;
 	public JToggleButton btnupanddown;
-
 
 	public static String ruta;
 	public static ImageIcon imagen;
@@ -313,8 +312,9 @@ public class registro_nuevas_planillas extends JFrame {
 
 					String encabezado = "Reporte de planillas de " + login_usuario.nombre.toString();
 
-					utilJTablePrint(tablaPlanilla, encabezado,
-							"Pagina {0} de " + i + "                                  " + fecha, true);
+					utilJTablePrint(tablaPlanilla, encabezado, "Pagina {0} de " + i + "          Impreso por: "
+							+ login_usuario.nombreCompletoUsuario.toString() + "          " + fecha, true);
+
 				}
 			}
 		});
@@ -324,14 +324,14 @@ public class registro_nuevas_planillas extends JFrame {
 		btnContinuar.setBackground(new Color(255, 165, 0));
 		btnContinuar.setBounds(275, 112, 99, 23);
 		panel_2.add(btnContinuar);
-		
+
 		btnupanddown = new JToggleButton("");
 		btnupanddown.setBounds(381, 113, 21, 18);
 		panel_2.add(btnupanddown);
-		final ImageIcon logoq = new ImageIcon(
-				upand.getImage().getScaledInstance(btnupanddown.getWidth(), btnupanddown.getHeight(), Image.SCALE_DEFAULT));
+		final ImageIcon logoq = new ImageIcon(upand.getImage().getScaledInstance(btnupanddown.getWidth(),
+				btnupanddown.getHeight(), Image.SCALE_DEFAULT));
 		btnupanddown.setIcon(logoq);
-		
+
 		label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
 		label_8.setBounds(0, 0, 430, 496);
@@ -520,22 +520,22 @@ public class registro_nuevas_planillas extends JFrame {
 		cbxTipoPlanillaFinal.setModel(new DefaultComboBoxModel(new String[] { "Mensual", "Quincenal", "Eventual" }));
 		cbxTipoPlanillaFinal.setBounds(113, 112, 116, 20);
 		panel.add(cbxTipoPlanillaFinal);
-		
+
 		JLabel label_2 = new JLabel("Creacion :");
 		label_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		label_2.setBounds(10, 61, 74, 20);
 		panel.add(label_2);
-		
+
 		dateRegistro = new JDateChooser();
 		dateRegistro.setBounds(113, 61, 116, 20);
 		panel.add(dateRegistro);
 		dateRegistro.setVisible(false);
-		
+
 		label_4 = new JLabel("L.");
 		label_4.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
 		label_4.setBounds(10, 312, 18, 18);
 		panel.add(label_4);
-		
+
 		labelFechaRegistro = new JLabel("");
 		labelFechaRegistro.setHorizontalAlignment(SwingConstants.CENTER);
 		labelFechaRegistro.setBounds(81, 61, 148, 18);
@@ -545,7 +545,6 @@ public class registro_nuevas_planillas extends JFrame {
 		editor2.setEditable(false);
 		editor2.setHorizontalAlignment(SwingConstants.CENTER);
 		editor2.setForeground(Color.BLACK);
-		
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
@@ -577,7 +576,7 @@ public class registro_nuevas_planillas extends JFrame {
 		final ImageIcon logo21 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_7.getWidth(), label_7.getHeight(), Image.SCALE_DEFAULT));
 		label_7.setIcon(logo21);
-		
+
 		JButton button = new JButton("Regresar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -646,7 +645,7 @@ public class registro_nuevas_planillas extends JFrame {
 			tablaPlanilla.getColumnModel().getColumn(9).setCellRenderer(tcr);
 		}
 	}
-	
+
 	public void construirTabla2() {
 		String titulos[] = { "Código", "Estado", "Tipo", "Nombre", "Fecha de creación", "Fecha de pago", "Deducciones",
 				"Bonificaciones", "Sueldos", "Total Planilla" };
@@ -737,7 +736,6 @@ public class registro_nuevas_planillas extends JFrame {
 			lbl_hora.setText(horas + ":" + minutos + ":" + segundos + " " + ampm);
 		}
 	};
-	
 
 	public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
 		boolean fitWidth = true;
@@ -767,7 +765,7 @@ public class registro_nuevas_planillas extends JFrame {
 		txtTotalBonos.setText(numero);
 		txtTotalPlanilla.setText(numero);
 	}
-	
+
 	public static String getFecha() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -776,12 +774,12 @@ public class registro_nuevas_planillas extends JFrame {
 		date = cal.getTime();
 		return df.format(date);
 	}
-	
+
 	public static String getFechaYHora() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		SimpleDateFormat df = new SimpleDateFormat("'Dia' EEEEEEEEE dd 'de' MMMMM 'del' yyyy 'a las' HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("dd'/'MMMMM'/'yyyy HH:mm:ss ");
 		date = cal.getTime();
 		return df.format(date);
 	}
@@ -790,7 +788,8 @@ public class registro_nuevas_planillas extends JFrame {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();
 		try {
-			PreparedStatement stmtr = conn.prepareStatement("SELECT * FROM historial_planillas ORDER BY id_planilla_final DESC");
+			PreparedStatement stmtr = conn
+					.prepareStatement("SELECT * FROM historial_planillas ORDER BY id_planilla_final DESC");
 			ResultSet rsr = stmtr.executeQuery();
 			if (rsr.next()) {
 				totalDatos = rsr.getString("id_planilla_final");
