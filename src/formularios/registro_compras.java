@@ -140,7 +140,7 @@ public class registro_compras extends JFrame {
 				configuraciones configuracion = new configuraciones();
 				configuracion.consultarConfiguracion();
 				configuracion.establecerConfiguraciones();
-				principal.setTitle("Sesión iniciada por: "+login_usuario.nombreCompletoUsuario);
+				principal.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
 		});
@@ -229,12 +229,6 @@ public class registro_compras extends JFrame {
 			@Override
 			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
-					ke.consume();
-				}
-				
 				if (txtNombre.getText().length() == 30)
 					ke.consume();
 			}
@@ -262,7 +256,7 @@ public class registro_compras extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
+
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
 			}
@@ -297,11 +291,11 @@ public class registro_compras extends JFrame {
 			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
 				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
+				if (Character.isDigit(c) && (c < '0' || c > '9')) {
 					Toolkit.getDefaultToolkit().beep();
 					ke.consume();
 				}
-				
+
 				if (txtPeso.getText().length() == 30)
 					ke.consume();
 			}
@@ -335,7 +329,7 @@ public class registro_compras extends JFrame {
 					Toolkit.getDefaultToolkit().beep();
 					ke.consume();
 				}
-				
+
 				if (txtColor.getText().length() == 20)
 					ke.consume();
 			}
@@ -364,12 +358,7 @@ public class registro_compras extends JFrame {
 			@Override
 			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
-					ke.consume();
-				}
-				
+
 				if (txtMarca.getText().length() == 30)
 					ke.consume();
 			}
@@ -403,12 +392,7 @@ public class registro_compras extends JFrame {
 			@Override
 			// metodo de solo letras y simbolos
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (Character.isDigit(c)) {
-					Toolkit.getDefaultToolkit().beep();
-					ke.consume();
-				}
-				
+
 				if (txtModelo.getText().length() == 30)
 					ke.consume();
 			}
@@ -439,7 +423,7 @@ public class registro_compras extends JFrame {
 					Toolkit.getDefaultToolkit().beep();
 					ke.consume();
 				}
-				
+
 				if (txtDescripcion.getText().length() == 50)
 					ke.consume();
 			}
@@ -472,8 +456,7 @@ public class registro_compras extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
-				
-				
+
 				if (txtCantidad.getText().length() == 8)
 					ke.consume();
 			}
@@ -787,7 +770,7 @@ public class registro_compras extends JFrame {
 		}
 
 	}
-	
+
 	public void obtenerTotalDatosReporte() {
 		conexion objCon = new conexion();
 		Connection conn = objCon.getConexion();

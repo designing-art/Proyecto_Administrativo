@@ -239,11 +239,6 @@ public class registro_servicios extends JFrame {
 		txtServicio.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-					ke.consume();
-				}
 				if (txtServicio.getText().length() == 30)
 					ke.consume();
 			}

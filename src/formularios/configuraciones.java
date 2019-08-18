@@ -32,6 +32,7 @@ import clases.*;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextArea;
 
 public class configuraciones extends JFrame {
 
@@ -50,11 +51,12 @@ public class configuraciones extends JFrame {
 	public JLabel lblTemasDelSistema;
 	public static JRadioButton rdbtnClaro;
 	public static JRadioButton rdbtnObscuro;
+	private JPanel panel;
 
 	public configuraciones() {
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(0);
-		setBounds(100, 100, 387, 437);
+		setBounds(100, 100, 387, 453);
 		setUndecorated(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -109,7 +111,7 @@ public class configuraciones extends JFrame {
 		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFrase.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 10));
 		txtFrase.setColumns(10);
-		txtFrase.setBounds(20, 352, 351, 40);
+		txtFrase.setBounds(20, 382, 351, 26);
 		contentPane.add(txtFrase);
 		InputMap map8 = txtFrase.getInputMap(JComponent.WHEN_FOCUSED);
 		map8.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -132,25 +134,25 @@ public class configuraciones extends JFrame {
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnGuardar.setBackground(new Color(50, 205, 50));
-		btnGuardar.setBounds(30, 403, 104, 23);
+		btnGuardar.setBounds(32, 419, 104, 23);
 		contentPane.add(btnGuardar);
 
 		btnActualizar = new JButton("Guardar");
 		btnActualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizar.setBackground(new Color(50, 205, 50));
-		btnActualizar.setBounds(254, 403, 104, 23);
+		btnActualizar.setBounds(256, 419, 104, 23);
 		contentPane.add(btnActualizar);
 
 		JLabel lblFraseMotivadora = new JLabel("Frase Motivadora :");
 		lblFraseMotivadora.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFraseMotivadora.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		lblFraseMotivadora.setBounds(97, 308, 190, 20);
+		lblFraseMotivadora.setBounds(97, 343, 190, 26);
 		contentPane.add(lblFraseMotivadora);
 
 		JLabel lblEscribaUnaFrase = new JLabel("Escriba una frase motivadora.");
 		lblEscribaUnaFrase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscribaUnaFrase.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblEscribaUnaFrase.setBounds(10, 323, 371, 26);
+		lblEscribaUnaFrase.setBounds(10, 361, 371, 23);
 		contentPane.add(lblEscribaUnaFrase);
 
 		txtCodigo = new JTextField();
@@ -158,27 +160,42 @@ public class configuraciones extends JFrame {
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
+		grupo2 = new ButtonGroup();
+
+		panel = new JPanel();
+		panel.setBounds(20, 259, 357, 91);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
 		lblTemasDelSistema = new JLabel("Temas del sistema :");
+		lblTemasDelSistema.setBounds(82, 0, 188, 26);
+		panel.add(lblTemasDelSistema);
 		lblTemasDelSistema.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTemasDelSistema.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
-		lblTemasDelSistema.setBounds(105, 257, 188, 26);
-		contentPane.add(lblTemasDelSistema);
 
 		rdbtnClaro = new JRadioButton("Claro");
+		rdbtnClaro.setEnabled(false);
+		rdbtnClaro.setBounds(61, 21, 119, 23);
+		panel.add(rdbtnClaro);
 		rdbtnClaro.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnClaro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnClaro.setBounds(84, 278, 119, 23);
-		contentPane.add(rdbtnClaro);
+		grupo2.add(rdbtnClaro);
 
 		rdbtnObscuro = new JRadioButton("Obscuro");
+		rdbtnObscuro.setEnabled(false);
+		rdbtnObscuro.setBounds(182, 21, 119, 23);
+		panel.add(rdbtnObscuro);
 		rdbtnObscuro.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnObscuro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		rdbtnObscuro.setBounds(205, 278, 119, 23);
-		contentPane.add(rdbtnObscuro);
-
-		grupo2 = new ButtonGroup();
-		grupo2.add(rdbtnClaro);
 		grupo2.add(rdbtnObscuro);
+		
+		JTextArea txtrNotaApartado = new JTextArea();
+		txtrNotaApartado.setEditable(false);
+		txtrNotaApartado.setForeground(new Color(0, 128, 128));
+		txtrNotaApartado.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 10));
+		txtrNotaApartado.setText("Nota : Apartado de temas bloqueado. \r\nDisponible en futuras actualizaciones.");
+		txtrNotaApartado.setBounds(82, 47, 202, 33);
+		panel.add(txtrNotaApartado);
 
 		txtCodigo.setVisible(false);
 
@@ -211,22 +228,8 @@ public class configuraciones extends JFrame {
 					"SELECT sonido_configuracion, tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
 
 			if (rs.next()) {
-				sonido = (rs.getString("sonido_configuracion"));
 				tema = (rs.getString("tema_configuracion"));
 				frase = (rs.getString("frase_configuracion"));
-
-				System.out.print(tema);
-				if (sonido.equals("Activar")) {
-					try {
-						vozBienvenido();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (JavaLayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
 
 				if (frase.equals("")) {
 					ventana_principal.txtFrase.setText(
@@ -244,9 +247,41 @@ public class configuraciones extends JFrame {
 
 					} else {
 						ventana_principal.panelClientes.setBackground(Color.WHITE);
-						
+
 					}
 				}
+			}
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+		} catch (SQLException exx) {
+			System.out.println(exx.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void establecerSonidoInicial() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto
+					.executeQuery("SELECT sonido_configuracion FROM configuraciones WHERE id_configuracion = 1");
+
+			if (rs.next()) {
+				sonido = (rs.getString("sonido_configuracion"));
+
+				if (sonido.equals("Activar")) {
+					try {
+						vozBienvenido();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (JavaLayerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
 			}
 			rs.close();
 			estatuto.close();

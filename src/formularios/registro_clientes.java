@@ -383,12 +383,6 @@ public class registro_clientes extends JFrame {
 		txtNombreEmpresa.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-					ke.consume();
-				}
 				if (txtNombreEmpresa.getText().length() == 30)
 					ke.consume();
 			}

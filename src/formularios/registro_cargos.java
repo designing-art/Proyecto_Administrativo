@@ -304,11 +304,7 @@ public class registro_cargos extends JFrame {
 		txtNombreCargo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar()) && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-						&& !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-					ke.consume();
-				}
+				
 				if (txtNombreCargo.getText().length() == 30)
 					ke.consume();
 			}

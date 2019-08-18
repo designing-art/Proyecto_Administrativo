@@ -49,6 +49,7 @@ public class control_factura_cliente implements ActionListener {
 		this.formulario.btnBorrar.addActionListener(this);
 		this.formulario.btnVer.addActionListener(this);
 		this.formulario.btnAceptar.addActionListener(this);
+		this.formulario.btnFactura.addActionListener(this);
 	}
 
 	@Override
@@ -254,6 +255,31 @@ public class control_factura_cliente implements ActionListener {
 					formulario.btnAceptar.setText("Aceptar");
 					formulario.btnAceptar.setVisible(true);
 
+				}
+
+			} catch (HeadlessException ex) {
+				JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente",
+						" .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+		if (e.getSource() == formulario.btnFactura) {
+			int filaseleccionada;
+			try {
+				filaseleccionada = formulario.tablaCliente.getSelectedRow();
+				if (filaseleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+				} else {
+					String nombres = formulario.tablaCliente.getValueAt(filaseleccionada, 1).toString();
+					String apellidos = formulario.tablaCliente.getValueAt(filaseleccionada, 2).toString();
+					String direccion1 = formulario.tablaCliente.getValueAt(filaseleccionada, 3).toString();
+					String rtn = formulario.tablaCliente.getValueAt(filaseleccionada, 12).toString();
+
+					formulario.txtCliente.setText(nombres+" "+apellidos);
+					formulario.txtDireccion.setText(direccion1);
+					formulario.txtRTN.setText(rtn);
+					
+					formulario.txtPorConceptoDe.requestFocusInWindow();
 				}
 
 			} catch (HeadlessException ex) {

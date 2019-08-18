@@ -55,18 +55,25 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
+import consultas.consultas_cliente;
+import controles.control_cliente;
 import controles.control_factura_cliente;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JTextFieldDateEditor;
 
+import clases.cliente;
+
+import java.awt.Component;
+
 public class registro_facturas_clientes extends JFrame implements Printable {
 	public JScrollPane scrollFunciones;
 	public PlaceHolder pista;
 	public JPanel panelRegistro;
 	public JLabel lblLibreta; 
-	public static JLabel lblLogo2;
+	public JButton btnFactura;
+	public static JLabel label_3;
 
 	public JButton btnGuardar;
 	public JButton btnNuevo;
@@ -93,6 +100,9 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 	public JTextField txtBusqueda;
 	public JScrollPane barra;
 	public JTable tabla;
+	
+	public JScrollPane barraCliente;
+	public JTable tablaCliente;
 
 	public static String ruta_logo;
 	public static JLabel label;
@@ -100,6 +110,9 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 	public TableRowSorter<TableModel> trsfiltroCodigo;
 	String filtroCodigo;
+	
+	public TableRowSorter<TableModel> trsfiltroCodigoCliente;
+	String filtroCodigoCliente;
 
 	public ImageIcon icono = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 	public ImageIcon icono2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
@@ -144,11 +157,12 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 	public JTextField txtCodigoSAR;
 
 	public static String codSAR = null;
+	public static JTextField txtBusquedaCliente;
 
 	public registro_facturas_clientes() {
 		setResizable(false);
 		setDefaultCloseOperation(0);
-		setBounds(100, 100, 1016, 650);
+		setBounds(100, 100, 1326, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -159,7 +173,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		btnAtras = new JButton("Regresar");
 		btnAtras.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnAtras.setBackground(new Color(255, 127, 80));
-		btnAtras.setBounds(882, 25, 102, 23);
+		btnAtras.setBounds(1197, 11, 102, 23);
 		contentPane.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			@Override
@@ -186,18 +200,18 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DE FACTURAS DE LOS CLIENTES DE LA EMPRESA");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistrarCargo.setBounds(28, 20, 844, 29);
+		lblRegistrarCargo.setBounds(28, 11, 844, 38);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
 		panelRegistro = new JPanel();
 		panelRegistro.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-		panelRegistro.setBounds(28, 60, 465, 550);
+		panelRegistro.setBounds(417, 45, 465, 550);
 		contentPane.add(panelRegistro);
 		panelRegistro.setLayout(null);
 
 		label = new JLabel();
-		label.setBounds(325, 48, 49, 44);
+		label.setBounds(384, 48, 55, 49);
 		panelRegistro.add(label);
 
 		btnNuevo = new JButton("Nuevo");
@@ -575,12 +589,21 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				btnNuevo.setVisible(false);
 				btnGuardar.setVisible(false);
 				lblLibreta.setVisible(false);
-				imprimirFactura();
+				btnAceptar.setVisible(false);
+				panelRegistro.setBackground(Color.WHITE);
+				lblNombreEmpresa.setBounds(27, 2, 412, 32);
+				label.setBounds(205, 29, 55, 49);
+				panelRegistro.setBounds(417, 45, 465, 497);
 				imprimirFactura();
 				btnImprimir.setVisible(true);
 				btnNuevo.setVisible(true);
 				btnGuardar.setVisible(true);
 				lblLibreta.setVisible(true);
+				btnAceptar.setVisible(true);
+				panelRegistro.setBackground(Color.WHITE);
+				lblNombreEmpresa.setBounds(27, 48, 412, 32);
+				label.setBounds(384, 48, 55, 49);
+				panelRegistro.setBounds(417, 45, 465, 550);
 			}
 		});
 
@@ -590,16 +613,12 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		final ImageIcon logo = new ImageIcon(
 				icono.getImage().getScaledInstance(lblLibreta.getWidth(), lblLibreta.getHeight(), Image.SCALE_DEFAULT));
 		lblLibreta.setIcon(logo);
-		
-		lblLogo2 = new JLabel();
-		lblLogo2.setBounds(92, 48, 49, 44);
-		panelRegistro.add(lblLogo2);
 
 		JPanel panelTablaCargos = new JPanel();
 		panelTablaCargos.setLayout(null);
 		panelTablaCargos.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		panelTablaCargos.setBackground(Color.WHITE);
-		panelTablaCargos.setBounds(503, 59, 481, 549);
+		panelTablaCargos.setBounds(892, 45, 425, 549);
 		contentPane.add(panelTablaCargos);
 
 		JLabel lblCargosRegistrados = new JLabel("Facturas registradas :");
@@ -616,7 +635,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		txtBusqueda.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBusqueda.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		txtBusqueda.setColumns(10);
-		txtBusqueda.setBounds(138, 73, 257, 21);
+		txtBusqueda.setBounds(138, 73, 199, 21);
 		panelTablaCargos.add(txtBusqueda);
 		InputMap map6 = txtBusqueda.getInputMap(JComponent.WHEN_FOCUSED);
 		map6.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -650,13 +669,13 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		barra = new JScrollPane(tabla, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelTablaCargos.add(barra);
-		barra.setBounds(28, 101, 426, 378);
+		barra.setBounds(28, 101, 368, 378);
 
 		tabla = new JTable();
 		barra.setViewportView(tabla);
 
 		label_2 = new JLabel();
-		label_2.setBounds(405, 50, 49, 44);
+		label_2.setBounds(340, 50, 56, 48);
 		panelTablaCargos.add(label_2);
 
 		btnActualizarDatos = new JButton("Actualizar Datos");
@@ -667,13 +686,13 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		});
 		btnActualizarDatos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnActualizarDatos.setBackground(new Color(60, 179, 113));
-		btnActualizarDatos.setBounds(317, 490, 137, 23);
+		btnActualizarDatos.setBounds(256, 490, 137, 23);
 		panelTablaCargos.add(btnActualizarDatos);
 
 		btnVer = new JButton("Ver detalles");
 		btnVer.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		btnVer.setBackground(new Color(0, 206, 209));
-		btnVer.setBounds(199, 490, 108, 23);
+		btnVer.setBounds(138, 490, 108, 23);
 		panelTablaCargos.add(btnVer);
 
 		button = new JButton("Imprimir Reporte");
@@ -745,15 +764,117 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		});
 		button.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		button.setBackground(new Color(60, 179, 113));
-		button.setBounds(258, 50, 137, 19);
+		button.setBounds(191, 50, 146, 19);
 		panelTablaCargos.add(button);
 
 		JLabel label_5 = new JLabel();
-		label_5.setBounds(0, 0, 481, 549);
+		label_5.setBounds(0, 0, 426, 549);
 		panelTablaCargos.add(label_5);
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(3, 45, 404, 550);
+		contentPane.add(panel_1);
+		
+		JLabel lblBuscarCliente = new JLabel("Buscar Cliente:");
+		lblBuscarCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		lblBuscarCliente.setBounds(28, 77, 119, 22);
+		panel_1.add(lblBuscarCliente);
+		
+		txtBusquedaCliente = new JTextField();
+		txtBusquedaCliente.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBusquedaCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		txtBusquedaCliente.setColumns(10);
+		txtBusquedaCliente.setBounds(136, 78, 180, 21);
+		panel_1.add(txtBusquedaCliente);
+		InputMap map61 = txtBusquedaCliente.getInputMap(JComponent.WHEN_FOCUSED);
+		map61.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+		txtBusquedaCliente.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				trsfiltroCodigoCliente = new TableRowSorter(tablaCliente.getModel());
+				tablaCliente.setRowSorter(trsfiltroCodigoCliente);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				String cadena = (txtBusquedaCliente.getText());
+				txtBusquedaCliente.setText(cadena);
+				repaint();
+				filtroClientes();
+			}
+		});		
+		
+		barraCliente = new JScrollPane(tablaCliente, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		barraCliente.setBounds(28, 106, 350, 381);
+		panel_1.add(barraCliente);
+		tablaCliente = new JTable();
+		barraCliente.setViewportView(tablaCliente);
+		
+		label_3 = new JLabel();
+		label_3.setBounds(321, 49, 57, 50);
+		panel_1.add(label_3);
+		
+		btnFactura = new JButton("Factura");
+		btnFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnFactura.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnFactura.setBackground(new Color(60, 179, 113));
+		btnFactura.setBounds(259, 492, 119, 23);
+		panel_1.add(btnFactura);
+		
+		JLabel lblClientesRegistradosEn = new JLabel("Clientes registrados en la empresa.");
+		lblClientesRegistradosEn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClientesRegistradosEn.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+		lblClientesRegistradosEn.setBounds(28, 49, 299, 29);
+		panel_1.add(lblClientesRegistradosEn);
+		
+		JButton btnClientes = new JButton("Clientes");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cliente clase = new cliente();
+				consultas_cliente consulta = new consultas_cliente();
+				registro_clientes formulario = new registro_clientes();
+				control_cliente control = new control_cliente(clase, consulta, formulario);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtNombresCliente.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				dispose();
+			}
+		});
+		btnClientes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnClientes.setBackground(new Color(100, 149, 237));
+		btnClientes.setBounds(28, 493, 119, 23);
+		panel_1.add(btnClientes);
+		
+		JLabel label_6 = new JLabel();
+		label_6.setBounds(0, 0, 404, 550);
+		panel_1.add(label_6);
+		final ImageIcon logo2 = new ImageIcon(
+				icono.getImage().getScaledInstance(label_6.getWidth(), label_6.getHeight(), Image.SCALE_DEFAULT));
+		label_6.setIcon(logo2);
 
 	}
 
@@ -856,9 +977,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 						label_2.getHeight(), Image.SCALE_DEFAULT));
 				label_2.setIcon(icono2);
 				
-				final ImageIcon icono3 = new ImageIcon(logo.getImage().getScaledInstance(lblLogo2.getWidth(),
-						lblLogo2.getHeight(), Image.SCALE_DEFAULT));
-				lblLogo2.setIcon(icono3);
+				final ImageIcon icono4 = new ImageIcon(logo.getImage().getScaledInstance(label_3.getWidth(),
+						label_3.getHeight(), Image.SCALE_DEFAULT));
+				label_3.setIcon(icono4);
+				
+				
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"Para una mejor experiencia Personalice su empresa en :" + " MAS INFORMACIONS DE LA EMPRESA.");
@@ -1007,5 +1130,26 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void construirTablaClientes() {
+		String titulos[] = { "Codigo", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Genero", "Identidad",
+				"Foto", "Empresa", "Descripcion Empresa", "Direccion Empresa", "RTN", "Telefono Empresa",
+				"Correo Empresa" };
+		String informacion[][] = control_cliente.obtenerMatriz();
+		tablaCliente = new JTable(informacion, titulos);
+		barraCliente.setViewportView(tablaCliente);
+		for (int c = 0; c < tablaCliente.getColumnCount(); c++) {
+			Class<?> col_class = tablaCliente.getColumnClass(c);
+			tablaCliente.setDefaultEditor(col_class, null);
+			tablaCliente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			tablaCliente.getTableHeader().setReorderingAllowed(false);
+
+		}
+	}
+
+	public void filtroClientes() {
+		filtroCodigoCliente = txtBusquedaCliente.getText();
+		trsfiltroCodigoCliente.setRowFilter(RowFilter.regexFilter(txtBusquedaCliente.getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14));
 	}
 }

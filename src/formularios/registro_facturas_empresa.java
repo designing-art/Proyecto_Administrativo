@@ -352,12 +352,6 @@ public class registro_facturas_empresa extends JFrame {
 		txtCompra.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				char c = ke.getKeyChar();
-				if (!Character.isLetter(ke.getKeyChar())
-		                && !(ke.getKeyChar() == KeyEvent.VK_SPACE)
-		                && !(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-					ke.consume();
-				}
 				if (txtCompra.getText().length() == 50)
 					ke.consume();
 			}

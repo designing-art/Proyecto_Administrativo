@@ -545,6 +545,7 @@ public class login_usuario extends JFrame {
 						definirPermisos();
 						configuraciones configuracion = new configuraciones();
 						configuracion.establecerConfiguraciones();
+						configuracion.establecerSonidoInicial();
 						principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
 						dispose();
 					} else {
