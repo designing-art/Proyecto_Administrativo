@@ -104,6 +104,8 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextArea;
+import javax.swing.border.SoftBevelBorder;
 
 public class ventana_principal extends JFrame {
 
@@ -118,9 +120,9 @@ public class ventana_principal extends JFrame {
 	public static JButton btnHorario;
 	public JLabel lbl_horaSistema;
 	public JLabel lbl_fechaSistema;
-	public static JTextField txtFrase;
 	public static JLabel labelfotousuario;
 	public static String frasebase;
+	public static JTextArea txtFrase;
 
 	public static JButton btnProducto;
 
@@ -200,26 +202,25 @@ public class ventana_principal extends JFrame {
 		});
 		setBounds(100, 100, 700, 580);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 255));
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		contentPane.setBackground(UIManager.getColor("Button.highlight"));
+		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono_d_a.jpg")));
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
-		frasebase = configuraciones.frase;
 
 		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenuDeOpciones.setForeground(Color.BLACK);
 		lblMenuDeOpciones.setFont(new Font("Cooper Black", Font.PLAIN, 15));
-		lblMenuDeOpciones.setBounds(46, 79, 327, 34);
+		lblMenuDeOpciones.setBounds(46, 87, 327, 26);
 		contentPane.add(lblMenuDeOpciones);
 
 		panelEmpleados = new JPanel();
 		panelEmpleados.setBackground(Color.WHITE);
-		panelEmpleados.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panelEmpleados.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelEmpleados.setBounds(46, 111, 327, 86);
 		contentPane.add(panelEmpleados);
 		panelEmpleados.setLayout(null);
@@ -467,7 +468,7 @@ public class ventana_principal extends JFrame {
 
 		panelClientes = new JPanel();
 		panelClientes.setBackground(UIManager.getColor("Button.background"));
-		panelClientes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelClientes.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panelClientes.setBounds(46, 198, 327, 73);
 		contentPane.add(panelClientes);
 		panelClientes.setLayout(null);
@@ -646,7 +647,7 @@ public class ventana_principal extends JFrame {
 
 		panelFinanzas = new JPanel();
 		panelFinanzas.setBackground(UIManager.getColor("Button.background"));
-		panelFinanzas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelFinanzas.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panelFinanzas.setBounds(46, 312, 327, 46);
 		contentPane.add(panelFinanzas);
 		panelFinanzas.setLayout(null);
@@ -716,7 +717,7 @@ public class ventana_principal extends JFrame {
 
 		panelInventario = new JPanel();
 		panelInventario.setBackground(Color.WHITE);
-		panelInventario.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelInventario.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelInventario.setBounds(46, 268, 327, 46);
 		contentPane.add(panelInventario);
 		panelInventario.setLayout(null);
@@ -900,7 +901,7 @@ public class ventana_principal extends JFrame {
 		panel_5.add(lblDatos);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setBounds(145, 23, 119, 125);
 		panel_5.add(panel);
@@ -954,7 +955,7 @@ public class ventana_principal extends JFrame {
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBounds(10, 32, 252, 223);
@@ -1000,7 +1001,7 @@ public class ventana_principal extends JFrame {
 
 		panelFacturas = new JPanel();
 		panelFacturas.setLayout(null);
-		panelFacturas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelFacturas.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelFacturas.setBackground(Color.WHITE);
 		panelFacturas.setBounds(46, 363, 327, 46);
 		contentPane.add(panelFacturas);
@@ -1130,7 +1131,7 @@ public class ventana_principal extends JFrame {
 		});
 
 		panelOpciones = new JPanel();
-		panelOpciones.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelOpciones.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panelOpciones.setBackground(SystemColor.menu);
 		panelOpciones.setBounds(46, 407, 327, 53);
 		contentPane.add(panelOpciones);
@@ -1202,22 +1203,21 @@ public class ventana_principal extends JFrame {
 				dispose();
 			}
 		});
-
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(46, 471, 327, 34);
+		scrollPane.setViewportBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(46, 464, 327, 40);
 		contentPane.add(scrollPane);
-		scrollPane.setViewportBorder(UIManager.getBorder("ComboBox.editorBorder"));
-
-		txtFrase = new JTextField();
-		txtFrase.setHorizontalAlignment(SwingConstants.CENTER);
-		txtFrase.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 12));
-		txtFrase.setBackground(Color.WHITE);
-		txtFrase.setColumns(10);
+		
+		txtFrase = new JTextArea();
+		txtFrase.setFont(new Font("Consolas", Font.BOLD | Font.ITALIC, 11));
+		txtFrase.setEditable(false);
 		scrollPane.setViewportView(txtFrase);
-		txtFrase.setText(frasebase);
 
 		JLabel lblMenuOpciones = new JLabel();
+		lblMenuOpciones.setFont(new Font("Script MT Bold", Font.PLAIN, 11));
 		lblMenuOpciones.setBounds(21, 43, 379, 497);
 		contentPane.add(lblMenuOpciones);
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblMenuOpciones.getWidth(),
@@ -1374,5 +1374,4 @@ public class ventana_principal extends JFrame {
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
 			System.exit(0);
 	}
-
 }

@@ -12,6 +12,7 @@ public class television extends JFrame {
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 		login.consultarEmpresa();
+		login.establecerConfiguraciones();
 		login.btnIngresar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

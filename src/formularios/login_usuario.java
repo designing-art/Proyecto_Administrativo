@@ -34,6 +34,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
 
 public class login_usuario extends JFrame {
 
@@ -49,6 +51,8 @@ public class login_usuario extends JFrame {
 	public static String ruta_logo = null;
 	public static JRadioButton rdbtnPass;
 	public static JLabel lblestadocontraseña;
+	public JToggleButton btnAyudaLogin;
+	public JButton btnActualizarBase;
 
 	public static String todo;
 	public static String empleado;
@@ -86,7 +90,7 @@ public class login_usuario extends JFrame {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 396, 398);
+		setBounds(100, 100, 396, 401);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -103,7 +107,7 @@ public class login_usuario extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(31, 27, 327, 308);
+		panel.setBounds(31, 27, 327, 319);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -116,7 +120,7 @@ public class login_usuario extends JFrame {
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
 		lblContrasea.setForeground(new Color(0, 0, 0));
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblContrasea.setBounds(125, 209, 98, 20);
+		lblContrasea.setBounds(125, 207, 98, 20);
 		panel.add(lblContrasea);
 
 		lblestadocontraseña = new JLabel("");
@@ -236,6 +240,50 @@ public class login_usuario extends JFrame {
 		final ImageIcon icono2 = new ImageIcon(logo2.getImage().getScaledInstance(lblFotoEmpresa.getWidth(),
 				lblFotoEmpresa.getHeight(), Image.SCALE_DEFAULT));
 		lblFotoEmpresa.setIcon(icono2);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.GRAY);
+		panel_2.setBounds(10, 319, 307, 77);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+
+		btnActualizarBase = new JButton("Actualizar la conexión con la BD.");
+		btnActualizarBase.setBounds(67, 52, 176, 20);
+		panel_2.add(btnActualizarBase);
+		btnActualizarBase.setForeground(Color.BLACK);
+		btnActualizarBase.setFont(new Font("Dubai", Font.BOLD, 10));
+		btnActualizarBase.setBackground(new Color(60, 179, 113));
+		btnActualizarBase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				configurarZonaHoraria();
+			}
+		});
+
+		JTextArea txtrS = new JTextArea();
+		txtrS.setFont(new Font("Dialog", Font.BOLD, 10));
+		txtrS.setText(
+				"  Si tienes problemas con la conexi\u00F3n, puedes actualizar\r\n  la base de datos, si el problema persiste. cont\u00E1ctame:\r\n                      krizemandiaz11@gmail.com");
+		txtrS.setBounds(10, 5, 287, 46);
+		panel_2.add(txtrS);
+
+		btnAyudaLogin = new JToggleButton("Problemas con la conexi\u00F3n?");
+		btnAyudaLogin.setBackground(Color.WHITE);
+		btnAyudaLogin.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnAyudaLogin.setBounds(74, 300, 181, 15);
+		panel.add(btnAyudaLogin);
+		btnAyudaLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (btnAyudaLogin.isSelected()) {
+					setBounds(100, 100, 396, 474);
+					setLocationRelativeTo(null);
+					panel.setBounds(31, 27, 327, 407);
+				} else {
+					setBounds(100, 100, 396, 399);
+					setLocationRelativeTo(null);
+					panel.setBounds(31, 27, 327, 317);
+				}
+			}
+		});
 
 		JLabel lblLoginSistemaAdministrativo = new JLabel("LOGIN SISTEMA ADMINISTRATIVO");
 		lblLoginSistemaAdministrativo.setBackground(new Color(0, 128, 128));
@@ -499,8 +547,8 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-
-	public void establecerFrase() {
+	
+	public void establecerConfiguraciones() {
 		conexion conex = new conexion();
 		try {
 			Statement estatuto = conex.getConexion().createStatement();
@@ -509,19 +557,13 @@ public class login_usuario extends JFrame {
 
 			if (rs.next()) {
 				frase = (rs.getString("frase_configuracion"));
-
-				if (frase.toString().equals("")) {
-					ventana_principal.txtFrase.setText(
-							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
-				} else {
-					ventana_principal.txtFrase.setText(frase);
-				}
-
 			}
 			rs.close();
 			estatuto.close();
 			conex.desconectar();
-		} catch (SQLException exx) {
+		} catch (
+
+		SQLException exx) {
 			System.out.println(exx.getMessage());
 			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -531,6 +573,7 @@ public class login_usuario extends JFrame {
 		ventana_principal.lblNombreUsuario.setText(nombreCompletoUsuario);
 		ventana_principal.lblCargoUsuario.setText(cargoUsuario);
 		ventana_principal.lblTipoUsuario.setText(tipoUsuario);
+		ventana_principal.txtFrase.setText(frase);
 		final ImageIcon icono = new ImageIcon(direccionFotoUsuario);
 		final ImageIcon iconofoto = new ImageIcon(
 				icono.getImage().getScaledInstance(ventana_principal.labelfotousuario.getWidth(),
@@ -538,6 +581,28 @@ public class login_usuario extends JFrame {
 		ventana_principal.labelfotousuario.setIcon(iconofoto);
 	}
 
+	public void configurarZonaHoraria() {
+		conexion conex = new conexion();
+		try {
+			Statement estatuto = conex.getConexion().createStatement();
+			ResultSet rs = estatuto.executeQuery("set global time_zone= '-6:00';");
+
+			JOptionPane.showMessageDialog(null, "Base de datos actualiza!");
+			login_usuario login = new login_usuario();
+			login.dispose();
+			login.iniciarSesion();
+			rs.close();
+			estatuto.close();
+			conex.desconectar();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+
+	}
+	
 	@SuppressWarnings("unlikely-arg-type")
 	public void iniciarSesion() {
 		ventana_principal principal = new ventana_principal();
@@ -571,9 +636,9 @@ public class login_usuario extends JFrame {
 						consultarPermisos();
 						definirPermisos();
 						configuraciones configuracion = new configuraciones();
-						configuracion.establecerConfiguraciones();
 						configuracion.establecerSonidoInicial();
 						principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
+						principal.txtFrase.setText(frase);
 						dispose();
 					} else {
 						lblAlerta.setText("El usuario y contraseña son incorrectas");

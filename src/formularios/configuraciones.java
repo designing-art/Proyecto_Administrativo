@@ -219,46 +219,6 @@ public class configuraciones extends JFrame {
 		apl.play();
 	}
 
-	public void establecerConfiguraciones() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery(
-					"SELECT tema_configuracion, frase_configuracion FROM configuraciones WHERE id_configuracion = 1");
-
-			if (rs.next()) {
-				tema = (rs.getString("tema_configuracion"));
-				frase = (rs.getString("frase_configuracion"));
-
-				if (frase.toString().equals("")) {
-					ventana_principal.txtFrase.setText(
-							"La primera obligación de todo ser humano es ser feliz, la segunda hacer feliz a los demás.");
-				} else {
-					ventana_principal.txtFrase.setText(frase);
-				}
-
-				if (tema.equals("Claro")) {
-					ventana_principal.panelClientes.setBackground(Color.WHITE);
-
-				} else {
-					if (tema.equals("Obscuro")) {
-						ventana_principal.panelClientes.setBackground(Color.LIGHT_GRAY);
-
-					} else {
-						ventana_principal.panelClientes.setBackground(Color.WHITE);
-
-					}
-				}
-			}
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-		} catch (SQLException exx) {
-			System.out.println(exx.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
 	public void establecerSonidoInicial() {
 		conexion conex = new conexion();
 		try {
@@ -343,4 +303,11 @@ public class configuraciones extends JFrame {
 			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
+	public void establecerConfiguraciones() {
+
+		ventana_principal.txtFrase.setText(login_usuario.frase);
+
+	}
+
 }
