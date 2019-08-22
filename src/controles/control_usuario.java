@@ -139,9 +139,9 @@ public class control_usuario implements ActionListener {
 								registro_usuarios.txtDirecFoto.setText("");
 								final ImageIcon iconoContrato = new ImageIcon(
 										getClass().getResource("/iconos/usuario.png"));
-								final ImageIcon iconofoto = new ImageIcon(
-										iconoContrato.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
-												registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+								final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+										registro_usuarios.lblFotoUsuario.getWidth(),
+										registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
 								registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 							} else {
 								JOptionPane.showMessageDialog(null, "Error! Usuario no registrado");
@@ -157,8 +157,9 @@ public class control_usuario implements ActionListener {
 		if (e.getSource() == formulario.btnActualizar) {
 			if (registro_usuarios.txtNombres.getText().isEmpty()
 
-					|| registro_usuarios.txtCargo.getText().isEmpty() || registro_usuarios.txtIdentidad.getText().isEmpty()
-					|| formulario.txtUsuario.getText().isEmpty() || formulario.txtContraseña.getText().isEmpty()) {
+					|| registro_usuarios.txtCargo.getText().isEmpty()
+					|| registro_usuarios.txtIdentidad.getText().isEmpty() || formulario.txtUsuario.getText().isEmpty()
+					|| formulario.txtContraseña.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el usuario!");
 			} else {
 				if (formulario.txtUsuario.getText().toString().equals(login_usuario.nombreUsuario)) {
@@ -217,9 +218,9 @@ public class control_usuario implements ActionListener {
 								registro_usuarios.txtDirecFoto.setText("");
 								final ImageIcon iconoContrato = new ImageIcon(
 										getClass().getResource("/iconos/usuario.png"));
-								final ImageIcon iconofoto = new ImageIcon(
-										iconoContrato.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
-												registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+								final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+										registro_usuarios.lblFotoUsuario.getWidth(),
+										registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
 								registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 							} else {
 								JOptionPane.showMessageDialog(null, "Error! Usuario no actualizado");
@@ -924,8 +925,9 @@ public class control_usuario implements ActionListener {
 			registro_usuarios.txtBusqueda.setEditable(true);
 			registro_usuarios.txtDirecFoto.setText("");
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
-					registro_usuarios.lblFotoUsuario.getWidth(), registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+			final ImageIcon iconofoto = new ImageIcon(
+					iconoContrato.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
+							registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
 			registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 			registro_usuarios.txtBusqueda.requestFocusInWindow();
 
@@ -955,8 +957,9 @@ public class control_usuario implements ActionListener {
 			registro_usuarios.txtBusqueda.setEditable(true);
 			registro_usuarios.txtDirecFoto.setText("");
 			final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
-			final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
-					registro_usuarios.lblFotoUsuario.getWidth(), registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+			final ImageIcon iconofoto = new ImageIcon(
+					iconoContrato.getImage().getScaledInstance(registro_usuarios.lblFotoUsuario.getWidth(),
+							registro_usuarios.lblFotoUsuario.getHeight(), Image.SCALE_DEFAULT));
 			registro_usuarios.lblFotoUsuario.setIcon(iconofoto);
 			registro_usuarios.txtBusqueda.requestFocusInWindow();
 		}

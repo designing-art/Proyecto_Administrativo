@@ -254,6 +254,7 @@ public class login_usuario extends JFrame {
 		btnActualizarBase.setFont(new Font("Dubai", Font.BOLD, 10));
 		btnActualizarBase.setBackground(new Color(60, 179, 113));
 		btnActualizarBase.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				configurarZonaHoraria();
 			}
@@ -272,6 +273,7 @@ public class login_usuario extends JFrame {
 		btnAyudaLogin.setBounds(74, 300, 181, 15);
 		panel.add(btnAyudaLogin);
 		btnAyudaLogin.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (btnAyudaLogin.isSelected()) {
 					setBounds(100, 100, 396, 474);
@@ -547,7 +549,7 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-	
+
 	public void establecerConfiguraciones() {
 		conexion conex = new conexion();
 		try {
@@ -602,7 +604,7 @@ public class login_usuario extends JFrame {
 		}
 
 	}
-	
+
 	@SuppressWarnings("unlikely-arg-type")
 	public void iniciarSesion() {
 		ventana_principal principal = new ventana_principal();
@@ -638,7 +640,7 @@ public class login_usuario extends JFrame {
 						configuraciones configuracion = new configuraciones();
 						configuracion.establecerSonidoInicial();
 						principal.setTitle("Sesión iniciada por: " + nombreCompletoUsuario);
-						principal.txtFrase.setText(frase);
+						ventana_principal.txtFrase.setText(frase);
 						dispose();
 					} else {
 						lblAlerta.setText("El usuario y contraseña son incorrectas");

@@ -121,14 +121,15 @@ public class control_servicio implements ActionListener {
 
 							clase2.setExistencia_producto(
 									Integer.parseInt(registro_servicios.txtExistenciaProducto.getText().toString()));
-							clase2.setId_producto(Integer.parseInt(registro_servicios.txtCodigoProducto.getText().toString()));
+							clase2.setId_producto(
+									Integer.parseInt(registro_servicios.txtCodigoProducto.getText().toString()));
 
 							clase3.setTipo_ingreso(
 									"Ingreso por servicio de: " + formulario.txtServicio.getText().toString());
 							clase3.setCantidad_ingreso(Double.parseDouble(formulario.txtPrecio.getText().toString()));
-							clase3.setDescripcion_ingreso(
-									"Caracteristicas del servicio : " + formulario.txtDescripcion.getText().toString()
-											+ " y " + "venta de :" + registro_servicios.txtDispositivo.getText().toString());
+							clase3.setDescripcion_ingreso("Caracteristicas del servicio : "
+									+ formulario.txtDescripcion.getText().toString() + " y " + "venta de :"
+									+ registro_servicios.txtDispositivo.getText().toString());
 							clase3.setFecha_ingreso(formulario.editor.getText().toString());
 
 							if (consulta.insertar(clase) && consulta.actualizarInventarioProductos(clase2)

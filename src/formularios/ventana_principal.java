@@ -100,7 +100,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
@@ -1203,14 +1202,14 @@ public class ventana_principal extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(46, 464, 327, 40);
 		contentPane.add(scrollPane);
-		
+
 		txtFrase = new JTextArea();
 		txtFrase.setFont(new Font("Consolas", Font.BOLD | Font.ITALIC, 11));
 		txtFrase.setEditable(false);
