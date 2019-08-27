@@ -862,8 +862,8 @@ public class ventana_principal extends JFrame {
 		lblTipoUsuario = new JLabel("tipo");
 		lblTipoUsuario.setBounds(10, 111, 131, 28);
 		panel_5.add(lblTipoUsuario);
-		lblTipoUsuario.setForeground(new Color(0, 0, 128));
-		lblTipoUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblTipoUsuario.setForeground(new Color(72, 61, 139));
+		lblTipoUsuario.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
 
 		JLabel lblUsuario_1 = new JLabel("Tipo de usuario.");
 		lblUsuario_1.setBounds(10, 97, 177, 14);
@@ -874,8 +874,8 @@ public class ventana_principal extends JFrame {
 		lblCargoUsuario = new JLabel("cargo");
 		lblCargoUsuario.setBounds(10, 68, 131, 32);
 		panel_5.add(lblCargoUsuario);
-		lblCargoUsuario.setForeground(new Color(0, 0, 128));
-		lblCargoUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblCargoUsuario.setForeground(new Color(72, 61, 139));
+		lblCargoUsuario.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
 
 		JLabel lblCargo = new JLabel("Cargo del usuario.");
 		lblCargo.setBounds(10, 56, 177, 14);
@@ -887,8 +887,8 @@ public class ventana_principal extends JFrame {
 		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setBounds(10, 150, 254, 14);
 		panel_5.add(lblNombreUsuario);
-		lblNombreUsuario.setForeground(new Color(0, 0, 128));
-		lblNombreUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNombreUsuario.setForeground(new Color(72, 61, 139));
+		lblNombreUsuario.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
 
 		JLabel lblInformacionDelUsuario = new JLabel();
 		lblInformacionDelUsuario.setText("Administraci\u00F3n del Usuario\r\n. ");
@@ -928,7 +928,7 @@ public class ventana_principal extends JFrame {
 		panel_6.setLayout(null);
 
 		lbl_fechaSistema = new JLabel();
-		lbl_fechaSistema.setForeground(new Color(0, 0, 128));
+		lbl_fechaSistema.setForeground(new Color(0, 0, 0));
 		lbl_fechaSistema.setBounds(0, 0, 274, 26);
 		panel_6.add(lbl_fechaSistema);
 		lbl_fechaSistema.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
@@ -946,16 +946,16 @@ public class ventana_principal extends JFrame {
 		lbl_nombre_empresa_principal = new JLabel();
 		lbl_nombre_empresa_principal.setBounds(0, 0, 274, 33);
 		panel_7.add(lbl_nombre_empresa_principal);
-		lbl_nombre_empresa_principal.setForeground(new Color(0, 0, 128));
+		lbl_nombre_empresa_principal.setForeground(new Color(0, 0, 0));
 		lbl_nombre_empresa_principal.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_nombre_empresa_principal.setFont(new Font("Eras Bold ITC", Font.PLAIN, 18));
+		lbl_nombre_empresa_principal.setFont(new Font("Eras Bold ITC", Font.BOLD, 17));
 		lbl_nombre_empresa_principal.setText("Nombre de la empresa.");
 
 		btnInformacionEmpresa = new JButton("\u00BFMas Informaci\u00F3n de la empresa?");
 		btnInformacionEmpresa.setBounds(10, 256, 252, 23);
 		panel_7.add(btnInformacionEmpresa);
 		btnInformacionEmpresa.setBackground(new Color(255, 255, 255));
-		btnInformacionEmpresa.setForeground(new Color(0, 0, 128));
+		btnInformacionEmpresa.setForeground(new Color(0, 0, 0));
 		btnInformacionEmpresa.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 
 		panel_1 = new JPanel();
@@ -1000,7 +1000,7 @@ public class ventana_principal extends JFrame {
 		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema Administrativo.");
 		panel_8.add(lblBienvenidoAlSistema);
 		lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBienvenidoAlSistema.setForeground(new Color(0, 0, 128));
+		lblBienvenidoAlSistema.setForeground(new Color(0, 0, 0));
 		lblBienvenidoAlSistema.setFont(new Font("Cooper Black", Font.PLAIN, 18));
 
 		panelFacturas = new JPanel();
@@ -1212,24 +1212,26 @@ public class ventana_principal extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(46, 464, 327, 40);
+		scrollPane.setBounds(46, 464, 281, 40);
 		contentPane.add(scrollPane);
 
 		txtFrase = new JTextArea();
-		txtFrase.setFont(new Font("Consolas", Font.BOLD | Font.ITALIC, 11));
+		txtFrase.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 11));
 		txtFrase.setEditable(false);
 		scrollPane.setViewportView(txtFrase);
+		txtFrase.setForeground(new Color(0, 0, 0));
 
 		button = new JButton("?");
+		button.setToolTipText("Ayuda?");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirManual();
 			}
 		});
 		button.setForeground(Color.BLACK);
-		button.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 11));
-		button.setBackground(Color.PINK);
-		button.setBounds(336, 88, 37, 25);
+		button.setFont(new Font("Courgette", Font.BOLD, 15));
+		button.setBackground(new Color(0, 139, 139));
+		button.setBounds(327, 464, 46, 40);
 		contentPane.add(button);
 
 		JLabel lblMenuOpciones = new JLabel();

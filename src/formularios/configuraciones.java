@@ -209,6 +209,7 @@ public class configuraciones extends JFrame {
 			btnActualizar.setVisible(true);
 		} else {
 			JOptionPane.showMessageDialog(null, "Bienvenido a las configuraciones");
+			rdbtnClaro.setSelected(true);
 			btnGuardar.setVisible(true);
 			btnActualizar.setVisible(false);
 		}
