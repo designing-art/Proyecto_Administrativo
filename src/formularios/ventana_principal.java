@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Desktop;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -86,7 +88,9 @@ import controles.control_servicio;
 import controles.control_usuario;
 import controles.control_venta;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -199,7 +203,8 @@ public class ventana_principal extends JFrame {
 				close();
 			}
 		});
-		setBounds(100, 100, 700, 580);
+
+		setBounds(100, 100, 710, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(UIManager.getColor("Button.highlight"));
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -214,7 +219,7 @@ public class ventana_principal extends JFrame {
 		lblMenuDeOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenuDeOpciones.setForeground(Color.BLACK);
 		lblMenuDeOpciones.setFont(new Font("Cooper Black", Font.PLAIN, 15));
-		lblMenuDeOpciones.setBounds(46, 87, 327, 26);
+		lblMenuDeOpciones.setBounds(46, 86, 327, 26);
 		contentPane.add(lblMenuDeOpciones);
 
 		panelEmpleados = new JPanel();
@@ -1215,6 +1220,18 @@ public class ventana_principal extends JFrame {
 		txtFrase.setEditable(false);
 		scrollPane.setViewportView(txtFrase);
 
+		button = new JButton("?");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirManual();
+			}
+		});
+		button.setForeground(Color.BLACK);
+		button.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 11));
+		button.setBackground(Color.PINK);
+		button.setBounds(336, 88, 37, 25);
+		contentPane.add(button);
+
 		JLabel lblMenuOpciones = new JLabel();
 		lblMenuOpciones.setFont(new Font("Script MT Bold", Font.PLAIN, 11));
 		lblMenuOpciones.setBounds(21, 43, 379, 497);
@@ -1267,6 +1284,7 @@ public class ventana_principal extends JFrame {
 		}
 	};
 	private JPanel panel_1;
+	private JButton button;
 
 	public static String getFecha() {
 		Date date = new Date();
@@ -1372,5 +1390,16 @@ public class ventana_principal extends JFrame {
 		if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?", "Salir del sistema",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
 			System.exit(0);
+	}
+
+	public void abrirManual() {
+		try {
+			File objetofile = new File("src/manual/doc.docx");
+			Desktop.getDesktop().open(objetofile);
+		} catch (IOException ex) {
+
+			System.out.println(ex);
+
+		}
 	}
 }
