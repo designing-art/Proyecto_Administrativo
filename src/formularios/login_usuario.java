@@ -90,7 +90,7 @@ public class login_usuario extends JFrame {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 396, 401);
+		setBounds(100, 100, 396, 410);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,7 +107,7 @@ public class login_usuario extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(31, 27, 327, 319);
+		panel.setBounds(31, 27, 327, 325);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -120,13 +120,13 @@ public class login_usuario extends JFrame {
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
 		lblContrasea.setForeground(new Color(0, 0, 0));
 		lblContrasea.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		lblContrasea.setBounds(125, 207, 98, 20);
+		lblContrasea.setBounds(125, 204, 98, 20);
 		panel.add(lblContrasea);
 
 		lblestadocontraseña = new JLabel("");
 		lblestadocontraseña.setBackground(Color.WHITE);
 		lblestadocontraseña.setHorizontalAlignment(SwingConstants.CENTER);
-		lblestadocontraseña.setBounds(277, 228, 21, 20);
+		lblestadocontraseña.setBounds(277, 225, 21, 20);
 		panel.add(lblestadocontraseña);
 		final ImageIcon iconoocultar = new ImageIcon(ocultar.getImage().getScaledInstance(
 				lblestadocontraseña.getWidth(), lblestadocontraseña.getHeight(), Image.SCALE_DEFAULT));
@@ -158,15 +158,15 @@ public class login_usuario extends JFrame {
 
 		btnIngresar = new JButton("Ingresar");
 		btnIngresar.setForeground(new Color(0, 0, 0));
-		btnIngresar.setFont(new Font("Dubai", Font.BOLD, 14));
+		btnIngresar.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 14));
 		btnIngresar.setBackground(new Color(60, 179, 113));
-		btnIngresar.setBounds(107, 256, 113, 20);
+		btnIngresar.setBounds(110, 248, 113, 25);
 		panel.add(btnIngresar);
 
 		txtContraseña = new JPasswordField();
 		txtContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContraseña.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		txtContraseña.setBounds(74, 228, 181, 20);
+		txtContraseña.setBounds(74, 225, 181, 20);
 		panel.add(txtContraseña);
 		InputMap map5 = txtContraseña.getInputMap(JComponent.WHEN_FOCUSED);
 		map5.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
@@ -194,7 +194,7 @@ public class login_usuario extends JFrame {
 		lblAlerta = new JLabel("");
 		lblAlerta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlerta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		lblAlerta.setBounds(10, 283, 307, 14);
+		lblAlerta.setBounds(10, 272, 307, 25);
 		panel.add(lblAlerta);
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
 
@@ -207,7 +207,7 @@ public class login_usuario extends JFrame {
 		rdbtnPass = new JRadioButton("");
 		rdbtnPass.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnPass.setBackground(Color.WHITE);
-		rdbtnPass.setBounds(256, 228, 21, 20);
+		rdbtnPass.setBounds(256, 225, 21, 20);
 		panel.add(rdbtnPass);
 		rdbtnPass.addActionListener(new ActionListener() {
 			@Override
@@ -243,11 +243,11 @@ public class login_usuario extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.GRAY);
-		panel_2.setBounds(10, 319, 307, 77);
+		panel_2.setBounds(10, 325, 307, 71);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 
-		btnActualizarBase = new JButton("Actualizar la conexión con la BD.");
+		btnActualizarBase = new JButton("Actualizar la conexi\u00F3n.");
 		btnActualizarBase.setBounds(67, 52, 176, 20);
 		panel_2.add(btnActualizarBase);
 		btnActualizarBase.setForeground(Color.BLACK);
@@ -270,7 +270,7 @@ public class login_usuario extends JFrame {
 		btnAyudaLogin = new JToggleButton("Problemas con la conexi\u00F3n?");
 		btnAyudaLogin.setBackground(Color.WHITE);
 		btnAyudaLogin.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnAyudaLogin.setBounds(74, 300, 181, 15);
+		btnAyudaLogin.setBounds(74, 295, 181, 20);
 		panel.add(btnAyudaLogin);
 		btnAyudaLogin.addActionListener(new ActionListener() {
 			@Override

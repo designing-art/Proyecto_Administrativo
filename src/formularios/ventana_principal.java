@@ -214,6 +214,7 @@ public class ventana_principal extends JFrame {
 		final ImageIcon logo2 = new ImageIcon(getClass().getResource("/iconos/libreta.png"));
 		final ImageIcon logousuario = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 		final ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo_estandar.png"));
+		final ImageIcon logo3 = new ImageIcon(getClass().getResource("/iconos/info.png"));
 
 		JLabel lblMenuDeOpciones = new JLabel("Men\u00FA de Opciones :");
 		lblMenuDeOpciones.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1212,7 +1213,7 @@ public class ventana_principal extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(46, 464, 281, 40);
+		scrollPane.setBounds(46, 464, 327, 40);
 		contentPane.add(scrollPane);
 
 		txtFrase = new JTextArea();
@@ -1221,7 +1222,9 @@ public class ventana_principal extends JFrame {
 		scrollPane.setViewportView(txtFrase);
 		txtFrase.setForeground(new Color(0, 0, 0));
 
-		button = new JButton("?");
+		button = new JButton();
+		button.setBounds(352, 85, 28, 26);
+		contentPane.add(button);
 		button.setToolTipText("Ayuda?");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1231,8 +1234,9 @@ public class ventana_principal extends JFrame {
 		button.setForeground(Color.BLACK);
 		button.setFont(new Font("Courgette", Font.BOLD, 15));
 		button.setBackground(new Color(0, 139, 139));
-		button.setBounds(327, 464, 46, 40);
-		contentPane.add(button);
+		final ImageIcon iconoInfo = new ImageIcon(logo3.getImage().getScaledInstance(button.getWidth(),
+				button.getHeight(), Image.SCALE_DEFAULT));
+		button.setIcon(iconoInfo);
 
 		JLabel lblMenuOpciones = new JLabel();
 		lblMenuOpciones.setFont(new Font("Script MT Bold", Font.PLAIN, 11));

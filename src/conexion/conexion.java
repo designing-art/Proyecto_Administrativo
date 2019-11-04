@@ -8,10 +8,10 @@ import java.util.logging.Logger;
 
 public class conexion {
 
-	private final String base = "television";
-	private final String user = "master";
+	private final String base = "television?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private final String user = "root";
 	private final String password = "1234";
-	public static String urlGlobal = "192.168.137.1";
+	public static String urlGlobal = "localhost";
 	private final String url = "jdbc:mysql://" + urlGlobal + "/" + base;
 	private Connection con = null;
 
