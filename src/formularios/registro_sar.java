@@ -51,6 +51,7 @@ import controles.control_sar;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
+import java.awt.event.KeyAdapter;
 
 public class registro_sar extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -378,6 +379,15 @@ public class registro_sar extends JFrame {
 			e1.printStackTrace();
 		}
 		txtCaiSar = new JFormattedTextField(formato);
+		txtCaiSar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if(txtCaiSar.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCaiSar.setText("");
+				}
+			}
+		});
 		txtCaiSar.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCaiSar.setColumns(10);
 		txtCaiSar.setBounds(101, 84, 213, 19);
@@ -413,6 +423,11 @@ public class registro_sar extends JFrame {
 
 				if (txtRangoInicial.getText().length() == 8)
 					ke.consume();
+				
+				if(txtRangoInicial.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtRangoInicial.setText("");
+				}
 			}
 
 			@Override
@@ -452,6 +467,11 @@ public class registro_sar extends JFrame {
 
 				if (txtRangoFinal.getText().length() == 8)
 					ke.consume();
+				
+				if(txtRangoFinal.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtRangoFinal.setText("");
+				}
 			}
 
 			@Override
@@ -513,6 +533,15 @@ public class registro_sar extends JFrame {
 			e1.printStackTrace();
 		}
 		txtFormatoSar = new JFormattedTextField(formato7);
+		txtFormatoSar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if(txtFormatoSar.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtFormatoSar.setText("");
+				}
+			}
+		});
 		txtFormatoSar.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFormatoSar.setColumns(10);
 		txtFormatoSar.setBounds(101, 165, 131, 19);

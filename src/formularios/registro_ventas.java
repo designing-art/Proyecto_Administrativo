@@ -408,6 +408,11 @@ public class registro_ventas extends JFrame {
 
 				if (txtCantidadVenta.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidadVenta.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidadVenta.setText("");
+				}
 			}
 
 			@Override
@@ -449,6 +454,11 @@ public class registro_ventas extends JFrame {
 
 				if (txtPrecioVenta.getText().length() == 8)
 					ke.consume();
+				
+				if(txtPrecioVenta.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPrecioVenta.setText("");
+				}
 			}
 
 			@Override
@@ -736,6 +746,7 @@ public class registro_ventas extends JFrame {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				formulario.txtExistencia.setText("0");
+				formulario.btnAtras.setVisible(false);
 				dispose();
 			}
 		});

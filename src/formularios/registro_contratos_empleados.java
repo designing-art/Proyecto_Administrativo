@@ -288,6 +288,11 @@ public class registro_contratos_empleados extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtIdentidadContratoEmpleado.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtIdentidadContratoEmpleado.setText("");
+				}
 			}
 
 			@Override

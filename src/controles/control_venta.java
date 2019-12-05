@@ -133,6 +133,7 @@ public class control_venta implements ActionListener {
 							formulario2.pistas();
 							formulario2.consultarEmpresa();
 							formulario2.construirTabla();
+							formulario2.construirTablaClientes();
 							formulario2.establecerDatosEmpresa();
 							formulario2.ObtenerUltimosDatosSar();
 							formulario2.btnGuardar.setVisible(true);

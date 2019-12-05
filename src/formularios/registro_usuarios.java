@@ -624,6 +624,11 @@ public class registro_usuarios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtUsuario.getText().length() == 15)
 					ke.consume();
+				
+				if(txtUsuario.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtUsuario.setText("");
+				}
 			}
 
 			@Override
@@ -678,6 +683,11 @@ public class registro_usuarios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtContraseña.getText().toString().length() == 15)
 					ke.consume();
+				
+				if(txtContraseña.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtContraseña.setText("");
+				}
 			}
 
 			@Override
@@ -716,6 +726,11 @@ public class registro_usuarios extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtBusqueda.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtBusqueda.setText("");
+				}
 			}
 
 			@Override

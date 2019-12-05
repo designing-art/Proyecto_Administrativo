@@ -416,6 +416,11 @@ public class registro_bonificaciones extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtIdentidadEmpleadoBonificacion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtIdentidadEmpleadoBonificacion.setText("");
+				}
 			}
 
 			@Override
@@ -534,6 +539,11 @@ public class registro_bonificaciones extends JFrame {
 					ke.consume();
 				if (txtCantidadBonificacion.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidadBonificacion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidadBonificacion.setText("");
+				}
 			}
 
 			@Override
@@ -563,6 +573,11 @@ public class registro_bonificaciones extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtObservacionBonificacion.getText().length() == 100) {
 					ke.consume();
+				}
+				
+				if(txtObservacionBonificacion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtObservacionBonificacion.setText("");
 				}
 
 			}

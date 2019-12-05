@@ -3,6 +3,8 @@ package principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+
+import conexion.conexion;
 import formularios.*;
 
 public class television extends JFrame {
@@ -13,6 +15,8 @@ public class television extends JFrame {
 		login.setVisible(true);
 		login.consultarEmpresa();
 		login.establecerConfiguraciones();
+		conexion con = new conexion();
+		con.conectarConIPglobal();
 		login.btnIngresar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -20,4 +24,6 @@ public class television extends JFrame {
 			}
 		});
 	}
+	
+	
 }

@@ -425,6 +425,11 @@ public class registro_egresos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtEgreso.getText().length() == 50)
 					ke.consume();
+				
+				if(txtEgreso.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtEgreso.setText("");
+				}
 			}
 
 			@Override
@@ -456,6 +461,11 @@ public class registro_egresos extends JFrame {
 					ke.consume();
 				if (txtCantidad.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidad.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidad.setText("");
+				}
 			}
 
 			@Override
@@ -485,6 +495,11 @@ public class registro_egresos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDescripcion.getText().length() == 100) {
 					ke.consume();
+				}
+				
+				if(txtDescripcion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcion.setText("");
 				}
 
 			}

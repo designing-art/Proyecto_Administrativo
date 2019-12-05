@@ -508,6 +508,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.btnRegresarALas.setVisible(false);
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
 			}
@@ -759,6 +760,7 @@ public class ventana_principal extends JFrame {
 				formulario.btnActualizar.setVisible(false);
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
+				formulario.btnIrAVentas.setVisible(false);
 				formulario.txtExistencia.setText("0");
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
 				dispose();
@@ -1213,17 +1215,16 @@ public class ventana_principal extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(46, 464, 327, 40);
+		scrollPane.setBounds(46, 463, 298, 40);
 		contentPane.add(scrollPane);
 
 		txtFrase = new JTextArea();
 		txtFrase.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 11));
-		txtFrase.setEditable(false);
 		scrollPane.setViewportView(txtFrase);
 		txtFrase.setForeground(new Color(0, 0, 0));
 
 		button = new JButton();
-		button.setBounds(352, 85, 28, 26);
+		button.setBounds(343, 471, 30, 26);
 		contentPane.add(button);
 		button.setToolTipText("Ayuda?");
 		button.addActionListener(new ActionListener() {
@@ -1233,7 +1234,7 @@ public class ventana_principal extends JFrame {
 		});
 		button.setForeground(Color.BLACK);
 		button.setFont(new Font("Courgette", Font.BOLD, 15));
-		button.setBackground(new Color(0, 139, 139));
+		button.setBackground(Color.WHITE);
 		final ImageIcon iconoInfo = new ImageIcon(logo3.getImage().getScaledInstance(button.getWidth(),
 				button.getHeight(), Image.SCALE_DEFAULT));
 		button.setIcon(iconoInfo);
@@ -1400,7 +1401,7 @@ public class ventana_principal extends JFrame {
 
 	public void abrirManual() {
 		try {
-			File objetofile = new File("src/manual/doc.docx");
+			File objetofile = new File("C:/doc.pdf");
 			Desktop.getDesktop().open(objetofile);
 		} catch (IOException ex) {
 

@@ -263,6 +263,11 @@ public class registro_proveedores extends JFrame {
 
 				if (txtNombresProveedor.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombresProveedor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombresProveedor.setText("");
+				}
 			}
 
 			@Override
@@ -294,6 +299,11 @@ public class registro_proveedores extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtCuentaProveedor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCuentaProveedor.setText("");
+				}
 			}
 
 			@Override
@@ -316,6 +326,11 @@ public class registro_proveedores extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDireccionProveedor.getText().length() == 100) {
 					ke.consume();
+				}
+				
+				if(txtDireccionProveedor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDireccionProveedor.setText("");
 				}
 
 			}
@@ -364,6 +379,11 @@ public class registro_proveedores extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtRtnProveedor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtRtnProveedor.setText("");
+				}
 			}
 
 			@Override
@@ -400,6 +420,11 @@ public class registro_proveedores extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtTelefonoProveedor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtTelefonoProveedor.setText("");
+				}
 			}
 
 			@Override
@@ -422,6 +447,11 @@ public class registro_proveedores extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCorreoProveedor.getText().length() == 50)
 					ke.consume();
+				
+				if(txtCorreoProveedor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCorreoProveedor.setText("");
+				}
 			}
 
 			@Override

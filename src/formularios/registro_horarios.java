@@ -246,6 +246,11 @@ public class registro_horarios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDescripcionHorario.getText().length() == 100)
 					ke.consume();
+				
+				if(txtDescripcionHorario.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcionHorario.setText("");
+				}
 			}
 
 			@Override
@@ -275,6 +280,11 @@ public class registro_horarios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtObservacionHorario.getText().length() == 100)
 					ke.consume();
+				
+				if(txtObservacionHorario.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtObservacionHorario.setText("");
+				}
 			}
 
 			@Override

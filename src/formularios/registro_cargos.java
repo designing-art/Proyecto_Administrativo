@@ -178,6 +178,11 @@ public class registro_cargos extends JFrame {
 
 				if (txtSueldoCargo.getText().length() == 8)
 					ke.consume();
+				
+				if(txtSueldoCargo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtSueldoCargo.setText("");
+				}
 			}
 
 			@Override
@@ -206,6 +211,11 @@ public class registro_cargos extends JFrame {
 
 				if (txtHoraExtraCargo.getText().length() == 6)
 					ke.consume();
+				
+				if(txtHoraExtraCargo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtHoraExtraCargo.setText("");
+				}
 			}
 
 			@Override
@@ -277,6 +287,11 @@ public class registro_cargos extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtFuncionesCargo.getText().length() == 100)
 					ke.consume();
+				
+				if(txtFuncionesCargo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtFuncionesCargo.setText("");
+				}
 			}
 
 			@Override
@@ -307,6 +322,11 @@ public class registro_cargos extends JFrame {
 
 				if (txtNombreCargo.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombreCargo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombreCargo.setText("");
+				}
 			}
 
 			@Override

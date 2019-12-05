@@ -280,6 +280,11 @@ public class registro_productos extends JFrame {
 
 				if (txtDispositivo.getText().length() == 20)
 					ke.consume();
+				
+				if(txtDispositivo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDispositivo.setText("");
+				}
 			}
 
 			@Override
@@ -303,6 +308,11 @@ public class registro_productos extends JFrame {
 
 				if (txtMarca.getText().length() == 20)
 					ke.consume();
+				
+				if(txtMarca.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtMarca.setText("");
+				}
 			}
 
 			@Override
@@ -326,6 +336,11 @@ public class registro_productos extends JFrame {
 
 				if (txtCapasidad.getText().length() == 20)
 					ke.consume();
+				
+				if(txtCapasidad.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCapasidad.setText("");
+				}
 			}
 
 			@Override
@@ -359,6 +374,11 @@ public class registro_productos extends JFrame {
 
 				if (txtColor.getText().length() == 20)
 					ke.consume();
+				
+				if(txtColor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtColor.setText("");
+				}
 			}
 
 			@Override
@@ -391,6 +411,11 @@ public class registro_productos extends JFrame {
 					ke.consume();
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
+				
+				if(txtPrecio.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPrecio.setText("");
+				}
 			}
 
 			@Override
@@ -422,6 +447,11 @@ public class registro_productos extends JFrame {
 					ke.consume();
 				if (txtCantidad.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidad.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidad.setText("");
+				}
 			}
 
 			@Override

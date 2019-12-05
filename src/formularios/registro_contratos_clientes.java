@@ -286,6 +286,11 @@ public class registro_contratos_clientes extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtIdentidadContrato.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtIdentidadContrato.setText("");
+				}
 			}
 
 			@Override

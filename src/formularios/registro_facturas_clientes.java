@@ -317,6 +317,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				}
 				if (txtCliente.getText().length() == 50)
 					ke.consume();
+				
+				if(txtCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCliente.setText("");
+				}
 			}
 
 			@Override
@@ -345,6 +350,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtRTN.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtRTN.setText("");
+				}
 			}
 
 			@Override
@@ -368,6 +378,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDireccion.getText().length() == 50)
 					ke.consume();
+				
+				if(txtDireccion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDireccion.setText("");
+				}
 			}
 
 			@Override
@@ -463,6 +478,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 			public void keyTyped(KeyEvent ke) {
 				if (txtPorConceptoDe.getText().length() == 100)
 					ke.consume();
+				
+				if(txtPorConceptoDe.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPorConceptoDe .setText("");
+				}
 			}
 
 			@Override
@@ -501,6 +521,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				}
 				if (txtCantidadLetras.getText().length() == 50)
 					ke.consume();
+				
+				if(txtCantidadLetras.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidadLetras.setText("");
+				}
 			}
 
 			@Override
@@ -534,6 +559,11 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 
 				if (txtCantidadNumeros.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidadNumeros.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidadNumeros.setText("");
+				}
 			}
 
 			@Override
@@ -857,6 +887,7 @@ public class registro_facturas_clientes extends JFrame implements Printable {
 				formulario.btnAceptar.setVisible(false);
 				formulario.btnBorrar.setVisible(false);
 				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				formulario.btnAtras.setVisible(false);
 				dispose();
 			}
 		});

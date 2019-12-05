@@ -413,6 +413,11 @@ public class registro_deducciones extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtIdentidadEmpleadoDeduccion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtIdentidadEmpleadoDeduccion.setText("");
+				}
 			}
 
 			@Override
@@ -531,6 +536,11 @@ public class registro_deducciones extends JFrame {
 					ke.consume();
 				if (txtCantidadDeduccion.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidadDeduccion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidadDeduccion.setText("");
+				}
 			}
 
 			@Override
@@ -560,6 +570,11 @@ public class registro_deducciones extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtObservacionDeduccion.getText().length() == 100) {
 					ke.consume();
+				}
+				
+				if(txtObservacionDeduccion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtObservacionDeduccion.setText("");
 				}
 
 			}

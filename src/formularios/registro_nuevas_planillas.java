@@ -387,6 +387,11 @@ public class registro_nuevas_planillas extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtNombrePlanilla.getText().length() == 45)
 					ke.consume();
+				
+				if(txtNombrePlanilla.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombrePlanilla.setText("");
+				}
 			}
 
 			@Override

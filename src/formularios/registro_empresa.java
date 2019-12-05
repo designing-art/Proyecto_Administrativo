@@ -336,6 +336,11 @@ public class registro_empresa extends JFrame {
 
 				if (txtNombreEmpresa.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombre_Empresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombre_Empresa.setText("");
+				}
 			}
 
 			@Override
@@ -373,6 +378,10 @@ public class registro_empresa extends JFrame {
 					ke.consume();
 				}
 
+				if(txtDireccionEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDireccionEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -414,6 +423,11 @@ public class registro_empresa extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtTelefonoEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtTelefonoEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -450,6 +464,11 @@ public class registro_empresa extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtRTNempresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtRTNempresa.setText("");
+				}
 			}
 
 			@Override
@@ -474,6 +493,11 @@ public class registro_empresa extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCorreoEmpresa.getText().length() == 30)
 					ke.consume();
+				
+				if(txtCorreoEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCorreoEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -508,6 +532,11 @@ public class registro_empresa extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCuentaEmpresa.getText().length() == 100) {
 					ke.consume();
+				}
+				
+				if(txtCuentaEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCuentaEmpresa.setText("");
 				}
 
 			}

@@ -230,6 +230,11 @@ public class registro_compras extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtNombre.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombre.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombre.setText("");
+				}
 			}
 
 			@Override
@@ -258,6 +263,11 @@ public class registro_compras extends JFrame {
 
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
+				
+				if(txtPrecio.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPrecio.setText("");
+				}
 			}
 
 			@Override
@@ -297,6 +307,11 @@ public class registro_compras extends JFrame {
 
 				if (txtPeso.getText().length() == 30)
 					ke.consume();
+				
+				if(txtPeso.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPeso.setText("");
+				}
 			}
 
 			@Override
@@ -331,6 +346,11 @@ public class registro_compras extends JFrame {
 
 				if (txtColor.getText().length() == 20)
 					ke.consume();
+				
+				if(txtColor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtColor.setText("");
+				}
 			}
 
 			@Override
@@ -360,6 +380,11 @@ public class registro_compras extends JFrame {
 
 				if (txtMarca.getText().length() == 30)
 					ke.consume();
+				
+				if(txtMarca.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtMarca.setText("");
+				}
 			}
 
 			@Override
@@ -394,6 +419,11 @@ public class registro_compras extends JFrame {
 
 				if (txtModelo.getText().length() == 30)
 					ke.consume();
+				
+				if(txtModelo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtModelo.setText("");
+				}
 			}
 
 			@Override
@@ -425,6 +455,11 @@ public class registro_compras extends JFrame {
 
 				if (txtDescripcion.getText().length() == 50)
 					ke.consume();
+				
+				if(txtDescripcion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcion.setText("");
+				}
 			}
 
 			@Override
@@ -458,6 +493,11 @@ public class registro_compras extends JFrame {
 
 				if (txtCantidad.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidad.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidad.setText("");
+				}
 			}
 
 			@Override

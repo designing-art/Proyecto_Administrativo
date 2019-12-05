@@ -240,6 +240,11 @@ public class registro_servicios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtServicio.getText().length() == 30)
 					ke.consume();
+				
+				if(txtServicio.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtServicio.setText("");
+				}
 			}
 
 			@Override
@@ -262,6 +267,11 @@ public class registro_servicios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtTiempo.getText().length() == 20)
 					ke.consume();
+				
+				if(txtTiempo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtTiempo.setText("");
+				}
 			}
 
 			@Override
@@ -300,6 +310,11 @@ public class registro_servicios extends JFrame {
 
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
+				
+				if(txtPrecio.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPrecio.setText("");
+				}
 			}
 
 			@Override
@@ -335,6 +350,11 @@ public class registro_servicios extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDescripcion.getText().length() == 50) {
 					ke.consume();
+				}
+				
+				if(txtDescripcion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcion.setText("");
 				}
 
 			}

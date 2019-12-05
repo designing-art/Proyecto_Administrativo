@@ -8,9 +8,16 @@ import java.awt.Event;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import clases.empleado;
+import clases.servidor;
 import clases.usuario;
 import conexion.conexion;
+import consultas.consultas_empleado;
+import consultas.consultas_servidor;
 import consultas.consultas_usuario;
+import controles.control_empleado;
+import controles.control_servidor;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -24,10 +31,15 @@ import javax.swing.KeyStroke;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -48,11 +60,19 @@ public class login_usuario extends JFrame {
 	public static JLabel lblFotoEmpresa;
 	public static String nombre = null;
 	public static String frase = null;
+	public static String ipServidor = null;
 	public static String ruta_logo = null;
 	public static JRadioButton rdbtnPass;
 	public static JLabel lblestadocontraseña;
 	public JToggleButton btnAyudaLogin;
 	public JButton btnActualizarBase;
+
+	String base = "television?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	String user = "root";
+	String password = "1234";
+	String urlGlobal = "localhost:3306";
+	String url = "jdbc:mysql://" + urlGlobal + "/" + base;
+	Connection con = null;
 
 	public static String todo;
 	public static String empleado;
@@ -85,6 +105,7 @@ public class login_usuario extends JFrame {
 	public static String tipoUsuario;
 	public static String direccionFotoUsuario;
 	public static String nombreUsuario;
+	public static JTextField txtIPservidor;
 
 	public login_usuario() {
 		setType(Type.UTILITY);
@@ -145,6 +166,11 @@ public class login_usuario extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtUsuario.getText().length() == 15)
 					ke.consume();
+				
+				if(txtUsuario.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtUsuario.setText("");
+				}
 			}
 
 			@Override
@@ -175,7 +201,11 @@ public class login_usuario extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				if (txtContraseña.getText().length() == 15)
 					e.consume();
-
+				
+				if(txtContraseña.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtContraseña.setText("");
+				}
 			}
 
 			@Override
@@ -256,7 +286,7 @@ public class login_usuario extends JFrame {
 		btnActualizarBase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				configurarZonaHoraria();
+				Configurar();
 			}
 		});
 
@@ -272,6 +302,16 @@ public class login_usuario extends JFrame {
 		btnAyudaLogin.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnAyudaLogin.setBounds(74, 295, 181, 20);
 		panel.add(btnAyudaLogin);
+		
+		txtIPservidor = new JTextField();
+		txtIPservidor.setFont(new Font("Gill Sans MT Condensed", Font.PLAIN, 10));
+		txtIPservidor.setEditable(false);
+		txtIPservidor.setHorizontalAlignment(SwingConstants.CENTER);
+		txtIPservidor.setBounds(10, 142, 67, 20);
+		panel.add(txtIPservidor);
+		txtIPservidor.setColumns(10);
+		txtIPservidor.setVisible(false);
+		
 		btnAyudaLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -583,25 +623,14 @@ public class login_usuario extends JFrame {
 		ventana_principal.labelfotousuario.setIcon(iconofoto);
 	}
 
-	public void configurarZonaHoraria() {
-		conexion conex = new conexion();
-		try {
-			Statement estatuto = conex.getConexion().createStatement();
-			ResultSet rs = estatuto.executeQuery("set global time_zone= '-6:00';");
-
-			JOptionPane.showMessageDialog(null, "Base de datos actualiza!");
-			login_usuario login = new login_usuario();
-			login.dispose();
-			login.iniciarSesion();
-			rs.close();
-			estatuto.close();
-			conex.desconectar();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Error al consultar", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
+	public void Configurar() {
+		servidor clase = new servidor();
+		consultas_servidor consulta = new consultas_servidor();
+		configuracion_servidor formulario = new configuracion_servidor();
+		control_servidor control = new control_servidor(clase, consulta, formulario);
+		formulario.setVisible(true);
+		formulario.setLocationRelativeTo(null);
+		dispose();
 
 	}
 

@@ -48,6 +48,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
 import javax.swing.DefaultComboBoxModel;
@@ -244,6 +246,10 @@ public class registro_empleados extends JFrame {
 				if (txtNombresEmpleado.getText().length() == 30)
 					ke.consume();
 
+				if (txtNombresEmpleado.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtNombresEmpleado.setText("");
+				}
 			}
 
 			@Override
@@ -284,6 +290,11 @@ public class registro_empleados extends JFrame {
 				}
 				if (txtApellidosEmpleado.getText().length() == 40)
 					ke.consume();
+
+				if (txtApellidosEmpleado.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtApellidosEmpleado.setText("");
+				}
 			}
 
 			@Override
@@ -323,6 +334,11 @@ public class registro_empleados extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+
+				if (txtIdentidadEmpleado.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtIdentidadEmpleado.setText("");
+				}
 			}
 
 			@Override
@@ -399,6 +415,11 @@ public class registro_empleados extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCorreoEmpleado.getText().length() == 50)
 					ke.consume();
+
+				if (txtCorreoEmpleado.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtCorreoEmpleado.setText("");
+				}
 			}
 
 			@Override
@@ -410,6 +431,7 @@ public class registro_empleados extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
+				
 			}
 		});
 
@@ -438,6 +460,11 @@ public class registro_empleados extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+
+				if (txtTelefonoEmpleado.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtTelefonoEmpleado.setText("");
+				}
 			}
 
 			@Override
@@ -534,6 +561,11 @@ public class registro_empleados extends JFrame {
 				}
 				if (txtNombreReferencia.getText().length() == 30)
 					ke.consume();
+
+				if (txtNombreReferencia.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtNombreReferencia.setText("");
+				}
 			}
 
 			@Override
@@ -573,6 +605,11 @@ public class registro_empleados extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+
+				if (txtTelefonoReferencia.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtTelefonoReferencia.setText("");
+				}
 			}
 
 			@Override
@@ -611,6 +648,11 @@ public class registro_empleados extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDireccionEmpleado.getText().length() == 100) {
 					ke.consume();
+				}
+
+				if (txtDireccionEmpleado.getText().toString().equals(" ")) {
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");
+					txtDireccionEmpleado.setText("");
 				}
 
 			}
@@ -1234,7 +1276,7 @@ public class registro_empleados extends JFrame {
 	public void tomarFoto() {
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("src/utilidades/cam.exe");
+			camara.exec("C:/cam.exe");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -232,6 +232,11 @@ public class registro_facturas_empresa extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDescripcion.getText().length() == 100)
 					ke.consume();
+				
+				if(txtDescripcion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcion.setText("");
+				}
 			}
 
 			@Override
@@ -280,6 +285,11 @@ public class registro_facturas_empresa extends JFrame {
 
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
+				
+				if(txtPrecio.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPrecio.setText("");
+				}
 			}
 
 			@Override
@@ -330,6 +340,11 @@ public class registro_facturas_empresa extends JFrame {
 
 				if (txtCantidad.getText().length() == 6)
 					ke.consume();
+				
+				if(txtCantidad.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidad.setText("");
+				}
 			}
 
 			@Override
@@ -353,6 +368,11 @@ public class registro_facturas_empresa extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCompra.getText().length() == 50)
 					ke.consume();
+				
+				if(txtCompra.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCompra.setText("");
+				}
 			}
 
 			@Override

@@ -51,12 +51,18 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
+import consultas.consultas_factura_cliente;
 import controles.control_cliente;
+import controles.control_factura_cliente;
 import utilidades.visor_imagen;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JTextFieldDateEditor;
+
+import clases.factura_cliente;
+import clases.sar;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -121,6 +127,7 @@ public class registro_clientes extends JFrame {
 	public JTextArea txtDireccionEmpresa;
 	private JScrollPane scrollPane_2;
 	public JTextArea txtDescripcionEmpresa;
+	public JButton btnRegresarALas;
 
 	public registro_clientes() {
 		setResizable(false);
@@ -251,6 +258,11 @@ public class registro_clientes extends JFrame {
 				}
 				if (txtNombresCliente.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombresCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombresCliente.setText("");
+				}
 			}
 
 			@Override
@@ -279,6 +291,11 @@ public class registro_clientes extends JFrame {
 				}
 				if (txtApellidosCliente.getText().length() == 30)
 					ke.consume();
+				
+				if(txtApellidosCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtApellidosCliente.setText("");
+				}
 			}
 
 			@Override
@@ -320,6 +337,11 @@ public class registro_clientes extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtTelefonoCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtTelefonoCliente.setText("");
+				}
 			}
 
 			@Override
@@ -347,6 +369,11 @@ public class registro_clientes extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCorreoCliente.getText().length() == 40)
 					ke.consume();
+				
+				if(txtCorreoCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCorreoCliente.setText("");
+				}
 			}
 
 			@Override
@@ -382,6 +409,11 @@ public class registro_clientes extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtNombreEmpresa.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombreEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombreEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -411,6 +443,11 @@ public class registro_clientes extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDireccionCliente.getText().length() == 50) {
 					ke.consume();
+				}
+				
+				if(txtDireccionCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDireccionCliente.setText("");
 				}
 
 			}
@@ -524,6 +561,11 @@ public class registro_clientes extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtTelefonoEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtTelefonoEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -551,6 +593,11 @@ public class registro_clientes extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtCorreoEmpresa.getText().length() == 40)
 					ke.consume();
+				
+				if(txtCorreoEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCorreoEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -586,6 +633,11 @@ public class registro_clientes extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtRTNEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtRTNEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -612,6 +664,10 @@ public class registro_clientes extends JFrame {
 					ke.consume();
 				}
 
+				if(txtDireccionEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDireccionEmpresa.setText("");
+				}
 			}
 
 			@Override
@@ -652,6 +708,11 @@ public class registro_clientes extends JFrame {
 				char c = ke.getKeyChar();
 				if ((c < '0' || c > '9'))
 					ke.consume();
+				
+				if(txtIdentidadCliente.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtIdentidadCliente.setText("");
+				}
 			}
 
 			@Override
@@ -676,6 +737,11 @@ public class registro_clientes extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtDescripcionEmpresa.getText().length() == 50) {
 					ke.consume();
+				}
+				
+				if(txtDescripcionEmpresa.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcionEmpresa.setText("");
 				}
 
 			}
@@ -861,6 +927,40 @@ public class registro_clientes extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
+		
+		btnRegresarALas = new JButton("Regresar a las facturas.");
+		btnRegresarALas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				factura_cliente clase = new factura_cliente();
+				consultas_factura_cliente consulta = new consultas_factura_cliente();
+				registro_facturas_clientes formulario = new registro_facturas_clientes();
+				sar clase2 = new sar();
+				control_factura_cliente control = new control_factura_cliente(clase, consulta, formulario,
+						clase2);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtCliente.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTabla();
+				formulario.construirTablaClientes();
+				formulario.establecerDatosEmpresa();
+				formulario.ObtenerUltimosDatosSar();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				formulario.txtEmpleado.setText(login_usuario.nombreCompletoUsuario);
+				dispose();
+			}
+		});
+		btnRegresarALas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnRegresarALas.setBackground(new Color(255, 127, 80));
+		btnRegresarALas.setBounds(761, 26, 223, 23);
+		contentPane.add(btnRegresarALas);
 
 	}
 
@@ -993,7 +1093,7 @@ public class registro_clientes extends JFrame {
 	public void tomarFoto() {
 		Runtime camara = Runtime.getRuntime();
 		try {
-			camara.exec("src/utilidades/cam.exe");
+			camara.exec("C:/cam.exe");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

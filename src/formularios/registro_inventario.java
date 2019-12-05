@@ -49,11 +49,18 @@ import javax.swing.text.MaskFormatter;
 import com.placeholder.PlaceHolder;
 
 import conexion.conexion;
+import consultas.consultas_venta;
 import controles.control_inventario;
+import controles.control_venta;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
+
+import clases.ingreso;
+import clases.inventario;
+import clases.venta;
 
 public class registro_inventario extends JFrame {
 	public JScrollPane scrollFunciones;
@@ -107,6 +114,7 @@ public class registro_inventario extends JFrame {
 	public JTextField txtCantidad;
 	public JTextFieldDateEditor editor;
 	public JTextField txtTotalExistencia;
+	public JButton btnIrAVentas;
 
 	public registro_inventario() {
 		setResizable(false);
@@ -149,7 +157,7 @@ public class registro_inventario extends JFrame {
 
 		JLabel lblRegistrarCargo = new JLabel("REGISTRO Y MANTENIMIENTO DEL INVENTARIO DE LA EMPRESA");
 		lblRegistrarCargo.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
-		lblRegistrarCargo.setBounds(28, 20, 693, 29);
+		lblRegistrarCargo.setBounds(28, 20, 669, 29);
 		contentPane.add(lblRegistrarCargo);
 		scrollFunciones = new JScrollPane();
 
@@ -234,6 +242,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtNombre.getText().length() == 30)
 					ke.consume();
+				
+				if(txtNombre.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtNombre.setText("");
+				}
 			}
 
 			@Override
@@ -262,6 +275,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtPrecio.getText().length() == 8)
 					ke.consume();
+				
+				if(txtPrecio.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPrecio.setText("");
+				}
 			}
 
 			@Override
@@ -296,6 +314,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtPeso.getText().length() == 30)
 					ke.consume();
+				
+				if(txtPeso.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtPeso.setText("");
+				}
 			}
 
 			@Override
@@ -330,6 +353,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtColor.getText().length() == 20)
 					ke.consume();
+				
+				if(txtColor.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtColor.setText("");
+				}
 			}
 
 			@Override
@@ -358,6 +386,11 @@ public class registro_inventario extends JFrame {
 			public void keyTyped(KeyEvent ke) {
 				if (txtMarca.getText().length() == 30)
 					ke.consume();
+				
+				if(txtMarca.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtMarca.setText("");
+				}
 			}
 
 			@Override
@@ -392,6 +425,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtModelo.getText().length() == 40)
 					ke.consume();
+				
+				if(txtModelo.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtModelo.setText("");
+				}
 			}
 
 			@Override
@@ -435,6 +473,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtDescripcion.getText().length() == 80)
 					ke.consume();
+				
+				if(txtDescripcion.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtDescripcion.setText("");
+				}
 			}
 
 			@Override
@@ -468,6 +511,11 @@ public class registro_inventario extends JFrame {
 
 				if (txtCantidad.getText().length() == 8)
 					ke.consume();
+				
+				if(txtCantidad.getText().toString().equals(" ")){
+					JOptionPane.showMessageDialog(null, "No esta permitido escribir espacios vacios!");	
+					txtCantidad.setText("");
+				}
 			}
 
 			@Override
@@ -674,6 +722,40 @@ public class registro_inventario extends JFrame {
 		final ImageIcon logo1 = new ImageIcon(
 				icono.getImage().getScaledInstance(label_5.getWidth(), label_5.getHeight(), Image.SCALE_DEFAULT));
 		label_5.setIcon(logo1);
+		
+		btnIrAVentas = new JButton("Ir a ventas.");
+		btnIrAVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				venta clase = new venta();
+				inventario clase2 = new inventario();
+				ingreso clase3 = new ingreso();
+				consultas_venta consulta = new consultas_venta();
+				registro_ventas formulario = new registro_ventas();
+				registro_ingresos formulario2 = new registro_ingresos();
+				control_venta control = new control_venta(clase, clase2, clase3, consulta, formulario, formulario2);
+				formulario.setVisible(true);
+				formulario.setLocationRelativeTo(null);
+				formulario.txtBusquedaInventario.requestFocusInWindow();
+				formulario.obtenerUltimoId();
+				formulario.pistas();
+				formulario.consultarEmpresa();
+				formulario.construirTablaInventario();
+				formulario.construirTablaVenta();
+				formulario.establecerFechaRegistro();
+				formulario.btnGuardar.setVisible(true);
+				formulario.btnNuevo.setVisible(true);
+				formulario.btnActualizar.setVisible(false);
+				formulario.btnAceptar.setVisible(false);
+				formulario.btnBorrar.setVisible(false);
+				formulario.txtExistencia.setText("0");
+				formulario.setTitle("Sesión iniciada por: " + login_usuario.nombreCompletoUsuario);
+				dispose();
+			}
+		});
+		btnIrAVentas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		btnIrAVentas.setBackground(new Color(255, 127, 80));
+		btnIrAVentas.setBounds(698, 26, 121, 23);
+		contentPane.add(btnIrAVentas);
 
 	}
 
