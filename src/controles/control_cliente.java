@@ -60,53 +60,36 @@ public class control_cliente implements ActionListener {
 					|| formulario.txtCorreoEmpresa.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Porfavor llene los campos para guardar el cliente!");
 			} else {
-				Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+				clase.setNombres_cliente(formulario.txtNombresCliente.getText().toString());
+				clase.setApellidos_cliente(formulario.txtApellidosCliente.getText().toString());
+				clase.setDireccion_cliente(formulario.txtDireccionCliente.getText().toString());
+				clase.setTelefono_cliente(formulario.txtTelefonoCliente.getText().toString());
+				clase.setCorreo_cliente(formulario.txtCorreoCliente.getText().toString());
+				clase.setGenero_cliente(formulario.cbxGeneroCliente.getSelectedItem().toString());
+				clase.setIdentidad_cliente(formulario.txtIdentidadCliente.getText().toString());
+				clase.setFoto_cliente(formulario.txtFotoCliente.getText().toString());
+				clase.setNombre_empresa_cliente(formulario.txtNombreEmpresa.getText().toString());
+				clase.setDescripcion_empresa_cliente(formulario.txtDescripcionEmpresa.getText().toString());
+				clase.setDireccion_empresa_cliente(formulario.txtDireccionEmpresa.getText().toString());
+				clase.setRtn_empresa_cliente(formulario.txtRTNEmpresa.getText().toString());
+				clase.setTelefono_empresa_cliente(formulario.txtTelefonoEmpresa.getText().toString());
+				clase.setCorreo_empresa_cliente(formulario.txtCorreoEmpresa.getText().toString());
 
-				Matcher mather = pattern.matcher(formulario.txtCorreoCliente.getText().toString().trim());
-				if (mather.find() == false) {
-					JOptionPane.showMessageDialog(null, "El email de cliente ingresado es inválido.");
+				if (consulta.registrar(clase)) {
+					JOptionPane.showMessageDialog(null, "Cliente registrado!");
+					limpiar();
+					formulario.construirTabla();
+					formulario.obtenerUltimoId();
+					formulario.txtFotoCliente.setText("Sin Fotografia.");
+					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
+					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
+							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
+					formulario.lblFotoC.setIcon(iconofoto);
 				} else {
-					Pattern pattern2 = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-							+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
-					Matcher mather2 = pattern.matcher(formulario.txtCorreoEmpresa.getText().toString().trim());
-					if (mather.find() == false) {
-						JOptionPane.showMessageDialog(null, "El email de la empresa ingresado es inválido.");
-					} else {
-						clase.setNombres_cliente(formulario.txtNombresCliente.getText().toString());
-						clase.setApellidos_cliente(formulario.txtApellidosCliente.getText().toString());
-						clase.setDireccion_cliente(formulario.txtDireccionCliente.getText().toString());
-						clase.setTelefono_cliente(formulario.txtTelefonoCliente.getText().toString());
-						clase.setCorreo_cliente(formulario.txtCorreoCliente.getText().toString());
-						clase.setGenero_cliente(formulario.cbxGeneroCliente.getSelectedItem().toString());
-						clase.setIdentidad_cliente(formulario.txtIdentidadCliente.getText().toString());
-						clase.setFoto_cliente(formulario.txtFotoCliente.getText().toString());
-						clase.setNombre_empresa_cliente(formulario.txtNombreEmpresa.getText().toString());
-						clase.setDescripcion_empresa_cliente(formulario.txtDescripcionEmpresa.getText().toString());
-						clase.setDireccion_empresa_cliente(formulario.txtDireccionEmpresa.getText().toString());
-						clase.setRtn_empresa_cliente(formulario.txtRTNEmpresa.getText().toString());
-						clase.setTelefono_empresa_cliente(formulario.txtTelefonoEmpresa.getText().toString());
-						clase.setCorreo_empresa_cliente(formulario.txtCorreoEmpresa.getText().toString());
-
-						if (consulta.registrar(clase)) {
-							JOptionPane.showMessageDialog(null, "Cliente registrado!");
-							limpiar();
-							formulario.construirTabla();
-							formulario.obtenerUltimoId();
-							formulario.txtFotoCliente.setText("Sin Fotografia.");
-							final ImageIcon iconoContrato = new ImageIcon(
-									getClass().getResource("/iconos/usuario.png"));
-							final ImageIcon iconofoto = new ImageIcon(
-									iconoContrato.getImage().getScaledInstance(formulario.lblFotoC.getWidth(),
-											formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
-							formulario.lblFotoC.setIcon(iconofoto);
-						} else {
-							JOptionPane.showMessageDialog(null, "Error! Cliente no registrado");
-							limpiar();
-						}
-					}
+					JOptionPane.showMessageDialog(null, "Error! Cliente no registrado");
+					limpiar();
 				}
+
 			}
 
 		}
@@ -146,6 +129,7 @@ public class control_cliente implements ActionListener {
 					formulario.construirTabla();
 					formulario.obtenerUltimoId();
 					formulario.txtFotoCliente.setText("Sin Fotografia.");
+
 					final ImageIcon iconoContrato = new ImageIcon(getClass().getResource("/iconos/usuario.png"));
 					final ImageIcon iconofoto = new ImageIcon(iconoContrato.getImage().getScaledInstance(
 							formulario.lblFotoC.getWidth(), formulario.lblFotoC.getHeight(), Image.SCALE_DEFAULT));
